@@ -18,7 +18,6 @@
 		472B4A661846E4ED002971EE /* CustonTarbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B4A651846E4ED002971EE /* CustonTarbarItem.m */; };
 		4732A03018432AEF009AD32D /* ItelUserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732A02F18432AEF009AD32D /* ItelUserTest.m */; };
 		4732A03418432F61009AD32D /* NXInputChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813F41839E6490085224D /* NXInputChecker.m */; };
-		4732A03718432FF0009AD32D /* NXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813E61839E6490085224D /* NXLoginViewController.m */; };
 		4732A0381843303E009AD32D /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B908018376DCB005D8CCB /* ItelUser.m */; };
 		4734957A18458BEA00972FD9 /* StrangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4734957918458BEA00972FD9 /* StrangerViewController.m */; };
 		473F62D718386B04006CAE31 /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473F62D618386B04006CAE31 /* AddressBookViewController.m */; };
@@ -82,7 +81,6 @@
 		478814021839E66C0085224D /* NXLoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813FF1839E66C0085224D /* NXLoginViewControllerTest.m */; };
 		478814031839E66C0085224D /* NXRegViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 478814001839E66C0085224D /* NXRegViewControllerTest.m */; };
 		478814051839E7120085224D /* mockhead.png in Resources */ = {isa = PBXBuildFile; fileRef = 478814041839E7120085224D /* mockhead.png */; };
-		478814071839E7250085224D /* Login_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 478814061839E7250085224D /* Login_iPhone.storyboard */; };
 		478814091839E8400085224D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 478814081839E8400085224D /* libsqlite3.dylib */; };
 		4788140B1839ED7F0085224D /* itel.png in Resources */ = {isa = PBXBuildFile; fileRef = 4788140A1839ED7F0085224D /* itel.png */; };
 		47952D9418582DBA0044CF64 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9318582DBA0044CF64 /* MBProgressHUD.m */; };
@@ -99,13 +97,16 @@
 		479B908A18376F15005D8CCB /* ItelNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B908918376F15005D8CCB /* ItelNetManager.m */; };
 		479B908D18377696005D8CCB /* ItelUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B908C18377696005D8CCB /* ItelUserManager.m */; };
 		479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C9C201834F02800DE40D8 /* ContentViewController.m */; };
-		479C9C271834FA0C00DE40D8 /* iCloudPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47B89DE61834D40000022FE5 /* iCloudPhone.storyboard */; };
 		479C9C291835019D00DE40D8 /* 头像.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 479C9C281835019D00DE40D8 /* 头像.jpg */; };
-		479DC498183A4CC100C3F3F2 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DC497183A4CC100C3F3F2 /* RootViewController.m */; };
 		479DC49B183A4D3F00C3F3F2 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DC49A183A4D3F00C3F3F2 /* PeopleViewController.m */; };
 		479DC49D183A544200C3F3F2 /* 广告.png in Resources */ = {isa = PBXBuildFile; fileRef = 479DC49C183A544200C3F3F2 /* 广告.png */; };
 		479E0CDA1856A817005BAE20 /* RegManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E0CD91856A817005BAE20 /* RegManager.m */; };
 		479E2BC81835B8B6002D8172 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E2BC71835B8B6002D8172 /* AddViewController.m */; };
+		479E934A185AB76B001AF6ED /* iCloudPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479E9349185AB76B001AF6ED /* iCloudPhone.storyboard */; };
+		479E934C185AB7A3001AF6ED /* Login_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479E934B185AB7A3001AF6ED /* Login_iPhone.storyboard */; };
+		479E934F185AB7D4001AF6ED /* NXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E934E185AB7D4001AF6ED /* NXLoginViewController.m */; };
+		479E9351185AB7F8001AF6ED /* NSCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E9350185AB7F8001AF6ED /* NSCAppDelegate.m */; };
+		479E9353185AB842001AF6ED /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E9352185AB842001AF6ED /* RootViewController.m */; };
 		479EF04E1859D47C0012EE29 /* IMAnsweringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF00F1859D47C0012EE29 /* IMAnsweringViewController.m */; };
 		479EF04F1859D47C0012EE29 /* IMCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF0111859D47C0012EE29 /* IMCallingViewController.m */; };
 		479EF0501859D47C0012EE29 /* IMDailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF0131859D47C0012EE29 /* IMDailViewController.m */; };
@@ -146,7 +147,6 @@
 		47B89DD91834D40000022FE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD81834D40000022FE5 /* UIKit.framework */; };
 		47B89DDF1834D40000022FE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47B89DDD1834D40000022FE5 /* InfoPlist.strings */; };
 		47B89DE11834D40000022FE5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B89DE01834D40000022FE5 /* main.m */; };
-		47B89DE51834D40000022FE5 /* NSCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B89DE41834D40000022FE5 /* NSCAppDelegate.m */; };
 		47B89DED1834D40000022FE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47B89DEC1834D40000022FE5 /* Images.xcassets */; };
 		47B89DF41834D40000022FE5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DF31834D40000022FE5 /* XCTest.framework */; };
 		47B89DF51834D40000022FE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
@@ -317,8 +317,6 @@
 		478813C51839C35E0085224D /* USDictionaryWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USDictionaryWrapper.m; sourceTree = "<group>"; };
 		478813E31839E6490085224D /* NXInputNewPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXInputNewPasswordViewController.h; sourceTree = "<group>"; };
 		478813E41839E6490085224D /* NXInputNewPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXInputNewPasswordViewController.m; sourceTree = "<group>"; };
-		478813E51839E6490085224D /* NXLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXLoginViewController.h; sourceTree = "<group>"; };
-		478813E61839E6490085224D /* NXLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXLoginViewController.m; sourceTree = "<group>"; };
 		478813E71839E6490085224D /* NXQuestionResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXQuestionResetViewController.h; sourceTree = "<group>"; };
 		478813E81839E6490085224D /* NXQuestionResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXQuestionResetViewController.m; sourceTree = "<group>"; };
 		478813E91839E6490085224D /* NXRegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NXRegViewController.h; path = login/controllers/NXRegViewController.h; sourceTree = "<group>"; };
@@ -335,7 +333,6 @@
 		478813FF1839E66C0085224D /* NXLoginViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXLoginViewControllerTest.m; sourceTree = "<group>"; };
 		478814001839E66C0085224D /* NXRegViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXRegViewControllerTest.m; sourceTree = "<group>"; };
 		478814041839E7120085224D /* mockhead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mockhead.png; sourceTree = "<group>"; };
-		478814061839E7250085224D /* Login_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login_iPhone.storyboard; sourceTree = "<group>"; };
 		478814081839E8400085224D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		4788140A1839ED7F0085224D /* itel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itel.png; sourceTree = "<group>"; };
 		47952D9218582DBA0044CF64 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -363,10 +360,8 @@
 		479B908C18377696005D8CCB /* ItelUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUserManager.m; sourceTree = "<group>"; };
 		479C9C1F1834F02800DE40D8 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		479C9C201834F02800DE40D8 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
-		479C9C261834F88B00DE40D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iCloudPhone.storyboard; sourceTree = "<group>"; };
 		479C9C281835019D00DE40D8 /* 头像.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "头像.jpg"; sourceTree = "<group>"; };
 		479DC496183A4CC100C3F3F2 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		479DC497183A4CC100C3F3F2 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		479DC499183A4D3F00C3F3F2 /* PeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeopleViewController.h; path = ../PeopleViewController.h; sourceTree = "<group>"; };
 		479DC49A183A4D3F00C3F3F2 /* PeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeopleViewController.m; path = ../PeopleViewController.m; sourceTree = "<group>"; };
 		479DC49C183A544200C3F3F2 /* 广告.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "广告.png"; sourceTree = "<group>"; };
@@ -374,6 +369,12 @@
 		479E0CD91856A817005BAE20 /* RegManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegManager.m; sourceTree = "<group>"; };
 		479E2BC61835B8B6002D8172 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
 		479E2BC71835B8B6002D8172 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		479E9349185AB76B001AF6ED /* iCloudPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iCloudPhone.storyboard; path = "预切片/iCloudPhone.storyboard"; sourceTree = "<group>"; };
+		479E934B185AB7A3001AF6ED /* Login_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login_iPhone.storyboard; sourceTree = "<group>"; };
+		479E934D185AB7D4001AF6ED /* NXLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXLoginViewController.h; sourceTree = "<group>"; };
+		479E934E185AB7D4001AF6ED /* NXLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXLoginViewController.m; sourceTree = "<group>"; };
+		479E9350185AB7F8001AF6ED /* NSCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSCAppDelegate.m; sourceTree = "<group>"; };
+		479E9352185AB842001AF6ED /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		479EF00E1859D47C0012EE29 /* IMAnsweringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAnsweringViewController.h; sourceTree = "<group>"; };
 		479EF00F1859D47C0012EE29 /* IMAnsweringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAnsweringViewController.m; sourceTree = "<group>"; };
 		479EF0101859D47C0012EE29 /* IMCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMCallingViewController.h; sourceTree = "<group>"; };
@@ -443,7 +444,6 @@
 		47B89DE01834D40000022FE5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		47B89DE21834D40000022FE5 /* iCloudPhone-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iCloudPhone-Prefix.pch"; sourceTree = "<group>"; };
 		47B89DE31834D40000022FE5 /* NSCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NSCAppDelegate.h; path = iCloudPhone/NSCAppDelegate.h; sourceTree = "<group>"; };
-		47B89DE41834D40000022FE5 /* NSCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NSCAppDelegate.m; path = iCloudPhone/NSCAppDelegate.m; sourceTree = "<group>"; };
 		47B89DEC1834D40000022FE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		47B89DF21834D40000022FE5 /* iCloudPhoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iCloudPhoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47B89DF31834D40000022FE5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -727,8 +727,8 @@
 			children = (
 				478813E31839E6490085224D /* NXInputNewPasswordViewController.h */,
 				478813E41839E6490085224D /* NXInputNewPasswordViewController.m */,
-				478813E51839E6490085224D /* NXLoginViewController.h */,
-				478813E61839E6490085224D /* NXLoginViewController.m */,
+				479E934D185AB7D4001AF6ED /* NXLoginViewController.h */,
+				479E934E185AB7D4001AF6ED /* NXLoginViewController.m */,
 				478813E71839E6490085224D /* NXQuestionResetViewController.h */,
 				478813E81839E6490085224D /* NXQuestionResetViewController.m */,
 				478813EB1839E6490085224D /* NXResetPasswordViewController.h */,
@@ -832,7 +832,7 @@
 				479C9C1F1834F02800DE40D8 /* ContentViewController.h */,
 				479C9C201834F02800DE40D8 /* ContentViewController.m */,
 				479DC496183A4CC100C3F3F2 /* RootViewController.h */,
-				479DC497183A4CC100C3F3F2 /* RootViewController.m */,
+				479E9352185AB842001AF6ED /* RootViewController.m */,
 				47E2DB8A18595A5A00D455EF /* SearchNavController.h */,
 				47E2DB8B18595A5A00D455EF /* SearchNavController.m */,
 			);
@@ -997,7 +997,7 @@
 			children = (
 				479EF00C1859D47C0012EE29 /* im */,
 				47B89DE31834D40000022FE5 /* NSCAppDelegate.h */,
-				47B89DE41834D40000022FE5 /* NSCAppDelegate.m */,
+				479E9350185AB7F8001AF6ED /* NSCAppDelegate.m */,
 				4757D04C1855A2CE001A9639 /* register */,
 				478813E11839E6490085224D /* login */,
 				47B89DDA1834D40000022FE5 /* iCloudPhone */,
@@ -1060,11 +1060,11 @@
 		47B89DDB1834D40000022FE5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				47B89DDC1834D40000022FE5 /* iCloudPhone-Info.plist */,
-				47B89DDD1834D40000022FE5 /* InfoPlist.strings */,
 				478594AA185026FF00AFF6BF /* 预切片 */,
-				47B89DE61834D40000022FE5 /* iCloudPhone.storyboard */,
-				478814061839E7250085224D /* Login_iPhone.storyboard */,
+				47B89DDC1834D40000022FE5 /* iCloudPhone-Info.plist */,
+				479E9349185AB76B001AF6ED /* iCloudPhone.storyboard */,
+				479E934B185AB7A3001AF6ED /* Login_iPhone.storyboard */,
+				47B89DDD1834D40000022FE5 /* InfoPlist.strings */,
 				4757D0541855C5F0001A9639 /* itel输入提示.png */,
 				4757D0561855C92F001A9639 /* 下一步.png */,
 				47E2DB9B185997F000D455EF /* 登录logo.png */,
@@ -1281,6 +1281,7 @@
 				478594B7185026FF00AFF6BF /* itel2_3a.png in Resources */,
 				478594BD185026FF00AFF6BF /* tab_4a.png in Resources */,
 				4757D0571855C92F001A9639 /* 下一步.png in Resources */,
+				479E934C185AB7A3001AF6ED /* Login_iPhone.storyboard in Resources */,
 				479C9C291835019D00DE40D8 /* 头像.jpg in Resources */,
 				47E05DC51851A2CE009FDCED /* 详细按钮.png in Resources */,
 				478594B6185026FF00AFF6BF /* itel2_3.png in Resources */,
@@ -1289,12 +1290,12 @@
 				47E2DB8E185985C800D455EF /* 本机联系人.png in Resources */,
 				478594BC185026FF00AFF6BF /* tab_4.png in Resources */,
 				47E2DB9518598B0500D455EF /* 邀请.png in Resources */,
+				479E934A185AB76B001AF6ED /* iCloudPhone.storyboard in Resources */,
 				478594BA185026FF00AFF6BF /* tab_2.png in Resources */,
 				47E05DC318519C9C009FDCED /* 头像.png in Resources */,
 				479B907618371DD7005D8CCB /* iCloudPhone-Info.plist in Resources */,
 				47E2DB9C185997F000D455EF /* 登录logo.png in Resources */,
 				4757D0591855CAD6001A9639 /* 短信提示.png in Resources */,
-				479C9C271834FA0C00DE40D8 /* iCloudPhone.storyboard in Resources */,
 				47952D99185846B90044CF64 /* RegHeaders.h in Resources */,
 				47E05DC018517418009FDCED /* searchuser.png in Resources */,
 				47E05DC118517418009FDCED /* checkAddress.png in Resources */,
@@ -1302,7 +1303,6 @@
 				478594BF185026FF00AFF6BF /* tab_5a.png in Resources */,
 				478594BB185026FF00AFF6BF /* tab_2a.png in Resources */,
 				47B89DDF1834D40000022FE5 /* InfoPlist.strings in Resources */,
-				478814071839E7250085224D /* Login_iPhone.storyboard in Resources */,
 				478814051839E7120085224D /* mockhead.png in Resources */,
 				478594B8185026FF00AFF6BF /* tab_1.png in Resources */,
 				4757D0511855C078001A9639 /* 企业注册.png in Resources */,
@@ -1347,6 +1347,7 @@
 			files = (
 				479B908A18376F15005D8CCB /* ItelNetManager.m in Sources */,
 				479EF0561859D47C0012EE29 /* IMDataPool.m in Sources */,
+				479E9353185AB842001AF6ED /* RootViewController.m in Sources */,
 				478813DA1839C35E0085224D /* UIImageView+AFNetworking.m in Sources */,
 				479B908118376DCB005D8CCB /* ItelUser.m in Sources */,
 				47212EEA18449FCB00F148C7 /* StrangerCell.m in Sources */,
@@ -1357,7 +1358,6 @@
 				479EF04F1859D47C0012EE29 /* IMCallingViewController.m in Sources */,
 				47225148184D804D00C44857 /* NewFriendListViewController.m in Sources */,
 				4781464D1855F79800362E53 /* RegDetailViewController.m in Sources */,
-				479DC498183A4CC100C3F3F2 /* RootViewController.m in Sources */,
 				478813DE1839C35E0085224D /* Underscore.m in Sources */,
 				47952D9D18585F600044CF64 /* RegNextButton.m in Sources */,
 				478813D21839C35E0085224D /* FMDatabaseAdditions.m in Sources */,
@@ -1370,7 +1370,6 @@
 				479EF0511859D47C0012EE29 /* IMHomeViewController.m in Sources */,
 				479EF05A1859D47C0012EE29 /* IMSeqenceGen.m in Sources */,
 				478813F91839E6490085224D /* NXResetPasswordViewController.m in Sources */,
-				4732A03718432FF0009AD32D /* NXLoginViewController.m in Sources */,
 				479EF0501859D47C0012EE29 /* IMDailViewController.m in Sources */,
 				478813C61839C35E0085224D /* AFHTTPRequestOperation.m in Sources */,
 				47952D9718583D170044CF64 /* NSCAlertView.m in Sources */,
@@ -1386,6 +1385,7 @@
 				479EF0551859D47C0012EE29 /* IMAuthMessageBuilder.m in Sources */,
 				478813E01839C35E0085224D /* USDictionaryWrapper.m in Sources */,
 				479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */,
+				479E934F185AB7D4001AF6ED /* NXLoginViewController.m in Sources */,
 				472251D2184DBDF000C44857 /* NXImageView.m in Sources */,
 				478813DD1839C35E0085224D /* Underscore+Functional.m in Sources */,
 				479B908718376EF5005D8CCB /* ItelBookManager.m in Sources */,
@@ -1416,7 +1416,6 @@
 				478813DB1839C35E0085224D /* UIProgressView+AFNetworking.m in Sources */,
 				472251CF184DB01400C44857 /* ContactCellTopView.m in Sources */,
 				479DC49B183A4D3F00C3F3F2 /* PeopleViewController.m in Sources */,
-				47B89DE51834D40000022FE5 /* NSCAppDelegate.m in Sources */,
 				479B907E18376DA1005D8CCB /* ItelAction.m in Sources */,
 				478813CB1839C35E0085224D /* AFURLConnectionOperation.m in Sources */,
 				478813CC1839C35E0085224D /* AFURLRequestSerialization.m in Sources */,
@@ -1437,6 +1436,7 @@
 				478813C91839C35E0085224D /* AFNetworkReachabilityManager.m in Sources */,
 				479EF0521859D47C0012EE29 /* IMInSessionViewController.m in Sources */,
 				473F62DC18387CA4006CAE31 /* PersonInAddressBook.m in Sources */,
+				479E9351185AB7F8001AF6ED /* NSCAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1484,14 +1484,6 @@
 				47B89DDE1834D40000022FE5 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		47B89DE61834D40000022FE5 /* iCloudPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				479C9C261834F88B00DE40D8 /* en */,
-			);
-			name = iCloudPhone.storyboard;
 			sourceTree = "<group>";
 		};
 		47B89DFC1834D40000022FE5 /* InfoPlist.strings */ = {

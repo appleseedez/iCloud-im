@@ -65,6 +65,7 @@
         [self.manager tearDown];
         [self.manager disconnectToSignalServer];
         [self.manager setMyAccount:nil];
+        self.RootVC.view=nil;
     }
     else if(Type==RootViewControllerMain){
         [self.window setRootViewController:self.RootVC];
@@ -72,6 +73,7 @@
         NSString *hostItel=[[ItelAction action]getHost].itelNum;
         [self.manager setMyAccount:hostItel ];
         [self.manager connectToSignalServer];
+        self.loginVC.view=nil;
     }
     [UIView commitAnimations];
 }

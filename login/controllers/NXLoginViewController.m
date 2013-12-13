@@ -153,8 +153,30 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(conformKeyBoard:) name:UIKeyboardWillChangeFrameNotification object:Nil];
     [self.btnLogin setUI];
     
+}
+-(void)conformKeyBoard:(NSNotification*)notification{
+    CGFloat keyBoardHeightDelta;
+
+    NSDictionary *info= notification.userInfo;
+ 
+    CGRect beginRect=[[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    CGRect endRect=[[info objectForKey:UIKeyboardFrameEndUserInfoKey]CGRectValue];
+    keyBoardHeightDelta=beginRect.origin.y-endRect.origin.y;
+
+    [UIView animateKeyframesWithDuration:0.30 delay:0.2 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
+        
+        self.view.center=CGPointMake(self.view.center.x, self.view.center.y-keyBoardHeightDelta);
+            } completion:^(BOOL finished) {
+        
+    }];
+
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(void)autoLogin:(NSNotification*)notification{
     self.txtUserCloudNumber.text=[notification.userInfo objectForKey:@"itel"];
