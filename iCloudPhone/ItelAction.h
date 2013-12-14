@@ -41,6 +41,8 @@
 -(ItelUser*)userInBlackBook:(NSString*)userItel;
 //模糊查询好友
 -(NSArray*)searchInfirendBook:(NSString*)search;
+//keypath本地查找
+-(ItelBook*)searchInFriendBookWithKeyPath:(NSString*)keyPath andSearch:(NSString*)search;
 @end
 
 #pragma  mark - 用户操作协议
@@ -137,4 +139,6 @@
 -(ItelUser*)userInBlackBook:(NSString*)itel;
 //模糊查找好友
 -(NSArray*)searchInFirendBook:(NSString*)search;
+/*keypath 查找好友列表 keypath为需要匹配得iteluser的属性 如字符串的形式如 昵称 @“nickName”  电话 @“telNum” 备注 @“remarkName” 返回itelbook 如需要多种搜索 多次调用用appendingByItelBook拼接返回的itelBook*/
+-(ItelBook*)searchInFriendBookWithKeyPath:(NSString*)keyPath andSearch:(NSString*)search;
 @end

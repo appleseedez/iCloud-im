@@ -216,9 +216,13 @@
 -(ItelUser*)userInBlackBook:(NSString*)itel{
     return [self.itelBookActionDelegate userInBlackBook:itel];
 }
-//模糊查找好友
+//模糊查找好友(用过itel)
 -(NSArray*)searchInFirendBook:(NSString*)search{
    return  [self.itelBookActionDelegate searchInfirendBook:search];
+}
+-(ItelBook*)searchInFriendBookWithKeyPath:(NSString*)keyPath andSearch:(NSString*)search{
+    ItelBook *result=[self.itelBookActionDelegate searchInFriendBookWithKeyPath:keyPath andSearch:search];
+    return result;
 }
 #pragma mark - 响应正常返回的通知(异常由netManager直接通知)
 
