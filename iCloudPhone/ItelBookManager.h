@@ -19,5 +19,5 @@
 
 +(ItelBookManager*)defaultManager;
 -(AddressBook*)phoneBook;
-
+-(ItelBook*)searchByNicknameInfirendBook:(NSString*)search;
 @end

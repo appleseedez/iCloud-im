@@ -11,6 +11,7 @@
 #import "ItelBook.h"
 #import "ContactCell.h"
 #import "UserViewController.h"
+#import "ItelBookManager.h"
 @interface PeopleViewController ()
 @property (nonatomic,strong) ItelBook *contacts;
 @property (nonatomic,strong) ItelBook *searchResult;
@@ -106,26 +107,30 @@ static float changelimit=100.0;
     [self.tableVIew reloadData];
 }
 -(void)search:(NSString*)text{
-    NSUInteger length=[text length];
-       ItelBook *search=[[ItelBook alloc]init];
-    for (NSString *itel in [self.contacts getAllKeys]) {
-        ItelUser *user=[self.contacts userForKey:itel];
-        NSString *nickname=user.nickName;
-     
-        if ([user.nickName length]>=length) {
-            NSString *nick=[nickname substringWithRange:NSMakeRange(0, length)];
-            if ([text isEqualToString:nick]) {
-                [search addUser:user forKey:itel];
-            }
-        }
-        if ([user.itelNum length]>=length) {
-            NSString *uitel=[user.itelNum substringWithRange:NSMakeRange(0, length)];
-            if ([text isEqualToString:uitel]) {
-                [search addUser:user forKey:itel];
-            }
-        }
-    
-    }
+    ItelBook *inNickName=[[ItelAction action] searchInFriendBookWithKeyPath:@"nickName" andSearch:text];
+    ItelBook *inAlias=[[ItelAction action] searchInFriendBookWithKeyPath:@"remarkName" andSearch:text];
+    ItelBook *inItels=[[ItelAction action] searchInFriendBookWithKeyPath:@"itelNum" andSearch:text];
+    ItelBook *search=[[inNickName appendingByItelBook:inAlias] appendingByItelBook:inItels];
+//    NSUInteger length=[text length];
+//       ItelBook *search=[[ItelBook alloc]init];
+//    for (NSString *itel in [self.contacts getAllKeys]) {
+//        ItelUser *user=[self.contacts userForKey:itel];
+//        NSString *nickname=user.nickName;
+//     
+//        if ([user.nickName length]>=length) {
+//            NSString *nick=[nickname substringWithRange:NSMakeRange(0, length)];
+//            if ([text isEqualToString:nick]) {
+//                [search addUser:user forKey:itel];
+//            }
+//        }
+//        if ([user.itelNum length]>=length) {
+//            NSString *uitel=[user.itelNum substringWithRange:NSMakeRange(0, length)];
+//            if ([text isEqualToString:uitel]) {
+//                [search addUser:user forKey:itel];
+//            }
+//        }
+//    
+//    }
     self.searchResult=search;
     [self.tableVIew reloadData];
 }

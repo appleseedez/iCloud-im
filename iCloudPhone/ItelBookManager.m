@@ -167,7 +167,7 @@ static ItelBookManager *manager;
 -(ItelUser*)userInBlackBook:(NSString*)userItel{
     return [self.blackBook userForKey:userItel];
 }
-#pragma mark - 模糊查询好友列表
+#pragma mark - 模糊查询好友列表（itel）
 -(NSArray*)searchInfirendBook:(NSString*)search{
     
     NSPredicate* searchPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@",search];
@@ -184,5 +184,10 @@ static ItelBookManager *manager;
     // NSLog(@"搜索结果为:%@",resultUsers);
 
     return resultUsers;
+}
+#pragma mark - 模糊查询好友列表（昵称）
+-(ItelBook*)searchInFriendBookWithKeyPath:(NSString*)keyPath andSearch:(NSString*)search{
+    ItelBook *result = [self.friendBook searchInKeypath:keyPath andSearch:search];
+    return result;
 }
 @end

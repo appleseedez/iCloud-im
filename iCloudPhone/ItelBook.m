@@ -76,4 +76,39 @@
     }
     return self;
 }
+-(ItelBook*)searchInKeypath:(NSString*)keypath andSearch:(NSString*)search{
+    
+    NSMutableArray *searchkeys = [[NSMutableArray alloc]init];
+    for (NSString *k in self.keys ) {
+        NSString *rKeypath=[NSString stringWithFormat:@"%@.%@",k,keypath];
+        [searchkeys addObject:[self.users valueForKeyPath:rKeypath]];
+    }
+    
+   
+    
+    NSPredicate* searchPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@",search];
+    
+    NSMutableArray* matched =
+    [[searchkeys filteredArrayUsingPredicate:searchPredicate] mutableCopy];
+    
+    
+    ItelBook *result=[[ItelBook alloc] init];
+    for (NSString *matchedkey in matched) {
+        for (NSString *k in self.keys) {
+            ItelUser *user= [self.users objectForKey:k];
+            
+            NSString* searchKey=[user valueForKeyPath:keypath];
+        
+                if ([matchedkey isEqualToString:searchKey]) {
+                    [result addUser:user forKey:user.itelNum];
+                }
+       
+          
+        
+        }
+    }
+    
+    
+    return result;
+}
 @end
