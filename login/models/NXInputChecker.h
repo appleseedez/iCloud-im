@@ -21,4 +21,6 @@
 +(NSString*)resetPhoneNumber11:(NSString*)phoneNumber;
 //数组转化为字符串
 +(NSString*)changeArrayToString:(NSArray*)array;
+//加密显示手机号码
++(NSString*)encodeTelNumber:(NSString*)telNum;
 @end
