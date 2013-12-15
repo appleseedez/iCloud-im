@@ -20,9 +20,9 @@
     if (firstNum==0) {
         return NO;
     }
-     //云号码位数检测（5-11位）
+     //云号码位数检测（5-12位）
     NSUInteger length=[cloudNumber length];
-    if ((length<5)||(length>11)) {
+    if ((length<5)||(length>12)) {
         return NO;
     }
     

@@ -22,6 +22,7 @@
     [self.layer   setCornerRadius:cornerRadius]; //设置矩形四个圆角半径
     [self.layer   setBorderWidth:borderWidth]; //边框宽度
     [self.layer   setBorderColor:borderColor.CGColor];//边框颜色
+    [self setClipsToBounds:YES];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -50,6 +50,13 @@
     }
     return 0;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section==0) {
+        return 40;
+    }
+    else return 30;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     [cell.textLabel setFont:[UIFont fontWithName:@"HeiTi SC" size:12]];
@@ -149,6 +156,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"1"}];
     [self.btnAddUser setUI];
     [self.btnAddUser setTitle:@"添加到通讯录" forState:UIControlStateNormal];
     [self.btnAddUser setTitle:@"添加到通讯录" forState:UIControlStateHighlighted];
@@ -189,6 +197,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
     [self.navigationController setNavigationBarHidden:NO];
 }
 @end

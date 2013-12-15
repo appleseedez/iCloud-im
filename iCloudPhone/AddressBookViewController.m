@@ -105,7 +105,7 @@
     picker.body=@"我注册了云电话,可以视频 可以聊天 还能开店铺呢 都是免费得 快来试试吧！！  http://www.itelland.com   =====测试功能 骚扰见谅--宁少春  ";
     NSArray *array = @[number];
     picker.recipients = array;
-    [self presentViewController:picker animated:YES completion:^{
+    [self.navigationController presentViewController:picker animated:YES completion:^{
         
     }];
     
