@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "RegNextButton.h"
 #import "regDetailTextField.h"
+#import "RegTipLabel.h"
 #define TXT_ITEL_TAG 500001
 #define TXT_PASSWORD_TAG 500002
 #define TXT_RE_PASSWORD_TAG 500003
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet regDetailTextField *txtPhoneNumber;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet RegNextButton *nextButton;
+@property (weak, nonatomic) IBOutlet RegTipLabel *tipView;
 @property (strong,nonatomic) UIView *inputAccessoryView;
 @end
 
@@ -111,6 +113,8 @@ static float animatedDuration=1.0;
 }
 -(void)setSubViewUI{
     [self.nextButton setUI];
+    [self.tipView setUI];
+    
 }
 - (void)viewDidLoad
 {

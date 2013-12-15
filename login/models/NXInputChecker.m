@@ -90,6 +90,23 @@
     return phoneNumber;
     
 }
+//加密显示手机号码
++(NSString*)encodeTelNumber:(NSString*)telNum{
+    if ([NXInputChecker checkPhoneNumberIsMobile:telNum]) {
+        NSRange hRange;
+        hRange.location=0;
+        hRange.length=3;
+        NSRange bRange;
+        bRange.location=7;
+        bRange.length=4;
+        NSString *head=[telNum substringWithRange:hRange];
+        NSString *middle=@"****";
+        NSString *end=[telNum substringWithRange:bRange];
+        return [NSString stringWithFormat:@"%@%@%@",head,middle,end];
+        
+    }
+   else return nil;
+}
 #pragma mark - 数组转化为字符串
 +(NSString*)changeArrayToString:(NSArray*)array{
        NSString *result=@"";
