@@ -140,6 +140,7 @@
     NSInteger forwardPort = [[parsedData valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] integerValue];
     // 获取本机natType
     NatType natType = [self.engine natType];
+    NSLog(@"本机的NAT类型：%d",natType);
     // 获取本机的链路列表. 中继服务器目前充当外网地址探测
     NSDictionary* communicationAddress = [self.engine endPointAddressWithProbeServer:forwardIP port:forwardPort];
     [self.keepSessionAlive invalidate];
@@ -270,19 +271,21 @@
 #endif
         [self.keepSessionAlive invalidate];
         self.keepSessionAlive = nil;
-    NSLog(@"开始通话，停止session保持数据包的发送，开始获取p2p通道");
+        NSLog(@"开始通话，停止session保持数据包的发送，开始获取p2p通道");
         
         NSLog(@"收到PEER的链路数据：%@",notify.userInfo);
-        if (![self.engine tunnelWith:notify.userInfo]) {
-            [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
-            return;
-        }
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTransportAndNotify:) name:P2PTUNNEL_SUCCESS object:nil];
+        [self.engine tunnelWith:notify.userInfo];
+//        if (![self.engine tunnelWith:notify.userInfo]) {
+//            [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
+//            return;
+//        }
         
-        [self.engine startTransport];
-        //通知view可以切换的到“通话中"界面了
-        [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_INSESSION_VIEW_NOTIFICATION
-                                                            object:nil
-                                                          userInfo:notify.userInfo];
+//        [self.engine startTransport];
+//        //通知view可以切换的到“通话中"界面了
+//        [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_INSESSION_VIEW_NOTIFICATION
+//                                                            object:nil
+//                                                          userInfo:notify.userInfo];
     }else if ([self.state isEqualToString:IDLE]){ //如果是idle状态下，接到了通话信令，则是有人拨打
 #if MANAGER_DEBUG
         NSLog(@"收到通话请求，用户操作可以接听");
@@ -313,12 +316,39 @@
     [self.keepSessionAlive invalidate];
     self.keepSessionAlive = nil;
     NSLog(@"接受通话请求，停止session保持数据包的发送，开始获取p2p通道");
-    if (![self.engine tunnelWith:notify.userInfo]) {
-        [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
-        return;
-    }
+//    if (![self.engine tunnelWith:notify.userInfo]) {
+//        [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
+//        return;
+//    }
+//    
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(justStartTransport:) name:P2PTUNNEL_SUCCESS object:nil];
+    [self.engine tunnelWith:notify.userInfo];
+    /**
+     *  移到 justStartTransport 方法
+     *  测试
+     */
+//    [self.engine startTransport];
+}
+
+#pragma mark - 1213 test
+/**
+ *  因为tunnelWith 方法阻塞操作，将其放到线程中去
+ *
+ *  @param notify 外部传入
+ */
+- (void) justStartTransport:(NSNotification*) notify{
     [self.engine startTransport];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:P2PTUNNEL_SUCCESS object:nil];
+}
+
+- (void) startTransportAndNotify:(NSNotification*) notify{
+    [self.engine startTransport];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:P2PTUNNEL_SUCCESS object:nil];
+    //通知view可以切换的到“通话中"界面了
+    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_INSESSION_VIEW_NOTIFICATION
+                                                        object:nil
+                                                      userInfo:notify.userInfo];
 }
 
 //收到信令服务器的验证响应，

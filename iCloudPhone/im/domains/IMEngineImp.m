@@ -106,7 +106,7 @@ UIImageView* _pview_local;
 
 - (NatType)natType{
     NatTypeImpl nat;
-    return nat.GetNatType("stunserver.org");
+    return nat.GetNatType("stun.fwdnet.net:3478");
 }
 
 - (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort{
@@ -129,72 +129,150 @@ UIImageView* _pview_local;
 }
 
 - (int)tunnelWith:(NSDictionary*) params{
-    NSLog(@"开始获取p2p通道");
-     TP2PPeerArgc argc;
+    bool __block ret = true;
+    dispatch_queue_t q =  dispatch_queue_create("p2p tunnel queue", NULL);
+    dispatch_async(q, ^{
+        //
+        NSLog(@"开始获取p2p通道,%@", [NSDate date]);
+        TP2PPeerArgc argc;
+
+        
+        // 外网地址
+        ::strncpy(argc.otherInterIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY] UTF8String], sizeof(argc.otherInterIP));
+        argc.otherInterPort = [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY] intValue];
+        // 内网地址
+        ::strncpy(argc.otherLocalIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY] UTF8String], sizeof(argc.otherLocalIP));
+        argc.otherLocalPort =  [[params valueForKey:SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY] intValue];
+        // 转发地址
+        ::strncpy(argc.otherForwardIP,[[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY] UTF8String], sizeof(argc.otherForwardIP));
+        argc.otherForwardPort = [[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] intValue];
+
+        // 对方的ssid
+        argc.otherSsid = [[params valueForKey:SESSION_DEST_SSID_KEY] intValue];
+        // 自己的ssid
+        argc.selfSsid = [[params valueForKey:SESSION_SRC_SSID_KEY] intValue];
+
+        //如果内网的ip相同.设置argc.localable = true;
+        
+        NSLog(@"本机的外网ip：%@",self.currentInterIP);
+        NSLog(@"对方的外网ip：%@",[NSString stringWithUTF8String:argc.otherInterIP]);
+        if ([self.currentInterIP isEqualToString:[NSString stringWithUTF8String:argc.otherInterIP]]) {
+            argc.localEnble = true;
+        }else{
+            argc.localEnble = false;
+        }
+        NSLog(@"设置localable为：%d",argc.localEnble);
+        NSLog(@"通话参数：对方外网ip：%s",argc.otherInterIP);
+        NSLog(@"通话参数：对方外网port：%i",argc.otherInterPort);
+        NSLog(@"通话参数：对方内网ip：%s",argc.otherLocalIP);
+        NSLog(@"通话参数：对方内网port:%i",argc.otherLocalPort);
+        NSLog(@"通话参数：对方ssid：%i",argc.otherSsid);
+        NSLog(@"通话参数：自己ssid：%i",argc.selfSsid);
+        NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
+        if (self.pInterfaceApi->GetP2PPeer(argc) != 0) {
+//            return -1;
+            ret = -1;
+        }
+        NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
+        long long  dTime =endTime - startTime;
+        NSLog(@"调用时间间隔：%@",[NSString stringWithFormat:@"%llu",dTime]);
+        
+        NSLog(@"isLocal的状态：%d",argc.islocal);
+        if (argc.islocal)
+        {
+            NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
+            ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherLocalIP, argc.otherLocalPort);// 要判断返回值
+        }
+        else if (argc.isInter)
+        {
+            NSLog(@"外网可用[%s:%d]", argc.otherInterIP, argc.otherInterPort);
+            ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherInterIP, argc.otherInterPort);// 要判断返回值
+        }
+        else
+        {
+            NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
+            ret = self.pInterfaceApi->StartMedia(InitTypeVoe, argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
+        }
+        if (!ret)
+        {
+            NSLog(@"传输初期化失败");
+        }
+        // 如果穿透操作成功。则发送通知
+        if (ret) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
+        }else{
+            [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
+        }
+
+    });
+    
+//    NSLog(@"开始获取p2p通道,%@", [NSDate date]);
+//     TP2PPeerArgc argc;
+//    
+//    
+//    // 外网地址
+//    ::strncpy(argc.otherInterIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY] UTF8String], sizeof(argc.otherInterIP));
+//    argc.otherInterPort = [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY] intValue];
+//    // 内网地址
+//    ::strncpy(argc.otherLocalIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY] UTF8String], sizeof(argc.otherLocalIP));
+//    argc.otherLocalPort =  [[params valueForKey:SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY] intValue];
+//    // 转发地址
+//    ::strncpy(argc.otherForwardIP,[[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY] UTF8String], sizeof(argc.otherForwardIP));
+//    argc.otherForwardPort = [[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] intValue];
+//    
+//    // 对方的ssid
+//    argc.otherSsid = [[params valueForKey:SESSION_DEST_SSID_KEY] intValue];
+//    // 自己的ssid
+//    argc.selfSsid = [[params valueForKey:SESSION_SRC_SSID_KEY] intValue];
+//    
+//    //如果内网的ip相同.设置argc.localable = true;
+//    
+//    NSLog(@"本机的外网ip：%@",self.currentInterIP);
+//    NSLog(@"对方的外网ip：%@",[NSString stringWithUTF8String:argc.otherInterIP]);
+//    if ([self.currentInterIP isEqualToString:[NSString stringWithUTF8String:argc.otherInterIP]]) {
+//        argc.localEnble = true;
+//    }else{
+//        argc.localEnble = false;
+//    }
+//    NSLog(@"设置localable为：%d",argc.localEnble);
+//    NSLog(@"通话参数：对方外网ip：%s",argc.otherInterIP);
+//    NSLog(@"通话参数：对方外网port：%i",argc.otherInterPort);
+//    NSLog(@"通话参数：对方内网ip：%s",argc.otherLocalIP);
+//    NSLog(@"通话参数：对方内网port:%i",argc.otherLocalPort);
+//    NSLog(@"通话参数：对方ssid：%i",argc.otherSsid);
+//    NSLog(@"通话参数：自己ssid：%i",argc.selfSsid);
+//    NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
+//    if (self.pInterfaceApi->GetP2PPeer(argc) != 0) {
+//        return -1;
+//    }
+//    NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
+//    long long  dTime =endTime - startTime;
+//    NSLog(@"调用时间间隔：%@",[NSString stringWithFormat:@"%llu",dTime]);
+//    bool ret;
+//    NSLog(@"isLocal的状态：%d",argc.islocal);
+//    if (argc.islocal)
+//    {
+//        NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
+//        ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherLocalIP, argc.otherLocalPort);// 要判断返回值
+//    }
+//    else if (argc.isInter)
+//    {
+//        NSLog(@"外网可用[%s:%d]", argc.otherInterIP, argc.otherInterPort);
+//        ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherInterIP, argc.otherInterPort);// 要判断返回值
+//    }
+//    else
+//    {
+//        NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
+//        ret = self.pInterfaceApi->StartMedia(InitTypeVoe, argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
+//    }
+//    if (!ret)
+//    {
+//        NSLog(@"传输初期化失败");
+//    }
     
     
-    // 外网地址
-    ::strncpy(argc.otherInterIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY] UTF8String], sizeof(argc.otherInterIP));
-    argc.otherInterPort = [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY] intValue];
-    // 内网地址
-    ::strncpy(argc.otherLocalIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY] UTF8String], sizeof(argc.otherLocalIP));
-    argc.otherLocalPort =  [[params valueForKey:SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY] intValue];
-    // 转发地址
-    ::strncpy(argc.otherForwardIP,[[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY] UTF8String], sizeof(argc.otherForwardIP));
-    argc.otherForwardPort = [[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] intValue];
-    
-    // 对方的ssid
-    argc.otherSsid = [[params valueForKey:SESSION_DEST_SSID_KEY] intValue];
-    // 自己的ssid
-    argc.selfSsid = [[params valueForKey:SESSION_SRC_SSID_KEY] intValue];
-    
-    //如果内网的ip相同.设置argc.localable = true;
-    
-    NSLog(@"本机的外网ip：%@",self.currentInterIP);
-    NSLog(@"对方的外网ip：%@",[NSString stringWithUTF8String:argc.otherInterIP]);
-    if ([self.currentInterIP isEqualToString:[NSString stringWithUTF8String:argc.otherInterIP]]) {
-        argc.localEnble = true;
-    }else{
-        argc.localEnble = false;
-    }
-    NSLog(@"设置localable为：%d",argc.localEnble);
-    NSLog(@"通话参数：对方外网ip：%s",argc.otherInterIP);
-    NSLog(@"通话参数：对方外网port：%i",argc.otherInterPort);
-    NSLog(@"通话参数：对方内网ip：%s",argc.otherLocalIP);
-    NSLog(@"通话参数：对方内网port:%i",argc.otherLocalPort);
-    NSLog(@"通话参数：对方ssid：%i",argc.otherSsid);
-    NSLog(@"通话参数：自己ssid：%i",argc.selfSsid);
-    NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
-    if (self.pInterfaceApi->GetP2PPeer(argc) != 0) {
-        return -1;
-    }
-    NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
-    long long  dTime =endTime - startTime;
-    NSLog(@"调用时间间隔：%@",[NSString stringWithFormat:@"%llu",dTime]);
-    bool ret;
-    NSLog(@"isLocal的状态：%d",argc.islocal);
-    if (argc.islocal)
-    {
-        NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
-        ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherLocalIP, argc.otherLocalPort);// 要判断返回值
-    }
-    else if (argc.isInter)
-    {
-        NSLog(@"外网可用[%s:%d]", argc.otherInterIP, argc.otherInterPort);
-        ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherInterIP, argc.otherInterPort);// 要判断返回值
-    }
-    else
-    {
-        NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
-        ret = self.pInterfaceApi->StartMedia(InitTypeVoe, argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
-    }
-    if (!ret)
-    {
-        NSLog(@"传输初期化失败");
-    }
-    
-    
-    return ret;
+//    return ret;
+    return  ret;
 }
 - (BOOL)startTransport{
     
