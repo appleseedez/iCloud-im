@@ -17,9 +17,9 @@
 
 @implementation SearchNewFriendViewController
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
-}
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    [self.view endEditing:YES];
+//}
 
 #pragma mark -网络接口
 
@@ -43,5 +43,9 @@
     
     
     [self pushNewFriendList:search ];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.searchBar becomeFirstResponder];
 }
 @end

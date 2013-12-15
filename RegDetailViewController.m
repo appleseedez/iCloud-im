@@ -11,16 +11,17 @@
 #import "NXInputChecker.h"
 #import "MBProgressHUD.h"
 #import "RegNextButton.h"
+#import "regDetailTextField.h"
 #define TXT_ITEL_TAG 500001
 #define TXT_PASSWORD_TAG 500002
 #define TXT_RE_PASSWORD_TAG 500003
 #define TXT_PHONE_NUMBER_TAG 500004
 
 @interface RegDetailViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *txtItel;
-@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
-@property (weak, nonatomic) IBOutlet UITextField *txtRePassword;
-@property (weak, nonatomic) IBOutlet UITextField *txtPhoneNumber;
+@property (weak, nonatomic) IBOutlet regDetailTextField *txtItel;
+@property (weak, nonatomic) IBOutlet regDetailTextField *txtPassword;
+@property (weak, nonatomic) IBOutlet regDetailTextField *txtRePassword;
+@property (weak, nonatomic) IBOutlet regDetailTextField *txtPhoneNumber;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet RegNextButton *nextButton;
 @property (strong,nonatomic) UIView *inputAccessoryView;
@@ -119,6 +120,10 @@ static float animatedDuration=1.0;
     self.txtPassword.inputAccessoryView=self.inputAccessoryView;
     self.txtRePassword.inputAccessoryView=self.inputAccessoryView;
     self.txtPhoneNumber.inputAccessoryView=self.inputAccessoryView;
+    [self.txtItel setUI];
+    [self.txtPassword setUI];
+    [self.txtPhoneNumber setUI];
+    [self.txtRePassword setUI];
     UIScrollView *scroll=self.scrollView;
     
     scroll.frame=self.view.frame;
