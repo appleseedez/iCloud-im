@@ -368,6 +368,7 @@
     [self injectDependency];
     //环境初始化
     [self.engine initNetwork];
+
     [self.engine initMedia];
     [self endSession];
     /*测试需要，自动生成随机号码*/

@@ -29,6 +29,9 @@
         [NSException exceptionWithName:@"400:Data Parse Error" reason:@"json数据构造失败" userInfo:nil];
         return @{};
     }
+#if SIGNAL_MESSAGE
+    NSLog(@"结束信令:%@",result);
+#endif
     return result;
 }
 @end

@@ -99,9 +99,35 @@ UIImageView* _pview_local;
 }
 
 - (void)initMedia{
+    
     self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeNone);
+    AFNetworkReachabilityManager* reachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        //
+        NSLog(@"检查当前的链接状态:%@",AFStringFromNetworkReachabilityStatus(status));
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+            {
+                
+                
+//                self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeVoeAndVie);
+
+                _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 144, 192)];
+            }
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+            {
+//                self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeVoe);
+                _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0,0)];
+            }
+                break;
+            default:
+                break;
+        }
+    }];
     NSLog(@"媒体类型：%d",self.m_type);
-    _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 144, 192)];
+    [reachabilityManager startMonitoring];
+
 }
 
 - (NatType)natType{
@@ -130,7 +156,7 @@ UIImageView* _pview_local;
 
 - (int)tunnelWith:(NSDictionary*) params{
     bool __block ret = true;
-    dispatch_queue_t q =  dispatch_queue_create("p2p tunnel queue", NULL);
+    dispatch_queue_t q = dispatch_get_main_queue();// dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);// dispatch_queue_create("com.itelland.p2ptunnelprivatequeue", DISPATCH_QUEUE_CONCURRENT );
     dispatch_async(q, ^{
         //
         NSLog(@"开始获取p2p通道,%@", [NSDate date]);
@@ -154,13 +180,14 @@ UIImageView* _pview_local;
 
         //如果内网的ip相同.设置argc.localable = true;
         
-        NSLog(@"本机的外网ip：%@",self.currentInterIP);
-        NSLog(@"对方的外网ip：%@",[NSString stringWithUTF8String:argc.otherInterIP]);
         if ([self.currentInterIP isEqualToString:[NSString stringWithUTF8String:argc.otherInterIP]]) {
             argc.localEnble = true;
         }else{
             argc.localEnble = false;
         }
+#if ENGINE_MSG
+        NSLog(@"本机的外网ip：%@",self.currentInterIP);
+        NSLog(@"对方的外网ip：%@",[NSString stringWithUTF8String:argc.otherInterIP]);
         NSLog(@"设置localable为：%d",argc.localEnble);
         NSLog(@"通话参数：对方外网ip：%s",argc.otherInterIP);
         NSLog(@"通话参数：对方外网port：%i",argc.otherInterPort);
@@ -168,11 +195,13 @@ UIImageView* _pview_local;
         NSLog(@"通话参数：对方内网port:%i",argc.otherLocalPort);
         NSLog(@"通话参数：对方ssid：%i",argc.otherSsid);
         NSLog(@"通话参数：自己ssid：%i",argc.selfSsid);
+#endif
         NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
         if (self.pInterfaceApi->GetP2PPeer(argc) != 0) {
 //            return -1;
-            ret = -1;
+            ret = false;
         }
+        NSLog(@"媒体类型:%d",self.m_type);
         NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
         long long  dTime =endTime - startTime;
         NSLog(@"调用时间间隔：%@",[NSString stringWithFormat:@"%llu",dTime]);
@@ -198,6 +227,9 @@ UIImageView* _pview_local;
             NSLog(@"传输初期化失败");
         }
         // 如果穿透操作成功。则发送通知
+        
+        
+        NSLog(@"到底你执行了多少次");
         if (ret) {
             [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
         }else{

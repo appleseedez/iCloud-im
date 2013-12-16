@@ -16,9 +16,11 @@
     #import <ifaddrs.h>
     #import <arpa/inet.h>
     #import "NSData+Byte.h"
+    #import "MSWeakTimer.h"
     #define APP_DELEGATE_DEBUG 1
     #define MANAGER_DEBUG 1
     #define COMMUNICATOR_DEBUG 1
     #define ROOT_TABBAR_DEBUG 0
     #define SIGNAL_MESSAGE 1
+    #define ENGINE_MSG 0
 #endif

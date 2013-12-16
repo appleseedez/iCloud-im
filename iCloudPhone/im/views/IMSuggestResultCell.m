@@ -19,6 +19,11 @@
     return self;
 }
 
+- (void)awakeFromNib{
+    self.avatarView.layer.masksToBounds = YES;
+    self.avatarView.layer.cornerRadius = 10;
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
