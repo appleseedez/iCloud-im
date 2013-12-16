@@ -10,6 +10,9 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "ConstantHeader.h"
 #import "IMInSessionViewController.h"
+#import "ItelAction.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 static int soundCount;
 @interface IMCallingViewController ()
 @property(nonatomic) NSNotification* inSessionNotify;
@@ -55,6 +58,11 @@ static int soundCount;
 
 - (void) setup{
     self.peerAccountLabel.text = [NSString stringWithFormat:@"呼叫用户 %@",[self.callingNotify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]];
+   ItelUser* peerUser =  [[ItelAction action] userInFriendBook:self.peerAccountLabel.text];
+    self.PeerAvatarImageView.layer.cornerRadius = 10;
+    self.PeerAvatarImageView.layer.masksToBounds = YES;
+    
+    [self.PeerAvatarImageView setImageWithURL:[NSURL URLWithString:@"http://img3.douban.com/icon/ul4659739-9.jpg"] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
     //开始拨号了。播放声音
     soundCount = 0;//给拨号音计数，响八次就可以结束
     //系统声音播放是一个异步过程。要循环播放则必须借助回调

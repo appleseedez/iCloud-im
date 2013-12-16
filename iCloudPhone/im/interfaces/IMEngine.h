@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #include "NatTypeImpl.h"
 #import "video_render_ios_view.h"
-
+#import "AFNetworking.h"
 @protocol IMEngine <NSObject>
 //初始化网络
 - (void) initNetwork;

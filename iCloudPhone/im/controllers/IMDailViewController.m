@@ -13,6 +13,8 @@
 #import "ItelAction.h"
 #import "ItelUser.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 @interface IMDailViewController ()
 @property(nonatomic) NSDictionary* touchToneMap; //按键的拨号音，系统默认就有的
 @property(nonatomic) BOOL hidePan;// 标识出当前拨号盘是否可见。
@@ -127,7 +129,7 @@
     ItelUser* userItem = self.currentSuggestDataSource[indexPath.row];
     cell.nameLabel.text = userItem.nickName;
     cell.numberLabel.text = userItem.itelNum;
-    cell.avatarView.image = [UIImage imageNamed:@"callerAvatar"];
+    [cell.avatarView setImageWithURL:[NSURL URLWithString:@"http://img3.douban.com/icon/ul4659739-9.jpg"] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
     
     return cell;
 }
@@ -196,6 +198,7 @@
             } completion:nil];
             self.hidePan = NO;
         }
+        
     }
     NSString* temp = [self.peerAccount.text substringToIndex:length-1];
     self.peerAccount.text = temp;

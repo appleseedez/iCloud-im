@@ -10,7 +10,7 @@
 #import "ConstantHeader.h"
 @interface IMTCPCommunicator ()<GCDAsyncSocketDelegate>
 @property(nonatomic) GCDAsyncSocket* sock; // tcp长链接端点
-@property(nonatomic) NSTimer* heartBeat; // 心跳定时器
+@property(nonatomic) MSWeakTimer* heartBeat; // 心跳定时器
 @property(nonatomic) NSDictionary* heartBeatPKG; // 心跳包
 @end
 
@@ -170,7 +170,11 @@
 }
 
 - (void)keepAlive{
+    
     [self.heartBeat invalidate];
-    self.heartBeat = [NSTimer scheduledTimerWithTimeInterval:HEART_BEAT_INTERVAL target:self selector:@selector(sendHeartBeat) userInfo:nil repeats:YES];
+    self.heartBeat = [MSWeakTimer scheduledTimerWithTimeInterval:HEART_BEAT_INTERVAL target:self selector:@selector(sendHeartBeat) userInfo:nil repeats:YES dispatchQueue:dispatch_queue_create("com.itelland.private_queue", DISPATCH_QUEUE_CONCURRENT)];
+//    self.heartBeat = [NSTimer scheduledTimerWithTimeInterval:HEART_BEAT_INTERVAL target:self selector:@selector(sendHeartBeat) userInfo:nil repeats:YES];
+//    self.heartBeat = [NSTimer timerWithTimeInterval:HEART_BEAT_INTERVAL target:self selector:@selector(sendHeartBeat) userInfo:nil repeats:YES];
+//    [[NSRunLoop mainRunLoop] addTimer:self.heartBeat forMode:NSRunLoopCommonModes];
 }
 @end
