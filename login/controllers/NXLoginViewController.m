@@ -74,10 +74,12 @@
     
     NSData *httpBody=[NSJSONSerialization dataWithJSONObject:@{@"itel": self.txtUserCloudNumber.text,@"password":self.txtUserPassword.text} options:NSJSONWritingPrettyPrinted error:nil];
     [request setHTTPBody:httpBody];
-
+  
+    
     //success封装了一段代码表示如果请求成功 执行这段代码
     void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject){
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+       
         if ([json isKindOfClass:[NSDictionary class]]) {
             //NSLog(@"%@",json);
             NSDictionary *dic=[json objectForKey:@"message"];

@@ -228,6 +228,7 @@
     self.messageBuilder = [[IMSessionRefuseMessageBuilder alloc] init];
     NSDictionary* data =  [self.messageBuilder buildWithParams:params];
     [self.communicator send:data];
+    
 }
 
 #pragma mark - NOTIFICATION HANDLE

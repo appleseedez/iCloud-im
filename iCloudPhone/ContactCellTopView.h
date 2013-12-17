@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 @class ContactCell;
-@interface ContactCellTopView : UIView
+@interface ContactCellTopView : UIScrollView
 @property (nonatomic,weak) ContactCell *cell;
 @end
