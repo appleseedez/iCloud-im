@@ -11,7 +11,10 @@
 #import "video_render_ios_view.h"
 @protocol IMManager <NSObject>
 - (NSString*) myAccount;
-- (void) setMyAccount:(NSString*) account;
+//由外部设置
+- (void) setMyAccount:(NSString*) account; //登陆后的本机账号
+- (void) setRouteSeverIP:(NSString*) ip;//登陆后的路由服务器地址
+- (void) setRouteServerPort:(u_int16_t) port;//登陆后的路由服务器端口
 //拨号
 - (void) dial:(NSString*) account;
 // 开始通话过程

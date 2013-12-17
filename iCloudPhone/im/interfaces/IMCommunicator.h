@@ -10,7 +10,7 @@
 
 @protocol IMCommunicator <NSObject>
 //建立链接
-- (void) connect;
+- (void) connect:(NSString*) account;
 // 断开链接
 - (void) disconnect;
 // 发送数据
@@ -22,4 +22,7 @@
 // 长链接
 - (void) keepAlive;
 
+- (void) setupIP:(NSString*) ip;
+
+- (void) setupPort:(u_int16_t) port;
 @end

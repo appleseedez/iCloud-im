@@ -1523,7 +1523,7 @@
         <image name="history_btn" width="21" height="21"/>
         <image name="message_btn" width="22" height="19"/>
         <image name="mockhead.png" width="203" height="189"/>
-        <image name="peerAvatar" width="128" height="128"/>
+        <image name="peerAvatar" width="64" height="64"/>
         <image name="refuseShortCut_btn" width="83" height="12"/>
         <image name="searchuser.png" width="80" height="81"/>
         <image name="silence_btn" width="25" height="32"/>
