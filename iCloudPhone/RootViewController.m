@@ -59,7 +59,7 @@
      [sender isSelected:YES];
     int i= [self.customTabbar.items indexOfObject:sender];
     if (i==0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"弹拨号盘啦" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"presentDialView" object:nil];
     }
     [self setSelectedIndex:i];
 }
