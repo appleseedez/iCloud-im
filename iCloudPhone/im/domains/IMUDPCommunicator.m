@@ -42,9 +42,10 @@
     if (!self.account) {
         [NSException exceptionWithName:@"account is nil" reason:@"账号为空" userInfo:nil];
     }
-    self.ip = ROUTE_SERVER_IP;
-    self.port = ROUTE_SERVER_PORT;
+//    self.ip = ROUTE_SERVER_IP;
+//    self.port = ROUTE_SERVER_PORT;
     self.tag = ROUTE_SRV_TAG;
+    NSLog(@"udpConnector.ip:%@",self.ip);
     [self send:@{
                  HEAD_SECTION_KEY:@{
                          DATA_TYPE_KEY:[NSNumber numberWithInt:ROUTE_SERVER_IP_REQ_TYPE ],

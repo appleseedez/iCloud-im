@@ -36,7 +36,7 @@
     self.searchNewBtn.layer.borderColor=borderColor.CGColor;
     self.searchNewBtn.layer.borderWidth=0.5;
     
-    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"联系人列表" style:UIBarButtonItemStylePlain target:self action:@selector(dismis)];
+//    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"联系人列表" style:UIBarButtonItemStylePlain target:self action:@selector(dismis)];
     self.view.frame=winFrame;
 	// Do any additional setup after loading the view.
 }

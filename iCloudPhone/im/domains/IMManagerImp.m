@@ -231,6 +231,8 @@
     self.messageBuilder = [[IMSessionRefuseMessageBuilder alloc] init];
     NSDictionary* data =  [self.messageBuilder buildWithParams:params];
     [self.TCPcommunicator send:data];
+
+
 }
 
 #pragma mark - NOTIFICATION HANDLE
@@ -374,7 +376,8 @@
     [self.engine initMedia];
     [self endSession];
     /*测试需要，自动生成随机号码*/
-    self.selfAccount = [NSString stringWithFormat:@"%d",arc4random()%1000];
+    
+//    self.selfAccount = [NSString stringWithFormat:@"%d",arc4random()%1000];
 }
 
 - (void)connectToSignalServer{
@@ -392,6 +395,10 @@
 //    }
 //    NSLog(@"目前的本机帐号：%@",[self myAccount]);
 //    [self auth:self.selfAccount cert:@"chengjianjun"];
+    NSLog(@"当前的routeIP:%@",self.routeIP);
+    NSAssert(self.UDPcommunicator , @"大多数");
+    [self.UDPcommunicator setupIP:self.routeIP];
+    [self.UDPcommunicator setupPort:self.port];
     [self.UDPcommunicator connect:self.selfAccount];
     
     
@@ -469,5 +476,11 @@
 }
 - (NSString *)myAccount{
     return self.selfAccount;
+}
+- (void)setRouteSeverIP:(NSString *)ip{
+    self.routeIP = ip;
+}
+- (void)setRouteServerPort:(u_int16_t)port{
+    self.port = port;
 }
 @end

@@ -16,7 +16,16 @@
 @end
 
 @implementation RootViewController
-
+-(void)setCustomTabbarHidden:(NSNotification*)notification{
+    BOOL hidden=[[notification.userInfo objectForKey:@"hidden"] boolValue];
+     [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
+         self.customTabbar.alpha=!hidden;
+         
+     } completion:^(BOOL finished) {
+         
+     }];
+    
+}
 
 
 - (void)viewDidLoad
@@ -50,7 +59,7 @@
      [sender isSelected:YES];
     int i= [self.customTabbar.items indexOfObject:sender];
     if (i==0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"弹拨号盘啦" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"presentDialView" object:nil];
     }
     [self setSelectedIndex:i];
 }
@@ -60,6 +69,7 @@
     // 当manager要求加载“拨打中”界面时，收到该通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentCallingView:) name:PRESENT_CALLING_VIEW_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentAnsweringView:) name:SESSION_PERIOD_REQ_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCustomTabbarHidden:) name:@"hideTab" object:nil];
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

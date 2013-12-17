@@ -14,12 +14,13 @@
 #import "AFNetworking.h"
 #import "NSCAppDelegate.h"
 #import "RegNextButton.h"
-
+#import "NXImageView.h"
 #import "ItelAction.h"
 #define mockServer [AFHTTPSessionManager manager]
 
 @interface NXLoginViewController ()
 @property (weak, nonatomic) IBOutlet RegNextButton *btnLogin;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 
 @end
 
@@ -73,23 +74,25 @@
     
     NSData *httpBody=[NSJSONSerialization dataWithJSONObject:@{@"itel": self.txtUserCloudNumber.text,@"password":self.txtUserPassword.text} options:NSJSONWritingPrettyPrinted error:nil];
     [request setHTTPBody:httpBody];
-
+  
+    
     //success封装了一段代码表示如果请求成功 执行这段代码
     void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject){
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+       
         if ([json isKindOfClass:[NSDictionary class]]) {
-            //NSLog(@"%@",json);
+NSLog(@"%@",json);
             NSDictionary *dic=[json objectForKey:@"message"];
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 HostItelUser *host=[HostItelUser userWithDictionary:[dic objectForKey:@"data"]];
-
+                NSAssert(host.itelNum, @"空的");
                 [[ItelAction action] setHostItelUser:host];
                 [self.actWaitingToLogin stopAnimating];
                 self.txtInuptCheckMessage.text = @"";
 
                 NSCAppDelegate *delegate =   (NSCAppDelegate*) [UIApplication sharedApplication].delegate;
-                [delegate changeRootViewController:RootViewControllerMain];
+                [delegate changeRootViewController:RootViewControllerMain userInfo:[[json valueForKey:@"message"] valueForKey:@"data"]];
                 
                 [[ItelAction action] checkAddressBookMatchingItel];
                 
@@ -113,26 +116,6 @@
     [operation start];
 
 }
--(void)sendRequesturl:(NSString*)url
-            parameters:(NSDictionary *)parametrers
-               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-{
-#ifndef mockServer
-     //正常的情况
-    [[AFHTTPRequestOperationManager manager]POST:url parameters:parametrers constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        
-    } success:success failure:failure];
-#endif
-#ifdef mockServer
-      [[NXMockServer sharedServer] POST:url parameters:parametrers constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-          
-      } success:success failure:failure];
-#endif
-    
-
-    
-}
 #pragma mark - 检测用户输入
 
 -(BOOL)checkUserInput{
@@ -145,8 +128,15 @@
     [super viewDidLoad];
     [self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
     self.actWaitingToLogin.hidesWhenStopped=YES;
-    self.txtUserCloudNumber.text=@"1000003";
+    self.txtUserCloudNumber.text=@"2301031983";
     self.txtUserPassword.text=@"123456";
+    
+    NXImageView *logo=[[NXImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 75)];
+    [logo setRect:3 cornerRadius:10 borderColor:[UIColor whiteColor]];
+    [logo setClipsToBounds:YES];
+    logo.image=[UIImage imageNamed:@"login_logo"];
+    [self.logoImageView addSubview:logo];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoLogin:) name:@"regSuccess" object:nil];
 	// Do any additional setup after loading the view.
 }
@@ -168,7 +158,7 @@
 
     [UIView animateKeyframesWithDuration:0.30 delay:0.2 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
         
-        self.view.center=CGPointMake(self.view.center.x, self.view.center.y-keyBoardHeightDelta);
+        self.view.center=CGPointMake(self.view.center.x, self.view.center.y-keyBoardHeightDelta/2);
             } completion:^(BOOL finished) {
         
     }];

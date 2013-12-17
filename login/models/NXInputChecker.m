@@ -20,14 +20,16 @@
     if (firstNum==0) {
         return NO;
     }
-     //云号码位数检测（5-11位）
+     //云号码位数检测（11位）
     NSUInteger length=[cloudNumber length];
-    if ((length<5)||(length>11)) {
+    if ((length>11)) {
         return NO;
     }
     
     return YES;
 }
+
+
 +(BOOL)checkPassword:(NSString*)password{
     //非空检测
     if (![NXInputChecker checkEmpty:password]) {
@@ -77,10 +79,19 @@
 
 //检查是否为手机号码
 +(BOOL)checkPhoneNumberIsMobile:(NSString*)phoneNumber{
-   
+    if (phoneNumber.length!=11) {
+        return NO;
+    }
+    else {
+        NSRange range;
+        range.length=1;
+        range.location=0;
+        int head=[[phoneNumber substringWithRange:range] intValue];
+        if (head!=1) {
+            return NO;
+        }
+    }
         return YES;
-   
-        
 }
 //把手机号码设置为标准11位
 +(NSString*)resetPhoneNumber11:(NSString*)phoneNumber;{
@@ -89,6 +100,23 @@
     phoneNumber =[NXInputChecker filterStringWithString:phoneNumber targetString:@"-" replaceWithString:@""];
     return phoneNumber;
     
+}
+//加密显示手机号码
++(NSString*)encodeTelNumber:(NSString*)telNum{
+    if ([NXInputChecker checkPhoneNumberIsMobile:telNum]) {
+        NSRange hRange;
+        hRange.location=0;
+        hRange.length=3;
+        NSRange bRange;
+        bRange.location=7;
+        bRange.length=4;
+        NSString *head=[telNum substringWithRange:hRange];
+        NSString *middle=@"****";
+        NSString *end=[telNum substringWithRange:bRange];
+        return [NSString stringWithFormat:@"%@%@%@",head,middle,end];
+        
+    }
+   else return nil;
 }
 #pragma mark - 数组转化为字符串
 +(NSString*)changeArrayToString:(NSArray*)array{

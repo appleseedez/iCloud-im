@@ -19,7 +19,7 @@
 @implementation NSCAppDelegate
 -(void) signOut{
     [[ItelAction action] setHostItelUser:nil];
-    [self changeRootViewController:RootViewControllerLogin];
+    [self changeRootViewController:RootViewControllerLogin userInfo:nil];
     
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -57,7 +57,7 @@
    return YES;
 }
 
--(void)changeRootViewController:(setRootViewController)Type{
+-(void)changeRootViewController:(setRootViewController)Type userInfo:(NSDictionary *)info{
     
     [UIView beginAnimations:@"memory" context:nil];
     if (Type==RootViewControllerLogin) {
@@ -68,11 +68,19 @@
         self.RootVC.view=nil;
     }
     else if(Type==RootViewControllerMain){
+ 
         [self.window setRootViewController:self.RootVC];
-        [self.manager setup];
         NSString *hostItel=[[ItelAction action]getHost].itelNum;
+        if (info) {
+            [self.manager setRouteSeverIP:[info valueForKey:ROUTE_SERVER_IP_KEY]];
+            [self.manager setRouteServerPort:[[info valueForKey:ROUTE_SERVER_PORT_KEY] intValue]];
+        }
         [self.manager setMyAccount:hostItel ];
+        [self.manager setup];
         [self.manager connectToSignalServer];
+
+
+
         self.loginVC.view=nil;
     }
     [UIView commitAnimations];
@@ -112,7 +120,7 @@
     NSLog(@"调用 applicationDidBecomeActive ");
 #endif
      if ([[ItelAction action] getHost]) {
-    [self.manager connectToSignalServer];
+//    [self.manager connectToSignalServer];
      }
 }
 

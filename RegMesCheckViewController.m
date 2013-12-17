@@ -10,10 +10,15 @@
 #import "RegManager.h"
 #import "NSCAlertView.h"
 #import "RegNextButton.h"
+#import "RegTipLabel.h"
+#import "NXInputChecker.h"
+#import "PersonRegButton.h"
 @interface RegMesCheckViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *btnReSend;
+@property (weak, nonatomic) IBOutlet PersonRegButton *btnReSend;
 @property (nonatomic,strong) NSTimer *timer;
 @property (weak, nonatomic) IBOutlet RegNextButton *nextButton;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet RegTipLabel *tipView;
 @property (weak, nonatomic) IBOutlet UITextField *txtCheckCode;
 - (IBAction)messageButton:(UIButton *)sender;
 @end
@@ -22,11 +27,19 @@
 static int waitingTime=60;
 -(void)setUI{
     [self.nextButton setUI];
+    [self.tipView setUI];
+    NSString *tel=[RegManager defaultManager].regPhoneNumber;
+    NSString *codedTel=[NXInputChecker encodeTelNumber:tel];
+    if (codedTel!=nil) {
+        self.tipLabel.text=[NSString stringWithFormat:@"请输入手机%@收到的短信校验码",codedTel];
+    }
+    [self.btnReSend.layer setCornerRadius:5.0];
 }
 -(void)TimerStart{
     waitingTime=60;
     self.timer=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerBeat) userInfo:nil repeats:YES];
     self.btnReSend.enabled=NO;
+    self.btnReSend.backgroundColor=[UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1];
 
 }
 -(void)timerEnd{
@@ -52,6 +65,7 @@ static int waitingTime=60;
     else{
          title=@"点击重新发送";
         self.btnReSend.enabled=YES;
+        self.btnReSend.backgroundColor=[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1];
         [self timerEnd];
     }
     [self.btnReSend setTitle:title forState:UIControlStateNormal];
@@ -105,7 +119,7 @@ static int waitingTime=60;
 }
 - (IBAction)messageButton:(UIButton *)sender {
     [self TimerStart];
-    sender.enabled=NO;
+  
     [[RegManager defaultManager] sendMessageInterface];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

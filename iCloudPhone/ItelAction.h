@@ -53,13 +53,13 @@
 -(void)setHost:(HostItelUser*)host;
 
 //设置好友
--(void)setUser:(ItelUser*)user friend:(BOOL) isFriend;
+//-(void)setUser:(ItelUser*)user friend:(BOOL) isFriend;
 //设置黑名单
--(void)setUser:(ItelUser*)user black:(BOOL) isBlack;
+//-(void)setUser:(ItelUser*)user black:(BOOL) isBlack;
 //呼叫该用户
 -(void)callUser:(ItelUser*)user;
 //短信邀请该用户
--(void)invideUserByMessage:(ItelUser*)user;
+//-(void)invideUserByMessage:(ItelUser*)user;
 @end
 
 

@@ -37,4 +37,8 @@
 @property (nonatomic) id<IMMessageParser> messageParser;
 
 
+@property(nonatomic,copy) NSString* routeIP;
+
+@property(nonatomic) u_int16_t port;
+
 @end

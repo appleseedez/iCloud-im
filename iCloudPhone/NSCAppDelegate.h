@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, setRootViewController) {
 
 @interface NSCAppDelegate : UIResponder <UIApplicationDelegate>
 
--(void)changeRootViewController:(setRootViewController)Type;
+-(void)changeRootViewController:(setRootViewController)Type userInfo:(NSDictionary*) info ;
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic) BOOL autoLogin;
