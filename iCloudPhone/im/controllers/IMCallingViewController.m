@@ -57,6 +57,7 @@ static int soundCount;
 }
 
 - (void) setup{
+    
     self.peerAccountLabel.text = [NSString stringWithFormat:@"呼叫用户 %@",[self.callingNotify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]];
    ItelUser* peerUser =  [[ItelAction action] userInFriendBook:self.peerAccountLabel.text];
     self.PeerAvatarImageView.layer.cornerRadius = 10;

@@ -14,6 +14,7 @@
 #import "IMManager.h"
 #import "NSCAppDelegate.h"
 #import "ItelBookManager.h"
+#import "NSCAppDelegate.h"
 @interface UserViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbShowName;
 @property (weak, nonatomic) IBOutlet NXImageView *imageView;
@@ -172,6 +173,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"1"}];
     [self.imageView setRect:5.0 cornerRadius:self.imageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(callActionSheet) ];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAliasChanged:) name:@"resetAlias" object:nil];
@@ -207,7 +209,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-       self.navigationController.navigationBarHidden=NO;
+   [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
 }
 -(void)didAddBlack:(NSNotification*)notification{
     BOOL isNormal = [[notification.userInfo objectForKey:@"isNormal"]boolValue];

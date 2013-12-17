@@ -12,23 +12,26 @@
 #import "ContactCell.h"
 #import "UserViewController.h"
 #import "ItelBookManager.h"
+#import "NXInputChecker.h"
+#import "NSCAppDelegate.h"
 @interface PeopleViewController ()
 @property (nonatomic,strong) ItelBook *contacts;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic,strong) ItelBook *searchResult;
 @property (nonatomic,strong) UIPanGestureRecognizer *gestreRecognizer;
+
 @end
-static int start =0;
-static BOOL isEnd=0;
+
+
 @implementation PeopleViewController
 
 
-static float changelimit=100.0;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.9333 green:0.9333 blue:0.9333 alpha:1]];
-    self.gestreRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panRecognizer:)];
-	
+    
+   	
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
@@ -42,56 +45,6 @@ static float changelimit=100.0;
     }
     return _searchResult;
 }
--(void)panRecognizer:(UIPanGestureRecognizer*)recognizer{
-    CGFloat translation=[recognizer translationInView:recognizer.view ].x;
-    //NSLog(@"手势滑动：%f",translation);
-    //NSLog(@"%f",self.backView.frame.size.height);
-    recognizer.maximumNumberOfTouches=1;
-    ContactCell *cell=((ContactCellTopView*)recognizer.view).cell;
-    if (recognizer.state==UIGestureRecognizerStateChanged) {
-        if ((recognizer.view.frame.origin.x>=-changelimit)&&(recognizer.view.frame.origin.x<=changelimit)) {
-            
-            CGFloat transX=0;
-            if (translation>=changelimit) {
-                transX=changelimit   ;
-            }else if(translation<=-changelimit){
-                transX=-changelimit;
-            }
-            else{
-                transX=translation;
-            }
-            
-            [recognizer.view setTransform:CGAffineTransformMakeTranslation( transX-cell.currenTranslate, 0)];
-            
-            
-            //self.topView.frame=CGRectMake(self.topView.frame.origin.x+transX, self.topView.frame.origin.y,  self.topView.frame.size.width , self.topView.frame.size.height);
-        }
-        
-        
-        
-    }
-    else if(recognizer.state==UIGestureRecognizerStateEnded){
-        [UIView beginAnimations:@"back" context:nil];
-        [UIView setAnimationBeginsFromCurrentState:YES];
-        [UIView setAnimationDelay:0.2];
-        recognizer.view.frame=recognizer.view.superview.bounds;
-        [UIView commitAnimations];
-        if (translation>changelimit) {
-            NSLog(@"打电话");
-            self.gestreRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panRecognizer:)];
-            cell.currenTranslate=cell.currenTranslate-changelimit;
-        }
-        else if (translation<-changelimit){
-            NSLog(@"发短信");
-            translation=0;
-            cell.currenTranslate=cell.currenTranslate+changelimit;
-        }
-        
-    }
-    
-    
-    
-}
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     NSLog(@"开始搜索:%@",searchBar.text );
     [self search:searchBar.text];
@@ -100,6 +53,19 @@ static float changelimit=100.0;
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar{
     [searchBar resignFirstResponder];
     searchBar.text=nil;
+    [self endSearch];
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if (![NXInputChecker checkEmpty:searchText]) {
+        [self endSearch];
+    }
+    else  [self search:searchText];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+     searchBar.text=@"";
     [self endSearch];
 }
 -(void)endSearch{
@@ -111,26 +77,6 @@ static float changelimit=100.0;
     ItelBook *inAlias=[[ItelAction action] searchInFriendBookWithKeyPath:@"remarkName" andSearch:text];
     ItelBook *inItels=[[ItelAction action] searchInFriendBookWithKeyPath:@"itelNum" andSearch:text];
     ItelBook *search=[[inNickName appendingByItelBook:inAlias] appendingByItelBook:inItels];
-//    NSUInteger length=[text length];
-//       ItelBook *search=[[ItelBook alloc]init];
-//    for (NSString *itel in [self.contacts getAllKeys]) {
-//        ItelUser *user=[self.contacts userForKey:itel];
-//        NSString *nickname=user.nickName;
-//     
-//        if ([user.nickName length]>=length) {
-//            NSString *nick=[nickname substringWithRange:NSMakeRange(0, length)];
-//            if ([text isEqualToString:nick]) {
-//                [search addUser:user forKey:itel];
-//            }
-//        }
-//        if ([user.itelNum length]>=length) {
-//            NSString *uitel=[user.itelNum substringWithRange:NSMakeRange(0, length)];
-//            if ([text isEqualToString:uitel]) {
-//                [search addUser:user forKey:itel];
-//            }
-//        }
-//    
-//    }
     self.searchResult=search;
     [self.tableVIew reloadData];
 }
@@ -147,20 +93,21 @@ static float changelimit=100.0;
 }
 - (ContactCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString *CellIdentifier = @"Cell";
+    NSString *CellIdentifier = @"contactCell";
     ContactCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[ContactCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] ;
-    }
+    
     if ([[self.searchResult getAllKeys] count]>indexPath.row) {
         ItelUser *user=[self.searchResult userAtIndex:indexPath.row];
-        cell.backView.frame=cell.bounds;
+        [cell setup];
         cell.topView.frame=cell.bounds;
         cell.imgPhoto.image=[UIImage imageNamed:@"头像.png"];
         cell.lbItelNumber.text=user.itelNum;
         cell.lbNickName.text=user.remarkName;
         if ([user.remarkName isEqualToString:@""]) {
             cell.lbNickName.text=user.nickName;
+            cell.btnPush.tag=55333+indexPath.row;
+            [cell.btnPush addTarget:self action:@selector(pushDetailAtIndexPath:) forControlEvents:UIControlEventTouchUpInside];
+            cell.user=user;
         }
     }
    
@@ -169,16 +116,14 @@ static float changelimit=100.0;
     
 }
 
-- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-   // ContactCell *cell=(ContactCell*)[tableView cellForRowAtIndexPath:indexPath];
-    //[cell.topView removeGestureRecognizer:self.gestreRecognizer];
-}
-- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+
+- (void)pushDetailAtIndexPath:(UIButton*)sender {
+    static float gray=0.3333;
+  static  UIColor *high=[UIColor colorWithRed:gray green:gray     blue:gray alpha:0.1];
+    sender.backgroundColor=high;
+    NSInteger row=sender.tag-55333;
     
-    //ContactCell *cell=(ContactCell*)[tableView cellForRowAtIndexPath:indexPath];
-    //[cell.topView addGestureRecognizer:self.gestreRecognizer];
-    
-    ItelUser *user=[self.searchResult userAtIndex:indexPath.row];
+    ItelUser *user=[self.searchResult userAtIndex:row];
     UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
     UserViewController *userVC=[storyBoard instantiateViewControllerWithIdentifier:@"userView"];
     userVC.user=user;
@@ -187,17 +132,35 @@ static float changelimit=100.0;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
-    [[ItelAction action] getItelFriendList:start];
+    [[ItelAction action] getItelFriendList:0];
 
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFriendListNotification:) name:@"getItelList" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAliasChanged:) name:@"resetAlias" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delNotification:) name:@"delItelUser" object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellAction:) name:@"cellAction" object:nil];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.tableVIew reloadData];
+}
+-(void)cellAction:(NSNotification*)notification{
+    NSString *action=[notification.userInfo objectForKey:@"action"];
+    ItelUser *user=[notification.userInfo objectForKey:@"user"];
+    
+    if ([action isEqualToString:@"call"]) {
+        [self callUser:user];
+    }
+    
+}
+-(void)callUser:(ItelUser*)user{
+    NSCAppDelegate *appDelegate = (NSCAppDelegate*)[UIApplication sharedApplication].delegate;
+    HostItelUser *host=[[ItelAction action] getHost];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
+                                                                                                                       SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:user.itelNum,
+                                                                                                                       SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:host.itelNum
+                                                                                                                       }];
+    [appDelegate.manager dial:user.itelNum];
 }
 -(void)delNotification:(NSNotification*)notification{
     NSDictionary *userInfo=notification.userInfo;

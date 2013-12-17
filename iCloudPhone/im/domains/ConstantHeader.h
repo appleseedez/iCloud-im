@@ -53,7 +53,8 @@ enum AccountClientTypes
 #define DATA_STATUS_KEY @"status"
 #define DATA_SEQ_KEY @"seq"
 #define DATA_CONTENT_KEY @"data"
-
+#define ROUTE_SERVER_IP_KEY @"domain"
+#define ROUTE_SERVER_PORT_KEY @"port"
 // 目录服务器请求字段
 #define UDP_INDEX_REQ_FIELD_ACCOUNT_KEY @"account"
 #define UDP_INDEX_REQ_FIELD_SRVTYPE_KEY @"srvtype"
