@@ -20,7 +20,7 @@
 }
 -(void)setUI{
     [self.layer setBorderWidth:1];
-    [self.layer setBorderColor:[UIColor colorWithRed:0.875 green:0.698 blue:0.447 alpha:1].CGColor];
+    [self.layer setBorderColor:[UIColor colorWithRed:0.8888 green:0.8888 blue:0.8888 alpha:1].CGColor];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

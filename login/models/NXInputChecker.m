@@ -20,14 +20,16 @@
     if (firstNum==0) {
         return NO;
     }
-     //云号码位数检测（5-12位）
+     //云号码位数检测（11位）
     NSUInteger length=[cloudNumber length];
-    if ((length<5)||(length>12)) {
+    if ((length>11)) {
         return NO;
     }
     
     return YES;
 }
+
+
 +(BOOL)checkPassword:(NSString*)password{
     //非空检测
     if (![NXInputChecker checkEmpty:password]) {
@@ -77,10 +79,19 @@
 
 //检查是否为手机号码
 +(BOOL)checkPhoneNumberIsMobile:(NSString*)phoneNumber{
-   
+    if (phoneNumber.length!=11) {
+        return NO;
+    }
+    else {
+        NSRange range;
+        range.length=1;
+        range.location=0;
+        int head=[[phoneNumber substringWithRange:range] intValue];
+        if (head!=1) {
+            return NO;
+        }
+    }
         return YES;
-   
-        
 }
 //把手机号码设置为标准11位
 +(NSString*)resetPhoneNumber11:(NSString*)phoneNumber;{

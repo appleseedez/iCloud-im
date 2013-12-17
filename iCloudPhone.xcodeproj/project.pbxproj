@@ -448,7 +448,7 @@
 		47A01121185C90B3003F8878 /* PersonRegButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonRegButton.m; sourceTree = "<group>"; };
 		47A01123185CA34E003F8878 /* regDetailTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regDetailTextField.h; sourceTree = "<group>"; };
 		47A01124185CA34E003F8878 /* regDetailTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = regDetailTextField.m; sourceTree = "<group>"; };
-		47B89DD11834D40000022FE5 /* iCloudPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCloudPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		47B89DD11834D40000022FE5 /* iTel 2.0Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iTel 2.0Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47B89DD41834D40000022FE5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		47B89DD61834D40000022FE5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		47B89DD81834D40000022FE5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1042,7 +1042,7 @@
 		47B89DD21834D40000022FE5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				47B89DD11834D40000022FE5 /* iCloudPhone.app */,
+				47B89DD11834D40000022FE5 /* iTel 2.0Test.app */,
 				47B89DF21834D40000022FE5 /* iCloudPhoneTests.xctest */,
 				479EF09C1859D9A40012EE29 /* libGCDSocket.a */,
 				479EF0A91859D9A50012EE29 /* GCDSocketTests.xctest */,
@@ -1230,7 +1230,7 @@
 			);
 			name = iCloudPhone;
 			productName = iCloudPhone;
-			productReference = 47B89DD11834D40000022FE5 /* iCloudPhone.app */;
+			productReference = 47B89DD11834D40000022FE5 /* iTel 2.0Test.app */;
 			productType = "com.apple.product-type.application";
 		};
 		47B89DF11834D40000022FE5 /* iCloudPhoneTests */ = {
@@ -1716,7 +1716,7 @@
 					/Users/Pharaoh/Documents/workInItel/iCloudPhone/iCloudPhone/im/sdk,
 				);
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "iTel 2.0Test";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
@@ -1742,7 +1742,7 @@
 					/Users/Pharaoh/Documents/workInItel/iCloudPhone/iCloudPhone/im/sdk,
 				);
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "iTel 2.0Test";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;

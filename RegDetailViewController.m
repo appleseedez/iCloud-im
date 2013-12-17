@@ -41,24 +41,26 @@ static float animatedDuration=1.0;
     if (_inputAccessoryView==nil) {
         _inputAccessoryView=[[UIView alloc]init];
         _inputAccessoryView.bounds=CGRectMake(0, 0, 320, 44);
-        _inputAccessoryView.backgroundColor=[UIColor orangeColor];
-        UIButton *foreward=[[UIButton alloc]initWithFrame:CGRectMake(60, 0, 88, 44)];
+        _inputAccessoryView.backgroundColor=[UIColor grayColor];
+        UIButton *foreward=[[UIButton alloc]initWithFrame:CGRectMake(106, 0, 109, 44)];
         [foreward setTitle:@"下一个" forState:UIControlStateNormal];
-        foreward.backgroundColor=[UIColor purpleColor];
+        foreward.backgroundColor=[UIColor whiteColor];
         [foreward addTarget:self action:@selector(chanegeToNextText) forControlEvents:UIControlEventTouchUpInside];
+        [foreward setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_inputAccessoryView addSubview:foreward];
         
-        UIButton *backward=[[UIButton alloc]initWithFrame:CGRectMake(60+88, 0, 88, 44)];
+        UIButton *backward=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 44)];
         [backward setTitle:@"上一个" forState:UIControlStateNormal];
-        backward.backgroundColor=[UIColor purpleColor];
+        backward.backgroundColor=[UIColor whiteColor];
         [backward addTarget:self action:@selector(changeToLast) forControlEvents:UIControlEventTouchUpInside];
         [_inputAccessoryView addSubview:backward];
-        
-        UIButton *end=[[UIButton alloc]initWithFrame:CGRectMake(320-88, 0, 88, 44)];
+        [backward setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        UIButton *end=[[UIButton alloc]initWithFrame:CGRectMake(216, 0, 106, 44)];
         [end setTitle:@"结束" forState:UIControlStateNormal];
-        end.backgroundColor=[UIColor purpleColor];
+        end.backgroundColor=[UIColor whiteColor];
         [end addTarget:self action:@selector(returnKeyBoard) forControlEvents:UIControlEventTouchUpInside];
         [_inputAccessoryView addSubview:end];
+        [end setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     return _inputAccessoryView;
 }
