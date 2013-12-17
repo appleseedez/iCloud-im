@@ -8,7 +8,24 @@
 
 #ifndef im_ConstantHeader_h
 #define im_ConstantHeader_h
+//客户端状态值
+enum AccountStatusTypes
+{
+    AST_INVALID = -1,
+    AST_ONLINE,// 在线
+    AST_OFFLINE,// 离线
+    AST_LOGOUT// 注销
+};
 
+//客户端类型值：
+enum AccountClientTypes
+{
+    ACT_INVALID = -1,
+    ACT_ANDROID,// android客户端
+    ACT_IOS,// IOS客户端
+    ACT_WINDOWS,// windows客户端
+    ACT_MAC// mac客户端
+};
 // 常量定义
 #define PRESENT_CALLING_VIEW_NOTIFICATION @"PRESENT_CALLING_VIEW_NOTIFICATION" // 通知加载"拨号中"界面
 #define PRESENT_ANSWERING_VIEW_NOTIFICATION @"PRESENT_ANSWERING_VIEW_NOTIFICATION"// 通知加载“待接听”界面
@@ -16,6 +33,8 @@
 #define PARSED_DATA_KEY @"PARSED_DATA_KEY" //数据暂存池的key
 #define DIALING_SOUND_ID 1151 //拨号的声音
 
+
+#define UDP_LOOKUP_COMPLETE_NOTIFICATION @"UDP_LOOKUP_COMPLETE_NOTIFICATION" //udp查询完成,应该能够获得信令服务器地址
 #define DATA_RECEIVED_NOTIFICATION @"DATA_RECEIVED_NOTIFICATION" // 收到通知标识
 #define SESSION_INITED_NOTIFICATION @"SESSION_INITED_NOTIFICATION" // 收到通话查询响应
 #define SESSION_PERIOD_NOTIFICATION @"SESSION_PERIOD_NOTIFICATION" // 收到通话查询响应
@@ -35,10 +54,20 @@
 #define DATA_SEQ_KEY @"seq"
 #define DATA_CONTENT_KEY @"data"
 
+// 目录服务器请求字段
+#define UDP_INDEX_REQ_FIELD_ACCOUNT_KEY @"account"
+#define UDP_INDEX_REQ_FIELD_SRVTYPE_KEY @"srvtype"
+#define UDP_INDEX_RES_FIELD_SERVER_IP_KEY @"ip"
+#define UDP_INDEX_RES_FIELD_SERVER_PORT_KEY @"port"
+#define UDP_INDEX_ROUTE_SERVER_TYPE @0
+#define UDP_INDEX_GATEWAY_SERVER_TYPE @1
+
 
 // 信令服务器认证信令字段
 #define CMID_APP_LOGIN_SSS_REQ_FIELD_ACCOUNT_KEY @"account"
-#define CMID_APP_LOGIN_SSS_REQ_FIELD_CERT_KEY @"keys"
+//#define CMID_APP_LOGIN_SSS_REQ_FIELD_CERT_KEY @"keys"
+#define CMID_APP_LOGIN_SSS_REQ_FIELD_CLIENT_TYPE_KEY @"clienttype"
+#define CMID_APP_LOGIN_SSS_REQ_FIELD_CLIENT_STATUS_KEY @"clientstatus"
 #define CMID_APP_LOGIN_SSS_REQ_FIELD_TOKEN_KEY @"token"
 // 通话查询信令字段
 #define SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY @"destaccount" // 请求: destAccount
@@ -69,6 +98,9 @@
 #define HEART_BEAT_INTERVAL 15 // 心跳间隔15秒
 #define HEART_BEAT_REQ_TYPE 0x00000000 //心跳包请求类型
 
+#define ROUTE_SERVER_IP_REQ_TYPE 0x00000001 // 目录服务器地址请求
+#define ROUTE_SERVER_IP_RES_TYPE 0x00010001 // 目录服务器地址请求响应
+
 #define SESSION_INIT_REQ_TYPE 0x00000003  // 通话查询请求
 #define SESSION_INIT_RES_TYPE 0x00010003  // 通话查询响应
 
@@ -94,6 +126,11 @@
 #define SIGNAL_SERVER_IP @"211.149.147.73"
 //#define SIGNAL_SERVER_IP @"211.149.144.15"
 #define SIGNAL_SERVER_PORT 9989
+#define ROUTE_SERVER_IP @"192.168.1.110"
+#define ROUTE_SERVER_PORT 9000 // 通话模块会先绑定登陆服务器的9000端口,用于请求路由,网关服务器的地址.
+#define ROUTE_SRV_TAG 0x000000fd
+#define ROUTE_GATEWAY_TAG 0x000000fe
+#define ROUTE_UDP_SEQENCE_END_TAG 0x000000ff
 #define LOCAL_PORT 11111
 //#define PROBE_SERVER "118.123.7.92"
 //#define PROBE_PORT 11111

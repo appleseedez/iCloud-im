@@ -12,6 +12,7 @@
 #import "IMEngineImp.h"
 #import "IMCommunicator.h"
 #import "IMTCPCommunicator.h"
+#import "IMUDPCommunicator.h"
 #import "IMMessageBuilder.h"
 #import "IMSessionInitMessageBuilder.h"
 #import "IMAuthMessageBuilder.h"
@@ -27,7 +28,9 @@
 //sdk引擎
 @property (nonatomic) id<IMEngine> engine;
 //网络通信器
-@property (nonatomic) id<IMCommunicator> communicator;
+@property (nonatomic) id<IMCommunicator> TCPcommunicator;
+
+@property (nonatomic) id<IMCommunicator> UDPcommunicator;
 // 信令构造器
 @property (nonatomic) id<IMMessageBuilder> messageBuilder;
 // 信令解析器

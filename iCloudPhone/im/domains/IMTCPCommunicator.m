@@ -18,6 +18,8 @@
 - (id)init{
     if (self = [super init]) {
         _sock = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+        _ip = SIGNAL_SERVER_IP;
+        _port=SIGNAL_SERVER_PORT;
         //心跳包是固定的格式，可以直接构造。
         _heartBeatPKG = @{
                           @"head":@{
@@ -138,9 +140,10 @@
     }
 }
 // IMCommunicator接口
-- (void)connect{
+- (void)connect:(NSString*) account{
     NSError* error;
-    if (![self.sock connectToHost:SIGNAL_SERVER_IP onPort:SIGNAL_SERVER_PORT error:&error]) {
+    self.account = account;
+    if (![self.sock connectToHost:self.ip onPort:self.port error:&error]) {
         [NSException exceptionWithName:@"403:connect to signal sever failed" reason:@"链接信令服务器失败" userInfo:nil];
     }
     
@@ -173,8 +176,13 @@
     
     [self.heartBeat invalidate];
     self.heartBeat = [MSWeakTimer scheduledTimerWithTimeInterval:HEART_BEAT_INTERVAL target:self selector:@selector(sendHeartBeat) userInfo:nil repeats:YES dispatchQueue:dispatch_queue_create("com.itelland.private_queue", DISPATCH_QUEUE_CONCURRENT)];
-//    self.heartBeat = [NSTimer scheduledTimerWithTimeInterval:HEART_BEAT_INTERVAL target:self selector:@selector(sendHeartBeat) userInfo:nil repeats:YES];
-//    self.heartBeat = [NSTimer timerWithTimeInterval:HEART_BEAT_INTERVAL target:self selector:@selector(sendHeartBeat) userInfo:nil repeats:YES];
-//    [[NSRunLoop mainRunLoop] addTimer:self.heartBeat forMode:NSRunLoopCommonModes];
+}
+
+
+- (void)setupIP:(NSString *)ip{
+    self.ip = ip;
+}
+- (void) setupPort:(uint16_t)port{
+    self.port = port;
 }
 @end

@@ -159,6 +159,7 @@
 		47E2DB9518598B0500D455EF /* 邀请.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E2DB9418598B0500D455EF /* 邀请.png */; };
 		47E2DB9A185991BD00D455EF /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E2DB99185991BD00D455EF /* MoreViewController.m */; };
 		47E2DB9C185997F000D455EF /* 登录logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E2DB9B185997F000D455EF /* 登录logo.png */; };
+		BA835794185EDF9F007A5990 /* IMUDPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA835793185EDF9F007A5990 /* IMUDPCommunicator.m */; };
 		BA9C62CE185DF74400997BC5 /* MSWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9C62CD185DF74400997BC5 /* MSWeakTimer.m */; };
 		BA9C62CF185DF74400997BC5 /* MSWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9C62CD185DF74400997BC5 /* MSWeakTimer.m */; };
 		BA9C62D5185EA01B00997BC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
@@ -464,6 +465,8 @@
 		47E2DB98185991BD00D455EF /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		47E2DB99185991BD00D455EF /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		47E2DB9B185997F000D455EF /* 登录logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登录logo.png"; sourceTree = "<group>"; };
+		BA835792185EDF9F007A5990 /* IMUDPCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMUDPCommunicator.h; sourceTree = "<group>"; };
+		BA835793185EDF9F007A5990 /* IMUDPCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMUDPCommunicator.m; sourceTree = "<group>"; };
 		BA9C62CC185DF74400997BC5 /* MSWeakTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWeakTimer.h; sourceTree = "<group>"; };
 		BA9C62CD185DF74400997BC5 /* MSWeakTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWeakTimer.m; sourceTree = "<group>"; };
 		BA9C62D4185EA01B00997BC5 /* libGCDSocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGCDSocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -909,6 +912,8 @@
 				479EF0331859D47C0012EE29 /* IMTCPCommunicator.m */,
 				479EF0341859D47C0012EE29 /* NSData+Byte.h */,
 				479EF0351859D47C0012EE29 /* NSData+Byte.m */,
+				BA835792185EDF9F007A5990 /* IMUDPCommunicator.h */,
+				BA835793185EDF9F007A5990 /* IMUDPCommunicator.m */,
 			);
 			path = domains;
 			sourceTree = "<group>";
@@ -1341,6 +1346,7 @@
 			files = (
 				479B908A18376F15005D8CCB /* ItelNetManager.m in Sources */,
 				479EF0561859D47C0012EE29 /* IMDataPool.m in Sources */,
+				BA835794185EDF9F007A5990 /* IMUDPCommunicator.m in Sources */,
 				479E9353185AB842001AF6ED /* RootViewController.m in Sources */,
 				478813DA1839C35E0085224D /* UIImageView+AFNetworking.m in Sources */,
 				479B908118376DCB005D8CCB /* ItelUser.m in Sources */,
@@ -1813,6 +1819,7 @@
 				BA9C62F2185EA01C00997BC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA9C62F3185EA01C00997BC5 /* Build configuration list for PBXNativeTarget "GCDSocketTests" */ = {
 			isa = XCConfigurationList;
@@ -1821,6 +1828,7 @@
 				BA9C62F5185EA01C00997BC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

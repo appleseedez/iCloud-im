@@ -30,7 +30,7 @@
     NSLog(@"发起通话查询请求：%@",data);
 #endif
     // 发送信令数据到信令服务器
-    [self.communicator send:data];
+    [self.TCPcommunicator send:data];
     // 转到 [self receive:];
 }
 // 向信令服务器做一次验证
@@ -40,19 +40,21 @@
     self.messageBuilder = [[IMAuthMessageBuilder alloc] init];
     NSDictionary* data = [self.messageBuilder buildWithParams:@{
                                                                 CMID_APP_LOGIN_SSS_REQ_FIELD_ACCOUNT_KEY:selfAccount,
-                                                                CMID_APP_LOGIN_SSS_REQ_FIELD_CERT_KEY:cert,
+                                                                CMID_APP_LOGIN_SSS_REQ_FIELD_CLIENT_TYPE_KEY:[NSNumber numberWithInt:ACT_IOS],
+                                                                CMID_APP_LOGIN_SSS_REQ_FIELD_CLIENT_STATUS_KEY:[NSNumber numberWithInt:AST_ONLINE],
                                                                 CMID_APP_LOGIN_SSS_REQ_FIELD_TOKEN_KEY:token
                                                                 }];
 #if SIGNAL_MESSAGE
     NSLog(@"信令服务器的验证请求：%@",data);
 #endif
-    [self.communicator send:data];
+    [self.TCPcommunicator send:data];
 }
 
 #pragma mark - PRIVATE
 
 // 注册通知
 - (void)registerNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectToSignalServer:) name:UDP_LOOKUP_COMPLETE_NOTIFICATION object:nil];
     //网络通信器会在收到数据响应时，发出该通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:DATA_RECEIVED_NOTIFICATION object:nil];
     //对收到的信令响应数据进行解析后，如果是通话查询请求的响应，则发出该通知
@@ -73,9 +75,9 @@
 // 依赖注入
 - (void)injectDependency {
     self.engine = [[IMEngineImp alloc] init];// 引擎
-    self.communicator = [[IMTCPCommunicator alloc] init];// 网络通信器
+    self.TCPcommunicator = [[IMTCPCommunicator alloc] init];// 网络通信器
     self.messageParser = [[IMMessageParserImp alloc] init]; // 信令解析器
-    
+    self.UDPcommunicator = [[IMUDPCommunicator alloc] init];
 }
 //根据数据的具体类型做操作路由
 - (void) route:(NSDictionary*) data{
@@ -169,7 +171,7 @@
 #if SIGNAL_MESSAGE
     NSLog(@"通话开始阶段的谈判过程，数据往来:%@",data);
 #endif
-    [self.communicator send:data];
+    [self.TCPcommunicator send:data];
 }
 
 
@@ -228,7 +230,7 @@
     NSLog(@"准备发送的终止信令：%@",params);
     self.messageBuilder = [[IMSessionRefuseMessageBuilder alloc] init];
     NSDictionary* data =  [self.messageBuilder buildWithParams:params];
-    [self.communicator send:data];
+    [self.TCPcommunicator send:data];
 }
 
 #pragma mark - NOTIFICATION HANDLE
@@ -382,34 +384,38 @@
     //注册事件
     [self registerNotifications];
     //连接信令服务器
-    [self.communicator connect];
-    [self.communicator keepAlive];
+//    [self.communicator connect];
+//    [self.communicator keepAlive];
+//    //向信令服务器发验证请求
+//    if (!self.selfAccount) {
+//        self.selfAccount = @"6666";
+//    }
+//    NSLog(@"目前的本机帐号：%@",[self myAccount]);
+//    [self auth:self.selfAccount cert:@"chengjianjun"];
+    [self.UDPcommunicator connect:self.selfAccount];
     
-//    NSString *urlAsString = @"http://192.168.1.106:2000";
-//    NSURL *url = [NSURL URLWithString:urlAsString];
-//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-//    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-//    [NSURLConnection sendAsynchronousRequest:urlRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-//        //
-//        if ([data length]) {
-//            NSDictionary* accountJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-//            NSString* randomAccount = [accountJSON valueForKey:@"number"];
-//            self.selfAccount = randomAccount;
-//            NSLog(@"获取到的随机帐号：%@",randomAccount);
-//        }
-//
-//    }];
-    
-    //向信令服务器发验证请求
-    if (!self.selfAccount) {
-        self.selfAccount = @"6666";
-    }
-    NSLog(@"目前的本机帐号：%@",[self myAccount]);
-    [self auth:self.selfAccount cert:@"chengjianjun"];
     
 }
+
+- (void) connectToSignalServer:(NSNotification*) notify{
+    //设置长连接地址
+    NSDictionary* addressData = notify.userInfo;
+    [self.TCPcommunicator setupIP: [[addressData valueForKey:BODY_SECTION_KEY] valueForKey:UDP_INDEX_RES_FIELD_SERVER_IP_KEY]];
+    [self.TCPcommunicator setupPort:[[[addressData valueForKey:BODY_SECTION_KEY] valueForKey:UDP_INDEX_RES_FIELD_SERVER_PORT_KEY] intValue]];
+    
+    
+    //连接信令服务器
+    [self.TCPcommunicator connect:self.selfAccount];
+    [self.TCPcommunicator keepAlive];
+    //向信令服务器发验证请求
+    if (!self.selfAccount) {
+            self.selfAccount = @"6666";
+        }
+        NSLog(@"目前的本机帐号：%@",[self myAccount]);
+        [self auth:self.selfAccount cert:@"chengjianjun"];
+}
 - (void)disconnectToSignalServer{
-    [self.communicator disconnect];
+    [self.TCPcommunicator disconnect];
     [self removeNotifications];
 }
 - (void) tearDown{
@@ -419,7 +425,8 @@
     [self disconnectToSignalServer];
     [self.engine tearDown];
     self.engine=nil;
-    self.communicator =  nil;
+    self.TCPcommunicator =  nil;
+    self.UDPcommunicator = nil;
     self.messageBuilder = nil;
 }
 - (void)startSession:(NSString*) destAccount{

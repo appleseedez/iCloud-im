@@ -10,5 +10,7 @@
 #import "IMCommunicator.h"
 #import "GCDAsyncSocket.h"
 @interface IMTCPCommunicator : NSObject <IMCommunicator>
-
+@property(nonatomic,copy) NSString* ip;
+@property(nonatomic) uint16_t port;
+@property(nonatomic,copy) NSString* account;
 @end
