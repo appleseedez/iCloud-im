@@ -41,7 +41,7 @@
     for (CustonTarbarItem *item in self.customTabbar.items) {
         [item addTarget:self action:@selector(changeController:) forControlEvents:UIControlEventTouchDown];
     }
-    [self changeController:[self.customTabbar.items objectAtIndex:2]];
+    [self changeController:[self.customTabbar.items objectAtIndex:2] presentDialingView:NO];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -52,18 +52,31 @@
     [super viewWillDisappear:animated];
 //    [self removeNotifications];
 }
--(void)changeController:(CustonTarbarItem*)sender{
+-(void)changeController:(CustonTarbarItem*)sender {
+   
+    [self changeController:sender presentDialingView:YES];
+}
+-(void)changeController:(CustonTarbarItem*)sender presentDialingView:(BOOL)presentDialingView{
     for (CustonTarbarItem *item in self.customTabbar.items ) {
         [item isSelected:NO];
     }
      [sender isSelected:YES];
     int i= [self.customTabbar.items indexOfObject:sender];
-    if (i==0) {
+    if (i==0&&presentDialingView==YES) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"presentDialView" object:nil];
     }
     [self setSelectedIndex:i];
 }
-
+-(void)changeSubViewAtIndex:(NSInteger)index{
+    BOOL present;
+    //通话记录传10 其他传index
+    if (index==10) {
+        present=YES;
+        index=0;
+    }
+    else present=NO;
+    [self changeController:[self.customTabbar.items objectAtIndex:index] presentDialingView:present];
+}
 #pragma mark - PRIVATE
 - (void) registerNotifications{
     // 当manager要求加载“拨打中”界面时，收到该通知

@@ -14,7 +14,7 @@
 #import "NetRequester.h"
 #define  SUCCESS void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
 #define  FAILURE void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error)
-static NSString *server=@"http://211.149.144.15:9000/CloudCommunity";
+static NSString *server=@"http://211.149.144.15:8000/CloudCommunity";
 static ItelNetManager *manager=nil;
 @implementation ItelNetManager
 
@@ -249,7 +249,8 @@ static int addcount=0;
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 
-                [[ItelAction action] delFriendFromItelBook:itel];
+                
+                [[ItelAction action] delFriendFromBlackResponse:itel];
             }
             else {
                 NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"解析异常" };
@@ -357,5 +358,31 @@ static int addcount=0;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getBlackList" object:nil userInfo:userInfo];
     };
     [NetRequester jsonGetRequestWithUrl:url andParameters:parameters success:success failure:failure];
+}
+#pragma mark - 上传图片
+-(void)uploadImage:(NSData*)imageData parameters:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/upload/uploadImg.json",server];
+      //url=@"http://10.0.0.137:8080/CloudCommunity/upload/uploadImg.json";
+    SUCCESS{
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+            
+            int ret=[[dic objectForKey:@"ret"] intValue];
+            if (ret==0) {
+            
+            }
+            else {
+                NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"解析异常" };
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"uploadImage" object:nil userInfo:userInfo];
+            }
+        }//如果请求失败 则执行failure
+    };
+    FAILURE {
+        NSLog(@"网络问题：%@",error);
+        NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"uploadImage" object:nil userInfo:userInfo];
+    };
+    [NetRequester uploadImagePostRequestWithUrl:url imageData:imageData andParameters:parameters success:success failure:failure];
 }
 @end

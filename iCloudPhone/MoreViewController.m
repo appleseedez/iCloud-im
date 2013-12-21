@@ -46,6 +46,7 @@
     }
     return 0;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
         return 60;
@@ -65,25 +66,23 @@
     UITableViewCell *cell=nil;
     if (indexPath.section==0) {
          identifier=@"hostCell";
-      cell=[tableView dequeueReusableCellWithIdentifier:identifier];
+      cell=[tableView dequeueReusableCellWithIdentifier:identifier ];
         [((MoreHostViewCell*)cell).hostImage setRect:0 cornerRadius:8 borderColor:[UIColor clearColor]];
         
     }
     else{
-        identifier=@"otherCell";
-      cell =[tableView dequeueReusableCellWithIdentifier:identifier];
-        [((MoreOtherViewCell*)cell).otherLogo setRect:0 cornerRadius:8 borderColor:nil];
-        UILabel *text=((MoreOtherViewCell*)cell).moreTitle;
+        
+      
         if (indexPath.section==1) {
             switch (indexPath.row) {
                 case 0:
-                     text.text=@"通知设置";
+                     identifier=@"notificationSetting";
                     break;
                 case 1:
-                    text.text=@"来电设置";
+                   identifier=@"notificationPush";
                     break;
                 case 2:
-                    text.text=@"隐身设置";
+                   identifier=@"personal";
                     break;
                     
                 default:
@@ -93,16 +92,19 @@
         else if (indexPath.section==2){
             switch (indexPath.row) {
                 case 0:
-                    text.text=@"iTel应用中心";
+                    identifier=@"itelCeter";
                     break;
                 case 1:
-                    text.text=@"关于";
+                    identifier=@"aboutItel";
                     break;
                     
                 default:
                     break;
             }
         }
+        cell =[tableView dequeueReusableCellWithIdentifier:identifier];
+        [((MoreOtherViewCell*)cell).otherLogo setRect:0 cornerRadius:8 borderColor:nil];
+        
     }
     
     return cell;
@@ -110,6 +112,7 @@
 - (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath{
     return UITableViewCellAccessoryDisclosureIndicator;
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

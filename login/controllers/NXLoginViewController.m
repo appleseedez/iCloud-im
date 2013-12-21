@@ -9,8 +9,8 @@
 #import "NXLoginViewController.h"
 #import "NXInputChecker.h"
 #import "NXRegViewController.h"
-#import "NXResetPasswordViewController.h"
-#import "NXMockServer.h"
+
+
 #import "AFNetworking.h"
 #import "NSCAppDelegate.h"
 #import "RegNextButton.h"
@@ -41,14 +41,7 @@
 
 }
 
-- (IBAction)presentResetPasswordViewController:(UIButton *)sender{
-    
-    NXResetPasswordViewController *resetP=[[NXResetPasswordViewController alloc]init];
-    UINavigationController *resetNavVC= [[UINavigationController alloc]initWithRootViewController:resetP];
-    [self presentViewController:resetNavVC animated:YES completion:^{
-        
-    }];
-}
+
 
 #pragma mark - 点击登录按钮
 - (IBAction)loginButtonPushed:(UIButton *)sender {
@@ -65,7 +58,7 @@
     [self.view endEditing:YES];
     self.txtInuptCheckMessage.text=@"登录中...";
     [self.actWaitingToLogin startAnimating];
-    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://211.149.144.15:9000/CloudCommunity/login.json"]];
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://211.149.144.15:8000/CloudCommunity/login.json"]];
     
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
@@ -130,7 +123,7 @@ NSLog(@"%@",json);
     self.actWaitingToLogin.hidesWhenStopped=YES;
     self.txtUserCloudNumber.text=@"2301031983";
     self.txtUserPassword.text=@"123456";
-    
+  
     NXImageView *logo=[[NXImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 75)];
     [logo setRect:3 cornerRadius:10 borderColor:[UIColor whiteColor]];
     [logo setClipsToBounds:YES];

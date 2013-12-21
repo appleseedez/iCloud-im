@@ -25,15 +25,21 @@
 
 @implementation RegMesCheckViewController
 static int waitingTime=60;
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 -(void)setUI{
     [self.nextButton setUI];
     [self.tipView setUI];
-    NSString *tel=[RegManager defaultManager].regPhoneNumber;
+    NSString *tel=[self getTelephone];
     NSString *codedTel=[NXInputChecker encodeTelNumber:tel];
     if (codedTel!=nil) {
         self.tipLabel.text=[NSString stringWithFormat:@"请输入手机%@收到的短信校验码",codedTel];
     }
     [self.btnReSend.layer setCornerRadius:5.0];
+}
+-(NSString*)getTelephone{
+    return  [RegManager defaultManager].regPhoneNumber;
 }
 -(void)TimerStart{
     waitingTime=60;
@@ -94,14 +100,18 @@ static int waitingTime=60;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCodeResponse:) name:COMMIT_INTERFACE_NOTIFICATION object:nil];
+    [self addNotification];
     
+}
+-(void)addNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCodeResponse:) name:COMMIT_INTERFACE_NOTIFICATION object:nil];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [self timerEnd];
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 -(void)checkCodeResponse:(NSNotification*)notification{
     NSDictionary *response=(NSDictionary*)notification.object;
     NSInteger ret=[[response objectForKey:@"ret"] integerValue] ;
@@ -119,8 +129,11 @@ static int waitingTime=60;
 }
 - (IBAction)messageButton:(UIButton *)sender {
     [self TimerStart];
-  
-    [[RegManager defaultManager] sendMessageInterface];
+    [self resendMessage];
+   
+}
+-(void)resendMessage{
+     [[RegManager defaultManager] sendMessageInterface];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
