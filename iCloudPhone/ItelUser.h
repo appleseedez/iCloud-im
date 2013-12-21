@@ -24,5 +24,9 @@
 @property (nonatomic)        BOOL isBlack;     //黑名单关系
 @property (nonatomic,strong) NSString *userId;
 @property (nonatomic,strong) NSString *personalitySignature; //个性签名
+@property (nonatomic,strong) NSString *birthDay;
+@property (nonatomic,strong) NSString *address;
+@property (nonatomic,strong) NSString *QQ;
+
 + (ItelUser*)userWithDictionary:(NSDictionary*)dic;
 @end

@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "IMManager.h"
-@interface RootViewController : UITabBarController
+
+@protocol RoorViewChangingSubPageDelegate <NSObject>
+
+-(void)changeSubViewAtIndex:(NSInteger)index;
+
+@end
+
+@interface RootViewController : UITabBarController<RoorViewChangingSubPageDelegate>
 @property (nonatomic,weak) id <IMManager> manager;
 
 @end

@@ -56,7 +56,7 @@
 -(void) getItelBlackList:(NSInteger)start{
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
     
-    NSDictionary *parameters = @{@"keyWord":hostUser.userId ,@"start":[NSNumber numberWithInteger:start],@"token":hostUser.token,@"limit":[NSNumber numberWithInteger:20]};
+    NSDictionary *parameters = @{@"keyWord":hostUser.userId ,@"start":[NSNumber numberWithInteger:start],@"token":hostUser.token,@"limit":[NSNumber numberWithInteger:2030]};
     [self.itelNetRequestActionDelegate refreshBlackList:parameters];
 }
 -(void) getItelBlackListResponse:(id)data{
@@ -132,6 +132,7 @@
     [self NotifyForNormalResponse:@"addBlack" parameters:nil];
 
 }
+
 #pragma mark - 从黑名单移除
 //
 -(void) delFriendFromBlack:(NSString*)itel{
@@ -143,6 +144,10 @@
     
     [self.itelBookActionDelegate removeUserFromBlackBook:itel];
     [self NotifyForNormalResponse:@"removeBlack" parameters:nil];
+}
+#pragma mark - 获得黑名单
+-(ItelBook*) blackList{
+    return [self.itelBookActionDelegate getBlackList];
 }
 #pragma  mark - 匹配通讯录好友
 /*匹配通讯录中得联系人接口
@@ -198,11 +203,28 @@
  */
 -(void) searchStranger:(NSString*)searchMessage newSearch:(BOOL)newSearch{
     [self.itelNetRequestActionDelegate searchUser:searchMessage isNewSearch:newSearch];
- 
+    
 }
 //回调
 -(void) searchStrangerResponse:(id)response isEnd:(BOOL)isEnd{
     [self NotifyForNormalResponse:@"searchStranger" parameters:response];
+}
+#pragma mark - 上传图片
+-(void)uploadImage:(UIImage*)image{
+    //NSData *imgData=UIImagePNGRepresentation(image);
+    NSData *imgData=UIImageJPEGRepresentation(image, 1);
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"hostItel":hostUser.itelNum,@"token":hostUser.token};
+    [self.itelNetRequestActionDelegate uploadImage:imgData parameters:parameters];
+}
+//回调
+-(void)uploadImageResponse:(NSDictionary*)response{
+    
+   HostItelUser *hostUser = [self.itelUserActionDelegate hostUser];
+    NSString *imageUrl=[response objectForKey:@"data"];
+    hostUser.imageurl=imageUrl;
+    [self NotifyForNormalResponse:@"uploadImage" parameters:response];
+    
 }
 
 -(ItelBook*) getFriendBook{

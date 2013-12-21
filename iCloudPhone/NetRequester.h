@@ -17,4 +17,10 @@
                andParameters:(NSDictionary*)parameters
                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
++(void)uploadImagePostRequestWithUrl:(NSString*)url
+                           imageData:(NSData*)imageData
+                       andParameters:(NSDictionary*)parameters
+                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

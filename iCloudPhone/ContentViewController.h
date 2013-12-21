@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RootViewController.h"
 @interface ContentViewController : UIViewController<UIScrollViewDelegate>
-
+@property (nonatomic,weak) id <RoorViewChangingSubPageDelegate> rootDelegate;
 @end

@@ -20,6 +20,8 @@
 		4732A03418432F61009AD32D /* NXInputChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813F41839E6490085224D /* NXInputChecker.m */; };
 		4732A0381843303E009AD32D /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B908018376DCB005D8CCB /* ItelUser.m */; };
 		4734957A18458BEA00972FD9 /* StrangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4734957918458BEA00972FD9 /* StrangerViewController.m */; };
+		473748CC1863D8C700F112AF /* HostQQCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 473748CB1863D8C700F112AF /* HostQQCell.m */; };
+		473748CF1863E5A500F112AF /* HostEditQQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473748CE1863E5A500F112AF /* HostEditQQViewController.m */; };
 		473F62D718386B04006CAE31 /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473F62D618386B04006CAE31 /* AddressBookViewController.m */; };
 		473F62D918386B2F006CAE31 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 473F62D818386B2F006CAE31 /* AddressBook.framework */; };
 		473F62DC18387CA4006CAE31 /* PersonInAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 473F62DB18387CA4006CAE31 /* PersonInAddressBook.m */; };
@@ -69,12 +71,7 @@
 		478813DE1839C35E0085224D /* Underscore.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813C01839C35E0085224D /* Underscore.m */; };
 		478813DF1839C35E0085224D /* USArrayWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813C21839C35E0085224D /* USArrayWrapper.m */; };
 		478813E01839C35E0085224D /* USDictionaryWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813C51839C35E0085224D /* USDictionaryWrapper.m */; };
-		478813F51839E6490085224D /* NXInputNewPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813E41839E6490085224D /* NXInputNewPasswordViewController.m */; };
-		478813F71839E6490085224D /* NXQuestionResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813E81839E6490085224D /* NXQuestionResetViewController.m */; };
 		478813F81839E6490085224D /* NXRegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813EA1839E6490085224D /* NXRegViewController.m */; };
-		478813F91839E6490085224D /* NXResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813EC1839E6490085224D /* NXResetPasswordViewController.m */; };
-		478813FA1839E6490085224D /* NXTelResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813EE1839E6490085224D /* NXTelResetViewController.m */; };
-		478813FB1839E6490085224D /* NXMockServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813F11839E6490085224D /* NXMockServer.m */; };
 		478813FC1839E6490085224D /* NXInputChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813F41839E6490085224D /* NXInputChecker.m */; };
 		478814011839E66C0085224D /* NXInputCheckerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813FE1839E66C0085224D /* NXInputCheckerTest.m */; };
 		478814021839E66C0085224D /* NXLoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813FF1839E66C0085224D /* NXLoginViewControllerTest.m */; };
@@ -99,6 +96,9 @@
 		479C7BAE185DDB480046B1D7 /* RegTipLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BAD185DDB480046B1D7 /* RegTipLabel.m */; };
 		479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C9C201834F02800DE40D8 /* ContentViewController.m */; };
 		479C9C291835019D00DE40D8 /* 头像.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 479C9C281835019D00DE40D8 /* 头像.jpg */; };
+		479DB4B418648F8300421C10 /* CommonSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4B318648F8300421C10 /* CommonSettingViewController.m */; };
+		479DB4B718648F9900421C10 /* BlackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4B618648F9900421C10 /* BlackListViewController.m */; };
+		479DB4BB186494A000421C10 /* blackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4BA186494A000421C10 /* blackCell.m */; };
 		479DC49B183A4D3F00C3F3F2 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DC49A183A4D3F00C3F3F2 /* PeopleViewController.m */; };
 		479DC49D183A544200C3F3F2 /* 广告.png in Resources */ = {isa = PBXBuildFile; fileRef = 479DC49C183A544200C3F3F2 /* 广告.png */; };
 		479E0CDA1856A817005BAE20 /* RegManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E0CD91856A817005BAE20 /* RegManager.m */; };
@@ -143,8 +143,29 @@
 		479EF0C61859DA010012EE29 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF0C31859DA010012EE29 /* GCDAsyncUdpSocket.m */; };
 		479EF0C71859DA010012EE29 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF0C31859DA010012EE29 /* GCDAsyncUdpSocket.m */; };
 		479EF0C81859DA1B0012EE29 /* libGCDSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 479EF09C1859D9A40012EE29 /* libGCDSocket.a */; };
+		479F138B18617096006DF67B /* HostSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F138A18617096006DF67B /* HostSettingViewController.m */; };
+		479F138F186178C7006DF67B /* HostHeadImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F138E186178C7006DF67B /* HostHeadImageCell.m */; };
+		479F1392186178DB006DF67B /* HostSignCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F1391186178DB006DF67B /* HostSignCell.m */; };
+		479F139518617904006DF67B /* HostNickNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F139418617904006DF67B /* HostNickNameCell.m */; };
+		479F13981861791B006DF67B /* HostSexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F13971861791B006DF67B /* HostSexCell.m */; };
+		479F139B18617A07006DF67B /* HostBirthdayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F139A18617A07006DF67B /* HostBirthdayCell.m */; };
+		479F139E18617A1C006DF67B /* HostAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F139D18617A1C006DF67B /* HostAddressCell.m */; };
+		479F13A118617A2E006DF67B /* HostTelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F13A018617A2E006DF67B /* HostTelCell.m */; };
+		479F13A418617A44006DF67B /* HostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F13A318617A44006DF67B /* HostImageCell.m */; };
+		479F13A718618294006DF67B /* HostEmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F13A618618294006DF67B /* HostEmailCell.m */; };
 		47A01122185C90B3003F8878 /* PersonRegButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A01121185C90B3003F8878 /* PersonRegButton.m */; };
 		47A01125185CA34E003F8878 /* regDetailTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A01124185CA34E003F8878 /* regDetailTextField.m */; };
+		47A0DEEE1862D56200BD28AB /* UIImage+Compress.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A0DEED1862D56200BD28AB /* UIImage+Compress.m */; };
+		47A0DEF11862D74D00BD28AB /* UIImageView+BetterFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A0DEF01862D74D00BD28AB /* UIImageView+BetterFace.m */; };
+		47A10D9D18654AF500FB9FED /* SecurityChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10D9C18654AF500FB9FED /* SecurityChangePasswordViewController.m */; };
+		47A10DA01865710000FB9FED /* SecuretyMesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10D9F1865710000FB9FED /* SecuretyMesViewController.m */; };
+		47A10DA418658F9700FB9FED /* PassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10DA318658F9700FB9FED /* PassViewController.m */; };
+		47A10DA71865951000FB9FED /* PassWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10DA61865951000FB9FED /* PassWayViewController.m */; };
+		47A10DAA1865971800FB9FED /* PassMesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10DA91865971800FB9FED /* PassMesViewController.m */; };
+		47A10DAD18659D3E00FB9FED /* PassSecuretyQuestiongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10DAC18659D3E00FB9FED /* PassSecuretyQuestiongViewController.m */; };
+		47A10DB01865A6EC00FB9FED /* PassResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10DAF1865A6EC00FB9FED /* PassResetViewController.m */; };
+		47A5577E186320640062EFFF /* HostEditSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A5577D186320640062EFFF /* HostEditSignViewController.m */; };
+		47A557811863280A0062EFFF /* HostEditNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A557801863280A0062EFFF /* HostEditNicknameViewController.m */; };
 		47B89DD51834D40000022FE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
 		47B89DD71834D40000022FE5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD61834D40000022FE5 /* CoreGraphics.framework */; };
 		47B89DD91834D40000022FE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD81834D40000022FE5 /* UIKit.framework */; };
@@ -235,6 +256,10 @@
 		4732A02F18432AEF009AD32D /* ItelUserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUserTest.m; sourceTree = "<group>"; };
 		4734957818458BEA00972FD9 /* StrangerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrangerViewController.h; sourceTree = "<group>"; };
 		4734957918458BEA00972FD9 /* StrangerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrangerViewController.m; sourceTree = "<group>"; };
+		473748CA1863D8C700F112AF /* HostQQCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostQQCell.h; sourceTree = "<group>"; };
+		473748CB1863D8C700F112AF /* HostQQCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostQQCell.m; sourceTree = "<group>"; };
+		473748CD1863E5A500F112AF /* HostEditQQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEditQQViewController.h; sourceTree = "<group>"; };
+		473748CE1863E5A500F112AF /* HostEditQQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEditQQViewController.m; sourceTree = "<group>"; };
 		473F62D518386B04006CAE31 /* AddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookViewController.h; sourceTree = "<group>"; };
 		473F62D618386B04006CAE31 /* AddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewController.m; sourceTree = "<group>"; };
 		473F62D818386B2F006CAE31 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -320,18 +345,8 @@
 		478813C31839C35E0085224D /* USConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USConstants.h; sourceTree = "<group>"; };
 		478813C41839C35E0085224D /* USDictionaryWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USDictionaryWrapper.h; sourceTree = "<group>"; };
 		478813C51839C35E0085224D /* USDictionaryWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USDictionaryWrapper.m; sourceTree = "<group>"; };
-		478813E31839E6490085224D /* NXInputNewPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXInputNewPasswordViewController.h; sourceTree = "<group>"; };
-		478813E41839E6490085224D /* NXInputNewPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXInputNewPasswordViewController.m; sourceTree = "<group>"; };
-		478813E71839E6490085224D /* NXQuestionResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXQuestionResetViewController.h; sourceTree = "<group>"; };
-		478813E81839E6490085224D /* NXQuestionResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXQuestionResetViewController.m; sourceTree = "<group>"; };
 		478813E91839E6490085224D /* NXRegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NXRegViewController.h; path = login/controllers/NXRegViewController.h; sourceTree = "<group>"; };
 		478813EA1839E6490085224D /* NXRegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NXRegViewController.m; path = login/controllers/NXRegViewController.m; sourceTree = "<group>"; };
-		478813EB1839E6490085224D /* NXResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXResetPasswordViewController.h; sourceTree = "<group>"; };
-		478813EC1839E6490085224D /* NXResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXResetPasswordViewController.m; sourceTree = "<group>"; };
-		478813ED1839E6490085224D /* NXTelResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXTelResetViewController.h; sourceTree = "<group>"; };
-		478813EE1839E6490085224D /* NXTelResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXTelResetViewController.m; sourceTree = "<group>"; };
-		478813F01839E6490085224D /* NXMockServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXMockServer.h; sourceTree = "<group>"; };
-		478813F11839E6490085224D /* NXMockServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXMockServer.m; sourceTree = "<group>"; };
 		478813F31839E6490085224D /* NXInputChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXInputChecker.h; sourceTree = "<group>"; };
 		478813F41839E6490085224D /* NXInputChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXInputChecker.m; sourceTree = "<group>"; };
 		478813FE1839E66C0085224D /* NXInputCheckerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXInputCheckerTest.m; sourceTree = "<group>"; };
@@ -372,6 +387,12 @@
 		479C9C1F1834F02800DE40D8 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		479C9C201834F02800DE40D8 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		479C9C281835019D00DE40D8 /* 头像.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "头像.jpg"; sourceTree = "<group>"; };
+		479DB4B218648F8300421C10 /* CommonSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSettingViewController.h; sourceTree = "<group>"; };
+		479DB4B318648F8300421C10 /* CommonSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonSettingViewController.m; sourceTree = "<group>"; };
+		479DB4B518648F9900421C10 /* BlackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackListViewController.h; sourceTree = "<group>"; };
+		479DB4B618648F9900421C10 /* BlackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackListViewController.m; sourceTree = "<group>"; };
+		479DB4B9186494A000421C10 /* blackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blackCell.h; sourceTree = "<group>"; };
+		479DB4BA186494A000421C10 /* blackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = blackCell.m; sourceTree = "<group>"; };
 		479DC496183A4CC100C3F3F2 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		479DC499183A4D3F00C3F3F2 /* PeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeopleViewController.h; path = ../PeopleViewController.h; sourceTree = "<group>"; };
 		479DC49A183A4D3F00C3F3F2 /* PeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeopleViewController.m; path = ../PeopleViewController.m; sourceTree = "<group>"; };
@@ -446,10 +467,53 @@
 		479EF0C11859DA010012EE29 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		479EF0C21859DA010012EE29 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		479EF0C31859DA010012EE29 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		479F138918617096006DF67B /* HostSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostSettingViewController.h; sourceTree = "<group>"; };
+		479F138A18617096006DF67B /* HostSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostSettingViewController.m; sourceTree = "<group>"; };
+		479F138D186178C7006DF67B /* HostHeadImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHeadImageCell.h; sourceTree = "<group>"; };
+		479F138E186178C7006DF67B /* HostHeadImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHeadImageCell.m; sourceTree = "<group>"; };
+		479F1390186178DB006DF67B /* HostSignCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostSignCell.h; sourceTree = "<group>"; };
+		479F1391186178DB006DF67B /* HostSignCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostSignCell.m; sourceTree = "<group>"; };
+		479F139318617904006DF67B /* HostNickNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostNickNameCell.h; sourceTree = "<group>"; };
+		479F139418617904006DF67B /* HostNickNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostNickNameCell.m; sourceTree = "<group>"; };
+		479F13961861791B006DF67B /* HostSexCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostSexCell.h; sourceTree = "<group>"; };
+		479F13971861791B006DF67B /* HostSexCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostSexCell.m; sourceTree = "<group>"; };
+		479F139918617A07006DF67B /* HostBirthdayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostBirthdayCell.h; sourceTree = "<group>"; };
+		479F139A18617A07006DF67B /* HostBirthdayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostBirthdayCell.m; sourceTree = "<group>"; };
+		479F139C18617A1C006DF67B /* HostAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostAddressCell.h; sourceTree = "<group>"; };
+		479F139D18617A1C006DF67B /* HostAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostAddressCell.m; sourceTree = "<group>"; };
+		479F139F18617A2E006DF67B /* HostTelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostTelCell.h; sourceTree = "<group>"; };
+		479F13A018617A2E006DF67B /* HostTelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostTelCell.m; sourceTree = "<group>"; };
+		479F13A218617A44006DF67B /* HostImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostImageCell.h; sourceTree = "<group>"; };
+		479F13A318617A44006DF67B /* HostImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostImageCell.m; sourceTree = "<group>"; };
+		479F13A518618294006DF67B /* HostEmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEmailCell.h; sourceTree = "<group>"; };
+		479F13A618618294006DF67B /* HostEmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEmailCell.m; sourceTree = "<group>"; };
+		479F13A818618300006DF67B /* HostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HostCell.h; sourceTree = "<group>"; };
 		47A01120185C90B3003F8878 /* PersonRegButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonRegButton.h; sourceTree = "<group>"; };
 		47A01121185C90B3003F8878 /* PersonRegButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonRegButton.m; sourceTree = "<group>"; };
 		47A01123185CA34E003F8878 /* regDetailTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regDetailTextField.h; sourceTree = "<group>"; };
 		47A01124185CA34E003F8878 /* regDetailTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = regDetailTextField.m; sourceTree = "<group>"; };
+		47A0DEEC1862D56200BD28AB /* UIImage+Compress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Compress.h"; sourceTree = "<group>"; };
+		47A0DEED1862D56200BD28AB /* UIImage+Compress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Compress.m"; sourceTree = "<group>"; };
+		47A0DEEF1862D74D00BD28AB /* UIImageView+BetterFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+BetterFace.h"; sourceTree = "<group>"; };
+		47A0DEF01862D74D00BD28AB /* UIImageView+BetterFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BetterFace.m"; sourceTree = "<group>"; };
+		47A10D9B18654AF500FB9FED /* SecurityChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityChangePasswordViewController.h; sourceTree = "<group>"; };
+		47A10D9C18654AF500FB9FED /* SecurityChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityChangePasswordViewController.m; sourceTree = "<group>"; };
+		47A10D9E1865710000FB9FED /* SecuretyMesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecuretyMesViewController.h; sourceTree = "<group>"; };
+		47A10D9F1865710000FB9FED /* SecuretyMesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecuretyMesViewController.m; sourceTree = "<group>"; };
+		47A10DA218658F9700FB9FED /* PassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassViewController.h; sourceTree = "<group>"; };
+		47A10DA318658F9700FB9FED /* PassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassViewController.m; sourceTree = "<group>"; };
+		47A10DA51865951000FB9FED /* PassWayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassWayViewController.h; sourceTree = "<group>"; };
+		47A10DA61865951000FB9FED /* PassWayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassWayViewController.m; sourceTree = "<group>"; };
+		47A10DA81865971800FB9FED /* PassMesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassMesViewController.h; sourceTree = "<group>"; };
+		47A10DA91865971800FB9FED /* PassMesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassMesViewController.m; sourceTree = "<group>"; };
+		47A10DAB18659D3E00FB9FED /* PassSecuretyQuestiongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassSecuretyQuestiongViewController.h; sourceTree = "<group>"; };
+		47A10DAC18659D3E00FB9FED /* PassSecuretyQuestiongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassSecuretyQuestiongViewController.m; sourceTree = "<group>"; };
+		47A10DAE1865A6EC00FB9FED /* PassResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassResetViewController.h; sourceTree = "<group>"; };
+		47A10DAF1865A6EC00FB9FED /* PassResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassResetViewController.m; sourceTree = "<group>"; };
+		47A5577C186320640062EFFF /* HostEditSignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEditSignViewController.h; sourceTree = "<group>"; };
+		47A5577D186320640062EFFF /* HostEditSignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEditSignViewController.m; sourceTree = "<group>"; };
+		47A5577F1863280A0062EFFF /* HostEditNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEditNicknameViewController.h; sourceTree = "<group>"; };
+		47A557801863280A0062EFFF /* HostEditNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEditNicknameViewController.m; sourceTree = "<group>"; };
 		47B89DD11834D40000022FE5 /* iTel 2.0Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iTel 2.0Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47B89DD41834D40000022FE5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		47B89DD61834D40000022FE5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -642,6 +706,7 @@
 		478813861839C35E0085224D /* vendors */ = {
 			isa = PBXGroup;
 			children = (
+				47A0DE9F1862D3B300BD28AB /* UIImageView-BetterFace */,
 				478813871839C35E0085224D /* AFNetworking */,
 				478813A01839C35E0085224D /* fmdb */,
 				478813AB1839C35E0085224D /* UIKit+AFNetworking */,
@@ -736,7 +801,6 @@
 			isa = PBXGroup;
 			children = (
 				478813E21839E6490085224D /* controllers */,
-				478813EF1839E6490085224D /* mocks */,
 				478813F21839E6490085224D /* models */,
 			);
 			name = login;
@@ -746,27 +810,10 @@
 		478813E21839E6490085224D /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				478813E31839E6490085224D /* NXInputNewPasswordViewController.h */,
-				478813E41839E6490085224D /* NXInputNewPasswordViewController.m */,
 				479E934D185AB7D4001AF6ED /* NXLoginViewController.h */,
 				479E934E185AB7D4001AF6ED /* NXLoginViewController.m */,
-				478813E71839E6490085224D /* NXQuestionResetViewController.h */,
-				478813E81839E6490085224D /* NXQuestionResetViewController.m */,
-				478813EB1839E6490085224D /* NXResetPasswordViewController.h */,
-				478813EC1839E6490085224D /* NXResetPasswordViewController.m */,
-				478813ED1839E6490085224D /* NXTelResetViewController.h */,
-				478813EE1839E6490085224D /* NXTelResetViewController.m */,
 			);
 			path = controllers;
-			sourceTree = "<group>";
-		};
-		478813EF1839E6490085224D /* mocks */ = {
-			isa = PBXGroup;
-			children = (
-				478813F01839E6490085224D /* NXMockServer.h */,
-				478813F11839E6490085224D /* NXMockServer.m */,
-			);
-			path = mocks;
 			sourceTree = "<group>";
 		};
 		478813F21839E6490085224D /* models */ = {
@@ -875,6 +922,19 @@
 				47E2DB8B18595A5A00D455EF /* SearchNavController.m */,
 			);
 			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		479DB4B118648ED200421C10 /* CommonSetting */ = {
+			isa = PBXGroup;
+			children = (
+				479DB4B218648F8300421C10 /* CommonSettingViewController.h */,
+				479DB4B318648F8300421C10 /* CommonSettingViewController.m */,
+				479DB4B518648F9900421C10 /* BlackListViewController.h */,
+				479DB4B618648F9900421C10 /* BlackListViewController.m */,
+				479DB4B9186494A000421C10 /* blackCell.h */,
+				479DB4BA186494A000421C10 /* blackCell.m */,
+			);
+			name = CommonSetting;
 			sourceTree = "<group>";
 		};
 		479EF00C1859D47C0012EE29 /* im */ = {
@@ -1033,6 +1093,81 @@
 			path = asyncSocket;
 			sourceTree = "<group>";
 		};
+		479F138C18617890006DF67B /* hostSetting */ = {
+			isa = PBXGroup;
+			children = (
+				479F138918617096006DF67B /* HostSettingViewController.h */,
+				479F138A18617096006DF67B /* HostSettingViewController.m */,
+				47A5577C186320640062EFFF /* HostEditSignViewController.h */,
+				47A5577D186320640062EFFF /* HostEditSignViewController.m */,
+				47A5577F1863280A0062EFFF /* HostEditNicknameViewController.h */,
+				47A557801863280A0062EFFF /* HostEditNicknameViewController.m */,
+				473748CD1863E5A500F112AF /* HostEditQQViewController.h */,
+				473748CE1863E5A500F112AF /* HostEditQQViewController.m */,
+				479F13A818618300006DF67B /* HostCell.h */,
+				479F138D186178C7006DF67B /* HostHeadImageCell.h */,
+				479F138E186178C7006DF67B /* HostHeadImageCell.m */,
+				479F1390186178DB006DF67B /* HostSignCell.h */,
+				479F1391186178DB006DF67B /* HostSignCell.m */,
+				479F139318617904006DF67B /* HostNickNameCell.h */,
+				479F139418617904006DF67B /* HostNickNameCell.m */,
+				479F13961861791B006DF67B /* HostSexCell.h */,
+				479F13971861791B006DF67B /* HostSexCell.m */,
+				479F139918617A07006DF67B /* HostBirthdayCell.h */,
+				479F139A18617A07006DF67B /* HostBirthdayCell.m */,
+				479F139C18617A1C006DF67B /* HostAddressCell.h */,
+				479F139D18617A1C006DF67B /* HostAddressCell.m */,
+				479F139F18617A2E006DF67B /* HostTelCell.h */,
+				479F13A018617A2E006DF67B /* HostTelCell.m */,
+				479F13A218617A44006DF67B /* HostImageCell.h */,
+				479F13A318617A44006DF67B /* HostImageCell.m */,
+				479F13A518618294006DF67B /* HostEmailCell.h */,
+				479F13A618618294006DF67B /* HostEmailCell.m */,
+				473748CA1863D8C700F112AF /* HostQQCell.h */,
+				473748CB1863D8C700F112AF /* HostQQCell.m */,
+			);
+			name = hostSetting;
+			sourceTree = "<group>";
+		};
+		47A0DE9F1862D3B300BD28AB /* UIImageView-BetterFace */ = {
+			isa = PBXGroup;
+			children = (
+				47A0DEEC1862D56200BD28AB /* UIImage+Compress.h */,
+				47A0DEEF1862D74D00BD28AB /* UIImageView+BetterFace.h */,
+				47A0DEF01862D74D00BD28AB /* UIImageView+BetterFace.m */,
+				47A0DEED1862D56200BD28AB /* UIImage+Compress.m */,
+			);
+			path = "UIImageView-BetterFace";
+			sourceTree = "<group>";
+		};
+		47A10D9A18654ABB00FB9FED /* securety */ = {
+			isa = PBXGroup;
+			children = (
+				47A10D9B18654AF500FB9FED /* SecurityChangePasswordViewController.h */,
+				47A10D9C18654AF500FB9FED /* SecurityChangePasswordViewController.m */,
+				47A10D9E1865710000FB9FED /* SecuretyMesViewController.h */,
+				47A10D9F1865710000FB9FED /* SecuretyMesViewController.m */,
+			);
+			name = securety;
+			sourceTree = "<group>";
+		};
+		47A10DA118658F6900FB9FED /* findPassword */ = {
+			isa = PBXGroup;
+			children = (
+				47A10DA218658F9700FB9FED /* PassViewController.h */,
+				47A10DA318658F9700FB9FED /* PassViewController.m */,
+				47A10DA51865951000FB9FED /* PassWayViewController.h */,
+				47A10DA61865951000FB9FED /* PassWayViewController.m */,
+				47A10DA81865971800FB9FED /* PassMesViewController.h */,
+				47A10DA91865971800FB9FED /* PassMesViewController.m */,
+				47A10DAB18659D3E00FB9FED /* PassSecuretyQuestiongViewController.h */,
+				47A10DAC18659D3E00FB9FED /* PassSecuretyQuestiongViewController.m */,
+				47A10DAE1865A6EC00FB9FED /* PassResetViewController.h */,
+				47A10DAF1865A6EC00FB9FED /* PassResetViewController.m */,
+			);
+			name = findPassword;
+			sourceTree = "<group>";
+		};
 		47B89DC81834D40000022FE5 = {
 			isa = PBXGroup;
 			children = (
@@ -1087,6 +1222,7 @@
 		47B89DDA1834D40000022FE5 /* iCloudPhone */ = {
 			isa = PBXGroup;
 			children = (
+				47A10DA118658F6900FB9FED /* findPassword */,
 				478813E11839E6490085224D /* login */,
 				4757D04C1855A2CE001A9639 /* register */,
 				47E2DB971859919900D455EF /* more */,
@@ -1168,6 +1304,9 @@
 		47E2DB971859919900D455EF /* more */ = {
 			isa = PBXGroup;
 			children = (
+				47A10D9A18654ABB00FB9FED /* securety */,
+				479DB4B118648ED200421C10 /* CommonSetting */,
+				479F138C18617890006DF67B /* hostSetting */,
 				47E2DB98185991BD00D455EF /* MoreViewController.h */,
 				47E2DB99185991BD00D455EF /* MoreViewController.m */,
 				479C7BA5185DA7170046B1D7 /* moreViews */,
@@ -1394,10 +1533,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				479B908A18376F15005D8CCB /* ItelNetManager.m in Sources */,
+				479F138B18617096006DF67B /* HostSettingViewController.m in Sources */,
 				479EF0561859D47C0012EE29 /* IMDataPool.m in Sources */,
 				479E9353185AB842001AF6ED /* RootViewController.m in Sources */,
 				478813DA1839C35E0085224D /* UIImageView+AFNetworking.m in Sources */,
 				479B908118376DCB005D8CCB /* ItelUser.m in Sources */,
+				47A10DA01865710000FB9FED /* SecuretyMesViewController.m in Sources */,
 				47212EEA18449FCB00F148C7 /* StrangerCell.m in Sources */,
 				478813D11839C35E0085224D /* FMDatabase.m in Sources */,
 				479E0CDA1856A817005BAE20 /* RegManager.m in Sources */,
@@ -1406,6 +1547,7 @@
 				479EF04F1859D47C0012EE29 /* IMCallingViewController.m in Sources */,
 				47225148184D804D00C44857 /* NewFriendListViewController.m in Sources */,
 				4781464D1855F79800362E53 /* RegDetailViewController.m in Sources */,
+				479DB4BB186494A000421C10 /* blackCell.m in Sources */,
 				478813DE1839C35E0085224D /* Underscore.m in Sources */,
 				47952D9D18585F600044CF64 /* RegNextButton.m in Sources */,
 				478813D21839C35E0085224D /* FMDatabaseAdditions.m in Sources */,
@@ -1419,9 +1561,9 @@
 				478813C71839C35E0085224D /* AFHTTPRequestOperationManager.m in Sources */,
 				479EF0511859D47C0012EE29 /* IMHomeViewController.m in Sources */,
 				479EF05A1859D47C0012EE29 /* IMSeqenceGen.m in Sources */,
-				478813F91839E6490085224D /* NXResetPasswordViewController.m in Sources */,
 				479EF0501859D47C0012EE29 /* IMDailViewController.m in Sources */,
 				47A01122185C90B3003F8878 /* PersonRegButton.m in Sources */,
+				479F1392186178DB006DF67B /* HostSignCell.m in Sources */,
 				478813C61839C35E0085224D /* AFHTTPRequestOperation.m in Sources */,
 				47952D9718583D170044CF64 /* NSCAlertView.m in Sources */,
 				BA959A9418605639009B8A4C /* MSWeakTimer.m in Sources */,
@@ -1435,41 +1577,56 @@
 				473F62E3183889B0006CAE31 /* AddressBook.m in Sources */,
 				479B90791837660B005D8CCB /* SearchNewFriendViewController.m in Sources */,
 				479EF0551859D47C0012EE29 /* IMAuthMessageBuilder.m in Sources */,
+				47A0DEF11862D74D00BD28AB /* UIImageView+BetterFace.m in Sources */,
 				478813E01839C35E0085224D /* USDictionaryWrapper.m in Sources */,
 				479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */,
 				479E934F185AB7D4001AF6ED /* NXLoginViewController.m in Sources */,
 				472251D2184DBDF000C44857 /* NXImageView.m in Sources */,
+				47A557811863280A0062EFFF /* HostEditNicknameViewController.m in Sources */,
 				478813DD1839C35E0085224D /* Underscore+Functional.m in Sources */,
+				473748CC1863D8C700F112AF /* HostQQCell.m in Sources */,
 				479B908718376EF5005D8CCB /* ItelBookManager.m in Sources */,
+				479F139E18617A1C006DF67B /* HostAddressCell.m in Sources */,
 				478813D31839C35E0085224D /* FMDatabasePool.m in Sources */,
 				478813DC1839C35E0085224D /* UIWebView+AFNetworking.m in Sources */,
 				472B4A631846E45D002971EE /* CustomTabbar.m in Sources */,
+				47A10DAD18659D3E00FB9FED /* PassSecuretyQuestiongViewController.m in Sources */,
 				479EF05F1859D47C0012EE29 /* IMTCPCommunicator.m in Sources */,
 				479B908D18377696005D8CCB /* ItelUserManager.m in Sources */,
 				479E2BC81835B8B6002D8172 /* AddViewController.m in Sources */,
-				478813FA1839E6490085224D /* NXTelResetViewController.m in Sources */,
 				479EF0571859D47C0012EE29 /* IMEngineImp.m in Sources */,
+				479F138F186178C7006DF67B /* HostHeadImageCell.m in Sources */,
+				473748CF1863E5A500F112AF /* HostEditQQViewController.m in Sources */,
 				479EF0651859D47C0012EE29 /* IMSuggestResultCell.m in Sources */,
+				47A10DA71865951000FB9FED /* PassWayViewController.m in Sources */,
 				479EF05C1859D47C0012EE29 /* IMSessionPeriodRequestMessageBuilder.m in Sources */,
 				472B4A661846E4ED002971EE /* CustonTarbarItem.m in Sources */,
+				47A10DA418658F9700FB9FED /* PassViewController.m in Sources */,
 				47E2DB931859875A00D455EF /* InviteButton.m in Sources */,
 				479EF04E1859D47C0012EE29 /* IMAnsweringViewController.m in Sources */,
 				473F62D718386B04006CAE31 /* AddressBookViewController.m in Sources */,
 				478813D61839C35E0085224D /* AFNetworkActivityIndicatorManager.m in Sources */,
+				479DB4B418648F8300421C10 /* CommonSettingViewController.m in Sources */,
+				479DB4B718648F9900421C10 /* BlackListViewController.m in Sources */,
 				479EF05D1859D47C0012EE29 /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				478813C81839C35E0085224D /* AFHTTPSessionManager.m in Sources */,
 				47E2DB9A185991BD00D455EF /* MoreViewController.m in Sources */,
+				47A0DEEE1862D56200BD28AB /* UIImage+Compress.m in Sources */,
 				478813DF1839C35E0085224D /* USArrayWrapper.m in Sources */,
+				479F13981861791B006DF67B /* HostSexCell.m in Sources */,
 				47952D9418582DBA0044CF64 /* MBProgressHUD.m in Sources */,
+				47A10D9D18654AF500FB9FED /* SecurityChangePasswordViewController.m in Sources */,
+				47A5577E186320640062EFFF /* HostEditSignViewController.m in Sources */,
 				479EF0541859D47C0012EE29 /* IMRootTabBarViewController.m in Sources */,
-				478813FB1839E6490085224D /* NXMockServer.m in Sources */,
 				479C7BA8185DA78E0046B1D7 /* MoreHostViewCell.m in Sources */,
-				478813F51839E6490085224D /* NXInputNewPasswordViewController.m in Sources */,
 				479EF0591859D47C0012EE29 /* IMMessageParserImp.m in Sources */,
 				478813DB1839C35E0085224D /* UIProgressView+AFNetworking.m in Sources */,
+				479F13A418617A44006DF67B /* HostImageCell.m in Sources */,
 				472251CF184DB01400C44857 /* ContactCellTopView.m in Sources */,
 				479DC49B183A4D3F00C3F3F2 /* PeopleViewController.m in Sources */,
 				479B907E18376DA1005D8CCB /* ItelAction.m in Sources */,
+				47A10DB01865A6EC00FB9FED /* PassResetViewController.m in Sources */,
+				479F13A118617A2E006DF67B /* HostTelCell.m in Sources */,
 				478813CB1839C35E0085224D /* AFURLConnectionOperation.m in Sources */,
 				478813CC1839C35E0085224D /* AFURLRequestSerialization.m in Sources */,
 				478813CE1839C35E0085224D /* AFURLSessionManager.m in Sources */,
@@ -1478,7 +1635,9 @@
 				479EF05E1859D47C0012EE29 /* IMSessionRefuseMessageBuilder.m in Sources */,
 				478813D81839C35E0085224D /* UIAlertView+AFNetworking.m in Sources */,
 				473F62E01838820D006CAE31 /* AddressBookCell.m in Sources */,
-				478813F71839E6490085224D /* NXQuestionResetViewController.m in Sources */,
+				47A10DAA1865971800FB9FED /* PassMesViewController.m in Sources */,
+				479F13A718618294006DF67B /* HostEmailCell.m in Sources */,
+				479F139B18617A07006DF67B /* HostBirthdayCell.m in Sources */,
 				47212EE11844429400F148C7 /* ContactCell.m in Sources */,
 				4734957A18458BEA00972FD9 /* StrangerViewController.m in Sources */,
 				478813F81839E6490085224D /* NXRegViewController.m in Sources */,
@@ -1491,6 +1650,7 @@
 				479EF0521859D47C0012EE29 /* IMInSessionViewController.m in Sources */,
 				473F62DC18387CA4006CAE31 /* PersonInAddressBook.m in Sources */,
 				479C7BAB185DA7A30046B1D7 /* MoreOtherViewCell.m in Sources */,
+				479F139518617904006DF67B /* HostNickNameCell.m in Sources */,
 				479E9351185AB7F8001AF6ED /* NSCAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -147,6 +147,10 @@ static ItelBookManager *manager;
 -(void)delUserFromFriendBook:(NSString*)itel{
     [self.friendBook removeUserforKey:itel];
 }
+//获得黑名单
+-(ItelBook*)getBlackList{
+    return self.blackBook;
+}
 #pragma mark - 重新设置备注
 -(void)resetUserInFriendBook:(ItelUser*)user{
     
@@ -190,4 +194,5 @@ static ItelBookManager *manager;
     ItelBook *result = [self.friendBook searchInKeypath:keyPath andSearch:search];
     return result;
 }
+
 @end

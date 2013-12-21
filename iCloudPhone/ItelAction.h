@@ -37,6 +37,8 @@
 -(void)delItelUserIntoAddedList:(NSString *)itel;
 //查询好友列表
 -(ItelUser*)userInFriendBook:(NSString*)userItel;
+//获得黑名单
+-(ItelBook*)getBlackList;
 //查询黑名单
 -(ItelUser*)userInBlackBook:(NSString*)userItel;
 //模糊查询好友
@@ -75,6 +77,7 @@
 -(void)addUser:(NSDictionary*)parameters;
 //删除联系人
 -(void)delUser:(NSDictionary*)parameters;
+
 //添加联系人到黑名单
 -(void)addToBlackList:(NSDictionary*)parameters;
 //从黑名单中移除
@@ -85,6 +88,8 @@
 -(void)refreshUserList:(NSDictionary*)parameters;
 //刷新黑名单列表
 -(void)refreshBlackList:(NSDictionary*)parameters;
+//上传图片
+-(void)uploadImage:(NSData*)imageData parameters:(NSDictionary*)parameters;
 @end
 @interface ItelAction : NSObject
 @property (nonatomic,weak) id <ItelBookActionDelegate> itelBookActionDelegate;
@@ -124,12 +129,15 @@
 //刷新黑名单列表
 -(void) getItelBlackList:(NSInteger)start;
 -(void) getItelBlackListResponse:(id)data;
+//获得黑名单
+-(ItelBook*) blackList;
 //获得通讯录
 -(void) getAddressBook;
 //获得itel好友列表
 -(ItelBook*) getFriendBook;
-
-
+//上传图片
+-(void)uploadImage:(UIImage*)image;
+-(void)uploadImageResponse:(NSDictionary*)response;
 //查询是否已经添加该联系人
 -(BOOL)checkItelAdded:(NSString*)itel;
 #pragma mark - 查找本机用户接口

@@ -238,7 +238,7 @@ static float animatedDuration=1.0;
         return @"两次输入密码不一致";
     }
     if (![NXInputChecker checkPhoneNumberIsMobile:self.txtPhoneNumber.text]) {
-        return @"密码格式不正确";
+        return @"手机号码格式不正确";
     }
     
     
