@@ -11,4 +11,5 @@
 #import "HostCell.h"
 @interface HostSexCell : UITableViewCell <HostCell>
 @property (strong,nonatomic) UIWindow *window;
+@property (weak, nonatomic) IBOutlet UIImageView *sexImage;
 @end

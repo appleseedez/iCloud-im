@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface HostEmailCell : UITableViewCell
+#import "HostCell.h"
+@interface HostEmailCell : UITableViewCell <HostCell>
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 
 @end

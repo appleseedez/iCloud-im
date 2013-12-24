@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegMesCheckViewController : UIViewController<UIAlertViewDelegate>
+@interface RegMesCheckViewController : UIViewController<UIAlertViewDelegate,UITextFieldDelegate>
 
 @end

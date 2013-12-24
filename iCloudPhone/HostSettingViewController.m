@@ -41,8 +41,18 @@ UITableViewCell <HostCell> *getCellWithIndexPath(NSIndexPath *indexPath,UITableV
 }
 
 @implementation HostSettingViewController
-
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"modifyHost" object:nil];
+    [self refresh];
+}
+-(void)refresh{
+    [self.tableView reloadData];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -148,7 +158,10 @@ UITableViewCell <HostCell> *getCellWithIndexPath(NSIndexPath *indexPath,UITableV
     return 45;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell=(UITableViewCell*)getCellWithIndexPath(indexPath, tableView);
+    UITableViewCell <HostCell> *cell=(UITableViewCell<HostCell>*)getCellWithIndexPath(indexPath, tableView);
+    HostItelUser *host=[[ItelAction action] getHost];
+    [cell setPro:host];
+     
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -7,7 +7,7 @@
 //
 
 #import "HostSignCell.h"
-
+#import "HostItelUser.h"
 @implementation HostSignCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -27,5 +27,8 @@
 }
 -(void)showSettingView:(UIViewController *)viewController{
     
+}
+-(void)setPro:(HostItelUser *)host{
+    self.signLabel.text =host.personalitySignature;
 }
 @end

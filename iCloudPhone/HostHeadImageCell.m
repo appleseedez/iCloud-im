@@ -32,4 +32,7 @@
     actionSheet.delegate=viewController;
     [actionSheet showInView:viewController.view];
 }
+-(void)setPro:(HostItelUser *)host{
+     
+}
 @end

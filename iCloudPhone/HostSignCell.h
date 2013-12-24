@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "HostCell.h"
 @interface HostSignCell : UITableViewCell<HostCell>
+@property (weak, nonatomic) IBOutlet UILabel *signLabel;
 
 @end

@@ -13,6 +13,8 @@
 @property (nonatomic,strong) UILabel *label;
 @property (nonatomic,strong) UIImage *normalImage;
 @property (nonatomic,strong) UIImage *selectedImage;
+@property (nonatomic,strong) UIColor *labelTextColorNormal;
+@property (nonatomic,strong) UIColor *labelTextColorHigh;
 -(void)setLabelFrame:(CGRect)frame;
 -(void)setImageViewFrame:(CGRect)frame;
 -(void)setLabelTitle:(NSString*)title;

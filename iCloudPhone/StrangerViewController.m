@@ -190,7 +190,7 @@
          result=@"添加好友成功";
     }
     else {
-        result = @"添加好友失败";
+        result = [notification.userInfo objectForKey:@"result"];
     }
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:result message:nil delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
     [alert show];

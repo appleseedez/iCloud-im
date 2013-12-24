@@ -117,12 +117,11 @@ static ItelBookManager *manager;
  
  */
 -(void)actionWithItelUserInAddressBook:(NSArray*)itelUsers{
-    self.phoneBookNoneItel=[self.phoneBook copy];
-//    for (NSDictionary *dic in itelUsers) {
-//        ItelUser *user=[ItelUser userWithDictionary:dic];
-//        [[ItelAction action] inviteItelUserFriend:user.itelNum];
-//        
-//    }
+       for (NSDictionary *dic in itelUsers) {
+        ItelUser *user=[ItelUser userWithDictionary:dic];
+           [self.phoneBook setValue:user forKeyPath:[NSString stringWithFormat:@"users.%@.itelUser",user.telNum]];
+          
+    }
     
 }
 #pragma mark - 获得通讯录

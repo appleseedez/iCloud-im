@@ -27,6 +27,6 @@
 @property (nonatomic,strong) NSString *birthDay;
 @property (nonatomic,strong) NSString *address;
 @property (nonatomic,strong) NSString *QQ;
-
+@property (nonatomic,strong) NSString *email;
 + (ItelUser*)userWithDictionary:(NSDictionary*)dic;
 @end

@@ -49,36 +49,61 @@
         NSString *key=[[self.address getAllKeys] objectAtIndex:indexPath.row];
         PersonInAddressBook *person= (PersonInAddressBook*)[self.address userForKey:key];
         [cell setCell:person];
-        cell.inviteButton.userInfo=person.tel;
-        [cell.inviteButton addTarget:self action:@selector(invitePerson:) forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.delegate=self;
     }
     
         //config the cell
     return cell;
     
 }
+-(void)addFriends:(InviteButton *)sender{
+    PersonInAddressBook *person=(PersonInAddressBook*)sender.userInfo;
+    if (person.itelUser!=nil) {
+        [[ItelAction action] inviteItelUserFriend:person.itelUser.itelNum];
+    }
+    
+}
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     return NO;
 }
 - (void)invitePerson:(InviteButton*)sender{
+    PersonInAddressBook *person=(PersonInAddressBook*)sender.userInfo;
+    if (person.itelUser==nil) {
+         [self showSMSPicker:person.tel];
+    }
+
     
-    [self showSMSPicker:sender.userInfo];
 }
 #pragma mark - 监听通讯录通知
 //void *PhoneBook=(void*)&PhoneBook;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-   
+   [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didAddFriend:) name:@"inviteItelUser" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAddress:) name:@"addressLoadingFinish" object:nil];
     [[ItelAction action] getAddressBook];
 }
+-(void)didAddFriend:(NSNotification*)notification{
+    BOOL isNormal = [[notification.userInfo objectForKey:@"isNormal"]boolValue];
+    NSString *result=nil;
+    if (isNormal) {
+        result=@"添加好友成功";
+    }
+    else {
+       result = [notification.userInfo objectForKey:@"reason"];
+    }
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:result message:nil delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+    [alert show];
+    alert=nil;
+}
+
 -(void)showAddress:(NSNotification*)notification{
     self.address=(AddressBook*)notification.object;
     [self.tableView reloadData];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"addressLoadingFinish" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark - 调用短信接口
 - (void)showSMSPicker :(NSString*)number{

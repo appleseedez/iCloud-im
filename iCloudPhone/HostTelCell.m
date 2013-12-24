@@ -25,5 +25,7 @@
 
     // Configure the view for the selected state
 }
-
+-(void)setPro:(HostItelUser *)host{
+    self.telLabel.text=host.telNum;
+}
 @end

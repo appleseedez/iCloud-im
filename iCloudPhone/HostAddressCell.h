@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HostCell.h"
+@interface HostAddressCell : UITableViewCell <HostCell>
 
-@interface HostAddressCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *addressLable;
 @end

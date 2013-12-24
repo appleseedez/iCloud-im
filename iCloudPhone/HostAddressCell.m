@@ -25,5 +25,8 @@
 
     // Configure the view for the selected state
 }
+-(void)setPro:(HostItelUser *)host{
+    self.addressLable.text=host.address;
+}
 
 @end

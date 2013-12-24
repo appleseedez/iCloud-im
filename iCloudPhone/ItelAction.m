@@ -226,6 +226,16 @@
     [self NotifyForNormalResponse:@"uploadImage" parameters:response];
     
 }
+#pragma  mark - 修改个人资料
+-(void)modifyPersonal:(NSString*)key forValue:(NSString*)value{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itel":hostUser.itelNum,@"token":hostUser.token,@"key":key,@"value":value};
+    [self.itelNetRequestActionDelegate modifyPersonal:parameters];
+}
+-(void)modifyPersonalResponse:(NSDictionary*)data{
+    [self.itelUserActionDelegate modifyPersonal:data];
+    [self  NotifyForNormalResponse:@"modifyHost" parameters:data];
+}
 
 -(ItelBook*) getFriendBook{
     return [self.itelBookActionDelegate friendBook];

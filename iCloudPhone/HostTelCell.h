@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HostCell.h"
+@interface HostTelCell : UITableViewCell <HostCell>
 
-@interface HostTelCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *telLabel;
 @end

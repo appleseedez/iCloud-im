@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "AddressBook.h"
 #import <MessageUI/MessageUI.h>
-@interface AddressBookViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MFMessageComposeViewControllerDelegate>
+#import "AddressBookCell.h"
+@interface AddressBookViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MFMessageComposeViewControllerDelegate,addressCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
