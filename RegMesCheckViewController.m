@@ -118,7 +118,8 @@ static int waitingTime=60;
     
     if (ret==0) {
          //自动登陆
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"恭喜,注册成功" message:@"iTel号码 10086 已经被您注册，请牢记您的iTel号码，以免丢失" delegate:self cancelButtonTitle:@"返回登陆" otherButtonTitles: nil];
+        NSString *message=[NSString stringWithFormat:@"iTel号码 %@ 已经被您注册，请牢记您的iTel号码，以免丢失",[RegManager defaultManager].regItel];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"恭喜,注册成功" message:message delegate:self cancelButtonTitle:@"返回登陆" otherButtonTitles: nil];
         [alert show];
  
     }

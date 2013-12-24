@@ -7,32 +7,26 @@
 //
 
 #import "HostEditSignViewController.h"
-
+#import "ItelAction.h"
 @interface HostEditSignViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextView *signEditView;
 
 @end
 
 @implementation HostEditSignViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishButtonClicked)];
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)finishButtonClicked{
+//     NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)(self.signEditView.text), NULL, NULL,  kCFStringEncodingUTF8 ));
+    [[ItelAction action] modifyPersonal:@"recommend" forValue:self.signEditView.text];
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 @end

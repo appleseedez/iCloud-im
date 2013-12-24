@@ -54,14 +54,9 @@
 //设置本机用户
 -(void)setHost:(HostItelUser*)host;
 
-//设置好友
-//-(void)setUser:(ItelUser*)user friend:(BOOL) isFriend;
-//设置黑名单
-//-(void)setUser:(ItelUser*)user black:(BOOL) isBlack;
-//呼叫该用户
+-(void)modifyPersonal:(NSDictionary*)data;
 -(void)callUser:(ItelUser*)user;
-//短信邀请该用户
-//-(void)invideUserByMessage:(ItelUser*)user;
+
 @end
 
 
@@ -90,6 +85,8 @@
 -(void)refreshBlackList:(NSDictionary*)parameters;
 //上传图片
 -(void)uploadImage:(NSData*)imageData parameters:(NSDictionary*)parameters;
+//修改个人资料
+-(void) modifyPersonal:(NSDictionary*)parameters;
 @end
 @interface ItelAction : NSObject
 @property (nonatomic,weak) id <ItelBookActionDelegate> itelBookActionDelegate;
@@ -140,6 +137,9 @@
 -(void)uploadImageResponse:(NSDictionary*)response;
 //查询是否已经添加该联系人
 -(BOOL)checkItelAdded:(NSString*)itel;
+//修改个人资料
+-(void)modifyPersonal:(NSString*)key forValue:(NSString*)value;
+-(void)modifyPersonalResponse:(NSDictionary*)data;
 #pragma mark - 查找本机用户接口
 //精确查找好友列表
 -(ItelUser*)userInFriendBook:(NSString*)itel;

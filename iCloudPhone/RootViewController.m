@@ -36,7 +36,7 @@
     NSAssert(self.manager, @"注入manager到tabroot失败");
 #endif
     float height=[UIApplication sharedApplication].delegate.window.bounds.size.height;
-    self.customTabbar  =[[CustomTabbar alloc]initWithFrame:CGRectMake(0, height-55, 320, 55)];
+    self.customTabbar  =[[CustomTabbar alloc]initWithFrame:CGRectMake(0, height-50, 320, 50)];
     [self.view addSubview:self.customTabbar];
     for (CustonTarbarItem *item in self.customTabbar.items) {
         [item addTarget:self action:@selector(changeController:) forControlEvents:UIControlEventTouchDown];

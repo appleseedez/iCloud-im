@@ -7,8 +7,9 @@
 //
 
 #import "PassViewController.h"
-
+#import "RegNextButton.h"
 @interface PassViewController ()
+@property (weak, nonatomic) IBOutlet RegNextButton *nextButton;
 
 @end
 
@@ -19,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.nextButton setUI];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"登陆" style:UIBarButtonItemStyleDone target:self action:@selector(pop)];
 	// Do any additional setup after loading the view.
 }

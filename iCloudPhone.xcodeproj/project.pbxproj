@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		471F00D51868156500D3DAFD /* HostEditEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 471F00D41868156500D3DAFD /* HostEditEmailViewController.m */; };
+		471F00D81868321D00D3DAFD /* HostEditTelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 471F00D71868321D00D3DAFD /* HostEditTelViewController.m */; };
+		471F00DB1868324700D3DAFD /* HostMesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 471F00DA1868324700D3DAFD /* HostMesViewController.m */; };
 		47212EE11844429400F148C7 /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47212EE01844429400F148C7 /* ContactCell.m */; };
 		47212EE418446E5400F148C7 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47212EE318446E5400F148C7 /* UserViewController.m */; };
 		47212EE718447F1D00F148C7 /* EditAliasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47212EE618447F1D00F148C7 /* EditAliasViewController.m */; };
@@ -35,16 +38,6 @@
 		4781464D1855F79800362E53 /* RegDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4781464C1855F79800362E53 /* RegDetailViewController.m */; };
 		478146531856298F00362E53 /* RegMesCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478146521856298F00362E53 /* RegMesCheckViewController.m */; };
 		4783A24918404AEF0046871C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4783A24818404AEF0046871C /* MessageUI.framework */; };
-		478594B6185026FF00AFF6BF /* itel2_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594AB185026FF00AFF6BF /* itel2_3.png */; };
-		478594B7185026FF00AFF6BF /* itel2_3a.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594AC185026FF00AFF6BF /* itel2_3a.png */; };
-		478594B8185026FF00AFF6BF /* tab_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594AD185026FF00AFF6BF /* tab_1.png */; };
-		478594B9185026FF00AFF6BF /* tab_1a.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594AE185026FF00AFF6BF /* tab_1a.png */; };
-		478594BA185026FF00AFF6BF /* tab_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594AF185026FF00AFF6BF /* tab_2.png */; };
-		478594BB185026FF00AFF6BF /* tab_2a.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594B0185026FF00AFF6BF /* tab_2a.png */; };
-		478594BC185026FF00AFF6BF /* tab_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594B1185026FF00AFF6BF /* tab_4.png */; };
-		478594BD185026FF00AFF6BF /* tab_4a.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594B2185026FF00AFF6BF /* tab_4a.png */; };
-		478594BE185026FF00AFF6BF /* tab_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594B3185026FF00AFF6BF /* tab_5.png */; };
-		478594BF185026FF00AFF6BF /* tab_5a.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594B4185026FF00AFF6BF /* tab_5a.png */; };
 		478594C0185026FF00AFF6BF /* tab_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 478594B5185026FF00AFF6BF /* tab_bar.png */; };
 		478813C61839C35E0085224D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813891839C35E0085224D /* AFHTTPRequestOperation.m */; };
 		478813C71839C35E0085224D /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4788138B1839C35E0085224D /* AFHTTPRequestOperationManager.m */; };
@@ -235,6 +228,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		471F00D31868156500D3DAFD /* HostEditEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEditEmailViewController.h; sourceTree = "<group>"; };
+		471F00D41868156500D3DAFD /* HostEditEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEditEmailViewController.m; sourceTree = "<group>"; };
+		471F00D61868321D00D3DAFD /* HostEditTelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEditTelViewController.h; sourceTree = "<group>"; };
+		471F00D71868321D00D3DAFD /* HostEditTelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEditTelViewController.m; sourceTree = "<group>"; };
+		471F00D91868324700D3DAFD /* HostMesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostMesViewController.h; sourceTree = "<group>"; };
+		471F00DA1868324700D3DAFD /* HostMesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostMesViewController.m; sourceTree = "<group>"; };
 		47212EDF1844429400F148C7 /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
 		47212EE01844429400F148C7 /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
 		47212EE218446E5400F148C7 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
@@ -280,16 +279,6 @@
 		478146511856298F00362E53 /* RegMesCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegMesCheckViewController.h; sourceTree = "<group>"; };
 		478146521856298F00362E53 /* RegMesCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegMesCheckViewController.m; sourceTree = "<group>"; };
 		4783A24818404AEF0046871C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		478594AB185026FF00AFF6BF /* itel2_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itel2_3.png; sourceTree = "<group>"; };
-		478594AC185026FF00AFF6BF /* itel2_3a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itel2_3a.png; sourceTree = "<group>"; };
-		478594AD185026FF00AFF6BF /* tab_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_1.png; sourceTree = "<group>"; };
-		478594AE185026FF00AFF6BF /* tab_1a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_1a.png; sourceTree = "<group>"; };
-		478594AF185026FF00AFF6BF /* tab_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_2.png; sourceTree = "<group>"; };
-		478594B0185026FF00AFF6BF /* tab_2a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_2a.png; sourceTree = "<group>"; };
-		478594B1185026FF00AFF6BF /* tab_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_4.png; sourceTree = "<group>"; };
-		478594B2185026FF00AFF6BF /* tab_4a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_4a.png; sourceTree = "<group>"; };
-		478594B3185026FF00AFF6BF /* tab_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_5.png; sourceTree = "<group>"; };
-		478594B4185026FF00AFF6BF /* tab_5a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_5a.png; sourceTree = "<group>"; };
 		478594B5185026FF00AFF6BF /* tab_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bar.png; sourceTree = "<group>"; };
 		478813881839C35E0085224D /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		478813891839C35E0085224D /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -688,16 +677,6 @@
 			isa = PBXGroup;
 			children = (
 				47E05DBD18517403009FDCED /* qq截图 */,
-				478594AB185026FF00AFF6BF /* itel2_3.png */,
-				478594AC185026FF00AFF6BF /* itel2_3a.png */,
-				478594AD185026FF00AFF6BF /* tab_1.png */,
-				478594AE185026FF00AFF6BF /* tab_1a.png */,
-				478594AF185026FF00AFF6BF /* tab_2.png */,
-				478594B0185026FF00AFF6BF /* tab_2a.png */,
-				478594B1185026FF00AFF6BF /* tab_4.png */,
-				478594B2185026FF00AFF6BF /* tab_4a.png */,
-				478594B3185026FF00AFF6BF /* tab_5.png */,
-				478594B4185026FF00AFF6BF /* tab_5a.png */,
 				478594B5185026FF00AFF6BF /* tab_bar.png */,
 			);
 			path = "预切片";
@@ -1098,10 +1077,16 @@
 			children = (
 				479F138918617096006DF67B /* HostSettingViewController.h */,
 				479F138A18617096006DF67B /* HostSettingViewController.m */,
+				471F00D61868321D00D3DAFD /* HostEditTelViewController.h */,
+				471F00D71868321D00D3DAFD /* HostEditTelViewController.m */,
+				471F00D91868324700D3DAFD /* HostMesViewController.h */,
+				471F00DA1868324700D3DAFD /* HostMesViewController.m */,
 				47A5577C186320640062EFFF /* HostEditSignViewController.h */,
 				47A5577D186320640062EFFF /* HostEditSignViewController.m */,
 				47A5577F1863280A0062EFFF /* HostEditNicknameViewController.h */,
 				47A557801863280A0062EFFF /* HostEditNicknameViewController.m */,
+				471F00D31868156500D3DAFD /* HostEditEmailViewController.h */,
+				471F00D41868156500D3DAFD /* HostEditEmailViewController.m */,
 				473748CD1863E5A500F112AF /* HostEditQQViewController.h */,
 				473748CE1863E5A500F112AF /* HostEditQQViewController.m */,
 				479F13A818618300006DF67B /* HostCell.h */,
@@ -1466,20 +1451,14 @@
 				4757D0551855C5F0001A9639 /* itel输入提示.png in Resources */,
 				479DC49D183A544200C3F3F2 /* 广告.png in Resources */,
 				478594C0185026FF00AFF6BF /* tab_bar.png in Resources */,
-				478594B9185026FF00AFF6BF /* tab_1a.png in Resources */,
-				478594B7185026FF00AFF6BF /* itel2_3a.png in Resources */,
-				478594BD185026FF00AFF6BF /* tab_4a.png in Resources */,
 				479E934C185AB7A3001AF6ED /* Login_iPhone.storyboard in Resources */,
 				479C9C291835019D00DE40D8 /* 头像.jpg in Resources */,
 				47E05DC51851A2CE009FDCED /* 详细按钮.png in Resources */,
-				478594B6185026FF00AFF6BF /* itel2_3.png in Resources */,
 				4788140B1839ED7F0085224D /* itel.png in Resources */,
 				4757D0531855C083001A9639 /* 个人注册.png in Resources */,
 				47E2DB8E185985C800D455EF /* 本机联系人.png in Resources */,
-				478594BC185026FF00AFF6BF /* tab_4.png in Resources */,
 				47E2DB9518598B0500D455EF /* 邀请.png in Resources */,
 				479E934A185AB76B001AF6ED /* iCloudPhone.storyboard in Resources */,
-				478594BA185026FF00AFF6BF /* tab_2.png in Resources */,
 				47E05DC318519C9C009FDCED /* 头像.png in Resources */,
 				47E2DB9C185997F000D455EF /* 登录logo.png in Resources */,
 				4757D0591855CAD6001A9639 /* 短信提示.png in Resources */,
@@ -1487,13 +1466,9 @@
 				47E05DC018517418009FDCED /* searchuser.png in Resources */,
 				47E05DC118517418009FDCED /* checkAddress.png in Resources */,
 				47B89DED1834D40000022FE5 /* Images.xcassets in Resources */,
-				478594BF185026FF00AFF6BF /* tab_5a.png in Resources */,
-				478594BB185026FF00AFF6BF /* tab_2a.png in Resources */,
 				47B89DDF1834D40000022FE5 /* InfoPlist.strings in Resources */,
 				478814051839E7120085224D /* mockhead.png in Resources */,
-				478594B8185026FF00AFF6BF /* tab_1.png in Resources */,
 				4757D0511855C078001A9639 /* 企业注册.png in Resources */,
-				478594BE185026FF00AFF6BF /* tab_5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1554,6 +1529,7 @@
 				479EF05B1859D47C0012EE29 /* IMSessionInitMessageBuilder.m in Sources */,
 				479C7BAE185DDB480046B1D7 /* RegTipLabel.m in Sources */,
 				478813D71839C35E0085224D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				471F00D51868156500D3DAFD /* HostEditEmailViewController.m in Sources */,
 				4757D04F1855BC69001A9639 /* NetRequester.m in Sources */,
 				47A01125185CA34E003F8878 /* regDetailTextField.m in Sources */,
 				478146531856298F00362E53 /* RegMesCheckViewController.m in Sources */,
@@ -1567,6 +1543,7 @@
 				478813C61839C35E0085224D /* AFHTTPRequestOperation.m in Sources */,
 				47952D9718583D170044CF64 /* NSCAlertView.m in Sources */,
 				BA959A9418605639009B8A4C /* MSWeakTimer.m in Sources */,
+				471F00D81868321D00D3DAFD /* HostEditTelViewController.m in Sources */,
 				479EF0581859D47C0012EE29 /* IMManagerImp.m in Sources */,
 				478813D41839C35E0085224D /* FMDatabaseQueue.m in Sources */,
 				478813D91839C35E0085224D /* UIButton+AFNetworking.m in Sources */,
@@ -1641,6 +1618,7 @@
 				47212EE11844429400F148C7 /* ContactCell.m in Sources */,
 				4734957A18458BEA00972FD9 /* StrangerViewController.m in Sources */,
 				478813F81839E6490085224D /* NXRegViewController.m in Sources */,
+				471F00DB1868324700D3DAFD /* HostMesViewController.m in Sources */,
 				478813D51839C35E0085224D /* FMResultSet.m in Sources */,
 				BA959A971860565C009B8A4C /* IMUDPCommunicator.m in Sources */,
 				47212EE718447F1D00F148C7 /* EditAliasViewController.m in Sources */,

@@ -33,9 +33,9 @@
         [self.imgPhoto setRect:3.0 cornerRadius:self.imgPhoto.frame.size.width/4.0 borderColor:[UIColor whiteColor]];
         self.imgPhoto.clipsToBounds=YES;
         [self.contentView addSubview:self.imgPhoto];
-        self.inviteButton=[[InviteButton alloc]init];
-        [self.inviteButton setBackgroundImage:[UIImage imageNamed:@"邀请"] forState:UIControlStateNormal];
-        self.inviteButton.frame=CGRectMake(230, 10, 70, 45) ;
+        self.inviteButton=[InviteButton buttonWithType:UIButtonTypeSystem];
+        [self.inviteButton addTarget:self action:@selector(buttionAddAction:) forControlEvents:UIControlEventTouchUpInside];
+        self.inviteButton.frame=CGRectMake(230, 10, 40, 24) ;
         [self.contentView addSubview:self.inviteButton];
     }
     return self;
@@ -47,9 +47,28 @@
 
     // Configure the view for the selected state
 }
+-(void)buttionAddAction:(InviteButton*)sender{
+    if (((PersonInAddressBook*)(sender.userInfo)).itelUser==nil) {
+        [self.delegate invitePerson:self.inviteButton];
+    }
+    else {
+        [self.delegate addFriends:self.inviteButton];
+    }
+}
 -(void)setCell:(PersonInAddressBook*)person{
     self.name.text=person.name;
     self.tel.text=person.tel;
     self.imgPhoto.image=[UIImage imageNamed:@"本机联系人"];
-}   
+    self.inviteButton.userInfo=person;
+    
+    if (person.itelUser==nil) {
+       
+        [self.inviteButton setBackgroundImage:[UIImage imageNamed:@"inviteButton" ] forState:UIControlStateNormal];
+        
+    }
+    else{
+        [self.inviteButton setBackgroundImage:[UIImage imageNamed:@"addButton" ] forState:UIControlStateNormal];
+        
+    }
+}
 @end

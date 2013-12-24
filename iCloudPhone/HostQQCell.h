@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HostCell.h"
+@interface HostQQCell : UITableViewCell <HostCell>
 
-@interface HostQQCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *QQLabel;
 
 @end

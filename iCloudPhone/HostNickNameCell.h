@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface HostNickNameCell : UITableViewCell
+#import "HostCell.h"
+@interface HostNickNameCell : UITableViewCell < HostCell>
+@property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 
 @end

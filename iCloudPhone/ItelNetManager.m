@@ -309,8 +309,9 @@ static int addcount=0;
             if (ret==0) {
                 
                 
-                NSArray *list=[[dic objectForKey:@"data"] objectForKey:@"list"];
-                NSLog(@"刷新好友：返回数据%d条",[list count]);
+//                NSArray *list=[[dic objectForKey:@"data"] objectForKey:@"list"];
+                //NSLog(@"刷新好友：返回数据%d条",[list count]);
+                //NSLog(@"%@",list);
                 id data =[dic objectForKey:@"data"];
                 [[ItelAction action] getItelFriendListResponse:data ];
             }
@@ -384,5 +385,33 @@ static int addcount=0;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"uploadImage" object:nil userInfo:userInfo];
     };
     [NetRequester uploadImagePostRequestWithUrl:url imageData:imageData andParameters:parameters success:success failure:failure];
+}
+#pragma  mark - 修改个人资料
+-(void) modifyPersonal:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/user/updateUser.json",server];
+    url = @"http://10.0.0.137:8080/CloudCommunity/user/updateUser.json";
+    
+    SUCCESS{
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+            
+            int ret=[[dic objectForKey:@"ret"] intValue];
+            if (ret==0) {
+                id data =[dic objectForKey:@"data"];
+                [[ItelAction action] modifyPersonalResponse:data];
+            }
+            else {
+                NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"解析异常" };
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"modifyHost" object:nil userInfo:userInfo];
+            }
+        }//如果请求失败 则执行failure
+    };
+    FAILURE {
+        NSLog(@"%@",error);
+        NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"modifyHost" object:nil userInfo:userInfo];
+    };
+    [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
 }
 @end

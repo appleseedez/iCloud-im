@@ -7,7 +7,7 @@
 //
 
 #import "HostSexCell.h"
-
+#import "ItelAction.h"
 @implementation HostSexCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -37,25 +37,55 @@
     back.tag=25367;
     [back  addTarget:self action:@selector(sexSelect:) forControlEvents:UIControlEventTouchUpInside];
     [window addSubview:back];
-    UIButton *male=[[UIButton alloc]initWithFrame:CGRectMake(20, 200, 280, 40)];
-    [male setTitle:@"男" forState:UIControlStateNormal];
-    male.tag=25368;
+    UIButton *male=[UIButton buttonWithType:UIButtonTypeSystem];
+    male.frame=CGRectMake(20, 200, 280, 45);
+        male.tag=25368;
     male.backgroundColor=[UIColor whiteColor];
     [male.titleLabel setTextColor:[UIColor blackColor]];
     [window addSubview:male];
     [male addTarget:self action:@selector(sexSelect:) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *female=[[UIButton alloc]initWithFrame:CGRectMake(20, 245, 280, 40)];
-    [female setTitle:@"女" forState:UIControlStateNormal];
+    
+    UIImageView *nan=[[UIImageView alloc]initWithFrame:CGRectMake(90, 12, 16, 16)];
+    nan.image=[UIImage imageNamed:@"male"];
+    [male addSubview:nan];
+    [male setTitle:@"男" forState:UIControlStateNormal];
+
+    
+    UIButton *female=[UIButton buttonWithType:UIButtonTypeSystem];
+    female.frame=CGRectMake(20, 245, 280, 45);
     female.tag=25369;
     female.backgroundColor=[UIColor whiteColor];
     [female.titleLabel setTextColor:[UIColor blackColor]];
     [window addSubview:female];
     [female addTarget:self action:@selector(sexSelect:) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView *nv=[[UIImageView alloc]initWithFrame:CGRectMake(90, 12, 16, 16)];
+    nv.image=[UIImage imageNamed:@"female"];
+    [female addSubview:nv];
+     [female setTitle:@"女" forState:UIControlStateNormal];
+    
+    [male.layer setCornerRadius:10];
+    [female.layer setCornerRadius:10];
     [window setHidden:NO];
 }
 
 -(void)sexSelect:(UIButton*)sender{
     [self.window setHidden:YES];
-    self.window=nil;
+    NSString *sex=nil;
+    if (sender.tag==25368) {
+         sex = @"0";
+    }
+    else if(sender.tag==25369){
+        sex =@"1";
+    }
+    if(sex){
+        [[ItelAction action] modifyPersonal:@"sex" forValue:sex];
+    }
+  }
+
+-(void)setPro:(HostItelUser *)host{
+    if (host.sex) {
+        self.sexImage.image=[UIImage imageNamed:@"female"];
+    }
+    else self.sexImage.image=[UIImage imageNamed:@"male"];
 }
 @end

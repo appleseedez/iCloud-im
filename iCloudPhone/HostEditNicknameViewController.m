@@ -7,32 +7,25 @@
 //
 
 #import "HostEditNicknameViewController.h"
-
+#import "ItelAction.h"
 @interface HostEditNicknameViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *txtNIckName;
 
 @end
 
 @implementation HostEditNicknameViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishButtonClicked)];
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)finishButtonClicked{
+    [[ItelAction action] modifyPersonal:@"nick_name" forValue:self.txtNIckName.text];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

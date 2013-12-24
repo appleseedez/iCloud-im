@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-
+#import "HostItelUser.h"
 @protocol HostCell <NSObject>
+@optional;
 -(void) showSettingView:(UIViewController*)viewController;
+@required;
+-(void) setPro:(HostItelUser*)host;
 @end

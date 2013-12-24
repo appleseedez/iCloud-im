@@ -27,13 +27,14 @@
     if (selected) {
         if (self.selectedImage) {
             self.cusImageView.image=self.selectedImage;
+            [self.label setTextColor:self.labelTextColorHigh];
         }
         
     }
     else{
         if (self.normalImage) {
             self.cusImageView.image=self.normalImage;
-
+      [self.label setTextColor:self.labelTextColorNormal];
         }
             }
     
