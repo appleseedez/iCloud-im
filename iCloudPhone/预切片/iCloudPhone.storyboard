@@ -836,7 +836,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FF1-DS-Ht1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1398" y="2032"/>
+            <point key="canvasLocation" x="-1126" y="2259"/>
         </scene>
         <!--Table View Controller - 通知推送-->
         <scene sceneID="4fX-Tu-odQ">
@@ -1199,7 +1199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blO-2T-o8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-594" y="1603"/>
+            <point key="canvasLocation" x="-740" y="199"/>
         </scene>
         <!--Host EditQQ View Controller - 编辑-->
         <scene sceneID="m73-lK-YyH">
@@ -1915,7 +1915,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-164" y="1737"/>
+            <point key="canvasLocation" x="-168" y="1204"/>
         </scene>
         <!--Dail View Controller-->
         <scene sceneID="Z6h-56-3Sa">
@@ -2686,7 +2686,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yKy-dg-qri" customClass="RegNextButton">
                                         <rect key="frame" x="5" y="198" width="310" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="下一步">
+                                        <state key="normal" title="完成">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -2712,82 +2712,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V09-jf-wmV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1479" y="2284"/>
-        </scene>
-        <!--Securety Mes View Controller - 验证手机-->
-        <scene sceneID="6Mc-AL-Lo2">
-            <objects>
-                <viewController storyboardIdentifier="SecuretyMesView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dDB-7Y-fWO" customClass="SecuretyMesViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bLa-aY-xAV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="输入短信效验码" textAlignment="center" minimumFontSize="17" id="6Y1-M3-yg0">
-                                <rect key="frame" x="0.0" y="83" width="320" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="dDB-7Y-fWO" id="pas-jo-AvK"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bt3-HN-rRk" customClass="RegNextButton">
-                                <rect key="frame" x="5" y="209" width="310" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="下一步">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="checkCode:" destination="dDB-7Y-fWO" eventType="touchUpInside" id="06U-Pw-g1W"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mqr-2e-RTI" customClass="PersonRegButton">
-                                <rect key="frame" x="5" y="285" width="310" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="在秒后重新点击发送">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="messageButton:" destination="dDB-7Y-fWO" eventType="touchUpInside" id="a2w-j6-Twd"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" id="vI3-aM-MuU" customClass="RegTipLabel">
-                                <rect key="frame" x="0.0" y="144" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入手机130***1234收到的短信校验码" lineBreakMode="characterWrap" numberOfLines="0" adjustsFontSizeToFit="NO" id="taq-iA-mta">
-                                        <rect key="frame" x="20" y="0.0" width="285" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reg_tip" id="DM8-FH-K7F">
-                                <rect key="frame" x="39" y="138" width="9" height="7"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="验证手机" id="rjH-Qu-mEa"/>
-                    <connections>
-                        <outlet property="btnReSend" destination="mqr-2e-RTI" id="W3G-xm-d2W"/>
-                        <outlet property="nextButton" destination="bt3-HN-rRk" id="YgL-63-otI"/>
-                        <outlet property="tipLabel" destination="taq-iA-mta" id="Vi0-xe-cch"/>
-                        <outlet property="tipView" destination="vI3-aM-MuU" id="a0u-WS-p1Z"/>
-                        <outlet property="txtCheckCode" destination="6Y1-M3-yg0" id="phP-Od-5og"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JbL-BQ-3p6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1171" y="2306"/>
+            <point key="canvasLocation" x="-1518" y="2369"/>
         </scene>
         <!--Host Edit Tel View Controller - 修改手机-->
         <scene sceneID="HdB-wG-7gM">
@@ -2811,7 +2736,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="WjR-l4-XYa" kind="push" id="5pQ-Te-1S7"/>
+                                    <action selector="nextButtonClicked:" destination="QKo-uh-Vpb" eventType="touchUpInside" id="B4z-4z-fXg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2825,7 +2750,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkQ-jx-n5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-233" y="1603"/>
+            <point key="canvasLocation" x="-740" y="1600"/>
         </scene>
         <!--Host Edit Nickname View Controller - 编辑-->
         <scene sceneID="IXo-9i-ZQx">
@@ -2857,7 +2782,7 @@
         <!--Host Mes View Controller - 验证手机-->
         <scene sceneID="31X-tN-FzX">
             <objects>
-                <viewController storyboardIdentifier="SecuretyMesView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WjR-l4-XYa" customClass="HostMesViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HostMesView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WjR-l4-XYa" customClass="HostMesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i7w-A2-Z0K">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2927,7 +2852,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iB2-Gs-CAA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-690" y="2032"/>
+            <point key="canvasLocation" x="-376" y="1589"/>
         </scene>
     </scenes>
     <resources>

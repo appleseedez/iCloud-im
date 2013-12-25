@@ -87,6 +87,10 @@
 -(void)uploadImage:(NSData*)imageData parameters:(NSDictionary*)parameters;
 //修改个人资料
 -(void) modifyPersonal:(NSDictionary*)parameters;
+//修改手机-验证新号码
+-(void) checkNewTelNum:(NSDictionary*)parameters;
+//修改手机-发送短信验证码
+-(void) modifyPhoneNumCheckCode:(NSDictionary*)parameters;
 @end
 @interface ItelAction : NSObject
 @property (nonatomic,weak) id <ItelBookActionDelegate> itelBookActionDelegate;
@@ -140,6 +144,12 @@
 //修改个人资料
 -(void)modifyPersonal:(NSString*)key forValue:(NSString*)value;
 -(void)modifyPersonalResponse:(NSDictionary*)data;
+//修改手机-验证手机号码是否可用
+-(void)checkPhoneNumber:(NSString*)phone;
+-(void)checkPhoneNumberResponse:(NSDictionary*)response;
+//修改手机-发送短信验证码
+-(void)phoneCheckCode:(NSString*)checkCode phone:(NSString*)phone;
+-(void)phoneCheckCodeResponse:(id)response;
 #pragma mark - 查找本机用户接口
 //精确查找好友列表
 -(ItelUser*)userInFriendBook:(NSString*)itel;

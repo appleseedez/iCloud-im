@@ -157,7 +157,7 @@ static float animatedDuration=1.0;
 }
 - (IBAction)checkUserInput:(UIButton *)sender {
     [self returnKeyBoard];
-    [self pushNextView];
+   
     NSString *localCheck=[self checkInputFormat];
     if (localCheck==nil) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -183,10 +183,5 @@ static float animatedDuration=1.0;
     
     
     return nil;
-}
--(void)pushNextView{
-    UIStoryboard *story=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
-    UIViewController *vc = [story instantiateViewControllerWithIdentifier:@"SecuretyMesView"];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

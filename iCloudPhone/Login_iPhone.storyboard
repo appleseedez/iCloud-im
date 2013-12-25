@@ -176,7 +176,6 @@
                                 </state>
                                 <connections>
                                     <action selector="pushNext:" destination="UXM-td-02n" eventType="touchUpInside" id="ilG-op-KaL"/>
-                                    <segue destination="8R7-8w-O59" kind="push" id="nCH-BY-V3Z"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -184,6 +183,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="找回密码" id="7qM-Sy-wd6"/>
                     <connections>
+                        <outlet property="codeImage" destination="8ou-cp-23B" id="55w-E0-cRz"/>
                         <outlet property="nextButton" destination="h95-Gw-bfV" id="uAU-b1-0Kc"/>
                     </connections>
                 </viewController>
@@ -278,7 +278,7 @@
                             <tableViewSection headerTitle="     " id="v7y-Lg-Pp7">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Vnd-PD-csH">
-                                        <rect key="frame" x="0.0" y="119" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="55" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vnd-PD-csH" id="7Iq-fc-Dys">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>
@@ -301,7 +301,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tfv-Mj-sNZ">
-                                        <rect key="frame" x="0.0" y="169" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="105" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tfv-Mj-sNZ" id="wDy-mm-6Yf">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>

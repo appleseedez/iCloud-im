@@ -7,13 +7,18 @@
 //
 
 #import "HostMesViewController.h"
-
+#import "ItelAction.h"
 @interface HostMesViewController ()
-
+@property (nonatomic,weak) IBOutlet UITextField *txtCheckCode;
 @end
 
 @implementation HostMesViewController
-
+-(NSString*)newTelNum{
+    return _newTelNum;
+}
+-(void)setNewTelNum:(NSString*)newTelNum{
+    _newTelNum=newTelNum;
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,22 +35,34 @@
 }
 
 -(NSString*)getTelephone{
-    return nil;
+    return self.newTelNum;
 }
 
 - (IBAction)checkCode:(UIButton *)sender{
-    
+    [[ItelAction action] phoneCheckCode:self.txtCheckCode.text phone:self.newTelNum];
 }
 -(void)addNotification{
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCodeResponse:) name:@"phoneCheckCode" object:nil];
 }
 -(void)checkCodeResponse:(NSNotification*)notification{
-    
+    NSString *message=nil;
+    NSDictionary *userInfo=notification.userInfo;
+    BOOL isNormal=[[userInfo objectForKey:@"isNormal"] boolValue];
+    if (isNormal) {
+        message = [NSString stringWithFormat:@"您的绑定手机现在已经改为%@",self.newTelNum];
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"修改成功" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }
+    else{
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"验证失败" message:message delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 -(void)resendMessage{
     
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end

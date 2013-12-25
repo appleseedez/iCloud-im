@@ -8,6 +8,9 @@
 
 #import "RegMesCheckViewController.h"
 
-@interface HostMesViewController : RegMesCheckViewController
-
+@interface HostMesViewController : RegMesCheckViewController{
+    NSString * _newTelNum;
+}
+-(NSString*)newTelNum;
+-(void)setNewTelNum:(NSString*)newTelNum;
 @end
