@@ -151,7 +151,6 @@
 		47A0DEEE1862D56200BD28AB /* UIImage+Compress.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A0DEED1862D56200BD28AB /* UIImage+Compress.m */; };
 		47A0DEF11862D74D00BD28AB /* UIImageView+BetterFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A0DEF01862D74D00BD28AB /* UIImageView+BetterFace.m */; };
 		47A10D9D18654AF500FB9FED /* SecurityChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10D9C18654AF500FB9FED /* SecurityChangePasswordViewController.m */; };
-		47A10DA01865710000FB9FED /* SecuretyMesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10D9F1865710000FB9FED /* SecuretyMesViewController.m */; };
 		47A10DA418658F9700FB9FED /* PassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10DA318658F9700FB9FED /* PassViewController.m */; };
 		47A10DA71865951000FB9FED /* PassWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10DA61865951000FB9FED /* PassWayViewController.m */; };
 		47A10DAA1865971800FB9FED /* PassMesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10DA91865971800FB9FED /* PassMesViewController.m */; };
@@ -159,6 +158,7 @@
 		47A10DB01865A6EC00FB9FED /* PassResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10DAF1865A6EC00FB9FED /* PassResetViewController.m */; };
 		47A5577E186320640062EFFF /* HostEditSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A5577D186320640062EFFF /* HostEditSignViewController.m */; };
 		47A557811863280A0062EFFF /* HostEditNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A557801863280A0062EFFF /* HostEditNicknameViewController.m */; };
+		47B66DD7186AC3FA00AAD771 /* SecurityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B66DD6186AC3FA00AAD771 /* SecurityViewController.m */; };
 		47B89DD51834D40000022FE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
 		47B89DD71834D40000022FE5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD61834D40000022FE5 /* CoreGraphics.framework */; };
 		47B89DD91834D40000022FE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD81834D40000022FE5 /* UIKit.framework */; };
@@ -487,8 +487,6 @@
 		47A0DEF01862D74D00BD28AB /* UIImageView+BetterFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BetterFace.m"; sourceTree = "<group>"; };
 		47A10D9B18654AF500FB9FED /* SecurityChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityChangePasswordViewController.h; sourceTree = "<group>"; };
 		47A10D9C18654AF500FB9FED /* SecurityChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityChangePasswordViewController.m; sourceTree = "<group>"; };
-		47A10D9E1865710000FB9FED /* SecuretyMesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecuretyMesViewController.h; sourceTree = "<group>"; };
-		47A10D9F1865710000FB9FED /* SecuretyMesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecuretyMesViewController.m; sourceTree = "<group>"; };
 		47A10DA218658F9700FB9FED /* PassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassViewController.h; sourceTree = "<group>"; };
 		47A10DA318658F9700FB9FED /* PassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassViewController.m; sourceTree = "<group>"; };
 		47A10DA51865951000FB9FED /* PassWayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassWayViewController.h; sourceTree = "<group>"; };
@@ -503,6 +501,8 @@
 		47A5577D186320640062EFFF /* HostEditSignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEditSignViewController.m; sourceTree = "<group>"; };
 		47A5577F1863280A0062EFFF /* HostEditNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEditNicknameViewController.h; sourceTree = "<group>"; };
 		47A557801863280A0062EFFF /* HostEditNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEditNicknameViewController.m; sourceTree = "<group>"; };
+		47B66DD5186AC3FA00AAD771 /* SecurityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityViewController.h; sourceTree = "<group>"; };
+		47B66DD6186AC3FA00AAD771 /* SecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityViewController.m; sourceTree = "<group>"; };
 		47B89DD11834D40000022FE5 /* iTel 2.0Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iTel 2.0Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47B89DD41834D40000022FE5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		47B89DD61834D40000022FE5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1130,8 +1130,8 @@
 			children = (
 				47A10D9B18654AF500FB9FED /* SecurityChangePasswordViewController.h */,
 				47A10D9C18654AF500FB9FED /* SecurityChangePasswordViewController.m */,
-				47A10D9E1865710000FB9FED /* SecuretyMesViewController.h */,
-				47A10D9F1865710000FB9FED /* SecuretyMesViewController.m */,
+				47B66DD5186AC3FA00AAD771 /* SecurityViewController.h */,
+				47B66DD6186AC3FA00AAD771 /* SecurityViewController.m */,
 			);
 			name = securety;
 			sourceTree = "<group>";
@@ -1513,7 +1513,6 @@
 				479E9353185AB842001AF6ED /* RootViewController.m in Sources */,
 				478813DA1839C35E0085224D /* UIImageView+AFNetworking.m in Sources */,
 				479B908118376DCB005D8CCB /* ItelUser.m in Sources */,
-				47A10DA01865710000FB9FED /* SecuretyMesViewController.m in Sources */,
 				47212EEA18449FCB00F148C7 /* StrangerCell.m in Sources */,
 				478813D11839C35E0085224D /* FMDatabase.m in Sources */,
 				479E0CDA1856A817005BAE20 /* RegManager.m in Sources */,
@@ -1544,6 +1543,7 @@
 				47952D9718583D170044CF64 /* NSCAlertView.m in Sources */,
 				BA959A9418605639009B8A4C /* MSWeakTimer.m in Sources */,
 				471F00D81868321D00D3DAFD /* HostEditTelViewController.m in Sources */,
+				47B66DD7186AC3FA00AAD771 /* SecurityViewController.m in Sources */,
 				479EF0581859D47C0012EE29 /* IMManagerImp.m in Sources */,
 				478813D41839C35E0085224D /* FMDatabaseQueue.m in Sources */,
 				478813D91839C35E0085224D /* UIButton+AFNetworking.m in Sources */,

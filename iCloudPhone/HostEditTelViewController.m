@@ -36,15 +36,28 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:@"modifyPhone" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(push:) name:@"resendMes" object:nil];
 }
+
 -(void)receive:(NSNotification*)notification{
     NSDictionary *userInfo=notification.userInfo;
     BOOL isNormal=[[userInfo objectForKey:@"isNormal"] boolValue];
     if (isNormal) {
-        UIStoryboard *story=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
-        HostMesViewController *mesVC=[story instantiateViewControllerWithIdentifier:@"HostMesView"];
-        mesVC.newTelNum=self.TheNewTel;
-        [self.navigationController pushViewController:mesVC animated:YES];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"手机号码可用" message:@"系统即将发送一条验证短信给您的手机以完成绑定，点击取消将不发送" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"发送",nil];
+        [alert show];
+    }
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==0) {
+        
+    }
+    else{
+    UIStoryboard *story=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
+        
+    HostMesViewController *mesVC=[story instantiateViewControllerWithIdentifier:@"HostMesView"];
+    mesVC.newTelNum=self.TheNewTel;
+        [[ItelAction action] resendMassage:self.TheNewTel];
+    [self.navigationController pushViewController:mesVC animated:YES];
     }
 }
 - (void)viewDidLoad

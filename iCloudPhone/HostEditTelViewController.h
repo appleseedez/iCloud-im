@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HostEditTelViewController : UIViewController
+@interface HostEditTelViewController : UIViewController <UIAlertViewDelegate>
 
 @end

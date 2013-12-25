@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class regDetailTextField;
 
-@interface SecurityChangePasswordViewController : UIViewController <UIScrollViewDelegate,UITextFieldDelegate>
+@interface SecurityChangePasswordViewController : UIViewController <UIScrollViewDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet regDetailTextField *txtOldPassword;
 @property (weak, nonatomic) IBOutlet regDetailTextField *txtNewPassword;
 @property (weak, nonatomic) IBOutlet regDetailTextField *txtRepeatPassword;

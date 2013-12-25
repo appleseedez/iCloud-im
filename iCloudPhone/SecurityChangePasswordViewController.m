@@ -11,6 +11,7 @@
 #import "regDetailTextField.h"
 #import "MBProgressHUD.h"
 #import "NXInputChecker.h"
+#import "ItelAction.h"
 #define TXT_OLD_PASSWORD_TAG 510001
 #define TXT_NEW_PASSWORD_TAG 510002
 #define TXT_NEW_RE_PASSWORD_TAG 510003
@@ -150,6 +151,27 @@ static float animatedDuration=1.0;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(conformKeyBoard:) name:UIKeyboardWillChangeFrameNotification object:Nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receive:) name:@"changePassword" object:nil];
+}
+-(void)receive:(NSNotification*)notification{
+    NSDictionary *userInfo=notification.userInfo;
+    BOOL isNormal=[[userInfo objectForKey:@"isNormal"]boolValue];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if (isNormal) {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜成功" message:@"修改密码成功 请牢记您的新密码" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }
+    else{
+        NSString *reason=[userInfo objectForKey:@"reason"];
+        if (reason==nil) {
+              reason=@"密码修改失败请稍后再试";
+        }
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"修改失败" message:reason delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -161,7 +183,7 @@ static float animatedDuration=1.0;
     NSString *localCheck=[self checkInputFormat];
     if (localCheck==nil) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
+        [[ItelAction action] modifyUserPassword:self.txtOldPassword.text newPassword:self.txtNewPassword.text];
     }
     else {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"验证失败" message:localCheck delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];

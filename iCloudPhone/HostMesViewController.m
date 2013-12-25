@@ -42,6 +42,7 @@
     [[ItelAction action] phoneCheckCode:self.txtCheckCode.text phone:self.newTelNum];
 }
 -(void)addNotification{
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCodeResponse:) name:@"phoneCheckCode" object:nil];
 }
 -(void)checkCodeResponse:(NSNotification*)notification{
@@ -50,17 +51,19 @@
     BOOL isNormal=[[userInfo objectForKey:@"isNormal"] boolValue];
     if (isNormal) {
         message = [NSString stringWithFormat:@"您的绑定手机现在已经改为%@",self.newTelNum];
-        
+      HostItelUser *host=  [[ItelAction action] getHost];
+        host.telNum=self.newTelNum;
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"修改成功" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     }
     else{
+        message=[notification.userInfo objectForKey:@"reason"];
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"验证失败" message:message delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
         [alert show];
     }
 }
 -(void)resendMessage{
-    
+    [[ItelAction action] resendMassage:self.newTelNum];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self.navigationController popToRootViewControllerAnimated:YES];
