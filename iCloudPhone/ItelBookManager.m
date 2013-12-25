@@ -35,7 +35,7 @@ static ItelBookManager *manager;
     
         [self.addedItels addObject:itel];
         [self saveAddedItels];
-        NSLog(@"%@",self.addedItels);
+       // NSLog(@"%@",self.addedItels);
    
     
 }

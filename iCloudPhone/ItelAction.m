@@ -236,7 +236,26 @@
     [self.itelUserActionDelegate modifyPersonal:data];
     [self  NotifyForNormalResponse:@"modifyHost" parameters:data];
 }
-
+#pragma mark - 验证手机号码是否可用
+-(void)checkPhoneNumber:(NSString*)phone{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itel":hostUser.itelNum,@"token":hostUser.token,@"phone":phone,};
+    [self.itelNetRequestActionDelegate checkNewTelNum:parameters];
+}
+-(void)checkPhoneNumberResponse:(NSDictionary*)response{
+    [self NotifyForNormalResponse:@"modifyPhone" parameters:nil];
+}
+#pragma mark - 修改手机-发送短信验证码
+-(void)phoneCheckCode:(NSString*)checkCode phone:(NSString*)phone{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+   NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itel":hostUser.itelNum,@"token":hostUser.token,@"checkCode":checkCode,@"phone":phone};
+    [self.itelNetRequestActionDelegate modifyPhoneNumCheckCode:parameters];
+}
+-(void)phoneCheckCodeResponse:(id)response{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    hostUser.telNum=(NSString*)response;
+    [self NotifyForNormalResponse:@"phoneCheckCode" parameters:nil];
+}
 -(ItelBook*) getFriendBook{
     return [self.itelBookActionDelegate friendBook];
 }

@@ -198,6 +198,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [self.navigationController setNavigationBarHidden:NO];
 }
 @end
