@@ -239,7 +239,7 @@
 #pragma mark - 验证手机号码是否可用
 -(void)checkPhoneNumber:(NSString*)phone{
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
-    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itel":hostUser.itelNum,@"token":hostUser.token,@"phone":phone,};
+    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itelCode":hostUser.itelNum,@"token":hostUser.token,@"phone":phone,};
     [self.itelNetRequestActionDelegate checkNewTelNum:parameters];
 }
 -(void)checkPhoneNumberResponse:(NSDictionary*)response{
@@ -248,7 +248,7 @@
 #pragma mark - 修改手机-发送短信验证码
 -(void)phoneCheckCode:(NSString*)checkCode phone:(NSString*)phone{
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
-   NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itel":hostUser.itelNum,@"token":hostUser.token,@"checkCode":checkCode,@"phone":phone};
+   NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itelCode":hostUser.itelNum,@"token":hostUser.token,@"captcha":checkCode,@"phone":phone};
     [self.itelNetRequestActionDelegate modifyPhoneNumCheckCode:parameters];
 }
 -(void)phoneCheckCodeResponse:(id)response{
@@ -256,6 +256,39 @@
     hostUser.telNum=(NSString*)response;
     [self NotifyForNormalResponse:@"phoneCheckCode" parameters:nil];
 }
+
+#pragma mark - 重新发送短信
+-(void)resendMassage:(NSString*)phone{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itelCode":hostUser.itelNum,@"token":hostUser.token,@"phone":phone,};
+    [self.itelNetRequestActionDelegate resendPhoneMessage:parameters];
+}
+-(void)resendMassageResponse:(NSDictionary*)response{
+    NSString *msg=[response objectForKey:@"msg"];
+    if (msg) {
+        [self NotifyForNormalResponse:@"resendMes" parameters:msg];
+    }
+    else{
+    [self NotifyForNormalResponse:@"resendMes" parameters:nil];
+    }
+}
+#pragma mark - 修改密保-查询密保
+-(void)checkOutProtection{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    NSDictionary *parameters = @{@"userId":hostUser.userId };
+    [self.itelNetRequestActionDelegate getPasswordProtection:parameters];
+}
+#pragma mark - 修改用户密码
+-(void)modifyUserPassword:(NSString*)oldPassword newPassword:(NSString*)newPassword{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"token":hostUser.token,@"oldPassword":oldPassword,@"newPassword":newPassword,};
+    [self.itelNetRequestActionDelegate changePassword:parameters];
+}
+-(void)modifyUserPasswordResponse:(NSDictionary*)response{
+    
+    [self NotifyForNormalResponse:@"changePassword" parameters:response];
+}
+
 -(ItelBook*) getFriendBook{
     return [self.itelBookActionDelegate friendBook];
 }
@@ -278,7 +311,7 @@
 #pragma mark - 响应正常返回的通知(异常由netManager直接通知)
 
 -(void) NotifyForNormalResponse:(NSString*)name parameters:(id)parameters{
-    NSDictionary *userInfo=@{@"isNormal": @"1",@"reason":@"0" };
+    NSDictionary *userInfo=@{@"isNormal": @"1",@"reason":@"1" };
     
     [[NSNotificationCenter defaultCenter]postNotificationName:name object:parameters userInfo:userInfo];
 }

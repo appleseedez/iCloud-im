@@ -45,6 +45,8 @@
 -(NSArray*)searchInfirendBook:(NSString*)search;
 //keypath本地查找
 -(ItelBook*)searchInFriendBookWithKeyPath:(NSString*)keyPath andSearch:(NSString*)search;
+
+
 @end
 
 #pragma  mark - 用户操作协议
@@ -91,6 +93,12 @@
 -(void) checkNewTelNum:(NSDictionary*)parameters;
 //修改手机-发送短信验证码
 -(void) modifyPhoneNumCheckCode:(NSDictionary*)parameters;
+//修改手机-重新发送短信
+-(void) resendPhoneMessage:(NSDictionary*)parameters;
+//修改用户密码
+-(void)changePassword:(NSDictionary*)parameters;
+//修改密保-验证密保
+-(void)getPasswordProtection:(NSDictionary*)parameters;
 @end
 @interface ItelAction : NSObject
 @property (nonatomic,weak) id <ItelBookActionDelegate> itelBookActionDelegate;
@@ -150,6 +158,14 @@
 //修改手机-发送短信验证码
 -(void)phoneCheckCode:(NSString*)checkCode phone:(NSString*)phone;
 -(void)phoneCheckCodeResponse:(id)response;
+//重新发送短信
+-(void)resendMassage:(NSString*)phone;
+-(void)resendMassageResponse:(NSDictionary*)response;
+//修改用户密码
+-(void)modifyUserPassword:(NSString*)oldPassword newPassword:(NSString*)newPassword;
+-(void)modifyUserPasswordResponse:(NSDictionary*)response;
+//修改密保-查询密保
+-(void)checkOutProtection;
 #pragma mark - 查找本机用户接口
 //精确查找好友列表
 -(ItelUser*)userInFriendBook:(NSString*)itel;
@@ -159,4 +175,5 @@
 -(NSArray*)searchInFirendBook:(NSString*)search;
 /*keypath 查找好友列表 keypath为需要匹配得iteluser的属性 如字符串的形式如 昵称 @“nickName”  电话 @“telNum” 备注 @“remarkName” 返回itelbook 如需要多种搜索 多次调用用appendingByItelBook拼接返回的itelBook*/
 -(ItelBook*)searchInFriendBookWithKeyPath:(NSString*)keyPath andSearch:(NSString*)search;
+
 @end

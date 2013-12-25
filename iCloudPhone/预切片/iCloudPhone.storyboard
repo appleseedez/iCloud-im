@@ -504,7 +504,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yUT-7p-bMp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1037" y="1385"/>
+            <point key="canvasLocation" x="-1169" y="1433"/>
         </scene>
         <!--Common Setting View Controller - 通用设置-->
         <scene sceneID="iyg-7a-EsQ">
@@ -751,10 +751,10 @@
             </objects>
             <point key="canvasLocation" x="-1801" y="1900"/>
         </scene>
-        <!--Table View Controller - 安全隐私-->
+        <!--Security View Controller - 安全隐私-->
         <scene sceneID="OeR-a6-gDY">
             <objects>
-                <tableViewController id="EBc-4c-eIf" sceneMemberID="viewController">
+                <tableViewController id="EBc-4c-eIf" customClass="SecurityViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Wtx-bL-w1f">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -836,7 +836,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FF1-DS-Ht1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1126" y="2259"/>
+            <point key="canvasLocation" x="-915" y="2224"/>
         </scene>
         <!--Table View Controller - 通知推送-->
         <scene sceneID="4fX-Tu-odQ">
@@ -1731,7 +1731,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znl-d6-Tcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-410" y="941"/>
+            <point key="canvasLocation" x="-486" y="953"/>
         </scene>
         <!--In Session View Controller-->
         <scene sceneID="dKB-Nr-hPr">
@@ -2546,7 +2546,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kgu-zw-56C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="112" y="1775"/>
+            <point key="canvasLocation" x="920" y="963"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f7I-QK-0Og">
@@ -2582,7 +2582,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iOU-Dr-vgt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="464" y="1627"/>
+            <point key="canvasLocation" x="653" y="1670"/>
         </scene>
         <!--Recent Contact List View Controller-->
         <scene sceneID="FUF-TP-Mgc">
@@ -2727,7 +2727,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="b6T-D3-6Vo" customClass="RegNextButton">
                                 <rect key="frame" x="5" y="240" width="310" height="45"/>
@@ -2792,7 +2792,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <outlet property="delegate" destination="WjR-l4-XYa" id="oGx-xl-JdR"/>
                                 </connections>
@@ -2899,6 +2899,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ps9-HW-4k5"/>
+        <segue reference="5y8-TJ-QOU"/>
     </inferredMetricsTieBreakers>
 </document>
