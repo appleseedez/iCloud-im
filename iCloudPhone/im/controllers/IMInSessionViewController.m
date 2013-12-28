@@ -7,9 +7,13 @@
 //
 
 #import "IMInSessionViewController.h"
-
+#import "ItelAction.h"
 @interface IMInSessionViewController ()
-@property(nonatomic) BOOL hideHUD;
+@property(nonatomic) BOOL hideHUD; //标志是否隐藏控制面板
+@property(nonatomic) BOOL isMute; //标志是否静音
+@property(nonatomic) BOOL hideSelfCam; //标志是否隐藏小窗口
+@property(nonatomic) BOOL hideCam; //标志是否关闭摄像头
+@property(nonatomic) BOOL enableSpeaker; //标志是否开启扬声器
 @end
 
 @implementation IMInSessionViewController
@@ -29,6 +33,7 @@
     //开启视频窗口，调整摄像头
     [self.view sendSubviewToBack:self.remoteRenderView];
     [self.manager openScreen:self.remoteRenderView localView:self.selfCamView];
+    NSLog(@"传入的信息:%@",self.inSessionNotify);
 }
 - (void)viewDidAppear:(BOOL)animated{
     [self setup];
@@ -45,6 +50,20 @@
 - (void) setup{
     [self registerNotifications];
     [self.manager lockScreenForSession];
+    //小窗口要个边框好看些
+    self.selfCamView.layer.borderWidth = 1.0f;
+    self.selfCamView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.selfCamView.layer.masksToBounds = YES;
+    self.selfCamView.layer.cornerRadius = 1.f;
+    // 设置下标志位状态
+    self.isMute = NO; // 初始不是静音的
+    self.hideHUD = NO; //初始显示控制板
+    self.hideSelfCam = NO; //初始显示小窗口
+    self.hideCam = NO; //初始开启摄像头
+    self.enableSpeaker = NO; //初始关闭扬声器
+    // 设置好名字版
+    ((UILabel*)[self.nameHUDView viewWithTag:1]).text= [[ItelAction action] userInFriendBook:[[self.inSessionNotify userInfo] valueForKey:@"destaccount"]].nickName;
+    ((UILabel*)[self.nameHUDView viewWithTag:2]).text= [[ItelAction action] userInFriendBook:[[self.inSessionNotify userInfo] valueForKey:@"destaccount"]].itelNum;
 }
 
 - (void) tearDown{
@@ -91,5 +110,39 @@
         } completion:nil];
         self.hideHUD = NO;
     }
+}
+- (IBAction)toggleMute:(UIButton *)sender {
+    if (self.isMute) {
+        [self.manager unmute];
+        self.isMute=NO;
+    }else{
+        [self.manager mute];
+        self.isMute = YES;
+    }
+}
+
+- (IBAction)toggleSpeeker:(UIButton *)sender {
+    if (self.enableSpeaker) {
+        [self.manager disableSpeaker];
+        self.enableSpeaker = NO;
+    }else{
+        [self.manager enableSpeaker];
+        self.enableSpeaker = YES;
+    }
+}
+
+- (IBAction)toggleCam:(id)sender {
+    if (self.hideCam) {
+        [self.manager showCam];
+        [self.remoteRenderView setHidden:NO];
+        self.hideCam = NO;
+    }else{
+        [self.manager hideCam];
+        [self.remoteRenderView setHidden:YES];
+        self.hideCam = YES;
+    }
+}
+
+- (IBAction)togglePreviewCam:(id)sender {
 }
 @end
