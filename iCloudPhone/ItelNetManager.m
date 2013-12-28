@@ -364,7 +364,7 @@ static int addcount=0;
 #pragma mark - 上传图片
 -(void)uploadImage:(NSData*)imageData parameters:(NSDictionary*)parameters{
     NSString *url=[NSString stringWithFormat:@"%@/upload/uploadImg.json",server];
-      //url=@"http://10.0.0.137:8080/CloudCommunity/upload/uploadImg.json";
+      url=@"http://10.0.0.137:8080/CloudCommunity/upload/uploadImg.json";
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
@@ -512,7 +512,7 @@ static int addcount=0;
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 //id data =[dic objectForKey:@"data"];
-                [[ItelAction action]  resendMassageResponse:dic];
+                [[ItelAction action]  modifyUserPasswordResponse:dic];
             }
             else {
                 NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
@@ -527,6 +527,7 @@ static int addcount=0;
     };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
 }
+#pragma  mark - 密保设置-获得密保
 -(void)getPasswordProtection:(NSDictionary*)parameters{
     NSString *url=[NSString stringWithFormat:@"%@/safety/getPasswordProtection.json",server];
     url = @"http://10.0.0.150:8080/CloudCommunity/safety/getPasswordProtection.json";
@@ -539,7 +540,8 @@ static int addcount=0;
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 NSLog(@"%@",dic);
-                
+                NSDictionary *data=(NSDictionary*)[dic objectForKey:@"data"];
+                [[ItelAction action] checkOutProtectionResponse:data];
             }
             else {
                 NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
@@ -553,5 +555,61 @@ static int addcount=0;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"passwordProtection" object:nil userInfo:userInfo];
     };
     [NetRequester jsonGetRequestWithUrl:url andParameters:parameters success:success failure:failure];
+}
+#pragma mark - 密保设置-回答问题
+-(void)securetyAnsewerQuestion:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/safety/checkPasswordProtection.json",server];
+    url = @"http://10.0.0.150:8080/CloudCommunity/safety/checkPasswordProtection.json";
+    NSLog(@"%@",parameters);
+    SUCCESS{
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+            
+            int ret=[[dic objectForKey:@"ret"] intValue];
+            if (ret==0) {
+                NSLog(@"%@",dic);
+                [[ItelAction action] securetyAnswserQuestionResponse:dic];
+            }
+            else {
+                NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"answerQuestion" object:nil userInfo:userInfo];
+            }
+        }//如果请求失败 则执行failure
+    };
+    FAILURE {
+        
+        NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"answerQuestion" object:nil userInfo:userInfo];
+    };
+    [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
+}
+#pragma mark - 修改密保-提交修改
+-(void)sendSecuretyProduction:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/safety/saveOrUpdatePasswordProtection.json",server];
+    url = @"http://10.0.0.150:8080/CloudCommunity/safety/saveOrUpdatePasswordProtection.json";
+    NSLog(@"%@",parameters);
+    SUCCESS{
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+            
+            int ret=[[dic objectForKey:@"ret"] intValue];
+            if (ret==0) {
+          
+                [[ItelAction action] modifySecuretyProductionResponse:dic];
+            }
+            else {
+                NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"modifySecurety" object:nil userInfo:userInfo];
+            }
+        }//如果请求失败 则执行failure
+    };
+    FAILURE {
+        
+        NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"modifySecurety" object:nil userInfo:userInfo];
+    };
+    [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
 }
 @end

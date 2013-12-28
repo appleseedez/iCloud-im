@@ -96,11 +96,15 @@
 		479DC49D183A544200C3F3F2 /* 广告.png in Resources */ = {isa = PBXBuildFile; fileRef = 479DC49C183A544200C3F3F2 /* 广告.png */; };
 		479E0CDA1856A817005BAE20 /* RegManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E0CD91856A817005BAE20 /* RegManager.m */; };
 		479E2BC81835B8B6002D8172 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E2BC71835B8B6002D8172 /* AddViewController.m */; };
+		479E5BF3186BBD6600FD29FA /* ItelMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E5BF2186BBD6600FD29FA /* ItelMessage.m */; };
+		479E5BF6186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E5BF5186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.m */; };
 		479E934A185AB76B001AF6ED /* iCloudPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479E9349185AB76B001AF6ED /* iCloudPhone.storyboard */; };
 		479E934C185AB7A3001AF6ED /* Login_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479E934B185AB7A3001AF6ED /* Login_iPhone.storyboard */; };
 		479E934F185AB7D4001AF6ED /* NXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E934E185AB7D4001AF6ED /* NXLoginViewController.m */; };
 		479E9351185AB7F8001AF6ED /* NSCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E9350185AB7F8001AF6ED /* NSCAppDelegate.m */; };
 		479E9353185AB842001AF6ED /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E9352185AB842001AF6ED /* RootViewController.m */; };
+		479ED42C186C65C40084EED1 /* itelLOGO.png in Resources */ = {isa = PBXBuildFile; fileRef = 479ED42B186C65C40084EED1 /* itelLOGO.png */; };
+		479ED42E186C66290084EED1 /* AboutLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 479ED42D186C66290084EED1 /* AboutLogo.png */; };
 		479EF04E1859D47C0012EE29 /* IMAnsweringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF00F1859D47C0012EE29 /* IMAnsweringViewController.m */; };
 		479EF04F1859D47C0012EE29 /* IMCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF0111859D47C0012EE29 /* IMCallingViewController.m */; };
 		479EF0501859D47C0012EE29 /* IMDailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF0131859D47C0012EE29 /* IMDailViewController.m */; };
@@ -158,6 +162,8 @@
 		47A10DB01865A6EC00FB9FED /* PassResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A10DAF1865A6EC00FB9FED /* PassResetViewController.m */; };
 		47A5577E186320640062EFFF /* HostEditSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A5577D186320640062EFFF /* HostEditSignViewController.m */; };
 		47A557811863280A0062EFFF /* HostEditNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A557801863280A0062EFFF /* HostEditNicknameViewController.m */; };
+		47A5F8B6186D480900B8CEC8 /* PassManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A5F8B5186D480900B8CEC8 /* PassManager.m */; };
+		47A5F8B8186D650A00B8CEC8 /* Itel ICON-IOS.png in Resources */ = {isa = PBXBuildFile; fileRef = 47A5F8B7186D650A00B8CEC8 /* Itel ICON-IOS.png */; };
 		47B66DD7186AC3FA00AAD771 /* SecurityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B66DD6186AC3FA00AAD771 /* SecurityViewController.m */; };
 		47B89DD51834D40000022FE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
 		47B89DD71834D40000022FE5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD61834D40000022FE5 /* CoreGraphics.framework */; };
@@ -181,6 +187,7 @@
 		47CDFEA0184ED16800673C2B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CDFE9F184ED16800673C2B /* SystemConfiguration.framework */; };
 		47CDFEA2184ED17000673C2B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CDFEA1184ED17000673C2B /* CFNetwork.framework */; };
 		47CDFEA4184ED17800673C2B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CDFEA3184ED17800673C2B /* Security.framework */; };
+		47D6974E186B1AC000CF836E /* SecuretyQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D6974D186B1AC000CF836E /* SecuretyQuestionViewController.m */; };
 		47E05DC018517418009FDCED /* searchuser.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E05DBE18517418009FDCED /* searchuser.png */; };
 		47E05DC118517418009FDCED /* checkAddress.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E05DBF18517418009FDCED /* checkAddress.png */; };
 		47E05DC318519C9C009FDCED /* 头像.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E05DC218519C9C009FDCED /* 头像.png */; };
@@ -390,12 +397,18 @@
 		479E0CD91856A817005BAE20 /* RegManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegManager.m; sourceTree = "<group>"; };
 		479E2BC61835B8B6002D8172 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
 		479E2BC71835B8B6002D8172 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		479E5BF1186BBD6600FD29FA /* ItelMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelMessage.h; sourceTree = "<group>"; };
+		479E5BF2186BBD6600FD29FA /* ItelMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelMessage.m; sourceTree = "<group>"; };
+		479E5BF4186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecuretyAnswerQuestionViewController.h; sourceTree = "<group>"; };
+		479E5BF5186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecuretyAnswerQuestionViewController.m; sourceTree = "<group>"; };
 		479E9349185AB76B001AF6ED /* iCloudPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iCloudPhone.storyboard; path = "预切片/iCloudPhone.storyboard"; sourceTree = "<group>"; };
 		479E934B185AB7A3001AF6ED /* Login_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login_iPhone.storyboard; sourceTree = "<group>"; };
 		479E934D185AB7D4001AF6ED /* NXLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXLoginViewController.h; sourceTree = "<group>"; };
 		479E934E185AB7D4001AF6ED /* NXLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXLoginViewController.m; sourceTree = "<group>"; };
 		479E9350185AB7F8001AF6ED /* NSCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSCAppDelegate.m; sourceTree = "<group>"; };
 		479E9352185AB842001AF6ED /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		479ED42B186C65C40084EED1 /* itelLOGO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itelLOGO.png; sourceTree = "<group>"; };
+		479ED42D186C66290084EED1 /* AboutLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AboutLogo.png; sourceTree = "<group>"; };
 		479EF00E1859D47C0012EE29 /* IMAnsweringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAnsweringViewController.h; sourceTree = "<group>"; };
 		479EF00F1859D47C0012EE29 /* IMAnsweringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAnsweringViewController.m; sourceTree = "<group>"; };
 		479EF0101859D47C0012EE29 /* IMCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMCallingViewController.h; sourceTree = "<group>"; };
@@ -501,6 +514,9 @@
 		47A5577D186320640062EFFF /* HostEditSignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEditSignViewController.m; sourceTree = "<group>"; };
 		47A5577F1863280A0062EFFF /* HostEditNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEditNicknameViewController.h; sourceTree = "<group>"; };
 		47A557801863280A0062EFFF /* HostEditNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEditNicknameViewController.m; sourceTree = "<group>"; };
+		47A5F8B4186D480900B8CEC8 /* PassManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassManager.h; sourceTree = "<group>"; };
+		47A5F8B5186D480900B8CEC8 /* PassManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassManager.m; sourceTree = "<group>"; };
+		47A5F8B7186D650A00B8CEC8 /* Itel ICON-IOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Itel ICON-IOS.png"; sourceTree = "<group>"; };
 		47B66DD5186AC3FA00AAD771 /* SecurityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityViewController.h; sourceTree = "<group>"; };
 		47B66DD6186AC3FA00AAD771 /* SecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityViewController.m; sourceTree = "<group>"; };
 		47B89DD11834D40000022FE5 /* iTel 2.0Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iTel 2.0Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -529,6 +545,8 @@
 		47CDFE9F184ED16800673C2B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		47CDFEA1184ED17000673C2B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		47CDFEA3184ED17800673C2B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		47D6974C186B1AC000CF836E /* SecuretyQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecuretyQuestionViewController.h; sourceTree = "<group>"; };
+		47D6974D186B1AC000CF836E /* SecuretyQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecuretyQuestionViewController.m; sourceTree = "<group>"; };
 		47E05DBE18517418009FDCED /* searchuser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchuser.png; sourceTree = "<group>"; };
 		47E05DBF18517418009FDCED /* checkAddress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkAddress.png; sourceTree = "<group>"; };
 		47E05DC218519C9C009FDCED /* 头像.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "头像.png"; sourceTree = "<group>"; };
@@ -847,6 +865,8 @@
 			children = (
 				479B907C18376DA1005D8CCB /* ItelAction.h */,
 				479B907D18376DA1005D8CCB /* ItelAction.m */,
+				479E5BF1186BBD6600FD29FA /* ItelMessage.h */,
+				479E5BF2186BBD6600FD29FA /* ItelMessage.m */,
 				479B907F18376DCB005D8CCB /* ItelUser.h */,
 				479B908018376DCB005D8CCB /* ItelUser.m */,
 				4798A26C183DD45300060DDB /* HostItelUser.h */,
@@ -1132,6 +1152,10 @@
 				47A10D9C18654AF500FB9FED /* SecurityChangePasswordViewController.m */,
 				47B66DD5186AC3FA00AAD771 /* SecurityViewController.h */,
 				47B66DD6186AC3FA00AAD771 /* SecurityViewController.m */,
+				479E5BF4186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.h */,
+				479E5BF5186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.m */,
+				47D6974C186B1AC000CF836E /* SecuretyQuestionViewController.h */,
+				47D6974D186B1AC000CF836E /* SecuretyQuestionViewController.m */,
 			);
 			name = securety;
 			sourceTree = "<group>";
@@ -1149,6 +1173,8 @@
 				47A10DAC18659D3E00FB9FED /* PassSecuretyQuestiongViewController.m */,
 				47A10DAE1865A6EC00FB9FED /* PassResetViewController.h */,
 				47A10DAF1865A6EC00FB9FED /* PassResetViewController.m */,
+				47A5F8B4186D480900B8CEC8 /* PassManager.h */,
+				47A5F8B5186D480900B8CEC8 /* PassManager.m */,
 			);
 			name = findPassword;
 			sourceTree = "<group>";
@@ -1227,6 +1253,9 @@
 				479E9349185AB76B001AF6ED /* iCloudPhone.storyboard */,
 				479E934B185AB7A3001AF6ED /* Login_iPhone.storyboard */,
 				47B89DDD1834D40000022FE5 /* InfoPlist.strings */,
+				479ED42B186C65C40084EED1 /* itelLOGO.png */,
+				47A5F8B7186D650A00B8CEC8 /* Itel ICON-IOS.png */,
+				479ED42D186C66290084EED1 /* AboutLogo.png */,
 				4757D0541855C5F0001A9639 /* itel输入提示.png */,
 				47E2DB9B185997F000D455EF /* 登录logo.png */,
 				4757D0581855CAD6001A9639 /* 短信提示.png */,
@@ -1451,13 +1480,16 @@
 				4757D0551855C5F0001A9639 /* itel输入提示.png in Resources */,
 				479DC49D183A544200C3F3F2 /* 广告.png in Resources */,
 				478594C0185026FF00AFF6BF /* tab_bar.png in Resources */,
+				47A5F8B8186D650A00B8CEC8 /* Itel ICON-IOS.png in Resources */,
 				479E934C185AB7A3001AF6ED /* Login_iPhone.storyboard in Resources */,
 				479C9C291835019D00DE40D8 /* 头像.jpg in Resources */,
 				47E05DC51851A2CE009FDCED /* 详细按钮.png in Resources */,
 				4788140B1839ED7F0085224D /* itel.png in Resources */,
 				4757D0531855C083001A9639 /* 个人注册.png in Resources */,
+				479ED42C186C65C40084EED1 /* itelLOGO.png in Resources */,
 				47E2DB8E185985C800D455EF /* 本机联系人.png in Resources */,
 				47E2DB9518598B0500D455EF /* 邀请.png in Resources */,
+				479ED42E186C66290084EED1 /* AboutLogo.png in Resources */,
 				479E934A185AB76B001AF6ED /* iCloudPhone.storyboard in Resources */,
 				47E05DC318519C9C009FDCED /* 头像.png in Resources */,
 				47E2DB9C185997F000D455EF /* 登录logo.png in Resources */,
@@ -1507,10 +1539,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				479E5BF6186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.m in Sources */,
 				479B908A18376F15005D8CCB /* ItelNetManager.m in Sources */,
 				479F138B18617096006DF67B /* HostSettingViewController.m in Sources */,
 				479EF0561859D47C0012EE29 /* IMDataPool.m in Sources */,
 				479E9353185AB842001AF6ED /* RootViewController.m in Sources */,
+				47A5F8B6186D480900B8CEC8 /* PassManager.m in Sources */,
 				478813DA1839C35E0085224D /* UIImageView+AFNetworking.m in Sources */,
 				479B908118376DCB005D8CCB /* ItelUser.m in Sources */,
 				47212EEA18449FCB00F148C7 /* StrangerCell.m in Sources */,
@@ -1531,6 +1565,7 @@
 				471F00D51868156500D3DAFD /* HostEditEmailViewController.m in Sources */,
 				4757D04F1855BC69001A9639 /* NetRequester.m in Sources */,
 				47A01125185CA34E003F8878 /* regDetailTextField.m in Sources */,
+				47D6974E186B1AC000CF836E /* SecuretyQuestionViewController.m in Sources */,
 				478146531856298F00362E53 /* RegMesCheckViewController.m in Sources */,
 				479EF0611859D47C0012EE29 /* NSString+MD5.m in Sources */,
 				478813C71839C35E0085224D /* AFHTTPRequestOperationManager.m in Sources */,
@@ -1579,6 +1614,7 @@
 				479EF05C1859D47C0012EE29 /* IMSessionPeriodRequestMessageBuilder.m in Sources */,
 				472B4A661846E4ED002971EE /* CustonTarbarItem.m in Sources */,
 				47A10DA418658F9700FB9FED /* PassViewController.m in Sources */,
+				479E5BF3186BBD6600FD29FA /* ItelMessage.m in Sources */,
 				47E2DB931859875A00D455EF /* InviteButton.m in Sources */,
 				479EF04E1859D47C0012EE29 /* IMAnsweringViewController.m in Sources */,
 				473F62D718386B04006CAE31 /* AddressBookViewController.m in Sources */,

@@ -1,29 +1,25 @@
 //
-//  SecuretyQuestiongViewController.m
+//  SecuretyAnswerQuestionViewController.m
 //  iCloudPhone
 //
-//  Created by nsc on 13-12-21.
+//  Created by nsc on 13-12-26.
 //  Copyright (c) 2013年 NX. All rights reserved.
 //
 
-#import "PassSecuretyQuestiongViewController.h"
+#import "SecuretyAnswerQuestionViewController.h"
 #import "RegNextButton.h"
-#import "PassManager.h"
 #import "regDetailTextField.h"
-#import "PassResetViewController.h"
-#import "RegNextButton.h"
-@interface PassSecuretyQuestiongViewController ()
-
-@property (weak, nonatomic) IBOutlet UILabel *question;
+#import "ItelAction.h"
+#import "SecuretyQuestionViewController.h"
+@interface SecuretyAnswerQuestionViewController ()
 @property (weak, nonatomic) IBOutlet RegNextButton *nextButton;
-
 @property (weak, nonatomic) IBOutlet regDetailTextField *txtAnswer;
 @property (nonatomic,strong) NSString *strQuestion;
+@property (weak, nonatomic) IBOutlet UILabel *question;
+
 @end
 
-@implementation PassSecuretyQuestiongViewController
-
-
+@implementation SecuretyAnswerQuestionViewController
 
 -(void)setUI{
     [self.nextButton setUI];
@@ -34,16 +30,16 @@
     [super viewDidLoad];
     [self setUI];
     int i = arc4random()%3;
-    NSDictionary *data = [PassManager defaultManager].questions;
+
     switch (i) {
         case 0:
-            self.strQuestion=[data objectForKey:@"question1"];
+            self.strQuestion=[self.data objectForKey:@"question1"];
             break;
         case 1:
-            self.strQuestion=[data objectForKey:@"question2"];
+            self.strQuestion=[self.data objectForKey:@"question2"];
             break;
         case 2:
-            self.strQuestion=[data objectForKey:@"question3"];
+            self.strQuestion=[self.data objectForKey:@"question3"];
             break;
             
         default:
@@ -55,7 +51,7 @@
 }
 - (IBAction)nextButtonPushed:(RegNextButton *)sender {
     
-    [[PassManager defaultManager] answerQuestion:self.strQuestion answer:self.txtAnswer.text];
+    [[ItelAction action] securetyAnswserQuestion:self.strQuestion answser:self.txtAnswer.text];
 }
 -(void)receive:(NSNotification*)notification{
     BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"] boolValue];
@@ -63,13 +59,13 @@
         [self pushNext];
     }
     else{
-        [self errorAlert:[notification.userInfo objectForKey:@"reason"]];
+        [self errorAlert:@"密保问题回答错误"];
     }
 }
 -(void)pushNext{
-    UIStoryboard *story=[UIStoryboard storyboardWithName:@"Login_iPhone" bundle:nil];
-   PassResetViewController *passResetVC= [story instantiateViewControllerWithIdentifier:@"passReset"];
-    [self.navigationController pushViewController:passResetVC animated:YES];
+    UIStoryboard *story=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
+    SecuretyQuestionViewController *securetyQusetionVC= [story instantiateViewControllerWithIdentifier:@"SecuretyQuetionView"];
+    [self.navigationController pushViewController:securetyQusetionVC animated:YES];
 }
 -(void)errorAlert:(NSString*)errorString{
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"回答错误" message:errorString delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
@@ -77,11 +73,10 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:@"passAnswerQuestion" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:@"answerQuestion" object:nil];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 @end

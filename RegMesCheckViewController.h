@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RegMesCheckViewController : UIViewController<UIAlertViewDelegate,UITextFieldDelegate>
-
+-(void)setUI;
+-(void)resendMessage;
 @end
