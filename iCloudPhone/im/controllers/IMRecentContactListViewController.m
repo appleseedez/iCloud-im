@@ -16,18 +16,15 @@
 
 @implementation IMRecentContactListViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    
+    [self registerNotifications];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self setup];
+//    [self setup];
 }
 //- (void)viewDidAppear:(BOOL)animated{
 //    [super viewDidAppear:animated];
@@ -35,8 +32,9 @@
 //}
 - (void)viewDidLoad
 {
-    NSLog(@"tableView的viewDidLoad方法被调用");
+   
     [super viewDidLoad];
+     NSLog(@"tableView的viewDidLoad方法被调用");
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,7 +42,9 @@
     [super didReceiveMemoryWarning];
 }
 
-
+- (void)dealloc{
+    NSLog(@"被凶狠");
+}
 #pragma mark - private 
 - (void) setup{
     IMRootTabBarViewController* root =(IMRootTabBarViewController*)self.tabBarController;
@@ -56,6 +56,9 @@
     
 }
 
+-(void) registerNotifications{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setup) name:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
+}
 
 #pragma mark - Table view data source
 

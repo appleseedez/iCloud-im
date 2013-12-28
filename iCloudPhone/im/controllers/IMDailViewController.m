@@ -78,7 +78,7 @@
 
 - (IBAction)voiceDialing:(UIButton *)sender {
 #if MANAGER_DEBUG
-    NSlog("音频通话");
+    NSLog(@"音频通话");
 #endif
     [self.manager setIsVideoCall:NO];//告诉manager是音频通话
     NSString* peerAccount = self.peerAccount.text;
