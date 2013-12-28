@@ -16,6 +16,7 @@
 #define  FAILURE void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error)
 static NSString *server=@"http://211.149.144.15:8000/CloudCommunity";
 //static NSString *server=@"http://10.0.0.150:8080/CloudCommunity";
+
 static ItelNetManager *manager=nil;
 @implementation ItelNetManager
 

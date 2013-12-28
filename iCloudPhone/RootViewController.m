@@ -63,7 +63,7 @@
      [sender isSelected:YES];
     int i= [self.customTabbar.items indexOfObject:sender];
     if (i==0&&presentDialingView==YES) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"presentDialView" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
     }
     [self setSelectedIndex:i];
 }
@@ -90,18 +90,6 @@
 
 #pragma mark - HANDLER
 - (void) presentCallingView:(NSNotification*) notify{
-//#if ROOT_TABBAR_DEBUG
-//    NSLog(@"收到通知，将要加载CallingView");
-//#endif
-//    //加载“拨号中”界面
-//    //加载stroyboard
-//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
-//    UINavigationController* callingViewNavController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
-//    IMCallingViewController* callingViewController = (IMCallingViewController*) callingViewNavController.topViewController;
-//    //    IMCallingViewController* callingViewController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
-//    callingViewController.manager = self.manager;
-//    callingViewController.callingNotify = notify;
-//    [self presentViewController:callingViewNavController animated:YES completion:nil];
 #if ROOT_TABBAR_DEBUG
     NSLog(@"收到通知，将要加载CallingView");
 #endif
@@ -121,16 +109,7 @@
    
 }
 - (void) presentAnsweringView:(NSNotification*) notify{
-//#if ROOT_TABBAR_DEBUG
-//    NSLog(@"收到通知，将要加载AnsweringView");
-//#endif
-//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
-//    UINavigationController* answeringViewNavController =[sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
-//    IMAnsweringViewController* answeringViewController = (IMAnsweringViewController*) answeringViewNavController.topViewController;
-//    //    IMAnsweringViewController* answeringViewController = [sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
-//    answeringViewController.manager = self.manager;
-//    answeringViewController.callingNotify = notify;
-//    [self presentViewController:answeringViewNavController animated:YES completion:nil];
+
 #if ROOT_TABBAR_DEBUG
     NSLog(@"收到通知，将要加载AnsweringView");
 #endif

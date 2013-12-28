@@ -72,11 +72,15 @@
 - (void)send:(NSDictionary *)data{
     NSError* error = nil;
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
+#if UDP_MESSAGE
     NSLog(@"udp 数据,准备发送的:%@ 到 %@:%d",data,self.ip,self.port);
+#endif
     [self.udpSock sendData:jsonData toHost:self.ip port:self.port withTimeout:-1 tag:self.tag];
 }
 - (void)receive:(NSDictionary *)data{
+#if UDP_MESSAGE
     NSLog(@"最后收到数据:%@",data);
+#endif
     [[NSNotificationCenter defaultCenter] postNotificationName:UDP_LOOKUP_COMPLETE_NOTIFICATION object:nil userInfo:data];
 }
 
@@ -111,12 +115,10 @@
     self.ip = [[response valueForKey:BODY_SECTION_KEY] valueForKey:UDP_INDEX_RES_FIELD_SERVER_IP_KEY];
     self.port = [[[response valueForKey:BODY_SECTION_KEY] valueForKey:UDP_INDEX_RES_FIELD_SERVER_PORT_KEY] intValue];
     if (self.tag == ROUTE_GATEWAY_TAG) {
-
         [self send:@{
                      HEAD_SECTION_KEY:@{
                              DATA_TYPE_KEY:[NSNumber numberWithInt:ROUTE_SERVER_IP_REQ_TYPE ],
                              DATA_SEQ_KEY: [NSNumber numberWithInteger: [[IMSeqenceGen class] seq]],
-                             
                              DATA_STATUS_KEY:[NSNumber numberWithInteger:NORMAL_STATUS]
                              },
                      BODY_SECTION_KEY:@{
@@ -125,7 +127,9 @@
                              }
                      }];
     }else if (self.tag == ROUTE_UDP_SEQENCE_END_TAG){
-         NSLog(@"最后拿到的ip:%@,port:%d",self.ip,self.port);
+//         NSLog(@"最后拿到的ip:%@,port:%d",self.ip,self.port);
+//        [[response valueForKey:BODY_SECTION_KEY] setValue:@"10.0.0.30" forKey:UDP_INDEX_RES_FIELD_SERVER_IP_KEY];
+        NSLog(@"最后登录的业务服务器：%@",response);
         [self receive:response];
     }
     

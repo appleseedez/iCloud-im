@@ -16,10 +16,10 @@
 - (IBAction)dialNumber:(UIButton *)sender;
 - (IBAction)backspace:(UIButton *)sender;
 - (IBAction)showRecentContactList:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIView *dialBackGroundView;
 @property (weak, nonatomic) IBOutlet UILabel *selfAccountLabel;
 @property (weak,nonatomic) id<IMManager> manager;
 @property (weak, nonatomic) IBOutlet UITableView *searchResultView;
-@property (weak, nonatomic) IBOutlet UIView *dailPanView;
 @property (weak, nonatomic) IBOutlet UIView *suggestBtnView;
 @property (weak, nonatomic) IBOutlet UIView *dialPanView;
 - (IBAction)autoFill:(UIButton *)sender;

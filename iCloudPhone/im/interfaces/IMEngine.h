@@ -25,10 +25,20 @@
 - (BOOL) startTransport;
 //终止传输
 - (void) stopTransport;
+//静音
+- (void) mute;
+- (void) unmute;
+- (void) enableSpeaker;
+- (void) disableSpeaker;
+- (void) showCam;
+- (void) hideCam;
+- (void)setIsVideoCalling:(BOOL)isVideoCalling;
+- (BOOL)isVideoCalling;
 //开启远端视频输入窗口
 - (void) openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView*) localView;
 //关闭远端视频输入窗口
 - (void) closeScreen;
 - (void) tearDown;
 - (void) keepSessionAlive:(NSString*) probeServerIP port:(NSInteger) port;
+
 @end
