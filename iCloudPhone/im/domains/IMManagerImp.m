@@ -14,6 +14,7 @@
 @property (nonatomic,copy) NSString* state;
 @property (nonatomic,copy) NSString* selfAccount;
 @property (nonatomic,strong) NSTimer* keepSessionAlive;//从获取到外网地址，到收到通话回复。
+@property (nonatomic) BOOL isVideoCall; //是否是视频通话
 @end
 
 @implementation IMManagerImp
@@ -21,6 +22,9 @@
 
 - (void) testSessionStart:(NSString*) destAccount{
     // 通话查询开始
+    if (!destAccount || [destAccount isEqualToString:self.selfAccount]) {
+        return;
+    }
     [self startSession:destAccount];
     // 构造通话查询信令
     self.messageBuilder = [[IMSessionInitMessageBuilder alloc] init];
@@ -36,7 +40,7 @@
 // 向信令服务器做一次验证
 - (void) auth:(NSString*) selfAccount
          cert:(NSString*) cert{
-    NSString* token = @""; // 推送用到的token
+    NSString* token = BLANK_STRING; // 推送用到的token
     self.messageBuilder = [[IMAuthMessageBuilder alloc] init];
     NSDictionary* data = [self.messageBuilder buildWithParams:@{
                                                                 CMID_APP_LOGIN_SSS_REQ_FIELD_ACCOUNT_KEY:selfAccount,
@@ -247,9 +251,6 @@
 
 //收到信令服务器的通话查询响应，进行后续业务
 - (void) sessionInited:(NSNotification*) notify{
-#if MANAGER_DEBUG
-    NSLog(@"收到通话查询响应~");
-#endif
     
 #if SIGNAL_MESSAGE
     NSLog(@"收到信令服务器的通话查询响应：%@",notify.userInfo);
@@ -259,6 +260,9 @@
                                     SESSION_SRC_SSID_KEY:[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY],
                                     SESSION_DEST_SSID_KEY:[NSNumber numberWithInteger:[[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] integerValue]+1]}];
     self.messageBuilder = [[IMSessionPeriodRequestMessageBuilder alloc] init];
+#if SIGNAL_MESSAGE
+    NSLog(@"通话查询请求完成，即将进入通话请求发送阶段");
+#endif
     [self sessionPeriodNegotiation:data];
     // TODO 设置10秒超时，如果没有收到接受通话的回复则转到拒绝流程
     
@@ -279,17 +283,10 @@
         
         NSLog(@"收到PEER的链路数据：%@",notify.userInfo);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTransportAndNotify:) name:P2PTUNNEL_SUCCESS object:nil];
+        //告诉引擎，目前是否是视频通话
+        [self.engine setIsVideoCalling:self.isVideoCall];
         [self.engine tunnelWith:notify.userInfo];
-//        if (![self.engine tunnelWith:notify.userInfo]) {
-//            [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
-//            return;
-//        }
-        
-//        [self.engine startTransport];
-//        //通知view可以切换的到“通话中"界面了
-//        [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_INSESSION_VIEW_NOTIFICATION
-//                                                            object:nil
-//                                                          userInfo:notify.userInfo];
+
     }else if ([self.state isEqualToString:IDLE]){ //如果是idle状态下，接到了通话信令，则是有人拨打
 #if MANAGER_DEBUG
         NSLog(@"收到通话请求，用户操作可以接听");
@@ -320,13 +317,10 @@
     [self.keepSessionAlive invalidate];
     self.keepSessionAlive = nil;
     NSLog(@"接受通话请求，停止session保持数据包的发送，开始获取p2p通道");
-//    if (![self.engine tunnelWith:notify.userInfo]) {
-//        [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
-//        return;
-//    }
-//    
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(justStartTransport:) name:P2PTUNNEL_SUCCESS object:nil];
+    //告诉引擎，目前是否是视频通话
+    [self.engine setIsVideoCalling:self.isVideoCall];
     [self.engine tunnelWith:notify.userInfo];
     /**
      *  移到 justStartTransport 方法
@@ -387,21 +381,12 @@
     //注册事件
     [self registerNotifications];
     //连接信令服务器
-//    [self.communicator connect];
-//    [self.communicator keepAlive];
-//    //向信令服务器发验证请求
-//    if (!self.selfAccount) {
-//        self.selfAccount = @"6666";
-//    }
-//    NSLog(@"目前的本机帐号：%@",[self myAccount]);
-//    [self auth:self.selfAccount cert:@"chengjianjun"];
+#if SIGNAL_MESSAGE
     NSLog(@"当前的routeIP:%@",self.routeIP);
-    NSAssert(self.UDPcommunicator , @"大多数");
+#endif
     [self.UDPcommunicator setupIP:self.routeIP];
     [self.UDPcommunicator setupPort:self.port];
     [self.UDPcommunicator connect:self.selfAccount];
-    
-    
 }
 
 - (void) connectToSignalServer:(NSNotification*) notify{
@@ -437,6 +422,9 @@
     self.messageBuilder = nil;
 }
 - (void)startSession:(NSString*) destAccount{
+    if (!destAccount || [destAccount isEqualToString:BLANK_STRING]) {
+        destAccount = IDLE;
+    }
     self.state = destAccount;
 }
 - (void)endSession{
@@ -471,11 +459,45 @@
 - (void)unlockScreenForSession{
     [UIApplication sharedApplication].idleTimerDisabled=NO;
 }
+
+- (void)mute{
+    [self.engine mute];
+}
+- (void)unmute{
+    [self.engine unmute];
+}
+- (void)enableSpeaker{
+    [self.engine enableSpeaker];
+}
+- (void)disableSpeaker{
+    [self.engine disableSpeaker];
+}
+- (void)showCam{
+    [self.engine showCam];
+    
+}
+- (void)hideCam{
+    [self.engine hideCam];
+}
+- (void)showSelfCam{
+    
+}
+- (void)hideSelfCam{
+    
+}
 - (void)setMyAccount:(NSString *)account{
     self.selfAccount = account;
 }
 - (NSString *)myAccount{
     return self.selfAccount;
+}
+//synthesize的理解
+@synthesize isVideoCall = _isVideoCall;
+- (void) setIsVideoCall:(BOOL)isVideoCall{
+    _isVideoCall = isVideoCall;
+}
+- (BOOL) isVideoCall{
+    return _isVideoCall;
 }
 - (void)setRouteSeverIP:(NSString *)ip{
     self.routeIP = ip;

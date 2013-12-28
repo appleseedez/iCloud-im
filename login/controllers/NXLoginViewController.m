@@ -58,6 +58,7 @@
     [self.view endEditing:YES];
     self.txtInuptCheckMessage.text=@"登录中...";
     [self.actWaitingToLogin startAnimating];
+
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://211.149.144.15:8000/CloudCommunity/login.json"]];
     
     [request setHTTPMethod:@"POST"];
@@ -74,12 +75,10 @@
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
        
         if ([json isKindOfClass:[NSDictionary class]]) {
-NSLog(@"%@",json);
             NSDictionary *dic=[json objectForKey:@"message"];
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 HostItelUser *host=[HostItelUser userWithDictionary:[dic objectForKey:@"data"]];
-                NSAssert(host.itelNum, @"空的");
                 [[ItelAction action] setHostItelUser:host];
                 [self.actWaitingToLogin stopAnimating];
                 self.txtInuptCheckMessage.text = @"";

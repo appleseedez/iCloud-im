@@ -63,7 +63,7 @@ static int soundCount;
     self.PeerAvatarImageView.layer.cornerRadius = 10;
     self.PeerAvatarImageView.layer.masksToBounds = YES;
     
-    [self.PeerAvatarImageView setImageWithURL:[NSURL URLWithString:@"http://img3.douban.com/icon/ul4659739-9.jpg"] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    [self.PeerAvatarImageView setImageWithURL:[NSURL URLWithString:peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
     //开始拨号了。播放声音
     soundCount = 0;//给拨号音计数，响八次就可以结束
     //系统声音播放是一个异步过程。要循环播放则必须借助回调

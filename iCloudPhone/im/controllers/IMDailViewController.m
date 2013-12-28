@@ -77,8 +77,12 @@
 }
 
 - (IBAction)voiceDialing:(UIButton *)sender {
+#if MANAGER_DEBUG
+    NSlog("音频通话");
+#endif
+    [self.manager setIsVideoCall:NO];//告诉manager是音频通话
     NSString* peerAccount = self.peerAccount.text;
-    if (!peerAccount) {
+    if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
         return;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
@@ -103,6 +107,7 @@
 }
 - (void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authOK:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleDialPan:) name:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -110,7 +115,15 @@
 - (void) authOK:(NSNotification*) notify{
 }
 
-
+- (void) toggleDialPan:(NSNotification*) notify{
+    if (self.hidePan) {
+        // show the pan
+        
+    }else{
+        //hide the pan
+    }
+    
+}
 
 
 #pragma mark - table delegate & datasource
@@ -123,13 +136,13 @@
     if (!cell) {
         cell = [[IMSuggestResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SUGGEST_CELL_VIEW_IDENTIFIER];
     }
-    /**
-     *  test
-     */
     ItelUser* userItem = self.currentSuggestDataSource[indexPath.row];
     cell.nameLabel.text = userItem.nickName;
+    if ([cell.nameLabel.text isEqualToString:BLANK_STRING]) {
+        cell.nameLabel.text = userItem.itelNum;
+    }
     cell.numberLabel.text = userItem.itelNum;
-    [cell.avatarView setImageWithURL:[NSURL URLWithString:@"http://img3.douban.com/icon/ul4659739-9.jpg"] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    [cell.avatarView setImageWithURL:[NSURL URLWithString: userItem.imageurl ] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
     
     return cell;
 }
@@ -151,7 +164,17 @@
 
 #pragma mark - actions
 - (IBAction)videoDialing:(UIButton *)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:nil];
+    NSLog(@"TODO: 视频通话");
+    [self.manager setIsVideoCall:YES];
+    NSString* peerAccount = self.peerAccount.text;
+    if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
+        return;
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
+                                                                                                                       SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:peerAccount,
+                                                                                                                       SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self.manager myAccount]
+                                                                                                                       }];
+    [self.manager dial:peerAccount];
 }
 - (IBAction)dialNumber:(UIButton *)sender {
     if ([self.peerAccount.text length] >=13) {
@@ -162,36 +185,65 @@
     NSMutableString* currentSequence =[self.peerAccount.text mutableCopy];
     [currentSequence appendString:currentDig];
     self.peerAccount.text = [currentSequence copy];
-    // 从itelAction接口查询出符合条件的itelUser
-    self.currentSuggestDataSource =  [[[ItelAction action] searchInFirendBook:self.peerAccount.text] mutableCopy];
+
+
     if ([self.peerAccount.text length] > 0) {
         self.backspaceButton.hidden = NO;
+        self.dialBackGroundView.backgroundColor = [UIColor colorWithRed:0.267 green:0.643 blue:0.859 alpha:1];
     }else{
         self.backspaceButton.hidden = YES;
     }
-    
+    // 从itelAction接口查询出符合条件的itelUser
+    self.currentSuggestDataSource =  [[[ItelAction action] searchInFirendBook:self.peerAccount.text] mutableCopy];
+    [self setupSuggestView];
+    //显示建议面板
     if (!self.showSuggest) {
-        [UIView animateWithDuration:.3 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
+        [UIView animateWithDuration:.1 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
             self.suggestBtnView.center = CGPointMake(self.suggestBtnView.center.x, self.suggestBtnView.center.y-self.suggestBtnView.bounds.size.height);
         } completion:nil];
         self.showSuggest = YES;
     }
-
-
 }
-
+- (void) setupSuggestView{
+    //把其中的第一条数据放到建议面板
+    UIImageView* suggestClosestPeerAvatar = (UIImageView*) [self.suggestBtnView viewWithTag:1];
+    UILabel* suggestClosestPeerNameLabel = (UILabel*) [self.suggestBtnView viewWithTag:2];
+    UILabel* suggestClosestPeerItelNumber = (UILabel*) [self.suggestBtnView viewWithTag:3];
+    UIButton* suggestExpandBtn = (UIButton*) [self.suggestBtnView viewWithTag:5];
+    UILabel* itelTag = (UILabel*) [self.suggestBtnView viewWithTag:4];
+    if ([self.currentSuggestDataSource count]) {
+        ItelUser* firstSuggestUser = [self.currentSuggestDataSource firstObject];
+        [suggestClosestPeerAvatar setImageWithURL:[NSURL URLWithString:firstSuggestUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+        [suggestClosestPeerNameLabel setText:firstSuggestUser.nickName];
+        if ([firstSuggestUser.nickName isEqualToString:BLANK_STRING]) {
+            [suggestClosestPeerNameLabel setText:firstSuggestUser.itelNum];
+        }
+        [suggestClosestPeerItelNumber setText:firstSuggestUser.itelNum];
+        [suggestExpandBtn setTitle:[NSString stringWithFormat:@"%d",[self.currentSuggestDataSource count]] forState:UIControlStateNormal];
+        [suggestExpandBtn setHidden:NO];
+        itelTag.hidden = NO;
+    }else{
+        [suggestClosestPeerAvatar setImage:nil];
+        [suggestClosestPeerItelNumber setText:nil];
+        [suggestClosestPeerNameLabel setText:nil];
+        itelTag.hidden = YES;
+        [suggestExpandBtn setTitle:@"0" forState:UIControlStateNormal];
+        [suggestExpandBtn setHidden:YES];
+    }
+}
 - (IBAction)backspace:(UIButton *)sender {
     NSInteger length = [self.peerAccount.text length];
     if (length == 1) {
         self.backspaceButton.hidden = YES;
+        self.dialBackGroundView.backgroundColor = [UIColor whiteColor];
         if (self.showSuggest) {
-            [UIView animateWithDuration:.3 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
+            [UIView animateWithDuration:.1 delay:.1 options:UIViewAnimationCurveEaseInOut animations:^{
                 self.suggestBtnView.center = CGPointMake(self.suggestBtnView.center.x, self.suggestBtnView.center.y+self.suggestBtnView.bounds.size.height);
             } completion:nil];
             self.showSuggest = NO;
         }
         if (self.hidePan) {
-            [UIView animateWithDuration:.3 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
+            [UIView animateWithDuration:.1 delay:.1 options:UIViewAnimationCurveEaseInOut animations:^{
                 self.dialPanView.center = CGPointMake(self.dialPanView.center.x, self.dialPanView.center.y-self.dialPanView.bounds.size.height);
                 self.suggestBtnView.center = CGPointMake(self.suggestBtnView.center.x, self.suggestBtnView.center.y-self.dialPanView.bounds.size.height);
                 self.searchResultView.hidden = YES;
@@ -202,6 +254,9 @@
     }
     NSString* temp = [self.peerAccount.text substringToIndex:length-1];
     self.peerAccount.text = temp;
+    // 从itelAction接口查询出符合条件的itelUser
+    self.currentSuggestDataSource =  [[[ItelAction action] searchInFirendBook:self.peerAccount.text] mutableCopy];
+    [self setupSuggestView];
 }
 
 - (IBAction)showRecentContactList:(UIButton *)sender {
@@ -212,11 +267,11 @@
 
 - (IBAction)expandSuggestResults:(UIButton *)sender {
     if (self.showSuggest) {
-        [UIView animateWithDuration:.3 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
+        [UIView animateWithDuration:.1 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
             self.suggestBtnView.center = CGPointMake(self.suggestBtnView.center.x, self.suggestBtnView.center.y+ self.suggestBtnView.bounds.size.height);
         } completion:^(BOOL hideSuggestFinished){
             if (hideSuggestFinished && !self.hidePan) {
-                [UIView animateWithDuration:.3 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
+                [UIView animateWithDuration:.1 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
                     self.dialPanView.center = CGPointMake(self.dialPanView.center.x, self.dialPanView.center.y+self.dialPanView.bounds.size.height);
                     self.suggestBtnView.center = CGPointMake(self.suggestBtnView.center.x, self.suggestBtnView.center.y+self.dialPanView.bounds.size.height);
                     self.searchResultView.hidden = NO;

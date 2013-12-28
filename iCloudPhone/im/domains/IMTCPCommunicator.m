@@ -87,6 +87,7 @@
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
 #if COMMUNICATOR_DEBUG
     NSLog(@"从服务器断开了~");
+    NSLog(@"是否应该重连");
 #endif
 }
 
@@ -160,7 +161,9 @@
 
 - (void)send:(NSDictionary*) data{
     NSInteger type = [[[data valueForKey:HEAD_SECTION_KEY] valueForKey:DATA_TYPE_KEY] integerValue];
+#if COMMUNICATOR_DEBUG
     NSLog(@"发送的数据格式：%@",data);
+#endif
     [self sendRequest:data type:type];
 }
 
