@@ -14,8 +14,13 @@
 - (IBAction)endSession:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet VideoRenderIosView *remoteRenderView;
 - (IBAction)toggleHUD:(UITapGestureRecognizer *)sender;
-@property (weak, nonatomic) IBOutlet UIView *selfCamView;
-@property(nonatomic,strong) NSNotification* inSessionNotify;
-@property (weak, nonatomic) IBOutlet UIView *nameHUDView;
-@property (weak, nonatomic) IBOutlet UIView *actionHUDView;
+@property (weak, nonatomic) IBOutlet UIView *selfCamView; //小头像
+@property(nonatomic,strong) NSNotification* inSessionNotify; //接收到的拨号信息
+@property (weak, nonatomic) IBOutlet UIView *nameHUDView; //顶部名字
+@property (weak, nonatomic) IBOutlet UIView *actionHUDView; //底部操作
+@property (weak, nonatomic) IBOutlet UIButton *switchFrontAndBackCamBtn;
+- (IBAction)toggleMute:(UIButton *)sender;
+- (IBAction)toggleSpeeker:(UIButton *)sender;
+- (IBAction)toggleCam:(id)sender;
+- (IBAction)togglePreviewCam:(id)sender;
 @end

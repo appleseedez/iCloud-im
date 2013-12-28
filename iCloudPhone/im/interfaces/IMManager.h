@@ -39,4 +39,17 @@
 - (void) openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView*) localView;
 //关闭视频窗口
 - (void) closeScreen;
+//静音
+- (void) mute;
+//取消静音
+- (void) unmute;
+- (void) enableSpeaker;
+- (void) disableSpeaker;
+- (void) showCam;
+- (void) hideCam;
+- (void) showSelfCam;
+- (void) hideSelfCam;
+//告诉manager 是视频通话。 这个只是参考值， 最终是否是视频还要双方协商确定
+- (void) setIsVideoCall:(BOOL)isVideoCall;
+- (BOOL) isVideoCall;
 @end

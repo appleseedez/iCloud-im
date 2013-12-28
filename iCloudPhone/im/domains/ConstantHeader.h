@@ -33,7 +33,7 @@ enum AccountClientTypes
 #define PARSED_DATA_KEY @"PARSED_DATA_KEY" //数据暂存池的key
 #define DIALING_SOUND_ID 1151 //拨号的声音
 
-
+#define PRESENT_DIAL_VIEW_NOTIFICATION @"PRESENT_DIAL_VIEW_NOTIFICATION"
 #define UDP_LOOKUP_COMPLETE_NOTIFICATION @"UDP_LOOKUP_COMPLETE_NOTIFICATION" //udp查询完成,应该能够获得信令服务器地址
 #define DATA_RECEIVED_NOTIFICATION @"DATA_RECEIVED_NOTIFICATION" // 收到通知标识
 #define SESSION_INITED_NOTIFICATION @"SESSION_INITED_NOTIFICATION" // 收到通话查询响应
@@ -121,6 +121,7 @@ enum AccountClientTypes
 
 #define IN_USE @"IN_USE"
 #define IDLE @"IDLE"
+#define BLANK_STRING @""
 #define SCREEN_WIDTH 144
 #define SCREEN_HEIGHT 192
 #define SCREEN_HEIGHT_FOR_LOW 176
@@ -146,4 +147,5 @@ enum AccountClientTypes
 #define SUGGEST_CELL_VIEW_IDENTIFIER @"SuggestCellView"
 
 #define STATUS_BAR_HEIGHT 30 // 顶部status bar的高度
+#define FULL_SCREEN [[UIScreen mainScreen] bounds]
 #endif
