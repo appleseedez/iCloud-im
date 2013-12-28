@@ -167,13 +167,14 @@ static int addcount=0;
 -(void)checkAddressBookForItelUser:(NSArray*)phones{
     
     NSString *url=[NSString stringWithFormat:@"%@/contact/matchLocalContactsUser.json",server];
+    NSLog(@"server :%@",url);
     HostItelUser *host=[[ItelAction action] getHost];
     NSNumber *number=[NSNumber numberWithInteger:[host.userId intValue] ];
     NSString *strPhones=[NXInputChecker changeArrayToString:phones];
-    //strPhones =[NSString stringWithFormat:@"%@,15799990000,15899990000,15899990001,15699990000,15399990000,15899990022",strPhones];
+    strPhones =[NSString stringWithFormat:@"%@,15799990000,15899990000,15899990001,15699990000,15399990000,15899990022",strPhones];
     
     NSDictionary *parameters=@{@"hostUserId":number, @"numbers":strPhones,@"token":host.token};
-    //NSLog(@"%@",parameters);
+    NSLog(@"%@",parameters);
      SUCCESS {
             //NSLog(@"%@",responseObject);
          dispatch_queue_t getPhones=dispatch_queue_create("getPhones", NULL);
@@ -367,8 +368,8 @@ static int addcount=0;
     NSString *url=[NSString stringWithFormat:@"%@/upload/uploadImg.json",server];
       url=@"http://10.0.0.137:8080/CloudCommunity/upload/uploadImg.json";
     SUCCESS{
-        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
+        NSDictionary *//=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        dic = (NSDictionary*)responseObject;
         if ([dic isKindOfClass:[NSDictionary class]]) {
             
             int ret=[[dic objectForKey:@"ret"] intValue];
