@@ -56,8 +56,8 @@ static float width=62.5;
         CustonTarbarItem *main=[[CustonTarbarItem alloc]initWithFrame:CGRectMake(120, -25,  70, 70)];
         [main setImageViewFrame:main.bounds];
         main.center=CGPointMake(WINSIZE.width/2, frame.size.height-70/2.0);
-        main.normalImage=[UIImage imageNamed:@"itel2_3"];
-        main.selectedImage=[UIImage imageNamed:@"itel2_3a"];
+        main.normalImage=[UIImage imageNamed:@"tab_3"];
+        main.selectedImage=[UIImage imageNamed:@"tab_3a"];
         
         [self.items addObject:main];
         [self addSubview:main];
