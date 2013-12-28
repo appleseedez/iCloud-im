@@ -8,6 +8,6 @@
 
 #import "RegMesCheckViewController.h"
 
-@interface PassMesViewController : RegMesCheckViewController
+@interface PassMesViewController : UIViewController <UITextFieldDelegate>
 
 @end

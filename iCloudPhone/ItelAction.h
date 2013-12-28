@@ -99,6 +99,11 @@
 -(void)changePassword:(NSDictionary*)parameters;
 //修改密保-验证密保
 -(void)getPasswordProtection:(NSDictionary*)parameters;
+//修改密保-回答问题
+-(void)securetyAnsewerQuestion:(NSDictionary*)parameters;
+//修改密保-提交修改
+-(void)sendSecuretyProduction:(NSDictionary*)parameters;
+
 @end
 @interface ItelAction : NSObject
 @property (nonatomic,weak) id <ItelBookActionDelegate> itelBookActionDelegate;
@@ -166,6 +171,13 @@
 -(void)modifyUserPasswordResponse:(NSDictionary*)response;
 //修改密保-查询密保
 -(void)checkOutProtection;
+-(void)checkOutProtectionResponse:(NSDictionary*)response;
+//回答密保问题
+-(void)securetyAnswserQuestion:(NSString*)question answser:(NSString*)answer;
+-(void)securetyAnswserQuestionResponse:(NSDictionary*)response;
+//修改密保设置
+-(void)modifySecuretyProduction:(NSDictionary*)parameters;
+-(void)modifySecuretyProductionResponse:(NSDictionary*)response;
 #pragma mark - 查找本机用户接口
 //精确查找好友列表
 -(ItelUser*)userInFriendBook:(NSString*)itel;

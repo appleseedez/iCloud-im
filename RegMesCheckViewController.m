@@ -20,11 +20,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @property (weak, nonatomic) IBOutlet RegTipLabel *tipView;
 @property (weak, nonatomic) IBOutlet UITextField *txtCheckCode;
-- (IBAction)messageButton:(UIButton *)sender;
+
 @end
 
 @implementation RegMesCheckViewController
-static int waitingTime=60;
+static int waitingTime=6;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }

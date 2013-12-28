@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PassResetViewController : UIViewController
+@interface PassResetViewController : UIViewController <UIAlertViewDelegate>
 
 @end

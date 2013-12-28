@@ -278,6 +278,9 @@
     NSDictionary *parameters = @{@"userId":hostUser.userId };
     [self.itelNetRequestActionDelegate getPasswordProtection:parameters];
 }
+-(void)checkOutProtectionResponse:(NSDictionary*)response{
+    [self NotifyForNormalResponse:@"passwordProtection" parameters:response];
+}
 #pragma mark - 修改用户密码
 -(void)modifyUserPassword:(NSString*)oldPassword newPassword:(NSString*)newPassword{
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
@@ -287,8 +290,28 @@
 -(void)modifyUserPasswordResponse:(NSDictionary*)response{
     
     [self NotifyForNormalResponse:@"changePassword" parameters:response];
+   
 }
-
+#pragma mark - 回答密保问题
+-(void)securetyAnswserQuestion:(NSString*)question answser:(NSString*)answer{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"token":hostUser.token,@"question":question,@"answer":answer,};
+    [self.itelNetRequestActionDelegate securetyAnsewerQuestion:parameters];
+}
+-(void)securetyAnswserQuestionResponse:(NSDictionary*)response{
+    [self NotifyForNormalResponse:@"answerQuestion" parameters:response];
+}
+#pragma mark - 修改密保设置
+-(void)modifySecuretyProduction:(NSDictionary*)parameters{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    parameters =[parameters mutableCopy];
+    [parameters setValue:hostUser.userId forKey:@"userId"];
+    [parameters setValue:hostUser.token forKey:@"token"];
+    [self.itelNetRequestActionDelegate sendSecuretyProduction:parameters];
+}
+-(void)modifySecuretyProductionResponse:(NSDictionary*)response{
+    [self NotifyForNormalResponse:@"modifySecurety" parameters:response];
+}
 -(ItelBook*) getFriendBook{
     return [self.itelBookActionDelegate friendBook];
 }

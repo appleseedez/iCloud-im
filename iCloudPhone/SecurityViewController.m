@@ -8,6 +8,8 @@
 
 #import "SecurityViewController.h"
 #import "ItelAction.h"
+#import "SecuretyQuestionViewController.h"
+#import "SecuretyAnswerQuestionViewController.h"
 @interface SecurityViewController ()
 
 @end
@@ -42,5 +44,46 @@
 -(void)checkSecurity{
     [[ItelAction action] checkOutProtection];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:@"passwordProtection" object:nil];
+    
+}
+-(void)receive:(NSNotification*)notification{
+    BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"]boolValue];
+    
+    if (isNormal) {
+        if ([notification.object isEqual:[NSNull null]]) {
+            [self pushToSettingView];
+        }
+        else{
+            [self pushToReSettingView:notification.object];
+        }
+    }
+    else{
+        [self errorAlert:@"网络不通"];
+    }
+}
+-(void)errorAlert:(NSString*)errorString{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"错误" message:errorString delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+    [alert show];
+}
+-(void)pushToSettingView{
+    UIStoryboard *story=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
+   SecuretyQuestionViewController *securetyQusetionVC= [story instantiateViewControllerWithIdentifier:@"SecuretyQuetionView"];
+    
+    
+    [self.navigationController pushViewController:securetyQusetionVC animated:YES];
+    
+}
+-(void)pushToReSettingView:(NSDictionary*)data{
+    UIStoryboard *story=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
+    SecuretyAnswerQuestionViewController *securetyQusetionVC= [story instantiateViewControllerWithIdentifier:@"SecuretyAnswerView"];
+    securetyQusetionVC.data=data;
+    [self.navigationController pushViewController:securetyQusetionVC animated:YES];
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
