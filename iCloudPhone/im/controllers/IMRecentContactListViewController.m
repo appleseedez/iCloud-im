@@ -34,7 +34,9 @@
 {
    
     [super viewDidLoad];
+#if OTHER_MESSAGE
      NSLog(@"tableView的viewDidLoad方法被调用");
+#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,9 +45,11 @@
 }
 
 - (void)dealloc{
-    NSLog(@"被凶狠");
+#if OTHER_MESSAGE
+    NSLog(@"IMRecentContactListViewController被销毁了");
+#endif
 }
-#pragma mark - private 
+#pragma mark - private
 - (void) setup{
     IMRootTabBarViewController* root =(IMRootTabBarViewController*)self.tabBarController;
     self.manager = root.manager;
