@@ -58,8 +58,8 @@
     [self.view endEditing:YES];
     self.txtInuptCheckMessage.text=@"登录中...";
     [self.actWaitingToLogin startAnimating];
-//    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://211.149.144.15:8000/CloudCommunity/login.json"]];
-    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.0.40:8080/CloudCommunity/login.json"]];
+   NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://211.149.144.15:8000/CloudCommunity/login.json"]];
+   // NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.0.40:8080/CloudCommunity/login.json"]];
     
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
