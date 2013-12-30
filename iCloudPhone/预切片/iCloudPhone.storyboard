@@ -2796,7 +2796,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="videoCall_ico" id="by7-vx-8Ul">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="by7-vx-8Ul">
                                 <rect key="frame" x="90" y="170" width="140" height="140"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
@@ -2805,6 +2805,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hoj-yk-XrS"/>
                     <connections>
+                        <outlet property="isVideoCallICONView" destination="by7-vx-8Ul" id="DWp-Vz-Y6w"/>
                         <outlet property="peerAccountLabel" destination="SMX-5o-nlt" id="KMe-gn-7MS"/>
                         <outlet property="peerAvatarImageView" destination="by7-vx-8Ul" id="TR2-Ps-56Q"/>
                         <segue destination="kEe-Cf-lem" kind="push" identifier="acceptSessionSegue" id="5y8-TJ-QOU"/>
@@ -3163,7 +3164,6 @@
         <image name="silence_btn" width="25" height="32"/>
         <image name="speaker_btn" width="30" height="32"/>
         <image name="switch_cam_btn" width="53" height="32"/>
-        <image name="videoCall_ico" width="140" height="140"/>
         <image name="videoCam_btn" width="26" height="32"/>
         <image name="video_btn" width="20" height="24"/>
         <image name="头像.png" width="198" height="200"/>

@@ -88,7 +88,7 @@ enum AccountClientTypes
 #define SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY @"peerInterPort"
 #define SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY @"peerLocalIP"
 #define SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY @"peerLocalPort"
-
+#define SESSION_PERIOD_FIELD_PEER_USE_VIDEO @"useVideo"
 //通话终止信令字段
 #define SESSION_HALT_FIELD_TYPE_KEY @"halttype"
 #define SESSION_HALT_FILED_ACTION_REFUSE @"refusesession" //接收方需要终止session

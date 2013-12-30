@@ -30,10 +30,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"传入的信息:%@",self.inSessionNotify);
+    
+    if (![self.manager isVideoCall]) {
+        self.remoteRenderView = nil;
+        
+    }
     //开启视频窗口，调整摄像头
     [self.view sendSubviewToBack:self.remoteRenderView];
     [self.manager openScreen:self.remoteRenderView localView:self.selfCamView];
-    NSLog(@"传入的信息:%@",self.inSessionNotify);
 }
 - (void)viewDidAppear:(BOOL)animated{
     [self setup];
@@ -50,6 +55,7 @@
 - (void) setup{
     [self registerNotifications];
     [self.manager lockScreenForSession];
+
     //小窗口要个边框好看些
     self.selfCamView.layer.borderWidth = 1.0f;
     self.selfCamView.layer.borderColor = [[UIColor whiteColor] CGColor];
