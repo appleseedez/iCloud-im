@@ -52,4 +52,6 @@
 //告诉manager 是视频通话。 这个只是参考值， 最终是否是视频还要双方协商确定
 - (void) setIsVideoCall:(BOOL)isVideoCall;
 - (BOOL) isVideoCall;
+- (void) setCanVideo:(BOOL)canVideo;
+- (BOOL) canVideo;
 @end

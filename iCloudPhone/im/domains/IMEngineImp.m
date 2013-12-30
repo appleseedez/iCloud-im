@@ -16,7 +16,6 @@ UIImageView* _pview_local;
 @property(nonatomic) CAVInterfaceAPI* pInterfaceApi;
 @property(nonatomic) InitType m_type;
 @property(nonatomic,copy) NSString* currentInterIP;
-@property(nonatomic) BOOL isVideoCalling;
 @end
 
 @implementation IMEngineImp
@@ -127,6 +126,16 @@ UIImageView* _pview_local;
             default:
                 break;
         }
+        switch (self.m_type) {
+            case InitTypeVoe:
+                [self setCanVideoCalling:NO];
+                break;
+            case InitTypeVoeAndVie:
+                [self setCanVideoCalling:YES];
+                break;
+            default:
+                break;
+        }
     }];
     NSLog(@"媒体类型：%d",self.m_type);
     [reachabilityManager startMonitoring];
@@ -164,8 +173,15 @@ UIImageView* _pview_local;
         //
         NSLog(@"开始获取p2p通道,%@", [NSDate date]);
         TP2PPeerArgc argc;
-
-        
+        //根据传入的useVideo参数,确定最终穿透以后是走音频还是视频.
+        if ([self canVideoCalling]&&[[params valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]) {
+            self.m_type = InitTypeVoeAndVie;
+        }else{
+            self.m_type = InitTypeVoe;
+        }
+#if OTHER_MESSAGE
+        NSLog(@"穿透时使用的是神马类型:%d",self.m_type);
+#endif
         // 外网地址
         ::strncpy(argc.otherInterIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY] UTF8String], sizeof(argc.otherInterIP));
         argc.otherInterPort = [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY] intValue];
@@ -282,14 +298,17 @@ UIImageView* _pview_local;
     self.pInterfaceApi->SetMuteEnble(MTVoe, true);
 }
 
-@synthesize isVideoCalling = _isVideoCalling;
-- (void)setIsVideoCalling:(BOOL)isVideoCalling{
-    _isVideoCalling = isVideoCalling;
+@synthesize canVideoCalling = _canVideoCalling;
+- (void)setCanVideoCalling:(BOOL)canVideoCalling{
+    _canVideoCalling = canVideoCalling;
 }
-- (BOOL)isVideoCalling{
-    return _isVideoCalling;
+- (BOOL)canVideoCalling{
+    return _canVideoCalling;
 }
 - (void)openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView *)localView{
+    if (!remoteRenderView) {
+        return;
+    }
     // 开启摄像头
     if (self.pInterfaceApi->StartCamera(1) >= 0)
     {

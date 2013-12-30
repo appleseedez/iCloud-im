@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 #import "IMEngine.h"
 @interface IMEngineImp : NSObject <IMEngine>
-
+@property(nonatomic) BOOL canVideoCalling;
 @end

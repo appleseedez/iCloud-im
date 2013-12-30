@@ -15,4 +15,5 @@
 @property(nonatomic) NSNotification* callingNotify;
 @property(nonatomic,weak) id<IMManager> manager;
 @property (weak, nonatomic) IBOutlet UILabel *peerAccountLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *isVideoCallICONView;
 @end
