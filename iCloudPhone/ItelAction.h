@@ -9,6 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "HostItelUser.h"
 @class ItelBook;
+
+#pragma mark - 消息操作协议
+
+@protocol ItelMessageActionDelegate <NSObject>
+
+-(void)addNewMessages:(NSArray*)data;
+-(NSArray*)getSystemMessages;
+@end
+
+
 #pragma  mark - 联系人列表操作协议
 @protocol ItelBookActionDelegate <NSObject>
 //从好友列表中删除联系人
@@ -103,12 +113,18 @@
 -(void)securetyAnsewerQuestion:(NSDictionary*)parameters;
 //修改密保-提交修改
 -(void)sendSecuretyProduction:(NSDictionary*)parameters;
-
+//查询新消息
+-(void)searchNewMessage:(NSDictionary*)parameters;
+//刷新消息列表
+-(void)refreshForNewMessage:(NSDictionary*)parameters;
+//确认好友
+-(void)acceptIvitation:(NSDictionary*)parameters;
 @end
 @interface ItelAction : NSObject
 @property (nonatomic,weak) id <ItelBookActionDelegate> itelBookActionDelegate;
 @property (nonatomic,weak) id <ItelUserActionDelegate> itelUserActionDelegate;
 @property (nonatomic,weak) id <ItelNetRequestActionDelegate>itelNetRequestActionDelegate;
+@property (nonatomic,weak) id <ItelMessageActionDelegate> itelMessageDelegate;
 +(ItelAction*)action;
 //获得机主用户
 -(HostItelUser*)getHost;
@@ -187,5 +203,16 @@
 -(NSArray*)searchInFirendBook:(NSString*)search;
 /*keypath 查找好友列表 keypath为需要匹配得iteluser的属性 如字符串的形式如 昵称 @“nickName”  电话 @“telNum” 备注 @“remarkName” 返回itelbook 如需要多种搜索 多次调用用appendingByItelBook拼接返回的itelBook*/
 -(ItelBook*)searchInFriendBookWithKeyPath:(NSString*)keyPath andSearch:(NSString*)search;
-
+#pragma mark - 消息接口
+//查询新消息
+-(void)searchForNewMessage;
+-(void)searchForNewMessageResponse:(NSDictionary*)data;
+//刷新新消息
+-(void)getNewMessage;
+-(void)getNewMessageResponse:(NSDictionary*)data;
+//获得本地消息列表
+-(NSArray*)getMessageList;
+//处理好友邀请
+-(void)acceptFriendIvication:(NSString*)targetItel status:(NSString*)status;
+-(void)acceptFriendIvicationResponse:(NSDictionary*)data;
 @end

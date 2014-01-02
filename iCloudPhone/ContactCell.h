@@ -10,18 +10,18 @@
 #import "ContactCellTopView.h"
 #import "NXImageView.h"
 @class ItelUser;
-@interface ContactCell : UITableViewCell<UIScrollViewDelegate>
+@interface ContactCell : UITableViewCell
 @property  (nonatomic,strong) IBOutlet UILabel *lbNickName;
-@property (weak, nonatomic) IBOutlet UIView *frontView;
+
 @property  (nonatomic,strong) UILabel *lbAlias;
 @property  (nonatomic,strong) IBOutlet UILabel *lbItelNumber;
 @property  (nonatomic,strong) IBOutlet NXImageView *imgPhoto;
-@property (weak, nonatomic) IBOutlet UIButton *btnPush;
 
-@property (nonatomic,strong) IBOutlet ContactCellTopView *topView;
-@property (nonatomic) float currenTranslate;
+
+
+
 @property (nonatomic ,strong) UILabel *lbCall;
 @property (nonatomic ,strong) UILabel *lbSend;
-@property (nonatomic ,weak)   ItelUser *user;
+@property (nonatomic ,strong)   ItelUser *user;
 - (id)setup;
 @end

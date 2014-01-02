@@ -29,4 +29,5 @@
 @property (nonatomic,strong) NSString *QQ;
 @property (nonatomic,strong) NSString *email;
 + (ItelUser*)userWithDictionary:(NSDictionary*)dic;
+-(void)setPersonal:(NSDictionary*)data;
 @end

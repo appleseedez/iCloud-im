@@ -21,11 +21,15 @@
        
     }
     host.itelNum=[dic objectForKey:@"itel"];
-    host.userId=[dic objectForKey:@"user_id"];
-    host.nickName=[dic objectForKey:@"nickname"];
-    host.imageurl=[dic objectForKey:@"photo"];
+    host.userId=[dic objectForKey:@"userId"];
+    if (host.userId==nil) {
+        host.userId=[dic objectForKey:@"user_id"];
+    }
+    host.telNum=[dic objectForKey:@"phone"];
+   
     host.countType=[[dic objectForKey:@"user_type"] boolValue];
-    host.itelNum=[dic objectForKey:@"itel"];
+    [host setPersonal:dic];
+   
     return host;
 }
 @end

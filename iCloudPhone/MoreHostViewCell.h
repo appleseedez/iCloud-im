@@ -10,5 +10,7 @@
 #import "NXImageView.h"
 @interface MoreHostViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet NXImageView *hostImage;
+@property (weak, nonatomic) IBOutlet UILabel *nickName;
+@property (weak, nonatomic) IBOutlet UILabel *itel;
 
 @end

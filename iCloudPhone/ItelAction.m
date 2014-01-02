@@ -10,12 +10,14 @@
 #import "ItelUserManager.h"
 #import "ItelBookManager.h"
 #import "ItelNetManager.h"
+#import "ItelMessageManager.h"
 @implementation ItelAction
 +(ItelAction*)action{
     ItelAction *action=[[ItelAction alloc] init];
     action.itelBookActionDelegate=[ItelBookManager defaultManager];
     action.itelUserActionDelegate=[ItelUserManager defaultManager];
     action.itelNetRequestActionDelegate=[ItelNetManager defaultManager];
+    action.itelMessageDelegate=[ItelMessageManager defaultManager];
     return action;
 }
 #pragma mark - 获得机主用户
@@ -90,7 +92,7 @@
     [self.itelNetRequestActionDelegate addUser:parameters];
     }
     else {
-        NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"该用户已经添加过了" };
+        NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"请不要重复发送邀请" };
         [[NSNotificationCenter defaultCenter] postNotificationName:@"inviteItelUser" object:nil userInfo:userInfo];
     }
 }
@@ -211,8 +213,8 @@
 }
 #pragma mark - 上传图片
 -(void)uploadImage:(UIImage*)image{
-    //NSData *imgData=UIImagePNGRepresentation(image);
-    NSData *imgData=UIImageJPEGRepresentation(image, 1);
+    NSData *imgData=UIImagePNGRepresentation(image);
+    //NSData *imgData=UIImageJPEGRepresentation(image, 1);
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
     NSDictionary *parameters = @{@"userId":hostUser.userId ,@"hostItel":hostUser.itelNum,@"token":hostUser.token};
     [self.itelNetRequestActionDelegate uploadImage:imgData parameters:parameters];
@@ -223,7 +225,7 @@
    HostItelUser *hostUser = [self.itelUserActionDelegate hostUser];
     NSString *imageUrl=[response objectForKey:@"data"];
     hostUser.imageurl=imageUrl;
-    [self NotifyForNormalResponse:@"uploadImage" parameters:response];
+    [self NotifyForNormalResponse:@"modifyHost" parameters:response];
     
 }
 #pragma  mark - 修改个人资料
@@ -312,8 +314,44 @@
 -(void)modifySecuretyProductionResponse:(NSDictionary*)response{
     [self NotifyForNormalResponse:@"modifySecurety" parameters:response];
 }
+
+
+#pragma mark - 查询新消息
+-(void)searchForNewMessage{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    NSDictionary *parameters = @{@"itel":hostUser.itelNum ,@"token":hostUser.token};
+    [self.itelNetRequestActionDelegate searchNewMessage:parameters];
+}
+-(void)searchForNewMessageResponse:(NSDictionary*)data{
+    [self NotifyForNormalResponse:@"searchForNewMessage" parameters:data];
+}
+#pragma mark - 刷新新消息
+-(void)getNewMessage{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    NSDictionary *parameters = @{@"itel":hostUser.itelNum ,@"token":hostUser.token};
+    [self.itelNetRequestActionDelegate refreshForNewMessage:parameters];
+}
+-(void)getNewMessageResponse:(NSDictionary*)data{
+    NSArray *arr=[data objectForKey:@"data"];
+    [self.itelMessageDelegate addNewMessages:arr];
+    
+    [self NotifyForNormalResponse:@"getNewMessage" parameters:data];
+}
+#pragma mark - 获得本地消息列表
+-(NSArray*)getMessageList{
+   return  [self.itelMessageDelegate getSystemMessages];
+}
 -(ItelBook*) getFriendBook{
     return [self.itelBookActionDelegate friendBook];
+}
+#pragma mark - 处理好友邀请
+-(void)acceptFriendIvication:(NSString*)targetItel status:(NSString*)status{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+   NSDictionary *parameters = @{@"hostItel":hostUser.itelNum ,@"userId":hostUser.userId,@"targetItel":targetItel,@"status":status};
+    [self.itelNetRequestActionDelegate acceptIvitation:parameters];
+}
+-(void)acceptFriendIvicationResponse:(NSDictionary*)data{
+    [self NotifyForNormalResponse:@"acceptFriends" parameters:data];
 }
 //查找好友列表
 -(ItelUser*)userInFriendBook:(NSString*)itel{

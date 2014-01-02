@@ -11,11 +11,19 @@
 #import "CustonTarbarItem.h"
 #import "IMCallingViewController.h"
 #import "IMAnsweringViewController.h"
+#import "NewMessageView.h"
 @interface RootViewController ()
 @property (nonatomic,strong) CustomTabbar *customTabbar;
+@property (nonatomic,strong) NewMessageView *newMessage;
 @end
 
 @implementation RootViewController
+-(NewMessageView*)newMessage{
+    if (_newMessage==nil) {
+        _newMessage=[[NewMessageView alloc]initWithFrame:CGRectMake(40, 2.5, 10, 10)];
+    }
+    return _newMessage;
+}
 -(void)setCustomTabbarHidden:(NSNotification*)notification{
     BOOL hidden=[[notification.userInfo objectForKey:@"hidden"] boolValue];
      [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
@@ -47,10 +55,12 @@
     [super viewWillAppear:animated];
     
     [self registerNotifications];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewAppear" object:nil];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
 //    [self removeNotifications];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
 }
 -(void)changeController:(CustonTarbarItem*)sender {
    
@@ -83,6 +93,19 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentCallingView:) name:PRESENT_CALLING_VIEW_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentAnsweringView:) name:SESSION_PERIOD_REQ_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCustomTabbarHidden:) name:@"hideTab" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNewMessage:) name:@"searchForNewMessage" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNewMessage:) name:@"checkNewMessage" object:nil];
+}
+-(void)showNewMessage:(NSNotification*)notification{
+    BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"]boolValue];
+    if (isNormal) {
+        CustonTarbarItem *message=[self.customTabbar.items objectAtIndex:3];
+        [message addSubview:self.newMessage];
+    }
+   
+}
+-(void)checkNewMessage:(NSNotification*)notification{
+    [self.newMessage removeFromSuperview];
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

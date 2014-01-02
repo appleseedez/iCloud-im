@@ -59,7 +59,7 @@
     self.txtInuptCheckMessage.text=@"登录中...";
     [self.actWaitingToLogin startAnimating];
    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://211.149.144.15:8000/CloudCommunity/login.json"]];
-   // NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.0.40:8080/CloudCommunity/login.json"]];
+  // NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.0.137:8080/CloudCommunity/login.json"]];
     
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
@@ -79,6 +79,7 @@
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 HostItelUser *host=[HostItelUser userWithDictionary:[dic objectForKey:@"data"]];
+                 host.sessionId=[json objectForKey:@"JSESSIONID"];
                 [[ItelAction action] setHostItelUser:host];
                 [self.actWaitingToLogin stopAnimating];
                 self.txtInuptCheckMessage.text = @"";
@@ -88,8 +89,7 @@
                 
                 [[ItelAction action] checkAddressBookMatchingItel];
                 
-                //[[ItelAction action] delFriendFromBlack:@"1000002"];
-                //[[ItelAction action] getItelBlackList:0];
+                
             }
             else {
                 [self.actWaitingToLogin stopAnimating];
@@ -104,7 +104,7 @@
     };
     AFHTTPRequestOperation *operation=[[AFHTTPRequestOperation alloc]initWithRequest:request];
     [operation setCompletionBlockWithSuccess:success failure:failure];
-    //[self sendRequesturl:login parameters:postData success:success failure:failure];
+   
     [operation start];
 
 }

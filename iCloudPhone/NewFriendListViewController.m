@@ -11,6 +11,7 @@
 #import "StrangerCell.h"
 #import "ItelBook.h"
 #import "NXInputChecker.h"
+#import "UIImageView+AFNetworking.h"
 @interface NewFriendListViewController ()
 
 @end
@@ -48,7 +49,8 @@
     }
     if ([[self.searchResult getAllKeys] count]>indexPath.row) {
         ItelUser *user=[self.searchResult userAtIndex:indexPath.row];
-        cell.imgPhoto.image=[UIImage imageNamed:@"头像.png"];
+        //cell.imgPhoto.image=[UIImage imageNamed:@"头像.png"];
+        [cell.imgPhoto setImageWithURL:[NSURL URLWithString:user.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png" ]];
         cell.lbItelNumber.text=user.itelNum;
         
         cell.lbNickName.text=user.nickName;

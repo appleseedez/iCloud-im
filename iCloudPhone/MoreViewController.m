@@ -10,9 +10,12 @@
 #import "PersonRegButton.h"
 #import "MoreHostViewCell.h"
 #import "MoreOtherViewCell.h"
+#import "UIImageView+AFNetworking.h"
+#import "ItelAction.h"
 @interface MoreViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet PersonRegButton *btnSignOut;
+
 
 @end
 
@@ -25,6 +28,8 @@
     _btnSignOut.normal=[UIColor redColor];
     self.btnSignOut.high=[UIColor orangeColor];
     [self.btnSignOut setUI];
+
+    
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
@@ -68,7 +73,10 @@
          identifier=@"hostCell";
       cell=[tableView dequeueReusableCellWithIdentifier:identifier ];
         [((MoreHostViewCell*)cell).hostImage setRect:0 cornerRadius:8 borderColor:[UIColor clearColor]];
-        
+        HostItelUser *host =[[ItelAction action] getHost];
+        [((MoreHostViewCell*)cell).hostImage setImageWithURL:[NSURL URLWithString:host.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
+        ((MoreHostViewCell*)cell).itel.text=host.itelNum;
+        ((MoreHostViewCell*)cell).nickName.text=host.nickName;
     }
     else{
         
@@ -106,12 +114,10 @@
         [((MoreOtherViewCell*)cell).otherLogo setRect:0 cornerRadius:8 borderColor:nil];
         
     }
-    
+    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
-- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath{
-    return UITableViewCellAccessoryDisclosureIndicator;
-}
+
 
 - (void)viewDidLoad
 {
