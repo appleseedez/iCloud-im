@@ -174,7 +174,7 @@
     // 构造通话数据请求
     NSDictionary* data = [self.messageBuilder buildWithParams:mergeData];
 #if SIGNAL_MESSAGE
-    NSLog(@"通话开始阶段的谈判过程，数据往来:%@",data);
+    NSLog(@"通话开始阶段的谈判过程，数据往来:%@ useVideo:%@,mergeData:%@",data,[NSNumber numberWithBool:self.isVideoCall],mergeData);
 #endif
     [self.TCPcommunicator send:data];
 }

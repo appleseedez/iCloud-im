@@ -12,20 +12,25 @@
 +(HostItelUser*)userWithDictionary:(NSDictionary*)dic{
     HostItelUser *host = [[HostItelUser alloc] init];
     host.domain =[dic objectForKey:@"domain"];
-  
+    
     host.port = [dic objectForKey:@"port"];
     host.stunServer=[dic objectForKey:@"stun_server"];
     host.token=[dic objectForKey:@"token"];
     if ([host.token isEqual: [NSNull null]]) {
-         host.token=@"djsadfkjafaklfji";
-       
+        host.token=@"djsadfkjafaklfji";
+        
     }
     host.itelNum=[dic objectForKey:@"itel"];
-    host.userId=[dic objectForKey:@"user_id"];
-    host.nickName=[dic objectForKey:@"nickname"];
-    host.imageurl=[dic objectForKey:@"photo"];
+    host.userId=[dic objectForKey:@"userId"];
+    if (host.userId==nil) {
+        host.userId=[dic objectForKey:@"user_id"];
+    }
+    host.telNum=[dic objectForKey:@"phone"];
+    
     host.countType=[[dic objectForKey:@"user_type"] boolValue];
-    host.itelNum=[dic objectForKey:@"itel"];
+    [host setPersonal:dic];
+    
     return host;
 }
+
 @end
