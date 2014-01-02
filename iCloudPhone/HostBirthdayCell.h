@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "HostCell.h"
 @interface HostBirthdayCell : UITableViewCell<HostCell>
-@property (weak, nonatomic) IBOutlet UILabel *birthdayLable;
+@property (weak, nonatomic) IBOutlet UITextField *txtBirthday;
+
 @property (nonatomic,strong) UIWindow *window;
 @property (nonatomic,strong) UIDatePicker *picker;
 @end

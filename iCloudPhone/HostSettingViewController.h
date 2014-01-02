@@ -10,5 +10,5 @@
 
 @interface HostSettingViewController : UIViewController
 <UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property (weak,nonatomic) UIImageView *betterFaceImage;
+
 @end

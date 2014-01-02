@@ -92,7 +92,7 @@
     else {
        result = [notification.userInfo objectForKey:@"reason"];
     }
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:result message:nil delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:result message:result delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
     [alert show];
     alert=nil;
 }

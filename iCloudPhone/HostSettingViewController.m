@@ -8,11 +8,12 @@
 
 #import "HostSettingViewController.h"
 #import "HostCell.h"
-#import  "UIImageView+BetterFace.h"
+
 #import "UIImage+Compress.h"
 #import "HostItelUser.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ItelAction.h"
+#import "UIImageView+AFNetworking.h"
 @interface HostSettingViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) HostItelUser *hostUser;
@@ -56,12 +57,7 @@ UITableViewCell <HostCell> *getCellWithIndexPath(NSIndexPath *indexPath,UITableV
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.betterFaceImage.layer setBorderColor:[UIColor grayColor].CGColor];
-    [self.betterFaceImage.layer setBorderWidth:0.5f];
-    [self.betterFaceImage setContentMode:UIViewContentModeScaleAspectFill];
-    [self.betterFaceImage setClipsToBounds:YES];
-    [self.betterFaceImage setNeedsBetterFace:YES];
-    [self.betterFaceImage setFast:YES];
+ 
     self.tableView.frame=CGRectMake(0, 0, 320, 450);
     
     
@@ -113,10 +109,9 @@ UITableViewCell <HostCell> *getCellWithIndexPath(NSIndexPath *indexPath,UITableV
     
     UIImage *compressedImage=[UIImage imageWithData:compressed];
     
-    [self.betterFaceImage setBetterFaceImage:compressedImage];
+    
    
-    NSData *face = UIImagePNGRepresentation(self.betterFaceImage.image);
-    NSLog(@"2 处理以后图片大小：%ldByte",(long)face.length);
+    
     [[ItelAction action] uploadImage:compressedImage];
     [picker dismissViewControllerAnimated:YES completion:^{
         

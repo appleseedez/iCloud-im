@@ -8,6 +8,7 @@
 
 #import "HostHeadImageCell.h"
 #import "HostSettingViewController.h"
+#import "UIImageView+AFNetworking.h"
 @implementation HostHeadImageCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -26,13 +27,14 @@
     // Configure the view for the selected state
 }
 -(void)showSettingView:(UIViewController <UIActionSheetDelegate>*)viewController{
-    HostSettingViewController *hostVC=(HostSettingViewController*)viewController;
-    hostVC.betterFaceImage=self.betterFaceImage;
+    
+
     UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:viewController cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选取" ,nil];
     actionSheet.delegate=viewController;
     [actionSheet showInView:viewController.view];
 }
 -(void)setPro:(HostItelUser *)host{
-     
+    [self.betterFaceImage setImageWithURL:[NSURL URLWithString:host.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
+    
 }
 @end

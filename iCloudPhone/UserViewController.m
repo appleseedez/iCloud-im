@@ -15,6 +15,7 @@
 #import "NSCAppDelegate.h"
 #import "ItelBookManager.h"
 #import "NSCAppDelegate.h"
+#import "UIImageView+AFNetworking.h"
 @interface UserViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbShowName;
 @property (weak, nonatomic) IBOutlet NXImageView *imageView;
@@ -73,10 +74,17 @@
         switch (indexPath.row) {
             case 0:
                  cell.textLabel.text=@"姓名";
-                 prop.text=@"谢霆锋";
+                 prop.text=self.user.nickName;
                 break;
-            case 1:
+            case 1:{
                 cell.textLabel.text=@"性别";
+                UIImageView *sexImg=[[UIImageView alloc] initWithFrame:CGRectMake(80, 5, 20, 20)];
+                [cell.contentView addSubview:sexImg];
+                if (self.user.sex) {
+                    sexImg.image=[UIImage imageNamed:@"female"];
+                }
+                else sexImg.image=[UIImage imageNamed:@"male"];
+            }
                 break;
             case 2:
                 cell.textLabel.text=@"城市";
@@ -84,7 +92,7 @@
                 break;
             case 3:
                 cell.textLabel.text=@"邮箱";
-                prop.text = @"123456@qq.com";
+                prop.text =self.user.email;
                 break;
                 
             default:
@@ -93,13 +101,13 @@
     }
     else if (indexPath.section==2){
         cell.textLabel.text=@"手机";
-        prop.text=@"13648345272";
+        prop.text=self.user.telNum;
     }
     else if (indexPath.section==0){
         cell.textLabel.text=@"签名";
         prop.frame=CGRectMake(80, 5, 200, 30);
         [prop setNumberOfLines:0];
-        prop.text=@"路要一步一步的走，步子迈太大容易扯着蛋.......";
+        prop.text=self.user.personalitySignature;
     }
     
     return cell;
@@ -172,7 +180,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self.imageView setImageWithURL:[NSURL URLWithString:self.user.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"1"}];
     [self.imageView setRect:5.0 cornerRadius:self.imageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(callActionSheet) ];

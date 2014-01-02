@@ -15,6 +15,7 @@
 #import "ItelUserManager.h"
 //IMmanager 实现类
 #import "IMManagerImp.h"
+#import "ItelMessageManager.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 @implementation NSCAppDelegate
 -(void) signOut{
@@ -22,10 +23,17 @@
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
     
 }
+-(void)setupManagers{
+    [ItelMessageManager defaultManager];
+    [ItelUserManager defaultManager];
+    [ItelBookManager defaultManager];
+    [ItelNetManager defaultManager];
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
+    [self setupManagers];
     UIStoryboard *mainStoryboard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
     RootViewController *rootVC=[mainStoryboard instantiateViewControllerWithIdentifier:@"rootVC"];
     self.manager = [[IMManagerImp alloc] init];
@@ -66,6 +74,7 @@
         [self.manager disconnectToSignalServer];
         [self.manager setMyAccount:nil];
         self.RootVC.view=nil;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
     }
     else if(Type==RootViewControllerMain){
  
@@ -80,7 +89,7 @@
         [self.manager connectToSignalServer];
 
 
-
+       
         self.loginVC.view=nil;
     }
     [UIView commitAnimations];

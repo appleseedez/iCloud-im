@@ -14,6 +14,7 @@
 #import "ItelBookManager.h"
 #import "NXInputChecker.h"
 #import "NSCAppDelegate.h"
+#import "UIImageView+AFNetworking.h"
 @interface PeopleViewController ()
 @property (nonatomic,strong) ItelBook *contacts;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -99,36 +100,28 @@
     if ([[self.searchResult getAllKeys] count]>indexPath.row) {
         ItelUser *user=[self.searchResult userAtIndex:indexPath.row];
         [cell setup];
-        cell.topView.frame=cell.bounds;
-        cell.imgPhoto.image=[UIImage imageNamed:@"头像.png"];
+        cell.user=user;
+        //cell.imgPhoto.image=[UIImage imageNamed:@"头像.png"];
+        [cell.imgPhoto setImageWithURL:[NSURL URLWithString:user.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
         cell.lbItelNumber.text=user.itelNum;
         cell.lbNickName.text=user.remarkName;
         if ([user.remarkName isEqualToString:@""]) {
             cell.lbNickName.text=user.nickName;
-            cell.btnPush.tag=55333+indexPath.row;
-            [cell.btnPush addTarget:self action:@selector(pushDetailAtIndexPath:) forControlEvents:UIControlEventTouchUpInside];
-            cell.user=user;
-        }
+          }
     }
    
     //config the cell
     return cell;
     
 }
-
-
-- (void)pushDetailAtIndexPath:(UIButton*)sender {
-    static float gray=0.3333;
-  static  UIColor *high=[UIColor colorWithRed:gray green:gray     blue:gray alpha:0.1];
-    sender.backgroundColor=high;
-    NSInteger row=sender.tag-55333;
-    
-    ItelUser *user=[self.searchResult userAtIndex:row];
+-(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    ItelUser *user=[self.searchResult userAtIndex:indexPath.row];
     UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
     UserViewController *userVC=[storyBoard instantiateViewControllerWithIdentifier:@"userView"];
     userVC.user=user;
     [self.navigationController pushViewController:userVC animated:YES];
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
@@ -139,7 +132,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAliasChanged:) name:@"resetAlias" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delNotification:) name:@"delItelUser" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellAction:) name:@"cellAction" object:nil];
-}
+   }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.tableVIew reloadData];
