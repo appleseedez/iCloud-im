@@ -111,4 +111,8 @@
     
     return result;
 }
+-(void)reset{
+    self.users=nil;
+    self.keys=nil;
+}
 @end

@@ -12,6 +12,7 @@
 #import "MoreOtherViewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "ItelAction.h"
+#import "MoreSIgnOutCell.h"
 @interface MoreViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet PersonRegButton *btnSignOut;
@@ -25,6 +26,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tableView reloadData];
     _btnSignOut.normal=[UIColor redColor];
     self.btnSignOut.high=[UIColor orangeColor];
     [self.btnSignOut setUI];
@@ -32,7 +34,7 @@
     
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     switch (section) {
@@ -45,6 +47,9 @@
         case 2:
             return 2;
             break;
+        case 3:
+            return 1;
+            break;
             
         default:
             break;
@@ -56,7 +61,10 @@
     if (indexPath.section==0) {
         return 60;
     }
-    else return 45;
+    else if(indexPath.section!=3){
+        return 45;
+    }
+    else return 60;
 }
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 //    UIView *header=[[UIView alloc] init];
@@ -64,7 +72,14 @@
 //    return nil;
 //}
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
     return nil;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section==2||section==3) {
+        return 0;
+    }
+    else return 10;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
      NSString *identifier=nil;
@@ -78,7 +93,7 @@
         ((MoreHostViewCell*)cell).itel.text=host.itelNum;
         ((MoreHostViewCell*)cell).nickName.text=host.nickName;
     }
-    else{
+    else if(indexPath.section!=3){
         
       
         if (indexPath.section==1) {
@@ -110,14 +125,32 @@
                     break;
             }
         }
+        
         cell =[tableView dequeueReusableCellWithIdentifier:identifier];
         [((MoreOtherViewCell*)cell).otherLogo setRect:0 cornerRadius:8 borderColor:nil];
         
     }
-    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    else if (indexPath.section==3){
+        identifier=@"signOut";
+        cell =[tableView dequeueReusableCellWithIdentifier:identifier];
+       
+        ((MoreSIgnOutCell*)cell).btnSignOut.normal=[UIColor redColor];
+        ((MoreSIgnOutCell*)cell).btnSignOut.high=[UIColor orangeColor];
+        [((MoreSIgnOutCell*)cell).btnSignOut setUI];
+        cell.contentView.backgroundColor=[UIColor clearColor];
+    }
+    if (indexPath.section!=3) {
+        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
     return cell;
 }
-
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section==3) {
+        return NO;
+    }
+    else return YES;
+}
 
 - (void)viewDidLoad
 {

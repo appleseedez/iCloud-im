@@ -65,13 +65,17 @@
 -(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"接受邀请",@"忽略邀请",nil];
     self.currItel=[((ItelMessage*)[self.messageList objectAtIndex:indexPath.row]).user objectForKey:@"itel"];
-    actionSheet.cancelButtonIndex=2;
+    //actionSheet.cancelButtonIndex=2;
     [actionSheet showInView:self.view];
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSLog(@"%d",buttonIndex);
     NSString *status=nil;
-    if (buttonIndex==0) {
+    if (buttonIndex==2) {
+        return;
+    }
+    
+   else if (buttonIndex==0) {
          //接受邀请接口
         status=@"1";
         
@@ -80,6 +84,7 @@
     else if(buttonIndex==1){
         status=@"3";
     }
+    
     [[ItelAction action] acceptFriendIvication:self.currItel status:status];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -88,6 +93,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:@"getNewMessage" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showResult:) name:@"acceptFriends" object:nil];
     [[ItelAction action] getNewMessage];
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(void)showResult:(NSNotification*)notification{
     BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"]boolValue];

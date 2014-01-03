@@ -51,7 +51,8 @@
     [self getImage];
     }
 -(void)getImage{
-    NSString *strurl=@"http://10.0.0.150:8080/CloudCommunity/printImage";
+    NSString *strurl=[NSString stringWithFormat:@"%@/printImage",SIGNAL_SERVER];
+   // NSString *strurl=@"http://211.149.144.15:8000/CloudCommunity/printImage";
     
     NSURL *url  =[NSURL URLWithString:strurl];
     NSURLRequest *request=[NSURLRequest requestWithURL:url];
@@ -72,7 +73,8 @@
 
 }
 -(void)checkCode{
-    NSString *url=@"http://10.0.0.150:8080/CloudCommunity/safety/checkImgCodeItel.json";
+    NSString *url=[NSString stringWithFormat:@"%@/safety/checkImgCodeItel.json",SIGNAL_SERVER];
+    //NSString *url=@"http://211.149.144.15:8000/CloudCommunity/safety/checkImgCodeItel.json";
     NSDictionary *parameters=@{@"itel": self.txtItel.text,@"verifycode":self.txtVerifyCode.text};
     SUCCESS{
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];

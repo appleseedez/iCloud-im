@@ -20,6 +20,10 @@
     action.itelMessageDelegate=[ItelMessageManager defaultManager];
     return action;
 }
+#pragma mark - 重置联系人列表
+-(void)resetContact{
+    [self.itelBookActionDelegate reset];
+}
 #pragma mark - 获得机主用户
 -(HostItelUser*)getHost{
    return  [self.itelUserActionDelegate hostUser];
@@ -99,7 +103,7 @@
 //回调
 -(void)inviteItelUserFriendResponse:(NSString*)itel{
     [self.itelBookActionDelegate addItelUserIntoAddedList:itel];
-    [self NotifyForNormalResponse:@"inviteItelUser" parameters:itel];
+    [self NotifyForNormalResponse:ADD_FIRIEND_NOTIFICATION parameters:itel];
 }
 #pragma mark - 删除好友
 /*
@@ -116,7 +120,7 @@
 -(void)delFriendFromItelBookResponse:(NSString*)itel{
     [self.itelBookActionDelegate delItelUserIntoAddedList:itel];
     [self.itelBookActionDelegate delUserFromFriendBook:itel];
-    [self NotifyForNormalResponse:@"delItelUser" parameters:nil];
+    [self NotifyForNormalResponse:DEL_USER_NOTIFICATION parameters:nil];
 }
 #pragma mark - 添加到黑名单
 /*
@@ -209,7 +213,7 @@
 }
 //回调
 -(void) searchStrangerResponse:(id)response isEnd:(BOOL)isEnd{
-    [self NotifyForNormalResponse:@"searchStranger" parameters:response];
+    [self NotifyForNormalResponse:SEARCH_STRANGER_NOTIFICATION parameters:response];
 }
 #pragma mark - 上传图片
 -(void)uploadImage:(UIImage*)image{
