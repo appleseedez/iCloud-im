@@ -20,7 +20,8 @@ static PassManager *manager=nil;
     return manager;
 }
 -(void) checkMessageCode:(NSString*)code{
-    NSString *url = @"http://10.0.0.150:8080/CloudCommunity/com/modifyPhone.json";
+    NSString *url=[NSString stringWithFormat:@"%@/com/modifyPhone.json",SIGNAL_SERVER];
+    //NSString *url = @"http://211.149.144.15:8000/CloudCommunity/com/modifyPhone.json";
     NSDictionary *parameters=@{@"userId":self.userId ,@"itelCode":self.itel,@"token":@"fdffafaf",@"captcha":code,@"phone":self.telephone};
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -46,8 +47,9 @@ static PassManager *manager=nil;
 
 }
 -(void) sendMessage{
-    //NSString *url=[NSString stringWithFormat:@"%@/com/sendMassageByPhone.json",server];
-    NSString *url = @"http://10.0.0.150:8080/CloudCommunity/com/sendMassageByPhone.json";
+    
+    NSString *url=[NSString stringWithFormat:@"%@/com/sendMassageByPhone.json",SIGNAL_SERVER];
+    //NSString *url = @"http://211.149.144.15:8000/CloudCommunity/com/sendMassageByPhone.json";
     NSDictionary *parameters=@{@"userId":self.userId ,@"itelCode":self.itel,@"token":@"sfafgwqfgq",@"phone":self.telephone};
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -74,8 +76,8 @@ static PassManager *manager=nil;
 
 }
 -(void) modifyPassword:(NSString*)password{
-    //NSString *url=[NSString stringWithFormat:@"%@/safety/updatePassword.json",server];
-   NSString *url = @"http://10.0.0.150:8080/CloudCommunity/safety/resetPassword.json";
+    NSString *url=[NSString stringWithFormat:@"%@/safety/resetPassword.json",SIGNAL_SERVER];
+   //NSString *url = @"http://211.149.144.15:8000/CloudCommunity/safety/resetPassword.json";
        NSDictionary *parameters=@{@"itel":self.itel ,@"token":@"asdafaasf",@"password":password,};
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -102,8 +104,8 @@ static PassManager *manager=nil;
 
 }
 -(void) answerQuestion:(NSString*)question answer:(NSString*)answer{
-   // NSString *url=[NSString stringWithFormat:@"%@/safety/checkPasswordProtection.json",server];
-   NSString *url = @"http://10.0.0.150:8080/CloudCommunity/safety/checkPasswordProtection.json";
+   NSString *url=[NSString stringWithFormat:@"%@/safety/checkPasswordProtection.json",SIGNAL_SERVER];
+   //NSString *url = @"http://211.149.144.15:8000/CloudCommunity/safety/checkPasswordProtection.json";
     NSDictionary *parameters=@{@"question": question,
                                @"answer":answer,
                                @"userId":self.userId,

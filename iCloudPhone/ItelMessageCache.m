@@ -7,12 +7,13 @@
 //
 
 #import "ItelMessageCache.h"
-
+#import "ItelAction.h"
 @implementation ItelMessageCache
 
 
 -(NSMutableArray*)messages{
-    NSString *path=[NSString stringWithFormat:@"%@/%@",NSHomeDirectory(),self.name] ;
+    HostItelUser *host = [[ItelAction action] getHost];
+     NSString *path=[NSString stringWithFormat:@"%@/Documents/HOST%@%@",NSHomeDirectory(),host.itelNum,self.name];
     if (_messages==nil) {
         _messages=[NSKeyedUnarchiver unarchiveObjectWithFile:path];
         if (_messages==nil) {
@@ -43,7 +44,8 @@
     return array;
 }
 -(void)save{
-    NSString *path=[NSString stringWithFormat:@"%@/%@",NSHomeDirectory(),self.name] ;
+    HostItelUser *host = [[ItelAction action] getHost];
+    NSString *path=[NSString stringWithFormat:@"%@/Documents/HOST%@%@",NSHomeDirectory(),host.itelNum,self.name];
     [NSKeyedArchiver archiveRootObject:self.messages toFile:path];
 }
 @end

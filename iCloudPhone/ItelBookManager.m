@@ -29,6 +29,11 @@ static ItelBookManager *manager;
     
     return manager;
 }
+-(void)reset{
+    [self.friendBook reset];
+    [self.blackBook reset];
+  
+}
 #pragma mark - 添加用户到等待确认列表
 -(void)addItelUserIntoAddedList:(NSString *)itel{
     

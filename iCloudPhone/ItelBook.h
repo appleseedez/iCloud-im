@@ -16,4 +16,5 @@
 -(ItelUser*)userAtIndex:(NSInteger)index;
 -(ItelBook*)appendingByItelBook:(ItelBook*)itelBook;
 -(ItelBook*)searchInKeypath:(NSString*)keypath andSearch:(NSString*)search;
+-(void)reset;
 @end

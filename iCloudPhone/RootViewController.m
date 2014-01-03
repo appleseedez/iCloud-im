@@ -26,7 +26,7 @@
 }
 -(void)setCustomTabbarHidden:(NSNotification*)notification{
     BOOL hidden=[[notification.userInfo objectForKey:@"hidden"] boolValue];
-     [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
+     [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
          self.customTabbar.alpha=!hidden;
          
      } completion:^(BOOL finished) {
@@ -39,6 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.tabBar setHidden:YES];
 #if ROOT_TABBAR_DEBUG
     NSLog(@"tabbar 加载了");
     NSAssert(self.manager, @"注入manager到tabroot失败");

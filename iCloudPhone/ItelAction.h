@@ -21,6 +21,8 @@
 
 #pragma  mark - 联系人列表操作协议
 @protocol ItelBookActionDelegate <NSObject>
+//重置
+-(void)reset;
 //从好友列表中删除联系人
 -(void)delUserFromFriendBook:(NSString*)itel;
 //添加黑名单
@@ -215,4 +217,6 @@
 //处理好友邀请
 -(void)acceptFriendIvication:(NSString*)targetItel status:(NSString*)status;
 -(void)acceptFriendIvicationResponse:(NSDictionary*)data;
+//重置联系人列表
+-(void)resetContact;
 @end

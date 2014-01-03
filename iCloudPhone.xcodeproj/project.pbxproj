@@ -30,6 +30,7 @@
 		473F62DC18387CA4006CAE31 /* PersonInAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 473F62DB18387CA4006CAE31 /* PersonInAddressBook.m */; };
 		473F62E01838820D006CAE31 /* AddressBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 473F62DF1838820D006CAE31 /* AddressBookCell.m */; };
 		473F62E3183889B0006CAE31 /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 473F62E2183889B0006CAE31 /* AddressBook.m */; };
+		475165571875683500628C8A /* MoreSIgnOutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 475165561875683500628C8A /* MoreSIgnOutCell.m */; };
 		4757D04F1855BC69001A9639 /* NetRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757D04E1855BC69001A9639 /* NetRequester.m */; };
 		4757D0511855C078001A9639 /* 企业注册.png in Resources */ = {isa = PBXBuildFile; fileRef = 4757D0501855C078001A9639 /* 企业注册.png */; };
 		4757D0531855C083001A9639 /* 个人注册.png in Resources */ = {isa = PBXBuildFile; fileRef = 4757D0521855C083001A9639 /* 个人注册.png */; };
@@ -280,6 +281,9 @@
 		473F62DF1838820D006CAE31 /* AddressBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookCell.m; sourceTree = "<group>"; };
 		473F62E1183889B0006CAE31 /* AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBook.h; sourceTree = "<group>"; };
 		473F62E2183889B0006CAE31 /* AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBook.m; sourceTree = "<group>"; };
+		4751655418750DBA00628C8A /* NetHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetHeaders.h; sourceTree = "<group>"; };
+		475165551875683500628C8A /* MoreSIgnOutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreSIgnOutCell.h; sourceTree = "<group>"; };
+		475165561875683500628C8A /* MoreSIgnOutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSIgnOutCell.m; sourceTree = "<group>"; };
 		4757D04D1855BC69001A9639 /* NetRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetRequester.h; sourceTree = "<group>"; };
 		4757D04E1855BC69001A9639 /* NetRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetRequester.m; sourceTree = "<group>"; };
 		4757D0501855C078001A9639 /* 企业注册.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "企业注册.png"; sourceTree = "<group>"; };
@@ -690,6 +694,14 @@
 			name = views;
 			sourceTree = "<group>";
 		};
+		4751655318750D8B00628C8A /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				4751655418750DBA00628C8A /* NetHeaders.h */,
+			);
+			name = settings;
+			sourceTree = "<group>";
+		};
 		4757D04C1855A2CE001A9639 /* register */ = {
 			isa = PBXGroup;
 			children = (
@@ -911,6 +923,8 @@
 				479C7BA7185DA78E0046B1D7 /* MoreHostViewCell.m */,
 				479C7BA9185DA7A30046B1D7 /* MoreOtherViewCell.h */,
 				479C7BAA185DA7A30046B1D7 /* MoreOtherViewCell.m */,
+				475165551875683500628C8A /* MoreSIgnOutCell.h */,
+				475165561875683500628C8A /* MoreSIgnOutCell.m */,
 			);
 			name = moreViews;
 			sourceTree = "<group>";
@@ -1265,6 +1279,7 @@
 		47B89DDA1834D40000022FE5 /* iCloudPhone */ = {
 			isa = PBXGroup;
 			children = (
+				4751655318750D8B00628C8A /* settings */,
 				47A269AF1871195F00084A80 /* message */,
 				47A10DA118658F6900FB9FED /* findPassword */,
 				478813E11839E6490085224D /* login */,
@@ -1665,6 +1680,7 @@
 				478813DF1839C35E0085224D /* USArrayWrapper.m in Sources */,
 				479F13981861791B006DF67B /* HostSexCell.m in Sources */,
 				47952D9418582DBA0044CF64 /* MBProgressHUD.m in Sources */,
+				475165571875683500628C8A /* MoreSIgnOutCell.m in Sources */,
 				47A10D9D18654AF500FB9FED /* SecurityChangePasswordViewController.m in Sources */,
 				47A5577E186320640062EFFF /* HostEditSignViewController.m in Sources */,
 				479EF0541859D47C0012EE29 /* IMRootTabBarViewController.m in Sources */,

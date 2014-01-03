@@ -79,6 +79,9 @@
 
 //检查是否为手机号码
 +(BOOL)checkPhoneNumberIsMobile:(NSString*)phoneNumber{
+    if (![NXInputChecker checkEmpty:phoneNumber]) {
+        return NO;
+    }
     if (phoneNumber.length!=11) {
         return NO;
     }
