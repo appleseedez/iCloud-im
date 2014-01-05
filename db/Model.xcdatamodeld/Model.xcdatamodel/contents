@@ -3,6 +3,7 @@
     <entity name="Recent" representedClassName="Recent" syncable="YES">
         <attribute name="createDate" attributeType="Date" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="hostUserNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="peerAvatar" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="peerNick" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="peerNumber" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,6 +12,6 @@
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Recent" positionX="160" positionY="192" width="128" height="163"/>
+        <element name="Recent" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

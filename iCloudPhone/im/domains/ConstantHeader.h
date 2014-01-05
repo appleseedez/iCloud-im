@@ -161,4 +161,11 @@ enum AccountClientTypes
 #define kPeerNick @"peerNick"
 #define kCreateDate @"createDate"
 #define kStatus @"status"
+#define kDuration @"duration"
+#define kHostUserNumber @"hostUserNumber"
+
+#define STATUS_CALLED @"called"
+#define STATUS_ANSWERED @"answered"
+#define STATUS_MISSED @"missed"
+#define STATUS_REFUSED @"refused"
 #endif

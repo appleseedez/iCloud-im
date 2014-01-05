@@ -99,7 +99,7 @@
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recent"];
         [request setFetchBatchSize:20];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO selector:@selector(localizedCaseInsensitiveCompare:)]];
-        request.predicate = [NSPredicate predicateWithFormat:@"peerNumber = %@", self.currentRecent.peerNumber];
+        request.predicate = [NSPredicate predicateWithFormat:@"peerNumber = %@ and hostUserNumber = %@", self.currentRecent.peerNumber,[self.manager myAccount]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                             managedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext

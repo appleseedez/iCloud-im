@@ -8,6 +8,10 @@
 
 #import "IMManagerImp.h"
 #import  "ConstantHeader.h"
+#import "Recent.h"
+#import "Recent+CRUD.h"
+#import "ItelAction.h"
+#import "IMCoreDataManager.h"
 @interface IMManagerImp ()
 
 //状态标识符，表明当前所处的状态。目前只有占用和空闲两种 占用：IN_USE，空闲：IDLE
@@ -18,6 +22,8 @@
 
 @property (nonatomic,strong) MSWeakTimer* communicationTimer; //用于进行通话时长计时
 @property (nonatomic) double duration; //通话时长
+
+@property (nonatomic) NSDictionary* recentLog; //作为最近通话记录的status字段
 @end
 
 @implementation IMManagerImp
@@ -355,13 +361,35 @@
  *
  *  @param notify 外部传入
  */
+//主叫
 - (void) justStartTransport:(NSNotification*) notify{
     [self.engine startTransport];
+    //开始通话计时
+    self.recentLog = @{
+                       kStatus:STATUS_ANSWERED,
+                       kPeerNumber:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                       kCreateDate:[NSDate date]
+                       };
+    
+#if OTHER_MESSAGE
+    NSLog(@"the log to be saved : %@",self.recentLog);
+#endif
+    [self startCommunicationCounting];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:P2PTUNNEL_SUCCESS object:nil];
 }
-
+// 被叫接听回掉
 - (void) startTransportAndNotify:(NSNotification*) notify{
     [self.engine startTransport];
+    //开始通话计时
+    self.recentLog = @{
+                       kStatus:STATUS_CALLED,
+                       kPeerNumber:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                       kCreateDate:[NSDate date]
+                       };
+#if OTHER_MESSAGE
+    NSLog(@"the log to be saved : %@",self.recentLog);
+#endif
+    [self startCommunicationCounting];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:P2PTUNNEL_SUCCESS object:nil];
     //通知view可以切换的到“通话中"界面了
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_INSESSION_VIEW_NOTIFICATION
@@ -371,6 +399,9 @@
 
 - (void) durationTick{
     self.duration++;
+#if OTHER_MESSAGE
+    NSLog(@"当前通话持续时间:%f",self.duration);
+#endif
 }
 //开始为本次通话计时
 - (void) startCommunicationCounting{
@@ -382,9 +413,26 @@
 }
 //结束本次通话计时
 - (void) stopCommunicationCounting{
-    [self.communicationTimer invalidate];
+    if (self.communicationTimer) {
+        [self.communicationTimer invalidate];
+        self.communicationTimer = nil;
+        Recent* aRecent = [Recent recentWithCallInfo:@{
+                                                       kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
+                                                       kStatus:[self.recentLog valueForKey:kStatus],
+                                                       kDuration:@(self.duration),
+                                                       kCreateDate:[self.recentLog valueForKey:kCreateDate],
+                                                       kPeerRealName:@"测试",
+                                                       kPeerNick:@"测试",
+                                                       kPeerAvatar:@"test",
+                                                       kHostUserNumber:self.myAccount
+                                                       }
+                                           inContext:[[IMCoreDataManager defaulManager] managedObjectContext]];
+        NSLog(@"aRecent is :%@",aRecent);
+    }
     
 }
+
+
 //收到信令服务器的验证响应，
 - (void) authHasResult:(NSNotification*) notify{
 #if MANAGER_DEBUG
@@ -404,7 +452,8 @@
     [self.engine initNetwork];
 
     [self.engine initMedia];
-    [self endSession];
+    self.state = IDLE;
+//    [self endSession];
     /*测试需要，自动生成随机号码*/
     
 //    self.selfAccount = [NSString stringWithFormat:@"%d",arc4random()%1000];
@@ -464,7 +513,13 @@
     self.state = destAccount;
 }
 - (void)endSession{
+    //在通话session结束时,停止通话计时.保存.
+    [self stopCommunicationCounting];
     self.state = IDLE;
+    
+
+
+
 }
 
 - (void)dial:(NSString *)account{

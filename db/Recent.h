@@ -20,5 +20,5 @@
 @property (nonatomic, retain) NSString * peerRealName;
 @property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * sectionIdentifier;
-
+@property (nonatomic, retain) NSString * hostUserNumber;
 @end
