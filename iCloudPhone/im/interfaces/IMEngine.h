@@ -32,8 +32,8 @@
 - (void) disableSpeaker;
 - (void) showCam;
 - (void) hideCam;
-- (void)setIsVideoCalling:(BOOL)isVideoCalling;
-- (BOOL)isVideoCalling;
+- (void)setCanVideoCalling:(BOOL)canVideoCalling;
+- (BOOL)canVideoCalling;
 //开启远端视频输入窗口
 - (void) openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView*) localView;
 //关闭远端视频输入窗口

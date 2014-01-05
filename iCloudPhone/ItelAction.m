@@ -40,7 +40,7 @@
 
 -(void) getItelFriendList:(NSInteger)start{
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
-    
+    NSLog(@"%@",hostUser.userId);
     NSDictionary *parameters = @{@"keyWord":hostUser.userId ,@"start":[NSNumber numberWithInteger:start],@"token":hostUser.token,@"limit":[NSNumber numberWithInteger:2030]};
     [self.itelNetRequestActionDelegate refreshUserList:parameters];
 }

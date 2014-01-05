@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Recent" representedClassName="Recent" syncable="YES">
+        <attribute name="createDate" attributeType="Date" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="peerAvatar" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="peerNick" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="peerNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="peerRealName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sectionIdentifier" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Recent" positionX="160" positionY="192" width="128" height="163"/>
+    </elements>
+</model>

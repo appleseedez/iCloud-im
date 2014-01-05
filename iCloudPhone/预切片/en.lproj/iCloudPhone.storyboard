@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pj0-BP-Pa6">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
+        <deployment defaultVersion="1552" identifier="iOS"/>
         <development version="5000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -260,7 +260,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7nJ-eQ-XtS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-80" y="60"/>
+            <point key="canvasLocation" x="446" y="60"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="cdK-R4-Rky">
@@ -1515,7 +1515,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8bt-7w-Kih" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-637" y="833"/>
+            <point key="canvasLocation" x="-111" y="833"/>
         </scene>
         <!--Content View Controller - 主页-->
         <scene sceneID="nfj-8q-YVJ">
@@ -1697,7 +1697,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Vl7-8v-nnS" kind="relationship" relationship="viewControllers" id="xoj-i0-hGH"/>
+                        <segue destination="xFa-jd-6JR" kind="relationship" relationship="viewControllers" id="xoj-i0-hGH"/>
                         <segue destination="2wF-B8-A0s" kind="relationship" relationship="viewControllers" id="IQi-y5-f1R"/>
                         <segue destination="fI5-rZ-P4d" kind="relationship" relationship="viewControllers" id="d5q-5u-soO"/>
                         <segue destination="c83-lt-rxv" kind="relationship" relationship="viewControllers" id="vCF-hU-iee"/>
@@ -1840,6 +1840,157 @@
             </objects>
             <point key="canvasLocation" x="-1403" y="-114"/>
         </scene>
+        <!--Recent Contact Details View Controller - 详情-->
+        <scene sceneID="vsU-Bj-2vQ">
+            <objects>
+                <tableViewController id="nvj-B9-ahk" customClass="IMRecentContactDetailsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="laY-Zs-6ZX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="1le-4S-Pk8" userLabel="Header View">
+                            <rect key="frame" x="0.0" y="64" width="320" height="125"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" id="Zg8-wf-HtD" userLabel="info view">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="callerAvatar" id="DrY-vd-K6b">
+                                            <rect key="frame" x="20" y="10" width="56" height="56"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张燕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7KD-0I-Rg0">
+                                            <rect key="frame" x="84" y="10" width="96" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="24"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(小小菲林)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mq4-wO-5h0">
+                                            <rect key="frame" x="188" y="10" width="112" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7777777" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ngd-5g-aPB">
+                                            <rect key="frame" x="84" y="39" width="216" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="100" contentMode="scaleToFill" id="vAL-Oa-S5k" userLabel="action view">
+                                    <rect key="frame" x="0.0" y="76" width="320" height="49"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" id="WTy-rk-vFe" userLabel="maskBottom">
+                                            <rect key="frame" x="0.0" y="38" width="320" height="10"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" id="O5v-dl-9Og" userLabel="maskTop">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="10"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kud-CQ-4YT" userLabel="voiceCallBtn">
+                                            <rect key="frame" x="1" y="0.0" width="79" height="48"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" image="voiceCall_contact_detail_btn">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Iti-sb-hv6" userLabel="vidoeCallBtn">
+                                            <rect key="frame" x="81" y="0.0" width="78" height="48"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" image="vidoeCall_contact_detail_btn">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oAw-39-0Um" userLabel="messageBtn">
+                                            <rect key="frame" x="160" y="0.0" width="78" height="48"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" image="message_contact_detail_btn">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XMY-nM-5d5" userLabel="messageBtn">
+                                            <rect key="frame" x="239" y="0.0" width="80" height="48"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" image="action_contact_detail_btn">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Contact Cell" id="wmC-cj-Re8">
+                                <rect key="frame" x="0.0" y="211" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wmC-cj-Re8" id="VHa-po-2X2">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xiv-lE-pry">
+                                            <rect key="frame" x="20" y="10" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-01-04 9:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zx8-B1-KqC">
+                                            <rect key="frame" x="52" y="11" width="145" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通话时长" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rXM-Pm-mI2">
+                                            <rect key="frame" x="230" y="2" width="70" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:20:20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aoj-og-Ddm">
+                                            <rect key="frame" x="230" y="20" width="70" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="nvj-B9-ahk" id="7VD-T4-t0S"/>
+                            <outlet property="delegate" destination="nvj-B9-ahk" id="qBP-5r-frz"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="详情" id="VtB-F4-2wc">
+                        <barButtonItem key="rightBarButtonItem" image="detail_more_action_btn" id="6HM-ht-DGC"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="avatarView" destination="DrY-vd-K6b" id="cYg-NK-oAa"/>
+                        <outlet property="nameLabel" destination="7KD-0I-Rg0" id="HLH-sG-Krf"/>
+                        <outlet property="nickLabel" destination="Mq4-wO-5h0" id="bRb-DF-4kM"/>
+                        <outlet property="numberLabel" destination="Ngd-5g-aPB" id="GEh-YO-P4X"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FN8-vr-0hw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1182" y="546"/>
+        </scene>
         <!--Address Book View Controller-->
         <scene sceneID="5pH-rE-wCJ">
             <objects>
@@ -1867,7 +2018,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bvr-A7-aFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1383" y="602"/>
+            <point key="canvasLocation" x="-799" y="474"/>
         </scene>
         <!--Search New Friend View Controller - 添加页面-->
         <scene sceneID="QiS-kH-E2Y">
@@ -1895,7 +2046,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ldb-vv-JcW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-182" y="915"/>
+            <point key="canvasLocation" x="344" y="915"/>
         </scene>
         <!--Stranger View Controller-->
         <scene sceneID="XOo-Zh-xJl">
@@ -2032,7 +2183,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znl-d6-Tcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486" y="953"/>
+            <point key="canvasLocation" x="40" y="953"/>
         </scene>
         <!--In Session View Controller-->
         <scene sceneID="dKB-Nr-hPr">
@@ -2683,7 +2834,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="649-Vj-9gs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1019" y="858"/>
+            <point key="canvasLocation" x="-493" y="858"/>
         </scene>
         <!--Calling View Controller-->
         <scene sceneID="AU6-3U-6eC">
@@ -2779,7 +2930,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7PM-KB-2Xs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="492" y="625"/>
+            <point key="canvasLocation" x="1018" y="625"/>
         </scene>
         <!--Answering View Controller-->
         <scene sceneID="TYr-bc-RzA">
@@ -2843,7 +2994,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="videoCall_ico" id="by7-vx-8Ul">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="by7-vx-8Ul">
                                 <rect key="frame" x="90" y="170" width="140" height="140"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
@@ -2852,6 +3003,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hoj-yk-XrS"/>
                     <connections>
+                        <outlet property="isVideoCallICONView" destination="by7-vx-8Ul" id="DWp-Vz-Y6w"/>
                         <outlet property="peerAccountLabel" destination="SMX-5o-nlt" id="KMe-gn-7MS"/>
                         <outlet property="peerAvatarImageView" destination="by7-vx-8Ul" id="TR2-Ps-56Q"/>
                         <segue destination="kEe-Cf-lem" kind="push" identifier="acceptSessionSegue" id="5y8-TJ-QOU"/>
@@ -2859,7 +3011,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kgu-zw-56C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="920" y="963"/>
+            <point key="canvasLocation" x="1446" y="963"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f7I-QK-0Og">
@@ -2877,7 +3029,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PhG-rh-LOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-308" y="758"/>
+            <point key="canvasLocation" x="218" y="758"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WVb-9Y-aS1">
@@ -2897,7 +3049,7 @@
             </objects>
             <point key="canvasLocation" x="653" y="1670"/>
         </scene>
-        <!--Recent Contact List View Controller-->
+        <!--Recent Contact List View Controller - 通话记录-->
         <scene sceneID="FUF-TP-Mgc">
             <objects>
                 <tableViewController id="Vl7-8v-nnS" customClass="IMRecentContactListViewController" sceneMemberID="viewController">
@@ -2906,13 +3058,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="6Dw-E5-h9f">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Recent Call Cell" id="6Dw-E5-h9f">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Dw-E5-h9f" id="8xp-3R-8zL">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yEg-8Y-Qoz" userLabel="avatar">
+                                            <rect key="frame" x="20" y="6" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jaunt" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BQ0-D5-IPK" userLabel="name">
+                                            <rect key="frame" x="60" y="6" width="166" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Kwb-SQ-bb9" userLabel="record type">
+                                            <rect key="frame" x="63" y="29" width="9" height="9"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1231514" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KSF-pO-4sl" userLabel="number">
+                                            <rect key="frame" x="77" y="22" width="149" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="nvj-B9-ahk" kind="push" id="izZ-s3-C2z"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -2920,12 +3099,18 @@
                             <outlet property="delegate" destination="Vl7-8v-nnS" id="g8x-TC-34b"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="LEW-sE-M2D"/>
+                    <navigationItem key="navigationItem" title="通话记录" id="r0U-A6-jQC">
+                        <barButtonItem key="leftBarButtonItem" title="清空" id="xhX-0G-oXe">
+                            <connections>
+                                <action selector="deleteAllRecents:" destination="Vl7-8v-nnS" id="Up8-mV-ihc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1b-yl-8hd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2009" y="546"/>
+            <point key="canvasLocation" x="-1606" y="546"/>
         </scene>
         <!--Host Edit Email View Controller - 编辑-->
         <scene sceneID="mbv-CF-atV">
@@ -3179,6 +3364,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lz6-fi-kTA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="542" y="23"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IVO-gl-vaY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xFa-jd-6JR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="LEW-sE-M2D"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6XW-lF-MrX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Vl7-8v-nnS" kind="relationship" relationship="rootViewController" id="klE-M2-X0w"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1wK-pv-wwC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2009" y="546"/>
         </scene>
     </scenes>
     <resources>
@@ -3186,13 +3391,16 @@
         <image name="aboutItel" width="24" height="24"/>
         <image name="aboutlogo" width="90" height="46"/>
         <image name="action_btn" width="19" height="19"/>
+        <image name="action_contact_detail_btn" width="32" height="32"/>
         <image name="ad_a" width="320" height="150"/>
         <image name="ad_b" width="320" height="150"/>
         <image name="ad_c" width="320" height="150"/>
         <image name="backspace_btn" width="27" height="21"/>
         <image name="backspace_press_btn" width="27" height="21"/>
+        <image name="callerAvatar" width="64" height="64"/>
         <image name="checkAddress.png" width="80" height="80"/>
         <image name="commonSetting" width="24" height="24"/>
+        <image name="detail_more_action_btn" width="24" height="20"/>
         <image name="dial_btn" width="25" height="27"/>
         <image name="expand_btn" width="12" height="11"/>
         <image name="hideSelfCam_btn" width="30" height="30"/>
@@ -3201,6 +3409,7 @@
         <image name="itelCentre" width="24" height="24"/>
         <image name="itel_logo" width="64" height="64"/>
         <image name="message_btn" width="22" height="19"/>
+        <image name="message_contact_detail_btn" width="32" height="28"/>
         <image name="mockhead.png" width="203" height="189"/>
         <image name="peerAvatar" width="64" height="64"/>
         <image name="personalSetting" width="24" height="24"/>
@@ -3211,9 +3420,10 @@
         <image name="silence_btn" width="25" height="32"/>
         <image name="speaker_btn" width="30" height="32"/>
         <image name="switch_cam_btn" width="53" height="32"/>
-        <image name="videoCall_ico" width="140" height="140"/>
         <image name="videoCam_btn" width="26" height="32"/>
         <image name="video_btn" width="20" height="24"/>
+        <image name="vidoeCall_contact_detail_btn" width="27" height="32"/>
+        <image name="voiceCall_contact_detail_btn" width="30" height="32"/>
         <image name="头像.png" width="198" height="200"/>
         <image name="快鱼" width="64" height="38"/>
         <image name="消息" width="64" height="56"/>

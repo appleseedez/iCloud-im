@@ -15,6 +15,7 @@
     #import <Foundation/Foundation.h>
     #import <ifaddrs.h>
     #import <arpa/inet.h>
+    #import <CoreData/CoreData.h>
     #import "NSData+Byte.h"
     #import "MSWeakTimer.h"
     #import "NetHeaders.h"
@@ -23,8 +24,9 @@
     #define COMMUNICATOR_DEBUG 0
     #define ROOT_TABBAR_DEBUG 0
 
-    #define UDP_MESSAGE 0
-    #define OTHER_MESSAGE 0
-    #define SIGNAL_MESSAGE 0
-    #define ENGINE_MSG 0
+    #define UDP_MESSAGE 1
+    #define OTHER_MESSAGE 1
+    #define SIGNAL_MESSAGE 1
+    #define ENGINE_MSG 1
+
 #endif
