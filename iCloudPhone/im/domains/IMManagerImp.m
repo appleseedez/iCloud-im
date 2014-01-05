@@ -499,6 +499,7 @@
 #if MANAGER_DEBUG
     NSLog(@"call tearDown");
 #endif
+    [[IMCoreDataManager defaulManager] saveContext];
     [self disconnectToSignalServer];
     [self.engine tearDown];
     self.engine=nil;

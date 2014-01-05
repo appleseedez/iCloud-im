@@ -39,11 +39,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    [self setupFetchViewController];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self setupFetchViewController];
+    
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
