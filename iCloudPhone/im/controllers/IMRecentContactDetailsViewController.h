@@ -10,10 +10,11 @@
 #import "Recent.h"
 #import "Recent+CRUD.h"
 @interface IMRecentContactDetailsViewController : UITableViewController
-@property (weak, nonatomic) IBOutlet UIView *headerView;
+//@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (nonatomic) Recent* currentRecent; //
-@property (weak, nonatomic) IBOutlet UIImageView *avatarView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *nickLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarView;
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nickLabel;
+
 @end

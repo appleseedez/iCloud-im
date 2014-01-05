@@ -1809,7 +1809,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peerAvatar" id="DrY-vd-K6b">
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="callerAvatar" id="DrY-vd-K6b">
                                             <rect key="frame" x="20" y="10" width="56" height="56"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
@@ -1889,12 +1889,28 @@
                             <color key="backgroundColor" white="0.66666666666666663" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wmC-cj-Re8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="ymW-YW-qev" detailTextLabel="7qr-fD-M01" style="IBUITableViewCellStyleValue2" id="wmC-cj-Re8">
                                 <rect key="frame" x="0.0" y="211" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wmC-cj-Re8" id="VHa-po-2X2">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ymW-YW-qev">
+                                            <rect key="frame" x="15" y="13" width="91" height="17"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7qr-fD-M01">
+                                            <rect key="frame" x="112" y="13" width="37" height="17"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -1905,11 +1921,10 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="详情" id="VtB-F4-2wc"/>
                     <connections>
-                        <outlet property="avatarView" destination="DrY-vd-K6b" id="el6-VE-JAu"/>
-                        <outlet property="headerView" destination="1le-4S-Pk8" id="MAk-hg-7jO"/>
-                        <outlet property="nameLabel" destination="7KD-0I-Rg0" id="m7i-uM-D4h"/>
-                        <outlet property="nickLabel" destination="Mq4-wO-5h0" id="zgl-uP-uxz"/>
-                        <outlet property="numberLabel" destination="Ngd-5g-aPB" id="vaq-pb-mug"/>
+                        <outlet property="avatarView" destination="DrY-vd-K6b" id="cYg-NK-oAa"/>
+                        <outlet property="nameLabel" destination="7KD-0I-Rg0" id="HLH-sG-Krf"/>
+                        <outlet property="nickLabel" destination="Mq4-wO-5h0" id="bRb-DF-4kM"/>
+                        <outlet property="numberLabel" destination="Ngd-5g-aPB" id="GEh-YO-P4X"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FN8-vr-0hw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1943,7 +1958,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bvr-A7-aFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-857" y="602"/>
+            <point key="canvasLocation" x="-799" y="474"/>
         </scene>
         <!--Search New Friend View Controller - 添加页面-->
         <scene sceneID="QiS-kH-E2Y">
@@ -3015,7 +3030,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="nvj-B9-ahk" kind="push" identifier="Recent Detail" trigger="accessoryAction" id="Uku-gY-x8s"/>
+                                    <segue destination="nvj-B9-ahk" kind="push" id="izZ-s3-C2z"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -3321,6 +3336,7 @@
         <image name="ad_c" width="320" height="150"/>
         <image name="backspace_btn" width="27" height="21"/>
         <image name="backspace_press_btn" width="27" height="21"/>
+        <image name="callerAvatar" width="64" height="64"/>
         <image name="checkAddress.png" width="80" height="80"/>
         <image name="commonSetting" width="24" height="24"/>
         <image name="dial_btn" width="25" height="27"/>
