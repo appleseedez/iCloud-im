@@ -55,16 +55,19 @@
 
 
 }
-
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     if (![self.peerAccount.text length]) {
         self.backspaceButton.hidden = YES;
     }else{
         self.backspaceButton.hidden = NO;
     }
     [self setup];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -263,6 +266,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)autoFill:(UIButton *)sender {
+    //如果有筛选结果
+    UILabel* primityNumber =(UILabel*) [self.suggestBtnView viewWithTag:3];
+    if (primityNumber.text) {
+        self.peerAccount.text = primityNumber.text;
+    }
 }
 
 - (IBAction)expandSuggestResults:(UIButton *)sender {
