@@ -7,7 +7,7 @@
 //
 
 #import "NetRequester.h"
-
+#import "ItelAction.h"
 @implementation NetRequester
 
 +(void)jsonPostRequestWithUrl:(NSString*)url
@@ -16,7 +16,36 @@
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+//    HostItelUser *host= [[ItelAction action] getHost];
+//    
+//    if (host.sessionId) {
+//       
+//    
+//    NSMutableDictionary *cookieJSESSIONID = [NSMutableDictionary dictionary];
+//    [cookieJSESSIONID setObject:@"JSESSIONID" forKey:NSHTTPCookieName];
+//    [cookieJSESSIONID setObject:host.sessionId forKey:NSHTTPCookieValue];
+//    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieJSESSIONID];
+//    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+//    
+//    NSMutableDictionary *SPRING_SECURITY_REMEMBER_ME_COOKIE = [NSMutableDictionary dictionary];
+//    [SPRING_SECURITY_REMEMBER_ME_COOKIE setObject:@"SPRING_SECURITY_REMEMBER_ME_COOKIE" forKey:NSHTTPCookieName];
+//    [SPRING_SECURITY_REMEMBER_ME_COOKIE setObject:host.SPRING_SECURITY_REMEMBER_ME_COOKIE forKey:NSHTTPCookieValue];
+//    NSHTTPCookie *cookie1 = [NSHTTPCookie cookieWithProperties:SPRING_SECURITY_REMEMBER_ME_COOKIE];
+//    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie1];
+//        if (host.token==nil||[host.token isEqual:[NSNull null]]) {
+//             host.token=@"";
+//        }
+//        
+//    NSMutableDictionary *cookieToken = [NSMutableDictionary dictionary];
+//    [cookieToken setObject:@"token" forKey:NSHTTPCookieName];
+//    [cookieToken setObject:host.token forKey:NSHTTPCookieValue];
+//    NSHTTPCookie *cookie2 = [NSHTTPCookie cookieWithProperties:cookieToken];
+//    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie2];
+//    }
     
+    for (NSString *s in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) {
+        NSLog(@"%@",s);
+    }
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     

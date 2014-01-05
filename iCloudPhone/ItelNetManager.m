@@ -125,8 +125,8 @@ static int addcount=0;
                     }
                     
                     id data =[dic objectForKey:@"data"];
-                    NSArray *list=[data objectForKey:@"list"];
-                    NSLog(@"查找陌生人：服务器返回%d条数据",[list count]);
+                   // NSArray *list=[data objectForKey:@"list"];
+                    //NSLog(@"查找陌生人：服务器返回%d条数据",[list count]);
 
                     [[ItelAction action] searchStrangerResponse:data isEnd:isEnd];
                     }
