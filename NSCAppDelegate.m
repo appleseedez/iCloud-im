@@ -104,7 +104,8 @@
     NSLog(@"调用 applicationWillResignActive");
 #endif
     
-    [self.manager disconnectToSignalServer];
+    [self.manager tearDown];
+//    [self.manager disconnectToSignalServer];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -113,7 +114,7 @@
     NSLog(@"调用 applicationDidEnterBackground");
 #endif
      
-    [self.manager tearDown];
+//    [self.manager tearDown];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -121,9 +122,9 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationWillEnterForeground ");
 #endif
-    if ([[ItelAction action] getHost]) {
-        [self.manager setup];
-    }
+//    if ([[ItelAction action] getHost]) {
+//        [self.manager setup];
+//    }
     
 }
 
@@ -132,9 +133,14 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationDidBecomeActive ");
 #endif
-     if ([[ItelAction action] getHost]) {
-//    [self.manager connectToSignalServer];
-     }
+//     if ([[ItelAction action] getHost]) {
+////    [self.manager connectToSignalServer];
+//     }
+    
+    if ([[ItelAction action] getHost]) {
+        [self.manager setup];
+        [self.manager connectToSignalServer];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
