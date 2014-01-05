@@ -39,11 +39,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self setupFetchViewController];
+
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-
+    [self setupFetchViewController];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -92,12 +92,12 @@
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recent"];
         [request setFetchBatchSize:20];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO selector:@selector(localizedCaseInsensitiveCompare:)]];
-//        request.predicate = [NSPredicate predicateWithFormat:@"whoTook = %@", self.photographer];
+        request.predicate = [NSPredicate predicateWithFormat:@"hostUserNumber = %@",[self.manager myAccount]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                             managedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext
                                                                               sectionNameKeyPath:@"sectionIdentifier"
-                                                                                       cacheName:@"RENT_LIST"];
+                                                                                       cacheName:nil];
     } else {
         self.fetchedResultsController = nil;
     }
@@ -173,6 +173,8 @@
 //    if ([segue.identifier isEqualToString:@"Recent Detail"]) {
         Recent* selectedRecent = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:(UITableViewCell *) sender]];
         [(IMRecentContactDetailsViewController*)segue.destinationViewController setCurrentRecent:selectedRecent];
+        [(IMRecentContactDetailsViewController*)segue.destinationViewController setManager:self.manager];
+    
 //    }
 }
 

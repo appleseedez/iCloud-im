@@ -33,17 +33,20 @@
 //插入新数据到数据库. 由调用者判断是否为nil 只有非nil才做提交保存
 + (instancetype)recentWithCallInfo:(NSDictionary *)info inContext:(NSManagedObjectContext *)context{
     //简单检查下传人的info是否足够.不足则不会操作数据
-    if ([info.allKeys count] <5) {
+    if ([info.allKeys count] <7) {
         [NSException exceptionWithName:@"创建recent数据失败." reason:@"info is not enough to create a recent object " userInfo:nil];
         return nil;
     }
     Recent* aRecent = [NSEntityDescription insertNewObjectForEntityForName:@"Recent" inManagedObjectContext:context];
     aRecent.peerAvatar = [info valueForKey:kPeerAvatar];
-    aRecent.createDate = [NSDate date];
+    aRecent.createDate = [info valueForKey:kCreateDate];
     aRecent.peerNick = [info valueForKey:kPeerNick];
     aRecent.peerRealName = [info valueForKey:kPeerRealName];
     aRecent.peerNumber = [info valueForKey:kPeerNumber];
     aRecent.status = [info valueForKey:kStatus];
+    aRecent.duration = [info valueForKey:kDuration];
+    aRecent.hostUserNumber = [info valueForKey:kHostUserNumber];
+    [[IMCoreDataManager defaulManager] saveContext];
     return aRecent;
 }
 @end

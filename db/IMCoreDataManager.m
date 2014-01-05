@@ -115,43 +115,43 @@ static IMCoreDataManager* _instance;
     
     
     if (firstRun) {
-        
-        
-        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
-        [context setPersistentStoreCoordinator:_persistentStoreCoordinator];
-        
-        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-        [dateComponents setYear:2013];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        [dateFormatter setCalendar:calendar];
-        
-        for (NSInteger day = 1; day < 365; day += 7)
-        {
-            [dateComponents setDay:day];
-            NSDate *date = [calendar dateFromComponents:dateComponents];
-            
-            Recent* test = [NSEntityDescription insertNewObjectForEntityForName:@"Recent" inManagedObjectContext:context];
-            test.peerAvatar = @"peerAvatar";
-            test.peerNick = @"appleseedez";
-            test.peerNumber = @"123456";
-            test.peerRealName = @"领域";
-            test.createDate = date;
-            test.status = @"called";
-            Recent* test2 = [NSEntityDescription insertNewObjectForEntityForName:@"Recent" inManagedObjectContext:context];
-            test2.peerAvatar = @"callerAvatar";
-            test2.peerNick = @"Emma";
-            test2.peerNumber = @"12345121416";
-            test2.peerRealName = @"爱玛";
-            test2.createDate = date;
-            test2.status = @"missed";
-        }
-        
-        [context save:NULL];
+//        
+//        
+//        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+//        [context setPersistentStoreCoordinator:_persistentStoreCoordinator];
+//        
+//        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+//        [dateComponents setYear:2013];
+//        
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+//        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+//        
+//        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//        [dateFormatter setCalendar:calendar];
+//        
+//        for (NSInteger day = 1; day < 365; day += 7)
+//        {
+//            [dateComponents setDay:day];
+//            NSDate *date = [calendar dateFromComponents:dateComponents];
+//            
+//            Recent* test = [NSEntityDescription insertNewObjectForEntityForName:@"Recent" inManagedObjectContext:context];
+//            test.peerAvatar = @"peerAvatar";
+//            test.peerNick = @"appleseedez";
+//            test.peerNumber = @"123456";
+//            test.peerRealName = @"领域";
+//            test.createDate = date;
+//            test.status = @"called";
+//            Recent* test2 = [NSEntityDescription insertNewObjectForEntityForName:@"Recent" inManagedObjectContext:context];
+//            test2.peerAvatar = @"callerAvatar";
+//            test2.peerNick = @"Emma";
+//            test2.peerNumber = @"12345121416";
+//            test2.peerRealName = @"爱玛";
+//            test2.createDate = date;
+//            test2.status = @"missed";
+//        }
+//        
+//        [context save:NULL];
     }
     return _persistentStoreCoordinator;
 }

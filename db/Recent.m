@@ -24,6 +24,7 @@
 @dynamic sectionIdentifier;
 @dynamic primitiveCreateDate;
 @dynamic primitiveSectionIdentifier;
+@dynamic hostUserNumber;
 #pragma mark - Transient properties
 - (NSString *)sectionIdentifier{
     [self willAccessValueForKey:@"sectionIdentifier"];
