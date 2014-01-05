@@ -1813,21 +1813,21 @@
                                             <rect key="frame" x="20" y="10" width="56" height="56"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张燕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7KD-0I-Rg0">
-                                            <rect key="frame" x="84" y="10" width="56" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张燕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7KD-0I-Rg0">
+                                            <rect key="frame" x="84" y="10" width="96" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="24"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(小小菲林)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mq4-wO-5h0">
-                                            <rect key="frame" x="148" y="10" width="94" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(小小菲林)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mq4-wO-5h0">
+                                            <rect key="frame" x="188" y="10" width="112" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7777777" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ngd-5g-aPB">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7777777" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ngd-5g-aPB">
                                             <rect key="frame" x="84" y="39" width="216" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
@@ -1836,7 +1836,7 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </view>
-                                <view contentMode="scaleToFill" id="vAL-Oa-S5k" userLabel="action view">
+                                <view tag="100" contentMode="scaleToFill" id="vAL-Oa-S5k" userLabel="action view">
                                     <rect key="frame" x="0.0" y="76" width="320" height="49"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -1905,7 +1905,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="详情" id="VtB-F4-2wc"/>
                     <connections>
+                        <outlet property="avatarView" destination="DrY-vd-K6b" id="el6-VE-JAu"/>
                         <outlet property="headerView" destination="1le-4S-Pk8" id="MAk-hg-7jO"/>
+                        <outlet property="nameLabel" destination="7KD-0I-Rg0" id="m7i-uM-D4h"/>
+                        <outlet property="nickLabel" destination="Mq4-wO-5h0" id="zgl-uP-uxz"/>
+                        <outlet property="numberLabel" destination="Ngd-5g-aPB" id="vaq-pb-mug"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FN8-vr-0hw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2979,16 +2983,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Recent Call Cell" id="6Dw-E5-h9f">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Recent Call Cell" id="6Dw-E5-h9f">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Dw-E5-h9f" id="8xp-3R-8zL">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yEg-8Y-Qoz" userLabel="avatar">
                                             <rect key="frame" x="20" y="6" width="32" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jaunt" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BQ0-D5-IPK" userLabel="name">
                                             <rect key="frame" x="60" y="6" width="166" height="21"/>
@@ -3011,7 +3015,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="nvj-B9-ahk" kind="push" id="h55-Ve-igh"/>
+                                    <segue destination="nvj-B9-ahk" kind="push" identifier="Recent Detail" trigger="accessoryAction" id="Uku-gY-x8s"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -3020,7 +3024,13 @@
                             <outlet property="delegate" destination="Vl7-8v-nnS" id="g8x-TC-34b"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="通话记录" id="r0U-A6-jQC"/>
+                    <navigationItem key="navigationItem" title="通话记录" id="r0U-A6-jQC">
+                        <barButtonItem key="leftBarButtonItem" title="清空" id="xhX-0G-oXe">
+                            <connections>
+                                <action selector="deleteAllRecents:" destination="Vl7-8v-nnS" id="Up8-mV-ihc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1b-yl-8hd" userLabel="First Responder" sceneMemberID="firstResponder"/>

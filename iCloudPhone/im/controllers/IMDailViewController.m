@@ -97,7 +97,7 @@
     self.suggestBtnView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.suggestBtnView.layer.borderWidth = .5;
     self.searchResultView.hidden = YES;
-    self.selfAccountLabel.text = [NSString stringWithFormat:@"本机号码：%@", [self.manager myAccount]];
+    self.selfAccountLabel.text = @"";//[NSString stringWithFormat:@"本机号码：%@", [self.manager myAccount]];
     [[ItelAction action] getItelFriendList:0];
 }
 - (void) tearDown{

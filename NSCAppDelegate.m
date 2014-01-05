@@ -15,12 +15,48 @@
 #import "ItelUserManager.h"
 //IMmanager 实现类
 #import "IMManagerImp.h"
+#import "IMDBManagerImp.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 @implementation NSCAppDelegate
 -(void) signOut{
     [[ItelAction action] setHostItelUser:nil];
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
     
+}
+
+- (void) setupDB{
+    id<IMDBManager> dbManager = [IMDBManagerImp new];
+    [dbManager createTable];
+//    [dbManager dumpDataWithDic:@{
+//                                 @"peerNick":@"appleseedez",
+//                                 @"peerRealName":@"林古",
+//                                 @"peerNumber":@"13567823456",
+//                                 @"peerAvatar":@"peerAvatar",
+//                                 @"createDate":@"2014-01-02",
+//                                 @"duration":@(100),
+//                                 @"startTime":@"9:00",
+//                                 @"status":@"missed"
+//                                 } intoTable:@"recents"];
+//    [dbManager dumpDataWithDic:@{
+//                                 @"peerNick":@"nicole",
+//                                 @"peerRealName":@"陵园",
+//                                 @"peerNumber":@"1345644333",
+//                                 @"peerAvatar":@"peerAvatar",
+//                                 @"createDate":@"2014-01-03",
+//                                 @"duration":@(100),
+//                                 @"startTime":@"10:00",
+//                                 @"status":@"called"
+//                                 } intoTable:@"recents"];
+//    [dbManager dumpDataWithDic:@{
+//                                 @"peerNick":@"Herry",
+//                                 @"peerRealName":@"亨利",
+//                                 @"peerNumber":@"135675544",
+//                                 @"peerAvatar":@"peerAvatar",
+//                                 @"createDate":@"2014-01-03",
+//                                 @"duration":@(105),
+//                                 @"startTime":@"10:00",
+//                                 @"status":@"called"
+//                                 } intoTable:@"recents"];
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -52,6 +88,7 @@
         
     }
     
+    [self setupDB];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
    return YES;
@@ -85,6 +122,9 @@
     }
     [UIView commitAnimations];
 }
+
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 #if APP_DELEGATE_DEBUG
