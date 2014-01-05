@@ -14,5 +14,7 @@
 @property (nonatomic,strong) NSString *port;
 @property (nonatomic,strong) NSString *stunServer;
 @property (nonatomic,strong) NSString *sessionId;
+@property (nonatomic,strong) NSString *SPRING_SECURITY_REMEMBER_ME_COOKIE;
+
 +(HostItelUser*)userWithDictionary:(NSDictionary*)dic;
 @end

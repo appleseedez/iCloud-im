@@ -58,8 +58,8 @@
     [self.view endEditing:YES];
     self.txtInuptCheckMessage.text=@"登录中...";
     [self.actWaitingToLogin startAnimating];
-   NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://211.149.144.15:8000/CloudCommunity/login.json"]];
-  // NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.0.137:8080/CloudCommunity/login.json"]];
+   //NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://211.149.144.15:8000/CloudCommunity/login.json"]];
+     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.0.120:8080/CloudCommunity/login.json"]];
     
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
@@ -79,7 +79,14 @@
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 HostItelUser *host=[HostItelUser userWithDictionary:[dic objectForKey:@"data"]];
-                 host.sessionId=[json objectForKey:@"JSESSIONID"];
+                NSDictionary *tokens=[json objectForKey:@"tokens"];
+                if (tokens) {
+                    host.sessionId=[tokens objectForKey:@"jsessionid"];
+                    host.SPRING_SECURITY_REMEMBER_ME_COOKIE=[tokens objectForKey:@"spring_security_remember_me_cookie"];
+                    host.token=[tokens objectForKey:@"token"];
+                }
+                
+                
                 [[ItelAction action] setHostItelUser:host];
                 [self.actWaitingToLogin stopAnimating];
                 self.txtInuptCheckMessage.text = @"";
