@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Recent.h"
 #import "Recent+CRUD.h"
-@interface IMRecentContactDetailsViewController : UITableViewController
+#import "CoreDataTableViewController.h"
+@interface IMRecentContactDetailsViewController : CoreDataTableViewController
 //@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (nonatomic) Recent* currentRecent; //
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
