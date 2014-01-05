@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface IMRecentContactItem : NSObject
+@property(nonatomic) long sid;
 @property(nonatomic,copy) NSString* peerRealName;
 @property(nonatomic,copy) NSString* peerNick;
 @property(nonatomic,copy) NSString* peerAvatar;

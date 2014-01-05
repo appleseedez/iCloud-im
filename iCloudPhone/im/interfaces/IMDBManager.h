@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol IMDBManager <NSObject>
-
+- (void) createTable;
+- (void) dumpDataWithDic:(NSDictionary*) dic intoTable:(NSString*) tableName;
 @end

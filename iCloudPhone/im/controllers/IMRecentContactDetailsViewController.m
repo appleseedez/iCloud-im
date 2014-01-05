@@ -7,7 +7,8 @@
 //
 
 #import "IMRecentContactDetailsViewController.h"
-
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 @interface IMRecentContactDetailsViewController ()
 
 @end
@@ -25,23 +26,56 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    self.tableView.tableHeaderView = self.headerView;
+//self.tableView.tableHeaderView = self.headerView;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self setup];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self tearDown];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - life
+- (void) setup{
+//    [self.avatarView setImageWithURL:[NSURL URLWithString:self.currentRecent.peerAvatar] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+//    self.nameLabel.text =self.currentRecent.peerRealName;
+//    self.nickLabel.text = self.currentRecent.peerNick;
+//    self.numberLabel.text = self.currentRecent.peerNumber;
+    UIImageView* avatar = (UIImageView*) [self.headerView viewWithTag:1];
+    [avatar setImageWithURL:[NSURL URLWithString:self.currentRecent.peerAvatar] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    UILabel* nameLabel = (UILabel*) [self.headerView viewWithTag:2];
+    nameLabel.text = self.currentRecent.peerRealName;
+    UILabel* nickLabel = (UILabel*) [self.headerView viewWithTag:3];
+    nickLabel.text = [NSString stringWithFormat:@"(%@)",self.currentRecent.peerNick] ;
+    UILabel* numberLabel = (UILabel*) [self.headerView viewWithTag:4];
+    numberLabel.text = self.currentRecent.peerNumber;
+//        self.tableView.tableHeaderView = self.headerView;
+//    self.headerView = Nil;
+}
+
+- (void) tearDown{
+    
 }
 
 #pragma mark - Table view data source

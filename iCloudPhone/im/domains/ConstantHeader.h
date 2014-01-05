@@ -151,4 +151,14 @@ enum AccountClientTypes
 #define PATH_OF_APP_HOME    NSHomeDirectory()
 #define PATH_OF_TEMP        NSTemporaryDirectory()
 #define PATH_OF_DOCUMENT    [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+#define ONE_DAY_TIME_IN_SECONDS 86400.0
+
+
+#define TABLE_NAME_RECENT @"Recent"
+#define kPeerAvatar  @"peerAvatar"
+#define kPeerRealName @"peerRealName"
+#define kPeerNumber @"peerNumber"
+#define kPeerNick @"peerNick"
+#define kCreateDate @"createDate"
+#define kStatus @"status"
 #endif
