@@ -52,6 +52,12 @@ static int soundCount;
     AudioServicesAddSystemSoundCompletion(DIALING_SOUND_ID,NULL,NULL,soundPlayCallback1,NULL);
     AudioServicesPlaySystemSound(DIALING_SOUND_ID);
     [self registerNotifications];
+    if ([self.manager isVideoCall]) {
+        self.isVideoCallICONView.image = [UIImage imageNamed:@"videoCall_ico"];
+    }else{
+        self.isVideoCallICONView.image = [UIImage imageNamed:@"voiceCall_ico"];
+    }
+    
 }
 - (void) tearDown{
     //终止拨号音

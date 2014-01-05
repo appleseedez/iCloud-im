@@ -16,6 +16,7 @@
 //IMmanager 实现类
 #import "IMManagerImp.h"
 #import "ItelMessageManager.h"
+
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 @implementation NSCAppDelegate
 -(void) signOut{
@@ -94,6 +95,9 @@
     }
     [UIView commitAnimations];
 }
+
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 #if APP_DELEGATE_DEBUG

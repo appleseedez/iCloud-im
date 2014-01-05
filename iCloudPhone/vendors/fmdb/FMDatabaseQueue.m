@@ -40,13 +40,17 @@
     return q;
 }
 
++ (Class)databaseClass {
+    return [FMDatabase class];
+}
+
 - (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags {
     
     self = [super init];
     
     if (self != nil) {
         
-        _db = [FMDatabase databaseWithPath:aPath];
+        _db = [[[self class] databaseClass] databaseWithPath:aPath];
         FMDBRetain(_db);
         
 #if SQLITE_VERSION_NUMBER >= 3005000
@@ -74,6 +78,11 @@
     return [self initWithPath:aPath flags:SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE];
 }
 
+- (instancetype)init {
+    return [self initWithPath:nil];
+}
+
+    
 - (void)dealloc {
     
     FMDBRelease(_db);
@@ -105,7 +114,7 @@
 #if SQLITE_VERSION_NUMBER >= 3005000
         if (![_db openWithFlags:_openFlags]) {
 #else
-			if (![db open])
+        if (![db open]) {
 #endif
             NSLog(@"FMDatabaseQueue could not reopen database for path %@", _path);
             FMDBRelease(_db);
@@ -127,6 +136,14 @@
         
         if ([db hasOpenResultSets]) {
             NSLog(@"Warning: there is at least one open result set around after performing [FMDatabaseQueue inDatabase:]");
+            
+#ifdef DEBUG
+            NSSet *openSetCopy = FMDBReturnAutoreleased([[db valueForKey:@"_openResultSets"] copy]);
+            for (NSValue *rsInWrappedInATastyValueMeal in openSetCopy) {
+                FMResultSet *rs = (FMResultSet *)[rsInWrappedInATastyValueMeal pointerValue];
+                NSLog(@"query: '%@'", [rs query]);
+            }
+#endif
         }
     });
     

@@ -88,7 +88,7 @@ enum AccountClientTypes
 #define SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY @"peerInterPort"
 #define SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY @"peerLocalIP"
 #define SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY @"peerLocalPort"
-
+#define SESSION_PERIOD_FIELD_PEER_USE_VIDEO @"useVideo"
 //通话终止信令字段
 #define SESSION_HALT_FIELD_TYPE_KEY @"halttype"
 #define SESSION_HALT_FILED_ACTION_REFUSE @"refusesession" //接收方需要终止session
@@ -148,4 +148,17 @@ enum AccountClientTypes
 
 #define STATUS_BAR_HEIGHT 30 // 顶部status bar的高度
 #define FULL_SCREEN [[UIScreen mainScreen] bounds]
+#define PATH_OF_APP_HOME    NSHomeDirectory()
+#define PATH_OF_TEMP        NSTemporaryDirectory()
+#define PATH_OF_DOCUMENT    [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+#define ONE_DAY_TIME_IN_SECONDS 86400.0
+
+
+#define TABLE_NAME_RECENT @"Recent"
+#define kPeerAvatar  @"peerAvatar"
+#define kPeerRealName @"peerRealName"
+#define kPeerNumber @"peerNumber"
+#define kPeerNick @"peerNick"
+#define kCreateDate @"createDate"
+#define kStatus @"status"
 #endif

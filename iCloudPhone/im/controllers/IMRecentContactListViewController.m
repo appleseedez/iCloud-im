@@ -9,32 +9,54 @@
 #import "IMRecentContactListViewController.h"
 #import "IMRootTabBarViewController.h"
 #import "IMDailViewController.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+#import "FMDatabase.h"
+#import "IMRecentContactItem.h"
 #import "IMManager.h"
+#import "IMCoreDataManager.h"
+#import "Recent.h"
+#import "Recent+CRUD.h"
+#import "IMRecentContactDetailsViewController.h"
 @interface IMRecentContactListViewController ()
 @property id<IMManager> manager;
 @end
 
 @implementation IMRecentContactListViewController
+- (id)init
+{
+    self = [super init];
+    if (self) {
 
+    }
+    return self;
+}
 - (void)awakeFromNib{
     [super awakeFromNib];
-    
     [self registerNotifications];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self setup];
+    [self setupFetchViewController];
 }
-//- (void)viewDidAppear:(BOOL)animated{
-//    [super viewDidAppear:animated];
-//
-//}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+
+    
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self tearDown];
+}
 - (void)viewDidLoad
 {
-   
     [super viewDidLoad];
+#if OTHER_MESSAGE
      NSLog(@"tableView的viewDidLoad方法被调用");
+#endif
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,9 +65,12 @@
 }
 
 - (void)dealloc{
-    NSLog(@"被凶狠");
+#if OTHER_MESSAGE
+    NSLog(@"IMRecentContactListViewController被销毁了");
+#endif
 }
-#pragma mark - private 
+#pragma mark - private
+//由通知回调
 - (void) setup{
     IMRootTabBarViewController* root =(IMRootTabBarViewController*)self.tabBarController;
     self.manager = root.manager;
@@ -55,33 +80,119 @@
     [self presentViewController:dialViewController animated:YES completion:nil];
     
 }
+- (void) tearDown {
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
+}
 
+
+- (void) setupFetchViewController{
+    if ([IMCoreDataManager defaulManager].managedObjectContext) {
+// 获取最近通话记录列表
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recent"];
+        [request setFetchBatchSize:20];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO selector:@selector(localizedCaseInsensitiveCompare:)]];
+//        request.predicate = [NSPredicate predicateWithFormat:@"whoTook = %@", self.photographer];
+        
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                            managedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext
+                                                                              sectionNameKeyPath:@"sectionIdentifier"
+                                                                                       cacheName:@"RENT_LIST"];
+    } else {
+        self.fetchedResultsController = nil;
+    }
+}
+
+- (void) loadData{
+   //当加载数据后, 根据数据的分组情况,生成数个实现了NSxxxinfo接口的对象
+    
+}
 -(void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setup) name:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 0;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return 0;
-}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    id <NSFetchedResultsSectionInfo> theSection = [[self.fetchedResultsController sections] objectAtIndex:section];
 
+    static NSDateFormatter *formatter = nil;
+    
+    if (!formatter)
+    {
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setCalendar:[NSCalendar currentCalendar]];
+       
+//        NSString *formatTemplate = [NSDateFormatter dateFormatFromTemplate:@"YYYY MM-dd" options:0 locale:[NSLocale currentLocale]];
+        [formatter setDateFormat:@"YYYY-MM-dd"];
+    }
+   // 把每个section的标题转换为真正的日期显示
+    NSInteger numericSection = [[theSection name] integerValue];
+    NSInteger year = numericSection / 1000000;
+	NSInteger month =(numericSection -  (year * 1000000))/1000;
+	NSInteger day = numericSection - (year * 1000000) - (month * 1000);
+    
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    dateComponents.year = year;
+    dateComponents.month = month;
+    dateComponents.day = day;
+    NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
+	NSString *titleString = [formatter stringFromDate:date];
+	return titleString;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Recent Call Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+
+    Recent* record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    UIImageView* avatarView = (UIImageView*)[cell.contentView viewWithTag:1];
+    UILabel* nameLabel = (UILabel*) [cell.contentView viewWithTag:2];
+    UILabel* numberLabel = (UILabel*) [cell.contentView viewWithTag:3];
+    UIImageView* statusView = (UIImageView*) [cell.contentView viewWithTag:4];
+    [avatarView setImageWithURL:[NSURL URLWithString:record.peerAvatar] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    [nameLabel setText:record.peerNick];
+    [numberLabel setText:record.peerNumber];
+    [statusView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_ico",record.status]]];
+ 
     return cell;
 }
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Recent* recent = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [recent delete];
+    }
+}
 
+#pragma mark - segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+//    
+//    if ([segue.identifier isEqualToString:@"Recent Detail"]) {
+        Recent* selectedRecent = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:(UITableViewCell *) sender]];
+        [(IMRecentContactDetailsViewController*)segue.destinationViewController setCurrentRecent:selectedRecent];
+//    }
+}
+
+#pragma mark - actionSheet delegate
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet{
+    actionSheet = nil;
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        //
+        [Recent deleteAll];
+    }
+}
+- (IBAction)deleteAllRecents:(UIBarButtonItem*)sender{
+    if ([[self.fetchedResultsController sections] count]) {
+        UIActionSheet* confirmSheet = [[UIActionSheet alloc] initWithTitle:@"将要删除全部通话记录" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"全部删除" otherButtonTitles:nil, nil];
+        [confirmSheet showFromTabBar:self.tabBarController.tabBar];
+        
+    }
+    
+}
 @end

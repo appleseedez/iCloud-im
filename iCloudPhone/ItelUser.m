@@ -11,7 +11,7 @@
 @implementation ItelUser
 +(ItelUser*)userWithDictionary:(NSDictionary*)dic{
     for (NSString *key in [dic allKeys]) {
-       id object = [dic objectForKey:key];
+        id object = [dic objectForKey:key];
         if ([object isEqual:[NSNull null]]) {
             [dic setValue:@"" forKey:key];
         }
@@ -27,7 +27,7 @@
     
     user.remarkName=[dic objectForKey:@"alias"];
     
-        user.telNum=[dic objectForKey:@"phone"];
+    user.telNum=[dic objectForKey:@"phone"];
     [user setPersonal:dic];
     return user;
 }

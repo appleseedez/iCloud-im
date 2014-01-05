@@ -15,6 +15,9 @@
 @property (nonatomic,copy) NSString* selfAccount;
 @property (nonatomic,strong) NSTimer* keepSessionAlive;//从获取到外网地址，到收到通话回复。
 @property (nonatomic) BOOL isVideoCall; //是否是视频通话
+
+@property (nonatomic,strong) MSWeakTimer* communicationTimer; //用于进行通话时长计时
+@property (nonatomic) double duration; //通话时长
 @end
 
 @implementation IMManagerImp
@@ -164,7 +167,8 @@
                                               [parsedData valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY],
                                           SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY: self.selfAccount,
                                           SESSION_SRC_SSID_KEY:[parsedData valueForKey:SESSION_DEST_SSID_KEY], //总是在传递是以接收方的角度去思考
-                                          SESSION_DEST_SSID_KEY:[parsedData valueForKey:SESSION_SRC_SSID_KEY]
+                                          SESSION_DEST_SSID_KEY:[parsedData valueForKey:SESSION_SRC_SSID_KEY],
+                                          SESSION_PERIOD_FIELD_PEER_USE_VIDEO:[NSNumber numberWithBool:self.isVideoCall]
                                           }];
     //由于信令是发给对方的。所以destAccount和srcaccount应该是从对方的角度去思考。因此destAccount填的是自己的帐号，srcaccount填写的是对方的帐号。这样，在对方看来就是完美的。而且，对等方在构造信令数据时有相同的逻辑
     [mergeData addEntriesFromDictionary:@{SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[parsedData valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]}];
@@ -173,7 +177,7 @@
     // 构造通话数据请求
     NSDictionary* data = [self.messageBuilder buildWithParams:mergeData];
 #if SIGNAL_MESSAGE
-    NSLog(@"通话开始阶段的谈判过程，数据往来:%@",data);
+    NSLog(@"通话开始阶段的谈判过程，数据往来:%@ useVideo:%@,mergeData:%@",data,[NSNumber numberWithBool:self.isVideoCall],mergeData);
 #endif
     [self.TCPcommunicator send:data];
 }
@@ -267,7 +271,13 @@
     // TODO 设置10秒超时，如果没有收到接受通话的回复则转到拒绝流程
     
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param void <#void description#>
+ *
+ *  @return <#return value description#>
+ */
 //收到peer端的请求类型，则首先检查自己是否是被占用状态。
 //在非占用状态下，10秒内用户主动操作接听，则开始构造响应类型数据，同时本机设置为占用状态，然后开始获取p2p的后续操作
 - (void) sessionPeriod:(NSNotification*) notify{
@@ -284,13 +294,14 @@
         NSLog(@"收到PEER的链路数据：%@",notify.userInfo);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTransportAndNotify:) name:P2PTUNNEL_SUCCESS object:nil];
         //告诉引擎，目前是否是视频通话
-        [self.engine setIsVideoCalling:self.isVideoCall];
+        [self candidateUseVideoCall:[[notify.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]];
         [self.engine tunnelWith:notify.userInfo];
 
     }else if ([self.state isEqualToString:IDLE]){ //如果是idle状态下，接到了通话信令，则是有人拨打
 #if MANAGER_DEBUG
         NSLog(@"收到通话请求，用户操作可以接听");
 #endif
+        [self candidateUseVideoCall:[[notify.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]];
         //通知界面，弹出通话接听界面:[self sessionPeriodResponse:notify]
         [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:nil userInfo:notify.userInfo];
     }else{//剩余的情况表明。当前正在通话中，应该拒绝 这里会是自动拒绝 
@@ -309,6 +320,8 @@
 - (void) sessionPeriodResponse:(NSNotification*) notify{
     //首先，开启会话，设置处于占线状态
     [self startSession:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]];
+    
+
     //既然是接受通话，则信令构造器要换成回复的类型
     self.messageBuilder = [[IMSessionPeriodResponseMessageBuilder alloc] init];
     // 把自身的链路信息作为响应发出，表明本机接受通话请求
@@ -320,7 +333,7 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(justStartTransport:) name:P2PTUNNEL_SUCCESS object:nil];
     //告诉引擎，目前是否是视频通话
-    [self.engine setIsVideoCalling:self.isVideoCall];
+    [self candidateUseVideoCall:[[notify.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]];
     [self.engine tunnelWith:notify.userInfo];
     /**
      *  移到 justStartTransport 方法
@@ -328,7 +341,14 @@
      */
 //    [self.engine startTransport];
 }
-
+//决定最终是是否使用视频 决定因素:对方是否视频,自己是否支持视频
+- (void) candidateUseVideoCall:(BOOL) peerUseVideo{
+    if (peerUseVideo && [self canVideo]) {
+        [self setIsVideoCall:YES];
+    }else{
+        [self setIsVideoCall:NO];
+    }
+}
 #pragma mark - 1213 test
 /**
  *  因为tunnelWith 方法阻塞操作，将其放到线程中去
@@ -349,6 +369,22 @@
                                                       userInfo:notify.userInfo];
 }
 
+- (void) durationTick{
+    self.duration++;
+}
+//开始为本次通话计时
+- (void) startCommunicationCounting{
+    //状态归零
+    [self.communicationTimer invalidate];
+    self.duration = 0.0;
+    self.communicationTimer = [MSWeakTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(durationTick) userInfo:nil repeats:YES dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+    
+}
+//结束本次通话计时
+- (void) stopCommunicationCounting{
+    [self.communicationTimer invalidate];
+    
+}
 //收到信令服务器的验证响应，
 - (void) authHasResult:(NSNotification*) notify{
 #if MANAGER_DEBUG
@@ -498,6 +534,13 @@
 }
 - (BOOL) isVideoCall{
     return _isVideoCall;
+}
+//检查是否可以视频
+- (BOOL)canVideo{
+    return [self.engine canVideoCalling];
+}
+- (void)setCanVideo:(BOOL)canVideo{
+    [self.engine setCanVideoCalling:canVideo];
 }
 - (void)setRouteSeverIP:(NSString *)ip{
     self.routeIP = ip;
