@@ -15,6 +15,9 @@
 @property (nonatomic,copy) NSString* selfAccount;
 @property (nonatomic,strong) NSTimer* keepSessionAlive;//从获取到外网地址，到收到通话回复。
 @property (nonatomic) BOOL isVideoCall; //是否是视频通话
+
+@property (nonatomic,strong) MSWeakTimer* communicationTimer; //用于进行通话时长计时
+@property (nonatomic) double duration; //通话时长
 @end
 
 @implementation IMManagerImp
@@ -366,6 +369,22 @@
                                                       userInfo:notify.userInfo];
 }
 
+- (void) durationTick{
+    self.duration++;
+}
+//开始为本次通话计时
+- (void) startCommunicationCounting{
+    //状态归零
+    [self.communicationTimer invalidate];
+    self.duration = 0.0;
+    self.communicationTimer = [MSWeakTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(durationTick) userInfo:nil repeats:YES dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+    
+}
+//结束本次通话计时
+- (void) stopCommunicationCounting{
+    [self.communicationTimer invalidate];
+    
+}
 //收到信令服务器的验证响应，
 - (void) authHasResult:(NSNotification*) notify{
 #if MANAGER_DEBUG
