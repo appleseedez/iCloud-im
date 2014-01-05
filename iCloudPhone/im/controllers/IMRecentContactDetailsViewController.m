@@ -9,6 +9,7 @@
 #import "IMRecentContactDetailsViewController.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
+#import "IMCoreDataManager.h"
 @interface IMRecentContactDetailsViewController ()
 
 @end
@@ -63,94 +64,49 @@
     self.nameLabel.text =self.currentRecent.peerRealName;
     self.nickLabel.text = self.currentRecent.peerNick;
     self.numberLabel.text = self.currentRecent.peerNumber;
-//    UIImageView* avatar = (UIImageView*) [self.headerView viewWithTag:1];
-//    [avatar setImageWithURL:[NSURL URLWithString:self.currentRecent.peerAvatar] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
-//    UILabel* nameLabel = (UILabel*) [self.headerView viewWithTag:2];
-//    nameLabel.text = self.currentRecent.peerRealName;
-//    UILabel* nickLabel = (UILabel*) [self.headerView viewWithTag:3];
-//    nickLabel.text = [NSString stringWithFormat:@"(%@)",self.currentRecent.peerNick] ;
-//    UILabel* numberLabel = (UILabel*) [self.headerView viewWithTag:4];
-//    numberLabel.text = self.currentRecent.peerNumber;
-//        self.tableView.tableHeaderView = self.headerView;
-//    self.headerView = Nil;
+    [self setupFetchViewController];
 }
 
 - (void) tearDown{
-    
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return 111;
-}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Contact Cell";
+    static NSDateFormatter* timeFormatter = [[NSDateFormatter alloc] init];
+    [timeFormatter setDateFormat:@"YYYY-MM-dd HH:mm"];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    cell.detailTextLabel.text = @"test";
+    Recent* record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    UIImageView* statusView = (UIImageView*)[cell.contentView viewWithTag:1];
+    UILabel* timeStampLabel = (UILabel*) [cell.contentView viewWithTag:2];
+    UILabel* durationLabel = (UILabel*) [cell.contentView viewWithTag:3];
+    NSString* statusImage = [NSString stringWithFormat:@"%@_ico",record.status];
+    [statusView setImage:[UIImage imageNamed:statusImage]];
+    timeStampLabel.text = [timeFormatter stringFromDate:record.createDate];
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void) setupFetchViewController{
+    if ([IMCoreDataManager defaulManager].managedObjectContext) {
+        // 获取最近通话记录列表
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recent"];
+        [request setFetchBatchSize:20];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO selector:@selector(localizedCaseInsensitiveCompare:)]];
+        request.predicate = [NSPredicate predicateWithFormat:@"peerNumber = %@", self.currentRecent.peerNumber];
+        
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                            managedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext
+                                                                              sectionNameKeyPath:nil
+                                                                                       cacheName:nil];
+    } else {
+        self.fetchedResultsController = nil;
+    }
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
-
 @end

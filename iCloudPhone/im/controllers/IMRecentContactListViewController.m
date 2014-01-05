@@ -34,12 +34,12 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     [self registerNotifications];
-[self setupFetchViewController];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    [self setupFetchViewController];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -81,7 +81,8 @@
     
 }
 - (void) tearDown {
-    
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
 }
 
 
