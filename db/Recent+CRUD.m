@@ -19,10 +19,11 @@
     }
     
 }
-+ (void) deleteAll{
++ (void) deleteAll:(NSString*) accountNumber {
     if ([[IMCoreDataManager defaulManager] managedObjectContext]) {
         NSFetchRequest* deleteAll = [NSFetchRequest fetchRequestWithEntityName:TABLE_NAME_RECENT];
         deleteAll.sortDescriptors = @[];
+        deleteAll.predicate = [NSPredicate predicateWithFormat:@"hostUserNumber = %@",accountNumber];
         NSArray* allRecents = [[[IMCoreDataManager defaulManager] managedObjectContext] executeFetchRequest:deleteAll error:nil];
         for (Recent* i in allRecents) {
             [[[IMCoreDataManager defaulManager] managedObjectContext] deleteObject:i];

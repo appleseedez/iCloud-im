@@ -31,7 +31,7 @@
 
 - (void) testSessionStart:(NSString*) destAccount{
     // 通话查询开始
-    if (!destAccount || [destAccount isEqualToString:self.selfAccount]) {
+    if (!destAccount || [destAccount isEqualToString:self.selfAccount] || [self.state isEqualToString:destAccount]) {
         return;
     }
     [self startSession:destAccount];
@@ -78,6 +78,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionHalt:) name:SESSION_PERIOD_HALT_NOTIFICATION object:nil];
     //登录到信令服务器后，需要做一次验证，验证信息响应时，发出该通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHasResult:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
+    // 收到异常信令
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInitFail:) name:SIGNAL_ERROR_NOTIFICATION object:nil];
 }
 
 //移除通知 防止leak
@@ -107,6 +109,8 @@
         // 异常情况处理。
         if (status != NORMAL_STATUS) {
             [NSException exceptionWithName:@"500:data format error" reason:@"信令服务器返回数据状态不正常" userInfo:nil];
+            //如果收到的status不正常, 则触发该消息
+            [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_ERROR_NOTIFICATION object:nil userInfo:@{DATA_TYPE_KEY:@(type)}];
             return;
         }
         bodySection = [data valueForKey:BODY_SECTION_KEY];
@@ -265,6 +269,10 @@
 #if SIGNAL_MESSAGE
     NSLog(@"收到信令服务器的通话查询响应：%@",notify.userInfo);
 #endif
+    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
+                                                                                                                       SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                                                                                                                       SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self myAccount]
+                                                                                                                       }];
     NSMutableDictionary *data = [notify.userInfo mutableCopy];
     [data addEntriesFromDictionary:@{
                                     SESSION_SRC_SSID_KEY:[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY],
@@ -275,6 +283,10 @@
 #endif
     [self sessionPeriodNegotiation:data];
     // TODO 设置10秒超时，如果没有收到接受通话的回复则转到拒绝流程
+    
+}
+
+- (void) sessionInitFail:(NSNotification*) notify{
     
 }
 /**

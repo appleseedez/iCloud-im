@@ -186,7 +186,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
         //
-        [Recent deleteAll];
+        [Recent deleteAll:[self.manager myAccount]];
     }
 }
 - (IBAction)deleteAllRecents:(UIBarButtonItem*)sender{
