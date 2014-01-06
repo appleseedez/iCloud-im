@@ -274,6 +274,7 @@
                                                                                                                        SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self myAccount]
                                                                                                                        }];
     NSMutableDictionary *data = [notify.userInfo mutableCopy];
+    //
     [data addEntriesFromDictionary:@{
                                     SESSION_SRC_SSID_KEY:[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY],
                                     SESSION_DEST_SSID_KEY:[NSNumber numberWithInteger:[[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] integerValue]+1]}];
