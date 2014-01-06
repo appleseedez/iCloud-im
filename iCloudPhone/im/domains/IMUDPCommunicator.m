@@ -129,7 +129,9 @@
     }else if (self.tag == ROUTE_UDP_SEQENCE_END_TAG){
 //         NSLog(@"最后拿到的ip:%@,port:%d",self.ip,self.port);
 //        [[response valueForKey:BODY_SECTION_KEY] setValue:@"10.0.0.30" forKey:UDP_INDEX_RES_FIELD_SERVER_IP_KEY];
+#if UDP_MESSAGE
         NSLog(@"最后登录的业务服务器：%@",response);
+#endif
         [self receive:response];
     }
     

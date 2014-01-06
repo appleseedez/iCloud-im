@@ -107,7 +107,9 @@ UIImageView* _pview_local;
     AFNetworkReachabilityManager* reachabilityManager = [AFNetworkReachabilityManager sharedManager];
     [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         //
+#if ENGINE_MSG
         NSLog(@"检查当前的链接状态:%@",AFStringFromNetworkReachabilityStatus(status));
+#endif
         switch (status) {
             case AFNetworkReachabilityStatusReachableViaWiFi:
             {

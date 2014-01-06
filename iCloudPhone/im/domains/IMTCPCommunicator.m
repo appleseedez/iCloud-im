@@ -18,8 +18,8 @@
 - (id)init{
     if (self = [super init]) {
         _sock = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-        _ip = SIGNAL_SERVER_IP;
-        _port=SIGNAL_SERVER_PORT;
+//        _ip = SIGNAL_SERVER_IP;
+//        _port=SIGNAL_SERVER_PORT;
         //心跳包是固定的格式，可以直接构造。
         _heartBeatPKG = @{
                           @"head":@{
