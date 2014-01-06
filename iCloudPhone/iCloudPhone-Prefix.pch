@@ -19,6 +19,7 @@
     #import "NSData+Byte.h"
     #import "MSWeakTimer.h"
     #import "NetHeaders.h"
+    #import "IMUtils.h"
     #define APP_DELEGATE_DEBUG 1
     #define MANAGER_DEBUG 1
     #define COMMUNICATOR_DEBUG 1
