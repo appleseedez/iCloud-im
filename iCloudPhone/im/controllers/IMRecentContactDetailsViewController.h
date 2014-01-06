@@ -11,7 +11,7 @@
 #import "Recent+CRUD.h"
 #import "CoreDataTableViewController.h"
 #import "IMManager.h"
-@interface IMRecentContactDetailsViewController : CoreDataTableViewController
+@interface IMRecentContactDetailsViewController : CoreDataTableViewController <UIActionSheetDelegate,UIAlertViewDelegate>
 //@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (nonatomic) Recent* currentRecent; //
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -19,4 +19,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nickLabel;
 @property (nonatomic) id<IMManager> manager;
+- (IBAction)moreAction:(UIBarButtonItem *)sender;
 @end

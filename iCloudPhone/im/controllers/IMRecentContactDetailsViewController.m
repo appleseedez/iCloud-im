@@ -10,6 +10,9 @@
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 #import "IMCoreDataManager.h"
+#import "ItelAction.h"
+static NSString* kOperationStatusNormal = @"isNormal";
+static NSString* kOperationReason = @"reason";
 @interface IMRecentContactDetailsViewController ()
 
 @end
@@ -111,5 +114,86 @@
 }
 
 
+#pragma mark - actionSheet delegate
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet{
+    actionSheet = nil;
+}
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.numberOfButtons == 4) {
+        // 陌生人
+        //点击加好友
+        if (buttonIndex == 0) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inviteItelUserResultHandel:) name:ADD_FIRIEND_NOTIFICATION object:nil];
+            
+            [[ItelAction action] inviteItelUserFriend:self.currentRecent.peerNumber];
+        
+        }else if (buttonIndex == 1){ //点击加入黑名单
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlackListResultHandel:) name:ADD_TO_BLACK_LIST_NOTIFICATION object:nil];
+            [[ItelAction action] addItelUserBlack:self.currentRecent.peerNumber];
+        }
+    }else{
+       //好友
+        //点击加入黑名单
+        if (buttonIndex == 0) {
+            if ([[ItelAction action] userInBlackBook:self.currentRecent.peerNumber]) {
+                //已经在黑名单了
+               UIAlertView* alert =  [[UIAlertView alloc] initWithTitle:nil message:@"已经加入黑名单了" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil,nil];
+                [alert show];
+                return;
+            }
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlackListResultHandel:) name:ADD_TO_BLACK_LIST_NOTIFICATION object:nil];
+            [[ItelAction action] addItelUserBlack:self.currentRecent.peerNumber];
+        }
+    }
+    if (buttonIndex == actionSheet.destructiveButtonIndex) {
+        //删除记录
+    }
+    
+}
+//添加好友结果回调
+- (void) inviteItelUserResultHandel:(NSNotification*) notify{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ADD_FIRIEND_NOTIFICATION object:nil];
+    UIAlertView* alert = nil;
+    if ([[notify.userInfo valueForKey:kOperationStatusNormal] boolValue]) {
+        alert =[ [UIAlertView alloc] initWithTitle:nil message:@"操作成功" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+    }else{
+        alert =[ [UIAlertView alloc] initWithTitle:nil message:[notify.userInfo valueForKey:kOperationReason] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+       
+    }
+    [alert show];
+}
+- (void) addBlackListResultHandel:(NSNotification*) notify{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ADD_TO_BLACK_LIST_NOTIFICATION object:nil];
+    UIAlertView* alert = nil;
+    if ([[notify.userInfo valueForKey:kOperationStatusNormal] boolValue]) {
+         [[ItelAction action] getItelBlackList:0];
+        alert =[ [UIAlertView alloc] initWithTitle:nil message:@"操作成功" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+       
+    }else{
+         alert =[ [UIAlertView alloc] initWithTitle:nil message:[notify.userInfo valueForKey:kOperationReason] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+    }
+    [alert show];
+    
+    
+}
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    alertView.delegate = nil;
+    alertView = nil;
+}
+- (IBAction)moreAction:(UIBarButtonItem *)sender {
+    UIActionSheet* moreActionSheet = nil;
+    if ([[ItelAction action] userInFriendBook:self.currentRecent.peerNumber]) {
+        
+        moreActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles: @"加入黑名单",@"删除记录",nil];
+        
+        [moreActionSheet setDestructiveButtonIndex:1];
+    }else{
+        moreActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"加为好友", @"加入黑名单",@"删除记录",nil];
+        
+        [moreActionSheet setDestructiveButtonIndex:2];
+    }
+
+    [moreActionSheet showFromTabBar:self.tabBarController.tabBar];
+}
 @end
