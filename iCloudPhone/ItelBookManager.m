@@ -29,6 +29,9 @@ static ItelBookManager *manager;
     
     return manager;
 }
+-(void)tearDown{
+    manager=nil;
+}
 -(void)reset{
     [self.friendBook reset];
     [self.blackBook reset];

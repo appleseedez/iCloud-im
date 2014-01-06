@@ -60,7 +60,7 @@
     [self.actWaitingToLogin startAnimating];
 
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://211.149.144.15:8000/CloudCommunity/login.json"]];
-//    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.0.40:8080/CloudCommunity/login.json"]];
+   // NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.0.120:8080/CloudCommunity/login.json"]];
     
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
@@ -73,6 +73,8 @@
     
     //success封装了一段代码表示如果请求成功 执行这段代码
     void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject){
+       NSString *log = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",log);
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
        
         if ([json isKindOfClass:[NSDictionary class]]) {
@@ -83,7 +85,7 @@
                 NSDictionary *tokens=[json objectForKey:@"tokens"];
                 if (tokens) {
                     host.sessionId=[tokens objectForKey:@"jsessionid"];
-                    host.SPRING_SECURITY_REMEMBER_ME_COOKIE=[tokens objectForKey:@"spring_security_remember_me_cookie"];
+                    host.spring_security_remember_me_cookie=[tokens objectForKey:@"spring_security_remember_me_cookie"];
                     host.token=[tokens objectForKey:@"token"];
                 }
                 
@@ -93,6 +95,7 @@
                 self.txtInuptCheckMessage.text = @"";
                 
                 [[ItelAction action] resetContact];
+                
                 
                 NSCAppDelegate *delegate =   (NSCAppDelegate*) [UIApplication sharedApplication].delegate;
                 [delegate changeRootViewController:RootViewControllerMain userInfo:[[json valueForKey:@"message"] valueForKey:@"data"]];
@@ -130,8 +133,8 @@
     [super viewDidLoad];
     [self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
     self.actWaitingToLogin.hidesWhenStopped=YES;
-    //self.txtUserCloudNumber.text=@"2301031983";
-    //self.txtUserPassword.text=@"123456";
+    self.txtUserCloudNumber.text=@"1000003";
+    self.txtUserPassword.text=@"123456";
   
     NXImageView *logo=[[NXImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 75)];
     [logo setRect:3 cornerRadius:10 borderColor:[UIColor whiteColor]];

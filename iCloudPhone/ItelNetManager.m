@@ -14,8 +14,7 @@
 #import "NetRequester.h"
 #define  SUCCESS void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
 #define  FAILURE void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error)
-//static NSString *server=@"http://211.149.144.15:8000/CloudCommunity";
-//static NSString *server=@"http://10.0.0.137:8080/CloudCommunity";
+
 
 static ItelNetManager *manager=nil;
 @implementation ItelNetManager
@@ -28,7 +27,9 @@ static ItelNetManager *manager=nil;
    
     return manager;
 }
-
+-(void)tearDown{
+    manager=nil;
+}
 #pragma mark - 添加联系人
 static int addcount=0;
 
@@ -304,7 +305,7 @@ static int addcount=0;
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
        
         if ([dic isKindOfClass:[NSDictionary class]]) {
-            
+           
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 
@@ -679,5 +680,30 @@ static int addcount=0;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"acceptFriends" object:nil userInfo:userInfo];
     };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
+}
+-(void)logout:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/CloudCommunity/j_spring_security_logout",SIGNAL_SERVER];
+    SUCCESS{
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+            
+            int ret=[[dic objectForKey:@"ret"] intValue];
+            if (ret==0) {
+                
+                
+            }
+            else {
+               // NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"logout" object:nil userInfo:userInfo];
+            }
+        }//如果请求失败 则执行failure
+    };
+    FAILURE {
+        
+       // NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"logout" object:nil userInfo:userInfo];
+    };
+    [NetRequester jsonGetRequestWithUrl:url andParameters:@{} success:success failure:failure];
 }
 @end

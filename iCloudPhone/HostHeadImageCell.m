@@ -34,7 +34,7 @@
     [actionSheet showInView:viewController.view];
 }
 -(void)setPro:(HostItelUser *)host{
-    [self.betterFaceImage setImageWithURL:[NSURL URLWithString:host.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
+    [self.betterFaceImage setImageWithURL:[NSURL URLWithString:host.imageUrl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
     
 }
 @end

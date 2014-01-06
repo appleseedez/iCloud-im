@@ -15,7 +15,7 @@
 @interface ItelBookManager : NSObject <ItelBookActionDelegate>
 
 
-
+-(void)tearDown;
 
 +(ItelBookManager*)defaultManager;
 -(AddressBook*)phoneBook;

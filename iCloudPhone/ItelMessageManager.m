@@ -27,6 +27,9 @@ static ItelMessageManager *manager;
     }
     return _systemMessageCache;
 }
+-(void)tearDown{
+    manager=nil;
+}
 -(void)startSearching{
     [self sendSearching];
    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendSearching) userInfo:nil repeats:YES];

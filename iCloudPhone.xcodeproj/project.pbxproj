@@ -78,7 +78,7 @@
 		47952D9718583D170044CF64 /* NSCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9618583D170044CF64 /* NSCAlertView.m */; };
 		47952D99185846B90044CF64 /* RegHeaders.h in Resources */ = {isa = PBXBuildFile; fileRef = 47952D98185846B90044CF64 /* RegHeaders.h */; };
 		47952D9D18585F600044CF64 /* RegNextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9C18585F600044CF64 /* RegNextButton.m */; };
-		4798A26E183DD45300060DDB /* HostItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4798A26D183DD45300060DDB /* HostItelUser.m */; };
+		4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */ = {isa = PBXBuildFile; fileRef = 4798A26D183DD45300060DDB /* HostItelUser+set.m */; };
 		479B90791837660B005D8CCB /* SearchNewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B90781837660B005D8CCB /* SearchNewFriendViewController.m */; };
 		479B907E18376DA1005D8CCB /* ItelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B907D18376DA1005D8CCB /* ItelAction.m */; };
 		479B908118376DCB005D8CCB /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B908018376DCB005D8CCB /* ItelUser.m */; };
@@ -91,6 +91,7 @@
 		479C7BAE185DDB480046B1D7 /* RegTipLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BAD185DDB480046B1D7 /* RegTipLabel.m */; };
 		479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C9C201834F02800DE40D8 /* ContentViewController.m */; };
 		479C9C291835019D00DE40D8 /* 头像.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 479C9C281835019D00DE40D8 /* 头像.jpg */; };
+		479CF0F718798D3F00FC021D /* HostItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CF0F618798D3F00FC021D /* HostItelUser.m */; };
 		479DB4B418648F8300421C10 /* CommonSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4B318648F8300421C10 /* CommonSettingViewController.m */; };
 		479DB4B718648F9900421C10 /* BlackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4B618648F9900421C10 /* BlackListViewController.m */; };
 		479DB4BB186494A000421C10 /* blackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4BA186494A000421C10 /* blackCell.m */; };
@@ -382,8 +383,8 @@
 		47952D98185846B90044CF64 /* RegHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegHeaders.h; sourceTree = "<group>"; };
 		47952D9B18585F600044CF64 /* RegNextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegNextButton.h; sourceTree = "<group>"; };
 		47952D9C18585F600044CF64 /* RegNextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegNextButton.m; sourceTree = "<group>"; };
-		4798A26C183DD45300060DDB /* HostItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostItelUser.h; sourceTree = "<group>"; };
-		4798A26D183DD45300060DDB /* HostItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostItelUser.m; sourceTree = "<group>"; };
+		4798A26C183DD45300060DDB /* HostItelUser+set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HostItelUser+set.h"; sourceTree = "<group>"; };
+		4798A26D183DD45300060DDB /* HostItelUser+set.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HostItelUser+set.m"; sourceTree = "<group>"; };
 		479B90771837660B005D8CCB /* SearchNewFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNewFriendViewController.h; sourceTree = "<group>"; };
 		479B90781837660B005D8CCB /* SearchNewFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNewFriendViewController.m; sourceTree = "<group>"; };
 		479B907C18376DA1005D8CCB /* ItelAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelAction.h; sourceTree = "<group>"; };
@@ -407,6 +408,8 @@
 		479C9C1F1834F02800DE40D8 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		479C9C201834F02800DE40D8 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		479C9C281835019D00DE40D8 /* 头像.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "头像.jpg"; sourceTree = "<group>"; };
+		479CF0F518798D3F00FC021D /* HostItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostItelUser.h; sourceTree = "<group>"; };
+		479CF0F618798D3F00FC021D /* HostItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostItelUser.m; sourceTree = "<group>"; };
 		479DB4B218648F8300421C10 /* CommonSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSettingViewController.h; sourceTree = "<group>"; };
 		479DB4B318648F8300421C10 /* CommonSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonSettingViewController.m; sourceTree = "<group>"; };
 		479DB4B518648F9900421C10 /* BlackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackListViewController.h; sourceTree = "<group>"; };
@@ -936,8 +939,8 @@
 				47A269AA18710A1500084A80 /* ItelMessageCache.m */,
 				479B907F18376DCB005D8CCB /* ItelUser.h */,
 				479B908018376DCB005D8CCB /* ItelUser.m */,
-				4798A26C183DD45300060DDB /* HostItelUser.h */,
-				4798A26D183DD45300060DDB /* HostItelUser.m */,
+				4798A26C183DD45300060DDB /* HostItelUser+set.h */,
+				4798A26D183DD45300060DDB /* HostItelUser+set.m */,
 				479B908218376DE3005D8CCB /* ItelBook.h */,
 				479B908318376DE3005D8CCB /* ItelBook.m */,
 				473F62DA18387CA4006CAE31 /* PersonInAddressBook.h */,
@@ -1273,8 +1276,8 @@
 				BAFEE13818744FDA00DB1AC6 /* db */,
 				479EF00C1859D47C0012EE29 /* im */,
 				47B89DE31834D40000022FE5 /* NSCAppDelegate.h */,
-				479EF04B1859D47C0012EE29 /* views */,
 				479E9350185AB7F8001AF6ED /* NSCAppDelegate.m */,
+				479EF04B1859D47C0012EE29 /* views */,
 				47B89DDA1834D40000022FE5 /* iCloudPhone */,
 				47B89DF91834D40000022FE5 /* iCloudPhoneTests */,
 				479EF09E1859D9A50012EE29 /* GCDSocket */,
@@ -1459,6 +1462,8 @@
 				BADDFD6E18769DF600D10DDC /* CoreDataTableViewController.h */,
 				BADDFD6F18769DF600D10DDC /* CoreDataTableViewController.m */,
 				BADDFD2218768C4F00D10DDC /* Model.xcdatamodeld */,
+				479CF0F518798D3F00FC021D /* HostItelUser.h */,
+				479CF0F618798D3F00FC021D /* HostItelUser.m */,
 				BA8242FF1875A0C3001903CE /* Recents.db */,
 				BADDFD661876901500D10DDC /* IMCoreDataManager.h */,
 				BADDFD671876901500D10DDC /* IMCoreDataManager.m */,
@@ -1711,13 +1716,14 @@
 				478813D41839C35E0085224D /* FMDatabaseQueue.m in Sources */,
 				478813D91839C35E0085224D /* UIButton+AFNetworking.m in Sources */,
 				47E2DB8C18595A5A00D455EF /* SearchNavController.m in Sources */,
-				4798A26E183DD45300060DDB /* HostItelUser.m in Sources */,
+				4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */,
 				BADDFD681876901500D10DDC /* IMCoreDataManager.m in Sources */,
 				47B89DE11834D40000022FE5 /* main.m in Sources */,
 				479EF0601859D47C0012EE29 /* NSData+Byte.m in Sources */,
 				473F62E3183889B0006CAE31 /* AddressBook.m in Sources */,
 				479B90791837660B005D8CCB /* SearchNewFriendViewController.m in Sources */,
 				479EF0551859D47C0012EE29 /* IMAuthMessageBuilder.m in Sources */,
+				479CF0F718798D3F00FC021D /* HostItelUser.m in Sources */,
 				47A0DEF11862D74D00BD28AB /* UIImageView+BetterFace.m in Sources */,
 				478813E01839C35E0085224D /* USDictionaryWrapper.m in Sources */,
 				479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */,

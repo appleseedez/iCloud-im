@@ -26,6 +26,6 @@
     // Configure the view for the selected state
 }
 -(void)setPro:(HostItelUser *)host{
-    self.QQLabel.text=host.QQ;
+    self.QQLabel.text=host.qq;
 }
 @end

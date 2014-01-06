@@ -20,7 +20,7 @@
 -(void)callUserWithItel:(NSString*)itelNum;
 //访问用户商铺
 -(void)visitUserStore:(NSString*)itelNum;
-
+-(void)tearDown;
 
 
 @end
