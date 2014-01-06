@@ -7,6 +7,7 @@
 //
 
 #import "ItelUserManager.h"
+#import "IMCoreDataManager.h"
 static ItelUserManager *manager;
 @implementation ItelUserManager
 +(ItelUserManager*)defaultManager{
@@ -14,6 +15,9 @@ static ItelUserManager *manager;
         manager=[[ItelUserManager alloc]init];
     }
     return manager;
+}
+-(void)tearDown{
+    manager=nil;
 }
 -(void)setHost:(HostItelUser*)host{
     self.hostUser=host;
@@ -25,13 +29,15 @@ static ItelUserManager *manager;
         }
     }
     self.hostUser.nickName=[data objectForKey:@"nick_name"];
-    self.hostUser.QQ=[data objectForKey:@"qq_num"];
-    self.hostUser.sex=[[data objectForKey:@"sex"] boolValue];
+    self.hostUser.qq=[data objectForKey:@"qq_num"];
+    NSNumber *sex=[NSNumber numberWithBool:[[data objectForKey:@"sex"] boolValue]];
+    self.hostUser.sex=sex;
     self.hostUser.address=[data objectForKey:@"address"];
     self.hostUser.personalitySignature=[data objectForKey:@"recommend"];
     self.hostUser.email=[data objectForKey:@"mail"];
-    self.hostUser.birthDay=[data objectForKey:@"birthday"];
- 
+    self.hostUser.birthday=[data objectForKey:@"birthday"];
+    
+    [[IMCoreDataManager defaulManager]saveContext];
 }
 -(void)callUser:(ItelUser*)user{
     

@@ -83,7 +83,7 @@
   }
 
 -(void)setPro:(HostItelUser *)host{
-    if (host.sex) {
+    if ([host.sex boolValue]) {
         self.sexImage.image=[UIImage imageNamed:@"female"];
     }
     else self.sexImage.image=[UIImage imageNamed:@"male"];

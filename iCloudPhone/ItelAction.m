@@ -11,6 +11,7 @@
 #import "ItelBookManager.h"
 #import "ItelNetManager.h"
 #import "ItelMessageManager.h"
+#import "IMCoreDataManager.h"
 @implementation ItelAction
 +(ItelAction*)action{
     ItelAction *action=[[ItelAction alloc] init];
@@ -228,7 +229,8 @@
     
    HostItelUser *hostUser = [self.itelUserActionDelegate hostUser];
     NSString *imageUrl=[response objectForKey:@"data"];
-    hostUser.imageurl=imageUrl;
+    hostUser.imageUrl=imageUrl;
+    [[IMCoreDataManager defaulManager]saveContext];
     [self NotifyForNormalResponse:@"modifyHost" parameters:response];
     
 }
@@ -356,6 +358,13 @@
 }
 -(void)acceptFriendIvicationResponse:(NSDictionary*)data{
     [self NotifyForNormalResponse:@"acceptFriends" parameters:data];
+}
+#pragma mark - 退出登录
+-(void)logout{
+    
+}
+-(void)logoutResponse{
+    [self NotifyForNormalResponse:@"logout" parameters:nil];
 }
 //查找好友列表
 -(ItelUser*)userInFriendBook:(NSString*)itel{

@@ -46,7 +46,7 @@
         self.txtBirthday.inputView=picker;
         self.txtBirthday.inputAccessoryView=finish;
     }
-    self.txtBirthday.text=host.birthDay;
+    self.txtBirthday.text=host.birthday;
     
 }
 @end

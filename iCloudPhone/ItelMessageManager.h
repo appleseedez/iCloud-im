@@ -14,5 +14,5 @@
 @property (nonatomic,strong) ItelMessageCache *systemMessageCache;
 @property (nonatomic,strong) NSTimer *timer;
 +(ItelMessageManager*)defaultManager;
-
+-(void)tearDown;
 @end

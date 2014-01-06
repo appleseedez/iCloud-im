@@ -14,7 +14,7 @@
 @property (nonatomic,strong) HostItelUser *hostUser;
 +(ItelUserManager*)defaultManager;
 
-
+-(void)tearDown;
 
 
 @end

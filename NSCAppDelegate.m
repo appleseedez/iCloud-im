@@ -13,16 +13,26 @@
 #import "NXLoginViewController.h"
 #import "ItelNetManager.h"
 #import "ItelUserManager.h"
-//IMmanager 实现类
+#import "IMCoreDataManager.h"
 #import "IMManagerImp.h"
 #import "ItelMessageManager.h"
 
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 @implementation NSCAppDelegate
 -(void) signOut{
-    [[ItelAction action] setHostItelUser:nil];
+    [[ItelAction action] logout];
+    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"currUser"];
+    //[self tearDownManagers];
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
     
+}
+-(void)tearDownManagers{
+    [[ItelMessageManager defaultManager] tearDown];
+    [[ItelUserManager defaultManager] tearDown];
+    [[ItelBookManager defaultManager] tearDown];
+    [[ItelNetManager defaultManager] tearDown];
+    [self setupManagers];
+
 }
 -(void)setupManagers{
     [ItelMessageManager defaultManager];
@@ -49,7 +59,7 @@
     NXLoginViewController *loginVC=[loginStoryboard instantiateViewControllerWithIdentifier:@"login"];
     self.loginVC=loginVC;
     
-    self.autoLogin=0;
+    [self checkAutoLogin];
     
    [[ItelBookManager defaultManager] phoneBook];
     
@@ -65,7 +75,33 @@
     [self.window makeKeyAndVisible];
    return YES;
 }
-
+-(void)checkAutoLogin{
+     //查询currUser
+     HostItelUser *currUser=nil;
+    NSString *hostItel=[[NSUserDefaults standardUserDefaults]objectForKey:@"currUser"];
+    if (![hostItel isEqualToString:@"0"]) {
+        IMCoreDataManager *manager=[IMCoreDataManager defaulManager];
+        
+        NSFetchRequest* getHost = [NSFetchRequest fetchRequestWithEntityName:@"HostItelUser"];
+        getHost.sortDescriptors = @[];
+        NSArray* host = [[manager managedObjectContext] executeFetchRequest:getHost error:nil];
+        if (host) {
+            for(HostItelUser *user in host){
+                if ([user.itelNum isEqualToString:hostItel]) {
+                    currUser=user;
+                }
+            }
+        }
+    }
+   
+    if (currUser==nil) {
+        self.autoLogin=0;
+    }
+    else{
+        self.autoLogin=1;
+        [[ItelAction action] setHostItelUser:currUser];
+    }
+}
 -(void)changeRootViewController:(setRootViewController)Type userInfo:(NSDictionary *)info{
     
     [UIView beginAnimations:@"memory" context:nil];
@@ -81,6 +117,7 @@
  
         [self.window setRootViewController:self.RootVC];
         NSString *hostItel=[[ItelAction action]getHost].itelNum;
+        [[NSUserDefaults standardUserDefaults] setObject:hostItel forKey:@"currUser"];
         if (info) {
             [self.manager setRouteSeverIP:[info valueForKey:ROUTE_SERVER_IP_KEY]];
             [self.manager setRouteServerPort:[[info valueForKey:ROUTE_SERVER_PORT_KEY] intValue]];

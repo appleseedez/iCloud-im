@@ -7,7 +7,8 @@
 //  用来封装对itel电话本操作的动作 用不用另说
 
 #import <Foundation/Foundation.h>
-#import "HostItelUser.h"
+#import "HostItelUser+set.h"
+#import "ItelUser.h"
 @class ItelBook;
 
 #pragma mark - 消息操作协议
@@ -121,6 +122,8 @@
 -(void)refreshForNewMessage:(NSDictionary*)parameters;
 //确认好友
 -(void)acceptIvitation:(NSDictionary*)parameters;
+//退出登录
+-(void)logout:(NSDictionary*)parameters;
 @end
 @interface ItelAction : NSObject
 @property (nonatomic,weak) id <ItelBookActionDelegate> itelBookActionDelegate;
@@ -219,4 +222,7 @@
 -(void)acceptFriendIvicationResponse:(NSDictionary*)data;
 //重置联系人列表
 -(void)resetContact;
+//退出登录
+-(void)logout;
+-(void)logoutResponse;
 @end
