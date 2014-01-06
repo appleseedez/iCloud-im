@@ -207,6 +207,7 @@
 		BA06AFAD18783A8E0099C3F7 /* Recent+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BA06AFAC18783A8E0099C3F7 /* Recent+CRUD.m */; };
 		BA06AFAE187873910099C3F7 /* iCloudPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB0187873910099C3F7 /* iCloudPhone.storyboard */; };
 		BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB11878757B0099C3F7 /* zh-cn.strings */; };
+		BA1A74D7187A780A0071E83F /* IMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1A74D6187A780A0071E83F /* IMUtils.m */; };
 		BA772EDA1875F02400CD8982 /* IMDBManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA772ED91875F02400CD8982 /* IMDBManagerImp.m */; };
 		BA8242FC18758EA2001903CE /* jgb.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BA8242FB18758EA2001903CE /* jgb.m4a */; };
 		BA8243001875A0C3001903CE /* Recents.db in Resources */ = {isa = PBXBuildFile; fileRef = BA8242FF1875A0C3001903CE /* Recents.db */; };
@@ -597,6 +598,8 @@
 		BA06AFAC18783A8E0099C3F7 /* Recent+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Recent+CRUD.m"; sourceTree = "<group>"; };
 		BA06AFAF187873910099C3F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iCloudPhone.storyboard; sourceTree = "<group>"; };
 		BA06AFB11878757B0099C3F7 /* zh-cn.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-cn.strings"; sourceTree = "<group>"; };
+		BA1A74D5187A780A0071E83F /* IMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMUtils.h; sourceTree = "<group>"; };
+		BA1A74D6187A780A0071E83F /* IMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMUtils.m; sourceTree = "<group>"; };
 		BA772ED81875F02400CD8982 /* IMDBManagerImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManagerImp.h; sourceTree = "<group>"; };
 		BA772ED91875F02400CD8982 /* IMDBManagerImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDBManagerImp.m; sourceTree = "<group>"; };
 		BA8242FB18758EA2001903CE /* jgb.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jgb.m4a; sourceTree = "<group>"; };
@@ -1008,6 +1011,7 @@
 		479EF00C1859D47C0012EE29 /* im */ = {
 			isa = PBXGroup;
 			children = (
+				BA1A74D4187A77F40071E83F /* utils */,
 				BA8242FA18758E8A001903CE /* resources */,
 				BA959A9118605639009B8A4C /* timer */,
 				BA8F2359185AA5E600DB043B /* sdk */,
@@ -1422,6 +1426,15 @@
 			name = more;
 			sourceTree = "<group>";
 		};
+		BA1A74D4187A77F40071E83F /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				BA1A74D5187A780A0071E83F /* IMUtils.h */,
+				BA1A74D6187A780A0071E83F /* IMUtils.m */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		BA8242FA18758E8A001903CE /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1689,6 +1702,7 @@
 				479C7BAE185DDB480046B1D7 /* RegTipLabel.m in Sources */,
 				478813D71839C35E0085224D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				471F00D51868156500D3DAFD /* HostEditEmailViewController.m in Sources */,
+				BA1A74D7187A780A0071E83F /* IMUtils.m in Sources */,
 				47A269B5187163B200084A80 /* NewMessageView.m in Sources */,
 				4757D04F1855BC69001A9639 /* NetRequester.m in Sources */,
 				47A01125185CA34E003F8878 /* regDetailTextField.m in Sources */,

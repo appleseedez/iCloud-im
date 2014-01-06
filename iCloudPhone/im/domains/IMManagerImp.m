@@ -416,14 +416,22 @@
     if (self.communicationTimer) {
         [self.communicationTimer invalidate];
         self.communicationTimer = nil;
+        
+        ItelUser* peer =  [[ItelAction action] userInFriendBook:[self.recentLog valueForKey:kPeerNumber]];
+        if (!peer) {
+            peer = [ItelUser new];
+            peer.remarkName = @"";
+            peer.nickName = @"陌生人";
+            peer.imageurl = @"";
+        }
         Recent* aRecent = [Recent recentWithCallInfo:@{
                                                        kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
                                                        kStatus:[self.recentLog valueForKey:kStatus],
                                                        kDuration:@(self.duration),
                                                        kCreateDate:[self.recentLog valueForKey:kCreateDate],
-                                                       kPeerRealName:@"测试",
-                                                       kPeerNick:@"测试",
-                                                       kPeerAvatar:@"test",
+                                                       kPeerRealName:peer.remarkName,
+                                                       kPeerNick:peer.nickName,
+                                                       kPeerAvatar:peer.imageurl,
                                                        kHostUserNumber:self.myAccount
                                                        }
                                            inContext:[[IMCoreDataManager defaulManager] managedObjectContext]];

@@ -89,7 +89,7 @@
     NSString* statusImage = [NSString stringWithFormat:@"%@_ico",record.status];
     [statusView setImage:[UIImage imageNamed:statusImage]];
     timeStampLabel.text = [timeFormatter stringFromDate:record.createDate];
-    
+    durationLabel.text = [IMUtils secondsToTimeFormat:[record.duration integerValue]];
     return cell;
 }
 
@@ -109,4 +109,7 @@
         self.fetchedResultsController = nil;
     }
 }
+
+
+
 @end
