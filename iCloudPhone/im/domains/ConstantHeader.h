@@ -43,7 +43,7 @@ enum AccountClientTypes
 #define SESSION_PERIOD_RES_NOTIFICATION @"SESSION_PERIOD_RES_NOTIFICATION" // 收到通话响应
 #define CMID_APP_LOGIN_SSS_NOTIFICATION @"CMID_APP_LOGIN_SSS_NOTIFICATION" // 收到信令服务器验证回复
 #define END_SESSION_NOTIFICATION @"END_SESSION_NOTIFICATION" //终止会话
-
+#define SIGNAL_ERROR_NOTIFICATION @"SIGNAL_ERROR_NOTIFICATION" //收到异常信令数据
 
 #define P2PTUNNEL_SUCCESS @"P2PTUNNEL_SUCCESS"
 
@@ -161,4 +161,11 @@ enum AccountClientTypes
 #define kPeerNick @"peerNick"
 #define kCreateDate @"createDate"
 #define kStatus @"status"
+#define kDuration @"duration"
+#define kHostUserNumber @"hostUserNumber"
+
+#define STATUS_CALLED @"called"
+#define STATUS_ANSWERED @"answered"
+#define STATUS_MISSED @"missed"
+#define STATUS_REFUSED @"refused"
 #endif

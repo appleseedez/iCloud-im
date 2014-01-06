@@ -136,7 +136,7 @@
 -(void) addItelUserBlackResponse:(NSString*)itel{
     
     [self.itelBookActionDelegate addUserToBlackBook:itel];
-    [self NotifyForNormalResponse:@"addBlack" parameters:nil];
+    [self NotifyForNormalResponse:ADD_TO_BLACK_LIST_NOTIFICATION parameters:nil];
 
 }
 

@@ -1978,7 +1978,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="详情" id="VtB-F4-2wc">
-                        <barButtonItem key="rightBarButtonItem" image="detail_more_action_btn" id="6HM-ht-DGC"/>
+                        <barButtonItem key="rightBarButtonItem" image="detail_more_action_btn" id="6HM-ht-DGC">
+                            <connections>
+                                <action selector="moreAction:" destination="nvj-B9-ahk" id="GLN-Uh-U1V"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="avatarView" destination="DrY-vd-K6b" id="cYg-NK-oAa"/>
@@ -2440,7 +2444,7 @@
                                     <outlet property="delegate" destination="CmA-yR-FtJ" id="AdV-6Z-QHd"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="获取号码中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BsC-vH-9vp">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BsC-vH-9vp">
                                 <rect key="frame" x="0.0" y="296" width="320" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

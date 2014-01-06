@@ -36,6 +36,7 @@
 #pragma mark - 通知
 
 #define ADD_FIRIEND_NOTIFICATION @"inviteItelUser"
+#define ADD_TO_BLACK_LIST_NOTIFICATION @"addBlack"
 #define DEL_USER_NOTIFICATION @"delItelUser"
 #define SEARCH_STRANGER_NOTIFICATION @"searchStranger"
 
