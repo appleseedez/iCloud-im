@@ -1978,7 +1978,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="详情" id="VtB-F4-2wc">
-                        <barButtonItem key="rightBarButtonItem" image="detail_more_action_btn" id="6HM-ht-DGC"/>
+                        <barButtonItem key="rightBarButtonItem" image="detail_more_action_btn" id="6HM-ht-DGC">
+                            <connections>
+                                <action selector="moreAction:" destination="nvj-B9-ahk" id="GLN-Uh-U1V"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="avatarView" destination="DrY-vd-K6b" id="cYg-NK-oAa"/>
