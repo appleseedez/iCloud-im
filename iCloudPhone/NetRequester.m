@@ -44,7 +44,7 @@
 //    }
     
     for (NSString *s in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) {
-        NSLog(@"%@",s);
+        NSLog(@"目前的cookie值为:%@",s);
     }
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];

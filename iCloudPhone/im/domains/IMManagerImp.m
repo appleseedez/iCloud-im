@@ -264,8 +264,9 @@
 }
 
 //收到信令服务器的通话查询响应，进行后续业务
+static int count = 0;
 - (void) sessionInited:(NSNotification*) notify{
-    
+    count++;
 #if SIGNAL_MESSAGE
     NSLog(@"收到信令服务器的通话查询响应：%@",notify.userInfo);
 #endif
@@ -284,7 +285,7 @@
 #endif
     [self sessionPeriodNegotiation:data];
     // TODO 设置10秒超时，如果没有收到接受通话的回复则转到拒绝流程
-    
+    NSLog(@"sessionInited:%d",count);
 }
 
 - (void) sessionInitFail:(NSNotification*) notify{
@@ -506,10 +507,12 @@
     [self.TCPcommunicator connect:self.selfAccount];
     [self.TCPcommunicator keepAlive];
     //向信令服务器发验证请求
-    if (!self.selfAccount) {
-            self.selfAccount = @"6666";
-        }
+//    if (!self.selfAccount) {
+//            self.selfAccount = @"6666";
+//        }
+#if MANAGER_DEBUG
         NSLog(@"目前的本机帐号：%@",[self myAccount]);
+#endif
         [self auth:self.selfAccount cert:@"chengjianjun"];
 }
 - (void)disconnectToSignalServer{

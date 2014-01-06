@@ -55,6 +55,7 @@ enum AccountClientTypes
 #define DATA_CONTENT_KEY @"data"
 #define ROUTE_SERVER_IP_KEY @"domain"
 #define ROUTE_SERVER_PORT_KEY @"port"
+#define HOST_ITEL_NUMBER @"hostItelNumber"
 // 目录服务器请求字段
 #define UDP_INDEX_REQ_FIELD_ACCOUNT_KEY @"account"
 #define UDP_INDEX_REQ_FIELD_SRVTYPE_KEY @"srvtype"
@@ -125,7 +126,7 @@ enum AccountClientTypes
 #define SCREEN_WIDTH 144
 #define SCREEN_HEIGHT 192
 #define SCREEN_HEIGHT_FOR_LOW 176
-#define SIGNAL_SERVER_IP @"211.149.147.73"
+//#define SIGNAL_SERVER_IP @"211.149.147.73"
 //#define SIGNAL_SERVER_IP @"211.149.144.15"
 #define SIGNAL_SERVER_PORT 9989
 #define ROUTE_SERVER_IP @"192.168.1.110"
