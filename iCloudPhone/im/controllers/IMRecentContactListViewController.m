@@ -91,7 +91,7 @@
 // 获取最近通话记录列表
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recent"];
         [request setFetchBatchSize:20];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO selector:@selector(localizedCaseInsensitiveCompare:)]];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO selector:nil]];
         request.predicate = [NSPredicate predicateWithFormat:@"hostUserNumber = %@",[self.manager myAccount]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request

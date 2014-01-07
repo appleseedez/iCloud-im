@@ -18,13 +18,12 @@
 
 static ItelNetManager *manager=nil;
 @implementation ItelNetManager
-
-+(ItelNetManager*)defaultManager{
-    
++(void)initialize{
     if (manager==nil) {
         manager=[[ItelNetManager alloc]init];
     }
-   
+}
++(ItelNetManager*)defaultManager{
     return manager;
 }
 -(void)tearDown{

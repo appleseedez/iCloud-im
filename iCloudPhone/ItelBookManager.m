@@ -20,12 +20,13 @@ static ItelBookManager *manager;
 
 @implementation ItelBookManager
 #define PATH [NSHomeDirectory() stringByAppendingString:@"/users/"]
-+(ItelBookManager*)defaultManager{
-    
-    if (manager==nil) {
-        manager=[[ItelBookManager alloc]init];
-        
+
++(void)initialize{
+    if (!manager) {
+         manager=[[ItelBookManager alloc] init];
     }
+}
++(ItelBookManager*)defaultManager{
     
     return manager;
 }

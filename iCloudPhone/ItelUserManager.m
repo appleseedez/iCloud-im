@@ -10,14 +10,16 @@
 #import "IMCoreDataManager.h"
 static ItelUserManager *manager;
 @implementation ItelUserManager
-+(ItelUserManager*)defaultManager{
++ (void)initialize{
     if (manager==nil) {
         manager=[[ItelUserManager alloc]init];
     }
+}
++(ItelUserManager*)defaultManager{
+
     return manager;
 }
 -(void)tearDown{
-    manager=nil;
 }
 -(void)setHost:(HostItelUser*)host{
     self.hostUser=host;

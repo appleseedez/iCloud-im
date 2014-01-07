@@ -22,7 +22,8 @@
 -(void) signOut{
     [[ItelAction action] logout];
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"currUser"];
-    //[self tearDownManagers];
+    [self tearDownManagers];
+    [self.manager logoutFromSignalServer];
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
     
 }
@@ -108,57 +109,9 @@
 
         [self setupIMManager:params];
         
-//        [self readStoredCookies];
     }
 }
-//-(void)saveStoredCookies
-//{
-//    NSURL* hostDomain = [NSURL URLWithString: @"211.149.144.15"];
-//    
-//    NSArray *httpCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:hostDomain];
-//    NSData *httpCookiesData = [NSKeyedArchiver archivedDataWithRootObject:httpCookies];
-//    [[NSUserDefaults standardUserDefaults] setObject:httpCookiesData forKey:@"savedHttpCookies"];
-////    
-////    NSArray *httpsCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:hostDomain];
-////    NSData *httpsCookiesData = [NSKeyedArchiver archivedDataWithRootObject:httpsCookies];
-////    [[NSUserDefaults standardUserDefaults] setObject:httpsCookiesData forKey:@"savedHttpsCookies"];
-//    
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//}
 
-//-(void)readStoredCookies
-//{
-//    //clear, read and install stored cookies
-//    NSURL* hostDomain = [NSURL URLWithString: @"211.149.144.15"];
-//    
-//    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:hostDomain];
-//    for (NSHTTPCookie *cookie in cookies) {
-//        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
-//    }
-////    cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:hostDomain];
-////    for (NSHTTPCookie *cookie in cookies) {
-////        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
-////    }
-//    
-//    NSData *httpCookiesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"savedHttpCookies"];
-//    if([httpCookiesData length]) {
-//        NSArray *savedCookies = [NSKeyedUnarchiver unarchiveObjectWithData:httpCookiesData];
-//        for (NSHTTPCookie *cookie in savedCookies) {
-//            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-//        }
-//    }
-//    
-//    for (NSHTTPCookie* c in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
-//        NSLog(@"cookie:%@",c);
-//    }
-////    NSData *httpsCookiesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"savedHttpsCookies"];
-////    if([httpsCookiesData length]) {
-////        NSArray *savedCookies = [NSKeyedUnarchiver unarchiveObjectWithData:httpsCookiesData];
-////        for (NSHTTPCookie *cookie in savedCookies) {
-////            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-////        }
-////    }
-//}
 
 
 
@@ -250,6 +203,7 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationWillTerminate");
 #endif
+    [self.manager logoutFromSignalServer];
     [self.manager tearDown];
 }
 
