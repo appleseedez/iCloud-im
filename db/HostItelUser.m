@@ -2,11 +2,13 @@
 //  HostItelUser.m
 //  iCloudPhone
 //
-//  Created by nsc on 14-1-5.
-//  Copyright (c) 2014年 NX. All rights reserved.
+//  Created by Pharaoh on 1/7/14.
+//  Copyright (c) 2014 NX. All rights reserved.
 //
 
 #import "HostItelUser.h"
+#import "ItelUser.h"
+#import "Message.h"
 
 
 @implementation HostItelUser
@@ -29,5 +31,8 @@
 @dynamic telNum;
 @dynamic token;
 @dynamic userId;
+@dynamic friendBook;
+@dynamic blackBook;
+@dynamic systemMessages;
 
 @end
