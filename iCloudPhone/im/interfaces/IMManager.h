@@ -27,6 +27,9 @@
 - (void) connectToSignalServer;
 // 断开连接
 -(void) disconnectToSignalServer;
+
+//从信令业务服务器注销
+- (void) logoutFromSignalServer;
 //销毁
 - (void) tearDown;
 //接受通话请求

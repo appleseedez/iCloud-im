@@ -216,6 +216,12 @@
     if ([SESSION_HALT_FILED_ACTION_BUSY isEqualToString:haltType]) {
         [self endSession];
     }else if ([SESSION_HALT_FILED_ACTION_REFUSE isEqualToString:haltType]){
+        self.recentLog = @{
+                           kStatus:STATUS_REFUSED,
+                           kPeerNumber:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                           kCreateDate:[NSDate date]
+                           };
+        [self saveCommnicationLog];
         [self endSession];
     }else if ([SESSION_HALT_FILED_ACTION_END isEqualToString:haltType]){
         [self.engine stopTransport];
@@ -430,31 +436,32 @@ static int count = 0;
     if (self.communicationTimer) {
         [self.communicationTimer invalidate];
         self.communicationTimer = nil;
-        
-        ItelUser* peer =  [[ItelAction action] userInFriendBook:[self.recentLog valueForKey:kPeerNumber]];
-        if (!peer) {
-            peer = [ItelUser new];
-            peer.remarkName = @"";
-            peer.nickName = @"陌生人";
-            peer.imageurl = @"";
-        }
-        Recent* aRecent = [Recent recentWithCallInfo:@{
-                                                       kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
-                                                       kStatus:[self.recentLog valueForKey:kStatus],
-                                                       kDuration:@(self.duration),
-                                                       kCreateDate:[self.recentLog valueForKey:kCreateDate],
-                                                       kPeerRealName:peer.remarkName,
-                                                       kPeerNick:peer.nickName,
-                                                       kPeerAvatar:peer.imageurl,
-                                                       kHostUserNumber:self.myAccount
-                                                       }
-                                           inContext:[[IMCoreDataManager defaulManager] managedObjectContext]];
-        NSLog(@"aRecent is :%@",aRecent);
+        [self saveCommnicationLog];
     }
     
 }
 
-
+- (void) saveCommnicationLog{
+    ItelUser* peer =  [[ItelAction action] userInFriendBook:[self.recentLog valueForKey:kPeerNumber]];
+    if (!peer) {
+        peer = [ItelUser new];
+        peer.remarkName = @"";
+        peer.nickName = @"陌生人";
+        peer.imageurl = @"";
+    }
+    Recent* aRecent = [Recent recentWithCallInfo:@{
+                                                   kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
+                                                   kStatus:[self.recentLog valueForKey:kStatus],
+                                                   kDuration:@(self.duration),
+                                                   kCreateDate:[self.recentLog valueForKey:kCreateDate],
+                                                   kPeerRealName:peer.remarkName,
+                                                   kPeerNick:peer.nickName,
+                                                   kPeerAvatar:peer.imageurl,
+                                                   kHostUserNumber:self.myAccount
+                                                   }
+                                       inContext:[[IMCoreDataManager defaulManager] managedObjectContext]];
+    NSLog(@"aRecent is :%@",aRecent);
+}
 //收到信令服务器的验证响应，
 - (void) authHasResult:(NSNotification*) notify{
 #if MANAGER_DEBUG
@@ -519,6 +526,17 @@ static int count = 0;
     [self.TCPcommunicator disconnect];
     [self removeNotifications];
 }
+// 从信令服务器注销
+- (void)logoutFromSignalServer{
+    self.messageBuilder = [IMLogoutFromSignalServerMessageBuilder new];
+    NSDictionary* data = [self.messageBuilder buildWithParams:@{
+                                                                CMID_APP_LOGIN_SSS_REQ_FIELD_ACCOUNT_KEY: [self myAccount]
+                                                                }];
+#if SIGNAL_MESSAGE
+    NSLog(@"信令服务器的注销请求：%@",data);
+#endif
+    [self.TCPcommunicator send:data];
+}
 - (void) tearDown{
 #if MANAGER_DEBUG
     NSLog(@"call tearDown");
@@ -541,10 +559,6 @@ static int count = 0;
     //在通话session结束时,停止通话计时.保存.
     [self stopCommunicationCounting];
     self.state = IDLE;
-    
-
-
-
 }
 
 - (void)dial:(NSString *)account{
@@ -556,6 +570,14 @@ static int count = 0;
 }
 // 终止当前的通话
 - (void)haltSession:(NSDictionary*) data{
+    if ([[data valueForKey:SESSION_HALT_FIELD_TYPE_KEY] isEqualToString:SESSION_HALT_FILED_ACTION_REFUSE]) {
+        self.recentLog = @{
+                           kStatus:STATUS_REFUSED,
+                           kPeerNumber:[data valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                           kCreateDate:[NSDate date]
+                           };
+        [self saveCommnicationLog];
+    }
     [self.engine stopTransport];
     [self sessionHaltRequest:data];
     [self endSession];

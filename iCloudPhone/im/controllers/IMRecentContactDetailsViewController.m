@@ -19,28 +19,13 @@ static NSString* kOperationReason = @"reason";
 
 @implementation IMRecentContactDetailsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)awakeFromNib{
     [super awakeFromNib];
-//self.tableView.tableHeaderView = self.headerView;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -58,7 +43,6 @@ static NSString* kOperationReason = @"reason";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - life
@@ -101,7 +85,7 @@ static NSString* kOperationReason = @"reason";
         // 获取最近通话记录列表
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recent"];
         [request setFetchBatchSize:20];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO selector:@selector(localizedCaseInsensitiveCompare:)]];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO selector:nil]];
         request.predicate = [NSPredicate predicateWithFormat:@"peerNumber = %@ and hostUserNumber = %@", self.currentRecent.peerNumber,[self.manager myAccount]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
@@ -113,7 +97,21 @@ static NSString* kOperationReason = @"reason";
     }
 }
 
-
+- (void) delteRecentsOfMyOwn{
+    NSError* error = nil;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recent"];
+    request.sortDescriptors = @[];
+    request.predicate = [NSPredicate predicateWithFormat:@"peerNumber = %@ and hostUserNumber = %@", self.currentRecent.peerNumber,[self.manager myAccount]];
+    NSArray* results =  [[[IMCoreDataManager defaulManager] managedObjectContext] executeFetchRequest:request error:&error];
+    if (!error) {
+        for (Recent* r in results) {
+            [r delete];
+        }
+        [[IMCoreDataManager defaulManager] saveContext];
+    }else{
+        [NSException exceptionWithName:@"database error" reason:@"core data 查询失败" userInfo:nil];
+    }
+}
 #pragma mark - actionSheet delegate
 - (void)actionSheetCancel:(UIActionSheet *)actionSheet{
     actionSheet = nil;
@@ -148,6 +146,7 @@ static NSString* kOperationReason = @"reason";
     }
     if (buttonIndex == actionSheet.destructiveButtonIndex) {
         //删除记录
+        [self delteRecentsOfMyOwn];
     }
     
 }

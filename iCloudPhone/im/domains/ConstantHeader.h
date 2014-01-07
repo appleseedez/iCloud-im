@@ -26,6 +26,12 @@ enum AccountClientTypes
     ACT_WINDOWS,// windows客户端
     ACT_MAC// mac客户端
 };
+enum emDataType
+{
+    EDT_INVALID = -1,
+    EDT_SIGNEL,// 信令数据
+    EDT_MSG// 消息数据
+};
 // 常量定义
 #define PRESENT_CALLING_VIEW_NOTIFICATION @"PRESENT_CALLING_VIEW_NOTIFICATION" // 通知加载"拨号中"界面
 #define PRESENT_ANSWERING_VIEW_NOTIFICATION @"PRESENT_ANSWERING_VIEW_NOTIFICATION"// 通知加载“待接听”界面
@@ -53,9 +59,11 @@ enum AccountClientTypes
 #define DATA_STATUS_KEY @"status"
 #define DATA_SEQ_KEY @"seq"
 #define DATA_CONTENT_KEY @"data"
+#define DATA_CONTENT_TYPE @"datatype"
 #define ROUTE_SERVER_IP_KEY @"domain"
 #define ROUTE_SERVER_PORT_KEY @"port"
 #define HOST_ITEL_NUMBER @"hostItelNumber"
+
 // 目录服务器请求字段
 #define UDP_INDEX_REQ_FIELD_ACCOUNT_KEY @"account"
 #define UDP_INDEX_REQ_FIELD_SRVTYPE_KEY @"srvtype"
@@ -111,6 +119,8 @@ enum AccountClientTypes
 
 #define SESSION_PERIOD_REQ_TYPE 0x00000004 // 通话过程请求
 #define SESSION_PERIOD_RES_TYPE 0x00000004 // 通话过程响应
+
+#define CMID_APP_LOGOUT_SSS_REQ_TYPE 0x00000005 // app客户端从业务服务器注销
 
 #define SESSION_PERIOD_PROCEED_TYPE 0x00000400 //表明发送的是通话链接类型 是SESSION_PERIOD的子类型。因为会出现发送通话链接请求，而对方回复通话拒绝的情况
 #define SESSION_PERIOD_HALT_TYPE 0x00000800 //表明发送的是通话终止类型

@@ -222,6 +222,7 @@
 		BADDFD681876901500D10DDC /* IMCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BADDFD671876901500D10DDC /* IMCoreDataManager.m */; };
 		BADDFD6A1876915200D10DDC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADDFD691876915200D10DDC /* CoreData.framework */; };
 		BADDFD7018769DF600D10DDC /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADDFD6F18769DF600D10DDC /* CoreDataTableViewController.m */; };
+		BAE9C8DB187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C8DA187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -625,6 +626,8 @@
 		BADDFD691876915200D10DDC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		BADDFD6E18769DF600D10DDC /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		BADDFD6F18769DF600D10DDC /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
+		BAE9C8D9187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMLogoutFromSignalServerMessageBuilder.h; sourceTree = "<group>"; };
+		BAE9C8DA187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMLogoutFromSignalServerMessageBuilder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1082,6 +1085,8 @@
 				BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */,
 				BA772ED81875F02400CD8982 /* IMDBManagerImp.h */,
 				BA772ED91875F02400CD8982 /* IMDBManagerImp.m */,
+				BAE9C8D9187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.h */,
+				BAE9C8DA187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m */,
 			);
 			path = domains;
 			sourceTree = "<group>";
@@ -1780,6 +1785,7 @@
 				47A10D9D18654AF500FB9FED /* SecurityChangePasswordViewController.m in Sources */,
 				47A5577E186320640062EFFF /* HostEditSignViewController.m in Sources */,
 				479EF0541859D47C0012EE29 /* IMRootTabBarViewController.m in Sources */,
+				BAE9C8DB187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m in Sources */,
 				479C7BA8185DA78E0046B1D7 /* MoreHostViewCell.m in Sources */,
 				479EF0591859D47C0012EE29 /* IMMessageParserImp.m in Sources */,
 				478813DB1839C35E0085224D /* UIProgressView+AFNetworking.m in Sources */,

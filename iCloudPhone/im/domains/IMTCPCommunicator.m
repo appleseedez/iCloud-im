@@ -144,6 +144,10 @@
 - (void)connect:(NSString*) account{
     NSError* error;
     self.account = account;
+    if ([self.sock isConnected]) {
+        [self disconnect];
+    }
+
     if (![self.sock connectToHost:self.ip onPort:self.port error:&error]) {
         [NSException exceptionWithName:@"403:connect to signal sever failed" reason:@"链接信令服务器失败" userInfo:nil];
     }

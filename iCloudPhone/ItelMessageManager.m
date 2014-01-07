@@ -11,15 +11,28 @@
 @implementation ItelMessageManager
 
 static ItelMessageManager *manager;
-
-+(ItelMessageManager*)defaultManager{
-    if (manager==nil) {
-        manager=[[ItelMessageManager alloc]init];
-        [[NSNotificationCenter defaultCenter] addObserver:manager selector:@selector(startSearching) name:@"rootViewAppear" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:manager selector:@selector(stopSearching) name:@"rootViewDisappear" object:nil];
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self setup];
     }
+    return self;
+}
+
++ (void)initialize{
+    manager = [[ItelMessageManager alloc] init];
+}
++(ItelMessageManager*)defaultManager{
+
     return manager;
 }
+- (void) setup{
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startSearching) name:@"rootViewAppear" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopSearching) name:@"rootViewDisappear" object:nil];
+}
+
 -(ItelMessageCache*)systemMessageCache{
     if (_systemMessageCache==nil) {
         _systemMessageCache=[[ItelMessageCache alloc]init];
@@ -28,7 +41,7 @@ static ItelMessageManager *manager;
     return _systemMessageCache;
 }
 -(void)tearDown{
-    manager=nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(void)startSearching{
     [self sendSearching];
