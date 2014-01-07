@@ -132,7 +132,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="callUser:" destination="Rtf-Ci-C30" eventType="touchUpInside" id="mnY-En-eew"/>
+                                            <action selector="audioCall" destination="Rtf-Ci-C30" eventType="touchUpInside" id="raw-Zx-B2q"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="r43-Hy-qZR">
@@ -141,6 +141,9 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="vidioCall" destination="Rtf-Ci-C30" eventType="touchUpInside" id="TiM-t8-kjU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rSW-ED-fwh">
                                         <rect key="frame" x="225" y="10" width="44" height="35"/>
@@ -2075,7 +2078,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="CallUeser:" destination="hzN-fp-7C2" eventType="touchUpInside" id="R7u-ge-Vqs"/>
+                                            <action selector="audioCall" destination="hzN-fp-7C2" eventType="touchUpInside" id="09I-ML-8Ft"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1Gd-Fa-Hh8">
@@ -2084,6 +2087,9 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="vidioCall" destination="hzN-fp-7C2" eventType="touchUpInside" id="DoS-PM-CNb"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MID-vr-agU">
                                         <rect key="frame" x="225" y="10" width="44" height="35"/>
