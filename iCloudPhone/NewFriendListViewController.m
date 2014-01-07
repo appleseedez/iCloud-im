@@ -12,6 +12,7 @@
 #import "ItelBook.h"
 #import "NXInputChecker.h"
 #import "UIImageView+AFNetworking.h"
+#import "ItelUser+CRUD.h"
 @interface NewFriendListViewController ()
 
 @end
@@ -79,7 +80,7 @@
             if ([list count]) {
                 for ( NSDictionary *dic in list) {
                     ItelUser *user=[ItelUser userWithDictionary:dic];
-                    if (!user.isFirend) {
+                    if (!user.isFriend) {
                         [self.searchResult addUser:user forKey:user.itelNum];
                     }
                     [self.tableView reloadData];

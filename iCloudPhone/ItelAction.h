@@ -9,127 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "HostItelUser+set.h"
 #import "ItelUser.h"
+#import "ItelMessageInterface.h"
+#import "ItelBookInterface.h"
+#import "ItelUserInterface.h"
+#import "ItelNetInterface.h"
 @class ItelBook;
 
-#pragma mark - 消息操作协议
-
-@protocol ItelMessageActionDelegate <NSObject>
-
--(void)addNewMessages:(NSArray*)data;
--(NSArray*)getSystemMessages;
-@end
-
-
-#pragma  mark - 联系人列表操作协议
-@protocol ItelBookActionDelegate <NSObject>
-//重置
--(void)reset;
-//从好友列表中删除联系人
--(void)delUserFromFriendBook:(NSString*)itel;
-//添加黑名单
--(void)addUserToBlackBook:(NSString*)itel;
-//从黑名单移除
--(void)removeUserFromBlackBook:(NSString*)itel;
-//获得本机通讯录电话
--(NSArray*)getAddressPhoneNumbers;
-//找到已有itel用户
--(void)actionWithItelUserInAddressBook:(NSArray*)itelUsers;
-//设置备注 好友
--(void)resetUserInFriendBook:(ItelUser*)user;
-//设置备注 黑名单
--(void)resetUserInBlackBook:(ItelUser*)user;
-//获得通讯录
--(void)getAddressBook;
-//获得联系人列表
--(ItelBook*)friendBook;
-//查询用户在等待确认列表
--(BOOL)checkItelInAddedList:(NSString*)itel;
-//添加用户到等待确认列表
--(void)addItelUserIntoAddedList:(NSString *)itel;
-//删除用户从等待确认列表
--(void)delItelUserIntoAddedList:(NSString *)itel;
-//查询好友列表
--(ItelUser*)userInFriendBook:(NSString*)userItel;
-//获得黑名单
--(ItelBook*)getBlackList;
-//查询黑名单
--(ItelUser*)userInBlackBook:(NSString*)userItel;
-//模糊查询好友
--(NSArray*)searchInfirendBook:(NSString*)search;
-//keypath本地查找
--(ItelBook*)searchInFriendBookWithKeyPath:(NSString*)keyPath andSearch:(NSString*)search;
-
-
-@end
-
-#pragma  mark - 用户操作协议
-@protocol ItelUserActionDelegate <NSObject>
-//本机用户
--(HostItelUser*)hostUser;
-//设置本机用户
--(void)setHost:(HostItelUser*)host;
-
--(void)modifyPersonal:(NSDictionary*)data;
--(void)callUser:(ItelUser*)user;
-
-@end
-
-
-#pragma mark - 网络请求协议
-
-@protocol ItelNetRequestActionDelegate <NSObject>
-
-//匹配通讯录中联系人
--(void)checkAddressBookForItelUser:(NSArray*)phones;
-//查找陌生人
--(void)searchUser:(NSString*)search isNewSearch:(BOOL)isNewSearch;
-//添加联系人
--(void)addUser:(NSDictionary*)parameters;
-//删除联系人
--(void)delUser:(NSDictionary*)parameters;
-
-//添加联系人到黑名单
--(void)addToBlackList:(NSDictionary*)parameters;
-//从黑名单中移除
--(void)removeFromBlackList:(NSDictionary*)parameters;
-//编辑用户备注
--(void)editUserRemark:(NSString*)newRemark user:(NSDictionary*)parameters;
-//刷新好友列表
--(void)refreshUserList:(NSDictionary*)parameters;
-//刷新黑名单列表
--(void)refreshBlackList:(NSDictionary*)parameters;
-//上传图片
--(void)uploadImage:(NSData*)imageData parameters:(NSDictionary*)parameters;
-//修改个人资料
--(void) modifyPersonal:(NSDictionary*)parameters;
-//修改手机-验证新号码
--(void) checkNewTelNum:(NSDictionary*)parameters;
-//修改手机-发送短信验证码
--(void) modifyPhoneNumCheckCode:(NSDictionary*)parameters;
-//修改手机-重新发送短信
--(void) resendPhoneMessage:(NSDictionary*)parameters;
-//修改用户密码
--(void)changePassword:(NSDictionary*)parameters;
-//修改密保-验证密保
--(void)getPasswordProtection:(NSDictionary*)parameters;
-//修改密保-回答问题
--(void)securetyAnsewerQuestion:(NSDictionary*)parameters;
-//修改密保-提交修改
--(void)sendSecuretyProduction:(NSDictionary*)parameters;
-//查询新消息
--(void)searchNewMessage:(NSDictionary*)parameters;
-//刷新消息列表
--(void)refreshForNewMessage:(NSDictionary*)parameters;
-//确认好友
--(void)acceptIvitation:(NSDictionary*)parameters;
-//退出登录
--(void)logout:(NSDictionary*)parameters;
-@end
 @interface ItelAction : NSObject
-@property (nonatomic,weak) id <ItelBookActionDelegate> itelBookActionDelegate;
-@property (nonatomic,weak) id <ItelUserActionDelegate> itelUserActionDelegate;
-@property (nonatomic,weak) id <ItelNetRequestActionDelegate>itelNetRequestActionDelegate;
-@property (nonatomic,weak) id <ItelMessageActionDelegate> itelMessageDelegate;
+@property (nonatomic,weak) id <ItelBookInterface> itelBookActionDelegate;
+@property (nonatomic,weak) id <ItelUserInterface> itelUserActionDelegate;
+@property (nonatomic,weak) id <ItelNetInterface>itelNetRequestActionDelegate;
+@property (nonatomic,weak) id <ItelMessageInterface> itelMessageDelegate;
 +(ItelAction*)action;
 //获得机主用户
 -(HostItelUser*)getHost;

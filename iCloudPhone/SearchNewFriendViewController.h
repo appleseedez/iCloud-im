@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ItelNetManager.h"
 @interface SearchNewFriendViewController : UIViewController<UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 

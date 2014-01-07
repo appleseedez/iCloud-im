@@ -1,29 +1,27 @@
-    //
-//  ItelNetManager.m
+//
+//  ItelNetInterfaceImp.m
 //  iCloudPhone
 //
-//  Created by nsc on 13-11-16.
-//  Copyright (c) 2013年 nsc. All rights reserved.
+//  Created by Pharaoh on 1/7/14.
+//  Copyright (c) 2014 NX. All rights reserved.
 //
 
-#import "ItelNetManager.h"
+#import "ItelNetInterfaceImp.h"
 #import "AFNetworking.h"
 #import "ItelAction.h"
-#import "NXInputChecker.h"
-#import "HostItelUser.h"
 #import "NetRequester.h"
+#import "NXInputChecker.h"
+
 #define  SUCCESS void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
 #define  FAILURE void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error)
-
-
-static ItelNetManager *manager=nil;
-@implementation ItelNetManager
+static ItelNetInterfaceImp* manager;
+@implementation ItelNetInterfaceImp
 +(void)initialize{
     if (manager==nil) {
-        manager=[[ItelNetManager alloc]init];
+        manager=[[ItelNetInterfaceImp alloc]init];
     }
 }
-+(ItelNetManager*)defaultManager{
++(ItelNetInterfaceImp*)defaultManager{
     return manager;
 }
 -(void)tearDown{
@@ -39,30 +37,30 @@ static int addcount=0;
     SUCCESS{
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if ([json isKindOfClass:[NSDictionary class]]) {
-           
+            
             NSDictionary *dic=(NSDictionary*)json;
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 NSString *itel=[parameters objectForKey:@"targetItel"];
                 [[ItelAction action] inviteItelUserFriendResponse:itel];
-               }
+            }
             else {
                 NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
                 [[NSNotificationCenter defaultCenter] postNotificationName:ADD_FIRIEND_NOTIFICATION object:nil userInfo:userInfo];
             }
-            }
+        }
     };
     FAILURE{
-         NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
-          [[NSNotificationCenter defaultCenter] postNotificationName:ADD_FIRIEND_NOTIFICATION object:nil userInfo:userInfo];
-        };
+        NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
+        [[NSNotificationCenter defaultCenter] postNotificationName:ADD_FIRIEND_NOTIFICATION object:nil userInfo:userInfo];
+    };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
 }
 #pragma mark - 删除联系人
 
 -(void)delUser:(NSDictionary*)parameters{
-  
-      NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,DEL_FRIEND_INTERFACE];
+    
+    NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,DEL_FRIEND_INTERFACE];
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if ([dic isKindOfClass:[NSDictionary class]]) {
@@ -84,7 +82,7 @@ static int addcount=0;
         NSLog(@"%@",error);
     };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
-
+    
 }
 #pragma mark - 查找用户接口
 
@@ -104,48 +102,48 @@ static int addcount=0;
                                @"limit":[NSNumber numberWithInt:limit],
                                @"keyWord":search,
                                @"token":host.token ,
-                                   @"hostUserId":host.userId
+                               @"hostUserId":host.userId
                                };
     
-        SUCCESS{
-            NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-       
-            if ([dic isKindOfClass:[NSDictionary class]]) {
-                    int ret=[[dic objectForKey:@"ret"] intValue];
-                if (ret==0) {
-                    BOOL isEnd=0;
-                    int rtotal=[[dic objectForKey:@"total"] intValue];
-                    int rstart=[[dic objectForKey:@"start"] intValue];
-                    int rlimit=[[dic objectForKey: @"limit"] intValue];
-                    if (rtotal>rstart+rlimit) {
-                        isEnd=0;
-                    }
-                    else {
-                        isEnd=1;
-                    }
-                    
-                    id data =[dic objectForKey:@"data"];
-                   // NSArray *list=[data objectForKey:@"list"];
-                    //NSLog(@"查找陌生人：服务器返回%d条数据",[list count]);
-
-                    [[ItelAction action] searchStrangerResponse:data isEnd:isEnd];
-                    }
+    SUCCESS{
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+            int ret=[[dic objectForKey:@"ret"] intValue];
+            if (ret==0) {
+                BOOL isEnd=0;
+                int rtotal=[[dic objectForKey:@"total"] intValue];
+                int rstart=[[dic objectForKey:@"start"] intValue];
+                int rlimit=[[dic objectForKey: @"limit"] intValue];
+                if (rtotal>rstart+rlimit) {
+                    isEnd=0;
+                }
+                else {
+                    isEnd=1;
+                }
+                
+                id data =[dic objectForKey:@"data"];
+                // NSArray *list=[data objectForKey:@"list"];
+                //NSLog(@"查找陌生人：服务器返回%d条数据",[list count]);
+                
+                [[ItelAction action] searchStrangerResponse:data isEnd:isEnd];
+            }
             else {
                 NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
                 [[NSNotificationCenter defaultCenter] postNotificationName:SEARCH_STRANGER_NOTIFICATION object:nil userInfo:userInfo];
-               }
+            }
         }//如果请求失败 则执行failure
     };
     FAILURE {
         NSLog(@"%@",error);
         NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
         [[NSNotificationCenter defaultCenter] postNotificationName:SEARCH_STRANGER_NOTIFICATION object:nil userInfo:userInfo];
-        };
+    };
     [NetRequester jsonGetRequestWithUrl:url andParameters:Parameters success:success failure:failure];
 }
 #pragma mark - 拨打用户电话接口
 /*
-   待完善
+ 待完善
  */
 -(void)callUserWithItel:(NSString *)itelNum{
     
@@ -160,25 +158,25 @@ static int addcount=0;
 
 #pragma mark - 匹配通讯录中得联系人
 /*匹配通讯录中得联系人接口
-   1 获得本机所有联系人电话
-   2 网络请求
-*/
+ 1 获得本机所有联系人电话
+ 2 网络请求
+ */
 -(void)checkAddressBookForItelUser:(NSArray*)phones{
     
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,MATCH_ADDRESS_BOOK_INTERFACE];
-   
+    
     HostItelUser *host=[[ItelAction action] getHost];
     NSNumber *number=[NSNumber numberWithInteger:[host.userId intValue] ];
     NSString *strPhones=[NXInputChecker changeArrayToString:phones];
     
     NSDictionary *parameters=@{@"hostUserId":number, @"numbers":strPhones,@"token":host.token};
-        SUCCESS {
-           
-         dispatch_queue_t getPhones=dispatch_queue_create("getPhones", NULL);
-         dispatch_async(getPhones, ^{
-       
-         id dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:Nil];
-      
+    SUCCESS {
+        
+        dispatch_queue_t getPhones=dispatch_queue_create("getPhones", NULL);
+        dispatch_async(getPhones, ^{
+            
+            id dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:Nil];
+            
             if ([dic isKindOfClass:[NSDictionary class]]) {
                 
                 int ret=[[dic objectForKey:@"ret"] intValue];
@@ -191,22 +189,22 @@ static int addcount=0;
                         [action checkAddressBookMatchingResponse:itelusers];
                     }
                 }
-            else {
-                NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"checkAddress" object:nil userInfo:userInfo];
+                else {
+                    NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"checkAddress" object:nil userInfo:userInfo];
                 }
-        }  });//如果请求失败 则执行failure
+            }  });//如果请求失败 则执行failure
     };
     FAILURE{
-     
+        
         NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
         [[NSNotificationCenter defaultCenter] postNotificationName:@"checkAddress" object:nil userInfo:userInfo];
-      };
+    };
     [NetRequester jsonGetRequestWithUrl:url andParameters:parameters success:success failure:failure];
 }
 #pragma mark - 添加号码到黑名单
 -(void)addToBlackList:(NSDictionary*)parameters;{
-   
+    
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,ADD_USER_BLACK_INTERFACE];
     SUCCESS{
         
@@ -219,7 +217,7 @@ static int addcount=0;
             NSString *itel=[parameters objectForKey:@"targetItel"];
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
-               
+                
                 [[ItelAction action] addItelUserBlackResponse:itel];
             }
             else {
@@ -239,7 +237,7 @@ static int addcount=0;
 #pragma mark - 从黑名单中移除
 
 -(void)removeFromBlackList:(NSDictionary*)parameters;{
-   
+    
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,REMOVE_FROM_BLACK_INTERFACE];
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -267,14 +265,14 @@ static int addcount=0;
 
 #pragma mark - 编辑用户备注
 -(void)editUserRemark:(NSString*)newRemark user:(NSDictionary*)parameters{
-   
+    
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,EDIT_USER_ALIAS_INTERFACE];
-
+    
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if ([dic isKindOfClass:[NSDictionary class]]) {
             
-     
+            
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 
@@ -298,13 +296,13 @@ static int addcount=0;
 -(void)refreshUserList:(NSDictionary*)parameters{
     
     
-   NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,REFRESH_FRIENDS_LIST_INTERFACE];
-   
+    NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,REFRESH_FRIENDS_LIST_INTERFACE];
+    
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-       
+        
         if ([dic isKindOfClass:[NSDictionary class]]) {
-           
+            
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 
@@ -412,8 +410,8 @@ static int addcount=0;
 #pragma mark - 修改手机号码-验证新号码
 -(void) checkNewTelNum:(NSDictionary*)parameters{
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,MODIFY_PERSIONAL_TELEPHONE_INTERFACE];
- 
-   
+    
+    
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
@@ -456,12 +454,12 @@ static int addcount=0;
         }//如果请求失败 则执行failure
     };
     FAILURE {
-
+        
         NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
         [[NSNotificationCenter defaultCenter] postNotificationName:@"phoneCheckCode" object:nil userInfo:userInfo];
     };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
-
+    
 }
 -(void)resendPhoneMessage:(NSDictionary *)parameters{
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,MODIFY_PERSIONAL_TELEPHONE_SEND_MESSAGE_CODE_INTERFACE];
@@ -473,7 +471,7 @@ static int addcount=0;
             
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
-               
+                
                 [[ItelAction action]  resendMassageResponse:dic];
             }
             else {
@@ -492,7 +490,7 @@ static int addcount=0;
 #pragma  mark - 修改用户密码
 -(void)changePassword:(NSDictionary*)parameters{
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,MODIFY_PERSIONAL_PASSWORD_INTERFACE];
-  
+    
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
@@ -546,7 +544,7 @@ static int addcount=0;
 -(void)securetyAnsewerQuestion:(NSDictionary*)parameters{
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,SECURETY_ANSWER_PROTECTION_QUESTION_INTERFACE];
     
-
+    
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
@@ -554,7 +552,7 @@ static int addcount=0;
             
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
-
+                
                 [[ItelAction action] securetyAnswserQuestionResponse:dic];
             }
             else {
@@ -581,7 +579,7 @@ static int addcount=0;
             
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
-          
+                
                 [[ItelAction action] modifySecuretyProductionResponse:dic];
             }
             else {
@@ -600,7 +598,7 @@ static int addcount=0;
 #pragma mark - 查询新消息
 -(void)searchNewMessage:(NSDictionary*)parameters{
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,MESSAGE_SEARCH_FOR_NEW_MESSAGE_INTERFACE];
-   
+    
     
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -624,7 +622,7 @@ static int addcount=0;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"searchForNewMessage" object:nil userInfo:userInfo];
     };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
-  
+    
 }
 #pragma mark - 刷新消息列表
 -(void)refreshForNewMessage:(NSDictionary*)parameters{
@@ -693,14 +691,14 @@ static int addcount=0;
                 
             }
             else {
-               // NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
+                // NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
                 //[[NSNotificationCenter defaultCenter] postNotificationName:@"logout" object:nil userInfo:userInfo];
             }
         }//如果请求失败 则执行failure
     };
     FAILURE {
         
-       // NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
+        // NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
         //[[NSNotificationCenter defaultCenter] postNotificationName:@"logout" object:nil userInfo:userInfo];
     };
     [NetRequester jsonGetRequestWithUrl:url andParameters:@{} success:success failure:failure];
