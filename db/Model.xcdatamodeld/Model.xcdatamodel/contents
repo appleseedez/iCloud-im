@@ -19,6 +19,35 @@
         <attribute name="telNum" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="blackBook" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ItelUser" syncable="YES"/>
+        <relationship name="friendBook" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ItelUser" syncable="YES"/>
+        <relationship name="systemMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" syncable="YES"/>
+    </entity>
+    <entity name="ItelUser" representedClassName="ItelUser" syncable="YES">
+        <attribute name="accoutType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="birthDay" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageurl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isBlack" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isFriend" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="itelNum" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personalitySignature" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="qq" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remarkName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sex" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="telNum" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="sender" inverseEntity="Message" syncable="YES"/>
+    </entity>
+    <entity name="Message" representedClassName="Message" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isRead" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="sender" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ItelUser" inverseName="messages" inverseEntity="ItelUser" syncable="YES"/>
     </entity>
     <entity name="Recent" representedClassName="Recent" syncable="YES">
         <attribute name="createDate" attributeType="Date" syncable="YES"/>
@@ -32,7 +61,9 @@
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="HostItelUser" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Recent" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="HostItelUser" positionX="-623" positionY="-1168" width="128" height="358"/>
+        <element name="Recent" positionX="153" positionY="-1053" width="128" height="180"/>
+        <element name="ItelUser" positionX="-92" positionY="-1147" width="128" height="283"/>
+        <element name="Message" positionX="-342" positionY="-756" width="128" height="133"/>
     </elements>
 </model>

@@ -90,7 +90,6 @@
 		479C7BAE185DDB480046B1D7 /* RegTipLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BAD185DDB480046B1D7 /* RegTipLabel.m */; };
 		479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C9C201834F02800DE40D8 /* ContentViewController.m */; };
 		479C9C291835019D00DE40D8 /* 头像.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 479C9C281835019D00DE40D8 /* 头像.jpg */; };
-		479CF0F718798D3F00FC021D /* HostItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CF0F618798D3F00FC021D /* HostItelUser.m */; };
 		479DB4B418648F8300421C10 /* CommonSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4B318648F8300421C10 /* CommonSettingViewController.m */; };
 		479DB4B718648F9900421C10 /* BlackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4B618648F9900421C10 /* BlackListViewController.m */; };
 		479DB4BB186494A000421C10 /* blackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4BA186494A000421C10 /* blackCell.m */; };
@@ -223,6 +222,9 @@
 		BADDFD6A1876915200D10DDC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADDFD691876915200D10DDC /* CoreData.framework */; };
 		BADDFD7018769DF600D10DDC /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADDFD6F18769DF600D10DDC /* CoreDataTableViewController.m */; };
 		BAE9C8DB187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C8DA187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m */; };
+		BAE9C8DE187C1F0800E41A9E /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C8DD187C1F0800E41A9E /* Message.m */; };
+		BAE9C8E1187C1F0900E41A9E /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C8E0187C1F0900E41A9E /* ItelUser.m */; };
+		BAE9C8E4187C1F0900E41A9E /* HostItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C8E3187C1F0900E41A9E /* HostItelUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -408,8 +410,6 @@
 		479C9C1F1834F02800DE40D8 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		479C9C201834F02800DE40D8 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		479C9C281835019D00DE40D8 /* 头像.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "头像.jpg"; sourceTree = "<group>"; };
-		479CF0F518798D3F00FC021D /* HostItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostItelUser.h; sourceTree = "<group>"; };
-		479CF0F618798D3F00FC021D /* HostItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostItelUser.m; sourceTree = "<group>"; };
 		479DB4B218648F8300421C10 /* CommonSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSettingViewController.h; sourceTree = "<group>"; };
 		479DB4B318648F8300421C10 /* CommonSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonSettingViewController.m; sourceTree = "<group>"; };
 		479DB4B518648F9900421C10 /* BlackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackListViewController.h; sourceTree = "<group>"; };
@@ -628,6 +628,12 @@
 		BADDFD6F18769DF600D10DDC /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		BAE9C8D9187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMLogoutFromSignalServerMessageBuilder.h; sourceTree = "<group>"; };
 		BAE9C8DA187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMLogoutFromSignalServerMessageBuilder.m; sourceTree = "<group>"; };
+		BAE9C8DC187C1F0800E41A9E /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		BAE9C8DD187C1F0800E41A9E /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		BAE9C8DF187C1F0900E41A9E /* ItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUser.h; sourceTree = "<group>"; };
+		BAE9C8E0187C1F0900E41A9E /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
+		BAE9C8E2187C1F0900E41A9E /* HostItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostItelUser.h; sourceTree = "<group>"; };
+		BAE9C8E3187C1F0900E41A9E /* HostItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostItelUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1472,13 +1478,17 @@
 		BAFEE13818744FDA00DB1AC6 /* db */ = {
 			isa = PBXGroup;
 			children = (
+				BAE9C8E2187C1F0900E41A9E /* HostItelUser.h */,
+				BAE9C8E3187C1F0900E41A9E /* HostItelUser.m */,
+				BAE9C8DF187C1F0900E41A9E /* ItelUser.h */,
+				BAE9C8E0187C1F0900E41A9E /* ItelUser.m */,
+				BAE9C8DC187C1F0800E41A9E /* Message.h */,
+				BAE9C8DD187C1F0800E41A9E /* Message.m */,
 				BA06AFA81877C5F20099C3F7 /* Recent.h */,
 				BA06AFA91877C5F20099C3F7 /* Recent.m */,
 				BADDFD6E18769DF600D10DDC /* CoreDataTableViewController.h */,
 				BADDFD6F18769DF600D10DDC /* CoreDataTableViewController.m */,
 				BADDFD2218768C4F00D10DDC /* Model.xcdatamodeld */,
-				479CF0F518798D3F00FC021D /* HostItelUser.h */,
-				479CF0F618798D3F00FC021D /* HostItelUser.m */,
 				BA8242FF1875A0C3001903CE /* Recents.db */,
 				BADDFD661876901500D10DDC /* IMCoreDataManager.h */,
 				BADDFD671876901500D10DDC /* IMCoreDataManager.m */,
@@ -1696,6 +1706,7 @@
 				478813CA1839C35E0085224D /* AFSecurityPolicy.m in Sources */,
 				479EF0531859D47C0012EE29 /* IMRecentContactListViewController.m in Sources */,
 				BA06AFAD18783A8E0099C3F7 /* Recent+CRUD.m in Sources */,
+				BAE9C8E1187C1F0900E41A9E /* ItelUser.m in Sources */,
 				479EF04F1859D47C0012EE29 /* IMCallingViewController.m in Sources */,
 				47225148184D804D00C44857 /* NewFriendListViewController.m in Sources */,
 				4781464D1855F79800362E53 /* RegDetailViewController.m in Sources */,
@@ -1706,6 +1717,7 @@
 				478813D21839C35E0085224D /* FMDatabaseAdditions.m in Sources */,
 				479EF05B1859D47C0012EE29 /* IMSessionInitMessageBuilder.m in Sources */,
 				479C7BAE185DDB480046B1D7 /* RegTipLabel.m in Sources */,
+				BAE9C8DE187C1F0800E41A9E /* Message.m in Sources */,
 				478813D71839C35E0085224D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				471F00D51868156500D3DAFD /* HostEditEmailViewController.m in Sources */,
 				BA1A74D7187A780A0071E83F /* IMUtils.m in Sources */,
@@ -1738,7 +1750,6 @@
 				473F62E3183889B0006CAE31 /* AddressBook.m in Sources */,
 				479B90791837660B005D8CCB /* SearchNewFriendViewController.m in Sources */,
 				479EF0551859D47C0012EE29 /* IMAuthMessageBuilder.m in Sources */,
-				479CF0F718798D3F00FC021D /* HostItelUser.m in Sources */,
 				47A0DEF11862D74D00BD28AB /* UIImageView+BetterFace.m in Sources */,
 				478813E01839C35E0085224D /* USDictionaryWrapper.m in Sources */,
 				479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */,
@@ -1776,6 +1787,7 @@
 				479EF05D1859D47C0012EE29 /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				478813C81839C35E0085224D /* AFHTTPSessionManager.m in Sources */,
 				47A269AB18710A1500084A80 /* ItelMessageCache.m in Sources */,
+				BAE9C8E4187C1F0900E41A9E /* HostItelUser.m in Sources */,
 				47E2DB9A185991BD00D455EF /* MoreViewController.m in Sources */,
 				47A0DEEE1862D56200BD28AB /* UIImage+Compress.m in Sources */,
 				478813DF1839C35E0085224D /* USArrayWrapper.m in Sources */,
