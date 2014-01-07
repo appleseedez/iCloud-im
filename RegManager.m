@@ -17,7 +17,7 @@ static RegManager *manager;
     return manager;
 }
 -(void) checkNumberInterface{
-       NSString *url=[NSString stringWithFormat:@"%@/register/registerSubmitByJson.json",SERVER_IP];
+       NSString *url=[NSString stringWithFormat:@"%@/register/registerSubmitByJson.json",SIGNAL_SERVER];
     NSDictionary *parameters=@{@"itelCode": self.regItel,@"type":self.regType,@"phone":self.regPhoneNumber,@"password":self.regPassword};
         [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -37,7 +37,7 @@ static RegManager *manager;
     }];
 }
 -(void)sendMessageInterface{
-    NSString *url=[NSString stringWithFormat:@"%@/register/checkPhoneByJson.json",SERVER_IP];
+    NSString *url=[NSString stringWithFormat:@"%@/register/checkPhoneByJson.json",SIGNAL_SERVER];
     NSDictionary *parameters=@{@"itelCode": self.regItel,@"phone":self.regPhoneNumber};
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSData class]]) {
@@ -57,7 +57,7 @@ static RegManager *manager;
     
 }
 -(void)commitInterfaceCheckCode:(NSString*)CheckCode{
-    NSString *url=[NSString stringWithFormat:@"%@/register/submitPhoneOkByJson.json",SERVER_IP];
+    NSString *url=[NSString stringWithFormat:@"%@/register/submitPhoneOkByJson.json",SIGNAL_SERVER];
     NSDictionary *parameters=@{@"itelCode": self.regItel,@"type":self.regType,@"phone":self.regPhoneNumber,@"password":self.regPassword,@"captcha":CheckCode};
     
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {

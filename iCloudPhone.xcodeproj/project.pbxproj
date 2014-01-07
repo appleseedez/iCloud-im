@@ -76,7 +76,6 @@
 		4788140B1839ED7F0085224D /* itel.png in Resources */ = {isa = PBXBuildFile; fileRef = 4788140A1839ED7F0085224D /* itel.png */; };
 		47952D9418582DBA0044CF64 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9318582DBA0044CF64 /* MBProgressHUD.m */; };
 		47952D9718583D170044CF64 /* NSCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9618583D170044CF64 /* NSCAlertView.m */; };
-		47952D99185846B90044CF64 /* RegHeaders.h in Resources */ = {isa = PBXBuildFile; fileRef = 47952D98185846B90044CF64 /* RegHeaders.h */; };
 		47952D9D18585F600044CF64 /* RegNextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9C18585F600044CF64 /* RegNextButton.m */; };
 		4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */ = {isa = PBXBuildFile; fileRef = 4798A26D183DD45300060DDB /* HostItelUser+set.m */; };
 		479B90791837660B005D8CCB /* SearchNewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B90781837660B005D8CCB /* SearchNewFriendViewController.m */; };
@@ -381,7 +380,6 @@
 		47952D9318582DBA0044CF64 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		47952D9518583D170044CF64 /* NSCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCAlertView.h; sourceTree = "<group>"; };
 		47952D9618583D170044CF64 /* NSCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSCAlertView.m; sourceTree = "<group>"; };
-		47952D98185846B90044CF64 /* RegHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegHeaders.h; sourceTree = "<group>"; };
 		47952D9B18585F600044CF64 /* RegNextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegNextButton.h; sourceTree = "<group>"; };
 		47952D9C18585F600044CF64 /* RegNextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegNextButton.m; sourceTree = "<group>"; };
 		4798A26C183DD45300060DDB /* HostItelUser+set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HostItelUser+set.h"; sourceTree = "<group>"; };
@@ -753,7 +751,6 @@
 				478146521856298F00362E53 /* RegMesCheckViewController.m */,
 				479E0CD81856A817005BAE20 /* RegManager.h */,
 				479E0CD91856A817005BAE20 /* RegManager.m */,
-				47952D98185846B90044CF64 /* RegHeaders.h */,
 				47952D9A18585F2F0044CF64 /* registerVIew */,
 			);
 			name = register;
@@ -1635,7 +1632,6 @@
 				47E05DC318519C9C009FDCED /* 头像.png in Resources */,
 				47E2DB9C185997F000D455EF /* 登录logo.png in Resources */,
 				4757D0591855CAD6001A9639 /* 短信提示.png in Resources */,
-				47952D99185846B90044CF64 /* RegHeaders.h in Resources */,
 				47E05DC018517418009FDCED /* searchuser.png in Resources */,
 				47E05DC118517418009FDCED /* checkAddress.png in Resources */,
 				47B89DED1834D40000022FE5 /* Images.xcassets in Resources */,
