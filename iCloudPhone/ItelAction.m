@@ -7,18 +7,22 @@
 //
 
 #import "ItelAction.h"
-#import "ItelUserManager.h"
-#import "ItelBookManager.h"
-#import "ItelNetManager.h"
-#import "ItelMessageManager.h"
 #import "IMCoreDataManager.h"
+#import "ItelUser+CRUD.h"
+#import "ItelUserInterfaceImp.h"
+#import "ItelNetInterfaceImp.h"
+#import "ItelMessageInterfaceImp.h"
+#import "ItelBookInterfaceImp.h"
+@interface ItelMessageInterfaceImp()
++ (instancetype) defaultMessageInterface;
+@end
 @implementation ItelAction
 +(ItelAction*)action{
     ItelAction *action=[[ItelAction alloc] init];
-    action.itelBookActionDelegate=[ItelBookManager defaultManager];
-    action.itelUserActionDelegate=[ItelUserManager defaultManager];
-    action.itelNetRequestActionDelegate=[ItelNetManager defaultManager];
-    action.itelMessageDelegate=[ItelMessageManager defaultManager];
+    action.itelBookActionDelegate=[ItelBookInterfaceImp new];//[ItelBookManager defaultManager];
+    action.itelUserActionDelegate=[ItelUserInterfaceImp new];
+    action.itelNetRequestActionDelegate=[ItelNetInterfaceImp new];
+    action.itelMessageDelegate=[ItelMessageInterfaceImp defaultMessageInterface];
     return action;
 }
 #pragma mark - 重置联系人列表
@@ -54,6 +58,7 @@
         
         
         [self.itelBookActionDelegate resetUserInFriendBook:user];
+        
     }
     
     [self NotifyForNormalResponse:@"getItelList" parameters:data];
@@ -133,9 +138,21 @@
     NSDictionary *parameters = @{@"userId":hostUser.userId ,@"hostItel":hostUser.itelNum,@"targetItel":itel,@"token":hostUser.token};
     [self.itelNetRequestActionDelegate addToBlackList:parameters];
 }
--(void) addItelUserBlackResponse:(NSString*)itel{
-    
-    [self.itelBookActionDelegate addUserToBlackBook:itel];
+-(void) addItelUserBlackResponse:(NSDictionary*)userDic{
+    NSString* itelNum = [userDic objectForKey:@"itel"];
+    NSAssert(itelNum, @"服务端没有itel字段");
+    HostItelUser* hostUser = [self getHost];
+    ItelUser* user;
+    NSPredicate* findByItelNum = [NSPredicate predicateWithFormat:@"itelNum = %@",itelNum];
+    NSArray* matched = [[hostUser.users filteredSetUsingPredicate:findByItelNum] allObjects];
+    if ([matched count]) {
+        user = matched[0];
+       
+    }else{
+        user = [ItelUser userWithDictionary:userDic];
+    }
+    [self.itelBookActionDelegate addUserToBlackBook:user];
+ 
     [self NotifyForNormalResponse:ADD_TO_BLACK_LIST_NOTIFICATION parameters:nil];
 
 }
@@ -335,6 +352,7 @@
 -(void)getNewMessage{
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
     NSDictionary *parameters = @{@"itel":hostUser.itelNum ,@"token":hostUser.token};
+    NSLog(@"%@",parameters);
     [self.itelNetRequestActionDelegate refreshForNewMessage:parameters];
 }
 -(void)getNewMessageResponse:(NSDictionary*)data{

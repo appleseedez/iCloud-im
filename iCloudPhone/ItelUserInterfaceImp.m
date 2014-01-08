@@ -14,13 +14,16 @@ static NSString* kCurrentUser = @"currUser";
 -(HostItelUser*)hostUser{
     NSString* currUserItemNum = [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentUser];
     //
-    NSAssert([currUserItemNum intValue] != 0, @"NSUserDefaults 拿不到currUser");
+//    NSAssert([currUserItemNum intValue] != 0, @"NSUserDefaults 拿不到currUser");
     NSError* error = nil;
+    HostItelUser* currentUser;
     NSFetchRequest* getCurrentUser = [NSFetchRequest fetchRequestWithEntityName:@"HostItelUser"];
     getCurrentUser.predicate = [NSPredicate predicateWithFormat:@"itelNum = %@",currUserItemNum];
     NSArray* currentUsers = [[IMCoreDataManager defaulManager].managedObjectContext executeFetchRequest:getCurrentUser error:&error];
-    
-    HostItelUser* currentUser = currentUsers[0];
+    if ([currentUsers count]) {
+         currentUser = currentUsers[0];
+    }
+   
     return currentUser;
 }
 //设置本机用户

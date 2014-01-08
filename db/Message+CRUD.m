@@ -25,7 +25,7 @@
     NSError* error = nil;
     NSFetchRequest* getAllMessages = [NSFetchRequest fetchRequestWithEntityName:@"Message"];
     //TODO: 按时间逆序
-    getAllMessages.sortDescriptors = @[@"date"];
+    getAllMessages.sortDescriptors = @[];
     return [context executeFetchRequest:getAllMessages error:&error];
 }
 @end

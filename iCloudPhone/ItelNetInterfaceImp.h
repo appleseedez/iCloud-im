@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 #import "ItelNetInterface.h"
 @interface ItelNetInterfaceImp : NSObject <ItelNetInterface>
-
++(ItelNetInterfaceImp*)defaultManager;
 @end

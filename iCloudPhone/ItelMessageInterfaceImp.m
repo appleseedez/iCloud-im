@@ -13,8 +13,16 @@
 @interface ItelMessageInterfaceImp()
 @property(nonatomic) NSTimer* timer;
 @end
-
+static ItelMessageInterfaceImp* _instance;
 @implementation ItelMessageInterfaceImp
++(void)initialize{
+    _instance = [ItelMessageInterfaceImp new];
+}
++ (instancetype) defaultMessageInterface{
+    return _instance;
+}
+
+
 - (void) setup{
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startSearching) name:@"rootViewAppear" object:nil];

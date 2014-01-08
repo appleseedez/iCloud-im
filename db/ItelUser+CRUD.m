@@ -8,6 +8,7 @@
 
 #import "ItelUser+CRUD.h"
 #import "IMCoreDataManager.h"
+#import "ItelAction.h"
 @implementation ItelUser (CRUD)
 +(ItelUser*)userWithDictionary:(NSDictionary*)dic{
     for (NSString *key in [dic allKeys]) {
@@ -18,7 +19,7 @@
     }
     NSError* error;
     ItelUser *user;
-    NSString* itelNumber = [[dic objectForKey:@"itel"] stringValue];
+    NSString* itelNumber = [dic objectForKey:@"itel"];
     NSFetchRequest* getOneUser = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
     getOneUser.predicate = [NSPredicate predicateWithFormat:@"itelNum = %@",itelNumber];
     
@@ -29,13 +30,13 @@
         user= [NSEntityDescription insertNewObjectForEntityForName:@"ItelUser" inManagedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext];
     }
 
-    user.itelNum=[[dic objectForKey:@"itel"] stringValue];
-    user.userId=[[dic objectForKey:@"userId"] stringValue];
+    user.itelNum=[dic objectForKey:@"itel"];
+    user.userId=[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]];
     if (user.userId==nil) {
-        user.userId=[[dic objectForKey:@"user_id"] stringValue];
+        user.userId=[NSString stringWithFormat:@"%@",[dic objectForKey:@"user_id"]] ;
     }
-    user.remarkName=[[dic objectForKey:@"alias"] stringValue];
-    user.telNum=[[dic objectForKey:@"phone"] stringValue];
+    user.remarkName=[dic objectForKey:@"alias"] ;
+    user.telNum=[dic objectForKey:@"phone"];
     //
     [user setPersonal:dic];
     return user;
@@ -51,17 +52,30 @@
        nickName =[data objectForKey:@"nickname"];
     }
     self.nickName = nickName;
-    self.qq=[[data objectForKey:@"qq_num"] stringValue];
+    self.qq=[data objectForKey:@"qq_num"];
     self.sex=[NSNumber numberWithBool:[[data objectForKey:@"sex"] boolValue]];
-    self.address=[[data objectForKey:@"address"] stringValue];
-    self.personalitySignature=[[data objectForKey:@"recommend"] stringValue];
-    self.email=[[data objectForKey:@"mail"] stringValue];
-    self.birthDay=[[data objectForKey:@"birthday"] stringValue];
-    self.imageurl=[[data objectForKey:@"photo_file_name"] stringValue];
+    self.address=[data objectForKey:@"address"];
+    self.personalitySignature=[data objectForKey:@"recommend"];
+    self.email=[data objectForKey:@"mail"];
+    self.birthDay=[data objectForKey:@"birthday"];
+    self.imageurl=[data objectForKey:@"photo_file_name"];
     if ([self.imageurl isEqualToString:@""]) {
         self.imageurl=@"http://www.qqbody.com/uploads/allimg/121207/1ki0it-3.jpg";
     }
-    self.address=[[data objectForKey:@"area_code"] stringValue];
+    self.address=[data objectForKey:@"area_code"];
+    HostItelUser* hostUser = [[ItelAction action] getHost];
+    [hostUser addUsersObject:self];
+    self.host = hostUser;
+    
     [[IMCoreDataManager defaulManager] saveContext];
+}
+
+- (void)delete{
+    if ([[IMCoreDataManager defaulManager] managedObjectContext] == self.managedObjectContext) {
+        [[[IMCoreDataManager defaulManager] managedObjectContext] deleteObject:self];
+        [[IMCoreDataManager defaulManager] saveContext];
+    }else{
+        [NSException exceptionWithName:@"managerContext不一致" reason:@"managerContext is not the same " userInfo:nil];
+    }
 }
 @end

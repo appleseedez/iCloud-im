@@ -53,6 +53,7 @@ static int addcount=0;
     FAILURE{
         NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"网络异常" };
         [[NSNotificationCenter defaultCenter] postNotificationName:ADD_FIRIEND_NOTIFICATION object:nil userInfo:userInfo];
+        NSLog(@"生命轻轻的 是:%@",error);
     };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
 }
@@ -218,7 +219,7 @@ static int addcount=0;
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 
-                [[ItelAction action] addItelUserBlackResponse:itel];
+                [[ItelAction action] addItelUserBlackResponse:dic];
             }
             else {
                 NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };

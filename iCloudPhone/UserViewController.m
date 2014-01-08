@@ -13,7 +13,6 @@
 #import "NXImageView.h"
 #import "IMManager.h"
 #import "NSCAppDelegate.h"
-#import "ItelBookManager.h"
 #import "NSCAppDelegate.h"
 #import "UIImageView+AFNetworking.h"
 @interface UserViewController ()

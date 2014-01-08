@@ -26,7 +26,7 @@
     return _keys;
 }
 
--(void)addUser:(ItelUser*)user forKey:(NSString*)key{
+-(void)addUser:(id)user forKey:(NSString*)key{
    
        [self.keys addObject:key];
     

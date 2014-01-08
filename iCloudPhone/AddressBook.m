@@ -7,6 +7,7 @@
 //
 
 #import "AddressBook.h"
+#import <AddressBook/ABAddressBook.h>
 #import <AddressBook/AddressBook.h>
 #import "PersonInAddressBook.h"
 #import "NXInputChecker.h"
@@ -27,15 +28,14 @@
     return _addressBook;
 }
 -(NSArray*)getAllKeys{
-    while (self.isLoading) {
-        
-    }
+
    return  [super getAllKeys];
 }
 #pragma mark - 电话本操作
 -(void)getAddressBook{
     CFErrorRef error=NULL;
     ABAddressBookRef addressBook=ABAddressBookCreateWithOptions(NULL, &error);
+
     float version=[[UIDevice currentDevice].systemVersion floatValue];
     if (version>=7.0) {
         ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
@@ -43,21 +43,26 @@
                 NSLog(@"%@",error);
             }
             else if(granted){
-                self.isLoading=YES;
+//                self.isLoading=YES;
                 [self getPeopleInAddressBook];
             }
             
         });
     }
     else {
+        
         [self getPeopleInAddressBook];
     }
     CFRelease(addressBook);
 }
+
+
 -(void)getPeopleInAddressBook{
     CFErrorRef error=NULL;
-    ABAddressBookRef addressBook=ABAddressBookCreateWithOptions(NULL, &error);
+
     
+    
+    ABAddressBookRef addressBook=ABAddressBookCreateWithOptions(NULL, &error);
     CFArrayRef arrayRef= ABAddressBookCopyArrayOfAllPeople(addressBook)   ;
     NSArray *array=(NSArray*)CFBridgingRelease(arrayRef);
     for (id person in array)

@@ -16,7 +16,7 @@
 //从好友列表中删除联系人
 -(void)delUserFromFriendBook:(NSString*)itel;
 //添加黑名单
--(void)addUserToBlackBook:(NSString*)itel;
+-(void)addUserToBlackBook:(ItelUser*)user;
 //从黑名单移除
 -(void)removeUserFromBlackBook:(NSString*)itel;
 //获得本机通讯录电话
@@ -28,7 +28,7 @@
 //设置备注 黑名单
 -(void)resetUserInBlackBook:(ItelUser*)user;
 //获得通讯录
--(void)getAddressBook;
+-(ItelBook*)getAddressBook;
 //获得联系人列表
 -(ItelBook*)friendBook;
 //查询用户在等待确认列表
