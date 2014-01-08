@@ -11,7 +11,6 @@
 #import "ItelBook.h"
 #import "ContactCell.h"
 #import "UserViewController.h"
-#import "ItelBookManager.h"
 #import "NXInputChecker.h"
 #import "NSCAppDelegate.h"
 #import "UIImageView+AFNetworking.h"

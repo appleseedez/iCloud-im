@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "IMManager.h"
+#import "AddressBook.h"
 @class NXLoginViewController;
 @class RootViewController;
 typedef NS_ENUM(NSInteger, setRootViewController) {
@@ -25,4 +26,5 @@ typedef NS_ENUM(NSInteger, setRootViewController) {
 @property (strong,nonatomic) NXLoginViewController *loginVC;
 @property (nonatomic,strong) RootViewController *RootVC;
 @property (nonatomic,strong) id <IMManager> manager;
+@property  (nonatomic)AddressBook *phoneBook;  //电话联系人列表
 @end

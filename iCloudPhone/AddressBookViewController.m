@@ -9,7 +9,7 @@
 #import "AddressBookViewController.h"
 #import "PersonInAddressBook.h"
 #import  "AddressBookCell.h"
-#import "ItelBookManager.h"
+#import "ItelAction.h"
 #import "StrangerCell.h"
 @interface AddressBookViewController ()
 @property (nonatomic,strong) AddressBook *address;

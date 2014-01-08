@@ -8,44 +8,54 @@
 
 #import "NSCAppDelegate.h"
 #import "RootViewController.h"
-#import "ItelBookManager.h"
 #import "ContentViewController.h"
 #import "NXLoginViewController.h"
-#import "ItelNetManager.h"
-#import "ItelUserManager.h"
 #import "IMCoreDataManager.h"
 #import "IMManagerImp.h"
-#import "ItelMessageManager.h"
-
+#import "ItelMessageInterfaceImp.h"
+#import "ItelAction.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
+
+@interface ItelMessageInterfaceImp()
++ (instancetype) defaultMessageInterface;
+-(void) setup;
+-(void) tearDown;
+@end
+
 @implementation NSCAppDelegate
 -(void) signOut{
     [[ItelAction action] logout];
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"currUser"];
-    [self tearDownManagers];
+//    [self tearDownManagers];
     [self.manager logoutFromSignalServer];
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
     
 }
--(void)tearDownManagers{
-    [[ItelMessageManager defaultManager] tearDown];
-    [[ItelUserManager defaultManager] tearDown];
-    [[ItelBookManager defaultManager] tearDown];
-    [[ItelNetManager defaultManager] tearDown];
-    [self setupManagers];
-
-}
+//-(void)tearDownManagers{
+////    [[ItelMessageManager defaultManager] tearDown];
+////    [[ItelUserManager defaultManager] tearDown];
+////    [[ItelBookManager defaultManager] tearDown];
+////    [[ItelNetManager defaultManager] tearDown];
+//    [self setupManagers];
+//
+//}
 -(void)setupManagers{
-    [ItelMessageManager defaultManager];
-    [ItelUserManager defaultManager];
-    [ItelBookManager defaultManager];
-    [ItelNetManager defaultManager];
+
+//    [ItelUserManager defaultManager];
+//    [ItelBookManager defaultManager];
+//    [ItelNetManager defaultManager];
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    if (self.phoneBook == nil) {
+        self.phoneBook = [[AddressBook alloc] init];
+        [self.phoneBook loadAddressBook];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
     [self setupManagers];
+    //初始化ItelMessageInterface
+    [ItelMessageInterfaceImp defaultMessageInterface];
     UIStoryboard *mainStoryboard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
     RootViewController *rootVC=[mainStoryboard instantiateViewControllerWithIdentifier:@"rootVC"];
     self.manager = [[IMManagerImp alloc] init];
@@ -62,7 +72,7 @@
     
     [self checkAutoLogin];
     
-   [[ItelBookManager defaultManager] phoneBook];
+//   [[ItelBookManager defaultManager] phoneBook];
     
     if (self.autoLogin) {
         [self.window setRootViewController:rootVC];
@@ -160,7 +170,7 @@
 #endif
     
     [self.manager tearDown];
-//    [self.manager disconnectToSignalServer];
+    [[ItelMessageInterfaceImp defaultMessageInterface] tearDown];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -196,6 +206,8 @@
         [self.manager setup];
         [self.manager connectToSignalServer];
     }
+    
+    [[ItelMessageInterfaceImp defaultMessageInterface] setup];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -205,6 +217,7 @@
 #endif
     [self.manager logoutFromSignalServer];
     [self.manager tearDown];
+    [[ItelMessageInterfaceImp defaultMessageInterface] tearDown];
 }
 
 @end

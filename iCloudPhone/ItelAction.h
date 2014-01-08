@@ -16,9 +16,9 @@
 @class ItelBook;
 
 @interface ItelAction : NSObject
-@property (nonatomic,weak) id <ItelBookInterface> itelBookActionDelegate;
-@property (nonatomic,weak) id <ItelUserInterface> itelUserActionDelegate;
-@property (nonatomic,weak) id <ItelNetInterface>itelNetRequestActionDelegate;
+@property (nonatomic) id <ItelBookInterface> itelBookActionDelegate;
+@property (nonatomic) id <ItelUserInterface> itelUserActionDelegate;
+@property (nonatomic) id <ItelNetInterface>itelNetRequestActionDelegate;
 @property (nonatomic,weak) id <ItelMessageInterface> itelMessageDelegate;
 +(ItelAction*)action;
 //获得机主用户
@@ -41,7 +41,7 @@
 -(void) delFriendFromItelBookResponse:(NSString*)itel;
 //添加到黑名单
 -(void) addItelUserBlack:(NSString*)itel;
--(void) addItelUserBlackResponse:(NSString*)itel;
+-(void) addItelUserBlackResponse:(NSDictionary*)userDic;
 //从黑名单移除
 -(void) delFriendFromBlack:(NSString*)itel;
 -(void) delFriendFromBlackResponse:(NSString*)itel;

@@ -8,8 +8,8 @@
 
 #import "MessageSyetemViewController.h"
 #import "ItelAction.h"
-#import "ItelMessage.h"
 #import "MessageCell.h"
+#import "Message.h"
 #import "UIImageView+AFNetworking.h"
 @interface MessageSyetemViewController ()
 @property (nonatomic,strong) NSArray *messageList;
@@ -20,7 +20,7 @@
 
 -(NSArray*)messageList{
     if (_messageList==nil) {
-        _messageList=[[ItelAction action]getMessageList];
+        _messageList=[[ItelAction action] getMessageList];
     }
     return _messageList;
 }
@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
 
-   }
+}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -49,22 +49,22 @@
     MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     
-    ItelMessage *message=[self.messageList objectAtIndex:indexPath.row];
-    cell.lbTittle.text=[message.user objectForKey:@"nickName"];
+    Message *message=[self.messageList objectAtIndex:indexPath.row];
+    cell.lbTittle.text= message.sender.nickName;
     if (!cell.lbTittle.text.length) {
-        cell.lbTittle.text=[message.user objectForKey:@"itel"];
+        cell.lbTittle.text=message.sender.itelNum;
     }
     
     cell.lbBody.text=message.body;
     cell.lbDate.text=message.date;
-    NSString *imageUrl=[message.user objectForKey:@"photo_file_name"];
+    NSString *imageUrl=message.sender.imageurl;
     [cell.imgPhoto setImageWithURL:[NSURL URLWithString: imageUrl ] placeholderImage:[UIImage imageNamed:@"头像.png"]];
     
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"接受邀请",@"忽略邀请",nil];
-    self.currItel=[((ItelMessage*)[self.messageList objectAtIndex:indexPath.row]).user objectForKey:@"itel"];
+    self.currItel=((Message*)[self.messageList objectAtIndex:indexPath.row]).sender.itelNum;
     //actionSheet.cancelButtonIndex=2;
     [actionSheet showInView:self.view];
 }
@@ -93,6 +93,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:@"getNewMessage" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showResult:) name:@"acceptFriends" object:nil];
     [[ItelAction action] getNewMessage];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

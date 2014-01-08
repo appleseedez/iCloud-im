@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class ItelUser;
 @interface ItelBook : NSObject <NSCopying>
--(void)addUser:(ItelUser*)user forKey:(NSString*)key;
+-(void)addUser:(id)user forKey:(NSString*)key;
 -(void)removeUserforKey:(NSString*)key;
 -(NSArray*)getAllKeys;
 -(ItelUser*)userForKey:(NSString*)key;

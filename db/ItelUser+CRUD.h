@@ -10,4 +10,5 @@
 
 @interface ItelUser (CRUD)
 +(ItelUser*)userWithDictionary:(NSDictionary*)dic;
+- (void) delete;
 @end

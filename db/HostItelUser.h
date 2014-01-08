@@ -2,7 +2,7 @@
 //  HostItelUser.h
 //  iCloudPhone
 //
-//  Created by Pharaoh on 1/7/14.
+//  Created by Pharaoh on 1/8/14.
 //  Copyright (c) 2014 NX. All rights reserved.
 //
 
@@ -31,26 +31,20 @@
 @property (nonatomic, retain) NSString * telNum;
 @property (nonatomic, retain) NSString * token;
 @property (nonatomic, retain) NSString * userId;
-@property (nonatomic, retain) NSSet *friendBook;
-@property (nonatomic, retain) NSSet *blackBook;
 @property (nonatomic, retain) NSSet *systemMessages;
+@property (nonatomic, retain) NSSet *users;
 @end
 
 @interface HostItelUser (CoreDataGeneratedAccessors)
-
-- (void)addFriendBookObject:(ItelUser *)value;
-- (void)removeFriendBookObject:(ItelUser *)value;
-- (void)addFriendBook:(NSSet *)values;
-- (void)removeFriendBook:(NSSet *)values;
-
-- (void)addBlackBookObject:(ItelUser *)value;
-- (void)removeBlackBookObject:(ItelUser *)value;
-- (void)addBlackBook:(NSSet *)values;
-- (void)removeBlackBook:(NSSet *)values;
 
 - (void)addSystemMessagesObject:(Message *)value;
 - (void)removeSystemMessagesObject:(Message *)value;
 - (void)addSystemMessages:(NSSet *)values;
 - (void)removeSystemMessages:(NSSet *)values;
+
+- (void)addUsersObject:(ItelUser *)value;
+- (void)removeUsersObject:(ItelUser *)value;
+- (void)addUsers:(NSSet *)values;
+- (void)removeUsers:(NSSet *)values;
 
 @end

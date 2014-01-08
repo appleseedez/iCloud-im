@@ -50,7 +50,7 @@
     }
     else{
         
-        [self requestToLogin];
+        [self requestToLogin1];
     }
 }
 -(void)requestToLogin{
@@ -73,8 +73,7 @@
     
     //success封装了一段代码表示如果请求成功 执行这段代码
     void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject){
-       NSString *log = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"%@",log);
+       
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
        
         if ([json isKindOfClass:[NSDictionary class]]) {
@@ -120,6 +119,67 @@
    
     [operation start];
 
+}
+-(void)requestToLogin1{
+    //这是退出键盘的 不用理它
+    [self.view endEditing:YES];
+    self.txtInuptCheckMessage.text=@"登录中...";
+    [self.actWaitingToLogin startAnimating];
+    NSString *url=[NSString stringWithFormat:@"%@/login",SIGNAL_SERVER];
+    
+    
+    
+    
+    NSDictionary *parameters=  @{@"itel": self.txtUserCloudNumber.text,@"password":self.txtUserPassword.text,@"type":@"IOS",@"_spring_security_remember_me":@"true"};
+  
+   
+    
+    
+    //success封装了一段代码表示如果请求成功 执行这段代码
+    void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        id json=responseObject;
+        NSLog(@"返回的内容：%@",json);
+        
+        if ([json isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic=[json objectForKey:@"message"];
+            int ret=[[dic objectForKey:@"ret"] intValue];
+            if (ret==0) {
+                HostItelUser *host=[HostItelUser userWithDictionary:[[dic objectForKey:@"data"] mutableCopy]];
+                NSDictionary *tokens=[json objectForKey:@"tokens"];
+                if (tokens) {
+                    host.sessionId=[tokens objectForKey:@"jsessionid"];
+                    host.spring_security_remember_me_cookie=[tokens objectForKey:@"spring_security_remember_me_cookie"];
+                    host.token=[tokens objectForKey:@"token"];
+                }
+                
+                
+                [[ItelAction action] setHostItelUser:host];
+                [self.actWaitingToLogin stopAnimating];
+                self.txtInuptCheckMessage.text = @"";
+                
+                [[ItelAction action] resetContact];
+                
+                
+                NSCAppDelegate *delegate =   (NSCAppDelegate*) [UIApplication sharedApplication].delegate;
+                [delegate changeRootViewController:RootViewControllerMain userInfo:[[json valueForKey:@"message"] valueForKey:@"data"]];
+                
+                [[ItelAction action] checkAddressBookMatchingItel];
+                
+                
+            }
+            else {
+                [self.actWaitingToLogin stopAnimating];
+                self.txtInuptCheckMessage.text=[dic objectForKey:@"msg"];
+            }
+        }//如果请求失败 则执行failure
+    };
+    void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+        [self.actWaitingToLogin stopAnimating];
+        self.txtInuptCheckMessage.text = @"网络不通";
+    };
+    [[AFHTTPRequestOperationManager manager]POST:url parameters:parameters success:success failure:failure];
 }
 #pragma mark - 检测用户输入
 
