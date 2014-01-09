@@ -27,6 +27,11 @@ static int currPage=0;
     self.view.backgroundColor=[UIColor whiteColor];
 	// Do any additional setup after loading the view.
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+
+}
 - (IBAction)changeItel:(id)sender {
     [self.rootDelegate changeSubViewAtIndex:0];
 }

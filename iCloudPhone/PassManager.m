@@ -29,7 +29,8 @@ static PassManager *manager=nil;
             
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
-                
+                NSDictionary *userInfo=@{@"isNormal": @"1",@"reason":[dic objectForKey:@"msg"] };
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"passPhoneCheckCode" object:nil userInfo:userInfo];
                 }
             else {
                 NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };

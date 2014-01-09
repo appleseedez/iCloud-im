@@ -79,7 +79,7 @@
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
+    NSLog(@"上传接口:%@",url);
         [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
          [formData appendPartWithFileData:imageData     name:@"image" fileName:@"header.png" mimeType:@"image/png"];
     } success:success failure:failure];

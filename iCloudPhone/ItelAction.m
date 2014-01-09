@@ -139,7 +139,7 @@
     [self.itelNetRequestActionDelegate addToBlackList:parameters];
 }
 -(void) addItelUserBlackResponse:(NSDictionary*)userDic{
-    NSString* itelNum = [userDic objectForKey:@"itel"];
+    NSString* itelNum = [userDic valueForKey:@"itel"];
     NSAssert(itelNum, @"服务端没有itel字段");
     HostItelUser* hostUser = [self getHost];
     ItelUser* user;

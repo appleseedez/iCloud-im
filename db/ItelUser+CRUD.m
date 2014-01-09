@@ -11,6 +11,7 @@
 #import "ItelAction.h"
 @implementation ItelUser (CRUD)
 +(ItelUser*)userWithDictionary:(NSDictionary*)dic{
+    
     for (NSString *key in [dic allKeys]) {
         id object = [dic objectForKey:key];
         if ([object isEqual:[NSNull null]]) {
@@ -47,7 +48,7 @@
             [data setValue:@"" forKey:s];
         }
     }
-    NSString* nickName = [[data objectForKey:@"nick_name"] stringValue];
+    NSString* nickName = [data objectForKey:@"nick_name"];
     if (!nickName) {
        nickName =[data objectForKey:@"nickname"];
     }

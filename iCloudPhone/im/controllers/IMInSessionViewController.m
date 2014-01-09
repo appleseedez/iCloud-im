@@ -8,6 +8,8 @@
 
 #import "IMInSessionViewController.h"
 #import "ItelAction.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 @interface IMInSessionViewController ()
 @property(nonatomic) BOOL hideHUD; //标志是否隐藏控制面板
 @property(nonatomic) BOOL isMute; //标志是否静音
@@ -68,8 +70,11 @@
     self.hideCam = NO; //初始开启摄像头
     self.enableSpeaker = NO; //初始关闭扬声器
     // 设置好名字版
-    ((UILabel*)[self.nameHUDView viewWithTag:1]).text= [[ItelAction action] userInFriendBook:[[self.inSessionNotify userInfo] valueForKey:@"destaccount"]].nickName;
-    ((UILabel*)[self.nameHUDView viewWithTag:2]).text= [[ItelAction action] userInFriendBook:[[self.inSessionNotify userInfo] valueForKey:@"destaccount"]].itelNum;
+    
+    ItelUser* peerUser = [[ItelAction action] userInFriendBook:[[self.inSessionNotify userInfo] valueForKey:@"destaccount"]];
+    ((UILabel*)[self.nameHUDView viewWithTag:1]).text= peerUser.nickName;
+    ((UILabel*)[self.nameHUDView viewWithTag:2]).text= peerUser.itelNum;
+    [self.peerAvatar setImageWithURL:[NSURL URLWithString: peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
 }
 
 - (void) tearDown{

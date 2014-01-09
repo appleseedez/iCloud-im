@@ -28,6 +28,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"currUser"];
 //    [self tearDownManagers];
     [self.manager logoutFromSignalServer];
+    [self.manager tearDown];
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
     
 }

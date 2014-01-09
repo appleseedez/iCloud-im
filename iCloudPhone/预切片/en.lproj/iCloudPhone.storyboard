@@ -132,7 +132,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="callUser:" destination="Rtf-Ci-C30" eventType="touchUpInside" id="mnY-En-eew"/>
+                                            <action selector="audioCall" destination="Rtf-Ci-C30" eventType="touchUpInside" id="k4t-hz-lt6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="r43-Hy-qZR">
@@ -141,6 +141,9 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="vidioCall" destination="Rtf-Ci-C30" eventType="touchUpInside" id="O3V-bN-gL6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rSW-ED-fwh">
                                         <rect key="frame" x="225" y="10" width="44" height="35"/>
@@ -1525,9 +1528,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Dbr-sf-ZRt">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Dbr-sf-ZRt">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="521"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="ljy-58-ch2">
                                         <rect key="frame" x="6" y="164" width="152" height="152"/>
@@ -1677,6 +1680,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="主页" id="09i-4i-lK6"/>
                     <connections>
+                        <outlet property="contentScrollView" destination="Dbr-sf-ZRt" id="Eai-wT-jY8"/>
                         <outlet property="pageControl" destination="MkQ-g3-qof" id="X0t-y1-fL4"/>
                         <outlet property="scrollAd" destination="yvd-wc-tRR" id="ymb-RG-Vbg"/>
                         <outlet property="view" destination="Dbr-sf-ZRt" id="WaG-GC-4XY"/>
@@ -2075,7 +2079,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="CallUeser:" destination="hzN-fp-7C2" eventType="touchUpInside" id="R7u-ge-Vqs"/>
+                                            <action selector="audioCall" destination="hzN-fp-7C2" eventType="touchUpInside" id="Ic7-Q3-6x2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1Gd-Fa-Hh8">
@@ -2084,6 +2088,9 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="vidioCall" destination="hzN-fp-7C2" eventType="touchUpInside" id="bjT-0u-wtt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MID-vr-agU">
                                         <rect key="frame" x="225" y="10" width="44" height="35"/>
@@ -2197,6 +2204,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Bif-db-ZaU">
+                                <rect key="frame" x="90" y="170" width="140" height="140"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <view contentMode="scaleToFill" id="8Fc-F3-Ii1" customClass="VideoRenderIosView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -2364,7 +2375,7 @@
                                 </connections>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="tn0-xA-11T"/>
@@ -2372,6 +2383,7 @@
                     <connections>
                         <outlet property="actionHUDView" destination="4Bu-gC-DE4" id="138-v0-OGh"/>
                         <outlet property="nameHUDView" destination="E3b-dd-xck" id="UdB-zM-TMv"/>
+                        <outlet property="peerAvatar" destination="Bif-db-ZaU" id="XaS-XS-DH1"/>
                         <outlet property="remoteRenderView" destination="8Fc-F3-Ii1" id="H9F-iG-drK"/>
                         <outlet property="selfCamView" destination="QKn-Rt-qcO" id="r2g-z8-W92"/>
                         <outlet property="switchFrontAndBackCamBtn" destination="I0X-1v-8Vr" id="aP1-0v-HFe"/>

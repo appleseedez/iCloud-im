@@ -8,6 +8,7 @@
 
 #import "Message+CRUD.h"
 #import "ItelUser+CRUD.h"
+#import "ItelAction.h"
 @implementation Message (CRUD)
 +(instancetype)messageWithDic:(NSDictionary*)data inContext:(NSManagedObjectContext*) context{
     
@@ -16,7 +17,10 @@
     mes.body=[data objectForKey:@"msg"];
     mes.title=@"请求加你好友";
     ItelUser* aUser = [ItelUser userWithDictionary:[data objectForKey:@"contact"]];
+    HostItelUser* hostUser = [[ItelAction action] getHost];
+    [hostUser.systemMessages setByAddingObject:mes];
     mes.sender=aUser;
+    mes.receiver = hostUser;
     mes.isRead = [NSNumber numberWithBool:NO];
     return mes;
 }
@@ -26,6 +30,7 @@
     NSFetchRequest* getAllMessages = [NSFetchRequest fetchRequestWithEntityName:@"Message"];
     //TODO: 按时间逆序
     getAllMessages.sortDescriptors = @[];
+    getAllMessages.predicate = [NSPredicate predicateWithFormat:@"receiver.itelNum = %@",[[ItelAction action] getHost].itelNum];
     return [context executeFetchRequest:getAllMessages error:&error];
 }
 @end
