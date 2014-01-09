@@ -82,10 +82,10 @@
     BOOL present;
     //通话记录传10 其他传index
     if (index==10) {
-        present=YES;
+        present=NO;
         index=0;
     }
-    else present=NO;
+    else present=YES;
     [self changeController:[self.customTabbar.items objectAtIndex:index] presentDialingView:present];
 }
 #pragma mark - PRIVATE

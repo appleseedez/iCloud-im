@@ -363,7 +363,7 @@ static int addcount=0;
     SUCCESS{
         NSDictionary *dic = (NSDictionary*)responseObject;
         if ([dic isKindOfClass:[NSDictionary class]]) {
-            
+            NSLog(@"上传图片,收到的响应%@",dic);
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 [[ItelAction action]uploadImageResponse:dic];
@@ -633,7 +633,7 @@ static int addcount=0;
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
         if ([dic isKindOfClass:[NSDictionary class]]) {
-            
+            NSLog(@"返回的message:%@",[dic valueForKey:@"msg"]);
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 

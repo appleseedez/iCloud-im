@@ -116,7 +116,7 @@ static int waitingTime=6;
     NSDictionary *response=(NSDictionary*)notification.object;
     NSInteger ret=[[response objectForKey:@"ret"] integerValue] ;
     
-    if (ret==0) {
+    if (ret==0 && [[notification.userInfo valueForKey:@"success"] boolValue]) {
          //自动登陆
         NSString *message=[NSString stringWithFormat:@"iTel号码 %@ 已经被您注册，请牢记您的iTel号码，以免丢失",[RegManager defaultManager].regItel];
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"恭喜,注册成功" message:message delegate:self cancelButtonTitle:@"返回登陆" otherButtonTitles: nil];

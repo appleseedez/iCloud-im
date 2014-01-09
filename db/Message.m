@@ -2,11 +2,12 @@
 //  Message.m
 //  iCloudPhone
 //
-//  Created by Pharaoh on 1/8/14.
+//  Created by Pharaoh on 1/9/14.
 //  Copyright (c) 2014 NX. All rights reserved.
 //
 
 #import "Message.h"
+#import "HostItelUser.h"
 #import "ItelUser.h"
 
 
@@ -18,5 +19,6 @@
 @dynamic title;
 @dynamic type;
 @dynamic sender;
+@dynamic receiver;
 
 @end

@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *nameHUDView; //顶部名字
 @property (weak, nonatomic) IBOutlet UIView *actionHUDView; //底部操作
 @property (weak, nonatomic) IBOutlet UIButton *switchFrontAndBackCamBtn;
+@property (weak, nonatomic) IBOutlet UIImageView* peerAvatar;
 - (IBAction)toggleMute:(UIButton *)sender;
 - (IBAction)toggleSpeeker:(UIButton *)sender;
 - (IBAction)toggleCam:(id)sender;

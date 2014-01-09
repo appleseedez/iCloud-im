@@ -19,7 +19,7 @@
         <attribute name="telNum" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="systemMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" syncable="YES"/>
+        <relationship name="systemMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="receiver" inverseEntity="Message" syncable="YES"/>
         <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ItelUser" inverseName="host" inverseEntity="ItelUser" syncable="YES"/>
     </entity>
     <entity name="ItelUser" representedClassName="ItelUser" syncable="YES">
@@ -48,6 +48,7 @@
         <attribute name="isRead" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="receiver" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HostItelUser" inverseName="systemMessages" inverseEntity="HostItelUser" syncable="YES"/>
         <relationship name="sender" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ItelUser" inverseName="messages" inverseEntity="ItelUser" syncable="YES"/>
     </entity>
     <entity name="Recent" representedClassName="Recent" syncable="YES">
@@ -64,7 +65,7 @@
     <elements>
         <element name="HostItelUser" positionX="-29" positionY="-1224" width="128" height="343"/>
         <element name="ItelUser" positionX="-396" positionY="-1305" width="128" height="313"/>
-        <element name="Message" positionX="-342" positionY="-756" width="128" height="133"/>
+        <element name="Message" positionX="-128" positionY="-724" width="128" height="148"/>
         <element name="Recent" positionX="153" positionY="-1053" width="128" height="180"/>
     </elements>
 </model>

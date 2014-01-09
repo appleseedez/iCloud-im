@@ -10,4 +10,5 @@
 #import "RootViewController.h"
 @interface ContentViewController : UIViewController<UIScrollViewDelegate>
 @property (nonatomic,weak) id <RoorViewChangingSubPageDelegate> rootDelegate;
+@property (nonatomic,weak) IBOutlet UIScrollView* contentScrollView;
 @end

@@ -19,7 +19,7 @@
 #import "Recent+CRUD.h"
 #import "IMRecentContactDetailsViewController.h"
 @interface IMRecentContactListViewController ()
-@property id<IMManager> manager;
+@property(nonatomic,weak) id<IMManager> manager;
 @end
 
 @implementation IMRecentContactListViewController
@@ -39,6 +39,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self setup];
     [self setupFetchViewController];
 }
 - (void)viewDidAppear:(BOOL)animated{
@@ -74,12 +75,20 @@
 - (void) setup{
     IMRootTabBarViewController* root =(IMRootTabBarViewController*)self.tabBarController;
     self.manager = root.manager;
+//    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
+//    IMDailViewController* dialViewController = (IMDailViewController*) [sb instantiateViewControllerWithIdentifier:DIAL_PAN_VIEW_CONTROLLER_ID];
+//    dialViewController.manager = self.manager;
+//    [self presentViewController:dialViewController animated:YES completion:nil];
+    
+}
+
+- (void) presentPan{
     UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
     IMDailViewController* dialViewController = (IMDailViewController*) [sb instantiateViewControllerWithIdentifier:DIAL_PAN_VIEW_CONTROLLER_ID];
     dialViewController.manager = self.manager;
     [self presentViewController:dialViewController animated:YES completion:nil];
-    
 }
+
 - (void) tearDown {
     self.fetchedResultsController.delegate = nil;
     self.fetchedResultsController = nil;
@@ -108,7 +117,7 @@
     
 }
 -(void) registerNotifications{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setup) name:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentPan) name:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
 }
 
 #pragma mark - Table view data source

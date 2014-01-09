@@ -28,7 +28,9 @@
     return _addressBook;
 }
 -(NSArray*)getAllKeys{
-
+    while (self.isLoading) {
+        
+    }
    return  [super getAllKeys];
 }
 #pragma mark - 电话本操作
@@ -43,14 +45,14 @@
                 NSLog(@"%@",error);
             }
             else if(granted){
-//                self.isLoading=YES;
+                self.isLoading=YES;
                 [self getPeopleInAddressBook];
             }
             
         });
     }
     else {
-        
+        self.isLoading=YES;
         [self getPeopleInAddressBook];
     }
     CFRelease(addressBook);

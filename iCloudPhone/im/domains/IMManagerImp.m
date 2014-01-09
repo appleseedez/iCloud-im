@@ -10,6 +10,7 @@
 #import  "ConstantHeader.h"
 #import "Recent.h"
 #import "Recent+CRUD.h"
+#import "ItelUser+CRUD.h"
 #import "ItelAction.h"
 #import "IMCoreDataManager.h"
 @interface IMManagerImp ()
@@ -369,7 +370,7 @@ static int count = 0;
 }
 //决定最终是是否使用视频 决定因素:对方是否视频,自己是否支持视频
 - (void) candidateUseVideoCall:(BOOL) peerUseVideo{
-    if (peerUseVideo && [self canVideo]) {
+    if (peerUseVideo && [self canVideo] && [self isVideoCall]) {
         [self setIsVideoCall:YES];
     }else{
         [self setIsVideoCall:NO];
@@ -444,10 +445,16 @@ static int count = 0;
 - (void) saveCommnicationLog{
     ItelUser* peer =  [[ItelAction action] userInFriendBook:[self.recentLog valueForKey:kPeerNumber]];
     if (!peer) {
-        peer = [ItelUser new];
-        peer.remarkName = @"";
-        peer.nickName = @"陌生人";
-        peer.imageurl = @"";
+        peer = [ItelUser userWithDictionary:@{@"itel":[self.recentLog valueForKey:kPeerNumber]}];
+        peer.remarkName = @"TA";
+        peer.nickName = @"TA";
+        peer.imageurl = @"http://wwc.taobaocdn.com/avatar/getAvatar.do?userId=352958000&width=100&height=100&type=sns";
+        peer.isFriend = [NSNumber numberWithBool:NO];
+        [[IMCoreDataManager defaulManager] saveContext];
+//        peer = [ItelUser new];
+//        peer.remarkName = @"";
+//        peer.nickName = @"陌生人";
+//        peer.imageurl = @"";
     }
     Recent* aRecent = [Recent recentWithCallInfo:@{
                                                    kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
