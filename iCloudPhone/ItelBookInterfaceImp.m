@@ -95,10 +95,10 @@
 -(ItelBook*)friendBook{
     HostItelUser* hostUser =  [[ItelAction action] getHost];
     ItelBook* itelBook = [ItelBook new];
-    
-    for (ItelUser* u in hostUser.users) {
-        NSLog(@"当前用户关联的:%@",u.itelNum);
-    }
+//    
+//    for (ItelUser* u in hostUser.users) {
+//        NSLog(@"当前用户关联的:%@",u.itelNum);
+//    }
     for (ItelUser* user in hostUser.users) {
         if ([user.isFriend boolValue]) {
             [itelBook addUser:user forKey:user.itelNum];

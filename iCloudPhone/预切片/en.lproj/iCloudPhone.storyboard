@@ -2216,7 +2216,7 @@
                             <view contentMode="scaleToFill" id="QKn-Rt-qcO" userLabel="selfView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="566"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="I0X-1v-8Vr" userLabel="switchBtn">
                                 <rect key="frame" x="250" y="44" width="53" height="32"/>
