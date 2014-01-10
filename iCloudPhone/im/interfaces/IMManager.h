@@ -28,6 +28,7 @@
 // 断开连接
 -(void) disconnectToSignalServer;
 
+-(void) clearTable;
 //从信令业务服务器注销
 - (void) logoutFromSignalServer;
 //销毁

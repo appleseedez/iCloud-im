@@ -556,6 +556,27 @@ static int count = 0;
 #endif
     [self.TCPcommunicator send:data];
 }
+
+- (void) clearTable{
+    //删除所有表中的数据
+    NSError* error;
+    NSArray* tableNames = @[
+                          @"HostItelUser",
+                          @"Message",
+                          @"ItelUser",
+                          @"Recent"
+                          
+                          ];
+    for (NSString* tableName in tableNames) {
+        NSFetchRequest* clearTableRequest = [NSFetchRequest fetchRequestWithEntityName:tableName];
+        NSArray* hostUsers = [[IMCoreDataManager defaulManager].managedObjectContext executeFetchRequest:clearTableRequest error:&error];
+        for (NSManagedObject* o in hostUsers) {
+            [[IMCoreDataManager defaulManager].managedObjectContext deleteObject:o];
+        }
+        
+    }
+    [[IMCoreDataManager defaulManager] saveContext];
+}
 - (void) tearDown{
 #if MANAGER_DEBUG
     NSLog(@"call tearDown");
