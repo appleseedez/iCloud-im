@@ -20,4 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *nickLabel;
 @property (nonatomic) id<IMManager> manager;
 - (IBAction)moreAction:(UIBarButtonItem *)sender;
+- (IBAction)voiceDial:(UIButton*)sender;
+- (IBAction)videoDial:(UIButton*)sender;
 @end
