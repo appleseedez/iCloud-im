@@ -26,7 +26,7 @@
     #define ROOT_TABBAR_DEBUG 0
 
     #define UDP_MESSAGE 1
-    #define OTHER_MESSAGE 1
+    #define OTHER_MESSAGE 0
     #define SIGNAL_MESSAGE 1
     #define ENGINE_MSG 1
 

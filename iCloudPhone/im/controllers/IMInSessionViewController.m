@@ -75,6 +75,11 @@
     ((UILabel*)[self.nameHUDView viewWithTag:1]).text= peerUser.nickName;
     ((UILabel*)[self.nameHUDView viewWithTag:2]).text= peerUser.itelNum;
     [self.peerAvatar setImageWithURL:[NSURL URLWithString: peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    if ([self.manager isVideoCall]) {
+        [self.peerAvatar setHidden:YES ];
+    }else{
+        [self.peerAvatar setHidden:NO];
+    }
 }
 
 - (void) tearDown{
