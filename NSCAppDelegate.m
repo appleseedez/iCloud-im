@@ -32,6 +32,11 @@
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
     
 }
+
+
+- (void) reconnect:(NSNotification*) notify{
+    [self.manager connectToSignalServer];
+}
 //-(void)tearDownManagers{
 ////    [[ItelMessageManager defaultManager] tearDown];
 ////    [[ItelUserManager defaultManager] tearDown];
@@ -46,14 +51,24 @@
 //    [ItelBookManager defaultManager];
 //    [ItelNetManager defaultManager];
 }
+
+
+- (void) registerNotifications{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
+    //绑定重连通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reconnect:) name:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil];
+}
+- (void) removeNotifications{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     if (self.phoneBook == nil) {
         self.phoneBook = [[AddressBook alloc] init];
         [self.phoneBook loadAddressBook];
     }
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
+
     [self setupManagers];
     //初始化ItelMessageInterface
     [ItelMessageInterfaceImp defaultMessageInterface];
@@ -169,9 +184,10 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationWillResignActive");
 #endif
-    
+   
     [self.manager tearDown];
     [[ItelMessageInterfaceImp defaultMessageInterface] tearDown];
+    [self removeNotifications];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -188,10 +204,6 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationWillEnterForeground ");
 #endif
-//    if ([[ItelAction action] getHost]) {
-//        [self.manager setup];
-//    }
-    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -199,15 +211,12 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationDidBecomeActive ");
 #endif
-//     if ([[ItelAction action] getHost]) {
-////    [self.manager connectToSignalServer];
-//     }
     
     if ([[ItelAction action] getHost]) {
         [self.manager setup];
         [self.manager connectToSignalServer];
     }
-    
+    [self registerNotifications];
     [[ItelMessageInterfaceImp defaultMessageInterface] setup];
 }
 
@@ -219,6 +228,7 @@
     [self.manager logoutFromSignalServer];
     [self.manager tearDown];
     [[ItelMessageInterfaceImp defaultMessageInterface] tearDown];
+    [self removeNotifications];
 }
 
 @end

@@ -41,6 +41,7 @@
     if ([self.sock isConnected]) {
         [self sendRequest:self.heartBeatPKG type:HEART_BEAT_REQ_TYPE];
     }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
         [NSException exceptionWithName:@"断开连接了！" reason:@"断开连接了！" userInfo:nil];
     }
 }
