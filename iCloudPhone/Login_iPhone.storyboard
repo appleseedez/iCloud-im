@@ -20,6 +20,9 @@
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="14" maxY="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="xsB-Oa-PJU"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="center" minimumFontSize="17" id="8Nj-Qa-XUP">
                                 <rect key="frame" x="0.0" y="232" width="320" height="45"/>
@@ -28,6 +31,9 @@
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="14" maxY="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="BwC-Gd-Mka"/>
+                                </connections>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo_background" id="ej6-Ol-sYl">
                                 <rect key="frame" x="122" y="68" width="75" height="75"/>
@@ -270,7 +276,7 @@
                         <sections>
                             <tableViewSection headerTitle="     " id="v7y-Lg-Pp7">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Vnd-PD-csH">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="telephone" id="Vnd-PD-csH">
                                         <rect key="frame" x="0.0" y="55" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vnd-PD-csH" id="7Iq-fc-Dys">
@@ -293,7 +299,7 @@
                                             <segue destination="3qj-RH-MVl" kind="push" id="YvL-pn-JNS"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tfv-Mj-sNZ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="security" id="tfv-Mj-sNZ">
                                         <rect key="frame" x="0.0" y="105" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tfv-Mj-sNZ" id="wDy-mm-6Yf">
@@ -325,6 +331,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="找回密码" id="LHc-a0-RZG"/>
+                    <connections>
+                        <outlet property="questionSecurityCell" destination="tfv-Mj-sNZ" id="2Xl-oo-fge"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dV-3G-Q3h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -67,6 +67,7 @@
         
     }
     else{
+      
         [self.inviteButton setBackgroundImage:[UIImage imageNamed:@"addButton" ] forState:UIControlStateNormal];
         
     }
