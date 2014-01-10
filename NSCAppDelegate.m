@@ -30,7 +30,7 @@
     [self.manager logoutFromSignalServer];
     [self.manager tearDown];
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
-    
+    [self.manager clearTable];
 }
 
 
