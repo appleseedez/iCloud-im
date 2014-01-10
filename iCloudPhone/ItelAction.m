@@ -237,9 +237,10 @@
 #pragma mark - 上传图片
 -(void)uploadImage:(UIImage*)image{
     NSData *imgData=UIImagePNGRepresentation(image);
+    NSAssert(imgData, @"空的数据");
     //NSData *imgData=UIImageJPEGRepresentation(image, 1);
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
-    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"hostItel":hostUser.itelNum,@"token":hostUser.token};
+    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itelCode":hostUser.itelNum,@"token":hostUser.token};
     [self.itelNetRequestActionDelegate uploadImage:imgData parameters:parameters];
 }
 //回调

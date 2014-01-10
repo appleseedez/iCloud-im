@@ -81,9 +81,10 @@
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSLog(@"上传接口:%@",url);
+    
+        NSLog(@"上传图片的长度:%d",imageData.length);
         [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-         [formData appendPartWithFileData:imageData     name:@"image" fileName:@"header.png" mimeType:@"image/png"];
+         [formData appendPartWithFileData:imageData    name:@"image" fileName:@"header.png" mimeType:@"image/png"];
     } success:success failure:failure];
     
     //分界线的标识符

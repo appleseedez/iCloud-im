@@ -284,10 +284,26 @@ UIImageView* _pview_local;
 }
 - (void)enableSpeaker{
     NSLog(@"TODO:开扬声器");
+    VoEControlParameters param;
+    param.ostype = OsT_IOS;
+    param.optype = OpT_Speaker;
+    param.enable = true;
+    param.iVolume = 240;
+    int ret =
+    self.pInterfaceApi->SetVoEControlParameters(param);
+    NSLog(@"开启扬声器:%d",ret);
 }
 
 - (void)disableSpeaker{
     NSLog(@"TODO:关扬声器");
+    VoEControlParameters param;
+    param.ostype = OsT_IOS;
+    param.optype = OpT_Speaker;
+    param.enable = false;
+    param.iVolume = 240;
+    int ret=
+    self.pInterfaceApi->SetVoEControlParameters(param);
+    NSLog(@"关闭扬声器:%d",ret);
 }
 - (void)showCam{
     NSLog(@"显示摄像头");
