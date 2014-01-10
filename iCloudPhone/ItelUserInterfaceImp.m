@@ -23,7 +23,9 @@ static NSString* kCurrentUser = @"currUser";
     if ([currentUsers count]) {
          currentUser = currentUsers[0];
     }
-   
+    if (currentUser.itelNum == nil) {
+        currentUser = nil;
+    }
     return currentUser;
 }
 //设置本机用户

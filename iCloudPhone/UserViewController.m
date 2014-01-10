@@ -136,7 +136,6 @@
             break;
         case 1:
             [[ItelAction action] delFriendFromItelBook:self.user.itelNum];
-            [self.navigationController popViewControllerAnimated:YES];
             break;
             
         default:
@@ -183,19 +182,36 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self registerNotifcations];
     [self.imageView setImageWithURL:[NSURL URLWithString:self.user.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"1"}];
     [self.imageView setRect:5.0 cornerRadius:self.imageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(callActionSheet) ];
+    
+}
+
+
+- (void) registerNotifcations{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAliasChanged:) name:@"resetAlias" object:nil];
-     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didAddBlack:) name:@"addBlack" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didAddBlack:) name:@"addBlack" object:nil];
+    //删除成功通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delNotification:) name:@"delItelUser" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didAddBlack:) name:@"addBlack" object:nil];
 }
 -(void)callActionSheet{
     UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除联系人" otherButtonTitles:@"添加黑名单",@"编辑备注", nil];
     [actionSheet showInView:self.view];
     
 }
-
+- (void) delNotification:(NSNotification*) notify{
+    BOOL isNormal = [[notify.userInfo objectForKey:@"isNormal"] boolValue];
+    if (isNormal) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"删除成功" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+        [alert show];
+    }
+}
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     switch (buttonIndex) {
         case 0:
