@@ -32,11 +32,16 @@ static ItelMessageInterfaceImp* _instance;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(void)startSearching{
+    
     [self sendSearching];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendSearching) userInfo:nil repeats:YES];
 }
 -(void)sendSearching{
-    [[ItelAction action] searchForNewMessage];
+    NSAssert([[ItelAction action] getHost], @"host没有");
+    if ([[ItelAction action] getHost]) {
+        [[ItelAction action] searchForNewMessage];
+    }
+    
 }
 -(void)stopSearching{
     [self.timer invalidate];

@@ -123,18 +123,28 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    [self registerNotifications];
     [[ItelAction action] getItelFriendList:0];
+}
 
+- (void) registerNotifications{
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFriendListNotification:) name:@"getItelList" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAliasChanged:) name:@"resetAlias" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delNotification:) name:@"delItelUser" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellAction:) name:@"cellAction" object:nil];
-   }
+}
+
+
+
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.tableVIew reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(void)cellAction:(NSNotification*)notification{
     NSString *action=[notification.userInfo objectForKey:@"action"];
@@ -154,19 +164,19 @@
                                                                                                                        }];
     [appDelegate.manager dial:user.itelNum];
 }
--(void)delNotification:(NSNotification*)notification{
-    NSDictionary *userInfo=notification.userInfo;
-    BOOL isNormal=[[userInfo objectForKey:@"isNormal"] boolValue];
-    if (isNormal) {
-        self.contacts = [[ItelAction action]getFriendBook];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableVIew reloadData];
-        });
-        
-    }
-    
-}
+//-(void)delNotification:(NSNotification*)notification{
+//    NSDictionary *userInfo=notification.userInfo;
+//    BOOL isNormal=[[userInfo objectForKey:@"isNormal"] boolValue];
+//    if (isNormal) {
+//        self.contacts = [[ItelAction action]getFriendBook];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.tableVIew reloadData];
+//        });
+//        
+//    }
+//    
+//}
 -(void)refreshFriendListNotification:(NSNotification*)notification{
     NSDictionary *userInfo=notification.userInfo;
     BOOL isNormal=[[userInfo objectForKey:@"isNormal"] boolValue];
