@@ -13,6 +13,7 @@
 #import "ItelNetInterfaceImp.h"
 #import "ItelMessageInterfaceImp.h"
 #import "ItelBookInterfaceImp.h"
+#import "AddressBook.h"
 @interface ItelMessageInterfaceImp()
 + (instancetype) defaultMessageInterface;
 @end
@@ -38,8 +39,8 @@
     [self.itelUserActionDelegate setHost:host];
 }
 #pragma mark - 获得通讯录
--(void) getAddressBook{
-     [self.itelBookActionDelegate getAddressBook];
+-(AddressBook*) getAddressBook{
+     return  (AddressBook*)[self.itelBookActionDelegate getAddressBook];
 }
 #pragma mark - 刷新itel好友列表
 

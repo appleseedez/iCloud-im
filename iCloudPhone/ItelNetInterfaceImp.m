@@ -215,7 +215,7 @@ static int addcount=0;
         
         if ([dic isKindOfClass:[NSDictionary class]]) {
             
-            NSString *itel=[parameters objectForKey:@"targetItel"];
+            
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 

@@ -48,6 +48,7 @@
     if ([[self.address getAllKeys] count]-1>=indexPath.row) {
         NSString *key=[[self.address getAllKeys] objectAtIndex:indexPath.row];
         PersonInAddressBook *person= (PersonInAddressBook*)[self.address userForKey:key];
+        
         [cell setCell:person];
         
         cell.delegate=self;
@@ -80,19 +81,23 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didAddFriend:) name:@"inviteItelUser" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAddress:) name:@"addressLoadingFinish" object:nil];
-    [[ItelAction action] getAddressBook];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAddress:) name:@"addressLoadingFinish" object:nil];
+   self.address= [[ItelAction action] getAddressBook];
+    
 }
 -(void)didAddFriend:(NSNotification*)notification{
     BOOL isNormal = [[notification.userInfo objectForKey:@"isNormal"]boolValue];
     NSString *result=nil;
+    NSString *tittle=nil;
     if (isNormal) {
-        result=@"添加好友成功";
+        result=@"请求发送成功 等待对方确认";
+        tittle=@"成功";
     }
     else {
        result = [notification.userInfo objectForKey:@"reason"];
+        tittle=@"失败";
     }
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:result message:result delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:tittle message:result delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
     [alert show];
     alert=nil;
 }

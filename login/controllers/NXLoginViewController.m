@@ -30,7 +30,10 @@
     [self.view endEditing:YES];
     
 }
-
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    self.txtUserCloudNumber.text=@"";
+    self.txtUserPassword.text=@"";
+}
 - (IBAction)presentRegViewController:(UIButton *)sender {
     
     NXRegViewController *reg=[[NXRegViewController alloc]init];

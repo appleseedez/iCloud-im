@@ -116,8 +116,8 @@
                                  ROUTE_SERVER_IP_KEY:currUser.domain,
                                  ROUTE_SERVER_PORT_KEY:currUser.port,
                                  HOST_ITEL_NUMBER:currUser.itelNum
-                                 };
-
+                                    };
+        [[ItelAction action] checkAddressBookMatchingItel];
         [self setupIMManager:params];
         
     }

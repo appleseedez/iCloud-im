@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NXLoginViewController : UIViewController
+@interface NXLoginViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtUserCloudNumber;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtUserPassword;

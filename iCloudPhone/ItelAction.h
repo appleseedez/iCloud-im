@@ -14,7 +14,7 @@
 #import "ItelUserInterface.h"
 #import "ItelNetInterface.h"
 @class ItelBook;
-
+@class AddressBook;
 @interface ItelAction : NSObject
 @property (nonatomic) id <ItelBookInterface> itelBookActionDelegate;
 @property (nonatomic) id <ItelUserInterface> itelUserActionDelegate;
@@ -57,7 +57,7 @@
 //获得黑名单
 -(ItelBook*) blackList;
 //获得通讯录
--(void) getAddressBook;
+-(AddressBook*) getAddressBook;
 //获得itel好友列表
 -(ItelBook*) getFriendBook;
 //上传图片
