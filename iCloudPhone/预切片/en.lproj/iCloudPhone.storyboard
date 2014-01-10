@@ -1908,6 +1908,9 @@
                                             <state key="normal" image="voiceCall_contact_detail_btn">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="voiceDial:" destination="nvj-B9-ahk" eventType="touchUpInside" id="6yD-yl-5YU"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Iti-sb-hv6" userLabel="vidoeCallBtn">
                                             <rect key="frame" x="81" y="0.0" width="78" height="48"/>
@@ -1916,6 +1919,9 @@
                                             <state key="normal" image="vidoeCall_contact_detail_btn">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="videoDial:" destination="nvj-B9-ahk" eventType="touchUpInside" id="5Rj-bG-3IW"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oAw-39-0Um" userLabel="messageBtn">
                                             <rect key="frame" x="160" y="0.0" width="78" height="48"/>
@@ -2216,7 +2222,7 @@
                             <view contentMode="scaleToFill" id="QKn-Rt-qcO" userLabel="selfView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="566"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="I0X-1v-8Vr" userLabel="switchBtn">
                                 <rect key="frame" x="250" y="44" width="53" height="32"/>

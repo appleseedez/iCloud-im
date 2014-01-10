@@ -195,4 +195,13 @@ static NSString* kOperationReason = @"reason";
 
     [moreActionSheet showFromTabBar:self.tabBarController.tabBar];
 }
+
+- (void)videoDial:(UIButton *)sender{
+    [self.manager setIsVideoCall:YES];
+    [self.manager dial:self.currentRecent.peerNumber];
+}
+- (void)voiceDial:(UIButton *)sender{
+    [self.manager setIsVideoCall:NO];
+    [self.manager dial:self.currentRecent.peerNumber];
+}
 @end
