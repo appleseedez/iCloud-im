@@ -81,6 +81,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHasResult:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
     // 收到异常信令
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInitFail:) name:SIGNAL_ERROR_NOTIFICATION object:nil];
+    //收到了被服务器踢下线通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(droppedFromSignal:) name:DROPPED_FROM_SIGNAL_NOTIFICATION object:nil];
 }
 
 //移除通知 防止leak
@@ -136,6 +138,9 @@
         case SESSION_PERIOD_HALT_TYPE:
             [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_HALT_NOTIFICATION object:nil userInfo:bodySection];
             break;
+        case CMID_APP_DROPPED_SSS_REQ_TYPE:
+            [[NSNotificationCenter defaultCenter] postNotificationName:DROPPED_FROM_SIGNAL_NOTIFICATION object:nil userInfo:bodySection];
+            break;
         default:
             break;
     }
@@ -179,7 +184,7 @@
                                           SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY: self.selfAccount,
                                           SESSION_SRC_SSID_KEY:[parsedData valueForKey:SESSION_DEST_SSID_KEY], //总是在传递是以接收方的角度去思考
                                           SESSION_DEST_SSID_KEY:[parsedData valueForKey:SESSION_SRC_SSID_KEY],
-                                          SESSION_PERIOD_FIELD_PEER_USE_VIDEO:[NSNumber numberWithBool:self.isVideoCall]
+                                          SESSION_PERIOD_FIELD_PEER_USE_VIDEO:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo]
                                           }];
     //由于信令是发给对方的。所以destAccount和srcaccount应该是从对方的角度去思考。因此destAccount填的是自己的帐号，srcaccount填写的是对方的帐号。这样，在对方看来就是完美的。而且，对等方在构造信令数据时有相同的逻辑
     [mergeData addEntriesFromDictionary:@{SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[parsedData valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]}];
@@ -188,7 +193,7 @@
     // 构造通话数据请求
     NSDictionary* data = [self.messageBuilder buildWithParams:mergeData];
 #if SIGNAL_MESSAGE
-    NSLog(@"通话开始阶段的谈判过程，数据往来:%@ useVideo:%@,mergeData:%@",data,[NSNumber numberWithBool:self.isVideoCall],mergeData);
+    NSLog(@"通话开始阶段的谈判过程，数据往来:%@ mergeData:%@",data,mergeData);
 #endif
     [self.TCPcommunicator send:data];
 }
@@ -298,10 +303,14 @@ static int count = 0;
 - (void) sessionInitFail:(NSNotification*) notify{
     
 }
+
+- (void) droppedFromSignal:(NSNotification*) notify{
+    NSLog(@"我被踢下线了!!!!!!!");
+}
 /**
- *  <#Description#>
  *
- *  @param void <#void description#>
+ *
+ *  @param void
  *
  *  @return <#return value description#>
  */
@@ -321,14 +330,17 @@ static int count = 0;
         NSLog(@"收到PEER的链路数据：%@",notify.userInfo);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTransportAndNotify:) name:P2PTUNNEL_SUCCESS object:nil];
         //告诉引擎，目前是否是视频通话
-        [self candidateUseVideoCall:[[notify.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]];
+        [self setIsVideoCall: [[notify.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]&&self.canVideo&&self.isVideoCall];
+        [notify.userInfo setValue:[NSNumber numberWithBool:self.isVideoCall] forKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO];
         [self.engine tunnelWith:notify.userInfo];
 
     }else if ([self.state isEqualToString:IDLE]){ //如果是idle状态下，接到了通话信令，则是有人拨打
 #if MANAGER_DEBUG
         NSLog(@"收到通话请求，用户操作可以接听");
 #endif
-        [self candidateUseVideoCall:[[notify.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]];
+        //根据收到的usevideo和自身是否支持视频 设置自己是否有视频选项
+        [self setIsVideoCall: [[notify.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]&&self.canVideo];
+        [notify.userInfo setValue:[NSNumber numberWithBool:self.isVideoCall] forKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO];
         //通知界面，弹出通话接听界面:[self sessionPeriodResponse:notify]
         [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:nil userInfo:notify.userInfo];
     }else{//剩余的情况表明。当前正在通话中，应该拒绝 这里会是自动拒绝 
@@ -351,6 +363,7 @@ static int count = 0;
 
     //既然是接受通话，则信令构造器要换成回复的类型
     self.messageBuilder = [[IMSessionPeriodResponseMessageBuilder alloc] init];
+
     // 把自身的链路信息作为响应发出，表明本机接受通话请求
     [self sessionPeriodNegotiation:notify.userInfo];
     // 开始获取p2p通道
@@ -360,7 +373,6 @@ static int count = 0;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(justStartTransport:) name:P2PTUNNEL_SUCCESS object:nil];
     //告诉引擎，目前是否是视频通话
-    [self candidateUseVideoCall:[[notify.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]];
     [self.engine tunnelWith:notify.userInfo];
     /**
      *  移到 justStartTransport 方法
@@ -370,7 +382,7 @@ static int count = 0;
 }
 //决定最终是是否使用视频 决定因素:对方是否视频,自己是否支持视频
 - (void) candidateUseVideoCall:(BOOL) peerUseVideo{
-    if (peerUseVideo && [self canVideo] && [self isVideoCall]) {
+    if (peerUseVideo && [self canVideo]) {
         [self setIsVideoCall:YES];
     }else{
         [self setIsVideoCall:NO];
@@ -543,6 +555,27 @@ static int count = 0;
     NSLog(@"信令服务器的注销请求：%@",data);
 #endif
     [self.TCPcommunicator send:data];
+}
+
+- (void) clearTable{
+    //删除所有表中的数据
+    NSError* error;
+    NSArray* tableNames = @[
+                          @"HostItelUser",
+                          @"Message",
+                          @"ItelUser",
+                          @"Recent"
+                          
+                          ];
+    for (NSString* tableName in tableNames) {
+        NSFetchRequest* clearTableRequest = [NSFetchRequest fetchRequestWithEntityName:tableName];
+        NSArray* hostUsers = [[IMCoreDataManager defaulManager].managedObjectContext executeFetchRequest:clearTableRequest error:&error];
+        for (NSManagedObject* o in hostUsers) {
+            [[IMCoreDataManager defaulManager].managedObjectContext deleteObject:o];
+        }
+        
+    }
+    [[IMCoreDataManager defaulManager] saveContext];
 }
 - (void) tearDown{
 #if MANAGER_DEBUG
