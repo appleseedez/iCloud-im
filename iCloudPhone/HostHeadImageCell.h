@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HostCell.h"
+#import "NXImageView.h"
 @interface HostHeadImageCell : UITableViewCell<HostCell>
-@property (weak, nonatomic) IBOutlet UIImageView *betterFaceImage;
+@property (weak, nonatomic) IBOutlet NXImageView *betterFaceImage;
 @end

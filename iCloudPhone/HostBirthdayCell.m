@@ -15,6 +15,28 @@
    
     
 }
+-(UIView*)inputAssesoryView{
+    if (_inputAssesoryView==nil) {
+        _inputAssesoryView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+        _inputAssesoryView.backgroundColor=[UIColor whiteColor];
+        UIButton *finish=[UIButton buttonWithType:UIButtonTypeSystem];
+        float width=50;
+        float height=30;
+        finish.frame=CGRectMake(320-width-10, 0, width, height);
+        [finish setTitle:@"完成" forState:UIControlStateNormal];
+        [finish addTarget:self action:@selector(finishButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *cancel=[UIButton buttonWithType:UIButtonTypeSystem];
+        cancel.frame=CGRectMake(10, 0, width, height);
+        [cancel setTitle:@"取消" forState:UIControlStateNormal];
+        [cancel addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_inputAssesoryView addSubview:finish];
+        [_inputAssesoryView addSubview:cancel];
+    }
+    return _inputAssesoryView;
+}
+-(void)cancelButtonClicked{
+    [self.txtBirthday resignFirstResponder];
+}
 -(void)sexSelect:(UIButton*)sender{
     //[self.window setHidden:YES];
     //self.window=nil;
@@ -37,14 +59,10 @@
         self.picker=picker;
         picker.backgroundColor=[UIColor whiteColor];
         
-        UIButton *finish=[UIButton buttonWithType:UIButtonTypeSystem];
-        float width=30;
-        float height=20;
-        finish.frame=CGRectMake(320-width-10, -20, width, height);
-        [finish setTitle:@"完成" forState:UIControlStateNormal];
-        [finish addTarget:self action:@selector(finishButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+        
         self.txtBirthday.inputView=picker;
-        self.txtBirthday.inputAccessoryView=finish;
+        self.txtBirthday.inputAccessoryView=self.inputAssesoryView;
     }
     self.txtBirthday.text=host.birthday;
     

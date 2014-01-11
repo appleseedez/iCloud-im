@@ -34,6 +34,7 @@
     [actionSheet showInView:viewController.view];
 }
 -(void)setPro:(HostItelUser *)host{
+    [self.betterFaceImage  setRect:1.0 cornerRadius:10 borderColor:[UIColor whiteColor]];
     [self.betterFaceImage setImageWithURL:[NSURL URLWithString:host.imageUrl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
     
 }
