@@ -18,15 +18,14 @@
 #import "Recent.h"
 #import "Recent+CRUD.h"
 #import "IMRecentContactDetailsViewController.h"
+#import "NSCAppDelegate.h"
 @interface IMRecentContactListViewController ()
 @property(nonatomic,weak) id<IMManager> manager;
 @end
 
 @implementation IMRecentContactListViewController
-- (id)init
-{
-    self = [super init];
-    if (self) {
+- (id) initWithCoder:(NSCoder *)aDecoder{
+    if (self = [super initWithCoder:aDecoder]) {
 
     }
     return self;
@@ -34,9 +33,17 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     [self registerNotifications];
+    NSLog(@"床上");
 
 }
-
+- (id<IMManager>)manager{
+    if (_manager == nil) {
+        NSCAppDelegate* app = (NSCAppDelegate*) [UIApplication sharedApplication].delegate;
+        NSAssert(app.manager, @"没有immanager");
+        _manager = (id<IMManager>) app.manager;
+    }
+    return _manager;
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setup];
@@ -73,8 +80,7 @@
 #pragma mark - private
 //由通知回调
 - (void) setup{
-    IMRootTabBarViewController* root =(IMRootTabBarViewController*)self.tabBarController;
-    self.manager = root.manager;
+
 //    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
 //    IMDailViewController* dialViewController = (IMDailViewController*) [sb instantiateViewControllerWithIdentifier:DIAL_PAN_VIEW_CONTROLLER_ID];
 //    dialViewController.manager = self.manager;
@@ -83,6 +89,7 @@
 }
 
 - (void) presentPan{
+
     UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
     IMDailViewController* dialViewController = (IMDailViewController*) [sb instantiateViewControllerWithIdentifier:DIAL_PAN_VIEW_CONTROLLER_ID];
     dialViewController.manager = self.manager;

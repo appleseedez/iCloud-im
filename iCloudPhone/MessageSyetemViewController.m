@@ -17,7 +17,6 @@
 @end
 
 @implementation MessageSyetemViewController
-
 -(NSArray*)messageList{
     if (_messageList==nil) {
         _messageList=[[ItelAction action] getMessageList];
