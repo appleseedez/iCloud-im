@@ -67,7 +67,6 @@
 	
 }
 - (void)disconnect{
-    
 }
 - (void)send:(NSDictionary *)data{
     NSError* error = nil;
@@ -132,6 +131,7 @@
 #if UDP_MESSAGE
         NSLog(@"最后登录的业务服务器：%@",response);
 #endif
+        [self.udpSock close];
         [self receive:response];
     }
     
