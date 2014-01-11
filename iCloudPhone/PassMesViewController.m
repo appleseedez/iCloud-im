@@ -80,7 +80,9 @@ static int waitingTime=60;
     [self.btnReSend setTitle:title forState:UIControlStateDisabled];
 }
 
-
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

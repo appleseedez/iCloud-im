@@ -11,6 +11,7 @@
 #import "NatTypeImpl.h"
 #import "ConstantHeader.h"
 #import "video_render_ios_view.h"
+#import <AVFoundation/AVFoundation.h>
 UIImageView* _pview_local;
 @interface IMEngineImp ()
 @property(nonatomic) CAVInterfaceAPI* pInterfaceApi;
@@ -275,35 +276,41 @@ UIImageView* _pview_local;
 }
 
 - (void)mute{
+#if ENGINE_MSG
     NSLog(@"静音");
+#endif
     self.pInterfaceApi->SetMuteEnble(MTVoe, false);
 }
 - (void) unmute{
+#if ENGINE_MSG
     NSLog(@"取消静音");
+#endif
     self.pInterfaceApi->SetMuteEnble(MTVoe, true);
 }
 - (void)enableSpeaker{
+#if ENGINE_MSG
     NSLog(@"TODO:开扬声器");
-    VoEControlParameters param;
-    param.ostype = OsT_IOS;
-    param.optype = OpT_Speaker;
-    param.enable = true;
-    param.iVolume = 240;
-    int ret =
-    self.pInterfaceApi->SetVoEControlParameters(param);
-    NSLog(@"开启扬声器:%d",ret);
+#endif
+    NSError* error = nil;
+    [[AVAudioSession sharedInstance]setActive:YES error:&error];
+    [[AVAudioSession sharedInstance]setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:&error];
+    if (error) {
+#if ENGINE_MSG
+        [NSException exceptionWithName:@"audioSession error" reason:@"audioSession error" userInfo:nil];
+#endif
+    }
 }
 
 - (void)disableSpeaker{
     NSLog(@"TODO:关扬声器");
-    VoEControlParameters param;
-    param.ostype = OsT_IOS;
-    param.optype = OpT_Speaker;
-    param.enable = false;
-    param.iVolume = 240;
-    int ret=
-    self.pInterfaceApi->SetVoEControlParameters(param);
-    NSLog(@"关闭扬声器:%d",ret);
+    NSError* error = nil;
+    [[AVAudioSession sharedInstance]setActive:YES error:&error];
+    [[AVAudioSession sharedInstance]setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDuckOthers error:&error];
+    if (error) {
+#if ENGINE_MSG
+        [NSException exceptionWithName:@"audioSession error" reason:@"audioSession error" userInfo:nil];
+#endif
+    }
 }
 - (void)showCam{
     NSLog(@"显示摄像头");
