@@ -72,8 +72,8 @@
     [self setupManagers];
     //初始化ItelMessageInterface
     [ItelMessageInterfaceImp defaultMessageInterface];
-    UIStoryboard *mainStoryboard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
-    RootViewController *rootVC=[mainStoryboard instantiateViewControllerWithIdentifier:@"rootVC"];
+//    UIStoryboard *mainStoryboard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
+    RootViewController *rootVC= (RootViewController*) self.window.rootViewController;//[mainStoryboard instantiateViewControllerWithIdentifier:@"rootVC"];
     self.manager = [[IMManagerImp alloc] init];
     //[self.manager setup];
     rootVC.manager=self.manager;
