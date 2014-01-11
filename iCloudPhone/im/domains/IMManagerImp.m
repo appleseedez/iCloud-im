@@ -227,11 +227,13 @@
                            kPeerNumber:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
                            kCreateDate:[NSDate date]
                            };
-        [self saveCommnicationLog];
+        
         [self endSession];
+        [self saveCommnicationLog];
     }else if ([SESSION_HALT_FILED_ACTION_END isEqualToString:haltType]){
         [self.engine stopTransport];
         [self endSession];
+        [self saveCommnicationLog];
     }else{
         //
     }
@@ -301,7 +303,7 @@ static int count = 0;
 }
 
 - (void) sessionInitFail:(NSNotification*) notify{
-    
+    self.state = IDLE;
 }
 
 - (void) droppedFromSignal:(NSNotification*) notify{
@@ -449,11 +451,10 @@ static int count = 0;
     if (self.communicationTimer) {
         [self.communicationTimer invalidate];
         self.communicationTimer = nil;
-        [self saveCommnicationLog];
     }
     
 }
-
+//在通话session结束时,停止通话计时.保存.
 - (void) saveCommnicationLog{
     ItelUser* peer =  [[ItelAction action] userInFriendBook:[self.recentLog valueForKey:kPeerNumber]];
     if (!peer) {
@@ -596,9 +597,11 @@ static int count = 0;
     self.state = destAccount;
 }
 - (void)endSession{
-    //在通话session结束时,停止通话计时.保存.
-    [self stopCommunicationCounting];
     self.state = IDLE;
+    
+
+    [self stopCommunicationCounting];
+
 }
 
 - (void)dial:(NSString *)account{
@@ -616,11 +619,11 @@ static int count = 0;
                            kPeerNumber:[data valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
                            kCreateDate:[NSDate date]
                            };
-        [self saveCommnicationLog];
     }
     [self.engine stopTransport];
     [self sessionHaltRequest:data];
     [self endSession];
+    [self saveCommnicationLog];
     //通知界面，关闭相应的视图
     [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
