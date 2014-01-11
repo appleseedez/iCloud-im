@@ -10,7 +10,7 @@
 #import "HostCell.h"
 @interface HostBirthdayCell : UITableViewCell<HostCell>
 @property (weak, nonatomic) IBOutlet UITextField *txtBirthday;
-
+@property (nonatomic,strong) UIView *inputAssesoryView;
 @property (nonatomic,strong) UIWindow *window;
 @property (nonatomic,strong) UIDatePicker *picker;
 @end
