@@ -10,4 +10,5 @@
 @class ItelUser;
 @interface EditAliasViewController : UIViewController<UITextFieldDelegate>
 @property (nonatomic,strong) ItelUser *user;
+@property (nonatomic,weak) IBOutlet UITextField *txtEditAlias;
 @end
