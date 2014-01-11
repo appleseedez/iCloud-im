@@ -151,12 +151,12 @@
 
     ItelUser *user=self.user;
     UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
-    EditAliasViewController *aliasVC=[storyBoard instantiateViewControllerWithIdentifier:@"editAliasView"];
-    aliasVC.user=user;
+   UINavigationController *aliasVC=[storyBoard instantiateViewControllerWithIdentifier:@"editAliasView"];
+    ((EditAliasViewController*)aliasVC.topViewController).user=user;
     
-   [self presentViewController:aliasVC animated:YES completion:^{
-       
-   }];
+    [self presentViewController:aliasVC animated:YES completion:^{
+        
+    }];
 }
 - (void)addToBlack:(UIButton *)sender {
     [[ItelAction action] addItelUserBlack:self.user.itelNum];
@@ -176,6 +176,8 @@
     [super viewDidLoad];
     //self.navigationController.navigationBarHidden=YES;
     [self refreshMessage];
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(callActionSheet) ];
+
     
    	// Do any additional setup after loading the view.
 }
@@ -186,7 +188,6 @@
     [self.imageView setImageWithURL:[NSURL URLWithString:self.user.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"1"}];
     [self.imageView setRect:5.0 cornerRadius:self.imageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(callActionSheet) ];
     
 }
 
@@ -200,7 +201,8 @@
 }
 -(void)callActionSheet{
     UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除联系人" otherButtonTitles:@"添加黑名单",@"编辑备注", nil];
-    [actionSheet showInView:self.view];
+    NSAssert(self.view, @"一点");
+    [actionSheet showInView: self.view];
     
 }
 - (void) delNotification:(NSNotification*) notify{
@@ -212,8 +214,14 @@
         [alert show];
     }
 }
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet{
+    actionSheet.delegate = nil;
+    actionSheet = nil;
+}
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     switch (buttonIndex) {
+            
+        [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:YES];
         case 0:
             [self delUser:nil];
             break;
