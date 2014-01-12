@@ -83,6 +83,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 }
 
 - (void) sessionClosed:(NSNotification*) notify{
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - USER INTERACT
