@@ -83,6 +83,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 }
 
 - (void) sessionClosed:(NSNotification*) notify{
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - USER INTERACT
@@ -108,6 +109,6 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_REFUSE
                                                   }];
     [self.manager haltSession:refusedSessionNotifyMut];
-    [self sessionClosed:nil];
+//    [self sessionClosed:nil];
 }
 @end

@@ -23,7 +23,7 @@
 #import "IMMessageParser.h"
 #import "IMMessageParserImp.h"
 #import "IMDataPool.h"
-@interface IMManagerImp : NSObject <IMManager>
+@interface IMManagerImp : NSObject <IMManager,UIAlertViewDelegate>
 // 数据暂存
 @property (nonatomic) IMDataPool* dataPool;
 //sdk引擎
