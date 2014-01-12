@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
 	// Do any additional setup after loading the view.
 }
 
@@ -65,7 +66,13 @@
 -(void)resendMessage{
     [[ItelAction action] resendMassage:self.newTelNum];
 }
+-(void)dismiss{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self dismiss];
 }
 @end

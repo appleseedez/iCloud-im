@@ -71,6 +71,12 @@
 {
     [super viewDidLoad];
     [self setUI];
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
+}
+-(void)dismiss{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 
