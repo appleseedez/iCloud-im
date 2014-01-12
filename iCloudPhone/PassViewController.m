@@ -29,6 +29,12 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+-(void)startHud{
+    self.nextButton.enabled=NO;
+}
+-(void)stopHud{
+    self.nextButton.enabled=YES;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -40,6 +46,7 @@
 -(IBAction)pushNext:(id)sender{
     if ([NXInputChecker checkCloudNumber:self.txtItel.text]) {
         [self checkCode];
+        [self startHud];
     }
     
     else {
@@ -77,6 +84,7 @@
     //NSString *url=@"http://211.149.144.15:8000/CloudCommunity/safety/checkImgCodeItel.json";
     NSDictionary *parameters=@{@"itel": self.txtItel.text,@"verifycode":self.txtVerifyCode.text};
     SUCCESS{
+        [self stopHud];
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if ([json isKindOfClass:[NSDictionary class]]) {
             
@@ -94,6 +102,7 @@
     };
     FAILURE{
         [self errorAlert:@"网络不通 请稍后重试"];
+        [self stopHud];
         };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
 

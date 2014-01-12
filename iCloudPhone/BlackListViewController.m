@@ -72,7 +72,7 @@
     if (isNormal) {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"移除成功" message:nil delegate:nil cancelButtonTitle:@"返回" otherButtonTitles:nil];
         [alert show];
-        //self.blackList=[[ItelAction action]blackList];
+        self.blackList=[[ItelAction action]blackList];
         [self.tableView reloadData];
     }
 }

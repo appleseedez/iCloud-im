@@ -22,12 +22,19 @@
     [self.nextButton setUI];
     
 }
+-(void)startHud{
+    self.nextButton.enabled=NO;
+}
+-(void)stopHud{
+    self.nextButton.enabled=YES;
+}
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
 - (IBAction)nextButtonClicked:(RegNextButton *)sender {
     self.TheNewTel=self.txtTel.text;
     if ([NXInputChecker checkPhoneNumberIsMobile:self.TheNewTel]) {
+        [self startHud];
         [[ItelAction action] checkPhoneNumber:self.TheNewTel];
     }
     else [self showWrongMessage:@"手机号码格式不对"];
@@ -44,9 +51,11 @@
 
 -(void)receive:(NSNotification*)notification{
     NSDictionary *userInfo=notification.userInfo;
+    [self stopHud];
     BOOL isNormal=[[userInfo objectForKey:@"isNormal"] boolValue];
     if (isNormal) {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"手机号码可用" message:@"系统即将发送一条验证短信给您的手机以完成绑定，点击取消将不发送" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"发送",nil];
+        
         [alert show];
     }
     else{

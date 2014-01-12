@@ -28,6 +28,12 @@ static int waitingTime=6;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+-(void)startHud{
+    self.nextButton.enabled=NO;
+}
+-(void)stopHud{
+    self.nextButton.enabled=YES;
+}
 -(void)setUI{
     [self.nextButton setUI];
     [self.tipView setUI];
@@ -90,7 +96,7 @@ static int waitingTime=6;
   
     
 
-    
+    [self startHud];
     [[RegManager defaultManager] commitInterfaceCheckCode:self.txtCheckCode.text];
 }
 -(void)pop{
@@ -115,6 +121,7 @@ static int waitingTime=6;
 -(void)checkCodeResponse:(NSNotification*)notification{
     NSDictionary *response=(NSDictionary*)notification.object;
     NSInteger ret=[[response objectForKey:@"ret"] integerValue] ;
+    [self stopHud];
     
     if (ret==0 && [[notification.userInfo valueForKey:@"success"] boolValue]) {
          //自动登陆

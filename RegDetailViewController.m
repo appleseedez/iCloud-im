@@ -36,7 +36,12 @@ static float animatedDuration=1.0;
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     currEditingTextTag=textField.tag;
 }
-
+-(void)startHud{
+    self.nextButton.enabled=NO;
+}
+-(void)stopHud{
+    self.nextButton.enabled=YES;
+}
 -(UIView*)inputAccessoryView{
     if (_inputAccessoryView==nil) {
         _inputAccessoryView=[[UIView alloc]init];
@@ -181,6 +186,7 @@ static float animatedDuration=1.0;
 -(void) checkInputResponse:(NSNotification*)notification{
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSDictionary *userInfo = notification.userInfo;
+    [self stopHud];
     BOOL success=[[userInfo objectForKey:@"success"] boolValue];
         if (success) {
         int ret=[(NSString*)[(NSDictionary*)notification.object objectForKey:@"ret"] intValue];
@@ -208,6 +214,7 @@ static float animatedDuration=1.0;
 - (IBAction)checkUserInput:(UIButton *)sender {
     [self returnKeyBoard];
     //[self pushNextView];
+    [self startHud];
     NSString *localCheck=[self checkInputFormat];
     if (localCheck==nil) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
