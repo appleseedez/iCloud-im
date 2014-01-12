@@ -165,7 +165,6 @@ static int addcount=0;
 -(void)checkAddressBookForItelUser:(NSArray*)phones{
     
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,MATCH_ADDRESS_BOOK_INTERFACE];
-    
     HostItelUser *host=[[ItelAction action] getHost];
     NSNumber *number=[NSNumber numberWithInteger:[host.userId intValue] ];
     NSString *strPhones=[NXInputChecker changeArrayToString:phones];
