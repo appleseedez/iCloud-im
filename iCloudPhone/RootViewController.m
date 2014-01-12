@@ -56,7 +56,10 @@
     [super viewWillAppear:animated];
     
     [self registerNotifications];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewAppear" object:nil];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewAppear" object:nil];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];

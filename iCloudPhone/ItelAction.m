@@ -408,5 +408,6 @@
     NSDictionary *userInfo=@{@"isNormal": @"1",@"reason":@"1" };
     
     [[NSNotificationCenter defaultCenter]postNotificationName:name object:parameters userInfo:userInfo];
+    [[IMCoreDataManager defaulManager] saveContext];
 }
 @end

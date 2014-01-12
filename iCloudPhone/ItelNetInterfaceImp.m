@@ -444,7 +444,7 @@ static int addcount=0;
             
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
-                id data =[dic objectForKey:@"data"];
+                id data =[parameters objectForKey:@"phone"];
                 [[ItelAction action]  phoneCheckCodeResponse:data];
             }
             else {
