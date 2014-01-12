@@ -235,7 +235,9 @@
     // 关闭可能的保持session的包定时器
     [self.keepSessionAlive invalidate];
     self.keepSessionAlive = nil;
-    
+    //收到拒绝也应该终止超时定时器
+    [self.monitor invalidate];
+    self.monitor = nil;
     NSString* haltType = [notify.userInfo valueForKey:SESSION_HALT_FIELD_TYPE_KEY];
     if ([SESSION_HALT_FILED_ACTION_BUSY isEqualToString:haltType]) {
         [self endSession];
@@ -423,8 +425,8 @@
 #endif
         NSDictionary* busyData = @{
                                    DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
-                                   SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:currentDest,
-                                   SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[self myAccount],
+                                   SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self myAccount],
+                                   SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:currentDest,
                                    SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_BUSY
                                    };
         [self sessionHaltRequest:busyData];
@@ -553,7 +555,9 @@
                                                    kHostUserNumber:self.myAccount
                                                    }
                                        inContext:[[IMCoreDataManager defaulManager] managedObjectContext]];
+#if MANAGER_DEBUG
     NSLog(@"aRecent is :%@",aRecent);
+#endif
 }
 //收到信令服务器的验证响应，
 - (void) authHasResult:(NSNotification*) notify{
