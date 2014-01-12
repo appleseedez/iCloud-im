@@ -24,7 +24,12 @@
 @implementation PassSecuretyQuestiongViewController
 
 
-
+-(void)startHud{
+    self.nextButton.enabled=NO;
+}
+-(void)stopHud{
+    self.nextButton.enabled=YES;
+}
 -(void)setUI{
     [self.nextButton setUI];
     [self.txtAnswer setUI];
@@ -54,11 +59,12 @@
 	// Do any additional setup after loading the view.
 }
 - (IBAction)nextButtonPushed:(RegNextButton *)sender {
-    
+    [self startHud];
     [[PassManager defaultManager] answerQuestion:self.strQuestion answer:self.txtAnswer.text];
 }
 -(void)receive:(NSNotification*)notification{
     BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"] boolValue];
+    [self stopHud];
     if (isNormal) {
         [self pushNext];
     }

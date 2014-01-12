@@ -20,7 +20,12 @@
 @implementation PassResetViewController
 
 
-
+-(void)startHud{
+    self.nextButton.enabled=NO;
+}
+-(void)stopHud{
+    self.nextButton.enabled=YES;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -28,10 +33,11 @@
 }
 
 - (IBAction)modifyPassword:(RegNextButton *)sender {
-    if ([self.txtPassword.text isEqualToString:self.txtRePassword.text]) {
-        if ([NXInputChecker checkPassword:self.txtPassword.text]) {
+    if ([self.txtPassword.text isEqualToString:self.txtRePassword.text]&&[NXInputChecker checkPassword:self.txtPassword.text]) {
+      
+            [self startHud];
             [[PassManager defaultManager] modifyPassword:self.txtPassword.text];
-        }
+        
     }
     else{
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码成功失败" message:@"密码格式不正确" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
@@ -41,6 +47,7 @@
 }
 -(void)receive:(NSNotification*)notification{
     BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"]boolValue];
+    [self stopHud];
     if (isNormal) {
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"恭喜修改密码成功" message:@"请牢记您的密码" delegate:self cancelButtonTitle:@"返回" otherButtonTitles: nil];
         [alert show];

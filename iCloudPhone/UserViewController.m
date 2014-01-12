@@ -197,7 +197,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didAddBlack:) name:@"addBlack" object:nil];
     //删除成功通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delNotification:) name:@"delItelUser" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didAddBlack:) name:@"addBlack" object:nil];
+    
 }
 -(void)callActionSheet{
     UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除联系人" otherButtonTitles:@"添加黑名单",@"编辑备注", nil];
@@ -251,6 +251,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
    [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 -(void)didAddBlack:(NSNotification*)notification{
     BOOL isNormal = [[notification.userInfo objectForKey:@"isNormal"]boolValue];
