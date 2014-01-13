@@ -775,4 +775,8 @@
 - (void)setRouteServerPort:(u_int16_t)port{
     self.port = port;
 }
+
+- (double)checkDuration{
+    return self.duration;
+}
 @end
