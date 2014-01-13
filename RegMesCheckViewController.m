@@ -86,10 +86,16 @@ static int waitingTime=6;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
     [self setUI];
     [self TimerStart];
-    [self.navigationItem.leftBarButtonItem setAction:@selector(pop)];
+   
 	// Do any additional setup after loading the view.
+}
+-(void)dismiss{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 - (IBAction)checkCode:(UIButton *)sender {
    

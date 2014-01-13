@@ -2061,7 +2061,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ldb-vv-JcW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="870" y="915"/>
+            <point key="canvasLocation" x="1142" y="633"/>
         </scene>
         <!--Stranger View Controller-->
         <scene sceneID="XOo-Zh-xJl">
@@ -2179,12 +2179,12 @@
             </objects>
             <point key="canvasLocation" x="2037" y="-517"/>
         </scene>
-        <!--New Friend List View Controller-->
+        <!--New Friend List View Controller - 查询结果-->
         <scene sceneID="w4C-FE-MO8">
             <objects>
-                <tableViewController storyboardIdentifier="newFriendList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cIo-Lc-lfL" customClass="NewFriendListViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="newFriendList" title="查询结果" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cIo-Lc-lfL" customClass="NewFriendListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zYj-dn-syd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2198,10 +2198,11 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znl-d6-Tcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="566" y="953"/>
+            <point key="canvasLocation" x="436" y="953"/>
         </scene>
         <!--In Session View Controller-->
         <scene sceneID="dKB-Nr-hPr">
@@ -3097,7 +3098,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iOU-Dr-vgt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1179" y="1670"/>
+            <point key="canvasLocation" x="1433" y="1544"/>
         </scene>
         <!--Recent Contact List View Controller - 通话记录-->
         <scene sceneID="FUF-TP-Mgc">
@@ -3325,7 +3326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8dw-JL-0bI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1221" y="644"/>
+            <point key="canvasLocation" x="1227" y="362"/>
         </scene>
         <!--Host Mes View Controller - 验证手机-->
         <scene sceneID="31X-tN-FzX">

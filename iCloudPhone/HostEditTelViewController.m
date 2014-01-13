@@ -48,7 +48,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:@"modifyPhone" object:nil];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(push:) name:@"resendMes" object:nil];
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 -(void)receive:(NSNotification*)notification{
     NSDictionary *userInfo=notification.userInfo;
     [self stopHud];
@@ -80,7 +83,7 @@
 {
     [super viewDidLoad];
     [self setUI];
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
 }
 -(void)dismiss{
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
