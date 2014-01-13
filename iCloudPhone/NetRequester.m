@@ -67,8 +67,6 @@
     
     NSMutableURLRequest *request=[[AFJSONRequestSerializer serializer] requestWithMethod:@"get" URLString:url parameters:parameters];
     
-    
-    
     AFHTTPRequestOperation *operation=[[AFHTTPRequestOperation alloc]initWithRequest:request];
     [operation setCompletionBlockWithSuccess:success failure:failure];
     [operation start];

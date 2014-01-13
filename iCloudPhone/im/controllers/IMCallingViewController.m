@@ -20,22 +20,26 @@ static int soundCount;
 
 @implementation IMCallingViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        // Custom initialization
+
     }
     return self;
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //监听 "PRESENT_INSESSION_VIEW_NOTIFICATION"// 通知加载“通话中界面”
+    [self registerNotifications];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setup];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self setup];
+
 }
 - (void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -53,7 +57,7 @@ static int soundCount;
                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                                                   }];
     [self.manager haltSession:cancelCallNotifyMut];
-    [self sessionClosed:nil];
+//    [self sessionClosed:nil];
 }
 
 - (void) setup{
@@ -69,8 +73,7 @@ static int soundCount;
     //系统声音播放是一个异步过程。要循环播放则必须借助回调
     AudioServicesAddSystemSoundCompletion(DIALING_SOUND_ID,NULL,NULL,soundPlayCallback,NULL);
     AudioServicesPlaySystemSound(DIALING_SOUND_ID);
-    //监听 "PRESENT_INSESSION_VIEW_NOTIFICATION"// 通知加载“通话中界面”
-    [self registerNotifications];
+
 }
 
 - (void) tearDown{

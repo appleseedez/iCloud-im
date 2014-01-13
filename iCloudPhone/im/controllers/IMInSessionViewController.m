@@ -16,6 +16,7 @@
 @property(nonatomic) BOOL hideSelfCam; //标志是否隐藏小窗口
 @property(nonatomic) BOOL hideCam; //标志是否关闭摄像头
 @property(nonatomic) BOOL enableSpeaker; //标志是否开启扬声器
+@property(nonatomic) MSWeakTimer* clock;
 @end
 
 @implementation IMInSessionViewController
@@ -56,8 +57,11 @@
 
 - (void) setup{
     [self registerNotifications];
+    //通话过程中,禁止锁屏
     [self.manager lockScreenForSession];
-
+    //定时器用于显示通话时长
+    [self.clock invalidate];
+    self.clock = [MSWeakTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refresh) userInfo:nil repeats:YES dispatchQueue:dispatch_queue_create("com.itelland.clock_queue", DISPATCH_QUEUE_CONCURRENT)];
     //小窗口要个边框好看些
     self.selfCamView.layer.borderWidth = 1.0f;
     self.selfCamView.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -81,10 +85,18 @@
         [self.peerAvatar setHidden:NO];
     }
 }
-
+- (void) refresh{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ((UILabel*)[self.nameHUDView viewWithTag:3]).text = [IMUtils secondsToTimeFormat:[self.manager checkDuration]] ;
+    });
+    
+}
 - (void) tearDown{
     [self removeNotifications];
     [self.manager unlockScreenForSession];
+    [self.clock invalidate];
+    self.clock = nil;
+    
 }
 - (void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionClosed:) name:END_SESSION_NOTIFICATION object:nil];
