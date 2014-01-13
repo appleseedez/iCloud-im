@@ -58,4 +58,5 @@
 - (BOOL) isVideoCall;
 - (void) setCanVideo:(BOOL)canVideo;
 - (BOOL) canVideo;
+- (double) checkDuration;
 @end
