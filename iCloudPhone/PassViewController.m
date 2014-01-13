@@ -96,7 +96,7 @@
                 }
             else {
                
-                [self errorAlert:@"验证输入码错误"];
+                [self errorAlert:@"iTel号码不存在或验证码错误"];
             }
         }
     };
