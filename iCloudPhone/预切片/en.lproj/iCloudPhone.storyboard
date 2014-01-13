@@ -2556,7 +2556,7 @@
                                 <rect key="frame" x="0.0" y="338" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="8sQ-JS-mbY" userLabel="1">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8sQ-JS-mbY" userLabel="1">
                                         <rect key="frame" x="0.0" y="1" width="98" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2566,11 +2566,14 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="highlighted" title="1"/>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="bU5-iT-79p"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="irF-Iq-ddb"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="aKI-4D-JdT"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="UKG-mi-PHZ" userLabel="2">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UKG-mi-PHZ" userLabel="2">
                                         <rect key="frame" x="99" y="1" width="122" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2581,6 +2584,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="YSq-Ps-Ozi"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="xCa-aT-9QO"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="Sjz-na-p9J"/>
                                         </connections>
                                     </button>
@@ -2591,7 +2596,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="FHA-7q-dtI" userLabel="3">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FHA-7q-dtI" userLabel="3">
                                         <rect key="frame" x="222" y="1" width="98" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2602,6 +2607,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="G35-yn-7vc"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="2w0-dI-hGI"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="rmg-u1-NR7"/>
                                         </connections>
                                     </button>
@@ -2612,7 +2619,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="9hY-0d-wzp" userLabel="4">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9hY-0d-wzp" userLabel="4">
                                         <rect key="frame" x="0.0" y="46" width="98" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2623,6 +2630,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="nJM-RS-Ies"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="hEB-bT-xAX"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="V4H-s3-EhW"/>
                                         </connections>
                                     </button>
@@ -2633,7 +2642,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="x9r-06-xNf" userLabel="5">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="x9r-06-xNf" userLabel="5">
                                         <rect key="frame" x="99" y="46" width="122" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2644,6 +2653,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="ADc-vE-QEm"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="lmr-p5-pZJ"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="RdE-Rn-KhJ"/>
                                         </connections>
                                     </button>
@@ -2654,7 +2665,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="hJv-Rl-nsy" userLabel="6">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hJv-Rl-nsy" userLabel="6">
                                         <rect key="frame" x="222" y="46" width="98" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2665,6 +2676,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="TlN-I7-vdv"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="fNO-uJ-60U"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="5sq-hT-1uG"/>
                                         </connections>
                                     </button>
@@ -2675,7 +2688,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="1QQ-3f-P1M" userLabel="7">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1QQ-3f-P1M" userLabel="7">
                                         <rect key="frame" x="0.0" y="91" width="98" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2686,6 +2699,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="OpO-fi-VEr"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="K1h-GQ-Rj9"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="vh4-4N-B9M"/>
                                         </connections>
                                     </button>
@@ -2696,7 +2711,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="tME-VG-SFw" userLabel="8">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tME-VG-SFw" userLabel="8">
                                         <rect key="frame" x="99" y="91" width="122" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2707,6 +2722,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="437-r6-SXt"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="KUk-CX-SQP"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="0go-p7-I4l"/>
                                         </connections>
                                     </button>
@@ -2717,7 +2734,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="gWB-b4-ifR" userLabel="9">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gWB-b4-ifR" userLabel="9">
                                         <rect key="frame" x="222" y="91" width="98" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2728,6 +2745,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="7kV-TO-kiJ"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="RTc-ne-EZu"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="iEr-BV-Jri"/>
                                         </connections>
                                     </button>
@@ -2738,7 +2757,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="iSC-fe-uUT" userLabel="star">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iSC-fe-uUT" userLabel="star">
                                         <rect key="frame" x="0.0" y="136" width="98" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2749,10 +2768,12 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="rHb-Xm-oRe"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="hfG-PE-rKk"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="Ies-lP-0nG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="uUn-cw-p0y" userLabel="0">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uUn-cw-p0y" userLabel="0">
                                         <rect key="frame" x="99" y="136" width="122" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2763,10 +2784,12 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="z6x-Cv-6EZ"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="uwa-6r-9DR"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="Tkv-Mh-wIL"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="T1J-yb-uSc" userLabel="hash">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T1J-yb-uSc" userLabel="hash">
                                         <rect key="frame" x="222" y="136" width="98" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2777,6 +2800,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="c5U-mq-Taq"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="MeJ-2P-oGV"/>
                                             <action selector="dialNumber:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="1lc-dz-xG7"/>
                                         </connections>
                                     </button>
@@ -2790,6 +2815,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="XVX-PY-5jk"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="MBK-HC-wU7"/>
                                             <action selector="showRecentContactList:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="Lov-RI-JL9"/>
                                         </connections>
                                     </button>

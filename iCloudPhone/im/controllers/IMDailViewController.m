@@ -179,7 +179,18 @@
 //                                                                                                                       }];
     [self.manager dial:peerAccount];
 }
+- (IBAction)buttonPress:(UIButton*)sender{
+    //高亮
+    sender.backgroundColor =[UIColor colorWithRed:0/255.0f green:102/255.0f blue:255/255.0f alpha:1.0f];
+    sender.titleLabel.textColor = [UIColor whiteColor];
+}
+- (void)buttonReleaseOutSide:(UIButton *)sender{
+    sender.backgroundColor =[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1.0f];
+    sender.titleLabel.textColor = [UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f];
+}
 - (IBAction)dialNumber:(UIButton *)sender {
+    sender.backgroundColor =[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1.0f];
+    sender.titleLabel.textColor = [UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f];
     if ([self.peerAccount.text length] >=13) {
         return;
     }
