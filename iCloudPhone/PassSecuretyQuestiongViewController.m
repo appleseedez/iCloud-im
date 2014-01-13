@@ -30,6 +30,11 @@
 -(void)stopHud{
     self.nextButton.enabled=YES;
 }
+-(void)dismiss{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 -(void)setUI{
     [self.nextButton setUI];
     [self.txtAnswer setUI];
@@ -55,6 +60,7 @@
             break;
     }
     self.question.text=[NSString stringWithFormat:@"问题：%@",self.strQuestion];
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
     
 	// Do any additional setup after loading the view.
 }

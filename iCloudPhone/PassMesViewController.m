@@ -91,9 +91,15 @@ static int waitingTime=60;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
     [[PassManager defaultManager] sendMessage];
     [self setUI];
     [self TimerStart];
+}
+-(void)dismiss{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 -(NSString*)getTelephone{
     return [PassManager defaultManager].telephone;
