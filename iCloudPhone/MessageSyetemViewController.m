@@ -23,10 +23,11 @@
     }
     return _messageList;
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+   
 }
 
 
@@ -92,6 +93,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:@"getNewMessage" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showResult:) name:@"acceptFriends" object:nil];
     [[ItelAction action] getNewMessage];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
 }
 
 
