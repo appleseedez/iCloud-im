@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *backspaceButton;
 @property (weak, nonatomic) IBOutlet UILabel *peerAccount;
 - (IBAction)dialNumber:(UIButton *)sender;
+- (IBAction)buttonReleaseOutSide:(UIButton*)sender;
+- (IBAction)buttonPress:(UIButton*)sender;
 - (IBAction)backspace:(UIButton *)sender;
 - (IBAction)showRecentContactList:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIView *dialBackGroundView;

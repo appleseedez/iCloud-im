@@ -17,8 +17,8 @@
 - (void) setRouteServerPort:(u_int16_t) port;//登陆后的路由服务器端口
 //拨号
 - (void) dial:(NSString*) account;
-// 开始通话过程
-- (void) startSession:(NSString*) destAccount;
+// 开始通话过程. 返回YES表示开启通话过程成功.可以继续.否则后续流程终止
+- (BOOL) startSession:(NSString*) destAccount;
 // 结束通话过程
 - (void) endSession;
 // 初始化&启动
@@ -58,4 +58,5 @@
 - (BOOL) isVideoCall;
 - (void) setCanVideo:(BOOL)canVideo;
 - (BOOL) canVideo;
+- (double) checkDuration;
 @end

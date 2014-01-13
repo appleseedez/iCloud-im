@@ -27,7 +27,7 @@
 
     #define UDP_MESSAGE 0
     #define OTHER_MESSAGE 0
-    #define SIGNAL_MESSAGE 0
+    #define SIGNAL_MESSAGE 1
     #define ENGINE_MSG 0
 
 #endif

@@ -249,9 +249,9 @@ UIImageView* _pview_local;
             NSLog(@"传输初期化失败");
         }
         // 如果穿透操作成功。则发送通知
-        
-        
+#if ENGINE_MSG
         NSLog(@"到底你执行了多少次");
+#endif
         if (ret) {
             [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
         }else{
@@ -270,7 +270,12 @@ UIImageView* _pview_local;
 
 - (void)stopTransport{
     bool ret = self.pInterfaceApi->StopMedia(self.m_type);
-    NSLog(@"关闭传输通道成功：%d",ret);
+    if (ret) {
+#if ENGINE_MSG
+        NSLog(@"关闭传输通道成功：%d",ret);
+#endif
+    }
+
     //通知界面
 //    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
