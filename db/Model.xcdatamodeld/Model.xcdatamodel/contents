@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Area" representedClassName="Area" syncable="YES">
+        <attribute name="areaId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="capital" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sequence" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="HostItelUser" representedClassName="HostItelUser" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
@@ -63,9 +71,10 @@
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="HostItelUser" positionX="-29" positionY="-1224" width="128" height="343"/>
-        <element name="ItelUser" positionX="-396" positionY="-1305" width="128" height="313"/>
-        <element name="Message" positionX="-128" positionY="-724" width="128" height="148"/>
-        <element name="Recent" positionX="153" positionY="-1053" width="128" height="180"/>
+        <element name="HostItelUser" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ItelUser" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Message" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Recent" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Area" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

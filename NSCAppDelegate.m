@@ -10,10 +10,10 @@
 #import "RootViewController.h"
 #import "ContentViewController.h"
 #import "NXLoginViewController.h"
-#import "IMCoreDataManager.h"
 #import "IMManagerImp.h"
 #import "ItelMessageInterfaceImp.h"
 #import "ItelAction.h"
+#import "IMCoreDataManager+FMDB_TO_COREDATA.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 
 @interface ItelMessageInterfaceImp()
@@ -68,7 +68,7 @@
         self.phoneBook = [[AddressBook alloc] init];
         [self.phoneBook loadAddressBook];
     }
-
+    [[IMCoreDataManager defaulManager] isAreaInCoreData]; //地名插入coredata
     [self setupManagers];
     //初始化ItelMessageInterface
     [ItelMessageInterfaceImp defaultMessageInterface];
