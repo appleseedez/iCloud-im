@@ -168,6 +168,7 @@
  *  @return void
  */
 - (void) sessionPeriodNegotiation:(NSDictionary*) negotiationData{
+    [self.engine initNetwork];
     NSDictionary* parsedData =  [self.messageParser parse:negotiationData];
 #if MANAGER_DEBUG
     NSLog(@"获取到的谈判数据：%@",parsedData);
@@ -575,9 +576,9 @@
 - (void)setup{
     [self injectDependency];
     //环境初始化
-    [self.engine initNetwork];
+//    [self.engine initNetwork];
     
-    [self.engine initMedia];
+//    [self.engine initMedia];
     self.state = IDLE;
 }
 
@@ -660,7 +661,7 @@
 #endif
     [[IMCoreDataManager defaulManager] saveContext];
     [self disconnectToSignalServer];
-    [self.engine tearDown];
+//    [self.engine tearDown];
     self.engine=nil;
     self.TCPcommunicator =  nil;
     self.UDPcommunicator = nil;
@@ -678,6 +679,7 @@
 }
 - (void)endSession{
     self.state = IDLE;
+    [self.engine tearDown];
     [self stopCommunicationCounting];
     
 }

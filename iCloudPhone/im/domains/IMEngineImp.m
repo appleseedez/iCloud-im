@@ -24,6 +24,7 @@ UIImageView* _pview_local;
     if (self = [super init]) {
         if (_pInterfaceApi == nil) {
             _pInterfaceApi = new CAVInterfaceAPI();
+            self.canVideoCalling = YES;
         }
     }
     return self;
@@ -96,6 +97,9 @@ UIImageView* _pview_local;
 - (void)initNetwork{
     if (false == self.pInterfaceApi->NetWorkInit(LOCAL_PORT)) {
         [NSException exceptionWithName:@"400: init network failed" reason:@"引擎初始化网络失败" userInfo:nil];
+    }else{
+
+        [self initMedia];
     }
 }
 /**
@@ -285,6 +289,7 @@ UIImageView* _pview_local;
 #if ENGINE_MSG
         NSLog(@"关闭传输通道成功：%d",ret);
 #endif
+        [self tearDown];
     }
 
     //通知界面
