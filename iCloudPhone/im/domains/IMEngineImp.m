@@ -104,6 +104,17 @@ UIImageView* _pview_local;
 - (void)initMedia{
     // 首先，初始化媒体。此时返回的m_type可以表明本机是否有能力进行视频。
     self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeNone);
+    
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        if (granted) {
+            self.canVideoCalling = YES;
+        }else{
+            self.canVideoCalling = NO;
+        }
+    }];
+
+    
+    
    //接下来，本地根据网络情况，会重新评估一次是否支持视频
     AFNetworkReachabilityManager* reachabilityManager = [AFNetworkReachabilityManager sharedManager];
     [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
