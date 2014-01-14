@@ -44,11 +44,17 @@ static NSString* kCurrentUser = @"currUser";
     self.hostUser.qq=[data objectForKey:@"qq_num"];
     NSNumber *sex=[NSNumber numberWithBool:[[data objectForKey:@"sex"] boolValue]];
     self.hostUser.sex=sex;
-    self.hostUser.address=[data objectForKey:@"address"];
+    self.hostUser.address= [data objectForKey:@"area_code"];
     self.hostUser.personalitySignature=[data objectForKey:@"recommend"];
     self.hostUser.email=[data objectForKey:@"mail"];
     self.hostUser.birthday=[data objectForKey:@"birthday"];
-    
+    NSString *imageUrl=[data objectForKey:@"photo_file_name"];
+    if ([imageUrl isKindOfClass:[NSString class]]) {
+        if (![imageUrl isEqualToString:@""]) {
+              self.hostUser.imageUrl=imageUrl;
+        }
+      
+    }
     [[IMCoreDataManager defaulManager]saveContext];
 }
 

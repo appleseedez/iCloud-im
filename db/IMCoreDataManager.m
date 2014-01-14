@@ -13,6 +13,7 @@ static IMCoreDataManager* _instance;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
 - (id)init
 {
     self = [super init];

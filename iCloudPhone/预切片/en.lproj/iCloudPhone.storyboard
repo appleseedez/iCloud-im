@@ -507,6 +507,43 @@
             </objects>
             <point key="canvasLocation" x="-1604" y="1532"/>
         </scene>
+        <!--Host Second Address View Controller-->
+        <scene sceneID="O1T-aw-iu1">
+            <objects>
+                <tableViewController storyboardIdentifier="hostSecondAddressView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7kk-p2-vwk" customClass="HostSecondAddressViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ALl-x3-bFi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="secondAddressCell" textLabel="bPa-PT-bfZ" style="IBUITableViewCellStyleDefault" id="FYI-bp-pLG">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FYI-bp-pLG" id="qsa-JW-2MO">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bPa-PT-bfZ">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7kk-p2-vwk" id="mUl-uh-Wrs"/>
+                            <outlet property="delegate" destination="7kk-p2-vwk" id="raJ-gh-j1l"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9nH-Oc-EJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1325" y="1783"/>
+        </scene>
         <!--Common Setting View Controller - 通用设置-->
         <scene sceneID="iyg-7a-EsQ">
             <objects>
@@ -924,7 +961,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiC-c0-Q0u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-880" y="1829"/>
+            <point key="canvasLocation" x="-354" y="1829"/>
         </scene>
         <!--Securety Answer Question View Controller-->
         <scene sceneID="RV5-ox-dVD">
@@ -1321,7 +1358,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="重庆市-沙坪坝区" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O2L-Xb-VJE">
-                                            <rect key="frame" x="78" y="11" width="138" height="21"/>
+                                            <rect key="frame" x="78" y="11" width="209" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -1331,6 +1368,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="addressLable" destination="O2L-Xb-VJE" id="rOW-zB-yqV"/>
+                                    <segue destination="DtN-Xk-bbA" kind="modal" id="svZ-DY-QeU"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="birthday" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="birthday" rowHeight="44" id="s0I-zE-l0T" customClass="HostBirthdayCell">
@@ -1454,7 +1492,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blO-2T-o8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1383" y="1211"/>
+            <point key="canvasLocation" x="-1483" y="1213"/>
         </scene>
         <!--Host EditQQ View Controller - 编辑-->
         <scene sceneID="m73-lK-YyH">
@@ -1481,7 +1519,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zt3-HS-hZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1040" y="1279"/>
+            <point key="canvasLocation" x="1566" y="1279"/>
         </scene>
         <!--Host Edit Sign View Controller - 编辑-->
         <scene sceneID="sXG-8r-pYN">
@@ -1519,7 +1557,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8bt-7w-Kih" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="415" y="833"/>
+            <point key="canvasLocation" x="941" y="833"/>
         </scene>
         <!--Content View Controller - 主页-->
         <scene sceneID="nfj-8q-YVJ">
@@ -2202,7 +2240,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znl-d6-Tcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="436" y="953"/>
+            <point key="canvasLocation" x="1280" y="983"/>
         </scene>
         <!--In Session View Controller-->
         <scene sceneID="dKB-Nr-hPr">
@@ -2404,7 +2442,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="358" y="1204"/>
+            <point key="canvasLocation" x="884" y="1204"/>
         </scene>
         <!--Dail View Controller-->
         <scene sceneID="Z6h-56-3Sa">
@@ -2885,7 +2923,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="649-Vj-9gs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33" y="858"/>
+            <point key="canvasLocation" x="559" y="858"/>
         </scene>
         <!--Calling View Controller-->
         <scene sceneID="AU6-3U-6eC">
@@ -3062,7 +3100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kgu-zw-56C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1972" y="963"/>
+            <point key="canvasLocation" x="2498" y="963"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f7I-QK-0Og">
@@ -3080,7 +3118,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PhG-rh-LOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="744" y="758"/>
+            <point key="canvasLocation" x="1270" y="758"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WVb-9Y-aS1">
@@ -3098,7 +3136,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iOU-Dr-vgt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1433" y="1544"/>
+            <point key="canvasLocation" x="1959" y="1544"/>
         </scene>
         <!--Recent Contact List View Controller - 通话记录-->
         <scene sceneID="FUF-TP-Mgc">
@@ -3188,7 +3226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jJo-XW-nZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="693" y="1482"/>
+            <point key="canvasLocation" x="1219" y="1482"/>
         </scene>
         <!--Security Change Password View Controller - 修改登录密码-->
         <scene sceneID="jJD-c3-sV1">
@@ -3299,7 +3337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkQ-jx-n5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-354" y="1153"/>
+            <point key="canvasLocation" x="172" y="1153"/>
         </scene>
         <!--Host Edit Nickname View Controller - 编辑-->
         <scene sceneID="IXo-9i-ZQx">
@@ -3401,7 +3439,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iB2-Gs-CAA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130" y="1482"/>
+            <point key="canvasLocation" x="656" y="1482"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="yhg-me-b7F">
@@ -3454,6 +3492,44 @@
             </objects>
             <point key="canvasLocation" x="1104" y="-540"/>
         </scene>
+        <!--Host Address View Controller-->
+        <scene sceneID="zW9-vn-Tq9">
+            <objects>
+                <tableViewController id="OhX-Z2-Qev" customClass="HostAddressViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ykI-Ug-cDu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="HostSettingAddressCell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HostSettingAddressCell" textLabel="vKP-6v-CqO" style="IBUITableViewCellStyleDefault" id="9TD-gE-e9v">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9TD-gE-e9v" id="hGL-lq-lMp">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vKP-6v-CqO">
+                                            <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="OhX-Z2-Qev" id="HtR-xh-Vzq"/>
+                            <outlet property="delegate" destination="OhX-Z2-Qev" id="0qa-Uf-oB6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="TW3-76-uVr"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HJU-o7-uJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-585" y="1321"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="rvd-yN-tmG">
             <objects>
@@ -3471,7 +3547,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ty2-xZ-11o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-880" y="1153"/>
+            <point key="canvasLocation" x="-354" y="1153"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gg9-5P-o2d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DtN-Xk-bbA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="E5k-ck-h12"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DGL-Av-XVG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OhX-Z2-Qev" kind="relationship" relationship="rootViewController" id="jjd-uc-j6h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gx2-Jn-RH1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1111" y="1321"/>
         </scene>
     </scenes>
     <resources>
