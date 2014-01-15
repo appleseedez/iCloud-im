@@ -25,6 +25,7 @@
 @property (nonatomic,strong) MSWeakTimer* monitor; //用于监控状态
 @property (nonatomic) double duration; //通话时长
 @property (nonatomic) int lossCount; //统计出现丢包的次数。 连续次数超过20 则自动挂断。
+@property (nonatomic) int cameraIndex;
 
 @property (nonatomic) NSDictionary* recentLog; //作为最近通话记录的status字段
 @end
@@ -711,6 +712,9 @@
     return YES;
 }
 - (void)endSession{
+    if ([self.state isEqualToString:IDLE]) {
+        return;
+    }
     self.state = IDLE;
     [self.engine tearDown];
     [self stopCommunicationCounting];
@@ -782,6 +786,12 @@
 }
 - (void)hideSelfCam{
     
+}
+- (void) doSwitchCam{
+    
+}
+- (void)switchCamera{
+    [self.engine switchCamera];
 }
 - (void)setMyAccount:(NSString *)account{
     self.selfAccount = account;
