@@ -30,6 +30,12 @@
 {
     [super viewDidLoad];
 	[self.nextButton setUI];
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
+}
+-(void)dismiss{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (IBAction)modifyPassword:(RegNextButton *)sender {

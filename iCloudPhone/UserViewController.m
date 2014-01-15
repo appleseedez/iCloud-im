@@ -186,7 +186,7 @@
     [super viewWillAppear:animated];
     [self registerNotifcations];
     [self.imageView setImageWithURL:[NSURL URLWithString:self.user.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"1"}];
+    
     [self.imageView setRect:5.0 cornerRadius:self.imageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
     
 }
@@ -250,7 +250,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-   [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
+  
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 -(void)didAddBlack:(NSNotification*)notification{

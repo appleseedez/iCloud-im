@@ -76,6 +76,12 @@
 		47952D9418582DBA0044CF64 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9318582DBA0044CF64 /* MBProgressHUD.m */; };
 		47952D9718583D170044CF64 /* NSCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9618583D170044CF64 /* NSCAlertView.m */; };
 		47952D9D18585F600044CF64 /* RegNextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9C18585F600044CF64 /* RegNextButton.m */; };
+		47955C2618852B1B00AEBF09 /* HostAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47955C2518852B1B00AEBF09 /* HostAddressViewController.m */; };
+		4797E8CB188546510075BD9B /* Area.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8CA188546510075BD9B /* Area.m */; };
+		4797E8CF18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8CE18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m */; };
+		4797E8D018855A710075BD9B /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 4797E8CC188546B60075BD9B /* area.sqlite */; };
+		4797E8D118855A720075BD9B /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 4797E8CC188546B60075BD9B /* area.sqlite */; };
+		4797E8D4188567DA0075BD9B /* HostSecondAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8D3188567DA0075BD9B /* HostSecondAddressViewController.m */; };
 		4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */ = {isa = PBXBuildFile; fileRef = 4798A26D183DD45300060DDB /* HostItelUser+set.m */; };
 		479B90791837660B005D8CCB /* SearchNewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B90781837660B005D8CCB /* SearchNewFriendViewController.m */; };
 		479B907E18376DA1005D8CCB /* ItelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B907D18376DA1005D8CCB /* ItelAction.m */; };
@@ -384,6 +390,15 @@
 		47952D9618583D170044CF64 /* NSCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSCAlertView.m; sourceTree = "<group>"; };
 		47952D9B18585F600044CF64 /* RegNextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegNextButton.h; sourceTree = "<group>"; };
 		47952D9C18585F600044CF64 /* RegNextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegNextButton.m; sourceTree = "<group>"; };
+		47955C2418852B1B00AEBF09 /* HostAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostAddressViewController.h; sourceTree = "<group>"; };
+		47955C2518852B1B00AEBF09 /* HostAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostAddressViewController.m; sourceTree = "<group>"; };
+		4797E8C9188546510075BD9B /* Area.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Area.h; sourceTree = "<group>"; };
+		4797E8CA188546510075BD9B /* Area.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Area.m; sourceTree = "<group>"; };
+		4797E8CC188546B60075BD9B /* area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = area.sqlite; sourceTree = "<group>"; };
+		4797E8CD18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IMCoreDataManager+FMDB_TO_COREDATA.h"; sourceTree = "<group>"; };
+		4797E8CE18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IMCoreDataManager+FMDB_TO_COREDATA.m"; sourceTree = "<group>"; };
+		4797E8D2188567DA0075BD9B /* HostSecondAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostSecondAddressViewController.h; sourceTree = "<group>"; };
+		4797E8D3188567DA0075BD9B /* HostSecondAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostSecondAddressViewController.m; sourceTree = "<group>"; };
 		4798A26C183DD45300060DDB /* HostItelUser+set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HostItelUser+set.h"; sourceTree = "<group>"; };
 		4798A26D183DD45300060DDB /* HostItelUser+set.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HostItelUser+set.m"; sourceTree = "<group>"; };
 		479B90771837660B005D8CCB /* SearchNewFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNewFriendViewController.h; sourceTree = "<group>"; };
@@ -1202,6 +1217,10 @@
 				471F00D41868156500D3DAFD /* HostEditEmailViewController.m */,
 				473748CD1863E5A500F112AF /* HostEditQQViewController.h */,
 				473748CE1863E5A500F112AF /* HostEditQQViewController.m */,
+				47955C2418852B1B00AEBF09 /* HostAddressViewController.h */,
+				47955C2518852B1B00AEBF09 /* HostAddressViewController.m */,
+				4797E8D2188567DA0075BD9B /* HostSecondAddressViewController.h */,
+				4797E8D3188567DA0075BD9B /* HostSecondAddressViewController.m */,
 				479F13A818618300006DF67B /* HostCell.h */,
 				479F138D186178C7006DF67B /* HostHeadImageCell.h */,
 				479F138E186178C7006DF67B /* HostHeadImageCell.m */,
@@ -1360,6 +1379,7 @@
 			children = (
 				478594AA185026FF00AFF6BF /* 预切片 */,
 				47B89DDC1834D40000022FE5 /* iCloudPhone-Info.plist */,
+				4797E8CC188546B60075BD9B /* area.sqlite */,
 				BA06AFB0187873910099C3F7 /* iCloudPhone.storyboard */,
 				479E934B185AB7A3001AF6ED /* Login_iPhone.storyboard */,
 				47B89DDD1834D40000022FE5 /* InfoPlist.strings */,
@@ -1502,9 +1522,13 @@
 				BADDFD6E18769DF600D10DDC /* CoreDataTableViewController.h */,
 				BADDFD6F18769DF600D10DDC /* CoreDataTableViewController.m */,
 				BADDFD2218768C4F00D10DDC /* Model.xcdatamodeld */,
+				4797E8C9188546510075BD9B /* Area.h */,
+				4797E8CA188546510075BD9B /* Area.m */,
 				BA8242FF1875A0C3001903CE /* Recents.db */,
 				BADDFD661876901500D10DDC /* IMCoreDataManager.h */,
 				BADDFD671876901500D10DDC /* IMCoreDataManager.m */,
+				4797E8CD18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.h */,
+				4797E8CE18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m */,
 				BA06AFAB18783A8E0099C3F7 /* Recent+CRUD.h */,
 				BA06AFAC18783A8E0099C3F7 /* Recent+CRUD.m */,
 				BAE9C910187C3AA900E41A9E /* Message+CRUD.h */,
@@ -1665,6 +1689,7 @@
 				47E2DB9C185997F000D455EF /* 登录logo.png in Resources */,
 				4757D0591855CAD6001A9639 /* 短信提示.png in Resources */,
 				47E05DC018517418009FDCED /* searchuser.png in Resources */,
+				4797E8D018855A710075BD9B /* area.sqlite in Resources */,
 				47E05DC118517418009FDCED /* checkAddress.png in Resources */,
 				47B89DED1834D40000022FE5 /* Images.xcassets in Resources */,
 				47B89DDF1834D40000022FE5 /* InfoPlist.strings in Resources */,
@@ -1677,6 +1702,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4797E8D118855A720075BD9B /* area.sqlite in Resources */,
 				47B89DFE1834D40000022FE5 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1770,7 +1796,9 @@
 				47A0DEF11862D74D00BD28AB /* UIImageView+BetterFace.m in Sources */,
 				478813E01839C35E0085224D /* USDictionaryWrapper.m in Sources */,
 				479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */,
+				4797E8D4188567DA0075BD9B /* HostSecondAddressViewController.m in Sources */,
 				479E934F185AB7D4001AF6ED /* NXLoginViewController.m in Sources */,
+				47955C2618852B1B00AEBF09 /* HostAddressViewController.m in Sources */,
 				472251D2184DBDF000C44857 /* NXImageView.m in Sources */,
 				47A557811863280A0062EFFF /* HostEditNicknameViewController.m in Sources */,
 				478813DD1839C35E0085224D /* Underscore+Functional.m in Sources */,
@@ -1787,6 +1815,7 @@
 				BAE9C908187C31B800E41A9E /* ItelNetInterfaceImp.m in Sources */,
 				479E2BC81835B8B6002D8172 /* AddViewController.m in Sources */,
 				479EF0571859D47C0012EE29 /* IMEngineImp.m in Sources */,
+				4797E8CF18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m in Sources */,
 				479F138F186178C7006DF67B /* HostHeadImageCell.m in Sources */,
 				473748CF1863E5A500F112AF /* HostEditQQViewController.m in Sources */,
 				479EF0651859D47C0012EE29 /* IMSuggestResultCell.m in Sources */,
@@ -1813,6 +1842,7 @@
 				47A10D9D18654AF500FB9FED /* SecurityChangePasswordViewController.m in Sources */,
 				47A5577E186320640062EFFF /* HostEditSignViewController.m in Sources */,
 				479EF0541859D47C0012EE29 /* IMRootTabBarViewController.m in Sources */,
+				4797E8CB188546510075BD9B /* Area.m in Sources */,
 				BAE9C8DB187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m in Sources */,
 				479C7BA8185DA78E0046B1D7 /* MoreHostViewCell.m in Sources */,
 				479EF0591859D47C0012EE29 /* IMMessageParserImp.m in Sources */,

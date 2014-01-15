@@ -30,9 +30,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.navigationController.delegate=self;
    	
 }
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    if (viewController!=self) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"1"}];
+    }
+    
+}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
     self.searchResult=self.contacts;
@@ -124,6 +131,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self registerNotifications];
+     [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
     [[ItelAction action] getItelFriendList:0];
 }
 

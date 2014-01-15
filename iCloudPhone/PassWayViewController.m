@@ -21,7 +21,7 @@
 {
     [super viewDidLoad];
     NSDictionary *questions= [PassManager defaultManager].questions;
-    
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
     NSString *question1=[questions objectForKey:@"question1"];
     NSString *question2=[questions objectForKey:@"question2"];
     NSString *question3=[questions objectForKey:@"question3"];
@@ -29,6 +29,11 @@
         [self showSecurity:YES];
     }
     else [self showSecurity:NO];
+}
+-(void)dismiss{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 -(void)showSecurity:(BOOL)show{
   

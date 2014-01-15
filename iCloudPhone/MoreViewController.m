@@ -24,13 +24,23 @@
 - (IBAction)signOut:(UIButton *)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"signOut" object:nil];
 }
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    if (viewController!=self) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"1"}];
+    }
+    
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tableView reloadData];
     _btnSignOut.normal=[UIColor redColor];
     self.btnSignOut.high=[UIColor orangeColor];
     [self.btnSignOut setUI];
-
+   [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -155,6 +165,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.delegate=self;
     self.tableView.backgroundColor=[UIColor  clearColor];
 	// Do any additional setup after loading the view.
 }

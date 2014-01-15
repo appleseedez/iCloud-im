@@ -136,12 +136,17 @@ static float animatedDuration=1.0;
     [self.txtPhoneNumber setUI];
     [self.txtRePassword setUI];
     UIScrollView *scroll=self.scrollView;
-    
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
     scroll.frame=self.view.frame;
     scroll.contentSize=scroll.bounds.size;
     
     
 	// Do any additional setup after loading the view.
+}
+-(void)dismiss{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 -(void)conformKeyBoard:(NSNotification *)notification
 {
