@@ -12,6 +12,7 @@
 #import "NSCAppDelegate.h"
 #import "RegNextButton.h"
 #import "UIImageView+AFNetworking.h"
+#import "Area+toString.h"
 @interface StrangerViewController ()
 @property (weak, nonatomic) IBOutlet NXImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lbItel;
@@ -83,9 +84,13 @@
             }
 
                 break;
-            case 2:
+            case 2:{
                 cell.textLabel.text=@"城市";
-                prop.text=@"中国-重庆市-九龙坡区";
+                Area *area=[Area idForArea:self.user.address];
+                if (area) {
+                    prop.text=area.toString;
+                }
+            }
                 break;
             case 3:
                 cell.textLabel.text=@"邮箱";

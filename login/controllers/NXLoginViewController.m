@@ -164,7 +164,8 @@
                 [delegate changeRootViewController:RootViewControllerMain userInfo:[[json valueForKey:@"message"] valueForKey:@"data"]];
                 
                 [[ItelAction action] checkAddressBookMatchingItel];
-                
+                [[ItelAction action] getItelBlackList:0];
+                [[ItelAction action] getItelFriendList:0];
                 
             }
             else {

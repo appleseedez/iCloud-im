@@ -83,7 +83,7 @@
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
         [request setFetchBatchSize:20];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"nickName" ascending:NO selector:nil]];
-        request.predicate = [NSPredicate predicateWithFormat:@"isFriend = %@ and host.itelNum = %@ and itelNum contains %@", [NSNumber numberWithInt:1],[[ItelAction action] getHost].itelNum,@""];
+        request.predicate = [NSPredicate predicateWithFormat:@"isFriend = %@ and host.itelNum = %@ ", [NSNumber numberWithInt:1],[[ItelAction action] getHost].itelNum];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                             managedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext
@@ -125,6 +125,7 @@
     UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
     UserViewController *userVC=[storyBoard instantiateViewControllerWithIdentifier:@"userView"];
     userVC.user=user;
+    [self.view endEditing:YES];
     [self.navigationController pushViewController:userVC animated:YES];
 }
 
