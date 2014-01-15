@@ -78,7 +78,7 @@
     //[self.manager setup];
     rootVC.manager=self.manager;
     self.RootVC=rootVC;
-    [rootVC setSelectedIndex:2];
+//    [rootVC setSelectedIndex:2];
     
    //===========================登陆注册=============================
     UIStoryboard *loginStoryboard=[UIStoryboard storyboardWithName:@"Login_iPhone" bundle:nil];
