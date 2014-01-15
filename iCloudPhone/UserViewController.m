@@ -15,6 +15,7 @@
 #import "NSCAppDelegate.h"
 #import "NSCAppDelegate.h"
 #import "UIImageView+AFNetworking.h"
+#import "Area+toString.h"
 @interface UserViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbShowName;
 @property (weak, nonatomic) IBOutlet NXImageView *imageView;
@@ -85,9 +86,14 @@
                 else sexImg.image=[UIImage imageNamed:@"male"];
             }
                 break;
-            case 2:
+            case 2:{
                 cell.textLabel.text=@"城市";
-                prop.text=@"中国-重庆市-九龙坡区";
+                Area *area=[Area idForArea:self.user.address];
+                if (area) {
+                    prop.text=area.toString;
+                }
+                
+            }
                 break;
             case 3:
                 cell.textLabel.text=@"邮箱";

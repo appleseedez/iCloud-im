@@ -895,7 +895,6 @@
 			isa = PBXGroup;
 			children = (
 				478813E21839E6490085224D /* controllers */,
-				478813F21839E6490085224D /* models */,
 			);
 			name = login;
 			path = ../login;
@@ -906,6 +905,7 @@
 			children = (
 				479E934D185AB7D4001AF6ED /* NXLoginViewController.h */,
 				479E934E185AB7D4001AF6ED /* NXLoginViewController.m */,
+				478813F21839E6490085224D /* models */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -916,7 +916,8 @@
 				478813F31839E6490085224D /* NXInputChecker.h */,
 				478813F41839E6490085224D /* NXInputChecker.m */,
 			);
-			path = models;
+			name = models;
+			path = ../models;
 			sourceTree = "<group>";
 		};
 		478813FD1839E66C0085224D /* logintest */ = {
@@ -2142,7 +2143,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "iTel 2.0Test";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4E244975-9B18-4BE3-B2A5-57EC0BC1C21B";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -2166,7 +2167,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "iTel 2.0Test";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4E244975-9B18-4BE3-B2A5-57EC0BC1C21B";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

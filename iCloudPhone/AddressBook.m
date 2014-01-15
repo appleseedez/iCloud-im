@@ -47,15 +47,18 @@
             else if(granted){
                 self.isLoading=YES;
                 [self getPeopleInAddressBook];
+            }else{
+                self.isLoading = NO;
+                return;
             }
             
         });
     }
-    else {
-        self.isLoading=YES;
-        [self getPeopleInAddressBook];
-    }
-    CFRelease(addressBook);
+//    else {
+//        self.isLoading=YES;
+//        [self getPeopleInAddressBook];
+//    }
+//    CFRelease(addressBook);
 }
 
 
