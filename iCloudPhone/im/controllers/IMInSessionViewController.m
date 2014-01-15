@@ -83,6 +83,7 @@
     ItelUser* peerUser = [[ItelAction action] userInFriendBook:[[self.inSessionNotify userInfo] valueForKey:@"destaccount"]];
     ((UILabel*)[self.nameHUDView viewWithTag:1]).text= peerUser.nickName;
     ((UILabel*)[self.nameHUDView viewWithTag:2]).text= peerUser.itelNum;
+    ((UILabel*)[self.nameHUDView viewWithTag:4]).text = peerUser.address;
     [self.peerAvatar setImageWithURL:[NSURL URLWithString: peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
     if ([self.manager isVideoCall]) {
         [self.peerAvatar setHidden:YES ];
@@ -169,16 +170,23 @@
 - (IBAction)toggleCam:(id)sender {
     if (self.hideCam) {
         [self.manager showCam];
-        [self.remoteRenderView setHidden:NO];
+//        [self.remoteRenderView setHidden:NO];
         self.hideCam = NO;
     }else{
         [self.manager hideCam];
-        [self.remoteRenderView setHidden:YES];
+//        [self.remoteRenderView setHidden:YES];
         self.hideCam = YES;
     }
 }
 
 - (IBAction)togglePreviewCam:(id)sender {
+    if (self.hideSelfCam) {
+        self.selfCamView.hidden = NO;
+        self.hideSelfCam = NO;
+    }else{
+        self.selfCamView.hidden = YES;
+        self.hideSelfCam = YES;
+    }
 }
 
 - (IBAction)switchCamera:(UIButton *)sender {
