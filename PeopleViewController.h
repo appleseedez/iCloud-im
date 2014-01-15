@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface PeopleViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UIScrollViewDelegate,UINavigationControllerDelegate>
+#import "CoreDataTableViewController.h"
+@interface PeopleViewController :  CoreDataTableViewController<UISearchBarDelegate,UIScrollViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableVIew;
 
 @end
