@@ -24,4 +24,5 @@
 - (IBAction)toggleSpeeker:(UIButton *)sender;
 - (IBAction)toggleCam:(id)sender;
 - (IBAction)togglePreviewCam:(id)sender;
+- (IBAction)switchCamera:(UIButton *)sender;
 @end

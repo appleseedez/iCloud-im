@@ -17,6 +17,8 @@
 @property(nonatomic) BOOL hideCam; //标志是否关闭摄像头
 @property(nonatomic) BOOL enableSpeaker; //标志是否开启扬声器
 @property(nonatomic) MSWeakTimer* clock;
+@property(nonatomic) BOOL canSwitchNow;
+
 @end
 
 @implementation IMInSessionViewController
@@ -73,11 +75,15 @@
     self.hideSelfCam = NO; //初始显示小窗口
     self.hideCam = NO; //初始开启摄像头
     self.enableSpeaker = NO; //初始关闭扬声器
+    self.switchFrontAndBackCamBtn.hidden = YES; //初始隐藏交换摄像头按钮
+    self.canSwitchNow = YES; //
+    [self performSelector:@selector(toggleHUD:) withObject:nil afterDelay:3];
     // 设置好名字版
     
     ItelUser* peerUser = [[ItelAction action] userInFriendBook:[[self.inSessionNotify userInfo] valueForKey:@"destaccount"]];
     ((UILabel*)[self.nameHUDView viewWithTag:1]).text= peerUser.nickName;
     ((UILabel*)[self.nameHUDView viewWithTag:2]).text= peerUser.itelNum;
+    ((UILabel*)[self.nameHUDView viewWithTag:4]).text = peerUser.address;
     [self.peerAvatar setImageWithURL:[NSURL URLWithString: peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
     if ([self.manager isVideoCall]) {
         [self.peerAvatar setHidden:YES ];
@@ -131,12 +137,14 @@
             self.actionHUDView.center = CGPointMake(self.actionHUDView.center.x, self.actionHUDView.center.y+ self.actionHUDView.bounds.size.height);
         } completion:nil];
         self.hideHUD = YES;
+        self.switchFrontAndBackCamBtn.hidden = NO;
     }else{
         [UIView animateWithDuration:.3 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
             self.nameHUDView.center= CGPointMake(self.nameHUDView.center.x, self.nameHUDView.center.y+self.nameHUDView.bounds.size.height+STATUS_BAR_HEIGHT);
             self.actionHUDView.center = CGPointMake(self.actionHUDView.center.x, self.actionHUDView.center.y- self.actionHUDView.bounds.size.height);
         } completion:nil];
         self.hideHUD = NO;
+        self.switchFrontAndBackCamBtn.hidden = YES;
     }
 }
 - (IBAction)toggleMute:(UIButton *)sender {
@@ -162,15 +170,31 @@
 - (IBAction)toggleCam:(id)sender {
     if (self.hideCam) {
         [self.manager showCam];
-        [self.remoteRenderView setHidden:NO];
+//        [self.remoteRenderView setHidden:NO];
         self.hideCam = NO;
     }else{
         [self.manager hideCam];
-        [self.remoteRenderView setHidden:YES];
+//        [self.remoteRenderView setHidden:YES];
         self.hideCam = YES;
     }
 }
 
 - (IBAction)togglePreviewCam:(id)sender {
+    if (self.hideSelfCam) {
+        self.selfCamView.hidden = NO;
+        self.hideSelfCam = NO;
+    }else{
+        self.selfCamView.hidden = YES;
+        self.hideSelfCam = YES;
+    }
+}
+
+- (IBAction)switchCamera:(UIButton *)sender {
+    if (self.canSwitchNow) {
+        self.canSwitchNow = NO;
+        [self.manager switchCamera];
+        [self performSelector:@selector(setCanSwitchNow:) withObject:@(YES) afterDelay:2];
+    }
+    
 }
 @end
