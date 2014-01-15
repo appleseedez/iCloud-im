@@ -83,6 +83,7 @@
 		4797E8D118855A720075BD9B /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 4797E8CC188546B60075BD9B /* area.sqlite */; };
 		4797E8D4188567DA0075BD9B /* HostSecondAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8D3188567DA0075BD9B /* HostSecondAddressViewController.m */; };
 		4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */ = {isa = PBXBuildFile; fileRef = 4798A26D183DD45300060DDB /* HostItelUser+set.m */; };
+		479AD2EB18862AB2009B3278 /* Area+toString.m in Sources */ = {isa = PBXBuildFile; fileRef = 479AD2EA18862AB2009B3278 /* Area+toString.m */; };
 		479B90791837660B005D8CCB /* SearchNewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B90781837660B005D8CCB /* SearchNewFriendViewController.m */; };
 		479B907E18376DA1005D8CCB /* ItelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B907D18376DA1005D8CCB /* ItelAction.m */; };
 		479B908418376DE3005D8CCB /* ItelBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B908318376DE3005D8CCB /* ItelBook.m */; };
@@ -401,6 +402,8 @@
 		4797E8D3188567DA0075BD9B /* HostSecondAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostSecondAddressViewController.m; sourceTree = "<group>"; };
 		4798A26C183DD45300060DDB /* HostItelUser+set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HostItelUser+set.h"; sourceTree = "<group>"; };
 		4798A26D183DD45300060DDB /* HostItelUser+set.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HostItelUser+set.m"; sourceTree = "<group>"; };
+		479AD2E918862AB2009B3278 /* Area+toString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Area+toString.h"; sourceTree = "<group>"; };
+		479AD2EA18862AB2009B3278 /* Area+toString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Area+toString.m"; sourceTree = "<group>"; };
 		479B90771837660B005D8CCB /* SearchNewFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNewFriendViewController.h; sourceTree = "<group>"; };
 		479B90781837660B005D8CCB /* SearchNewFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNewFriendViewController.m; sourceTree = "<group>"; };
 		479B907D18376DA1005D8CCB /* ItelAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelAction.m; sourceTree = "<group>"; };
@@ -1535,6 +1538,8 @@
 				BAE9C911187C3AA900E41A9E /* Message+CRUD.m */,
 				BAE9C913187C415800E41A9E /* ItelUser+CRUD.h */,
 				BAE9C914187C415800E41A9E /* ItelUser+CRUD.m */,
+				479AD2E918862AB2009B3278 /* Area+toString.h */,
+				479AD2EA18862AB2009B3278 /* Area+toString.m */,
 			);
 			path = db;
 			sourceTree = "<group>";
@@ -1816,6 +1821,7 @@
 				479E2BC81835B8B6002D8172 /* AddViewController.m in Sources */,
 				479EF0571859D47C0012EE29 /* IMEngineImp.m in Sources */,
 				4797E8CF18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m in Sources */,
+				479AD2EB18862AB2009B3278 /* Area+toString.m in Sources */,
 				479F138F186178C7006DF67B /* HostHeadImageCell.m in Sources */,
 				473748CF1863E5A500F112AF /* HostEditQQViewController.m in Sources */,
 				479EF0651859D47C0012EE29 /* IMSuggestResultCell.m in Sources */,
