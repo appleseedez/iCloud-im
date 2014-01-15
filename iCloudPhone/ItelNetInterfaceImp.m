@@ -168,7 +168,6 @@ static int addcount=0;
     HostItelUser *host=[[ItelAction action] getHost];
     NSNumber *number=[NSNumber numberWithInteger:[host.userId intValue] ];
     NSString *strPhones=[NXInputChecker changeArrayToString:phones];
-    
     NSDictionary *parameters=@{@"hostUserId":number, @"numbers":strPhones,@"token":host.token};
     SUCCESS {
         

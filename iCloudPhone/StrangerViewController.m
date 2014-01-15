@@ -166,7 +166,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.headImageView setImageWithURL:[NSURL URLWithString:self.user.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"1"}];
+    
     [self.btnAddUser setUI];
     [self.btnAddUser setTitle:@"添加到通讯录" forState:UIControlStateNormal];
     [self.btnAddUser setTitle:@"添加到通讯录" forState:UIControlStateHighlighted];
@@ -207,7 +207,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
+   
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     [self.navigationController setNavigationBarHidden:NO];
 }
