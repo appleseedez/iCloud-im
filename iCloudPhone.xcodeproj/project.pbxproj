@@ -199,6 +199,7 @@
 		BA06AFAE187873910099C3F7 /* iCloudPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB0187873910099C3F7 /* iCloudPhone.storyboard */; };
 		BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB11878757B0099C3F7 /* zh-cn.strings */; };
 		BA1A74D7187A780A0071E83F /* IMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1A74D6187A780A0071E83F /* IMUtils.m */; };
+		BA2BC1291885F691001EB5C3 /* IMTipImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2BC1281885F691001EB5C3 /* IMTipImp.m */; };
 		BA338B55187E839B00242DAF /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B54187E839B00242DAF /* Message.m */; };
 		BA338B58187E839C00242DAF /* HostItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B57187E839C00242DAF /* HostItelUser.m */; };
 		BA338B5B187E839C00242DAF /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B5A187E839C00242DAF /* ItelUser.m */; };
@@ -585,6 +586,9 @@
 		BA06AFB11878757B0099C3F7 /* zh-cn.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-cn.strings"; sourceTree = "<group>"; };
 		BA1A74D5187A780A0071E83F /* IMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMUtils.h; sourceTree = "<group>"; };
 		BA1A74D6187A780A0071E83F /* IMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMUtils.m; sourceTree = "<group>"; };
+		BA2BC1261885F55E001EB5C3 /* IMTip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMTip.h; sourceTree = "<group>"; };
+		BA2BC1271885F691001EB5C3 /* IMTipImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMTipImp.h; sourceTree = "<group>"; };
+		BA2BC1281885F691001EB5C3 /* IMTipImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMTipImp.m; sourceTree = "<group>"; };
 		BA338B53187E839B00242DAF /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		BA338B54187E839B00242DAF /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		BA338B56187E839C00242DAF /* HostItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostItelUser.h; sourceTree = "<group>"; };
@@ -1087,6 +1091,8 @@
 				BA772ED91875F02400CD8982 /* IMDBManagerImp.m */,
 				BAE9C8D9187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.h */,
 				BAE9C8DA187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m */,
+				BA2BC1271885F691001EB5C3 /* IMTipImp.h */,
+				BA2BC1281885F691001EB5C3 /* IMTipImp.m */,
 			);
 			path = domains;
 			sourceTree = "<group>";
@@ -1100,6 +1106,7 @@
 				479EF03A1859D47C0012EE29 /* IMMessageBuilder.h */,
 				479EF03B1859D47C0012EE29 /* IMMessageParser.h */,
 				BAAEA48D187256CD00C05BCF /* IMDBManager.h */,
+				BA2BC1261885F55E001EB5C3 /* IMTip.h */,
 			);
 			path = interfaces;
 			sourceTree = "<group>";
@@ -1797,6 +1804,7 @@
 				479EF05D1859D47C0012EE29 /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				478813C81839C35E0085224D /* AFHTTPSessionManager.m in Sources */,
 				47E2DB9A185991BD00D455EF /* MoreViewController.m in Sources */,
+				BA2BC1291885F691001EB5C3 /* IMTipImp.m in Sources */,
 				47A0DEEE1862D56200BD28AB /* UIImage+Compress.m in Sources */,
 				478813DF1839C35E0085224D /* USArrayWrapper.m in Sources */,
 				479F13981861791B006DF67B /* HostSexCell.m in Sources */,

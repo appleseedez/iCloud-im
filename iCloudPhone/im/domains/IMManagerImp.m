@@ -24,6 +24,7 @@
 @property (nonatomic,strong) MSWeakTimer* communicationTimer; //用于进行通话时长计时
 @property (nonatomic,strong) MSWeakTimer* monitor; //用于监控状态
 @property (nonatomic) double duration; //通话时长
+@property (nonatomic) int lossCount; //统计出现丢包的次数。 连续次数超过20 则自动挂断。
 
 @property (nonatomic) NSDictionary* recentLog; //作为最近通话记录的status字段
 @end
@@ -56,7 +57,8 @@
 - (void) haltCallingProgress{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
     [self endSession];
-    //TODO:提示用户
+    //提示用户
+    NSLog(@"业务服务器异常，请稍后再试");
 }
 // 向信令服务器做一次验证
 - (void) auth:(NSString*) selfAccount
@@ -82,8 +84,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectToSignalServer:) name:UDP_LOOKUP_COMPLETE_NOTIFICATION object:nil];
     //网络通信器会在收到数据响应时，发出该通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:DATA_RECEIVED_NOTIFICATION object:nil];
-//    //对收到的信令响应数据进行解析后，如果是通话查询请求的响应，则发出该通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
+    //    //对收到的信令响应数据进行解析后，如果是通话查询请求的响应，则发出该通知
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
     //通话请求期间的数据通信，都发这个通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionPeriod:) name:SESSION_PERIOD_NOTIFICATION object:nil];
     //通话终止，发这个通知
@@ -252,7 +254,7 @@
         [self endSession];
         [self saveCommnicationLog];
     }else if ([SESSION_HALT_FILED_ACTION_END isEqualToString:haltType]){
-        [self.engine stopTransport];
+//        [self.engine stopTransport];
         [self endSession];
         [self saveCommnicationLog];
     }else{
@@ -335,8 +337,8 @@
     self.monitor = nil;
     //发送终止信令
     [self haltSession:@{
-                        SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:self.state,
-                        SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[self myAccount],
+                        SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self myAccount],
+                        SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:self.state,
                         SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                         }];
 }
@@ -347,16 +349,19 @@
     self.monitor = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
     self.state = IDLE;
-    // TODO: 提示用户 对方不在线
+    // 提示用户 对方不在线
+    NSLog(@"对方不在线");
 }
 
 - (void) droppedFromSignal:(NSNotification*) notify{
+#if OTHER_MESSAGE
     NSLog(@"我被踢下线了!!!!!!!");
+#endif
     //当前用户被其他用此账号登陆的客户端踢下线了. 断开连接.提示当前用户,然后登出.
     if (![self.state isEqualToString: IDLE]) {
-        if (self.recentLog) {
-            [self.engine stopTransport];
-        }
+//        if (self.recentLog) {
+//            [self.engine stopTransport];
+//        }
         [self endSession];
         [self saveCommnicationLog];
     }
@@ -365,7 +370,7 @@
     //提示用户
     UIAlertView* multiLoginAlert = [[UIAlertView alloc] initWithTitle:@"被踢下线通知" message:@"您的账号已在别处登陆.如果不是您本人操作,那么账号有可能被盗.请联系客服." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
     [multiLoginAlert show];
-
+    
 }
 
 #pragma mark - alert view delegate
@@ -388,11 +393,15 @@
 - (void) sessionPeriod:(NSNotification*) notify{
     NSString* currentDest = [notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY];
     //如果收到的通话信令就是自己正在拨打的。则表明自己是拨打方，可以开始p2p流程了
-    if ([self.state isEqualToString:currentDest]) {
+    if ([self.state isEqualToString:currentDest] && [[notify.userInfo valueForKey:SESSION_SRC_SSID_KEY] intValue] < [[notify.userInfo valueForKey:SESSION_DEST_SSID_KEY] intValue]) {
 #if MANAGER_DEBUG
         NSLog(@"开始通话，停止session保持数据包的发送，开始获取p2p通道");
         NSLog(@"主叫方收到PEER的链路数据：%@",notify.userInfo);
 #endif
+        //作为主叫方，自己的ssid应该是比被叫方小的。
+//        if ([[notify.userInfo valueForKey:SESSION_SRC_SSID_KEY] intValue] > [[notify.userInfo valueForKey:SESSION_DEST_SSID_KEY] intValue]) {
+//            return;
+//        }
         //开始获取p2p通道，保持session的数据包可以停止发送了。
         [self.keepSessionAlive invalidate];
         self.keepSessionAlive = nil;
@@ -407,18 +416,23 @@
         
     }
     //如果是idle状态下，接到了通话信令，则是有人拨打
-    else if ([self.state isEqualToString:IDLE]){
+    else if ([self.state isEqualToString:IDLE] && [[notify.userInfo valueForKey:SESSION_SRC_SSID_KEY] intValue] > [[notify.userInfo valueForKey:SESSION_DEST_SSID_KEY] intValue]){
 #if MANAGER_DEBUG
         NSLog(@"被叫方收到通话请求，等待用户操作接听");
 #endif
+        //
+//        if ([[notify.userInfo valueForKey:SESSION_SRC_SSID_KEY] intValue] < [[notify.userInfo valueForKey:SESSION_DEST_SSID_KEY] intValue]) {
+//            return;
+//        }
+        
         //根据收到的usevideo和自身是否支持视频 设置自己是否有视频选项
         [self setIsVideoCall: [[notify.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]&&self.canVideo];
         [notify.userInfo setValue:[NSNumber numberWithBool:self.isVideoCall] forKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO];
         //通知界面，弹出通话接听界面:[self sessionPeriodResponse:notify]
         [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:nil userInfo:notify.userInfo];
         //开启被叫方定时器10秒超时则拒绝
-        [self.monitor invalidate];
-        self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_not_willing_to_answer_queue", DISPATCH_QUEUE_CONCURRENT)];
+//        [self.monitor invalidate];
+//        self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_not_willing_to_answer_queue", DISPATCH_QUEUE_CONCURRENT)];
     }else{//剩余的情况表明。当前正在通话中，应该拒绝 这里会是自动拒绝
         //构造拒绝信令
 #if MANAGER_DUBG
@@ -447,16 +461,13 @@
     // 开始获取p2p通道
     [self.keepSessionAlive invalidate];
     self.keepSessionAlive = nil;
+#if MANAGER_DEBUG
     NSLog(@"接受通话请求，停止session保持数据包的发送，开始获取p2p通道");
-    
+#endif
+    //用于接收通道建立成功的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(justStartTransport:) name:P2PTUNNEL_SUCCESS object:nil];
-    //告诉引擎，目前是否是视频通话
+    //开始建立通道
     [self.engine tunnelWith:notify.userInfo];
-    /**
-     *  移到 justStartTransport 方法
-     *  测试
-     */
-    //    [self.engine startTransport];
 }
 //决定最终是是否使用视频 决定因素:对方是否视频,自己是否支持视频
 - (void) candidateUseVideoCall:(BOOL) peerUseVideo{
@@ -466,7 +477,7 @@
         [self setIsVideoCall:NO];
     }
 }
-#pragma mark - 1213 test
+#pragma mark - 建立通道成功后的处理回调 20131213
 /**
  *  因为tunnelWith 方法阻塞操作，将其放到线程中去
  *
@@ -510,8 +521,21 @@
 
 - (void) durationTick{
     self.duration++;
+    //如果连续出现20次countTopSize为零，则终止通话
+    if ([self.engine countTopSize]>0) {
+        self.lossCount =0;
+        return;
+    }
+    if (self.lossCount>=20) {
+        [self haltSession:@{
+                            SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self myAccount],
+                            SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:self.state,
+                            SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
+                            }];
+    }
+    self.lossCount++;
 #if OTHER_MESSAGE
-    NSLog(@"当前通话持续时间:%f",self.duration);
+    NSLog(@"当前通话持续时间:%f,当前收到的数据长度:%d",self.duration,self.lossCount);
 #endif
 }
 //开始为本次通话计时
@@ -519,6 +543,7 @@
     //状态归零
     [self.communicationTimer invalidate];
     self.duration = 0.0;
+    self.lossCount = 0;
     self.communicationTimer = [MSWeakTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(durationTick) userInfo:nil repeats:YES dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     
 }
@@ -540,22 +565,22 @@
     if (!peer) {
         peer = [ItelUser userWithDictionary:@{@"itel":[self.recentLog valueForKey:kPeerNumber]}];
         peer.remarkName = @"陌生人";
-        peer.nickName = @"某帅";
+        peer.nickName = @"陌生人";
         peer.imageurl = @"http://wwc.taobaocdn.com/avatar/getAvatar.do?userId=352958000&width=100&height=100&type=sns";
         peer.isFriend = [NSNumber numberWithBool:NO];
         [[IMCoreDataManager defaulManager] saveContext];
     }
-    Recent* aRecent = [Recent recentWithCallInfo:@{
-                                                   kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
-                                                   kStatus:[self.recentLog valueForKey:kStatus],
-                                                   kDuration:@(self.duration),
-                                                   kCreateDate:[self.recentLog valueForKey:kCreateDate],
-                                                   kPeerRealName:peer.remarkName,
-                                                   kPeerNick:peer.nickName,
-                                                   kPeerAvatar:peer.imageurl,
-                                                   kHostUserNumber:self.myAccount
-                                                   }
-                                       inContext:[[IMCoreDataManager defaulManager] managedObjectContext]];
+    [Recent recentWithCallInfo:@{
+                                 kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
+                                 kStatus:[self.recentLog valueForKey:kStatus],
+                                 kDuration:@(self.duration),
+                                 kCreateDate:[self.recentLog valueForKey:kCreateDate],
+                                 kPeerRealName:peer.remarkName,
+                                 kPeerNick:peer.nickName,
+                                 kPeerAvatar:peer.imageurl,
+                                 kHostUserNumber:self.myAccount
+                                 }
+                     inContext:[[IMCoreDataManager defaulManager] managedObjectContext]];
 #if MANAGER_DEBUG
     NSLog(@"aRecent is :%@",aRecent);
 #endif
@@ -570,15 +595,21 @@
 #endif
 }
 
-#pragma mark - INTERFACE
-
-// IMManager 接口的实现
+#pragma mark - INTERFACE life cycle
+/**
+ *  IMManager 初始化
+ *  注入依赖.
+ *  状态为空闲
+ *
+ *  @param void
+ *
+ *  @return void
+ */
 - (void)setup{
+#if MANAGER_DEBUG
+    NSLog(@"初始化mananger")
+#endif
     [self injectDependency];
-    //环境初始化
-//    [self.engine initNetwork];
-    
-//    [self.engine initMedia];
     self.state = IDLE;
 }
 
@@ -586,6 +617,8 @@
 #if MANAGER_DEBUG
     NSLog(@"开始连接信令服务器");
 #endif
+    //先移除所有消息
+    [self removeNotifications];
     //注册事件
     [self registerNotifications];
     //连接信令服务器
@@ -661,7 +694,7 @@
 #endif
     [[IMCoreDataManager defaulManager] saveContext];
     [self disconnectToSignalServer];
-//    [self.engine tearDown];
+    //    [self.engine tearDown];
     self.engine=nil;
     self.TCPcommunicator =  nil;
     self.UDPcommunicator = nil;
@@ -704,7 +737,7 @@
                            kCreateDate:[NSDate date]
                            };
     }
-    [self.engine stopTransport];
+//    [self.engine stopTransport];
     [self sessionHaltRequest:data];
     [self endSession];
     [self saveCommnicationLog];
