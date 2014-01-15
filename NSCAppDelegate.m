@@ -49,7 +49,7 @@
 
 //    [ItelUserManager defaultManager];
 //    [ItelBookManager defaultManager];
-//    [ItelNetManager defaultManager];
+//    [ItelNetManager defaultManager];11
 }
 
 

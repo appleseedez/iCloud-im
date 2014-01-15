@@ -52,73 +52,6 @@
         [self requestToLogin1];
     }
 }
--(void)requestToLogin{
-    //这是退出键盘的 不用理它
-    [self.view endEditing:YES];
-    self.txtInuptCheckMessage.text=@"登录中...";
-    [self.actWaitingToLogin startAnimating];
-    NSString *url=[NSString stringWithFormat:@"%@/login.json",SIGNAL_SERVER];
-    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-
-    
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
-    NSData *httpBody=[NSJSONSerialization dataWithJSONObject:@{@"itel": self.txtUserCloudNumber.text,@"password":self.txtUserPassword.text} options:NSJSONWritingPrettyPrinted error:nil];
-    [request setHTTPBody:httpBody];
-  
-    
-    //success封装了一段代码表示如果请求成功 执行这段代码
-    void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject){
-       
-        id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-       
-        if ([json isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dic=[json objectForKey:@"message"];
-            int ret=[[dic objectForKey:@"ret"] intValue];
-            if (ret==0) {
-                HostItelUser *host=[HostItelUser userWithDictionary:[dic objectForKey:@"data"]];
-                NSDictionary *tokens=[json objectForKey:@"tokens"];
-                if (tokens) {
-                    host.sessionId=[tokens objectForKey:@"jsessionid"];
-                    host.spring_security_remember_me_cookie=[tokens objectForKey:@"spring_security_remember_me_cookie"];
-                    host.token=[tokens objectForKey:@"token"];
-                }
-                
-                
-                [[ItelAction action] setHostItelUser:host];
-                [self.actWaitingToLogin stopAnimating];
-                self.txtInuptCheckMessage.text = @"";
-                
-                [[ItelAction action] resetContact];
-                
-                
-                NSCAppDelegate *delegate =   (NSCAppDelegate*) [UIApplication sharedApplication].delegate;
-                [delegate changeRootViewController:RootViewControllerMain userInfo:[[json valueForKey:@"message"] valueForKey:@"data"]];
-                
-                [[ItelAction action] checkAddressBookMatchingItel];
-                
-                
-            }
-            else {
-                [self.actWaitingToLogin stopAnimating];
-                self.txtInuptCheckMessage.text=[dic objectForKey:@"msg"];
-            }
-        }//如果请求失败 则执行failure
-    };
-    void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
-        [self.actWaitingToLogin stopAnimating];
-        self.txtInuptCheckMessage.text = @"网络不通";
-    };
-    AFHTTPRequestOperation *operation=[[AFHTTPRequestOperation alloc]initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:success failure:failure];
-   
-    [operation start];
-
-}
 -(void)requestToLogin1{
     //这是退出键盘的 不用理它
     [self.view endEditing:YES];
@@ -202,7 +135,6 @@
     logo.image=[UIImage imageNamed:@"login_logo"];
     [self.logoImageView addSubview:logo];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoLogin:) name:@"regSuccess" object:nil];
 	// Do any additional setup after loading the view.
 }
 
@@ -233,9 +165,5 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
--(void)autoLogin:(NSNotification*)notification{
-    self.txtUserCloudNumber.text=[notification.userInfo objectForKey:@"itel"];
-    self.txtUserPassword.text=[notification.userInfo objectForKey:@"password"];
-    [self requestToLogin];
-}
+
 @end
