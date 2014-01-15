@@ -12,6 +12,7 @@
 #import "IMCallingViewController.h"
 #import "IMAnsweringViewController.h"
 #import "NewMessageView.h"
+#import "ItelAction.h"
 @interface RootViewController ()
 @property (nonatomic,strong) CustomTabbar *customTabbar;
 @property (nonatomic,strong) NewMessageView *newMessage;
@@ -39,6 +40,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[ItelAction action] getItelBlackList:0];
+    [[ItelAction action] getItelFriendList:0];
+    
     [self.tabBar setHidden:YES];
 #if ROOT_TABBAR_DEBUG
     NSLog(@"tabbar 加载了");

@@ -14,19 +14,25 @@
 #import "NXInputChecker.h"
 #import "NSCAppDelegate.h"
 #import "UIImageView+AFNetworking.h"
+#import "IMCoreDataManager.h"
 @interface PeopleViewController ()
-@property (nonatomic,strong) ItelBook *contacts;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (nonatomic,strong) ItelBook *searchResult;
-@property (nonatomic,strong) UIPanGestureRecognizer *gestreRecognizer;
 
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (nonatomic,strong) UIPanGestureRecognizer *gestreRecognizer;
+@property (nonatomic,strong) NSString *searchText;
 @end
 
 
 @implementation PeopleViewController
 
 
-
+-(NSString*)searchText{
+    if (_searchText==nil) {
+         _searchText=@"";
+    }
+    return _searchText;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -40,20 +46,10 @@
     
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
-    self.searchResult=self.contacts;
-    
-}
--(ItelBook*)searchResult{
-    if (_searchResult==nil) {
-        _searchResult=[[ItelBook alloc]init];
-        
-    }
-    return _searchResult;
-}
+
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    NSLog(@"开始搜索:%@",searchBar.text );
+   
     [self search:searchBar.text];
     [self.view endEditing:YES];
 }
@@ -66,45 +62,45 @@
     if (![NXInputChecker checkEmpty:searchText]) {
         [self endSearch];
     }
-    else  [self search:searchText];
+    else  self.searchText=searchText;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-     searchBar.text=@"";
-    [self endSearch];
+    
 }
 -(void)endSearch{
-    self.searchResult=self.contacts;
-    [self.tableVIew reloadData];
+    
 }
 -(void)search:(NSString*)text{
-    ItelBook *inNickName=[[ItelAction action] searchInFriendBookWithKeyPath:@"nickName" andSearch:text];
-    ItelBook *inAlias=[[ItelAction action] searchInFriendBookWithKeyPath:@"remarkName" andSearch:text];
-    ItelBook *inItels=[[ItelAction action] searchInFriendBookWithKeyPath:@"itelNum" andSearch:text];
-    ItelBook *search=[[inNickName appendingByItelBook:inAlias] appendingByItelBook:inItels];
-    self.searchResult=search;
-    [self.tableVIew reloadData];
-}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return [[self.searchResult getAllKeys] count];
+}
 
+- (void) setupFetchViewController{
+    if ([IMCoreDataManager defaulManager].managedObjectContext) {
+        // 获取最近通话记录列表
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
+        [request setFetchBatchSize:20];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"nickName" ascending:NO selector:nil]];
+        request.predicate = [NSPredicate predicateWithFormat:@"isFriend = %@ and host.itelNum = %@ and itelNum contains %@", [NSNumber numberWithInt:1],[[ItelAction action] getHost].itelNum,@""];
+        
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                            managedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext
+                                                                              sectionNameKeyPath:nil
+                                                                                       cacheName:nil];
+    } else {
+        self.fetchedResultsController = nil;
+    }
 }
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return nil;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
-}
+
 - (ContactCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSString *CellIdentifier = @"contactCell";
     ContactCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if ([[self.searchResult getAllKeys] count]>indexPath.row) {
-        ItelUser *user=[self.searchResult userAtIndex:indexPath.row];
+    
+    ItelUser *user=[self.fetchedResultsController objectAtIndexPath:indexPath];
         [cell setup];
         cell.user=user;
         //cell.imgPhoto.image=[UIImage imageNamed:@"头像.png"];
@@ -114,14 +110,18 @@
         if ([user.remarkName isEqualToString:@""]) {
             cell.lbNickName.text=user.nickName;
           }
-    }
+    
+    
    
     //config the cell
     return cell;
     
 }
+-(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
 -(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
-    ItelUser *user=[self.searchResult userAtIndex:indexPath.row];
+    ItelUser *user=[self.fetchedResultsController objectAtIndexPath:indexPath];
     UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
     UserViewController *userVC=[storyBoard instantiateViewControllerWithIdentifier:@"userView"];
     userVC.user=user;
@@ -130,30 +130,11 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self registerNotifications];
+    [self setupFetchViewController];
      [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
     [[ItelAction action] getItelFriendList:0];
 }
 
-- (void) registerNotifications{
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFriendListNotification:) name:@"getItelList" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAliasChanged:) name:@"resetAlias" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellAction:) name:@"cellAction" object:nil];
-}
-
-
-
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [self.tableVIew reloadData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 -(void)cellAction:(NSNotification*)notification{
     NSString *action=[notification.userInfo objectForKey:@"action"];
     ItelUser *user=[notification.userInfo objectForKey:@"user"];
@@ -172,35 +153,7 @@
                                                                                                                        }];
     [appDelegate.manager dial:user.itelNum];
 }
-//-(void)delNotification:(NSNotification*)notification{
-//    NSDictionary *userInfo=notification.userInfo;
-//    BOOL isNormal=[[userInfo objectForKey:@"isNormal"] boolValue];
-//    if (isNormal) {
-//        self.contacts = [[ItelAction action]getFriendBook];
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.tableVIew reloadData];
-//        });
-//        
-//    }
-//    
-//}
--(void)refreshFriendListNotification:(NSNotification*)notification{
-    NSDictionary *userInfo=notification.userInfo;
-    BOOL isNormal=[[userInfo objectForKey:@"isNormal"] boolValue];
-    if (isNormal) {
-        self.contacts = [[ItelAction action]getFriendBook];
-        self.searchResult=self.contacts;
-       
-        [self.tableVIew reloadData];
-    }
-    else {
-        NSLog(@"获得联系人列表失败");
-    }
-}
--(void)userAliasChanged:(NSNotification*)notification{
-    ItelUser *user=(ItelUser*)notification.object;
-    [self.contacts addUser:user forKey:user.itelNum];
-    
-}
+
+
+
 @end
