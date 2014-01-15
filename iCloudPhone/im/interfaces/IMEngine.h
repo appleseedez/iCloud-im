@@ -38,6 +38,7 @@
 - (void) openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView*) localView;
 //关闭远端视频输入窗口
 - (void) closeScreen;
+- (void) switchCamera;
 - (void) tearDown;
 - (void) keepSessionAlive:(NSString*) probeServerIP port:(NSInteger) port;
 - (int) countTopSize; //统计每秒的数据传输量

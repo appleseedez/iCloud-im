@@ -17,6 +17,7 @@ UIImageView* _pview_local;
 @property(nonatomic) CAVInterfaceAPI* pInterfaceApi;
 @property(nonatomic) InitType m_type;
 @property(nonatomic,copy) NSString* currentInterIP;
+@property(nonatomic) int cameraIndex;
 @end
 
 @implementation IMEngineImp
@@ -25,6 +26,7 @@ UIImageView* _pview_local;
         if (_pInterfaceApi == nil) {
             _pInterfaceApi = new CAVInterfaceAPI();
             self.canVideoCalling = YES;
+            self.cameraIndex = 1;
         }
     }
     return self;
@@ -355,10 +357,10 @@ UIImageView* _pview_local;
         return;
     }
     // 开启摄像头
-    if (self.pInterfaceApi->StartCamera(1) >= 0)
+    if (self.pInterfaceApi->StartCamera(self.cameraIndex) >= 0)
     {
         // 摆正摄像头位置
-        self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(0)]);
+        self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
     }
     [_pview_local setFrame:CGRectMake(0, 0, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
     [localView addSubview:_pview_local];
@@ -367,12 +369,27 @@ UIImageView* _pview_local;
 }
 - (void)closeScreen{
 }
-
-- (void)tearDown{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.pInterfaceApi->Terminate();
-    });
+- (void) switchCamera{
     
+    switch (self.cameraIndex) {
+        case 0:
+            self.cameraIndex = 1;
+            break;
+        case 1:
+            self.cameraIndex = 0;
+            break;
+        default:
+            break;
+    }
+    
+
+    self.pInterfaceApi->SwitchCamera(self.cameraIndex);
+    // 摆正摄像头位置
+    self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
+}
+- (void)tearDown{
+    
+    self.pInterfaceApi->Terminate();
 }
 
 - (void)keepSessionAlive:(NSString*) probeServerIP port:(NSInteger)port{
