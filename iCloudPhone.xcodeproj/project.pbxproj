@@ -895,7 +895,6 @@
 			isa = PBXGroup;
 			children = (
 				478813E21839E6490085224D /* controllers */,
-				478813F21839E6490085224D /* models */,
 			);
 			name = login;
 			path = ../login;
@@ -906,6 +905,7 @@
 			children = (
 				479E934D185AB7D4001AF6ED /* NXLoginViewController.h */,
 				479E934E185AB7D4001AF6ED /* NXLoginViewController.m */,
+				478813F21839E6490085224D /* models */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -916,7 +916,8 @@
 				478813F31839E6490085224D /* NXInputChecker.h */,
 				478813F41839E6490085224D /* NXInputChecker.m */,
 			);
-			path = models;
+			name = models;
+			path = ../models;
 			sourceTree = "<group>";
 		};
 		478813FD1839E66C0085224D /* logintest */ = {
