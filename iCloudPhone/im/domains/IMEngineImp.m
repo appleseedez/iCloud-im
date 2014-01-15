@@ -289,7 +289,6 @@ UIImageView* _pview_local;
 #if ENGINE_MSG
         NSLog(@"关闭传输通道成功：%d",ret);
 #endif
-        [self tearDown];
     }
 
     //通知界面
@@ -370,11 +369,17 @@ UIImageView* _pview_local;
 }
 
 - (void)tearDown{
-    self.pInterfaceApi->Terminate();
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.pInterfaceApi->Terminate();
+    });
+    
 }
 
 - (void)keepSessionAlive:(NSString*) probeServerIP port:(NSInteger)port{
     u_int8_t tick = 0xFF;
     self.pInterfaceApi->SendUserData(&tick, sizeof(u_int8_t), [probeServerIP UTF8String], port);
+}
+- (int)countTopSize{
+    return self.pInterfaceApi->GetTopMediaDataSize();
 }
 @end
