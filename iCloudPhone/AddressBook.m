@@ -54,11 +54,14 @@
             
         });
     }
-//    else {
-//        self.isLoading=YES;
-//        [self getPeopleInAddressBook];
-//    }
-//    CFRelease(addressBook);
+  else {
+        self.isLoading=YES;
+        [self getPeopleInAddressBook];
+   }
+    if (addressBook!=NULL) {
+        CFRelease(addressBook);
+    }
+    
 }
 
 
