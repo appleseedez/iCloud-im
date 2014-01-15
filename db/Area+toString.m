@@ -10,7 +10,7 @@
 #import "IMCoreDataManager.h"
 @implementation Area (toString)
 -(NSString*)toString{
-    NSString *areaId=[NSString stringWithFormat:@"%@",self.areaId];
+    
  
         
     
