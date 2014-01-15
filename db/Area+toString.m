@@ -10,8 +10,8 @@
 #import "IMCoreDataManager.h"
 @implementation Area (toString)
 -(NSString*)toString{
-    NSString *areaId=[NSString stringWithFormat:@"%@",self.areaId];
-    if (areaId.length>=5) {
+    
+ 
         
     
         Area *secondArea=[Area idForArea:[NSString stringWithFormat:@"%@",self.parentId]];
@@ -24,7 +24,7 @@
         address=[NSString stringWithFormat:@"%@-%@-%@",firstArea.name,secondArea.name,self.name];
     }
     return address;
-    }
+ 
     return nil;
 }
 
