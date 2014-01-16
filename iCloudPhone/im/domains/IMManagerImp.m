@@ -399,10 +399,7 @@
         NSLog(@"开始通话，停止session保持数据包的发送，开始获取p2p通道");
         NSLog(@"主叫方收到PEER的链路数据：%@",notify.userInfo);
 #endif
-        //作为主叫方，自己的ssid应该是比被叫方小的。
-//        if ([[notify.userInfo valueForKey:SESSION_SRC_SSID_KEY] intValue] > [[notify.userInfo valueForKey:SESSION_DEST_SSID_KEY] intValue]) {
-//            return;
-//        }
+
         //开始获取p2p通道，保持session的数据包可以停止发送了。
         [self.keepSessionAlive invalidate];
         self.keepSessionAlive = nil;
@@ -417,21 +414,20 @@
         
     }
     //如果是idle状态下，接到了通话信令，则是有人拨打
-    else if ([self.state isEqualToString:IDLE] && [[notify.userInfo valueForKey:SESSION_SRC_SSID_KEY] intValue] > [[notify.userInfo valueForKey:SESSION_DEST_SSID_KEY] intValue]){
+    else if ([self.state isEqualToString:IDLE] && ([[ItelAction action] queryBlackList:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]] == nil) && [[notify.userInfo valueForKey:SESSION_SRC_SSID_KEY] intValue] > [[notify.userInfo valueForKey:SESSION_DEST_SSID_KEY] intValue]){
 #if MANAGER_DEBUG
         NSLog(@"被叫方收到通话请求，等待用户操作接听");
 #endif
-        //
-//        if ([[notify.userInfo valueForKey:SESSION_SRC_SSID_KEY] intValue] < [[notify.userInfo valueForKey:SESSION_DEST_SSID_KEY] intValue]) {
-//            return;
-//        }
-        
         //根据收到的usevideo和自身是否支持视频 设置自己是否有视频选项
         [self setIsVideoCall: [[notify.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]&&self.canVideo];
         [notify.userInfo setValue:[NSNumber numberWithBool:self.isVideoCall] forKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO];
         //通知界面，弹出通话接听界面:[self sessionPeriodResponse:notify]
         [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:nil userInfo:notify.userInfo];
-        //开启被叫方定时器10秒超时则拒绝
+        //开启会话，设置处于占线状态
+        if (NO == [self startSession:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]] ) {
+            return;
+        }
+//        //开启被叫方定时器10秒超时则拒绝
 //        [self.monitor invalidate];
 //        self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_not_willing_to_answer_queue", DISPATCH_QUEUE_CONCURRENT)];
     }else{//剩余的情况表明。当前正在通话中，应该拒绝 这里会是自动拒绝
@@ -450,10 +446,7 @@
 }
 //如果是处理的peer端的响应类型。那么，有可能是接受通话，则接下来开始进行p2p通道获取; 也有可能是拒绝通话，则通话请求终止
 - (void) sessionPeriodResponse:(NSNotification*) notify{
-    //首先，开启会话，设置处于占线状态
-    if (NO == [self startSession:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]] ) {
-        return;
-    }
+
     //既然是接受通话，则信令构造器要换成回复的类型
     self.messageBuilder = [[IMSessionPeriodResponseMessageBuilder alloc] init];
     

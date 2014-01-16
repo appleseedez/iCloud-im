@@ -15,12 +15,16 @@
 #import "NSCAppDelegate.h"
 #import "UIImageView+AFNetworking.h"
 #import "IMCoreDataManager.h"
+#import "ConstantHeader.h"
+
 @interface PeopleViewController ()
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (nonatomic,strong) UIPanGestureRecognizer *gestreRecognizer;
 @property (nonatomic,strong) NSString *searchText;
+@property (nonatomic) NSPredicate* normalPredicate;
+@property (nonatomic) NSPredicate* searchPredicate;
 @end
 
 
@@ -37,6 +41,7 @@
 {
     [super viewDidLoad];
     self.navigationController.delegate=self;
+    self.searchBar.delegate = self;
    	
 }
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
@@ -55,22 +60,37 @@
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar{
     [searchBar resignFirstResponder];
-    searchBar.text=nil;
-    [self endSearch];
+    searchBar.text=BLANK_STRING;
+    //取消的时候， 返回到原始的搜索条件
+    [self.fetchedResultsController.fetchRequest setPredicate:self.normalPredicate];
+    [self.fetchedResultsController performFetch:nil ];
+    [self.tableView reloadData];
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+//    if (![NXInputChecker checkEmpty:searchText]) {
+//    }
+//    else  self.searchText=searchText;
     if (![NXInputChecker checkEmpty:searchText]) {
-        [self endSearch];
+       [self.fetchedResultsController.fetchRequest setPredicate:self.normalPredicate];
+    }else{
+        self.searchPredicate= [NSCompoundPredicate orPredicateWithSubpredicates:@[
+                                                                                  [NSPredicate predicateWithFormat:@"remarkName contains[cd] %@",searchText],
+                                                                                  [NSPredicate predicateWithFormat:@"nickName contains[cd] %@",searchText],
+                                                                                  [NSPredicate predicateWithFormat:@"itelNum contains %@",searchText]
+                                                                                  
+                                                                                  ]];
+        [self.fetchedResultsController.fetchRequest setPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:@[self.searchPredicate,self.normalPredicate]]];
     }
-    else  self.searchText=searchText;
+
+    
+
+    [self.fetchedResultsController performFetch:nil];
+    [self.tableView reloadData];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    
-}
--(void)endSearch{
     
 }
 -(void)search:(NSString*)text{
@@ -83,8 +103,12 @@
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
         [request setFetchBatchSize:20];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"nickName" ascending:NO selector:nil]];
-        request.predicate = [NSPredicate predicateWithFormat:@"isFriend = %@ and host.itelNum = %@ and itelNum contains %@", [NSNumber numberWithInt:1],[[ItelAction action] getHost].itelNum,@""];
         
+        self.normalPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[
+                                                                                    [NSPredicate predicateWithFormat:@"host.itelNum = %@",[[ItelAction action] getHost].itelNum                                                                                     ],
+                                                                                    [NSPredicate predicateWithFormat:@"isFriend = YES"]
+                                                                                    ]];
+        request.predicate = self.normalPredicate;
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                             managedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext
                                                                               sectionNameKeyPath:nil
@@ -125,6 +149,7 @@
     UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
     UserViewController *userVC=[storyBoard instantiateViewControllerWithIdentifier:@"userView"];
     userVC.user=user;
+    [self.view endEditing:YES];
     [self.navigationController pushViewController:userVC animated:YES];
 }
 

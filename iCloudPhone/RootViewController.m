@@ -36,12 +36,11 @@
     
 }
 
-
+//fdsfds
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[ItelAction action] getItelBlackList:0];
-    [[ItelAction action] getItelFriendList:0];
+   
     
     [self.tabBar setHidden:YES];
 #if ROOT_TABBAR_DEBUG
