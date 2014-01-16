@@ -2310,6 +2310,7 @@
                                                 <state key="normal" image="silence_btn">
                                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                 </state>
+                                                <state key="highlighted" image="mute_disable_btn"/>
                                                 <connections>
                                                     <action selector="toggleMute:" destination="kEe-Cf-lem" eventType="touchUpInside" id="SlJ-Dh-BQK"/>
                                                 </connections>
@@ -3571,6 +3572,7 @@
         <image name="message_btn" width="22" height="19"/>
         <image name="message_contact_detail_btn" width="32" height="28"/>
         <image name="mockhead.png" width="203" height="189"/>
+        <image name="mute_disable_btn" width="25" height="32"/>
         <image name="peerAvatar" width="64" height="64"/>
         <image name="personalSetting" width="24" height="24"/>
         <image name="pushNotification" width="24" height="24"/>

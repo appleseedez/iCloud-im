@@ -414,7 +414,7 @@
         
     }
     //如果是idle状态下，接到了通话信令，则是有人拨打
-    else if ([self.state isEqualToString:IDLE] && [[notify.userInfo valueForKey:SESSION_SRC_SSID_KEY] intValue] > [[notify.userInfo valueForKey:SESSION_DEST_SSID_KEY] intValue]){
+    else if ([self.state isEqualToString:IDLE] && ([[ItelAction action] queryBlackList:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]] == nil) && [[notify.userInfo valueForKey:SESSION_SRC_SSID_KEY] intValue] > [[notify.userInfo valueForKey:SESSION_DEST_SSID_KEY] intValue]){
 #if MANAGER_DEBUG
         NSLog(@"被叫方收到通话请求，等待用户操作接听");
 #endif
