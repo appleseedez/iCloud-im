@@ -174,6 +174,10 @@
 -(ItelBook*) blackList{
     return [self.itelBookActionDelegate getBlackList];
 }
+#pragma mark - 查询黑名单
+- (ItelUser*) queryBlackList:(NSString*) itelNum{
+    return [self.itelBookActionDelegate userInBlackBook:itelNum];
+}
 #pragma  mark - 匹配通讯录好友
 /*匹配通讯录中得联系人接口
  1 获得本机所有联系人电话
