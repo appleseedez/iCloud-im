@@ -129,7 +129,8 @@
     UINavigationController* callingViewNavController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
     IMCallingViewController* callingViewController = (IMCallingViewController*) callingViewNavController.topViewController;
     callingViewController.manager = self.manager;
-    callingViewController.callingNotify = notify;
+    //不再需要传递参数 在manager.state可以取到
+//    callingViewController.callingNotify = notify;
     //获取到当前的顶层viewContorller
     if (self.presentedViewController) {
         [self.presentedViewController presentViewController:callingViewNavController animated:YES completion:nil];

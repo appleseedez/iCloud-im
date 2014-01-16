@@ -52,7 +52,7 @@ static int soundCount;
 }
 
 - (IBAction)cancelCalling:(UIButton *)sender {
-    NSMutableDictionary* cancelCallNotifyMut = [self.callingNotify.userInfo mutableCopy];
+    NSMutableDictionary* cancelCallNotifyMut = [[self.manager myState] mutableCopy];
     [cancelCallNotifyMut addEntriesFromDictionary:@{
                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                                                   }];
@@ -62,8 +62,9 @@ static int soundCount;
 
 - (void) setup{
     
-    self.peerAccountLabel.text = [NSString stringWithFormat:@"呼叫用户 %@",[self.callingNotify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]];
-   ItelUser* peerUser =  [[ItelAction action] userInFriendBook:[self.callingNotify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]];
+
+   ItelUser* peerUser =  [[ItelAction action] userInFriendBook:[[self.manager myState] valueForKey:kPeerAccount]];
+    self.peerAccountLabel.text = [NSString stringWithFormat:@"呼叫用户 %@",peerUser.nickName];
     self.PeerAvatarImageView.layer.cornerRadius = 10;
     self.PeerAvatarImageView.layer.masksToBounds = YES;
     
