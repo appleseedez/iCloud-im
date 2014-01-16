@@ -44,7 +44,7 @@
  */
 - (void)setup{
 #if MANAGER_DEBUG
-    NSLog(@"初始化mananger")
+    NSLog(@"初始化mananger");
 #endif
     [self injectDependency];
     //启动时, 每个用户的state都是空的.
@@ -88,8 +88,7 @@
     //1. 终止掉超时定时器.这样,后续流程才能进行下去.
     [self.monitor invalidate];
     self.monitor = nil;
-    //2.移除通话查询请求成功的通知.因为只有下次主叫,又会重新注册接收该通知
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
+
     //3.通话查询已经成功返回. 将本机的state设置成为接收到的信息
     // peerAccount
     [self.state setValue:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY] forKey:kPeerAccount];
@@ -110,8 +109,7 @@
 #if SIGNAL_MESSAGE
     NSLog(@"通话查询请求完成，即将进入主叫方通话请求发送阶段");
 #endif
-    //5.主叫方把自己对于转发类型是消息接收关掉.
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_PERIOD_NOTIFICATION object:nil];
+
     // 使用主叫通信链路信令构造器构造通信链路数据.
     self.messageBuilder = [[IMSessionPeriodRequestMessageBuilder alloc] init];
     //主叫方组装通信链路数据,发送给peer 不再需要传递数据.直接从manager.state里面去取
@@ -126,9 +124,10 @@
     //终止掉超时定时器.这样,后续流程才能进行下去.
     [self.monitor invalidate];
     self.monitor = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
     //查询失败了.终止session
     [self restoreState];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
+
     // 提示用户 对方不在线
     [[IMTipImp defaultTip] showTip:@"对方不在线"];
 }
@@ -230,6 +229,8 @@
         [[IMTipImp defaultTip] showTip:@"本机正处于拨打状态.请稍后重试"];
         return;
     }
+    //1.1.移除通话查询请求成功的通知.因为只有下次主叫,又会重新注册接收该通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
     //2. 通话查询请求
     //2.1 注册账号查询成功通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
@@ -582,10 +583,11 @@
     //停止定时器
     [self.monitor invalidate];
     self.monitor = nil;
+    [[IMTipImp defaultTip] showTip:@"无人接听"];
     //发送终止信令
     [self haltSession:@{
                         SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self myAccount],
-                        SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:self.state,
+                        SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[self.state valueForKey:kPeerAccount],
                         SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                         }];
 }
@@ -705,7 +707,7 @@
         peer.isFriend = [NSNumber numberWithBool:NO];
         [[IMCoreDataManager defaulManager] saveContext];
     }
-    [Recent recentWithCallInfo:@{
+    Recent* aRecent =  [Recent recentWithCallInfo:@{
                                  kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
                                  kStatus:[self.recentLog valueForKey:kStatus],
                                  kDuration:@(self.duration),
@@ -809,6 +811,7 @@
         return;
     }
     [self restoreState];
+    
     [self.engine tearDown];
     [self stopCommunicationCounting];
     
@@ -825,6 +828,9 @@
                    kForwardPort:@(-1),
                    kUseVideo:@(-1)
                    }];
+    //重新开始接收通知 保险起见 先移除再添加
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_PERIOD_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionDataReceived:) name:SESSION_PERIOD_NOTIFICATION object:nil];
 }
 
 // 用户点击时，将通知数据传入
