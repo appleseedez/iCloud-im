@@ -2279,9 +2279,12 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
                                                 <inset key="titleEdgeInsets" minX="0.0" minY="36" maxX="28" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="-16" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" image="hideSelfCam_btn">
+                                                <inset key="imageEdgeInsets" minX="60" minY="-16" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="隐藏小窗口" image="hideSelfCam_btn">
                                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                                </state>
+                                                <state key="selected" title="显示小窗口" image="close_self_window_disable_btn">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="togglePreviewCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="xQb-Ry-Gbc"/>
@@ -2292,71 +2295,54 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="-20" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" image="videoCam_btn">
+                                                <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="28" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="60" minY="-16" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="关闭摄像头" image="stop_video_btn">
                                                     <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="selected" title="开启摄像头" image="closeCamera_disable_btn">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="toggleCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="hvW-Os-wln"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="vyO-gB-Cvk" userLabel="toggle mute">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="vyO-gB-Cvk" userLabel="toggle mute">
                                                 <rect key="frame" x="1" y="0.0" width="158" height="60"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
                                                 <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="24" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="-12" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" image="silence_btn">
+                                                <inset key="imageEdgeInsets" minX="28" minY="-12" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="静音" image="silence_btn">
                                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                                </state>
+                                                <state key="disabled" image="mute_disable_btn"/>
+                                                <state key="selected" title="静音" image="mute_disable_btn">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <state key="highlighted" image="mute_disable_btn"/>
                                                 <connections>
                                                     <action selector="toggleMute:" destination="kEe-Cf-lem" eventType="touchUpInside" id="SlJ-Dh-BQK"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="7Fr-G6-IxL" userLabel="toggle speaker">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="7Fr-G6-IxL" userLabel="toggle speaker">
                                                 <rect key="frame" x="160" y="0.0" width="159" height="60"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
                                                 <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="28" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="-16" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" image="speaker_btn">
+                                                <inset key="imageEdgeInsets" minX="36" minY="-16" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="扬声器" image="speaker_btn">
                                                     <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="selected" title="扬声器" image="speaker_disable_btn">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="toggleSpeeker:" destination="kEe-Cf-lem" eventType="touchUpInside" id="URA-eO-qJg"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="静音" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W86-Ah-oxe">
-                                                <rect key="frame" x="59" y="39" width="42" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
-                                                <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扬声器" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DOU-Im-OAK">
-                                                <rect key="frame" x="208" y="39" width="62" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
-                                                <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="隐藏小窗口" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VeG-o0-SFm">
-                                                <rect key="frame" x="40" y="100" width="81" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
-                                                <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关闭摄像头" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="An7-uE-Wno">
-                                                <rect key="frame" x="199" y="100" width="81" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
-                                                <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
                                     </view>
@@ -3560,6 +3546,8 @@
         <image name="backspace_press_btn" width="27" height="21"/>
         <image name="callerAvatar" width="64" height="64"/>
         <image name="checkAddress.png" width="80" height="80"/>
+        <image name="closeCamera_disable_btn" width="27" height="32"/>
+        <image name="close_self_window_disable_btn" width="30" height="30"/>
         <image name="commonSetting" width="24" height="24"/>
         <image name="detail_more_action_btn" width="24" height="20"/>
         <image name="dial_btn" width="25" height="27"/>
@@ -3581,8 +3569,9 @@
         <image name="searchuser.png" width="80" height="81"/>
         <image name="silence_btn" width="25" height="32"/>
         <image name="speaker_btn" width="30" height="32"/>
+        <image name="speaker_disable_btn" width="30" height="32"/>
+        <image name="stop_video_btn" width="27" height="32"/>
         <image name="switch_cam_btn" width="53" height="32"/>
-        <image name="videoCam_btn" width="26" height="32"/>
         <image name="video_btn" width="20" height="24"/>
         <image name="vidoeCall_contact_detail_btn" width="27" height="32"/>
         <image name="voiceCall_contact_detail_btn" width="30" height="32"/>
