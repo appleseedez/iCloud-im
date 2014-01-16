@@ -39,6 +39,15 @@ enum emDataType
 #define PARSED_DATA_KEY @"PARSED_DATA_KEY" //数据暂存池的key
 #define DIALING_SOUND_ID 1152 //拨号的声音
 
+//manager.state
+#define kMyAccount @"myAccount"
+#define kPeerAccount @"peerAccount"
+#define kPeerSSID @"peerSSID"
+#define kMySSID @"mySSID"
+#define kForwardIP @"ForwardIP"
+#define kForwardPort @"ForwardPort"
+#define kUseVideo @"useVideo"
+
 #define PRESENT_DIAL_VIEW_NOTIFICATION @"PRESENT_DIAL_VIEW_NOTIFICATION" //
 #define UDP_LOOKUP_COMPLETE_NOTIFICATION @"UDP_LOOKUP_COMPLETE_NOTIFICATION" //udp查询完成,应该能够获得信令服务器地址
 #define DATA_RECEIVED_NOTIFICATION @"DATA_RECEIVED_NOTIFICATION" // 收到通知标识
