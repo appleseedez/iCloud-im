@@ -45,7 +45,7 @@
     
     for (NSString *s in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) {
 #if OTHER_MESSAGE
-        NSLog(@"目前的cookie值为:%@",s);
+//        NSLog(@"目前的cookie值为:%@",s);
 #endif
     }
     [request setHTTPMethod:@"POST"];

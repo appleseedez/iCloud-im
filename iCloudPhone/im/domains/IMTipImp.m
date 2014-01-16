@@ -8,9 +8,12 @@
 
 #import "IMTipImp.h"
 #import "ConstantHeader.h"
+#import "ALAlertBanner.h"
+#import "NSCAppDelegate.h"
 static IMTipImp* _instance;
 @interface IMTipImp()
 @property(nonatomic,copy) NSString* tip;
+@property(nonatomic) ALAlertBannerStyle style;
 @property(nonatomic) MSWeakTimer* countDown;
 @end
 
@@ -41,10 +44,25 @@ static IMTipImp* _instance;
     [self.countDown invalidate];
     self.countDown =nil;
 }
+- (void) errorTip:(NSString *)tip{
+    self.style = ALAlertBannerStyleFailure;
+    [self showTip:tip];
+}
+- (void)successTip:(NSString *)tip{
+    self.style = ALAlertBannerStyleSuccess;
+    [self showTip:tip];
+}
 - (void)showTip:(NSString *)tip forSeconds:(int)seconds{
     self.tip = tip;
-    if (seconds>0) {
-        self.countDown = [MSWeakTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(hideTip) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.tip_queue", DISPATCH_QUEUE_CONCURRENT)];
-    }
+    NSCAppDelegate *appDelegate = (NSCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    ALAlertBannerStyle randomStyle = self.style;// (ALAlertBannerStyle)(arc4random_uniform(4));
+    ALAlertBannerPosition position = ALAlertBannerPositionTop;
+    ALAlertBanner* banner = [ALAlertBanner alertBannerForView:appDelegate.window style:randomStyle position:position title:self.tip subtitle:@"异常!" ];
+    banner.secondsToShow = 3.5;
+    banner.showAnimationDuration = .25;
+    banner.hideAnimationDuration = .2;
+
+    [banner show];
+    
 }
 @end

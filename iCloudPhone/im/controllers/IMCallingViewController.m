@@ -52,11 +52,12 @@ static int soundCount;
 }
 
 - (IBAction)cancelCalling:(UIButton *)sender {
-    NSMutableDictionary* cancelCallNotifyMut = [[self.manager myState] mutableCopy];
-    [cancelCallNotifyMut addEntriesFromDictionary:@{
-                                                  SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
-                                                  }];
-    [self.manager haltSession:cancelCallNotifyMut];
+    NSDictionary* cancelCallParams =  @{
+                                                                  SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[[self.manager myState] valueForKey:kPeerAccount],
+                                                                  SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self.manager myState] valueForKey:kMyAccount],
+                                                                  SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
+                                                                  };
+    [self.manager haltSession:cancelCallParams];
 //    [self sessionClosed:nil];
 }
 
