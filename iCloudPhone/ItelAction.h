@@ -56,6 +56,8 @@
 -(void) getItelBlackListResponse:(id)data;
 //获得黑名单
 -(ItelBook*) blackList;
+//查询黑名单
+- (ItelUser*) queryBlackList:(NSString*) itelNum;
 //获得通讯录
 -(AddressBook*) getAddressBook;
 //获得itel好友列表

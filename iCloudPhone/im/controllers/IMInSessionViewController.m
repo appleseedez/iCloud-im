@@ -10,6 +10,7 @@
 #import "ItelAction.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
+#import "Area+toString.h"
 @interface IMInSessionViewController ()
 @property(nonatomic) BOOL hideHUD; //标志是否隐藏控制面板
 @property(nonatomic) BOOL isMute; //标志是否静音
@@ -83,7 +84,7 @@
     ItelUser* peerUser = [[ItelAction action] userInFriendBook:[[self.inSessionNotify userInfo] valueForKey:@"destaccount"]];
     ((UILabel*)[self.nameHUDView viewWithTag:1]).text= peerUser.nickName;
     ((UILabel*)[self.nameHUDView viewWithTag:2]).text= peerUser.itelNum;
-    ((UILabel*)[self.nameHUDView viewWithTag:4]).text = peerUser.address;
+    ((UILabel*)[self.nameHUDView viewWithTag:4]).text = [Area idForArea:peerUser.address].toString;
     [self.peerAvatar setImageWithURL:[NSURL URLWithString: peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
     if ([self.manager isVideoCall]) {
         [self.peerAvatar setHidden:YES ];
