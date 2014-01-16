@@ -51,7 +51,7 @@
     if ([[self.searchResult getAllKeys] count]>indexPath.row) {
         ItelUser *user=[self.searchResult userAtIndex:indexPath.row];
         //cell.imgPhoto.image=[UIImage imageNamed:@"头像.png"];
-        [cell.imgPhoto setImageWithURL:[NSURL URLWithString:user.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png" ]];
+        [cell.imgPhoto setImageWithURL:[NSURL URLWithString:user.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader" ]];
         cell.lbItelNumber.text=user.itelNum;
         
         cell.lbNickName.text=user.nickName;
@@ -80,7 +80,7 @@
             if ([list count]) {
                 for ( NSDictionary *dic in list) {
                     ItelUser *user=[ItelUser userWithDictionary:dic];
-                    if (![user.isFriend boolValue]) {
+                    if (![user.isFriend boolValue]&&![user.itelNum isEqualToString:[ItelAction action].getHost.itelNum]) {
                         [self.searchResult addUser:user forKey:user.itelNum];
                     }
                     [self.tableView reloadData];

@@ -11,9 +11,11 @@
 #import "MessageCell.h"
 #import "Message.h"
 #import "UIImageView+AFNetworking.h"
+#import "IMCoreDataManager.h"
 @interface MessageSyetemViewController ()
 @property (nonatomic,strong) NSArray *messageList;
 @property (nonatomic,strong) NSString *currItel;
+@property (nonatomic,strong) Message *currMessage;
 @end
 
 @implementation MessageSyetemViewController
@@ -36,7 +38,9 @@
     
         return 1;
 }
-
+-(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     int rows = [self.messageList count];
@@ -54,22 +58,39 @@
     if (!cell.lbTittle.text.length) {
         cell.lbTittle.text=message.sender.itelNum;
     }
-    
+    [cell.imgPhoto setRect:2 cornerRadius:cell.imgPhoto.frame.size.height/6 borderColor:[UIColor whiteColor]];
     cell.lbBody.text=message.body;
     cell.lbDate.text=message.date;
     NSString *imageUrl=message.sender.imageurl;
     [cell.imgPhoto setImageWithURL:[NSURL URLWithString: imageUrl ] placeholderImage:[UIImage imageNamed:@"头像.png"]];
-    
+    if ([message.isRead boolValue]) {
+        cell.newMessage.alpha=0;
+    }
+    else{
+        cell.newMessage.alpha=1;
+    }
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"接受邀请",@"忽略邀请",nil];
-    self.currItel=((Message*)[self.messageList objectAtIndex:indexPath.row]).sender.itelNum;
-    //actionSheet.cancelButtonIndex=2;
-    [actionSheet showInView:self.view];
+    Message *message=[self.messageList objectAtIndex:indexPath.row];
+    self.currItel=message.sender.itelNum;
+    self.currMessage=message;
+    [[IMCoreDataManager defaulManager] saveContext];
+    BOOL isRead=[message.isRead boolValue];
+    if (isRead==NO) {
+        [actionSheet showInView:self.view];
+    }
+    else{
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"已处理消息" message:@"您已经处理过该消息，不能再次处理" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+        [alert show];
+    }
+    
+    
+    
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSLog(@"%d",buttonIndex);
+   
     NSString *status=nil;
     if (buttonIndex==2) {
         return;
@@ -78,14 +99,15 @@
    else if (buttonIndex==0) {
          //接受邀请接口
         status=@"1";
-        
-        
+       
     }
     else if(buttonIndex==1){
         status=@"3";
+        
     }
-    
+    self.currMessage.isRead=[NSNumber numberWithBool:YES];
     [[ItelAction action] acceptFriendIvication:self.currItel status:status];
+     [self.tableView reloadData];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

@@ -101,7 +101,7 @@ static float animatedDuration=1.0;
     self.answer1.inputAccessoryView=self.inputAccessoryView;
     self.answer2.inputAccessoryView=self.inputAccessoryView;
     self.answer3.inputAccessoryView=self.inputAccessoryView;
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(finishClicked)];
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishClicked)];
 }
 -(void)finishClicked{
     NSString *check=[self checkInput];

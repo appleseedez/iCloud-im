@@ -30,6 +30,21 @@
     [self.view endEditing:YES];
     
 }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField==self.txtUserCloudNumber) {
+        if (range.location>=11) {
+            return NO;
+        }
+        else return YES;
+    }
+    else if (textField==self.txtUserPassword){
+        if (range.location>=20) {
+            return NO;
+        }
+        else return YES;
+    }
+    return YES;
+}
 - (IBAction)presentRegViewController:(UIButton *)sender {
     
     NXRegViewController *reg=[[NXRegViewController alloc]init];

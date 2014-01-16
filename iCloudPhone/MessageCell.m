@@ -19,11 +19,13 @@
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(NewMessageView*)newMessage{
+    if (_newMessage==nil) {
+        _newMessage=[[NewMessageView alloc]initWithFrame:CGRectMake(40, 2.5, 10, 10)];
+        [self.imgPhoto addSubview:_newMessage];
+    }
+    
+    return _newMessage;
 }
 
 @end

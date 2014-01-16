@@ -14,6 +14,7 @@
 #import "PassWayViewController.h"
 #import "NXInputChecker.h"
 #import "PassManager.h"
+#import "UIImageView+AFNetworking.h"
 @interface PassViewController ()
 @property (weak, nonatomic) IBOutlet RegNextButton *nextButton;
 @property (weak, nonatomic) IBOutlet UIImageView *codeImage;
@@ -24,8 +25,27 @@
 #define  SUCCESS void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
 #define  FAILURE void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error)
 @implementation PassViewController
-
-
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    textField.text=nil;
+    if (textField==self.txtItel) {
+        [self getImage];
+    }
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField==self.txtItel) {
+        if (range.location>=12) {
+            return NO;
+        }
+        else return YES;
+    }
+    else {
+        if (range.location>=4) {
+            return NO;
+        }
+        else return YES;
+    }
+   
+}
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
@@ -38,6 +58,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.codeImage.image=[UIImage imageNamed:@"code_placeholder"];
     [self.nextButton setUI];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"登陆" style:UIBarButtonItemStyleDone target:self action:@selector(pop)];
     [self getImage];
@@ -59,7 +80,7 @@
     }
 -(void)getImage{
     NSString *strurl=[NSString stringWithFormat:@"%@/printImage",SIGNAL_SERVER];
-   // NSString *strurl=@"http://211.149.144.15:8000/CloudCommunity/printImage";
+  
     
     NSURL *url  =[NSURL URLWithString:strurl];
     NSURLRequest *request=[NSURLRequest requestWithURL:url];
@@ -68,15 +89,27 @@
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (connectionError) {
             NSLog(@"%@",connectionError);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.codeImage.image=[UIImage imageNamed:@"code_placeholder"];
+            });
+            
         }
         else{
             UIImage *image=[UIImage imageWithData:data];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.codeImage.image=image;
-            });
+            if ([image isKindOfClass:[UIImage class]]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.codeImage.image=image;
+                });
+            }
+            else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.codeImage.image=[UIImage imageNamed:@"code_placeholder"];
+                });
+            }
         }
         
     }];
+    
 
 }
 -(void)checkCode{

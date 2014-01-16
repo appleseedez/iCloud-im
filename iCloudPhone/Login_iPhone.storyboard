@@ -150,14 +150,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" tag="500001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入Tel云电话号码" textAlignment="center" minimumFontSize="17" id="hQi-o8-Ryv" customClass="regDetailTextField">
+                            <textField opaque="NO" clipsSubviews="YES" tag="500001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入Tel云电话号码" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" id="hQi-o8-Ryv" customClass="regDetailTextField">
                                 <rect key="frame" x="0.0" y="86" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
-                                    <outlet property="delegate" destination="CrQ-Lk-SyO" id="h60-4X-haS"/>
+                                    <outlet property="delegate" destination="UXM-td-02n" id="ePv-aZ-c4t"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" tag="500001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="验证码" textAlignment="center" minimumFontSize="17" id="AIw-ZD-Ouo" customClass="regDetailTextField">
@@ -167,7 +167,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="CrQ-Lk-SyO" id="KLh-eS-HV9"/>
+                                    <outlet property="delegate" destination="UXM-td-02n" id="gbG-cf-tgc"/>
                                 </connections>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="8ou-cp-23B">
