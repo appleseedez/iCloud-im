@@ -116,7 +116,7 @@
     [self sessionNegotiation];
     //6. 设置10秒超时，如果没有收到接受通话的回复则转到拒绝流程
     [self.monitor invalidate];
-    self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_peer_pickup_queue", DISPATCH_QUEUE_CONCURRENT)];
+    self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_peer_pickup_queue", DISPATCH_QUEUE_CONCURRENT)];
 }
 
 

@@ -1877,7 +1877,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="callerAvatar" id="DrY-vd-K6b">
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="standedHeader" id="DrY-vd-K6b">
                                             <rect key="frame" x="20" y="10" width="56" height="56"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
@@ -2480,7 +2480,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peerAvatar" id="uJj-mE-0FS">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="standedHeader" id="uJj-mE-0FS">
                                                     <rect key="frame" x="20" y="4" width="36" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -3584,7 +3584,6 @@
         <image name="ad_c" width="320" height="150"/>
         <image name="backspace_btn" width="27" height="21"/>
         <image name="backspace_press_btn" width="27" height="21"/>
-        <image name="callerAvatar" width="64" height="64"/>
         <image name="checkAddress.png" width="80" height="80"/>
         <image name="closeCamera_disable_btn" width="27" height="32"/>
         <image name="close_self_window_disable_btn" width="30" height="30"/>
@@ -3609,6 +3608,7 @@
         <image name="silence_btn" width="25" height="32"/>
         <image name="speaker_btn" width="30" height="32"/>
         <image name="speaker_disable_btn" width="30" height="32"/>
+        <image name="standedHeader" width="75" height="75"/>
         <image name="stop_video_btn" width="27" height="32"/>
         <image name="switch_cam_btn" width="53" height="32"/>
         <image name="video_btn" width="20" height="24"/>

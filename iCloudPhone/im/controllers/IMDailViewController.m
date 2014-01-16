@@ -145,7 +145,7 @@
         cell.nameLabel.text = userItem.itelNum;
     }
     cell.numberLabel.text = userItem.itelNum;
-    [cell.avatarView setImageWithURL:[NSURL URLWithString: userItem.imageurl ] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    [cell.avatarView setImageWithURL:[NSURL URLWithString: userItem.imageurl ] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     
     return cell;
 }
@@ -225,7 +225,7 @@
     UILabel* itelTag = (UILabel*) [self.suggestBtnView viewWithTag:4];
     if ([self.currentSuggestDataSource count]) {
         ItelUser* firstSuggestUser = [self.currentSuggestDataSource firstObject];
-        [suggestClosestPeerAvatar setImageWithURL:[NSURL URLWithString:firstSuggestUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+        [suggestClosestPeerAvatar setImageWithURL:[NSURL URLWithString:firstSuggestUser.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
         [suggestClosestPeerNameLabel setText:firstSuggestUser.nickName];
         if ([firstSuggestUser.nickName isEqualToString:BLANK_STRING]) {
             [suggestClosestPeerNameLabel setText:firstSuggestUser.itelNum];
