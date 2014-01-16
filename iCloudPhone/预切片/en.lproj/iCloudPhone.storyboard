@@ -2870,6 +2870,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="mmw-c3-28x"/>
+                                            <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="h4h-TW-FGw"/>
                                             <action selector="videoDialing:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="8Yo-N0-qhs"/>
                                         </connections>
                                     </button>
