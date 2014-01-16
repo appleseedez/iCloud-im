@@ -26,7 +26,7 @@
 -(void) signOut{
     [[ItelAction action] logout];
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"currUser"];
-//    [self tearDownManagers];
+
     [self.manager logoutFromSignalServer];
     [self.manager tearDown];
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
@@ -37,19 +37,9 @@
 - (void) reconnect:(NSNotification*) notify{
     [self.manager connectToSignalServer];
 }
-//-(void)tearDownManagers{
-////    [[ItelMessageManager defaultManager] tearDown];
-////    [[ItelUserManager defaultManager] tearDown];
-////    [[ItelBookManager defaultManager] tearDown];
-////    [[ItelNetManager defaultManager] tearDown];
-//    [self setupManagers];
-//
-//}
+
 -(void)setupManagers{
 
-//    [ItelUserManager defaultManager];
-//    [ItelBookManager defaultManager];
-//    [ItelNetManager defaultManager];11
 }
 
 
@@ -72,13 +62,13 @@
     [self setupManagers];
     //初始化ItelMessageInterface
     [ItelMessageInterfaceImp defaultMessageInterface];
-//    UIStoryboard *mainStoryboard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
-    RootViewController *rootVC= (RootViewController*) self.window.rootViewController;//[mainStoryboard instantiateViewControllerWithIdentifier:@"rootVC"];
+
+    RootViewController *rootVC= (RootViewController*) self.window.rootViewController;
     self.manager = [[IMManagerImp alloc] init];
-    //[self.manager setup];
+    
     rootVC.manager=self.manager;
     self.RootVC=rootVC;
-    //[rootVC setSelectedIndex:2];
+   
     
    //===========================登陆注册=============================
     UIStoryboard *loginStoryboard=[UIStoryboard storyboardWithName:@"Login_iPhone" bundle:nil];
@@ -148,8 +138,6 @@
         [self.manager tearDown];
         [self.manager disconnectToSignalServer];
         [self.manager setMyAccount:nil];
-        self.RootVC.view=nil;
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
     }
     else if(Type==RootViewControllerMain){
@@ -161,12 +149,10 @@
                                  ROUTE_SERVER_PORT_KEY:[info valueForKey:ROUTE_SERVER_PORT_KEY],
                                  HOST_ITEL_NUMBER:hostItel
                                  };
-
         [self setupIMManager:params];
         [self.manager setup];
         [self.manager connectToSignalServer];
-        self.loginVC.view=nil;
-    }
+   }
     [UIView commitAnimations];
 //    [self saveStoredCookies];
 }
