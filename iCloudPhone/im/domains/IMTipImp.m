@@ -34,7 +34,7 @@ static IMTipImp* _instance;
 }
 
 - (void)showTip:(NSString *)tip{
-    [self showTip:tip forSeconds:0];
+    [self showTip:tip forSeconds:3];
 }
 
 - (void)hideTip{
