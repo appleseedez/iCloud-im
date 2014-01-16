@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setTitle:@"回答问题"];
     [self setUI];
     int i = arc4random()%3;
 

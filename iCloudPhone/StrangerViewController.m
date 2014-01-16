@@ -54,19 +54,19 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
-        return 40;
+        return 45;
     }
-    else return 30;
+    else return 40;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    [cell.textLabel setFont:[UIFont fontWithName:@"HeiTi SC" size:12]];
+    [cell.textLabel setFont:[UIFont fontWithName:@"HeiTi SC" size:14]];
     UILabel *prop=[[UILabel alloc]init];
     [cell.contentView addSubview:prop];
-    prop.frame=CGRectMake(80, 5, 120, 20);
+    prop.frame=CGRectMake(60, 10, 260, 25);
     [prop setTextColor:[UIColor grayColor]];
-    [prop setFont:[UIFont fontWithName:@"HeiTi SC" size:11]];
+    [prop setFont:[UIFont fontWithName:@"HeiTi SC" size:13]];
     if (indexPath.section==1) {
         switch (indexPath.row) {
             case 0:
@@ -75,7 +75,7 @@
                 break;
             case 1:{
                 cell.textLabel.text=@"性别";
-                UIImageView *sexImg=[[UIImageView alloc] initWithFrame:CGRectMake(80, 5, 20, 20)];
+                UIImageView *sexImg=[[UIImageView alloc] initWithFrame:CGRectMake(60, 10, 20, 20)];
                 [cell.contentView addSubview:sexImg];
                 if (self.user.sex) {
                     sexImg.image=[UIImage imageNamed:@"female"];
@@ -104,7 +104,7 @@
     
     else if (indexPath.section==0){
         cell.textLabel.text=@"签名";
-        prop.frame=CGRectMake(80, 5, 200, 30);
+        prop.frame=CGRectMake(60, 0, 260, 45);
         [prop setNumberOfLines:0];
         prop.text=self.user.personalitySignature;
     }
@@ -144,7 +144,7 @@
     else {
         self.lbShowName.text=self.user.nickName;
     }
-    self.lbItel.text = [NSString stringWithFormat:@"itel:%@",self.user.itelNum];
+    self.lbItel.text = [NSString stringWithFormat:@"%@",self.user.itelNum];
     
 }
 - (IBAction)addStranger:(UIButton *)sender {
@@ -170,13 +170,13 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.headImageView setImageWithURL:[NSURL URLWithString:self.user.imageurl] placeholderImage:[UIImage imageNamed:@"头像.png"]];
+    [self.headImageView setImageWithURL:[NSURL URLWithString:self.user.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     
     [self.btnAddUser setUI];
     [self.btnAddUser setTitle:@"添加到通讯录" forState:UIControlStateNormal];
     [self.btnAddUser setTitle:@"添加到通讯录" forState:UIControlStateHighlighted];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(callActionSheet)];
-    [self.headImageView setRect:5.0 cornerRadius:self.headImageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
+    [self.headImageView setRect:2.0 cornerRadius:self.headImageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
     //[self.navigationController setNavigationBarHidden:YES];
 }
 -(void)viewDidAppear:(BOOL)animated{

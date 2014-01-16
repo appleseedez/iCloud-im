@@ -50,11 +50,20 @@
     if (string==nil) {
         return NO;
     }
-    NSString *filteEmpty = [NXInputChecker filterStringWithString:string targetString:@" " replaceWithString:@""];
-    if ([filteEmpty isEqualToString:@""]||[filteEmpty isEqualToString:@" "]||[filteEmpty isEqualToString:@"  "]||[filteEmpty isEqualToString:@"   "]) {
-        return NO;
-    }
-    return YES;
+//    NSString *filteEmpty = [NXInputChecker filterStringWithString:string targetString:@" " replaceWithString:@""];
+//    if ([filteEmpty isEqualToString:@""]||[filteEmpty isEqualToString:@" "]||[filteEmpty isEqualToString:@"  "]||[filteEmpty isEqualToString:@"   "]) {
+//        return NO;
+//    }
+//    return YES;
+  
+    
+    NSCharacterSet *whitespaces = [NSCharacterSet whitespaceCharacterSet];
+    NSPredicate *noEmptyStrings = [NSPredicate predicateWithFormat:@"SELF != ''"];
+    
+    NSArray *parts = [string componentsSeparatedByCharactersInSet:whitespaces];
+    NSArray *filteredArray = [parts filteredArrayUsingPredicate:noEmptyStrings];
+    string = [filteredArray componentsJoinedByString:@""];
+    return string.length;
 }
 #pragma mark - 字符串过滤
 +(NSString *)filterStringWithString:(NSString*)string targetString:(NSString*)targetString replaceWithString:(NSString*)newString{

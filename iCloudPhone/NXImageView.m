@@ -21,7 +21,7 @@
 -(void)setRect:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius borderColor:(UIColor*)borderColor{
     [self.layer   setCornerRadius:cornerRadius]; //设置矩形四个圆角半径
     [self.layer   setBorderWidth:borderWidth]; //边框宽度
-    CGColor *border=(__bridge CGColor*)borderColor;
+    CGColor *border=borderColor.CGColor;
     [self.layer   setBorderColor:border];//边框颜色
     [self setClipsToBounds:YES];
 }

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PassViewController : UIViewController
+@interface PassViewController : UIViewController<UITextFieldDelegate>
 
 @end

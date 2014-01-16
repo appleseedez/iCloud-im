@@ -16,7 +16,7 @@
 
 @implementation SecurityViewController
 
-
+static bool isConnecting=0;
 
 - (void)viewDidLoad
 {
@@ -26,6 +26,8 @@
 
 -(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==1) {
+        if (isConnecting==0) {
+            isConnecting=1;
         switch (indexPath.row) {
             case 0:
                 [self checkSecurity];
@@ -35,6 +37,7 @@
                 break;
             default:
                 break;
+        }
         }
     }
 }
@@ -51,7 +54,7 @@
 }
 -(void)receive:(NSNotification*)notification{
     BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"]boolValue];
-    
+    isConnecting=0;
     if (isNormal) {
         if ([notification.object isEqual:[NSNull null]]) {
             [self pushToSettingView];
