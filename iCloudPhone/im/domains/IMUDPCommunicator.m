@@ -141,4 +141,7 @@
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error{
     
 }
+- (void)tearDown{
+    
+}
 @end

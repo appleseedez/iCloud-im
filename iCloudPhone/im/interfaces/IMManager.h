@@ -11,6 +11,7 @@
 #import "video_render_ios_view.h"
 @protocol IMManager <NSObject>
 - (NSString*) myAccount;
+- (NSDictionary*) myState;
 //由外部设置
 - (void) setMyAccount:(NSString*) account; //登陆后的本机账号
 - (void) setRouteSeverIP:(NSString*) ip;//登陆后的路由服务器地址
@@ -18,7 +19,7 @@
 //拨号
 - (void) dial:(NSString*) account;
 // 开始通话过程. 返回YES表示开启通话过程成功.可以继续.否则后续流程终止
-- (BOOL) startSession:(NSString*) destAccount;
+- (BOOL) sessionStartedWithAccount:(NSString*) destAccount;
 // 结束通话过程
 - (void) endSession;
 // 初始化&启动
