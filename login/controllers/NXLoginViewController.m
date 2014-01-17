@@ -30,6 +30,12 @@ static int loginCount=0;
     [self.view endEditing:YES];
     
 }
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField==self.txtUserCloudNumber) {
+        self.txtUserCloudNumber.text=nil;
+        self.txtUserPassword.text=nil;
+    }
+}
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if (textField==self.txtUserCloudNumber) {
         if (range.location>=11) {

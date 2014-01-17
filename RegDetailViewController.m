@@ -232,6 +232,7 @@ static float animatedDuration=1.0;
     else {
          UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"验证失败" message:localCheck delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
+        [self stopHud];
     }
     
 }
