@@ -12,6 +12,7 @@
 #import "ConstantHeader.h"
 #import "video_render_ios_view.h"
 #import <AVFoundation/AVFoundation.h>
+#import "IMTipImp.h"
 UIImageView* _pview_local;
 @interface IMEngineImp ()
 @property(nonatomic) CAVInterfaceAPI* pInterfaceApi;
@@ -175,6 +176,7 @@ UIImageView* _pview_local;
     int ret = self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], probeServerPort, self_inter_ip, self_inter_port);
     if (ret != 0) {
         self.currentInterIP = BLANK_STRING;
+        [[IMTipImp defaultTip] showTip:@"没有获取到本机的外网地址.很有可能转发哦"];
     }else{
         self.currentInterIP =[NSString stringWithUTF8String:self_inter_ip];
     }

@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView* peerAvatar;
 - (IBAction)toggleMute:(UIButton *)sender;
 - (IBAction)toggleSpeeker:(UIButton *)sender;
-- (IBAction)toggleCam:(id)sender;
-- (IBAction)togglePreviewCam:(id)sender;
+- (IBAction)toggleCam:(UIButton*)sender;
+- (IBAction)togglePreviewCam:(UIButton*)sender;
 - (IBAction)switchCamera:(UIButton *)sender;
 @end

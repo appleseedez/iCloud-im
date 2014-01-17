@@ -18,7 +18,6 @@
 @property(nonatomic) BOOL hideCam; //标志是否关闭摄像头
 @property(nonatomic) BOOL enableSpeaker; //标志是否开启扬声器
 @property(nonatomic) MSWeakTimer* clock;
-@property(nonatomic) BOOL canSwitchNow;
 
 @end
 
@@ -77,7 +76,6 @@
     self.hideCam = NO; //初始开启摄像头
     self.enableSpeaker = NO; //初始关闭扬声器
     self.switchFrontAndBackCamBtn.hidden = YES; //初始隐藏交换摄像头按钮
-    self.canSwitchNow = YES; //
     [self performSelector:@selector(toggleHUD:) withObject:nil afterDelay:3];
     // 设置好名字版
     
@@ -85,7 +83,7 @@
     ((UILabel*)[self.nameHUDView viewWithTag:1]).text= peerUser.nickName;
     ((UILabel*)[self.nameHUDView viewWithTag:2]).text= peerUser.itelNum;
     ((UILabel*)[self.nameHUDView viewWithTag:4]).text = [Area idForArea:peerUser.address].toString;
-    [self.peerAvatar setImageWithURL:[NSURL URLWithString: peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    [self.peerAvatar setImageWithURL:[NSURL URLWithString: peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     if ([self.manager isVideoCall]) {
         [self.peerAvatar setHidden:YES ];
     }else{
@@ -125,7 +123,7 @@
                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                                                   }];
     
-    NSLog(@"通话中界面的业务数据：%@",endSessionDataMut);
+    NSLog(@"通话终止时按键方提供的数据：%@",endSessionDataMut);
     //终止会话
     [self.manager haltSession:endSessionDataMut];
     [self sessionClosed:nil];
@@ -152,9 +150,11 @@
     if (self.isMute) {
         [self.manager unmute];
         self.isMute=NO;
+        sender.selected = NO;
     }else{
         [self.manager mute];
         self.isMute = YES;
+        sender.selected = YES;
     }
 }
 
@@ -162,40 +162,43 @@
     if (self.enableSpeaker) {
         [self.manager disableSpeaker];
         self.enableSpeaker = NO;
+        sender.selected = NO;
     }else{
         [self.manager enableSpeaker];
         self.enableSpeaker = YES;
+        sender.selected = YES;
     }
 }
 
-- (IBAction)toggleCam:(id)sender {
+- (IBAction)toggleCam:(UIButton*)sender {
     if (self.hideCam) {
         [self.manager showCam];
 //        [self.remoteRenderView setHidden:NO];
         self.hideCam = NO;
+        sender.selected = NO;
     }else{
         [self.manager hideCam];
 //        [self.remoteRenderView setHidden:YES];
         self.hideCam = YES;
+        sender.selected = YES;
     }
 }
 
-- (IBAction)togglePreviewCam:(id)sender {
+- (IBAction)togglePreviewCam:(UIButton*)sender {
     if (self.hideSelfCam) {
         self.selfCamView.hidden = NO;
         self.hideSelfCam = NO;
+        sender.selected = NO;
     }else{
         self.selfCamView.hidden = YES;
         self.hideSelfCam = YES;
+        sender.selected = YES;
     }
 }
 
 - (IBAction)switchCamera:(UIButton *)sender {
-    if (self.canSwitchNow) {
-        self.canSwitchNow = NO;
-        [self.manager switchCamera];
-        [self performSelector:@selector(setCanSwitchNow:) withObject:@(YES) afterDelay:2];
-    }
-    
+    sender.enabled = NO;
+    [self.manager switchCamera];
+    sender.enabled = YES;
 }
 @end
