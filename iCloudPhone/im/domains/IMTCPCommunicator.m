@@ -167,7 +167,7 @@
 - (void)send:(NSDictionary*) data{
     NSInteger type = [[[data valueForKey:HEAD_SECTION_KEY] valueForKey:DATA_TYPE_KEY] integerValue];
 #if COMMUNICATOR_DEBUG
-    NSLog(@"发送的数据格式：%@",data);
+    NSLog(@"[账号:%@]:发出的数据：%@",[data valueForKey:SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY],data);
 #endif
     [self sendRequest:data type:type];
 }
