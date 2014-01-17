@@ -167,7 +167,7 @@
     UILabel* nameLabel = (UILabel*) [cell.contentView viewWithTag:2];
     UILabel* numberLabel = (UILabel*) [cell.contentView viewWithTag:3];
     UIImageView* statusView = (UIImageView*) [cell.contentView viewWithTag:4];
-    [avatarView setImageWithURL:[NSURL URLWithString:record.peerAvatar] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    [avatarView setImageWithURL:[NSURL URLWithString:record.peerAvatar] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     [nameLabel setText:record.peerNick];
     [numberLabel setText:record.peerNumber];
     [statusView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_ico",record.status]]];

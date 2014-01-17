@@ -205,6 +205,7 @@
 		BA06AFAD18783A8E0099C3F7 /* Recent+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BA06AFAC18783A8E0099C3F7 /* Recent+CRUD.m */; };
 		BA06AFAE187873910099C3F7 /* iCloudPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB0187873910099C3F7 /* iCloudPhone.storyboard */; };
 		BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB11878757B0099C3F7 /* zh-cn.strings */; };
+		BA0BD0081887EDCC00E52D11 /* IMManagerImp in Resources */ = {isa = PBXBuildFile; fileRef = BA0BD0071887EDCC00E52D11 /* IMManagerImp */; };
 		BA1A74D7187A780A0071E83F /* IMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1A74D6187A780A0071E83F /* IMUtils.m */; };
 		BA2BC1291885F691001EB5C3 /* IMTipImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2BC1281885F691001EB5C3 /* IMTipImp.m */; };
 		BA338B55187E839B00242DAF /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B54187E839B00242DAF /* Message.m */; };
@@ -220,6 +221,16 @@
 		BA9845C218718D5C00F5AF83 /* IMRecentContactDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9845C118718D5C00F5AF83 /* IMRecentContactDetailsViewController.m */; };
 		BAAEA49018726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
 		BAAEA49118726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
+		BABFEB151888412300FDB696 /* ALAlertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BABFEB091888412300FDB696 /* ALAlertBanner.m */; };
+		BABFEB161888412300FDB696 /* ALAlertBannerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BABFEB0B1888412300FDB696 /* ALAlertBannerManager.m */; };
+		BABFEB171888412300FDB696 /* bannerAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB0D1888412300FDB696 /* bannerAlert.png */; };
+		BABFEB181888412300FDB696 /* bannerAlert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB0E1888412300FDB696 /* bannerAlert@2x.png */; };
+		BABFEB191888412300FDB696 /* bannerFailure.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB0F1888412300FDB696 /* bannerFailure.png */; };
+		BABFEB1A1888412300FDB696 /* bannerFailure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB101888412300FDB696 /* bannerFailure@2x.png */; };
+		BABFEB1B1888412300FDB696 /* bannerNotify.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB111888412300FDB696 /* bannerNotify.png */; };
+		BABFEB1C1888412300FDB696 /* bannerNotify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB121888412300FDB696 /* bannerNotify@2x.png */; };
+		BABFEB1D1888412300FDB696 /* bannerSuccess.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB131888412300FDB696 /* bannerSuccess.png */; };
+		BABFEB1E1888412300FDB696 /* bannerSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB141888412300FDB696 /* bannerSuccess@2x.png */; };
 		BAC4A0DF187CE1E200BC856F /* ItelBookInterfaceImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */; };
 		BADDFD2418768C4F00D10DDC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BADDFD2218768C4F00D10DDC /* Model.xcdatamodeld */; };
 		BADDFD681876901500D10DDC /* IMCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BADDFD671876901500D10DDC /* IMCoreDataManager.m */; };
@@ -602,6 +613,7 @@
 		BA06AFAC18783A8E0099C3F7 /* Recent+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Recent+CRUD.m"; sourceTree = "<group>"; };
 		BA06AFAF187873910099C3F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iCloudPhone.storyboard; sourceTree = "<group>"; };
 		BA06AFB11878757B0099C3F7 /* zh-cn.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-cn.strings"; sourceTree = "<group>"; };
+		BA0BD0071887EDCC00E52D11 /* IMManagerImp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IMManagerImp; sourceTree = "<group>"; };
 		BA1A74D5187A780A0071E83F /* IMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMUtils.h; sourceTree = "<group>"; };
 		BA1A74D6187A780A0071E83F /* IMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMUtils.m; sourceTree = "<group>"; };
 		BA2BC1261885F55E001EB5C3 /* IMTip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMTip.h; sourceTree = "<group>"; };
@@ -631,6 +643,19 @@
 		BAAEA48D187256CD00C05BCF /* IMDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManager.h; sourceTree = "<group>"; };
 		BAAEA48E18726DF200C05BCF /* IMRecentContactItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRecentContactItem.h; sourceTree = "<group>"; };
 		BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRecentContactItem.m; sourceTree = "<group>"; };
+		BABFEB071888412300FDB696 /* ALAlertBanner+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAlertBanner+Private.h"; sourceTree = "<group>"; };
+		BABFEB081888412300FDB696 /* ALAlertBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAlertBanner.h; sourceTree = "<group>"; };
+		BABFEB091888412300FDB696 /* ALAlertBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAlertBanner.m; sourceTree = "<group>"; };
+		BABFEB0A1888412300FDB696 /* ALAlertBannerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAlertBannerManager.h; sourceTree = "<group>"; };
+		BABFEB0B1888412300FDB696 /* ALAlertBannerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAlertBannerManager.m; sourceTree = "<group>"; };
+		BABFEB0D1888412300FDB696 /* bannerAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerAlert.png; sourceTree = "<group>"; };
+		BABFEB0E1888412300FDB696 /* bannerAlert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerAlert@2x.png"; sourceTree = "<group>"; };
+		BABFEB0F1888412300FDB696 /* bannerFailure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerFailure.png; sourceTree = "<group>"; };
+		BABFEB101888412300FDB696 /* bannerFailure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerFailure@2x.png"; sourceTree = "<group>"; };
+		BABFEB111888412300FDB696 /* bannerNotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerNotify.png; sourceTree = "<group>"; };
+		BABFEB121888412300FDB696 /* bannerNotify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerNotify@2x.png"; sourceTree = "<group>"; };
+		BABFEB131888412300FDB696 /* bannerSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerSuccess.png; sourceTree = "<group>"; };
+		BABFEB141888412300FDB696 /* bannerSuccess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerSuccess@2x.png"; sourceTree = "<group>"; };
 		BAC4A0DD187CE1E200BC856F /* ItelBookInterfaceImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelBookInterfaceImp.h; sourceTree = "<group>"; };
 		BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelBookInterfaceImp.m; sourceTree = "<group>"; };
 		BADDFD2318768C4F00D10DDC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -1037,6 +1062,7 @@
 		479EF00C1859D47C0012EE29 /* im */ = {
 			isa = PBXGroup;
 			children = (
+				BABFEB061888412300FDB696 /* ALAlertBanner */,
 				BA1A74D4187A77F40071E83F /* utils */,
 				BA8242FA18758E8A001903CE /* resources */,
 				BA959A9118605639009B8A4C /* timer */,
@@ -1088,6 +1114,7 @@
 				479EF0231859D47C0012EE29 /* IMEngineImp.m */,
 				479EF0241859D47C0012EE29 /* IMManagerImp.h */,
 				479EF0251859D47C0012EE29 /* IMManagerImp.m */,
+				BA0BD0071887EDCC00E52D11 /* IMManagerImp */,
 				479EF0261859D47C0012EE29 /* IMMessageParserImp.h */,
 				479EF0271859D47C0012EE29 /* IMMessageParserImp.m */,
 				479EF0281859D47C0012EE29 /* IMSeqenceGen.h */,
@@ -1501,6 +1528,34 @@
 			path = timer;
 			sourceTree = "<group>";
 		};
+		BABFEB061888412300FDB696 /* ALAlertBanner */ = {
+			isa = PBXGroup;
+			children = (
+				BABFEB071888412300FDB696 /* ALAlertBanner+Private.h */,
+				BABFEB081888412300FDB696 /* ALAlertBanner.h */,
+				BABFEB091888412300FDB696 /* ALAlertBanner.m */,
+				BABFEB0A1888412300FDB696 /* ALAlertBannerManager.h */,
+				BABFEB0B1888412300FDB696 /* ALAlertBannerManager.m */,
+				BABFEB0C1888412300FDB696 /* Images */,
+			);
+			path = ALAlertBanner;
+			sourceTree = "<group>";
+		};
+		BABFEB0C1888412300FDB696 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BABFEB0D1888412300FDB696 /* bannerAlert.png */,
+				BABFEB0E1888412300FDB696 /* bannerAlert@2x.png */,
+				BABFEB0F1888412300FDB696 /* bannerFailure.png */,
+				BABFEB101888412300FDB696 /* bannerFailure@2x.png */,
+				BABFEB111888412300FDB696 /* bannerNotify.png */,
+				BABFEB121888412300FDB696 /* bannerNotify@2x.png */,
+				BABFEB131888412300FDB696 /* bannerSuccess.png */,
+				BABFEB141888412300FDB696 /* bannerSuccess@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		BAE9C90A187C31C700E41A9E /* interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -1675,6 +1730,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4757D0551855C5F0001A9639 /* itel输入提示.png in Resources */,
+				BABFEB171888412300FDB696 /* bannerAlert.png in Resources */,
+				BABFEB1D1888412300FDB696 /* bannerSuccess.png in Resources */,
 				BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */,
 				479DC49D183A544200C3F3F2 /* 广告.png in Resources */,
 				478594C0185026FF00AFF6BF /* tab_bar.png in Resources */,
@@ -1688,12 +1745,15 @@
 				BA8242FC18758EA2001903CE /* jgb.m4a in Resources */,
 				479ED42C186C65C40084EED1 /* itelLOGO.png in Resources */,
 				47E2DB8E185985C800D455EF /* 本机联系人.png in Resources */,
+				BABFEB1A1888412300FDB696 /* bannerFailure@2x.png in Resources */,
+				BABFEB1B1888412300FDB696 /* bannerNotify.png in Resources */,
 				47E2DB9518598B0500D455EF /* 邀请.png in Resources */,
 				479ED42E186C66290084EED1 /* AboutLogo.png in Resources */,
 				BA06AFAE187873910099C3F7 /* iCloudPhone.storyboard in Resources */,
 				47E05DC318519C9C009FDCED /* 头像.png in Resources */,
 				47E2DB9C185997F000D455EF /* 登录logo.png in Resources */,
 				4757D0591855CAD6001A9639 /* 短信提示.png in Resources */,
+				BABFEB1C1888412300FDB696 /* bannerNotify@2x.png in Resources */,
 				47E05DC018517418009FDCED /* searchuser.png in Resources */,
 				4797E8D018855A710075BD9B /* area.sqlite in Resources */,
 				47E05DC118517418009FDCED /* checkAddress.png in Resources */,
@@ -1701,6 +1761,10 @@
 				47B89DDF1834D40000022FE5 /* InfoPlist.strings in Resources */,
 				478814051839E7120085224D /* mockhead.png in Resources */,
 				4757D0511855C078001A9639 /* 企业注册.png in Resources */,
+				BABFEB1E1888412300FDB696 /* bannerSuccess@2x.png in Resources */,
+				BA0BD0081887EDCC00E52D11 /* IMManagerImp in Resources */,
+				BABFEB191888412300FDB696 /* bannerFailure.png in Resources */,
+				BABFEB181888412300FDB696 /* bannerAlert@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1825,6 +1889,7 @@
 				479AD2EB18862AB2009B3278 /* Area+toString.m in Sources */,
 				479F138F186178C7006DF67B /* HostHeadImageCell.m in Sources */,
 				473748CF1863E5A500F112AF /* HostEditQQViewController.m in Sources */,
+				BABFEB151888412300FDB696 /* ALAlertBanner.m in Sources */,
 				479EF0651859D47C0012EE29 /* IMSuggestResultCell.m in Sources */,
 				47A10DA71865951000FB9FED /* PassWayViewController.m in Sources */,
 				479EF05C1859D47C0012EE29 /* IMSessionPeriodRequestMessageBuilder.m in Sources */,
@@ -1844,6 +1909,7 @@
 				47A0DEEE1862D56200BD28AB /* UIImage+Compress.m in Sources */,
 				478813DF1839C35E0085224D /* USArrayWrapper.m in Sources */,
 				479F13981861791B006DF67B /* HostSexCell.m in Sources */,
+				BABFEB161888412300FDB696 /* ALAlertBannerManager.m in Sources */,
 				47952D9418582DBA0044CF64 /* MBProgressHUD.m in Sources */,
 				475165571875683500628C8A /* MoreSIgnOutCell.m in Sources */,
 				47A10D9D18654AF500FB9FED /* SecurityChangePasswordViewController.m in Sources */,
@@ -2143,7 +2209,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "iTel 2.0Test";
-				PROVISIONING_PROFILE = "4E244975-9B18-4BE3-B2A5-57EC0BC1C21B";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -2167,7 +2233,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "iTel 2.0Test";
-				PROVISIONING_PROFILE = "4E244975-9B18-4BE3-B2A5-57EC0BC1C21B";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

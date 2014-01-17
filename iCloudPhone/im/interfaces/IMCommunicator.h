@@ -25,4 +25,6 @@
 - (void) setupIP:(NSString*) ip;
 
 - (void) setupPort:(u_int16_t) port;
+
+- (void) tearDown;
 @end

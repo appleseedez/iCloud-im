@@ -47,7 +47,7 @@ static NSString* kOperationReason = @"reason";
 
 #pragma mark - life
 - (void) setup{
-    [self.avatarView setImageWithURL:[NSURL URLWithString:self.currentRecent.peerAvatar] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    [self.avatarView setImageWithURL:[NSURL URLWithString:self.currentRecent.peerAvatar] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     self.nameLabel.text =self.currentRecent.peerRealName;
     self.nickLabel.text = self.currentRecent.peerNick;
     self.numberLabel.text = self.currentRecent.peerNumber;

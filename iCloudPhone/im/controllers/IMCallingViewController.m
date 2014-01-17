@@ -52,22 +52,24 @@ static int soundCount;
 }
 
 - (IBAction)cancelCalling:(UIButton *)sender {
-    NSMutableDictionary* cancelCallNotifyMut = [self.callingNotify.userInfo mutableCopy];
-    [cancelCallNotifyMut addEntriesFromDictionary:@{
-                                                  SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
-                                                  }];
-    [self.manager haltSession:cancelCallNotifyMut];
+    NSDictionary* cancelCallParams =  @{
+                                                                  SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[[self.manager myState] valueForKey:kPeerAccount],
+                                                                  SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self.manager myState] valueForKey:kMyAccount],
+                                                                  SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
+                                                                  };
+    [self.manager haltSession:cancelCallParams];
 //    [self sessionClosed:nil];
 }
 
 - (void) setup{
     
-    self.peerAccountLabel.text = [NSString stringWithFormat:@"呼叫用户 %@",[self.callingNotify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]];
-   ItelUser* peerUser =  [[ItelAction action] userInFriendBook:[self.callingNotify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]];
+
+   ItelUser* peerUser =  [[ItelAction action] userInFriendBook:[[self.manager myState] valueForKey:kPeerAccount]];
+    self.peerAccountLabel.text = [NSString stringWithFormat:@"呼叫用户 %@",peerUser.nickName];
     self.PeerAvatarImageView.layer.cornerRadius = 10;
     self.PeerAvatarImageView.layer.masksToBounds = YES;
     
-    [self.PeerAvatarImageView setImageWithURL:[NSURL URLWithString:peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    [self.PeerAvatarImageView setImageWithURL:[NSURL URLWithString:peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     //开始拨号了。播放声音
     soundCount = 0;//给拨号音计数，响八次就可以结束
     //系统声音播放是一个异步过程。要循环播放则必须借助回调

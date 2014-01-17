@@ -145,7 +145,7 @@
         cell.nameLabel.text = userItem.itelNum;
     }
     cell.numberLabel.text = userItem.itelNum;
-    [cell.avatarView setImageWithURL:[NSURL URLWithString: userItem.imageurl ] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+    [cell.avatarView setImageWithURL:[NSURL URLWithString: userItem.imageurl ] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     
     return cell;
 }
@@ -173,10 +173,8 @@
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
         return;
     }
-//    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
-//                                                                                                                       SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:peerAccount,
-//                                                                                                                       SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self.manager myAccount]
-//                                                                                                                       }];
+    sender.backgroundColor =[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1.0f];
+    sender.titleLabel.textColor = [UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f];
     [self.manager dial:peerAccount];
 }
 - (IBAction)buttonPress:(UIButton*)sender{
@@ -227,7 +225,7 @@
     UILabel* itelTag = (UILabel*) [self.suggestBtnView viewWithTag:4];
     if ([self.currentSuggestDataSource count]) {
         ItelUser* firstSuggestUser = [self.currentSuggestDataSource firstObject];
-        [suggestClosestPeerAvatar setImageWithURL:[NSURL URLWithString:firstSuggestUser.imageurl] placeholderImage:[UIImage imageNamed:@"peerAvatar"]];
+        [suggestClosestPeerAvatar setImageWithURL:[NSURL URLWithString:firstSuggestUser.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
         [suggestClosestPeerNameLabel setText:firstSuggestUser.nickName];
         if ([firstSuggestUser.nickName isEqualToString:BLANK_STRING]) {
             [suggestClosestPeerNameLabel setText:firstSuggestUser.itelNum];
