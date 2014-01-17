@@ -268,10 +268,8 @@
  *
  *  @return void
  */
-static int count = 0;
 - (void) sessionNegotiation{
     // 1. 此时初始化媒体引擎
-    NSLog(@"第%d次",++count);
     [self.engine initNetwork];
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
@@ -516,7 +514,8 @@ static int count = 0;
     self.monitor = nil;
     NSString* haltType = [notify.userInfo valueForKey:SESSION_HALT_FIELD_TYPE_KEY];
     if ([SESSION_HALT_FILED_ACTION_BUSY isEqualToString:haltType]) {
-        [self endSession];
+        [self performSelector:@selector(endSession) withObject:nil afterDelay:2];
+//        [self endSession];
     }else if ([SESSION_HALT_FILED_ACTION_REFUSE isEqualToString:haltType]){
         self.recentLog = @{
                            kStatus:STATUS_REFUSED,
@@ -821,6 +820,7 @@ static int count = 0;
     
     [self.engine tearDown];
     [self stopCommunicationCounting];
+    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
     
 }
 
