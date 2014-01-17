@@ -123,7 +123,7 @@
                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                                                   }];
     
-    NSLog(@"通话中界面的业务数据：%@",endSessionDataMut);
+    NSLog(@"通话终止时按键方提供的数据：%@",endSessionDataMut);
     //终止会话
     [self.manager haltSession:endSessionDataMut];
     [self sessionClosed:nil];

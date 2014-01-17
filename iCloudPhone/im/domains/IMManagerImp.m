@@ -82,6 +82,9 @@
 }
 #pragma mark - callbacks
 - (void) sessionInited:(NSNotification*) notify{
+    //移除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIGNAL_ERROR_NOTIFICATION object:nil];
 #if SIGNAL_MESSAGE
     NSLog(@"收到信令服务器的通话查询成功响应：%@",notify.userInfo);
 #endif
@@ -112,9 +115,11 @@
 
     // 使用主叫通信链路信令构造器构造通信链路数据.
     self.messageBuilder = [[IMSessionPeriodRequestMessageBuilder alloc] init];
+    //7. 注册接收对方信令的通知.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionDataReceived:) name:SESSION_PERIOD_NOTIFICATION object:nil];
     //主叫方组装通信链路数据,发送给peer 不再需要传递数据.直接从manager.state里面去取
     [self sessionNegotiation];
-    //6. 设置10秒超时，如果没有收到接受通话的回复则转到拒绝流程
+    //6. 设置40秒超时，如果没有收到接受通话的回复则转到拒绝流程
     [self.monitor invalidate];
     self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_peer_pickup_queue", DISPATCH_QUEUE_CONCURRENT)];
 }
@@ -124,9 +129,11 @@
     //终止掉超时定时器.这样,后续流程才能进行下去.
     [self.monitor invalidate];
     self.monitor = nil;
-    //查询失败了.终止session
-    [self restoreState];
+    //移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIGNAL_ERROR_NOTIFICATION object:nil];
+    //查询失败了.终止session
+    [self endSession];
 
     // 提示用户 对方不在线
     [[IMTipImp defaultTip] showTip:@"对方不在线"];
@@ -195,7 +202,7 @@
         [response.userInfo setValue:[NSNumber numberWithBool:self.isVideoCall] forKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO];
         //通知界面，弹出通话接听界面:[self sessionPeriodResponse:notify]
         [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:nil userInfo:response.userInfo];
-        
+        NSLog(@"被叫方收到的数据:%@",response.userInfo);
         //开启会话，设置处于占线状态 只要是收到了呼叫,被叫方立刻进入占线状态
         if (NO == [self sessionStartedWithAccount:[response.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]] ) {
             return;
@@ -230,7 +237,7 @@
         return;
     }
     //1.1.移除通话查询请求成功的通知.因为只有下次主叫,又会重新注册接收该通知
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_PERIOD_NOTIFICATION object:nil];
     //2. 通话查询请求
     //2.1 注册账号查询成功通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
@@ -261,14 +268,16 @@
  *
  *  @return void
  */
+static int count = 0;
 - (void) sessionNegotiation{
     // 1. 此时初始化媒体引擎
+    NSLog(@"第%d次",++count);
     [self.engine initNetwork];
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
 
     // 3.获取本机natType
-    NatType natType = [self.engine natType];
+    NatType natType = StunTypeBlocked;
 #if MANAGER_DEBUG
     NSLog(@"本机的NAT类型：%d",natType);
 #endif
@@ -313,8 +322,7 @@
     NSLog(@"[账号:%@] >>>> [账号:%@] \n %@",[self.state valueForKey:kMyAccount],[self.state valueForKey:kPeerAccount],data);
 #endif
     
-    //7. 注册接收对方信令的通知.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionDataReceived:) name:SESSION_PERIOD_NOTIFICATION object:nil];
+
     //8. 发送通信所需的数据
     [self.TCPcommunicator send:data];
     // 8. 转向
@@ -373,7 +381,6 @@
 }
 //如果超时未收到信令业务服务器的通话查询回复.则终止流程(通过终止接收信令服务器的通话查询返回.
 - (void) haltCallingProgress{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
     [self endSession];
     //提示用户
     NSLog(@"业务服务器异常，请稍后再试");
