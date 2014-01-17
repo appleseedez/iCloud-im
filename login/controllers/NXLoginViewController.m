@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 
 @end
-
+static int loginCount=0;
 @implementation NXLoginViewController
 #pragma  mark - 点击空白退出键盘
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -63,7 +63,7 @@
          self.txtInuptCheckMessage.text=@"输入不正确";
     }
     else{
-        
+        self.btnLogin.enabled=NO;
         [self requestToLogin1];
     }
 }
@@ -74,7 +74,8 @@
     [self.actWaitingToLogin startAnimating];
     NSString *url=[NSString stringWithFormat:@"%@/login",SIGNAL_SERVER];
     
-    
+    loginCount ++;
+    NSLog(@"登录了%d次",loginCount);
     
     
     NSDictionary *parameters=  @{@"itel": self.txtUserCloudNumber.text,@"password":self.txtUserPassword.text,@"type":@"IOS",@"_spring_security_remember_me":@"true"};
@@ -86,7 +87,6 @@
     void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject){
         
         id json=responseObject;
-        NSLog(@"返回的内容：%@",json);
         
         if ([json isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic=[json objectForKey:@"message"];
@@ -114,11 +114,12 @@
                 [[ItelAction action] checkAddressBookMatchingItel];
                 [[ItelAction action] getItelBlackList:0];
                 [[ItelAction action] getItelFriendList:0];
-                
+                self.btnLogin.enabled=YES;
             }
             else {
                 [self.actWaitingToLogin stopAnimating];
                 self.txtInuptCheckMessage.text=[dic objectForKey:@"msg"];
+                self.btnLogin.enabled=YES;
             }
         }//如果请求失败 则执行failure
     };
@@ -141,8 +142,8 @@
     [super viewDidLoad];
     [self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
     self.actWaitingToLogin.hidesWhenStopped=YES;
-    self.txtUserCloudNumber.text=@"1000003";
-    self.txtUserPassword.text=@"123456";
+    self.txtUserCloudNumber.text=@"500001";
+    self.txtUserPassword.text=@"111111";
   
     NXImageView *logo=[[NXImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 75)];
     [logo setRect:3 cornerRadius:10 borderColor:[UIColor whiteColor]];
