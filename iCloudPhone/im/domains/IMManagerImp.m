@@ -50,6 +50,8 @@
     //启动时, 每个用户的state都是空的.
     //TODO:如果正在拨打的情况下重连.可以在断开前把数据保存在userDefaults里面.用于恢复
     [self restoreState];
+    // 1. 此时初始化媒体引擎
+    [self.engine initNetwork];
 }
 
 /**
@@ -269,8 +271,6 @@
  *  @return void
  */
 - (void) sessionNegotiation{
-    // 1. 此时初始化媒体引擎
-    [self.engine initNetwork];
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
 
@@ -818,10 +818,10 @@
     }
     [self restoreState];
     
-    [self.engine tearDown];
+//    [self.engine tearDown];
     [self stopCommunicationCounting];
     [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
-    
+    [self.engine stopTransport];
 }
 
 - (void) restoreState{

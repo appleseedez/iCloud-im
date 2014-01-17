@@ -111,7 +111,7 @@ UIImageView* _pview_local;
 - (void)initMedia{
     // 首先，初始化媒体。此时返回的m_type可以表明本机是否有能力进行视频。
     self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeNone);
-    
+   // TODO:在媒体初始化时,获取访问摄像头和麦克的权限. 另外如果没有获取到这些权限应该怎么办?
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
         if (granted) {
             self.canVideoCalling = YES;
@@ -390,8 +390,9 @@ UIImageView* _pview_local;
     self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
 }
 - (void)tearDown{
-    
-    self.pInterfaceApi->Terminate();
+    [self stopTransport];
+    bool ret  = self.pInterfaceApi->Terminate();
+    NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<关闭引擎>>>>>>>>>>>>>>:%d",ret);
 }
 
 - (void)keepSessionAlive:(NSString*) probeServerIP port:(NSInteger)port{

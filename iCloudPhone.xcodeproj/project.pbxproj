@@ -205,7 +205,6 @@
 		BA06AFAD18783A8E0099C3F7 /* Recent+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BA06AFAC18783A8E0099C3F7 /* Recent+CRUD.m */; };
 		BA06AFAE187873910099C3F7 /* iCloudPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB0187873910099C3F7 /* iCloudPhone.storyboard */; };
 		BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB11878757B0099C3F7 /* zh-cn.strings */; };
-		BA0BD0081887EDCC00E52D11 /* IMManagerImp in Resources */ = {isa = PBXBuildFile; fileRef = BA0BD0071887EDCC00E52D11 /* IMManagerImp */; };
 		BA1A74D7187A780A0071E83F /* IMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1A74D6187A780A0071E83F /* IMUtils.m */; };
 		BA2BC1291885F691001EB5C3 /* IMTipImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2BC1281885F691001EB5C3 /* IMTipImp.m */; };
 		BA338B55187E839B00242DAF /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B54187E839B00242DAF /* Message.m */; };
@@ -613,7 +612,6 @@
 		BA06AFAC18783A8E0099C3F7 /* Recent+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Recent+CRUD.m"; sourceTree = "<group>"; };
 		BA06AFAF187873910099C3F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iCloudPhone.storyboard; sourceTree = "<group>"; };
 		BA06AFB11878757B0099C3F7 /* zh-cn.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-cn.strings"; sourceTree = "<group>"; };
-		BA0BD0071887EDCC00E52D11 /* IMManagerImp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IMManagerImp; sourceTree = "<group>"; };
 		BA1A74D5187A780A0071E83F /* IMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMUtils.h; sourceTree = "<group>"; };
 		BA1A74D6187A780A0071E83F /* IMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMUtils.m; sourceTree = "<group>"; };
 		BA2BC1261885F55E001EB5C3 /* IMTip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMTip.h; sourceTree = "<group>"; };
@@ -1114,7 +1112,6 @@
 				479EF0231859D47C0012EE29 /* IMEngineImp.m */,
 				479EF0241859D47C0012EE29 /* IMManagerImp.h */,
 				479EF0251859D47C0012EE29 /* IMManagerImp.m */,
-				BA0BD0071887EDCC00E52D11 /* IMManagerImp */,
 				479EF0261859D47C0012EE29 /* IMMessageParserImp.h */,
 				479EF0271859D47C0012EE29 /* IMMessageParserImp.m */,
 				479EF0281859D47C0012EE29 /* IMSeqenceGen.h */,
@@ -1762,7 +1759,6 @@
 				478814051839E7120085224D /* mockhead.png in Resources */,
 				4757D0511855C078001A9639 /* 企业注册.png in Resources */,
 				BABFEB1E1888412300FDB696 /* bannerSuccess@2x.png in Resources */,
-				BA0BD0081887EDCC00E52D11 /* IMManagerImp in Resources */,
 				BABFEB191888412300FDB696 /* bannerFailure.png in Resources */,
 				BABFEB181888412300FDB696 /* bannerAlert@2x.png in Resources */,
 			);
