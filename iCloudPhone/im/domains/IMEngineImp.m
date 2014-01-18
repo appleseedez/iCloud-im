@@ -190,11 +190,13 @@ UIImageView* _pview_local;
 
 - (int)tunnelWith:(NSDictionary*) params{
     bool __block ret = true;
-    dispatch_queue_t q = dispatch_get_main_queue();// dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);// dispatch_queue_create("com.itelland.p2ptunnelprivatequeue", DISPATCH_QUEUE_CONCURRENT );
+    TP2PPeerArgc __block argc;
+    dispatch_queue_t q =// dispatch_get_main_queue();// dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+    dispatch_queue_create("com.itelland.p2ptunnelprivatequeue", DISPATCH_QUEUE_CONCURRENT );
     dispatch_async(q, ^{
         //
         NSLog(@"开始获取p2p通道,%@", [NSDate date]);
-        TP2PPeerArgc argc;
+//        TP2PPeerArgc argc;
         //根据传入的useVideo参数,确定最终穿透以后是走音频还是视频.
         if ([self canVideoCalling]&&[[params valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]) {
             self.m_type = InitTypeVoeAndVie;
@@ -242,40 +244,76 @@ UIImageView* _pview_local;
 //            return -1;
             ret = false;
         }
-        NSLog(@"媒体类型:%d",self.m_type);
-        NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
-        long long  dTime =endTime - startTime;
-        NSLog(@"调用时间间隔：%@",[NSString stringWithFormat:@"%llu",dTime]);
         
-        NSLog(@"isLocal的状态：%d",argc.islocal);
-        if (argc.islocal)
-        {
-            NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
-            ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherLocalIP, argc.otherLocalPort);// 要判断返回值
-        }
-        else if (argc.isInter)
-        {
-            NSLog(@"外网可用[%s:%d]", argc.otherInterIP, argc.otherInterPort);
-            ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherInterIP, argc.otherInterPort);// 要判断返回值
-        }
-        else
-        {
-            NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
-            ret = self.pInterfaceApi->StartMedia(InitTypeVoe, argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
-        }
-        if (!ret)
-        {
-            NSLog(@"传输初期化失败");
-        }
-        // 如果穿透操作成功。则发送通知
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"媒体类型:%d",self.m_type);
+            NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
+            long long  dTime =endTime - startTime;
+            NSLog(@"调用时间间隔：%@",[NSString stringWithFormat:@"%llu",dTime]);
+            
+            NSLog(@"isLocal的状态：%d",argc.islocal);
+            if (argc.islocal)
+            {
+                NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
+                ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherLocalIP, argc.otherLocalPort);// 要判断返回值
+            }
+            else if (argc.isInter)
+            {
+                NSLog(@"外网可用[%s:%d]", argc.otherInterIP, argc.otherInterPort);
+                ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherInterIP, argc.otherInterPort);// 要判断返回值
+            }
+            else
+            {
+                NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
+                ret = self.pInterfaceApi->StartMedia(InitTypeVoe, argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
+            }
+            if (!ret)
+            {
+                NSLog(@"传输初期化失败");
+            }
 #if ENGINE_MSG
-        NSLog(@"到底你执行了多少次");
+            NSLog(@"到底你执行了多少次");
 #endif
-        if (ret) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
-        }else{
-            [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
-        }
+            if (ret) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
+            }else{
+                [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
+            }
+        });
+//        NSLog(@"媒体类型:%d",self.m_type);
+//        NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
+//        long long  dTime =endTime - startTime;
+//        NSLog(@"调用时间间隔：%@",[NSString stringWithFormat:@"%llu",dTime]);
+//        
+//        NSLog(@"isLocal的状态：%d",argc.islocal);
+//        if (argc.islocal)
+//        {
+//            NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
+//            ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherLocalIP, argc.otherLocalPort);// 要判断返回值
+//        }
+//        else if (argc.isInter)
+//        {
+//            NSLog(@"外网可用[%s:%d]", argc.otherInterIP, argc.otherInterPort);
+//            ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherInterIP, argc.otherInterPort);// 要判断返回值
+//        }
+//        else
+//        {
+//            NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
+//            ret = self.pInterfaceApi->StartMedia(InitTypeVoe, argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
+//        }
+//        if (!ret)
+//        {
+//            NSLog(@"传输初期化失败");
+//        }
+        // 如果穿透操作成功。则发送通知
+//#if ENGINE_MSG
+//        NSLog(@"到底你执行了多少次");
+//#endif
+//        if (ret) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
+//        }else{
+//            [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
+//        }
 
     });
 
