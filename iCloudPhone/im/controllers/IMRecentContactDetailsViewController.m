@@ -103,18 +103,17 @@ static NSString* kOperationReason = @"reason";
     request.sortDescriptors = @[];
     request.predicate = [NSPredicate predicateWithFormat:@"peerNumber = %@ and hostUserNumber = %@", self.currentRecent.peerNumber,[self.manager myAccount]];
     NSManagedObjectContext* currentContext = [[IMCoreDataManager defaulManager] managedObjectContext];
-    [currentContext performBlock:^{
-        NSError* error = nil;
-        NSArray* results =  [currentContext executeFetchRequest:request error:&error];
-        if (!error) {
-            for (Recent* r in results) {
-                [r delete];
-            }
-            [[IMCoreDataManager defaulManager] saveContext:currentContext];
-        }else{
-            [NSException exceptionWithName:@"database error" reason:@"core data 查询失败" userInfo:nil];
+    NSError* error = nil;
+    NSArray* results =  [currentContext executeFetchRequest:request error:&error];
+    if (!error) {
+        for (Recent* r in results) {
+            [r delete];
         }
-    }];
+        [[IMCoreDataManager defaulManager] saveContext:currentContext];
+    }else{
+        [NSException exceptionWithName:@"database error" reason:@"core data 查询失败" userInfo:nil];
+    }
+
 
 }
 #pragma mark - actionSheet delegate

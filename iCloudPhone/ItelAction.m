@@ -32,7 +32,7 @@
 }
 #pragma mark - 获得机主用户
 -(HostItelUser*)getHost{
-   return  [self.itelUserActionDelegate hostUser];
+    return  [self.itelUserActionDelegate hostUser];
 }
 #pragma mark - 设置机主用户
 -(void)setHostItelUser:(HostItelUser*)host{
@@ -40,7 +40,7 @@
 }
 #pragma mark - 获得通讯录
 -(AddressBook*) getAddressBook{
-     return  (AddressBook*)[self.itelBookActionDelegate getAddressBook];
+    return  (AddressBook*)[self.itelBookActionDelegate getAddressBook];
 }
 #pragma mark - 刷新itel好友列表
 
@@ -51,18 +51,15 @@
     [self.itelNetRequestActionDelegate refreshUserList:parameters];
 }
 -(void) getItelFriendListResponse:(id)data{
-   
-    NSArray *list = [data objectForKey:@"list"];
-    NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
-    [currentContext performBlock:^{
-        for (NSDictionary *dic in (NSArray*)list) {
-            ItelUser *user=[ItelUser userWithDictionary:dic inContext:currentContext];
-            [self.itelBookActionDelegate resetUserInFriendBook:user];
-        }
-        [[IMCoreDataManager defaulManager] saveContext:currentContext];
-    }];
-
     
+    NSArray *list = [data objectForKey:@"list"];
+    
+    NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
+    for (NSDictionary *dic in (NSArray*)list) {
+        ItelUser *user=[ItelUser userWithDictionary:dic inContext:currentContext];
+        [self.itelBookActionDelegate resetUserInFriendBook:user];
+    }
+    [[IMCoreDataManager defaulManager] saveContext:currentContext];
     [self NotifyForNormalResponse:@"getItelList" parameters:data];
 }
 #pragma mark - 刷新黑名单列表
@@ -76,21 +73,19 @@
 -(void) getItelBlackListResponse:(id)data{
     NSArray *list = [data objectForKey:@"list"];
     NSManagedObjectContext* currentContext =[IMCoreDataManager defaulManager].managedObjectContext;
-    [currentContext performBlock:^{
-        for (NSDictionary *dic in (NSArray*)list) {
-            ItelUser *user=[ItelUser userWithDictionary:dic inContext:currentContext];
-            [self.itelBookActionDelegate resetUserInBlackBook:user];
-        }
-        [[IMCoreDataManager defaulManager] saveContext:currentContext];
-    }];
-
-    
+    for (NSDictionary *dic in (NSArray*)list) {
+        ItelUser *user=[ItelUser userWithDictionary:dic inContext:currentContext];
+        [self.itelBookActionDelegate resetUserInBlackBook:user];
+    }
+    [[IMCoreDataManager defaulManager] saveContext:currentContext];
     [self NotifyForNormalResponse:@"getBlackList" parameters:data];
+    
+    
 }
 #pragma mark - 添加一个好友
 /*
-  1 获取机主 token  itel userID
-  2 发送请求
+ 1 获取机主 token  itel userID
+ 2 发送请求
  */
 //查询是否已经添加该联系人
 -(BOOL)checkItelAdded:(NSString*)itel{
@@ -99,11 +94,11 @@
 -(void)inviteItelUserFriend:(NSString*)itel{
     if (![self checkItelAdded:itel]) {
         
-    
-     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
-    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"hostItel":hostUser.itelNum,@"targetItel":itel,@"token":hostUser.token};
-    
-    [self.itelNetRequestActionDelegate addUser:parameters];
+        
+        HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+        NSDictionary *parameters = @{@"userId":hostUser.userId ,@"hostItel":hostUser.itelNum,@"targetItel":itel,@"token":hostUser.token};
+        
+        [self.itelNetRequestActionDelegate addUser:parameters];
     }
     else {
         NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"请不要重复发送邀请" };
@@ -124,7 +119,7 @@
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
     NSDictionary *parameters = @{@"userId":hostUser.userId ,@"hostItel":hostUser.itelNum,@"targetItel":itel,@"token":hostUser.token};
     [self.itelNetRequestActionDelegate delUser:parameters];
-
+    
 }
 //回调 1通知viewController  2从列表中删除
 -(void)delFriendFromItelBookResponse:(NSString*)itel{
@@ -150,24 +145,20 @@
         return;
     }
     NSManagedObjectContext* currentContext =hostUser.managedObjectContext;
-    [currentContext performBlock:^{
-        ItelUser* user;
-        NSPredicate* findByItelNum = [NSPredicate predicateWithFormat:@"itelNum = %@",itelNum];
-        NSArray* matched = [[hostUser.users filteredSetUsingPredicate:findByItelNum] allObjects];
-        if ([matched count]) {
-            user = matched[0];
-        }else{
-            user = [ItelUser userWithDictionary:userDic inContext:[IMCoreDataManager defaulManager].managedObjectContext];
-        }
-        [self.itelBookActionDelegate addUserToBlackBook:user];
-        //在block结尾保存数据
-        [[IMCoreDataManager defaulManager] saveContext:currentContext];
-    }];
-
-
- 
+    ItelUser* user;
+    NSPredicate* findByItelNum = [NSPredicate predicateWithFormat:@"itelNum = %@",itelNum];
+    NSArray* matched = [[hostUser.users filteredSetUsingPredicate:findByItelNum] allObjects];
+    if ([matched count]) {
+        user = matched[0];
+    }else{
+        user = [ItelUser userWithDictionary:userDic inContext:[IMCoreDataManager defaulManager].managedObjectContext];
+    }
+    [self.itelBookActionDelegate addUserToBlackBook:user];
+    //在block结尾保存数据
+    [[IMCoreDataManager defaulManager] saveContext:currentContext];
+    
     [self NotifyForNormalResponse:ADD_TO_BLACK_LIST_NOTIFICATION parameters:nil];
-
+    
 }
 
 #pragma mark - 从黑名单移除
@@ -197,17 +188,17 @@
  */
 -(void) checkAddressBookMatchingItel{
     
-//    dispatch_queue_t getPhones=dispatch_queue_create("getPhones", NULL);
-//    dispatch_async(getPhones, ^{
-        NSArray *phones =  [self.itelBookActionDelegate getAddressPhoneNumbers];
-        
-        [self.itelNetRequestActionDelegate checkAddressBookForItelUser:phones];
-//    });
+    //    dispatch_queue_t getPhones=dispatch_queue_create("getPhones", NULL);
+    //    dispatch_async(getPhones, ^{
+    NSArray *phones =  [self.itelBookActionDelegate getAddressPhoneNumbers];
+    
+    [self.itelNetRequestActionDelegate checkAddressBookForItelUser:phones];
+    //    });
     
     
 }
 /*
-  回调：
+ 回调：
  
  */
 -(void) checkAddressBookMatchingResponse:(NSArray*)matchingItelUsers{
@@ -217,8 +208,8 @@
 }
 #pragma mark - 编辑好友备注
 /*
-  1 发送请求 
-  2 请求返回成功 设置新的备注
+ 1 发送请求
+ 2 请求返回成功 设置新的备注
  */
 -(void) editUser:(NSString*)itel alias:(NSString*)alias{
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
@@ -228,26 +219,20 @@
 }
 
 -(void)editUserAliasResponse:(NSDictionary*)user{
-    NSManagedObjectID* __block userObjID= nil;
     NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
-    [currentContext performBlockAndWait:^{
-        ItelUser *u=[ItelUser userWithDictionary:user inContext:currentContext];
-        
-        [self.itelBookActionDelegate resetUserInFriendBook:u];
-        if (u.isBlack) {
-            [self.itelBookActionDelegate resetUserInBlackBook:u];
-        }
-        [[IMCoreDataManager defaulManager] saveContext:currentContext];
-        userObjID = u.objectID;
-    }];
-
-
-    ItelUser* u  =(ItelUser*)[currentContext objectWithID:userObjID];
+    ItelUser *u=[ItelUser userWithDictionary:user inContext:currentContext];
+    
+    [self.itelBookActionDelegate resetUserInFriendBook:u];
+    if (u.isBlack) {
+        [self.itelBookActionDelegate resetUserInBlackBook:u];
+    }
+    [[IMCoreDataManager defaulManager] saveContext:currentContext];
+    
     [self NotifyForNormalResponse:@"resetAlias" parameters:u];
 }
 #pragma mark - 查找陌生人
 /*
-  1 得到查找关键词 发网络请求
+ 1 得到查找关键词 发网络请求
  
  */
 -(void) searchStranger:(NSString*)searchMessage newSearch:(BOOL)newSearch{
@@ -270,10 +255,11 @@
 //回调
 -(void)uploadImageResponse:(NSDictionary*)response{
     
-   HostItelUser *hostUser = [self.itelUserActionDelegate hostUser];
+    HostItelUser *hostUser = [self.itelUserActionDelegate hostUser];
     NSString *imageUrl=[response objectForKey:@"data"];
     hostUser.imageUrl=imageUrl;
     [[IMCoreDataManager defaulManager]saveContext:hostUser.managedObjectContext];
+    
     [self NotifyForNormalResponse:@"modifyHost" parameters:response];
     
 }
@@ -299,7 +285,7 @@
 #pragma mark - 修改手机-发送短信验证码
 -(void)phoneCheckCode:(NSString*)checkCode phone:(NSString*)phone{
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
-   NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itelCode":hostUser.itelNum,@"token":hostUser.token,@"captcha":checkCode,@"phone":phone};
+    NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itelCode":hostUser.itelNum,@"token":hostUser.token,@"captcha":checkCode,@"phone":phone};
     [self.itelNetRequestActionDelegate modifyPhoneNumCheckCode:parameters];
 }
 -(void)phoneCheckCodeResponse:(id)response{
@@ -320,7 +306,7 @@
         [self NotifyForNormalResponse:@"resendMes" parameters:msg];
     }
     else{
-    [self NotifyForNormalResponse:@"resendMes" parameters:nil];
+        [self NotifyForNormalResponse:@"resendMes" parameters:nil];
     }
 }
 #pragma mark - 修改密保-查询密保
@@ -341,7 +327,7 @@
 -(void)modifyUserPasswordResponse:(NSDictionary*)response{
     
     [self NotifyForNormalResponse:@"changePassword" parameters:response];
-   
+    
 }
 #pragma mark - 回答密保问题
 -(void)securetyAnswserQuestion:(NSString*)question answser:(NSString*)answer{
@@ -389,7 +375,7 @@
 }
 #pragma mark - 获得本地消息列表
 -(NSArray*)getMessageList{
-   return  [self.itelMessageDelegate getSystemMessages];
+    return  [self.itelMessageDelegate getSystemMessages];
 }
 -(ItelBook*) getFriendBook{
     return [self.itelBookActionDelegate friendBook];
@@ -397,7 +383,7 @@
 #pragma mark - 处理好友邀请
 -(void)acceptFriendIvication:(NSString*)targetItel status:(NSString*)status{
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
-   NSDictionary *parameters = @{@"hostItel":hostUser.itelNum ,@"userId":hostUser.userId,@"targetItel":targetItel,@"status":status};
+    NSDictionary *parameters = @{@"hostItel":hostUser.itelNum ,@"userId":hostUser.userId,@"targetItel":targetItel,@"status":status};
     [self.itelNetRequestActionDelegate acceptIvitation:parameters];
 }
 -(void)acceptFriendIvicationResponse:(NSDictionary*)data{
@@ -420,7 +406,7 @@
 }
 //模糊查找好友(用过itel)
 -(NSArray*)searchInFirendBook:(NSString*)search{
-   return  [self.itelBookActionDelegate searchInfirendBook:search];
+    return  [self.itelBookActionDelegate searchInfirendBook:search];
 }
 -(ItelBook*)searchInFriendBookWithKeyPath:(NSString*)keyPath andSearch:(NSString*)search{
     ItelBook *result=[self.itelBookActionDelegate searchInFriendBookWithKeyPath:keyPath andSearch:search];
@@ -431,5 +417,6 @@
 -(void) NotifyForNormalResponse:(NSString*)name parameters:(id)parameters{
     NSDictionary *userInfo=@{@"isNormal": @"1",@"reason":@"1" };
     [[NSNotificationCenter defaultCenter]postNotificationName:name object:parameters userInfo:userInfo];
+    //TODO:统一保存
 }
 @end

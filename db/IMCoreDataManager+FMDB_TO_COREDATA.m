@@ -26,20 +26,12 @@
 -(void)insertAreaToCoreData
 {
     NSString *createSQL=@"SeLeCt * from area";
-    
-    
-    
     NSString *dbPath=[[NSBundle mainBundle]pathForResource:@"area" ofType:@"sqlite"];
     NSLog(@"数据库路径：%@",dbPath);
-    
-    
     FMDatabase *db=[FMDatabase databaseWithPath:dbPath];
-   
-    [db open];
-    
-     
     FMResultSet *result=[db executeQuery:createSQL];
     NSManagedObjectContext* currentContext = self.managedObjectContext;
+    [db open];
     while (result.next) {
         Area *area=[NSEntityDescription insertNewObjectForEntityForName:@"Area" inManagedObjectContext:currentContext];
          area.areaId=[NSNumber numberWithInt: [result intForColumn:@"id"]];
@@ -49,8 +41,10 @@
         area.code=[result stringForColumn:@"code"];
         area.capital=[NSNumber numberWithInt: [result intForColumn:@"capital"]];
     }
-    [db close];
     [self saveContext:currentContext];
+    [db close];
+    
+
 
 }
 @end

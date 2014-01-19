@@ -127,7 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cbu-55-eCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="512" y="-503"/>
+            <point key="canvasLocation" x="-1872" y="1141"/>
         </scene>
         <!--Edit Alias View Controller - 输入新备注-->
         <scene sceneID="bOi-sH-tsm">
@@ -177,7 +177,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7nJ-eQ-XtS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172" y="29"/>
+            <point key="canvasLocation" x="122" y="545"/>
         </scene>
         <!--People View Controller - 联系人-->
         <scene sceneID="PQl-96-iw6">
@@ -240,7 +240,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rt0-qi-mLA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="519" y="37"/>
+            <point key="canvasLocation" x="447" y="539"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="cdK-R4-Rky">
@@ -703,7 +703,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uX0-qR-YjN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2887" y="1747"/>
+            <point key="canvasLocation" x="-2585" y="1687"/>
         </scene>
         <!--Black List View Controller-->
         <scene sceneID="UXl-uH-jXj">
@@ -986,7 +986,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0TQ-SI-IuX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-333" y="2508"/>
+            <point key="canvasLocation" x="-739" y="2486"/>
         </scene>
         <!--Securety Question View Controller-->
         <scene sceneID="2v4-1Z-Xnl">
@@ -1105,7 +1105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E78-6o-rpL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="268" y="1982"/>
+            <point key="canvasLocation" x="224" y="1854"/>
         </scene>
         <!--Table View Controller - 通知推送-->
         <scene sceneID="4fX-Tu-odQ">
@@ -1470,7 +1470,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blO-2T-o8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1483" y="1213"/>
+            <point key="canvasLocation" x="-1625" y="733"/>
         </scene>
         <!--Host EditQQ View Controller - 编辑-->
         <scene sceneID="m73-lK-YyH">
@@ -1497,7 +1497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zt3-HS-hZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1566" y="1279"/>
+            <point key="canvasLocation" x="-952" y="1695"/>
         </scene>
         <!--Host Edit Sign View Controller - 编辑-->
         <scene sceneID="sXG-8r-pYN">
@@ -1690,7 +1690,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
-                                <inset key="contentInset" minX="0.0" minY="0.0" maxX="320" maxY="720"/>
+                                <inset key="contentInset" minX="0.0" minY="0.0" maxX="320" maxY="520"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1705,7 +1705,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oor-Hm-DyR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-317" y="191"/>
+            <point key="canvasLocation" x="-279" y="551"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="Nq9-f8-8mv">
@@ -1786,7 +1786,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTi-5G-2FS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2105" y="2580"/>
+            <point key="canvasLocation" x="-2165" y="2320"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="e79-9b-GI0">
@@ -1802,7 +1802,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCS-vI-4ja" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2366" y="2638"/>
+            <point key="canvasLocation" x="-2554" y="2361"/>
         </scene>
         <!--Add View Controller - 查询页面-->
         <scene sceneID="DsO-qn-mSy">
@@ -1859,7 +1859,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRi-KL-aMn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="37" y="-546"/>
+            <point key="canvasLocation" x="-585" y="336"/>
         </scene>
         <!--Recent Contact Details View Controller - 详情-->
         <scene sceneID="vsU-Bj-2vQ">
@@ -2020,7 +2020,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FN8-vr-0hw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1182" y="546"/>
+            <point key="canvasLocation" x="-1298" y="968"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="OFW-yw-ZZi">
@@ -2048,7 +2048,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjH-mb-lDv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-720" y="-264"/>
+            <point key="canvasLocation" x="-1378" y="320"/>
         </scene>
         <!--Address Book View Controller-->
         <scene sceneID="5pH-rE-wCJ">
@@ -2077,7 +2077,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bvr-A7-aFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-799" y="474"/>
+            <point key="canvasLocation" x="-943" y="388"/>
         </scene>
         <!--Search New Friend View Controller - 添加页面-->
         <scene sceneID="QiS-kH-E2Y">
@@ -2105,7 +2105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ldb-vv-JcW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1142" y="633"/>
+            <point key="canvasLocation" x="128" y="2478"/>
         </scene>
         <!--Stranger View Controller-->
         <scene sceneID="XOo-Zh-xJl">
@@ -2241,7 +2241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLh-zy-tHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2037" y="-517"/>
+            <point key="canvasLocation" x="929" y="203"/>
         </scene>
         <!--New Friend List View Controller - 查询结果-->
         <scene sceneID="w4C-FE-MO8">
@@ -2266,7 +2266,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znl-d6-Tcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1280" y="983"/>
+            <point key="canvasLocation" x="924" y="1147"/>
         </scene>
         <!--In Session View Controller-->
         <scene sceneID="dKB-Nr-hPr">
@@ -2458,7 +2458,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="884" y="1204"/>
+            <point key="canvasLocation" x="568" y="1174"/>
         </scene>
         <!--Dail View Controller-->
         <scene sceneID="Z6h-56-3Sa">
@@ -2941,7 +2941,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="649-Vj-9gs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="559" y="858"/>
+            <point key="canvasLocation" x="-135" y="1912"/>
         </scene>
         <!--Calling View Controller-->
         <scene sceneID="AU6-3U-6eC">
@@ -3037,7 +3037,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7PM-KB-2Xs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1544" y="625"/>
+            <point key="canvasLocation" x="1354" y="1367"/>
         </scene>
         <!--Answering View Controller-->
         <scene sceneID="TYr-bc-RzA">
@@ -3118,7 +3118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kgu-zw-56C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2498" y="963"/>
+            <point key="canvasLocation" x="1227" y="1768"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f7I-QK-0Og">
@@ -3136,7 +3136,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PhG-rh-LOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1270" y="758"/>
+            <point key="canvasLocation" x="-306" y="2486"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WVb-9Y-aS1">
@@ -3154,7 +3154,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iOU-Dr-vgt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1959" y="1544"/>
+            <point key="canvasLocation" x="881" y="1768"/>
         </scene>
         <!--Recent Contact List View Controller - 通话记录-->
         <scene sceneID="FUF-TP-Mgc">
@@ -3217,7 +3217,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1b-yl-8hd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2292" y="376"/>
+            <point key="canvasLocation" x="-2562" y="320"/>
         </scene>
         <!--Host Edit Email View Controller - 编辑-->
         <scene sceneID="mbv-CF-atV">
@@ -3244,7 +3244,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jJo-XW-nZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1219" y="1482"/>
+            <point key="canvasLocation" x="603" y="1866"/>
         </scene>
         <!--Security Change Password View Controller - 修改登录密码-->
         <scene sceneID="jJD-c3-sV1">
@@ -3355,7 +3355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkQ-jx-n5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172" y="1153"/>
+            <point key="canvasLocation" x="-148" y="1213"/>
         </scene>
         <!--Host Edit Nickname View Controller - 编辑-->
         <scene sceneID="IXo-9i-ZQx">
@@ -3457,7 +3457,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iB2-Gs-CAA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="704" y="1482"/>
+            <point key="canvasLocation" x="224" y="1240"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IVO-gl-vaY">
@@ -3494,7 +3494,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZVj-Hx-wPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104" y="-540"/>
+            <point key="canvasLocation" x="-2184" y="262"/>
         </scene>
         <!--Host Address View Controller-->
         <scene sceneID="zW9-vn-Tq9">

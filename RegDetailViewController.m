@@ -33,6 +33,33 @@
 static long currEditingTextTag=0;
 static float animatedDuration=1.0;
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField==self.txtItel) {
+        if (range.location>=12) {
+            return NO;
+        }
+        else return YES;
+    }
+    else if(textField==self.txtPassword){
+        if (range.location>=18) {
+            return NO;
+        }
+        else return YES;
+    }
+    else if(textField==self.txtRePassword){
+        if (range.location>=18) {
+            return NO;
+        }
+        else return YES;
+    }
+    else if(textField==self.txtPhoneNumber){
+        if (range.location>=11) {
+            return NO;
+        }
+        else return YES;
+    }
+    return YES;
+}
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     currEditingTextTag=textField.tag;
 }
@@ -53,7 +80,6 @@ static float animatedDuration=1.0;
         [foreward addTarget:self action:@selector(chanegeToNextText) forControlEvents:UIControlEventTouchUpInside];
         [foreward setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_inputAccessoryView addSubview:foreward];
-        
         UIButton *backward=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 44)];
         [backward setTitle:@"上一个" forState:UIControlStateNormal];
         backward.backgroundColor=[UIColor whiteColor];
@@ -85,7 +111,6 @@ static float animatedDuration=1.0;
         case TXT_PHONE_NUMBER_TAG:
             nextTag=TXT_ITEL_TAG;
             break;
-            
         default:
             break;
     }
@@ -108,7 +133,6 @@ static float animatedDuration=1.0;
         case TXT_ITEL_TAG:
             nextTag=TXT_PHONE_NUMBER_TAG;
             break;
-            
         default:
             break;
     }
@@ -121,7 +145,6 @@ static float animatedDuration=1.0;
 -(void)setSubViewUI{
     [self.nextButton setUI];
     [self.tipView setUI];
-    
 }
 - (void)viewDidLoad
 {
@@ -232,6 +255,7 @@ static float animatedDuration=1.0;
     else {
          UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"验证失败" message:localCheck delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
+        [self stopHud];
     }
     
 }
@@ -240,15 +264,28 @@ static float animatedDuration=1.0;
  
  */
 -(NSString*)checkInputFormat{
+    if (![NXInputChecker checkEmpty:self.txtItel.text]) {
+       
+        return @"云号码不能为空";
+    }
     if (![NXInputChecker checkCloudNumber:self.txtItel.text]) {
         return @"云号码格式不正确";
     }
-    if (![NXInputChecker checkPassword:self.txtPassword.text]) {
-        return @"密码格式不正确";
+    if (![NXInputChecker checkEmpty:self.txtPassword.text]) {
+        return @"密码不能为空";
     }
+    
+    if (![NXInputChecker checkPassword:self.txtPassword.text]) {
+        return @"密码格式不正确，请输入长度大于6位的密码";
+    }
+    
     if (![self.txtPassword.text isEqualToString:self.txtRePassword.text]) {
         return @"两次输入密码不一致";
     }
+    if (![NXInputChecker checkEmpty:self.txtPhoneNumber.text]) {
+        return @"手机号码不能为空";
+    }
+
     if (![NXInputChecker checkPhoneNumberIsMobile:self.txtPhoneNumber.text]) {
         return @"手机号码格式不正确";
     }

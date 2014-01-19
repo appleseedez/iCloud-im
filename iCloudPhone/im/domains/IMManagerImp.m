@@ -52,6 +52,7 @@
     [self restoreState];
     // 1. 此时初始化媒体引擎
     [self.engine initNetwork];
+    
 }
 
 /**
@@ -61,6 +62,8 @@
 #if MANAGER_DEBUG
     NSLog(@"call tearDown");
 #endif
+    //保存所有修改
+    //TODO: 断线时保存修改
     //从业务服务器断开
     [self disconnectToSignalServer];
     //销毁引擎
@@ -91,7 +94,7 @@
     //1. 终止掉超时定时器.这样,后续流程才能进行下去.
     [self.monitor invalidate];
     self.monitor = nil;
-
+    
     //3.通话查询已经成功返回. 将本机的state设置成为接收到的信息
     // peerAccount
     [self.state setValue:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY] forKey:kPeerAccount];
@@ -107,12 +110,12 @@
     [self.state setValue: [notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] forKey:kForwardPort];
     //4. 通知界面弹起拨号中界面 信息从manager.state里面取状态 不再通过通知传递了 接收通知的结果就是主叫方会弹出正在拨号界面
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:nil];
-
+    
     
 #if SIGNAL_MESSAGE
     NSLog(@"通话查询请求完成，即将进入主叫方通话请求发送阶段");
 #endif
-
+    
     // 使用主叫通信链路信令构造器构造通信链路数据.
     self.messageBuilder = [[IMSessionPeriodRequestMessageBuilder alloc] init];
     //7. 注册接收对方信令的通知.
@@ -134,7 +137,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SIGNAL_ERROR_NOTIFICATION object:nil];
     //查询失败了.终止session
     [self endSession];
-
+    
     // 提示用户 对方不在线
     [[IMTipImp defaultTip] showTip:@"对方不在线"];
 }
@@ -271,7 +274,7 @@
 - (void) sessionNegotiation{
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
-
+    
     // 3.获取本机natType
     NatType natType = StunTypeBlocked;
 #if MANAGER_DEBUG
@@ -285,7 +288,7 @@
     NSLog(@"开始进行保持外网session的数据包发送");
 #endif
     [self.keepSessionAlive invalidate];
-
+    
     
     self.keepSessionAlive = [MSWeakTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(keepSession:) userInfo:@{PROBE_PORT_KEY:[self.state valueForKey:kForwardPort],PROBE_SERVER_KEY:[self.state valueForKey:kForwardIP]} repeats:YES dispatchQueue:dispatch_queue_create("com.itelland.keepIPSession", DISPATCH_QUEUE_CONCURRENT)];
     // 6. 把数据组装准备发送.
@@ -309,16 +312,16 @@
                                           SESSION_PERIOD_FIELD_PEER_NAT_TYPE_KEY: [NSNumber numberWithInt:natType],
                                           SESSION_PERIOD_FIELD_PEER_USE_VIDEO:[self.state valueForKey:kUseVideo]
                                           }];
-
-  
-
+    
+    
+    
     // 构造通话数据请求
     NSDictionary* data = [self.messageBuilder buildWithParams:mergeData];
 #if SIGNAL_MESSAGE
     NSLog(@"[账号:%@] >>>> [账号:%@] \n %@",[self.state valueForKey:kMyAccount],[self.state valueForKey:kPeerAccount],data);
 #endif
     
-
+    
     //8. 发送通信所需的数据
     [self.TCPcommunicator send:data];
     // 8. 转向
@@ -419,7 +422,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionHalt:) name:SESSION_PERIOD_HALT_NOTIFICATION object:nil];
     //登录到信令服务器后，需要做一次验证，验证信息响应时，发出该通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHasResult:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
-
+    
     //收到了被服务器踢下线通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(droppedFromSignal:) name:DROPPED_FROM_SIGNAL_NOTIFICATION object:nil];
 }
@@ -513,7 +516,7 @@
     NSString* haltType = [notify.userInfo valueForKey:SESSION_HALT_FIELD_TYPE_KEY];
     if ([SESSION_HALT_FILED_ACTION_BUSY isEqualToString:haltType]) {
         [self performSelector:@selector(endSession) withObject:nil afterDelay:2];
-//        [self endSession];
+        //        [self endSession];
     }else if ([SESSION_HALT_FILED_ACTION_REFUSE isEqualToString:haltType]){
         self.recentLog = @{
                            kStatus:STATUS_REFUSED,
@@ -524,7 +527,7 @@
         [self endSession];
         [self saveCommnicationLog];
     }else if ([SESSION_HALT_FILED_ACTION_END isEqualToString:haltType]){
-//        [self.engine stopTransport];
+        //        [self.engine stopTransport];
         [self endSession];
         [self saveCommnicationLog];
     }else{
@@ -703,38 +706,37 @@
         return;
     }
     NSManagedObjectContext* currentContext =[[IMCoreDataManager defaulManager] managedObjectContext];
-    [currentContext performBlock:^{
-        ItelUser* peer =  [[ItelAction action] userInFriendBook:[self.recentLog valueForKey:kPeerNumber]];
-        NSString* peerRemarkName = BLANK_STRING;
-        NSString* peerNickName = BLANK_STRING;
-        NSString* peerAvatar = BLANK_STRING;
-        if (!peer) {
-            peerRemarkName = @"陌生人";
-            peerNickName = @"陌生人";
-            peerAvatar  = @"http://wwc.taobaocdn.com/avatar/getAvatar.do?userId=352958000&width=100&height=100&type=sns";
-        }else{
-            peerRemarkName = peer.remarkName;
-            peerNickName = peer.nickName;
-            peerAvatar = peer.imageurl;
-        }
-        Recent* aRecent =  [Recent recentWithCallInfo:@{
-                                                        kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
-                                                        kStatus:[self.recentLog valueForKey:kStatus],
-                                                        kDuration:@(self.duration),
-                                                        kCreateDate:[self.recentLog valueForKey:kCreateDate],
-                                                        kPeerRealName:peerRemarkName,
-                                                        kPeerNick:peerNickName,
-                                                        kPeerAvatar:peerAvatar,
-                                                        kHostUserNumber:self.myAccount
-                                                        }
-                                            inContext:currentContext];
-        [[IMCoreDataManager defaulManager] saveContext:currentContext];
+    ItelUser* peer =  [[ItelAction action] userInFriendBook:[self.recentLog valueForKey:kPeerNumber]];
+    NSString* peerRemarkName = BLANK_STRING;
+    NSString* peerNickName = BLANK_STRING;
+    NSString* peerAvatar = BLANK_STRING;
+    if (!peer) {
+        peerRemarkName = @"陌生人";
+        peerNickName = @"陌生人";
+        peerAvatar  = @"http://wwc.taobaocdn.com/avatar/getAvatar.do?userId=352958000&width=100&height=100&type=sns";
+    }else{
+        peerRemarkName = peer.remarkName;
+        peerNickName = peer.nickName;
+        peerAvatar = peer.imageurl;
+    }
+    Recent* aRecent =  [Recent recentWithCallInfo:@{
+                                                    kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
+                                                    kStatus:[self.recentLog valueForKey:kStatus],
+                                                    kDuration:@(self.duration),
+                                                    kCreateDate:[self.recentLog valueForKey:kCreateDate],
+                                                    kPeerRealName:peerRemarkName,
+                                                    kPeerNick:peerNickName,
+                                                    kPeerAvatar:peerAvatar,
+                                                    kHostUserNumber:self.myAccount
+                                                    }
+                                        inContext:currentContext];
+    [[IMCoreDataManager defaulManager] saveContext:currentContext];
 #if MANAGER_DEBUG
-        NSLog(@"aRecent is :%@",aRecent);
+    NSLog(@"aRecent is :%@",aRecent);
 #endif
-    }];
     
-
+    
+    
 }
 //收到信令服务器的验证响应，
 - (void) authHasResult:(NSNotification*) notify{
@@ -808,22 +810,21 @@
     NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
     if (currentContext) {
         //从数组中获得表名.依次删除
-        [currentContext performBlock:^{
-            NSError* error;
-            for (NSString* tableName in tableNames) {
-                NSFetchRequest* clearTableRequest = [NSFetchRequest fetchRequestWithEntityName:tableName];
-                NSArray* hostUsers = [currentContext executeFetchRequest:clearTableRequest error:&error];
-                for (NSManagedObject* o in hostUsers) {
-                    [currentContext deleteObject:o];
-                }
-                
+        NSError* error;
+        for (NSString* tableName in tableNames) {
+            NSFetchRequest* clearTableRequest = [NSFetchRequest fetchRequestWithEntityName:tableName];
+            NSArray* hostUsers = [currentContext executeFetchRequest:clearTableRequest error:&error];
+            for (NSManagedObject* o in hostUsers) {
+                [currentContext deleteObject:o];
             }
-            [[IMCoreDataManager defaulManager] saveContext:currentContext];
-        }];
-
+            
+        }
+        [[IMCoreDataManager defaulManager] saveContext:currentContext];
+        
+        
     }
-
-
+    
+    
 }
 
 
@@ -834,23 +835,24 @@
     }
     [self restoreState];
     
-//    [self.engine tearDown];
+    //    [self.engine tearDown];
     [self stopCommunicationCounting];
     [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
     [self.engine stopTransport];
+    
 }
 
 - (void) restoreState{
     
     self.state = [NSMutableDictionary dictionaryWithDictionary: @{
-                   kMyAccount:[self myAccount], // 登陆状况下的通话查询结束. 账号还是要的
-                   kMySSID:@(-1), //空闲
-                   kPeerAccount:IDLE, //空闲
-                   kPeerSSID:@(-1), //空闲
-                   kForwardIP:BLANK_STRING,
-                   kForwardPort:@(-1),
-                   kUseVideo:@(-1)
-                   }];
+                                                                  kMyAccount:[self myAccount], // 登陆状况下的通话查询结束. 账号还是要的
+                                                                  kMySSID:@(-1), //空闲
+                                                                  kPeerAccount:IDLE, //空闲
+                                                                  kPeerSSID:@(-1), //空闲
+                                                                  kForwardIP:BLANK_STRING,
+                                                                  kForwardPort:@(-1),
+                                                                  kUseVideo:@(-1)
+                                                                  }];
     //重新开始接收通知 保险起见 先移除再添加
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_PERIOD_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionDataReceived:) name:SESSION_PERIOD_NOTIFICATION object:nil];
@@ -873,7 +875,7 @@
                            kCreateDate:[NSDate date]
                            };
     }
-//    [self.engine stopTransport];
+    //    [self.engine stopTransport];
     [self sessionHaltRequest:data];
     [self endSession];
     [self saveCommnicationLog];

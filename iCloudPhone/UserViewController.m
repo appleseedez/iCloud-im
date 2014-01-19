@@ -191,7 +191,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self registerNotifcations];
-    [self.imageView setImageWithURL:[NSURL URLWithString:self.user.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
+    [self.imageView setImageWithURL:[NSURL URLWithString:self.user.imageurl]];
     
     [self.imageView setRect:2.0 cornerRadius:self.imageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
     

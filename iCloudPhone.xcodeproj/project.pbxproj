@@ -79,8 +79,6 @@
 		47955C2618852B1B00AEBF09 /* HostAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47955C2518852B1B00AEBF09 /* HostAddressViewController.m */; };
 		4797E8CB188546510075BD9B /* Area.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8CA188546510075BD9B /* Area.m */; };
 		4797E8CF18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8CE18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m */; };
-		4797E8D018855A710075BD9B /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 4797E8CC188546B60075BD9B /* area.sqlite */; };
-		4797E8D118855A720075BD9B /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 4797E8CC188546B60075BD9B /* area.sqlite */; };
 		4797E8D4188567DA0075BD9B /* HostSecondAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8D3188567DA0075BD9B /* HostSecondAddressViewController.m */; };
 		4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */ = {isa = PBXBuildFile; fileRef = 4798A26D183DD45300060DDB /* HostItelUser+set.m */; };
 		479AD2EB18862AB2009B3278 /* Area+toString.m in Sources */ = {isa = PBXBuildFile; fileRef = 479AD2EA18862AB2009B3278 /* Area+toString.m */; };
@@ -212,7 +210,6 @@
 		BA338B5B187E839C00242DAF /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B5A187E839C00242DAF /* ItelUser.m */; };
 		BA772EDA1875F02400CD8982 /* IMDBManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA772ED91875F02400CD8982 /* IMDBManagerImp.m */; };
 		BA8242FC18758EA2001903CE /* jgb.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BA8242FB18758EA2001903CE /* jgb.m4a */; };
-		BA8243001875A0C3001903CE /* Recents.db in Resources */ = {isa = PBXBuildFile; fileRef = BA8242FF1875A0C3001903CE /* Recents.db */; };
 		BA8F235F185AA5E600DB043B /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8F235C185AA5E600DB043B /* libAVInterface.a */; };
 		BA959A9418605639009B8A4C /* MSWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA959A9318605639009B8A4C /* MSWeakTimer.m */; };
 		BA959A971860565C009B8A4C /* IMUDPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA959A961860565C009B8A4C /* IMUDPCommunicator.m */; };
@@ -231,6 +228,7 @@
 		BABFEB1D1888412300FDB696 /* bannerSuccess.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB131888412300FDB696 /* bannerSuccess.png */; };
 		BABFEB1E1888412300FDB696 /* bannerSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB141888412300FDB696 /* bannerSuccess@2x.png */; };
 		BAC4A0DF187CE1E200BC856F /* ItelBookInterfaceImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */; };
+		BACD8282188C36DB0066F143 /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BACD8281188C36DB0066F143 /* area.sqlite */; };
 		BADDFD2418768C4F00D10DDC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BADDFD2218768C4F00D10DDC /* Model.xcdatamodeld */; };
 		BADDFD681876901500D10DDC /* IMCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BADDFD671876901500D10DDC /* IMCoreDataManager.m */; };
 		BADDFD6A1876915200D10DDC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADDFD691876915200D10DDC /* CoreData.framework */; };
@@ -405,7 +403,6 @@
 		47955C2518852B1B00AEBF09 /* HostAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostAddressViewController.m; sourceTree = "<group>"; };
 		4797E8C9188546510075BD9B /* Area.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Area.h; sourceTree = "<group>"; };
 		4797E8CA188546510075BD9B /* Area.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Area.m; sourceTree = "<group>"; };
-		4797E8CC188546B60075BD9B /* area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = area.sqlite; sourceTree = "<group>"; };
 		4797E8CD18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IMCoreDataManager+FMDB_TO_COREDATA.h"; sourceTree = "<group>"; };
 		4797E8CE18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IMCoreDataManager+FMDB_TO_COREDATA.m"; sourceTree = "<group>"; };
 		4797E8D2188567DA0075BD9B /* HostSecondAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostSecondAddressViewController.h; sourceTree = "<group>"; };
@@ -626,7 +623,6 @@
 		BA772ED81875F02400CD8982 /* IMDBManagerImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManagerImp.h; sourceTree = "<group>"; };
 		BA772ED91875F02400CD8982 /* IMDBManagerImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDBManagerImp.m; sourceTree = "<group>"; };
 		BA8242FB18758EA2001903CE /* jgb.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jgb.m4a; sourceTree = "<group>"; };
-		BA8242FF1875A0C3001903CE /* Recents.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Recents.db; sourceTree = "<group>"; };
 		BA8F235A185AA5E600DB043B /* APITypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APITypes.h; sourceTree = "<group>"; };
 		BA8F235B185AA5E600DB043B /* AVInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVInterface.h; sourceTree = "<group>"; };
 		BA8F235C185AA5E600DB043B /* libAVInterface.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAVInterface.a; sourceTree = "<group>"; };
@@ -656,6 +652,7 @@
 		BABFEB141888412300FDB696 /* bannerSuccess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerSuccess@2x.png"; sourceTree = "<group>"; };
 		BAC4A0DD187CE1E200BC856F /* ItelBookInterfaceImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelBookInterfaceImp.h; sourceTree = "<group>"; };
 		BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelBookInterfaceImp.m; sourceTree = "<group>"; };
+		BACD8281188C36DB0066F143 /* area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = area.sqlite; sourceTree = "<group>"; };
 		BADDFD2318768C4F00D10DDC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BADDFD661876901500D10DDC /* IMCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMCoreDataManager.h; sourceTree = "<group>"; };
 		BADDFD671876901500D10DDC /* IMCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMCoreDataManager.m; sourceTree = "<group>"; };
@@ -1405,9 +1402,9 @@
 		47B89DDB1834D40000022FE5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BACD8281188C36DB0066F143 /* area.sqlite */,
 				478594AA185026FF00AFF6BF /* 预切片 */,
 				47B89DDC1834D40000022FE5 /* iCloudPhone-Info.plist */,
-				4797E8CC188546B60075BD9B /* area.sqlite */,
 				BA06AFB0187873910099C3F7 /* iCloudPhone.storyboard */,
 				479E934B185AB7A3001AF6ED /* Login_iPhone.storyboard */,
 				47B89DDD1834D40000022FE5 /* InfoPlist.strings */,
@@ -1580,7 +1577,6 @@
 				BADDFD2218768C4F00D10DDC /* Model.xcdatamodeld */,
 				4797E8C9188546510075BD9B /* Area.h */,
 				4797E8CA188546510075BD9B /* Area.m */,
-				BA8242FF1875A0C3001903CE /* Recents.db */,
 				BADDFD661876901500D10DDC /* IMCoreDataManager.h */,
 				BADDFD671876901500D10DDC /* IMCoreDataManager.m */,
 				4797E8CD18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.h */,
@@ -1728,12 +1724,12 @@
 			files = (
 				4757D0551855C5F0001A9639 /* itel输入提示.png in Resources */,
 				BABFEB171888412300FDB696 /* bannerAlert.png in Resources */,
+				BACD8282188C36DB0066F143 /* area.sqlite in Resources */,
 				BABFEB1D1888412300FDB696 /* bannerSuccess.png in Resources */,
 				BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */,
 				479DC49D183A544200C3F3F2 /* 广告.png in Resources */,
 				478594C0185026FF00AFF6BF /* tab_bar.png in Resources */,
 				47A5F8B8186D650A00B8CEC8 /* Itel ICON-IOS.png in Resources */,
-				BA8243001875A0C3001903CE /* Recents.db in Resources */,
 				479E934C185AB7A3001AF6ED /* Login_iPhone.storyboard in Resources */,
 				479C9C291835019D00DE40D8 /* 头像.jpg in Resources */,
 				47E05DC51851A2CE009FDCED /* 详细按钮.png in Resources */,
@@ -1752,7 +1748,6 @@
 				4757D0591855CAD6001A9639 /* 短信提示.png in Resources */,
 				BABFEB1C1888412300FDB696 /* bannerNotify@2x.png in Resources */,
 				47E05DC018517418009FDCED /* searchuser.png in Resources */,
-				4797E8D018855A710075BD9B /* area.sqlite in Resources */,
 				47E05DC118517418009FDCED /* checkAddress.png in Resources */,
 				47B89DED1834D40000022FE5 /* Images.xcassets in Resources */,
 				47B89DDF1834D40000022FE5 /* InfoPlist.strings in Resources */,
@@ -1768,7 +1763,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4797E8D118855A720075BD9B /* area.sqlite in Resources */,
 				47B89DFE1834D40000022FE5 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

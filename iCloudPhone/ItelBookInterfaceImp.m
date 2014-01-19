@@ -32,20 +32,14 @@
     NSArray* matched = [[hostUser.users filteredSetUsingPredicate:findByItelNum] allObjects];
     if ([matched count]) {
         matchedUser = matched[0];
-        [matchedUser.managedObjectContext performBlock:^{
-            matchedUser.isFriend = [NSNumber numberWithBool:NO];
-            [[IMCoreDataManager defaulManager] saveContext:matchedUser.managedObjectContext];
-        }];
-
+        matchedUser.isFriend = [NSNumber numberWithBool:NO];
+        [[IMCoreDataManager defaulManager] saveContext:matchedUser.managedObjectContext];
     }
 }
 //添加黑名单
 -(void)addUserToBlackBook:(ItelUser*)user{
-    [user.managedObjectContext performBlock:^{
-        user.isBlack = [NSNumber numberWithBool:YES];
-        [[IMCoreDataManager defaulManager] saveContext:user.managedObjectContext];
-    }];
-
+    user.isBlack = [NSNumber numberWithBool:YES];
+    [[IMCoreDataManager defaulManager] saveContext:user.managedObjectContext];
 }
 //从黑名单移除
 -(void)removeUserFromBlackBook:(NSString*)itel{
@@ -55,10 +49,8 @@
     NSArray* matched = [[hostUser.users filteredSetUsingPredicate:findByItelNum] allObjects];
     if ([matched count]) {
         matchedUser = matched[0];
-        [matchedUser.managedObjectContext performBlock:^{
-            matchedUser.isBlack = [NSNumber numberWithBool:NO];
-            [[IMCoreDataManager defaulManager] saveContext:matchedUser.managedObjectContext];
-        }];
+        matchedUser.isBlack = [NSNumber numberWithBool:NO];
+        [[IMCoreDataManager defaulManager] saveContext:matchedUser.managedObjectContext];
 
     }
 }
@@ -69,14 +61,11 @@
 //找到已有itel用户
 -(void)actionWithItelUserInAddressBook:(NSArray*)itelUsers{
     NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
-    [currentContext performBlock:^{
         for (NSDictionary* dic in itelUsers) {
             ItelUser* user = [ItelUser userWithDictionary:dic inContext:currentContext];
             [self.phoneBook setValue:user forKeyPath:[NSString stringWithFormat:@"users.%@.itelUser",user.telNum]];
         }
         [[IMCoreDataManager defaulManager] saveContext:currentContext];
-    }];
- 
 }
 //刷新好友列表,把好友信息刷新上去
 -(void)resetUserInFriendBook:(ItelUser*)user{

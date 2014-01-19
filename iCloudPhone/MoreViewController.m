@@ -99,7 +99,8 @@
       cell=[tableView dequeueReusableCellWithIdentifier:identifier ];
         [((MoreHostViewCell*)cell).hostImage setRect:0 cornerRadius:8 borderColor:[UIColor clearColor]];
         HostItelUser *host =[[ItelAction action] getHost];
-        [((MoreHostViewCell*)cell).hostImage setImageWithURL:[NSURL URLWithString:host.imageUrl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
+
+        [((MoreHostViewCell*)cell).hostImage setImageWithURL:[NSURL URLWithString:host.imageUrl] ];
         ((MoreHostViewCell*)cell).itel.text=host.itelNum;
         ((MoreHostViewCell*)cell).nickName.text=host.nickName;
     }

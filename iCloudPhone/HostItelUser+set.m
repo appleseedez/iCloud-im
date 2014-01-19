@@ -11,11 +11,10 @@
 @implementation HostItelUser (set)
 +(HostItelUser*)userWithDictionary:(NSDictionary*)dic{
     NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
-    NSManagedObjectID* __block hostUserID = nil;
+    HostItelUser* host = nil;
     if (currentContext) {
 
-        [currentContext performBlockAndWait:^{
-            HostItelUser *host = [NSEntityDescription insertNewObjectForEntityForName:@"HostItelUser" inManagedObjectContext:currentContext];
+            host = [NSEntityDescription insertNewObjectForEntityForName:@"HostItelUser" inManagedObjectContext:currentContext];
             host.domain =[dic objectForKey:@"domain"];
             
             NSNumber *port = [dic objectForKey:@"port"];
@@ -38,13 +37,11 @@
             host.countType=[NSNumber numberWithBool:[[dic objectForKey:@"user_type"] boolValue]];
             [host setPersonal:dic];
             [[IMCoreDataManager defaulManager] saveContext:host.managedObjectContext];
-            hostUserID = host.objectID;
-        }];
     }
 
 
 
-    return (HostItelUser*)[currentContext objectWithID:hostUserID];
+    return host;
 }
 -(void)setPersonal:(NSDictionary*)data{
     for(NSString *s in [data allKeys]){
