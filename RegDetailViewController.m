@@ -32,7 +32,33 @@
 @implementation RegDetailViewController
 static long currEditingTextTag=0;
 static float animatedDuration=1.0;
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField==self.txtItel) {
+        if (range.location>=12) {
+            return NO;
+        }
+        else return YES;
+    }
+    else if(textField==self.txtPassword){
+        if (range.location>=18) {
+            return NO;
+        }
+        else return YES;
+    }
+    else if(textField==self.txtRePassword){
+        if (range.location>=18) {
+            return NO;
+        }
+        else return YES;
+    }
+    else if(textField==self.txtPhoneNumber){
+        if (range.location>=11) {
+            return NO;
+        }
+        else return YES;
+    }
+    return YES;
+}
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     currEditingTextTag=textField.tag;
 }
