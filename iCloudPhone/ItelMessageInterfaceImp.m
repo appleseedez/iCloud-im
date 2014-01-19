@@ -48,15 +48,19 @@ static ItelMessageInterfaceImp* _instance;
     self.timer=nil;
 }
 -(void)addNewMessages:(NSArray*)data{
+    
     if ([data isKindOfClass:[NSArray class]]) {
-        for(NSDictionary *mesDic in data ){
-            [Message messageWithDic:mesDic inContext:[IMCoreDataManager defaulManager].managedObjectContext];
-        }
-        [[IMCoreDataManager defaulManager] saveContext];
+        NSManagedObjectContext* currentContext =[IMCoreDataManager defaulManager].managedObjectContext;
+        [currentContext performBlock:^{
+            for(NSDictionary *mesDic in data ){
+                [Message messageWithDic:mesDic inContext:currentContext];
+            }
+            [[IMCoreDataManager defaulManager] saveContext:currentContext];
+        }];
     }
 }
 -(NSArray*)getSystemMessages{
-
+    
     return [Message allMessagesInContext:[IMCoreDataManager defaulManager].managedObjectContext];
 }
 

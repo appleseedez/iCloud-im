@@ -13,6 +13,7 @@
 #import "NXInputChecker.h"
 #import "UIImageView+AFNetworking.h"
 #import "ItelUser+CRUD.h"
+#import "IMCoreDataManager.h"
 @interface NewFriendListViewController ()
 
 @end
@@ -78,13 +79,19 @@
         if (isNormal) {
             NSArray *list=[notification.object objectForKey:@"list"];
             if ([list count]) {
-                for ( NSDictionary *dic in list) {
-                    ItelUser *user=[ItelUser userWithDictionary:dic];
-                    if (![user.isFriend boolValue]&&![user.itelNum isEqualToString:[ItelAction action].getHost.itelNum]) {
-                        [self.searchResult addUser:user forKey:user.itelNum];
+                NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
+                [currentContext performBlock:^{
+                    for ( NSDictionary *dic in list) {
+                        ItelUser *user=[ItelUser userWithDictionary:dic inContext:currentContext];
+                        if (![user.isFriend boolValue]&&![user.itelNum isEqualToString:[ItelAction action].getHost.itelNum]) {
+                            [self.searchResult addUser:user forKey:user.itelNum];
+                        }
+                        
                     }
+                    [[IMCoreDataManager defaulManager] saveContext:currentContext];
                     [self.tableView reloadData];
-                                   }
+                }];
+
             }
         }
         else {

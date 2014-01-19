@@ -9,19 +9,23 @@
 #import "Message+CRUD.h"
 #import "ItelUser+CRUD.h"
 #import "ItelAction.h"
+#import "IMCoreDataManager.h"
 @implementation Message (CRUD)
 +(instancetype)messageWithDic:(NSDictionary*)data inContext:(NSManagedObjectContext*) context{
-    
-    Message* mes = [NSEntityDescription insertNewObjectForEntityForName:@"Message" inManagedObjectContext:context];
-    mes.date=[data objectForKey:@"date"];
-    mes.body=[data objectForKey:@"msg"];
-    mes.title=@"请求加你好友";
-    ItelUser* aUser = [ItelUser userWithDictionary:[data objectForKey:@"contact"]];
-    HostItelUser* hostUser = [[ItelAction action] getHost];
-    [hostUser.systemMessages setByAddingObject:mes];
-    mes.sender=aUser;
-    mes.receiver = hostUser;
-    mes.isRead = [NSNumber numberWithBool:NO];
+    Message* mes;
+    if (context) {
+        mes = [NSEntityDescription insertNewObjectForEntityForName:@"Message" inManagedObjectContext:context];
+        mes.date=[data objectForKey:@"date"];
+        mes.body=[data objectForKey:@"msg"];
+        mes.title=@"请求加你好友";
+        ItelUser* aUser = [ItelUser userWithDictionary:[data objectForKey:@"contact"] inContext:context];
+        HostItelUser* hostUser = [[ItelAction action] getHost];
+        [hostUser.systemMessages setByAddingObject:mes];
+        mes.sender=aUser;
+        mes.receiver = hostUser;
+        mes.isRead = [NSNumber numberWithBool:NO];
+    }
+
     return mes;
 }
 

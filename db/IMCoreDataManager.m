@@ -28,12 +28,11 @@ static IMCoreDataManager* _instance;
 + (instancetype)defaulManager{
     return _instance;
 }
-- (void)saveContext
+- (void)saveContext:(NSManagedObjectContext*)context
 {
     NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+    if (context != nil) {
+        if ([context hasChanges] && ![context save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -42,6 +41,14 @@ static IMCoreDataManager* _instance;
     }
 }
 
+- (void) deletObject:(NSManagedObject*) obj inContext:(NSManagedObjectContext*) context{
+    if (context) {
+        [context performBlock:^{
+            [context deleteObject:obj];
+        }];
+    }
+
+}
 #pragma mark - Core Data stack
 
 // Returns the managed object context for the application.

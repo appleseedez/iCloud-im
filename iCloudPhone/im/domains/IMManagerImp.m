@@ -61,8 +61,6 @@
 #if MANAGER_DEBUG
     NSLog(@"call tearDown");
 #endif
-    //保存所有修改
-    [[IMCoreDataManager defaulManager] saveContext];
     //从业务服务器断开
     [self disconnectToSignalServer];
     //销毁引擎
@@ -704,29 +702,39 @@
     if (![self.recentLog valueForKey:kPeerNumber]) {
         return;
     }
-    ItelUser* peer =  [[ItelAction action] userInFriendBook:[self.recentLog valueForKey:kPeerNumber]];
-    if (!peer) {
-        peer = [ItelUser userWithDictionary:@{@"itel":[self.recentLog valueForKey:kPeerNumber]}];
-        peer.remarkName = @"陌生人";
-        peer.nickName = @"陌生人";
-        peer.imageurl = @"http://wwc.taobaocdn.com/avatar/getAvatar.do?userId=352958000&width=100&height=100&type=sns";
-        peer.isFriend = [NSNumber numberWithBool:NO];
-        [[IMCoreDataManager defaulManager] saveContext];
-    }
-    Recent* aRecent =  [Recent recentWithCallInfo:@{
-                                 kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
-                                 kStatus:[self.recentLog valueForKey:kStatus],
-                                 kDuration:@(self.duration),
-                                 kCreateDate:[self.recentLog valueForKey:kCreateDate],
-                                 kPeerRealName:peer.remarkName,
-                                 kPeerNick:peer.nickName,
-                                 kPeerAvatar:peer.imageurl,
-                                 kHostUserNumber:self.myAccount
-                                 }
-                     inContext:[[IMCoreDataManager defaulManager] managedObjectContext]];
+    NSManagedObjectContext* currentContext =[[IMCoreDataManager defaulManager] managedObjectContext];
+    [currentContext performBlock:^{
+        ItelUser* peer =  [[ItelAction action] userInFriendBook:[self.recentLog valueForKey:kPeerNumber]];
+        NSString* peerRemarkName = BLANK_STRING;
+        NSString* peerNickName = BLANK_STRING;
+        NSString* peerAvatar = BLANK_STRING;
+        if (!peer) {
+            peerRemarkName = @"陌生人";
+            peerNickName = @"陌生人";
+            peerAvatar  = @"http://wwc.taobaocdn.com/avatar/getAvatar.do?userId=352958000&width=100&height=100&type=sns";
+        }else{
+            peerRemarkName = peer.remarkName;
+            peerNickName = peer.nickName;
+            peerAvatar = peer.imageurl;
+        }
+        Recent* aRecent =  [Recent recentWithCallInfo:@{
+                                                        kPeerNumber:[self.recentLog valueForKey:kPeerNumber],
+                                                        kStatus:[self.recentLog valueForKey:kStatus],
+                                                        kDuration:@(self.duration),
+                                                        kCreateDate:[self.recentLog valueForKey:kCreateDate],
+                                                        kPeerRealName:peerRemarkName,
+                                                        kPeerNick:peerNickName,
+                                                        kPeerAvatar:peerAvatar,
+                                                        kHostUserNumber:self.myAccount
+                                                        }
+                                            inContext:currentContext];
+        [[IMCoreDataManager defaulManager] saveContext:currentContext];
 #if MANAGER_DEBUG
-    NSLog(@"aRecent is :%@",aRecent);
+        NSLog(@"aRecent is :%@",aRecent);
 #endif
+    }];
+    
+
 }
 //收到信令服务器的验证响应，
 - (void) authHasResult:(NSNotification*) notify{
@@ -790,7 +798,6 @@
  */
 - (void) clearTable{
     //删除所有表中的数据
-    NSError* error;
     NSArray* tableNames = @[
                             @"HostItelUser",
                             @"Message",
@@ -798,16 +805,25 @@
                             @"Recent"
                             
                             ];
-    //从数组中获得表名.依次删除
-    for (NSString* tableName in tableNames) {
-        NSFetchRequest* clearTableRequest = [NSFetchRequest fetchRequestWithEntityName:tableName];
-        NSArray* hostUsers = [[IMCoreDataManager defaulManager].managedObjectContext executeFetchRequest:clearTableRequest error:&error];
-        for (NSManagedObject* o in hostUsers) {
-            [[IMCoreDataManager defaulManager].managedObjectContext deleteObject:o];
-        }
-        
+    NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
+    if (currentContext) {
+        //从数组中获得表名.依次删除
+        [currentContext performBlock:^{
+            NSError* error;
+            for (NSString* tableName in tableNames) {
+                NSFetchRequest* clearTableRequest = [NSFetchRequest fetchRequestWithEntityName:tableName];
+                NSArray* hostUsers = [currentContext executeFetchRequest:clearTableRequest error:&error];
+                for (NSManagedObject* o in hostUsers) {
+                    [currentContext deleteObject:o];
+                }
+                
+            }
+            [[IMCoreDataManager defaulManager] saveContext:currentContext];
+        }];
+
     }
-    [[IMCoreDataManager defaulManager] saveContext];
+
+
 }
 
 

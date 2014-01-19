@@ -76,7 +76,6 @@
     Message *message=[self.messageList objectAtIndex:indexPath.row];
     self.currItel=message.sender.itelNum;
     self.currMessage=message;
-    [[IMCoreDataManager defaulManager] saveContext];
     BOOL isRead=[message.isRead boolValue];
     if (isRead==NO) {
         [actionSheet showInView:self.view];

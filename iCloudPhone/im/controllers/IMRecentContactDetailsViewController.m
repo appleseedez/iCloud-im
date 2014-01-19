@@ -98,19 +98,24 @@ static NSString* kOperationReason = @"reason";
 }
 
 - (void) delteRecentsOfMyOwn{
-    NSError* error = nil;
+
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recent"];
     request.sortDescriptors = @[];
     request.predicate = [NSPredicate predicateWithFormat:@"peerNumber = %@ and hostUserNumber = %@", self.currentRecent.peerNumber,[self.manager myAccount]];
-    NSArray* results =  [[[IMCoreDataManager defaulManager] managedObjectContext] executeFetchRequest:request error:&error];
-    if (!error) {
-        for (Recent* r in results) {
-            [r delete];
+    NSManagedObjectContext* currentContext = [[IMCoreDataManager defaulManager] managedObjectContext];
+    [currentContext performBlock:^{
+        NSError* error = nil;
+        NSArray* results =  [currentContext executeFetchRequest:request error:&error];
+        if (!error) {
+            for (Recent* r in results) {
+                [r delete];
+            }
+            [[IMCoreDataManager defaulManager] saveContext:currentContext];
+        }else{
+            [NSException exceptionWithName:@"database error" reason:@"core data 查询失败" userInfo:nil];
         }
-        [[IMCoreDataManager defaulManager] saveContext];
-    }else{
-        [NSException exceptionWithName:@"database error" reason:@"core data 查询失败" userInfo:nil];
-    }
+    }];
+
 }
 #pragma mark - actionSheet delegate
 - (void)actionSheetCancel:(UIActionSheet *)actionSheet{

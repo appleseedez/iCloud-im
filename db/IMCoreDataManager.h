@@ -14,7 +14,8 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (void)saveContext;
+- (void)saveContext:(NSManagedObjectContext*) context;
+- (void) deletObject:(NSManagedObject*) obj inContext:(NSManagedObjectContext*) context;
 - (NSURL *)applicationDocumentsDirectory;
 + (instancetype) defaulManager;
 @end

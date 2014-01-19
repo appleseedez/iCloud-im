@@ -10,31 +10,41 @@
 #import "IMCoreDataManager.h"
 @implementation HostItelUser (set)
 +(HostItelUser*)userWithDictionary:(NSDictionary*)dic{
-    IMCoreDataManager *manager=[IMCoreDataManager defaulManager];
-    HostItelUser *host = [NSEntityDescription insertNewObjectForEntityForName:@"HostItelUser" inManagedObjectContext:manager.managedObjectContext];
-    host.domain =[dic objectForKey:@"domain"];
-    
-    NSNumber *port = [dic objectForKey:@"port"];
-    host.port=[NSString stringWithFormat:@"%@",port ];
-    host.stunServer=[dic objectForKey:@"stun_server"];
-    NSString *token=[dic objectForKey:@"token"];
-    if ([token isEqual: [NSNull null]]) {
-        host.token=@"djsadfkjafaklfji";
-        
+    NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
+    NSManagedObjectID* __block hostUserID = nil;
+    if (currentContext) {
+
+        [currentContext performBlockAndWait:^{
+            HostItelUser *host = [NSEntityDescription insertNewObjectForEntityForName:@"HostItelUser" inManagedObjectContext:currentContext];
+            host.domain =[dic objectForKey:@"domain"];
+            
+            NSNumber *port = [dic objectForKey:@"port"];
+            host.port=[NSString stringWithFormat:@"%@",port ];
+            host.stunServer=[dic objectForKey:@"stun_server"];
+            NSString *token=[dic objectForKey:@"token"];
+            if ([token isEqual: [NSNull null]]) {
+                host.token=@"djsadfkjafaklfji";
+                
+            }
+            else {
+                host.token=token;
+            }
+            host.itelNum=[dic objectForKey:@"itel"];
+            
+            host.userId=[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]];
+            
+            host.telNum=[dic objectForKey:@"phone"];
+            
+            host.countType=[NSNumber numberWithBool:[[dic objectForKey:@"user_type"] boolValue]];
+            [host setPersonal:dic];
+            [[IMCoreDataManager defaulManager] saveContext:host.managedObjectContext];
+            hostUserID = host.objectID;
+        }];
     }
-    else {
-        host.token=token;
-    }
-    host.itelNum=[dic objectForKey:@"itel"];
-   
-        host.userId=[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]];
-   
-    host.telNum=[dic objectForKey:@"phone"];
-   
-    host.countType=[NSNumber numberWithBool:[[dic objectForKey:@"user_type"] boolValue]];
-    [host setPersonal:dic];
-    [manager saveContext];
-    return host;
+
+
+
+    return (HostItelUser*)[currentContext objectWithID:hostUserID];
 }
 -(void)setPersonal:(NSDictionary*)data{
     for(NSString *s in [data allKeys]){

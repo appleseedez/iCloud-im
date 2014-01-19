@@ -9,8 +9,9 @@
 #import "ItelUser+CRUD.h"
 #import "IMCoreDataManager.h"
 #import "ItelAction.h"
+#import "IMCoreDataManager.h"
 @implementation ItelUser (CRUD)
-+(ItelUser*)userWithDictionary:(NSDictionary*)dic{
++(ItelUser*)userWithDictionary:(NSDictionary*)dic inContext:(NSManagedObjectContext*) context{
     
     for (NSString *key in [dic allKeys]) {
         id object = [dic objectForKey:key];
@@ -18,9 +19,10 @@
             [dic setValue:@"" forKey:key];
         }
     }
+
+    NSString* itelNumber = [dic objectForKey:@"itel"];
     NSError* error;
     ItelUser *user;
-    NSString* itelNumber = [dic objectForKey:@"itel"];
     NSFetchRequest* getOneUser = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
     getOneUser.predicate = [NSPredicate predicateWithFormat:@"itelNum = %@",itelNumber];
     
@@ -30,7 +32,7 @@
     }else{
         user= [NSEntityDescription insertNewObjectForEntityForName:@"ItelUser" inManagedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext];
     }
-
+    
     user.itelNum=[dic objectForKey:@"itel"];
     user.userId=[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]];
     if (user.userId==nil) {
@@ -38,8 +40,8 @@
     }
     user.remarkName=[dic objectForKey:@"alias"] ;
     user.telNum=[dic objectForKey:@"phone"];
-    //
     [user setPersonal:dic];
+
     return user;
 }
 -(void)setPersonal:(NSDictionary*)data{
@@ -60,23 +62,13 @@
     self.email=[data objectForKey:@"mail"];
     self.birthDay=[data objectForKey:@"birthday"];
     self.imageurl=[data objectForKey:@"photo_file_name"];
-//    if ([self.imageurl isEqualToString:@""]) {
-//        self.imageurl=@"http://www.qqbody.com/uploads/allimg/121207/1ki0it-3.jpg";
-//    }
     self.address=[data objectForKey:@"area_code"];
     HostItelUser* hostUser = [[ItelAction action] getHost];
     [hostUser addUsersObject:self];
     self.host = hostUser;
-    
-    [[IMCoreDataManager defaulManager] saveContext];
 }
 
 - (void)delete{
-    if ([[IMCoreDataManager defaulManager] managedObjectContext] == self.managedObjectContext) {
-        [[[IMCoreDataManager defaulManager] managedObjectContext] deleteObject:self];
-        [[IMCoreDataManager defaulManager] saveContext];
-    }else{
-        [NSException exceptionWithName:@"managerContext不一致" reason:@"managerContext is not the same " userInfo:nil];
-    }
+   //
 }
 @end
