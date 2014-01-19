@@ -65,13 +65,23 @@
 	// Do any additional setup after loading the view.
 }
 -(IBAction)pushNext:(id)sender{
+    if (![NXInputChecker checkEmpty:self.txtItel.text]) {
+        [self errorAlert:@"iTel号码不能为空"];
+        return;
+    }
+    if (![NXInputChecker checkEmpty:self.txtVerifyCode.text]) {
+        [self errorAlert:@"验证码不能为空"];
+        
+        return;
+    }
     if ([NXInputChecker checkCloudNumber:self.txtItel.text]) {
         [self checkCode];
         [self startHud];
+        return;
     }
     
     else {
-        [self errorAlert:@"iTel格式不对"];
+        [self errorAlert:@"iTel号码格式不正确"];
     }
     
 }

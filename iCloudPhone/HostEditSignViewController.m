@@ -21,6 +21,7 @@
 {
     [super viewDidLoad];
 	self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishButtonClicked)];
+    self.signEditView.delegate=self;
 }
 -(void)finishButtonClicked{
 //     NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)(self.signEditView.text), NULL, NULL,  kCFStringEncodingUTF8 ));
@@ -28,5 +29,15 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.signEditView becomeFirstResponder];
+    self.signEditView.text=[[ItelAction action]getHost].personalitySignature ;
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if (range.location>=50) {
+        return NO;
+    }
+    else return YES;
+    }
 @end

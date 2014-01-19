@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HostEditNicknameViewController : UIViewController
+@interface HostEditNicknameViewController : UIViewController<UITextFieldDelegate>
 
 @end

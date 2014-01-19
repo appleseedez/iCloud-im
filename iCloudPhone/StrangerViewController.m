@@ -170,7 +170,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.headImageView setImageWithURL:[NSURL URLWithString:self.user.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
+    [self.headImageView setImageWithURL:[NSURL URLWithString:self.user.imageurl]];
     
     [self.btnAddUser setUI];
     [self.btnAddUser setTitle:@"添加到通讯录" forState:UIControlStateNormal];

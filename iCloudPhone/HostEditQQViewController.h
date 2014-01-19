@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HostEditQQViewController : UIViewController
+@interface HostEditQQViewController : UIViewController<UITextFieldDelegate>
 
 @end

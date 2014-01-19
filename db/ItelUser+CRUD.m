@@ -60,9 +60,9 @@
     self.email=[data objectForKey:@"mail"];
     self.birthDay=[data objectForKey:@"birthday"];
     self.imageurl=[data objectForKey:@"photo_file_name"];
-//    if ([self.imageurl isEqualToString:@""]) {
-//        self.imageurl=@"http://www.qqbody.com/uploads/allimg/121207/1ki0it-3.jpg";
-//    }
+    if ([self.imageurl isEqualToString:@""]) {
+        self.imageurl=@"http://www.qqbody.com/uploads/allimg/121207/1ki0it-3.jpg";
+    }
     self.address=[data objectForKey:@"area_code"];
     HostItelUser* hostUser = [[ItelAction action] getHost];
     [hostUser addUsersObject:self];
