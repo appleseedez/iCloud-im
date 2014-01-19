@@ -20,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.QQText.delegate=self;
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishButtonClicked)];
 }
 -(void)finishButtonClicked{
@@ -27,6 +28,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.QQText becomeFirstResponder];
+    self.QQText.text=[[ItelAction action]getHost].qq ;
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (range.location>=13) {
+        return NO;
+    }
+    else return YES;
+}
 
 @end

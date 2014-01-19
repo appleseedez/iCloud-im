@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HostEditEmailViewController : UIViewController
+@interface HostEditEmailViewController : UIViewController<UITextFieldDelegate>
 
 @end

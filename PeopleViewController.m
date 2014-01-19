@@ -128,7 +128,7 @@
         [cell setup];
         cell.user=user;
         //cell.imgPhoto.image=[UIImage imageNamed:@"头像.png"];
-        [cell.imgPhoto setImageWithURL:[NSURL URLWithString:user.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
+        [cell.imgPhoto setImageWithURL:[NSURL URLWithString:user.imageurl]];
         cell.lbItelNumber.text=user.itelNum;
         cell.lbNickName.text=user.remarkName;
         if ([user.remarkName isEqualToString:@""]) {

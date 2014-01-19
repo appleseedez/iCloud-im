@@ -23,6 +23,6 @@
 +(NSString*)changeArrayToString:(NSArray*)array;
 //加密显示手机号码
 +(NSString*)encodeTelNumber:(NSString*)telNum;
-//检查云电话号码
-
+//检查邮箱格式
++(BOOL)checkEmail:(NSString *)email;
 @end
