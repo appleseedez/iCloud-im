@@ -53,14 +53,15 @@
 -(void) getItelFriendListResponse:(id)data{
    
     NSArray *list = [data objectForKey:@"list"];
-    
-    for (NSDictionary *dic in (NSArray*)list) {
-        ItelUser *user=[ItelUser userWithDictionary:dic];
-        
-        
-        [self.itelBookActionDelegate resetUserInFriendBook:user];
-        
-    }
+    NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
+    [currentContext performBlock:^{
+        for (NSDictionary *dic in (NSArray*)list) {
+            ItelUser *user=[ItelUser userWithDictionary:dic inContext:currentContext];
+            [self.itelBookActionDelegate resetUserInFriendBook:user];
+        }
+        [[IMCoreDataManager defaulManager] saveContext:currentContext];
+    }];
+
     
     [self NotifyForNormalResponse:@"getItelList" parameters:data];
 }
@@ -74,13 +75,15 @@
 }
 -(void) getItelBlackListResponse:(id)data{
     NSArray *list = [data objectForKey:@"list"];
-    
-    for (NSDictionary *dic in (NSArray*)list) {
-        ItelUser *user=[ItelUser userWithDictionary:dic];
-        
-        
-        [self.itelBookActionDelegate resetUserInBlackBook:user];
-    }
+    NSManagedObjectContext* currentContext =[IMCoreDataManager defaulManager].managedObjectContext;
+    [currentContext performBlock:^{
+        for (NSDictionary *dic in (NSArray*)list) {
+            ItelUser *user=[ItelUser userWithDictionary:dic inContext:currentContext];
+            [self.itelBookActionDelegate resetUserInBlackBook:user];
+        }
+        [[IMCoreDataManager defaulManager] saveContext:currentContext];
+    }];
+
     
     [self NotifyForNormalResponse:@"getBlackList" parameters:data];
 }
@@ -143,16 +146,25 @@
     NSString* itelNum = [userDic valueForKeyPath:@"data.itel"];
     NSAssert(itelNum, @"服务端没有itel字段");
     HostItelUser* hostUser = [self getHost];
-    ItelUser* user;
-    NSPredicate* findByItelNum = [NSPredicate predicateWithFormat:@"itelNum = %@",itelNum];
-    NSArray* matched = [[hostUser.users filteredSetUsingPredicate:findByItelNum] allObjects];
-    if ([matched count]) {
-        user = matched[0];
-       
-    }else{
-        user = [ItelUser userWithDictionary:userDic];
+    if (!hostUser) {
+        return;
     }
-    [self.itelBookActionDelegate addUserToBlackBook:user];
+    NSManagedObjectContext* currentContext =hostUser.managedObjectContext;
+    [currentContext performBlock:^{
+        ItelUser* user;
+        NSPredicate* findByItelNum = [NSPredicate predicateWithFormat:@"itelNum = %@",itelNum];
+        NSArray* matched = [[hostUser.users filteredSetUsingPredicate:findByItelNum] allObjects];
+        if ([matched count]) {
+            user = matched[0];
+        }else{
+            user = [ItelUser userWithDictionary:userDic inContext:[IMCoreDataManager defaulManager].managedObjectContext];
+        }
+        [self.itelBookActionDelegate addUserToBlackBook:user];
+        //在block结尾保存数据
+        [[IMCoreDataManager defaulManager] saveContext:currentContext];
+    }];
+
+
  
     [self NotifyForNormalResponse:ADD_TO_BLACK_LIST_NOTIFICATION parameters:nil];
 
@@ -216,13 +228,21 @@
 }
 
 -(void)editUserAliasResponse:(NSDictionary*)user{
-    ItelUser *u=[ItelUser userWithDictionary:user];
- 
+    NSManagedObjectID* __block userObjID= nil;
+    NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
+    [currentContext performBlockAndWait:^{
+        ItelUser *u=[ItelUser userWithDictionary:user inContext:currentContext];
+        
         [self.itelBookActionDelegate resetUserInFriendBook:u];
+        if (u.isBlack) {
+            [self.itelBookActionDelegate resetUserInBlackBook:u];
+        }
+        [[IMCoreDataManager defaulManager] saveContext:currentContext];
+        userObjID = u.objectID;
+    }];
 
-    if (u.isBlack) {
-        [self.itelBookActionDelegate resetUserInBlackBook:u];
-    }
+
+    ItelUser* u  =(ItelUser*)[currentContext objectWithID:userObjID];
     [self NotifyForNormalResponse:@"resetAlias" parameters:u];
 }
 #pragma mark - 查找陌生人
@@ -253,7 +273,7 @@
    HostItelUser *hostUser = [self.itelUserActionDelegate hostUser];
     NSString *imageUrl=[response objectForKey:@"data"];
     hostUser.imageUrl=imageUrl;
-    [[IMCoreDataManager defaulManager]saveContext];
+    [[IMCoreDataManager defaulManager]saveContext:hostUser.managedObjectContext];
     [self NotifyForNormalResponse:@"modifyHost" parameters:response];
     
 }
@@ -410,8 +430,6 @@
 
 -(void) NotifyForNormalResponse:(NSString*)name parameters:(id)parameters{
     NSDictionary *userInfo=@{@"isNormal": @"1",@"reason":@"1" };
-    
     [[NSNotificationCenter defaultCenter]postNotificationName:name object:parameters userInfo:userInfo];
-    [[IMCoreDataManager defaulManager] saveContext];
 }
 @end

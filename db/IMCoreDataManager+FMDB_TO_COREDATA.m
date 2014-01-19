@@ -39,19 +39,18 @@
     
      
     FMResultSet *result=[db executeQuery:createSQL];
-    
+    NSManagedObjectContext* currentContext = self.managedObjectContext;
     while (result.next) {
-        Area *area=[NSEntityDescription insertNewObjectForEntityForName:@"Area" inManagedObjectContext:self.managedObjectContext];
+        Area *area=[NSEntityDescription insertNewObjectForEntityForName:@"Area" inManagedObjectContext:currentContext];
          area.areaId=[NSNumber numberWithInt: [result intForColumn:@"id"]];
         area.name=[result stringForColumn:@"name"];
         area.parentId=[NSNumber numberWithInt: [result intForColumn:@"parent_id"]];
         area.sequence=[result stringForColumn:@"sequence"];
         area.code=[result stringForColumn:@"code"];
         area.capital=[NSNumber numberWithInt: [result intForColumn:@"capital"]];
-        //NSLog(@"%@",area.name);
     }
     [db close];
-    [self saveContext];
+    [self saveContext:currentContext];
 
 }
 @end

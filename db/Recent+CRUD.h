@@ -11,5 +11,5 @@
 @interface Recent (CRUD)
 + (instancetype) recentWithCallInfo:(NSDictionary*) info inContext:(NSManagedObjectContext*) context;
 - (void) delete;
-+ (void) deleteAll:(NSString*) accountNumber;
++ (void) deleteAllWithAccount:(NSString*) accountNumber;
 @end

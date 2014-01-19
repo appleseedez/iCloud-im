@@ -32,14 +32,20 @@
     NSArray* matched = [[hostUser.users filteredSetUsingPredicate:findByItelNum] allObjects];
     if ([matched count]) {
         matchedUser = matched[0];
-        matchedUser.isFriend = [NSNumber numberWithBool:NO];
-        [[IMCoreDataManager defaulManager] saveContext];
+        [matchedUser.managedObjectContext performBlock:^{
+            matchedUser.isFriend = [NSNumber numberWithBool:NO];
+            [[IMCoreDataManager defaulManager] saveContext:matchedUser.managedObjectContext];
+        }];
+
     }
 }
 //添加黑名单
 -(void)addUserToBlackBook:(ItelUser*)user{
-    user.isBlack = [NSNumber numberWithBool:YES];
-    [[IMCoreDataManager defaulManager] saveContext];
+    [user.managedObjectContext performBlock:^{
+        user.isBlack = [NSNumber numberWithBool:YES];
+        [[IMCoreDataManager defaulManager] saveContext:user.managedObjectContext];
+    }];
+
 }
 //从黑名单移除
 -(void)removeUserFromBlackBook:(NSString*)itel{
@@ -49,8 +55,11 @@
     NSArray* matched = [[hostUser.users filteredSetUsingPredicate:findByItelNum] allObjects];
     if ([matched count]) {
         matchedUser = matched[0];
-        matchedUser.isBlack = [NSNumber numberWithBool:NO];
-        [[IMCoreDataManager defaulManager] saveContext];
+        [matchedUser.managedObjectContext performBlock:^{
+            matchedUser.isBlack = [NSNumber numberWithBool:NO];
+            [[IMCoreDataManager defaulManager] saveContext:matchedUser.managedObjectContext];
+        }];
+
     }
 }
 //获得本机通讯录电话
@@ -59,20 +68,23 @@
 }
 //找到已有itel用户
 -(void)actionWithItelUserInAddressBook:(NSArray*)itelUsers{
-    for (NSDictionary* dic in itelUsers) {
-        ItelUser* user = [ItelUser userWithDictionary:dic];
-        [self.phoneBook setValue:user forKeyPath:[NSString stringWithFormat:@"users.%@.itelUser",user.telNum]];
-    }
+    NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
+    [currentContext performBlock:^{
+        for (NSDictionary* dic in itelUsers) {
+            ItelUser* user = [ItelUser userWithDictionary:dic inContext:currentContext];
+            [self.phoneBook setValue:user forKeyPath:[NSString stringWithFormat:@"users.%@.itelUser",user.telNum]];
+        }
+        [[IMCoreDataManager defaulManager] saveContext:currentContext];
+    }];
+ 
 }
 //刷新好友列表,把好友信息刷新上去
 -(void)resetUserInFriendBook:(ItelUser*)user{
     user.isFriend = [NSNumber numberWithBool:YES];
-    [[IMCoreDataManager defaulManager] saveContext];
 }
 //设置备注 黑名单
 -(void)resetUserInBlackBook:(ItelUser*)user{
     user.isBlack = [NSNumber numberWithBool:YES];
-    [[IMCoreDataManager defaulManager] saveContext];
 }
 
 

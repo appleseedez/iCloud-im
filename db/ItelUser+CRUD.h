@@ -9,6 +9,6 @@
 #import "ItelUser.h"
 
 @interface ItelUser (CRUD)
-+(ItelUser*)userWithDictionary:(NSDictionary*)dic;
++(ItelUser*)userWithDictionary:(NSDictionary*)dic inContext:(NSManagedObjectContext*)context;
 - (void) delete;
 @end

@@ -13,20 +13,24 @@ static NSString* kCurrentUser = @"currUser";
 //本机用户
 -(HostItelUser*)hostUser{
     NSString* currUserItemNum = [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentUser];
-    //
-//    NSAssert([currUserItemNum intValue] != 0, @"NSUserDefaults 拿不到currUser");
-    NSError* error = nil;
-    HostItelUser* currentUser;
-    NSFetchRequest* getCurrentUser = [NSFetchRequest fetchRequestWithEntityName:@"HostItelUser"];
-    getCurrentUser.predicate = [NSPredicate predicateWithFormat:@"itelNum = %@",currUserItemNum];
-    NSArray* currentUsers = [[IMCoreDataManager defaulManager].managedObjectContext executeFetchRequest:getCurrentUser error:&error];
-    if ([currentUsers count]) {
-         currentUser = currentUsers[0];
-    }
-    if (currentUser.itelNum == nil) {
-        currentUser = nil;
-    }
-    return currentUser;
+    NSManagedObjectContext* currentContext =[IMCoreDataManager defaulManager].managedObjectContext;
+    NSManagedObjectID* __block hostUserID =nil;
+    [currentContext performBlockAndWait:^{
+        NSError* error = nil;
+        HostItelUser* currentUser;
+        NSFetchRequest* getCurrentUser = [NSFetchRequest fetchRequestWithEntityName:@"HostItelUser"];
+        getCurrentUser.predicate = [NSPredicate predicateWithFormat:@"itelNum = %@",currUserItemNum];
+        NSArray* currentUsers = [currentContext executeFetchRequest:getCurrentUser error:&error];
+        if ([currentUsers count]) {
+            currentUser = currentUsers[0];
+        }
+        if (currentUser.itelNum == nil) {
+            currentUser = nil;
+        }
+        hostUserID = [currentUser objectID];
+    }];
+
+    return (HostItelUser*) [currentContext objectWithID:hostUserID];
 }
 //设置本机用户
 -(void)setHost:(HostItelUser*)host{
@@ -55,7 +59,7 @@ static NSString* kCurrentUser = @"currUser";
         }
       
     }
-    [[IMCoreDataManager defaulManager]saveContext];
+    [[IMCoreDataManager defaulManager]saveContext:self.hostUser.managedObjectContext];
 }
 
 @end

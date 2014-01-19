@@ -178,7 +178,14 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Recent* recent = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        [recent delete];
+        NSManagedObjectContext* currentContext = recent.managedObjectContext;
+        if (currentContext) {
+            [currentContext performBlock:^{
+                [recent delete];
+                [[IMCoreDataManager defaulManager] saveContext:currentContext];
+            }];
+        }
+
     }
 }
 
@@ -202,7 +209,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
         //
-        [Recent deleteAll:[self.manager myAccount]];
+        [Recent deleteAllWithAccount:[self.manager myAccount]];
     }
 }
 - (IBAction)deleteAllRecents:(UIBarButtonItem*)sender{
