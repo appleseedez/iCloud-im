@@ -16,7 +16,6 @@
 + (void) deleteAllWithAccount:(NSString*) accountNumber {
     NSManagedObjectContext* currentContext =[[IMCoreDataManager defaulManager] managedObjectContext];
     if (currentContext) {
-        [currentContext performBlock:^{
             NSError* error;
             NSFetchRequest* deleteAll = [NSFetchRequest fetchRequestWithEntityName:TABLE_NAME_RECENT];
             deleteAll.sortDescriptors = @[];
@@ -26,7 +25,6 @@
                 [currentContext deleteObject:i];
             }
             [currentContext save:&error];
-        }];
 
     }
 }
@@ -46,8 +44,6 @@
     aRecent.status = [info valueForKey:kStatus];
     aRecent.duration = [info valueForKey:kDuration];
     aRecent.hostUserNumber = [info valueForKey:kHostUserNumber];
-
     return aRecent;
-
 }
 @end

@@ -14,8 +14,6 @@ static NSString* kCurrentUser = @"currUser";
 -(HostItelUser*)hostUser{
     NSString* currUserItemNum = [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentUser];
     NSManagedObjectContext* currentContext =[IMCoreDataManager defaulManager].managedObjectContext;
-    NSManagedObjectID* __block hostUserID =nil;
-    [currentContext performBlockAndWait:^{
         NSError* error = nil;
         HostItelUser* currentUser;
         NSFetchRequest* getCurrentUser = [NSFetchRequest fetchRequestWithEntityName:@"HostItelUser"];
@@ -27,10 +25,9 @@ static NSString* kCurrentUser = @"currUser";
         if (currentUser.itelNum == nil) {
             currentUser = nil;
         }
-        hostUserID = [currentUser objectID];
-    }];
 
-    return (HostItelUser*) [currentContext objectWithID:hostUserID];
+    return currentUser;
+
 }
 //设置本机用户
 -(void)setHost:(HostItelUser*)host{

@@ -43,12 +43,11 @@ static IMCoreDataManager* _instance;
 
 - (void) deletObject:(NSManagedObject*) obj inContext:(NSManagedObjectContext*) context{
     if (context) {
-        [context performBlock:^{
-            [context deleteObject:obj];
-        }];
+        [context deleteObject:obj];
     }
 
 }
+
 #pragma mark - Core Data stack
 
 // Returns the managed object context for the application.

@@ -12,7 +12,6 @@
 #import "IMCoreDataManager.h"
 @implementation ItelUser (CRUD)
 +(ItelUser*)userWithDictionary:(NSDictionary*)dic inContext:(NSManagedObjectContext*) context{
-    
     for (NSString *key in [dic allKeys]) {
         id object = [dic objectForKey:key];
         if ([object isEqual:[NSNull null]]) {
@@ -23,6 +22,7 @@
     NSString* itelNumber = [dic objectForKey:@"itel"];
     NSError* error;
     ItelUser *user;
+
     NSFetchRequest* getOneUser = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
     getOneUser.predicate = [NSPredicate predicateWithFormat:@"itelNum = %@",itelNumber];
     
@@ -32,7 +32,8 @@
     }else{
         user= [NSEntityDescription insertNewObjectForEntityForName:@"ItelUser" inManagedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext];
     }
-    
+
+
     user.itelNum=[dic objectForKey:@"itel"];
     user.userId=[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]];
     if (user.userId==nil) {
@@ -62,6 +63,10 @@
     self.email=[data objectForKey:@"mail"];
     self.birthDay=[data objectForKey:@"birthday"];
     self.imageurl=[data objectForKey:@"photo_file_name"];
+
+    if ([self.imageurl isEqualToString:@""]) {
+        self.imageurl=@"http://www.qqbody.com/uploads/allimg/121207/1ki0it-3.jpg";
+    }
     self.address=[data objectForKey:@"area_code"];
     HostItelUser* hostUser = [[ItelAction action] getHost];
     [hostUser addUsersObject:self];
@@ -69,6 +74,6 @@
 }
 
 - (void)delete{
-   //
+
 }
 @end

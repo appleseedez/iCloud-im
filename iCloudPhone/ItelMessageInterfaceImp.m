@@ -51,16 +51,14 @@ static ItelMessageInterfaceImp* _instance;
     
     if ([data isKindOfClass:[NSArray class]]) {
         NSManagedObjectContext* currentContext =[IMCoreDataManager defaulManager].managedObjectContext;
-        [currentContext performBlock:^{
             for(NSDictionary *mesDic in data ){
                 [Message messageWithDic:mesDic inContext:currentContext];
             }
             [[IMCoreDataManager defaulManager] saveContext:currentContext];
-        }];
     }
 }
 -(NSArray*)getSystemMessages{
-    
+
     return [Message allMessagesInContext:[IMCoreDataManager defaulManager].managedObjectContext];
 }
 

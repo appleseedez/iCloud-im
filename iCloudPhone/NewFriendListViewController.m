@@ -14,6 +14,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "ItelUser+CRUD.h"
 #import "IMCoreDataManager.h"
+
 @interface NewFriendListViewController ()
 
 @end
@@ -52,7 +53,7 @@
     if ([[self.searchResult getAllKeys] count]>indexPath.row) {
         ItelUser *user=[self.searchResult userAtIndex:indexPath.row];
         //cell.imgPhoto.image=[UIImage imageNamed:@"头像.png"];
-        [cell.imgPhoto setImageWithURL:[NSURL URLWithString:user.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader" ]];
+        [cell.imgPhoto setImageWithURL:[NSURL URLWithString:user.imageurl]];
         cell.lbItelNumber.text=user.itelNum;
         
         cell.lbNickName.text=user.nickName;
@@ -80,7 +81,6 @@
             NSArray *list=[notification.object objectForKey:@"list"];
             if ([list count]) {
                 NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
-                [currentContext performBlock:^{
                     for ( NSDictionary *dic in list) {
                         ItelUser *user=[ItelUser userWithDictionary:dic inContext:currentContext];
                         if (![user.isFriend boolValue]&&![user.itelNum isEqualToString:[ItelAction action].getHost.itelNum]) {
@@ -90,7 +90,6 @@
                     }
                     [[IMCoreDataManager defaulManager] saveContext:currentContext];
                     [self.tableView reloadData];
-                }];
 
             }
         }

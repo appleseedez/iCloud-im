@@ -197,6 +197,7 @@ UIImageView* _pview_local;
         //
         NSLog(@"开始获取p2p通道,%@", [NSDate date]);
 //        TP2PPeerArgc argc;
+
         //根据传入的useVideo参数,确定最终穿透以后是走音频还是视频.
         if ([self canVideoCalling]&&[[params valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]) {
             self.m_type = InitTypeVoeAndVie;
@@ -315,6 +316,7 @@ UIImageView* _pview_local;
 //            [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
 //        }
 
+
     });
 
     return  ret;
@@ -431,6 +433,7 @@ UIImageView* _pview_local;
     [self stopTransport];
     bool ret  = self.pInterfaceApi->Terminate();
     NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<关闭引擎>>>>>>>>>>>>>>:%d",ret);
+
 }
 
 - (void)keepSessionAlive:(NSString*) probeServerIP port:(NSInteger)port{

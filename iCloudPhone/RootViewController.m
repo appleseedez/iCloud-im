@@ -40,8 +40,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"RootView_viewDidLoad");
-    
     [self.tabBar setHidden:YES];
 #if ROOT_TABBAR_DEBUG
     NSLog(@"tabbar 加载了");
@@ -57,17 +55,14 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    NSLog(@"RootView_viewWillAppear");
     [self registerNotifications];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-     NSLog(@"RootView_viewDidAppear");
      [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewAppear" object:nil];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    NSLog(@"RootView_viewWillDisappear");
     [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
 }
 -(void)changeController:(CustonTarbarItem*)sender {

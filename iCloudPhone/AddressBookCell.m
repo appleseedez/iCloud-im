@@ -7,7 +7,7 @@
 //
 
 #import "AddressBookCell.h"
-
+#import "UIImageView+AFNetworking.h"
 @implementation AddressBookCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -69,7 +69,7 @@
     else{
       
         [self.inviteButton setBackgroundImage:[UIImage imageNamed:@"addButton" ] forState:UIControlStateNormal];
-        
+        [self.imgPhoto setImageWithURL:[NSURL URLWithString:person.itelUser.imageurl]];
     }
 }
 @end

@@ -180,11 +180,10 @@
         Recent* recent = [self.fetchedResultsController objectAtIndexPath:indexPath];
         NSManagedObjectContext* currentContext = recent.managedObjectContext;
         if (currentContext) {
-            [currentContext performBlock:^{
-                [recent delete];
-                [[IMCoreDataManager defaulManager] saveContext:currentContext];
-            }];
+            [recent delete];
+            [[IMCoreDataManager defaulManager] saveContext:currentContext];
         }
+
 
     }
 }
@@ -208,8 +207,8 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
-        //
         [Recent deleteAllWithAccount:[self.manager myAccount]];
+
     }
 }
 - (IBAction)deleteAllRecents:(UIBarButtonItem*)sender{

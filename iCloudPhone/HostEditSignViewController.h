@@ -8,6 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HostEditSignViewController : UIViewController
-
+@interface HostEditSignViewController : UIViewController<UITextViewDelegate>
 @end
