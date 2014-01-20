@@ -22,6 +22,14 @@
     [self.nextButton setUI];
     
 }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (range.location>=11) {
+        return NO;
+    }
+    else return YES;
+    
+}
 -(void)startHud{
     self.nextButton.enabled=NO;
 }

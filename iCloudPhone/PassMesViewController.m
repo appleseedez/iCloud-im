@@ -32,6 +32,14 @@ static int waitingTime=60;
 -(void)stopHud{
     self.nextButton.enabled=YES;
 }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (range.location>=6) {
+        return NO;
+    }
+    else return YES;
+    
+}
 -(void)setUI{
     [self.nextButton setUI];
     [self.tipView setUI];
