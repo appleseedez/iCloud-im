@@ -11,14 +11,81 @@
 #import "UIImageView+AFNetworking.h"
 #import "IMCoreDataManager.h"
 #import "ItelAction.h"
+#import "ItelUser+CRUD.h"
+#import "UserViewController.h"
+#import "StrangerViewController.h"
 static NSString* kOperationStatusNormal = @"isNormal";
 static NSString* kOperationReason = @"reason";
 @interface IMRecentContactDetailsViewController ()
-
+@property (nonatomic)ItelUser *user;
 @end
 
 @implementation IMRecentContactDetailsViewController
+-(void)getItelUser{
+    if (self.user==nil) {
+        
+    
+    NSManagedObjectContext *context= [IMCoreDataManager defaulManager].managedObjectContext;
+    NSFetchRequest* getOneUser = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
+    getOneUser.predicate = [NSPredicate predicateWithFormat:@"itelNum = %@",self.currentRecent.peerNumber];
+    NSError *error=nil;
+    NSArray* match = [context executeFetchRequest:getOneUser error:&error];
+    if ([match count]) {
+        self.user =(ItelUser*)match[0];
+    }else{
+        [[ItelAction action] searchStranger:self.currentRecent.peerNumber newSearch:YES];
+    }
+    }
+}
+-(void)setStrangerUser:(NSNotification*)notification{
+    if ([notification.name isEqualToString:@"searchStranger"]) {
+        BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"]boolValue];
+        if (isNormal) {
+            NSArray *list=[notification.object objectForKey:@"list"];
+            if ([list count]) {
+                NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
+                for ( NSDictionary *dic in list) {
+                    ItelUser *user=[ItelUser userWithDictionary:dic inContext:currentContext];
+                    if (![user.isFriend boolValue]&&[user.itelNum isEqualToString:self.currentRecent.peerNumber]) {
+                        self.user=user;
+                        self.currentRecent.peerRealName=user.itelNum;
+                        self.currentRecent.peerNick=user.nickName;
+                        self.currentRecent.peerAvatar=user.imageurl;
+                    }
+                    
+                }
+                [[IMCoreDataManager defaulManager] saveContext:currentContext];
+             
+                
+            }
+        }
+        else {
+            NSLog(@"%@",[notification.userInfo objectForKey:@"reason"]);
+        }
+    }
 
+}
+-(IBAction)showRecentDetail:(id)sender{
+    
+    if (self.user) {
+        if (self.user.isFriend) {
+            UserViewController *userVC= [self.storyboard instantiateViewControllerWithIdentifier:@"userView"];
+            userVC.user=self.user;
+            [self.navigationController pushViewController:userVC animated:YES];
+        }
+        else {
+            StrangerViewController *strangerVC=[self.storyboard instantiateViewControllerWithIdentifier:@"stragerView"];
+            strangerVC.user=self.user;
+            [self.navigationController pushViewController:strangerVC animated:YES];
+        }
+    }
+    else{
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"查询用户失败" message:@"未查询到该用户信息，如果想再次查询请点击确定，否则点击取消" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+        [alert show];
+        
+    }
+    
+}
 - (void)awakeFromNib{
     [super awakeFromNib];
 }
@@ -29,6 +96,8 @@ static NSString* kOperationReason = @"reason";
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setStrangerUser:) name:SEARCH_STRANGER_NOTIFICATION object:nil];
+    [self getItelUser];
         [self setup];
 }
 

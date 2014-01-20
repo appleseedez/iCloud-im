@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
-@interface IMRecentContactListViewController : CoreDataTableViewController <UIActionSheetDelegate>
+@interface IMRecentContactListViewController : CoreDataTableViewController <UIActionSheetDelegate,UINavigationControllerDelegate>
 - (IBAction)deleteAllRecents:(UIBarButtonItem*)sender;
 @end
