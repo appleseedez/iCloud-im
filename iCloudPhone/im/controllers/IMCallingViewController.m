@@ -65,7 +65,13 @@ static int soundCount;
     
 
    ItelUser* peerUser =  [[ItelAction action] userInFriendBook:[[self.manager myState] valueForKey:kPeerAccount]];
-    self.peerAccountLabel.text = [NSString stringWithFormat:@"呼叫用户 %@",peerUser.nickName];
+    NSString* peerDisplayName = BLANK_STRING;
+    if (!peerUser) {
+        peerDisplayName = [[self.manager myState] valueForKey:kPeerAccount];
+    }else{
+        peerDisplayName = peerUser.nickName;
+    }
+    self.peerAccountLabel.text = [NSString stringWithFormat:@"呼叫用户 %@",peerDisplayName];
     self.PeerAvatarImageView.layer.cornerRadius = 10;
     self.PeerAvatarImageView.layer.masksToBounds = YES;
     
