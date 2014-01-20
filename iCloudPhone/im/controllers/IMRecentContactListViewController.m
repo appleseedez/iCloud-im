@@ -30,6 +30,12 @@
     }
     return self;
 }
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    if (viewController!=self) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"1"}];
+    }
+    
+}
 - (void)awakeFromNib{
     [super awakeFromNib];
     [self registerNotifications];
@@ -46,6 +52,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTab" object:nil userInfo:@{@"hidden":@"0"}];
     [self setup];
     [self setupFetchViewController];
 }
@@ -64,6 +71,7 @@
 #if OTHER_MESSAGE
      NSLog(@"tableView的viewDidLoad方法被调用");
 #endif
+    self.navigationController.delegate=self;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
