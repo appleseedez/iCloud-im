@@ -13,6 +13,7 @@
 #import "IMAnsweringViewController.h"
 #import "NewMessageView.h"
 #import "ItelAction.h"
+#import "IMDailViewController.h"
 @interface RootViewController ()
 @property (nonatomic,strong) CustomTabbar *customTabbar;
 @property (nonatomic,strong) NewMessageView *newMessage;
@@ -76,9 +77,16 @@
      [sender isSelected:YES];
     int i= [self.customTabbar.items indexOfObject:sender];
     if (i==0&&presentDialingView==YES) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
+        [self presentDialingViewController];
     }
     [self setSelectedIndex:i];
+}
+-(void)presentDialingViewController{
+    
+    IMDailViewController* dialViewController = (IMDailViewController*) [self.storyboard instantiateViewControllerWithIdentifier:DIAL_PAN_VIEW_CONTROLLER_ID];
+    dialViewController.manager = self.manager;
+    [self presentViewController:dialViewController animated:YES completion:nil];
 }
 -(void)changeSubViewAtIndex:(NSInteger)index{
     BOOL present;

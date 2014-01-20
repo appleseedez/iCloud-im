@@ -32,6 +32,14 @@
 	[self.nextButton setUI];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
 }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+
+        if (range.location>=18) {
+            return NO;
+        }
+        else return YES;
+    
+}
 -(void)dismiss{
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         

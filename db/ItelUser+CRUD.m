@@ -26,11 +26,11 @@
     NSFetchRequest* getOneUser = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
     getOneUser.predicate = [NSPredicate predicateWithFormat:@"itelNum = %@",itelNumber];
     
-    NSArray* match = [[IMCoreDataManager defaulManager].managedObjectContext executeFetchRequest:getOneUser error:&error];
+    NSArray* match = [context executeFetchRequest:getOneUser error:&error];
     if ([match count]) {
         user =(ItelUser*)match[0];
     }else{
-        user= [NSEntityDescription insertNewObjectForEntityForName:@"ItelUser" inManagedObjectContext:[IMCoreDataManager defaulManager].managedObjectContext];
+        user= [NSEntityDescription insertNewObjectForEntityForName:@"ItelUser" inManagedObjectContext:context];
     }
 
 

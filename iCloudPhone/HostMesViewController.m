@@ -21,6 +21,14 @@
 -(void)setNewTelNum:(NSString*)newTelNum{
     _newTelNum=newTelNum;
 }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (range.location>=6) {
+        return NO;
+    }
+    else return YES;
+    
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
