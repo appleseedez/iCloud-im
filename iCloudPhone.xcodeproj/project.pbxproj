@@ -1680,7 +1680,7 @@
 						TestTargetID = 47B89DD01834D40000022FE5;
 					};
 					47B89DD01834D40000022FE5 = {
-						DevelopmentTeam = KAH6228XJ2;
+						DevelopmentTeam = 849L563F75;
 					};
 					47B89DF11834D40000022FE5 = {
 						TestTargetID = 47B89DD01834D40000022FE5;

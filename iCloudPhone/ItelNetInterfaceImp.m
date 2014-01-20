@@ -171,8 +171,7 @@ static int addcount=0;
     NSDictionary *parameters=@{@"hostUserId":number, @"numbers":strPhones,@"token":host.token};
     SUCCESS {
         
-        dispatch_queue_t getPhones=dispatch_queue_create("getPhones", NULL);
-        dispatch_async(getPhones, ^{
+       
             
             id dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:Nil];
             
@@ -192,7 +191,7 @@ static int addcount=0;
                     NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"checkAddress" object:nil userInfo:userInfo];
                 }
-            }  });//如果请求失败 则执行failure
+            }  //如果请求失败 则执行failure
     };
     FAILURE{
         
