@@ -73,6 +73,7 @@
 -(void) getItelBlackListResponse:(id)data{
     NSArray *list = [data objectForKey:@"list"];
     NSManagedObjectContext* currentContext =[IMCoreDataManager defaulManager].managedObjectContext;
+    
     for (NSDictionary *dic in (NSArray*)list) {
         ItelUser *user=[ItelUser userWithDictionary:dic inContext:currentContext];
         [self.itelBookActionDelegate resetUserInBlackBook:user];
