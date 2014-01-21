@@ -135,11 +135,17 @@
     //移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SIGNAL_ERROR_NOTIFICATION object:nil];
+    //对方是不是我好友
+    if (![[ItelAction action] userInFriendBook:[self.state valueForKey:kPeerAccount]]) {
+        // 提示用户 陌生人或者不存在的号码
+        [[IMTipImp defaultTip] warningTip:@"对方不在线或者账号不存在"];
+    }else{
+        [[IMTipImp defaultTip] warningTip:@"好友不在线"];
+    }
     //查询失败了.终止session
     [self endSession];
-    
-    // 提示用户 对方不在线
-    [[IMTipImp defaultTip] errorTip:@"对方账号不存在."];
+
+   
 }
 //被踢下线了
 - (void) droppedFromSignal:(NSNotification*) notify{
@@ -835,8 +841,8 @@
         return;
     }
     [self restoreState];
-    
-    //    [self.engine tearDown];
+    //从非idle状态变回idle状态. 说明需要挂断. 给提示
+    [[IMTipImp defaultTip] showTip:@"挂断中..."];
     [self stopCommunicationCounting];
     [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
     [self.engine stopTransport];
@@ -844,9 +850,6 @@
 }
 
 - (void) restoreState{
-    if (![[self.state valueForKey:kPeerAccount] isEqualToString:IDLE]) {
-         [[IMTipImp defaultTip] showTip:@"挂断中..."];
-    }
     self.state = [NSMutableDictionary dictionaryWithDictionary: @{
                                                                   kMyAccount:[self myAccount], // 登陆状况下的通话查询结束. 账号还是要的
                                                                   kMySSID:@(-1), //空闲

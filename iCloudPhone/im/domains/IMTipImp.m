@@ -48,6 +48,10 @@ static IMTipImp* _instance;
     self.style = ALAlertBannerStyleFailure;
     [self showTip:tip];
 }
+- (void) warningTip:(NSString *)tip{
+    self.style = ALAlertBannerStyleWarning;
+    [self showTip:tip];
+}
 - (void)successTip:(NSString *)tip{
     self.style = ALAlertBannerStyleSuccess;
     [self showTip:tip];

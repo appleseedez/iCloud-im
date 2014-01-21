@@ -12,6 +12,7 @@
 - (void) showTip:(NSString*) tip forSeconds:(int) seconds; //显示x秒后消失
 - (void) showTip:(NSString*) tip;
 - (void) errorTip:(NSString*) tip;
+- (void) warningTip:(NSString*) tip;
 - (void) successTip:(NSString*) tip;
 - (void) hideTip;
 @end

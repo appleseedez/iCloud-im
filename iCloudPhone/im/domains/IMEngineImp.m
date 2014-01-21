@@ -291,6 +291,7 @@ UIImageView* _pview_local;
             if (!ret)
             {
                 NSLog(@"传输初期化失败");
+                [[IMTipImp defaultTip] errorTip:@"传输通道开启失败"];
             }
 #if ENGINE_MSG
             NSLog(@"到底你执行了多少次");
