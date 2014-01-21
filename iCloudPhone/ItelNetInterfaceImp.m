@@ -26,7 +26,8 @@ static ItelNetInterfaceImp* manager;
 }
 -(void)tearDown{
     manager=nil;
-}
+ 
+   }
 #pragma mark - 添加联系人
 static int addcount=0;
 
