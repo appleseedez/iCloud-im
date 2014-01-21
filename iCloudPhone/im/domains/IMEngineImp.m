@@ -19,6 +19,7 @@ UIImageView* _pview_local;
 @property(nonatomic) InitType m_type;
 @property(nonatomic,copy) NSString* currentInterIP;
 @property(nonatomic) int cameraIndex;
+@property(nonatomic) BOOL deviceAuthorized;
 @end
 
 @implementation IMEngineImp
@@ -93,7 +94,30 @@ UIImageView* _pview_local;
     return result;
 }
 
-
+- (void)checkDeviceAuthorizationStatus
+{
+	NSString *mediaType = AVMediaTypeVideo;
+	
+	[AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
+		if (granted)
+		{
+			//Granted access to mediaType
+			[self setDeviceAuthorized:YES];
+		}
+		else
+		{
+			//Not granted access to mediaType
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[[[UIAlertView alloc] initWithTitle:@"iTel"
+											message:@"如果不开启摄像头和mic权限,将无法使用视频及音频功能"
+										   delegate:self
+								  cancelButtonTitle:@"我知道了"
+								  otherButtonTitles:nil] show];
+				[self setDeviceAuthorized:NO];
+			});
+		}
+	}];
+}
 #pragma mark - INTERFACE
 
 // IMEngine接口 见接口定义
@@ -112,13 +136,7 @@ UIImageView* _pview_local;
     // 首先，初始化媒体。此时返回的m_type可以表明本机是否有能力进行视频。
     self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeNone);
    // TODO:在媒体初始化时,获取访问摄像头和麦克的权限. 另外如果没有获取到这些权限应该怎么办?
-    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-        if (granted) {
-            self.canVideoCalling = YES;
-        }else{
-            self.canVideoCalling = NO;
-        }
-    }];
+    [self checkDeviceAuthorizationStatus];
 
     
     
@@ -332,7 +350,9 @@ UIImageView* _pview_local;
 }
 
 - (void)disableSpeaker{
+#if ENGINE_MSG
     NSLog(@"TODO:关扬声器");
+#endif
     NSError* error = nil;
     [[AVAudioSession sharedInstance]setActive:YES error:&error];
     [[AVAudioSession sharedInstance]setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDuckOthers error:&error];
@@ -343,12 +363,16 @@ UIImageView* _pview_local;
     }
 }
 - (void)showCam{
+#if ENGINE_MSG
     NSLog(@"显示摄像头");
+#endif
     self.pInterfaceApi->SetMuteEnble(MTVie, true);
     self.pInterfaceApi->SetMuteEnble(MTVoe, true);
 }
 - (void)hideCam{
+#if ENGINE_MSG
     NSLog(@"隐藏摄像头");
+#endif
     self.pInterfaceApi->SetMuteEnble(MTVie, false);
     self.pInterfaceApi->SetMuteEnble(MTVoe, true);
 }
