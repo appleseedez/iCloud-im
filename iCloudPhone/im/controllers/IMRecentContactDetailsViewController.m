@@ -68,7 +68,7 @@ static NSString* kOperationReason = @"reason";
 -(IBAction)showRecentDetail:(id)sender{
     
     if (self.user) {
-        if (self.user.isFriend) {
+        if ([self.user.isFriend boolValue]) {
             UserViewController *userVC= [self.storyboard instantiateViewControllerWithIdentifier:@"userView"];
             userVC.user=self.user;
             [self.navigationController pushViewController:userVC animated:YES];
