@@ -263,9 +263,9 @@ UIImageView* _pview_local;
 //            return -1;
             ret = false;
         }
-        
+        NSLog(@"准备用于传输的对方外网ip:%@ : port:%i;内网ip:%@ : port:%i",[NSString stringWithUTF8String:argc.otherInterIP] ,argc.otherInterPort,[NSString stringWithUTF8String:argc.otherLocalIP],argc.otherLocalPort);
         //如果已经完成p2p穿透,就终止
-        self.pInterfaceApi->StopDetect();
+//        self.pInterfaceApi->StopDetect();
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"媒体类型:%d",self.m_type);
             NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
