@@ -71,7 +71,7 @@
         if (![msg intValue]) {
              msg =@"请稍后重试";
         }
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码成功失败" message:msg  delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码失败" message:msg  delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
         [alert show];
 
     }

@@ -37,7 +37,7 @@
     
 }
 
-//fdsfds
+//
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -136,7 +136,7 @@
     //不再需要传递参数 在manager.state可以取到
 //    callingViewController.callingNotify = notify;
     //获取到当前的顶层viewContorller
-    if (self.presentedViewController) {
+    if ([self.presentedViewController isKindOfClass:[IMDailViewController class]]) {
         [self.presentedViewController presentViewController:callingViewNavController animated:YES completion:nil];
     }else{
         [self presentViewController:callingViewNavController animated:YES completion:nil];
@@ -154,11 +154,12 @@
     answeringViewController.manager = self.manager;
     answeringViewController.callingNotify = notify;
     //获取到当前的顶层viewContorller
-    if (self.presentedViewController) {
-        [self.presentedViewController presentViewController:answeringViewNavController animated:YES completion:nil];
-    }else{
-        [self presentViewController:answeringViewNavController animated:YES completion:nil];
-    }
+    [self presentViewController:answeringViewNavController animated:YES completion:nil];
+//    if ([self.presentedViewController isKindOfClass:[IMDailViewController class]]) {
+//        [self.presentedViewController presentViewController:answeringViewNavController animated:YES completion:nil];
+//    }else{
+//        [self presentViewController:answeringViewNavController animated:YES completion:nil];
+//    }
     
 }
 
