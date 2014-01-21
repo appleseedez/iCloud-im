@@ -389,6 +389,7 @@ UIImageView* _pview_local;
         return;
     }
     // 开启摄像头
+    
     if (self.pInterfaceApi->StartCamera(self.cameraIndex) >= 0)
     {
         // 摆正摄像头位置

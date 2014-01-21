@@ -139,7 +139,7 @@
     [self endSession];
     
     // 提示用户 对方不在线
-    [[IMTipImp defaultTip] showTip:@"对方不在线"];
+    [[IMTipImp defaultTip] errorTip:@"对方账号不存在."];
 }
 //被踢下线了
 - (void) droppedFromSignal:(NSNotification*) notify{
@@ -383,6 +383,7 @@
     [self endSession];
     //提示用户
     NSLog(@"业务服务器异常，请稍后再试");
+    [[IMTipImp defaultTip] errorTip:@"对方不在线,请稍后重试"];
 }
 /**
  *  从业务服务器断开
@@ -843,7 +844,9 @@
 }
 
 - (void) restoreState{
-    
+    if (![[self.state valueForKey:kPeerAccount] isEqualToString:IDLE]) {
+         [[IMTipImp defaultTip] showTip:@"挂断中..."];
+    }
     self.state = [NSMutableDictionary dictionaryWithDictionary: @{
                                                                   kMyAccount:[self myAccount], // 登陆状况下的通话查询结束. 账号还是要的
                                                                   kMySSID:@(-1), //空闲
@@ -855,6 +858,7 @@
                                                                   }];
     //重新开始接收通知 保险起见 先移除再添加
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_PERIOD_NOTIFICATION object:nil];
+    sleep(1);//设置为空闲后,休息一秒再开始接收新的拨叫信息
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionDataReceived:) name:SESSION_PERIOD_NOTIFICATION object:nil];
 }
 

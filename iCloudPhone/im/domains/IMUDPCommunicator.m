@@ -142,6 +142,11 @@
     
 }
 - (void)tearDown{
+    if (![self.udpSock isClosed]) {
+        [self.udpSock close];
+    }
     
+    self.udpSock.delegate = nil;
+    self.udpSock = nil;
 }
 @end

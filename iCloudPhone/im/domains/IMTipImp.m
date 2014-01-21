@@ -57,8 +57,8 @@ static IMTipImp* _instance;
     NSCAppDelegate *appDelegate = (NSCAppDelegate *)[[UIApplication sharedApplication] delegate];
     ALAlertBannerStyle randomStyle = self.style;// (ALAlertBannerStyle)(arc4random_uniform(4));
     ALAlertBannerPosition position = ALAlertBannerPositionTop;
-    ALAlertBanner* banner = [ALAlertBanner alertBannerForView:appDelegate.window style:randomStyle position:position title:self.tip subtitle:@"异常!" ];
-    banner.secondsToShow = 3.5;
+    ALAlertBanner* banner = [ALAlertBanner alertBannerForView:appDelegate.window style:randomStyle position:position title:self.tip subtitle:@"" ];
+    banner.secondsToShow = 1.5;
     banner.showAnimationDuration = .25;
     banner.hideAnimationDuration = .2;
 
