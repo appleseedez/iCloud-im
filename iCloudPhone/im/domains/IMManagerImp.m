@@ -389,7 +389,7 @@
     [self endSession];
     //提示用户
     NSLog(@"业务服务器异常，请稍后再试");
-    [[IMTipImp defaultTip] errorTip:@"对方不在线,请稍后重试"];
+    [[IMTipImp defaultTip] showTip:@"对方不在线,请稍后重试"];
 }
 /**
  *  从业务服务器断开

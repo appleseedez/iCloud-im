@@ -23,7 +23,7 @@
     [self.layer   setBorderWidth:borderWidth]; //边框宽度
     CGColor *border=borderColor.CGColor;
     [self.layer   setBorderColor:border];//边框颜色
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bitch2"]];
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bitch"]];
     [self setClipsToBounds:YES];
 
 }
