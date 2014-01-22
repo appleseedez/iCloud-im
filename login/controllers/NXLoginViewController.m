@@ -215,9 +215,9 @@ static int loginCount=0;
     [super viewDidLoad];
     [self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
     self.actWaitingToLogin.hidesWhenStopped=YES;
-    self.txtUserCloudNumber.text=@"500009";
+    //self.txtUserCloudNumber.text=@"500009";
 
-    self.txtUserPassword.text=@"111111";
+    //self.txtUserPassword.text=@"111111";
   
     NXImageView *logo=[[NXImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 75)];
     [logo setRect:3 cornerRadius:10 borderColor:[UIColor whiteColor]];
