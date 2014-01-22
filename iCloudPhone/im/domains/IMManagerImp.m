@@ -836,6 +836,7 @@
 
 
 - (void)endSession{
+    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
     if ([[self.state valueForKey:kPeerAccount] isEqualToString:IDLE]) {
         [self restoreState];
         return;
@@ -844,7 +845,7 @@
     //从非idle状态变回idle状态. 说明需要挂断. 给提示
     [[IMTipImp defaultTip] showTip:@"挂断中..."];
     [self stopCommunicationCounting];
-    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
+
     [self.engine stopTransport];
     
 }
@@ -861,10 +862,14 @@
                                                                   }];
     //重新开始接收通知 保险起见 先移除再添加
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_PERIOD_NOTIFICATION object:nil];
-    sleep(1);//设置为空闲后,休息一秒再开始接收新的拨叫信息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionDataReceived:) name:SESSION_PERIOD_NOTIFICATION object:nil];
+    //设置为空闲后,休息一秒再开始接收新的拨叫信息
+    [self performSelector:@selector(addDataReceivedNotification:) withObject:nil afterDelay:2];
 }
 
+
+- (void) addDataReceivedNotification:(NSNotification*) notify{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionDataReceived:) name:SESSION_PERIOD_NOTIFICATION object:nil];
+}
 // 用户点击时，将通知数据传入
 - (void) acceptSession:(NSNotification*) notify{
     //终止超时定时器
