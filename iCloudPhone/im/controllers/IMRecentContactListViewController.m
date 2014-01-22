@@ -171,7 +171,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
     Recent* record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    UIImageView* avatarView = (UIImageView*)[cell.contentView viewWithTag:1];
+    
+        UIImageView* avatarView = (UIImageView*)[cell.contentView viewWithTag:1];
     UILabel* nameLabel = (UILabel*) [cell.contentView viewWithTag:2];
     UILabel* numberLabel = (UILabel*) [cell.contentView viewWithTag:3];
     UIImageView* statusView = (UIImageView*) [cell.contentView viewWithTag:4];

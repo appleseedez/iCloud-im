@@ -9,8 +9,8 @@
 #ifndef iCloudPhone_NetHeaders_h
 #define iCloudPhone_NetHeaders_h
 
-#define SIGNAL_SERVER @"http://115.28.21.131:8080/CloudCommunity"
-//#define SIGNAL_SERVER @"http://192.168.1.108:8080/CloudCommunity"
+//#define SIGNAL_SERVER @"http://115.28.21.131:8080/CloudCommunity"
+#define SIGNAL_SERVER @"http://42.96.149.86/CloudCommunity"
 //#define SIGNAL_SERVER @"http://211.149.144.15:8000/CloudCommunity"
 //#define SIGNAL_SERVER @"http://10.0.0.157:8080/CloudCommunity"
 #define ADD_FRIEND_INTERFACE @"/contact/applyItelFriend.json"   //添加联系人接口

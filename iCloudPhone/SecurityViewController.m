@@ -26,20 +26,23 @@ static bool isConnecting=0;
 
 -(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==1) {
-        if (isConnecting==0) {
-            isConnecting=1;
+        
         switch (indexPath.row) {
             case 0:
-                [self checkSecurity];
+                if (isConnecting==0) {
+                    [self checkSecurity];
+                    isConnecting=1;
+                }
+                
                 break;
             case 1:
                 [self pushToChangePasswordView];
                 break;
             default:
                 break;
-        }
-        }
-    }
+        
+        
+        }}
 }
 -(void)pushToChangePasswordView{
     
@@ -49,6 +52,7 @@ static bool isConnecting=0;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    isConnecting=0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:@"passwordProtection" object:nil];
     
 }
@@ -64,7 +68,7 @@ static bool isConnecting=0;
         }
     }
     else{
-        [self errorAlert:@"网络不通"];
+        [self errorAlert:[notification.userInfo objectForKey:@"reason"]];
     }
 }
 -(void)errorAlert:(NSString*)errorString{
@@ -85,6 +89,7 @@ static bool isConnecting=0;
     securetyQusetionVC.data=data;
     [self.navigationController pushViewController:securetyQusetionVC animated:YES];
 }
+
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];

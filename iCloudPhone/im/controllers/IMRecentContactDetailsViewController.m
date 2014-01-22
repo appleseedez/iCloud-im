@@ -22,7 +22,7 @@ static NSString* kOperationReason = @"reason";
 
 @implementation IMRecentContactDetailsViewController
 -(void)getItelUser{
-    if (self.user==nil) {
+    
         
     
     NSManagedObjectContext *context= [IMCoreDataManager defaulManager].managedObjectContext;
@@ -32,10 +32,11 @@ static NSString* kOperationReason = @"reason";
     NSArray* match = [context executeFetchRequest:getOneUser error:&error];
     if ([match count]) {
         self.user =(ItelUser*)match[0];
+        [self.currentRecent setWithUser:self.user];
     }else{
         [[ItelAction action] searchStranger:self.currentRecent.peerNumber newSearch:YES];
     }
-    }
+    
 }
 -(void)setStrangerUser:(NSNotification*)notification{
     if ([notification.name isEqualToString:@"searchStranger"]) {
