@@ -145,7 +145,6 @@
     //查询失败了.终止session
     [self endSession];
 
-   
 }
 //被踢下线了
 - (void) droppedFromSignal:(NSNotification*) notify{
@@ -844,6 +843,7 @@
     [self restoreState];
     //从非idle状态变回idle状态. 说明需要挂断. 给提示
     [[IMTipImp defaultTip] showTip:@"挂断中..."];
+
     [self stopCommunicationCounting];
 
     [self.engine stopTransport];
