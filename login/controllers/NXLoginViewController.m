@@ -16,6 +16,7 @@
 #import "RegNextButton.h"
 #import "NXImageView.h"
 #import "ItelAction.h"
+#import "NetRequester.h"
 #define mockServer [AFHTTPSessionManager manager]
 
 @interface NXLoginViewController ()
@@ -73,6 +74,70 @@ static int loginCount=0;
         self.btnLogin.enabled=NO;
         [self requestToLogin1];
     }
+}
+-(void)requestToLogin{
+    //这是退出键盘的 不用理它
+    [self.view endEditing:YES];
+    self.txtInuptCheckMessage.text=@"登录中...";
+    [self.actWaitingToLogin startAnimating];
+    NSString *url=[NSString stringWithFormat:@"%@/login.json",SIGNAL_SERVER];
+    
+    loginCount ++;
+    NSLog(@"登录了%d次",loginCount);
+    
+    
+    NSDictionary *parameters=  @{@"itel": self.txtUserCloudNumber.text,@"password":self.txtUserPassword.text,@"type":@"IOS"};
+    
+    
+    
+    
+    //success封装了一段代码表示如果请求成功 执行这段代码
+    void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([json isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic=[json objectForKey:@"message"];
+            int ret=[[dic objectForKey:@"ret"] intValue];
+            if (ret==0) {
+                HostItelUser *host=[HostItelUser userWithDictionary:[[dic objectForKey:@"data"] mutableCopy]];
+                NSDictionary *tokens=[json objectForKey:@"tokens"];
+                if (tokens) {
+                    host.sessionId=[tokens objectForKey:@"jsessionid"];
+                    host.spring_security_remember_me_cookie=[tokens objectForKey:@"spring_security_remember_me_cookie"];
+                    host.token=[tokens objectForKey:@"token"];
+                }
+                
+                
+                [[ItelAction action] setHostItelUser:host];
+                [self.actWaitingToLogin stopAnimating];
+                self.txtInuptCheckMessage.text = @"";
+                
+                [[ItelAction action] resetContact];
+                
+                
+                NSCAppDelegate *delegate =   (NSCAppDelegate*) [UIApplication sharedApplication].delegate;
+                [delegate changeRootViewController:RootViewControllerMain userInfo:[[json valueForKey:@"message"] valueForKey:@"data"]];
+                
+                [[ItelAction action] checkAddressBookMatchingItel];
+                [[ItelAction action] getItelBlackList:0];
+                [[ItelAction action] getItelFriendList:0];
+                self.btnLogin.enabled=YES;
+            }
+            else {
+                [self.actWaitingToLogin stopAnimating];
+                self.txtInuptCheckMessage.text=[dic objectForKey:@"msg"];
+                self.btnLogin.enabled=YES;
+            }
+        }//如果请求失败 则执行failure
+    };
+    void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+        [self.actWaitingToLogin stopAnimating];
+        self.txtInuptCheckMessage.text = @"网络不通";
+        self.btnLogin.enabled = YES;
+    };
+    [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
 }
 -(void)requestToLogin1{
     //这是退出键盘的 不用理它
