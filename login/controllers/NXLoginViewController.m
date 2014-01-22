@@ -134,6 +134,7 @@ static int loginCount=0;
         NSLog(@"%@",error);
         [self.actWaitingToLogin stopAnimating];
         self.txtInuptCheckMessage.text = @"网络不通";
+        self.btnLogin.enabled = YES;
     };
     [[AFHTTPRequestOperationManager manager]POST:url parameters:parameters success:success failure:failure];
 }

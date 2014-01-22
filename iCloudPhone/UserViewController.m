@@ -16,6 +16,7 @@
 #import "NSCAppDelegate.h"
 #import "UIImageView+AFNetworking.h"
 #import "Area+toString.h"
+#import "IMTipImp.h"
 @interface UserViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbShowName;
 @property (weak, nonatomic) IBOutlet NXImageView *imageView;
@@ -207,7 +208,6 @@
 }
 -(void)callActionSheet{
     UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除联系人" otherButtonTitles:@"添加黑名单",@"编辑备注", nil];
-    NSAssert(self.view, @"一点");
     [actionSheet showInView: self.view];
     
 }
@@ -216,8 +216,7 @@
     if (isNormal) {
         [self.navigationController popViewControllerAnimated:YES];
     }else{
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"删除成功" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
-        [alert show];
+        [[IMTipImp defaultTip] errorTip:@"当前网络异常,删除失败"];
     }
 }
 - (void)actionSheetCancel:(UIActionSheet *)actionSheet{

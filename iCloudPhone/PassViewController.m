@@ -138,8 +138,8 @@
                 [self pushNext];
                 }
             else {
-               
-                [self errorAlert:@"iTel号码不存在或验证码错误"];
+                //NSLog(@"message:%@   code:%@",[dic objectForKey:@"msg"],[dic objectForKey:@"code"]);
+                [self errorAlert:[dic objectForKey:@"msg"]];
             }
         }
     };
@@ -167,7 +167,7 @@
     [self.navigationController pushViewController:passVC animated:YES];
 }
 -(void)errorAlert:(NSString*)errorString{
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"验证错误" message:errorString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:errorString message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
 }
 -(void)pop{

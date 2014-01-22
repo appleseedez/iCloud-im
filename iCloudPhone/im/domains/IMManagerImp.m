@@ -135,11 +135,16 @@
     //移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SIGNAL_ERROR_NOTIFICATION object:nil];
+    //对方是不是我好友
+    if (![[ItelAction action] userInFriendBook:[self.state valueForKey:kPeerAccount]]) {
+        // 提示用户 陌生人或者不存在的号码
+        [[IMTipImp defaultTip] warningTip:@"对方不在线或者账号不存在"];
+    }else{
+        [[IMTipImp defaultTip] warningTip:@"好友不在线"];
+    }
     //查询失败了.终止session
     [self endSession];
-    
-    // 提示用户 对方不在线
-    [[IMTipImp defaultTip] showTip:@"对方不在线"];
+
 }
 //被踢下线了
 - (void) droppedFromSignal:(NSNotification*) notify{
@@ -383,6 +388,7 @@
     [self endSession];
     //提示用户
     NSLog(@"业务服务器异常，请稍后再试");
+    [[IMTipImp defaultTip] showTip:@"对方不在线,请稍后重试"];
 }
 /**
  *  从业务服务器断开
@@ -673,7 +679,7 @@
     if (self.lossCount>=20) {
         [self haltSession:@{
                             SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self myAccount],
-                            SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:self.state,
+                            SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[self.state valueForKey:kPeerAccount],
                             SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                             }];
     }
@@ -829,21 +835,22 @@
 
 
 - (void)endSession{
+    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
     if ([[self.state valueForKey:kPeerAccount] isEqualToString:IDLE]) {
         [self restoreState];
         return;
     }
     [self restoreState];
-    
-    //    [self.engine tearDown];
+    //从非idle状态变回idle状态. 说明需要挂断. 给提示
+    [[IMTipImp defaultTip] showTip:@"挂断中..."];
+
     [self stopCommunicationCounting];
-    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
+
     [self.engine stopTransport];
     
 }
 
 - (void) restoreState{
-    
     self.state = [NSMutableDictionary dictionaryWithDictionary: @{
                                                                   kMyAccount:[self myAccount], // 登陆状况下的通话查询结束. 账号还是要的
                                                                   kMySSID:@(-1), //空闲
@@ -855,9 +862,14 @@
                                                                   }];
     //重新开始接收通知 保险起见 先移除再添加
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_PERIOD_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionDataReceived:) name:SESSION_PERIOD_NOTIFICATION object:nil];
+    //设置为空闲后,休息一秒再开始接收新的拨叫信息
+    [self performSelector:@selector(addDataReceivedNotification:) withObject:nil afterDelay:2];
 }
 
+
+- (void) addDataReceivedNotification:(NSNotification*) notify{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionDataReceived:) name:SESSION_PERIOD_NOTIFICATION object:nil];
+}
 // 用户点击时，将通知数据传入
 - (void) acceptSession:(NSNotification*) notify{
     //终止超时定时器
