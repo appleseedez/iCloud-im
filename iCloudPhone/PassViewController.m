@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet regDetailTextField *txtItel;
 @property (weak, nonatomic) IBOutlet regDetailTextField *txtVerifyCode;
 
+
 @end
 #define  SUCCESS void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
 #define  FAILURE void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error)
@@ -61,7 +62,7 @@
     self.codeImage.image=[UIImage imageNamed:@"code_placeholder"];
     [self.nextButton setUI];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"登陆" style:UIBarButtonItemStyleDone target:self action:@selector(pop)];
-    [self getImage];
+    [self getToken];
 	// Do any additional setup after loading the view.
 }
 -(IBAction)pushNext:(id)sender{
@@ -88,11 +89,43 @@
 -(IBAction)getCheckCodeImage{
     [self getImage];
     }
+-(void)getToken{
+    NSString *strurl=[NSString stringWithFormat:@"%@/initToken.json",SIGNAL_SERVER];
+    
+    
+    NSURL *url  =[NSURL URLWithString:strurl];
+    NSURLRequest *request=[NSURLRequest requestWithURL:url];
+    
+    NSOperationQueue *queue=[[NSOperationQueue alloc]init];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (connectionError) {
+            NSLog(@"%@",connectionError);
+            
+            
+        }
+        else{
+            NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            if ([[dic objectForKey:@"ret"] intValue]==0) {
+               [PassManager defaultManager].token=[[dic objectForKey:@"data" ] objectForKey:@"token"];
+                
+                [self getImage];
+            }
+            else{
+                
+            }
+            
+            
+        }
+        
+    }];
+    
+
+}
 -(void)getImage{
     NSString *strurl=[NSString stringWithFormat:@"%@/printImage",SIGNAL_SERVER];
   
-    
-    NSURL *url  =[NSURL URLWithString:strurl];
+    NSString *parameterUrl=[NSString stringWithFormat:@"%@?token=%@",strurl,[PassManager defaultManager].token];
+    NSURL *url  =[NSURL URLWithString:parameterUrl];
     NSURLRequest *request=[NSURLRequest requestWithURL:url];
     
     NSOperationQueue *queue=[[NSOperationQueue alloc]init];
@@ -125,7 +158,7 @@
 -(void)checkCode{
     NSString *url=[NSString stringWithFormat:@"%@/safety/checkImgCodeItel.json",SIGNAL_SERVER];
     //NSString *url=@"http://211.149.144.15:8000/CloudCommunity/safety/checkImgCodeItel.json";
-    NSDictionary *parameters=@{@"itel": self.txtItel.text,@"verifycode":self.txtVerifyCode.text};
+    NSDictionary *parameters=@{@"itel": self.txtItel.text,@"verifycode":self.txtVerifyCode.text,@"token":[PassManager defaultManager].token};
     SUCCESS{
         [self stopHud];
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];

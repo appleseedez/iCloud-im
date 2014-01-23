@@ -12,7 +12,7 @@
 //#define SIGNAL_SERVER @"http://115.28.21.131:8080/CloudCommunity"
 #define SIGNAL_SERVER @"http://42.96.149.86/CloudCommunity"
 //#define SIGNAL_SERVER @"http://211.149.144.15:8000/CloudCommunity"
-//#define SIGNAL_SERVER @"http://10.0.0.157:8080/CloudCommunity"
+//#define SIGNAL_SERVER @"http://10.0.0.147:8080/CloudCommunity"
 #define ADD_FRIEND_INTERFACE @"/contact/applyItelFriend.json"   //添加联系人接口
 #define DEL_FRIEND_INTERFACE @"/contact/removeItelFriend.json"
 #define SEARCH_USER_INTERFACE @"/contact/searchUser.json"

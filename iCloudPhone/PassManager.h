@@ -14,6 +14,7 @@
 @property (nonatomic,strong) NSString *itel;
 @property (nonatomic,strong) NSString *userId;
 @property (nonatomic,strong) NSString *securetyID;  //密保是否可用
+@property (nonatomic,strong) NSString *token;
 +(PassManager*)defaultManager;
 -(void) checkMessageCode:(NSString*)code;
 -(void) sendMessage;
