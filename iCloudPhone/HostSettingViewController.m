@@ -36,7 +36,8 @@ NSString * indexForSting(NSIndexPath* indexPath){
 
 UITableViewCell <HostCell> *getCellWithIndexPath(NSIndexPath *indexPath,UITableView *tableView){
    
-    NSString *cellIdentifier=indexForSting(indexPath) ;    UITableViewCell <HostCell>*cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSString *cellIdentifier=indexForSting(indexPath) ;
+    UITableViewCell <HostCell>*cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
    
     return cell;
 }

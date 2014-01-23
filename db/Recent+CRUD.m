@@ -9,6 +9,7 @@
 #import "Recent+CRUD.h"
 #import "IMCoreDataManager.h"
 #import "ConstantHeader.h"
+#import "ItelUser+CRUD.h"
 @implementation Recent (CRUD)
 - (void)delete{
     [[IMCoreDataManager defaulManager] deletObject:self inContext:self.managedObjectContext];
@@ -45,5 +46,11 @@
     aRecent.duration = [info valueForKey:kDuration];
     aRecent.hostUserNumber = [info valueForKey:kHostUserNumber];
     return aRecent;
+}
+-(void)setWithUser:(ItelUser*)user{
+    self.peerAvatar=user.imageurl;
+    self.peerNick=user.nickName;
+    self.peerNumber=user.itelNum;
+    self.peerRealName=user.remarkName;
 }
 @end

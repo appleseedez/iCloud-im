@@ -205,6 +205,9 @@
 #if MANAGER_DEBUG
         NSLog(@"被叫方收到通话请求，等待用户操作接听");
 #endif
+       
+        
+        
         //根据收到的usevideo和自身是否支持视频 设置自己是否有视频选项
         [self setIsVideoCall: [[response.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]&&self.canVideo];
         [response.userInfo setValue:[NSNumber numberWithBool:self.isVideoCall] forKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO];

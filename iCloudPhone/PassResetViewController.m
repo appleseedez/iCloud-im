@@ -53,10 +53,15 @@
             [[PassManager defaultManager] modifyPassword:self.txtPassword.text];
         
     }
-    else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码成功失败" message:@"密码格式不正确" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+    else if(![NXInputChecker checkPassword:self.txtPassword.text]){
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码失败" message:@"密码格式不正确" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
         [alert show];
 
+    }
+    else {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码失败" message:@"两次输入密码不一致" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+        [alert show];
+        
     }
 }
 -(void)receive:(NSNotification*)notification{
