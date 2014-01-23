@@ -49,7 +49,7 @@
     [self injectDependency];
     //启动时, 每个用户的state都是空的.
     //TODO:如果正在拨打的情况下重连.可以在断开前把数据保存在userDefaults里面.用于恢复
-    [self restoreState];
+
     // 1. 此时初始化媒体引擎
     [self.engine initNetwork];
     
@@ -778,7 +778,7 @@
     NSDictionary* addressData = notify.userInfo;
     [self.TCPcommunicator setupIP: [[addressData valueForKey:BODY_SECTION_KEY] valueForKey:UDP_INDEX_RES_FIELD_SERVER_IP_KEY]];
     [self.TCPcommunicator setupPort:[[[addressData valueForKey:BODY_SECTION_KEY] valueForKey:UDP_INDEX_RES_FIELD_SERVER_PORT_KEY] intValue]];
-    
+    [self restoreState];
     
     //连接信令服务器
     [self.TCPcommunicator connect:self.selfAccount];

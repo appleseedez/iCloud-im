@@ -154,12 +154,11 @@
     answeringViewController.manager = self.manager;
     answeringViewController.callingNotify = notify;
     //获取到当前的顶层viewContorller
-    [self presentViewController:answeringViewNavController animated:YES completion:nil];
-//    if ([self.presentedViewController isKindOfClass:[IMDailViewController class]]) {
-//        [self.presentedViewController presentViewController:answeringViewNavController animated:YES completion:nil];
-//    }else{
-//        [self presentViewController:answeringViewNavController animated:YES completion:nil];
-//    }
+    if ([self.presentedViewController isKindOfClass:[IMDailViewController class]]) {
+        [self.presentedViewController presentViewController:answeringViewNavController animated:YES completion:nil];
+    }else{
+        [self presentViewController:answeringViewNavController animated:YES completion:nil];
+    }
     
 }
 
