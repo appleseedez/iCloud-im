@@ -11,7 +11,7 @@
 #import "NatTypeImpl.h"
 #import "ConstantHeader.h"
 #import "video_render_ios_view.h"
-#import <AVFoundation/AVFoundation.h>
+
 #import "IMTipImp.h"
 UIImageView* _pview_local;
 @interface IMEngineImp ()
@@ -19,7 +19,6 @@ UIImageView* _pview_local;
 @property(nonatomic) InitType m_type;
 @property(nonatomic,copy) NSString* currentInterIP;
 @property(nonatomic) int cameraIndex;
-@property(nonatomic) BOOL deviceAuthorized;
 @end
 
 @implementation IMEngineImp
@@ -94,30 +93,6 @@ UIImageView* _pview_local;
     return result;
 }
 
-- (void)checkDeviceAuthorizationStatus
-{
-	NSString *mediaType = AVMediaTypeVideo;
-	
-	[AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
-		if (granted)
-		{
-			//Granted access to mediaType
-			[self setDeviceAuthorized:YES];
-		}
-		else
-		{
-			//Not granted access to mediaType
-			dispatch_async(dispatch_get_main_queue(), ^{
-				[[[UIAlertView alloc] initWithTitle:@"iTel"
-											message:@"如果不开启摄像头和mic权限,将无法使用视频及音频功能"
-										   delegate:self
-								  cancelButtonTitle:@"我知道了"
-								  otherButtonTitles:nil] show];
-				[self setDeviceAuthorized:NO];
-			});
-		}
-	}];
-}
 #pragma mark - INTERFACE
 
 // IMEngine接口 见接口定义
@@ -125,7 +100,6 @@ UIImageView* _pview_local;
     if (false == self.pInterfaceApi->NetWorkInit(LOCAL_PORT)) {
         [NSException exceptionWithName:@"400: init network failed" reason:@"引擎初始化网络失败" userInfo:nil];
     }else{
-
         [self initMedia];
     }
 }
@@ -134,9 +108,9 @@ UIImageView* _pview_local;
  */
 - (void)initMedia{
     // 首先，初始化媒体。此时返回的m_type可以表明本机是否有能力进行视频。
-    self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeNone);
+    self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeVoeAndVie);
    // TODO:在媒体初始化时,获取访问摄像头和麦克的权限. 另外如果没有获取到这些权限应该怎么办?
-    [self checkDeviceAuthorizationStatus];
+
 
     
     
@@ -316,7 +290,7 @@ UIImageView* _pview_local;
     bool ret = self.pInterfaceApi->StopMedia(self.m_type);
     if (ret) {
 #if ENGINE_MSG
-        NSLog(@"关闭传输通道成功：%d",ret);
+        NSLog(@"<<<<<<<<<<<<<<<<<<<<关闭传输通道成功：>>>>>>>>>>>>>>>>>>>>>>%d",ret);
 #endif
     }
 
@@ -390,16 +364,23 @@ UIImageView* _pview_local;
         return;
     }
     // 开启摄像头
-    
-    if (self.pInterfaceApi->StartCamera(self.cameraIndex) >= 0)
-    {
-        // 摆正摄像头位置
-        self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
-    }
     [_pview_local setFrame:CGRectMake(0, 0, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
     [localView addSubview:_pview_local];
     [localView setFrame:CGRectMake(FULL_SCREEN.size.width*.7, FULL_SCREEN.size.height*.7, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
     self.pInterfaceApi->VieAddRemoteRenderer((__bridge void*)remoteRenderView);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        if (self.pInterfaceApi->StartCamera(self.cameraIndex) >= 0)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 摆正摄像头位置
+                self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
+            });
+
+
+        }
+    });
+  
+
 }
 - (void)closeScreen{
 }
@@ -434,5 +415,12 @@ UIImageView* _pview_local;
 }
 - (int)countTopSize{
     return self.pInterfaceApi->GetTopMediaDataSize();
+}
+
+
+- (int) stopDetectP2P{
+    int ret  = self.pInterfaceApi -> StopDetect();
+    NSLog(@"<<<<<<<<<<<<<<<终止P2P>>>>>>>>>> :%d",ret);
+    return ret;
 }
 @end

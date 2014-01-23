@@ -27,8 +27,8 @@
 @property (nonatomic) NSNumber* basicState; // 基本状态值
 @property (nonatomic) BOOL busy; //是否忙 KVO里直接根据basicState来自动设置是否忙
 @property (nonatomic) NSNumber* isInP2P; //当前是否正在p2p中
-
 @property (nonatomic) NSDictionary* recentLog; //作为最近通话记录的status字段
+@property(nonatomic) BOOL deviceAuthorized;
 @end
 enum BasicStates
 {
@@ -43,66 +43,169 @@ enum BasicStates
 @implementation IMManagerImp
 static void* basicStateIndentifer = (void*)&basicStateIndentifer;
 static void* p2pIndentifer = (void*)&p2pIndentifer;
-#pragma mark - basic states
+static int hasObserver = 0;
+#pragma mark - basic
 //TODO: kvo监听状态显示在tip里面
 
 
 
 
 
-#pragma mark - bussiness states
-
+#pragma mark - bussiness
+- (BOOL)sessionStartedWithAccount:(NSString *)destAccount{
+    return YES;
+}
 - (void)dial:(NSString *)account{
     // 从空闲进入查询
     if ([self.basicState intValue]  == basicStateIdle && [self canBeCalled:account]) {
         self.basicState =@(basicStateQuering);
+        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>当前状态:%@,当前是否busy:%d",self.basicState,self.busy);
+        [[IMTipImp defaultTip] showTip:[self describeState:self.basicState]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
+        //2.2 注册查询失败通知.
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInitFail:) name:SIGNAL_ERROR_NOTIFICATION object:nil];
+        //2.3 构造通话查询信令
+        self.messageBuilder = [[IMSessionInitMessageBuilder alloc] init];
+        NSDictionary* data = [self.messageBuilder buildWithParams:@{SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY: account}];
+#if SIGNAL_MESSAGE
+        NSLog(@"发起通话查询请求：%@",data);
+#endif
+        //2.4 发送信令数据到信令服务器
+        [self.TCPcommunicator send:data];
+        //2.5 开启一个1.5秒的定时器,监视信令业务服务器的查询返回情况,如果在这个时间内都没有返回.则主叫方主动挂断
+        [self.monitor invalidate];
+        self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(haltCallingProgress) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_queue", DISPATCH_QUEUE_CONCURRENT)];
+    }else{
+        [[IMTipImp defaultTip] showTip:@"本机正处于拨打状态.请稍后重试"];
     }
-    [[IMTipImp defaultTip] showTip:[self describeState:self.basicState]];
+}
+
+//如果超时未收到信令业务服务器的通话查询回复.则终止流程(通过终止接收信令服务器的通话查询返回.
+- (void) haltCallingProgress{
+    // 状态回到空闲
+    [self assertState:basicStateQuering];
+    self.basicState = @(basicStateIdle);
+    //TODO 在状态回到空闲时,释放资源
+//    [self endSession];
+    //提示用户
+    NSLog(@"业务服务器异常，请稍后再试");
+    [[IMTipImp defaultTip] showTip:@"对方不在线,请稍后重试"];
+}
+/**
+ *  通话拒绝
+ *  只是做信令数据的构造和发送
+ */
+
+-(void) sessionHaltRequest:(NSDictionary*) refuseData{
+#if MANAGER_DEBUG
+    NSLog(@"发送拒绝信令");
+#endif
+    //停止可能的保持session的包定时器
+    [self.keepSessionAlive invalidate];
+    self.keepSessionAlive = nil;
+    // 处理参数
+    NSDictionary* params = @{
+                             DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                             SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[refuseData valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                             SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[refuseData valueForKey:SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY],
+                             SESSION_HALT_FIELD_TYPE_KEY:[refuseData valueForKey:SESSION_HALT_FIELD_TYPE_KEY]
+                             };
+#if MANAGER_DEBUG
+    NSLog(@"准备发送的终止信令：%@",params);
+#endif
+    self.messageBuilder = [[IMSessionRefuseMessageBuilder alloc] init];
+    NSDictionary* data =  [self.messageBuilder buildWithParams:params];
+    [self.TCPcommunicator send:data];
+    
+    
 }
 
 
+// 终止当前的通话
+- (void)haltSession:(NSDictionary*) data{
+    if ([[data valueForKey:SESSION_HALT_FIELD_TYPE_KEY] isEqualToString:SESSION_HALT_FILED_ACTION_REFUSE]) {
+        self.recentLog = @{
+                           kStatus:STATUS_REFUSED,
+                           kPeerNumber:[data valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                           kCreateDate:[NSDate date]
+                           };
+    }
+    //    [self.engine stopTransport];
+    [self sessionHaltRequest:data];
+    [self endSession];
+    [self saveCommnicationLog];
+    //通知界面，关闭相应的视图
+    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
+}
 
+
+- (void)endSession{
+    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
+    if([self.engine stopDetectP2P] == 0){
+            self.isInP2P = @(0);
+    };
+
+    self.basicState = @(basicStateIdle);
+    if ([[self.state valueForKey:kPeerAccount] isEqualToString:IDLE]) {
+        [self restoreState];
+        return;
+    }
+    
+    
+    [self restoreState];
+    //从非idle状态变回idle状态. 说明需要挂断. 给提示
+    [[IMTipImp defaultTip] showTip:@"挂断中..."];
+    
+    [self stopCommunicationCounting];
+    
+    [self.engine stopTransport];
+    
+}
+
+//结束本次通话计时
+- (void) stopCommunicationCounting{
+    if (self.communicationTimer) {
+        [self.communicationTimer invalidate];
+        self.communicationTimer = nil;
+    }
+    
+}
 #pragma mark - callbacks
 //通话查询请求成功
 - (void) sessionInited:(NSNotification*) notify{
     [self assertState:basicStateQuering];
-    [self queryDataProcess];
+    //移除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIGNAL_ERROR_NOTIFICATION object:nil];
+
+    //1. 终止掉超时定时器.这样,后续流程才能进行下去.
+    [self.monitor invalidate];
+    self.monitor = nil;
+
+    //3.通话查询已经成功返回. 将本机的state设置成为接收到的信息
+    // peerAccount
+    [self.state setValue:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY] forKey:kPeerAccount];
+    // myAccount
+    [self.state setValue:[self myAccount] forKey:kMyAccount];
+    // mySSID
+    [self.state setValue:[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] forKey:kMySSID];
+    // peerSSID
+    [self.state setValue:[NSNumber numberWithInteger:[[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] integerValue]+1] forKey:kPeerSSID];
+    // 转发ip
+    [self.state setValue:[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY] forKey:kForwardIP];
+    // 转发port
+    [self.state setValue: [notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] forKey:kForwardPort];
+    //4. 通知界面弹起拨号中界面 信息从manager.state里面取状态 不再通过通知传递了 接收通知的结果就是主叫方会弹出正在拨号界面
+    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:nil];
+
+    
+    
+
+    //主叫方组装通信链路数据,发送给peer 不再需要传递数据.直接从manager.state里面去取
     [self sendCallingData];
-//    //移除通知
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIGNAL_ERROR_NOTIFICATION object:nil];
-//
-//    //1. 终止掉超时定时器.这样,后续流程才能进行下去.
-//    [self.monitor invalidate];
-//    self.monitor = nil;
-//    
-//    //3.通话查询已经成功返回. 将本机的state设置成为接收到的信息
-//    // peerAccount
-//    [self.state setValue:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY] forKey:kPeerAccount];
-//    // myAccount
-//    [self.state setValue:[self myAccount] forKey:kMyAccount];
-//    // mySSID
-//    [self.state setValue:[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] forKey:kMySSID];
-//    // peerSSID
-//    [self.state setValue:[NSNumber numberWithInteger:[[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] integerValue]+1] forKey:kPeerSSID];
-//    // 转发ip
-//    [self.state setValue:[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY] forKey:kForwardIP];
-//    // 转发port
-//    [self.state setValue: [notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] forKey:kForwardPort];
-//    //4. 通知界面弹起拨号中界面 信息从manager.state里面取状态 不再通过通知传递了 接收通知的结果就是主叫方会弹出正在拨号界面
-//    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:nil];
-//    
-    
-    
-    // 使用主叫通信链路信令构造器构造通信链路数据.
-//    self.messageBuilder = [[IMSessionPeriodRequestMessageBuilder alloc] init];
-//    //7. 注册接收对方信令的通知.
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionDataReceived:) name:SESSION_PERIOD_NOTIFICATION object:nil];
-//    //主叫方组装通信链路数据,发送给peer 不再需要传递数据.直接从manager.state里面去取
-//    [self sessionNegotiation];
-//    //6. 设置40秒超时，如果没有收到接受通话的回复则转到拒绝流程
-//    [self.monitor invalidate];
-//    self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_peer_pickup_queue", DISPATCH_QUEUE_CONCURRENT)];
+    //6. 设置40秒超时，如果没有收到接受通话的回复则转到拒绝流程
+    [self.monitor invalidate];
+    self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_peer_pickup_queue", DISPATCH_QUEUE_CONCURRENT)];
 }
 
 //通话查询请求失败
@@ -110,45 +213,112 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
     [self assertState:basicStateQuering];
     
     self.basicState = @(basicStateIdle);
-//    //终止掉超时定时器.这样,后续流程才能进行下去.
-//    [self.monitor invalidate];
-//    self.monitor = nil;
-//    //移除通知
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIGNAL_ERROR_NOTIFICATION object:nil];
-//    //对方是不是我好友
-//    if (![[ItelAction action] userInFriendBook:[self.state valueForKey:kPeerAccount]]) {
-//        // 提示用户 陌生人或者不存在的号码
-//        [[IMTipImp defaultTip] warningTip:@"对方不在线或者账号不存在"];
-//    }else{
-//        [[IMTipImp defaultTip] warningTip:@"好友不在线"];
-//    }
-//    //查询失败了.终止session
+    //终止掉超时定时器.这样,后续流程才能进行下去.
+    [self.monitor invalidate];
+    self.monitor = nil;
+    //移除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SESSION_INITED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIGNAL_ERROR_NOTIFICATION object:nil];
+    //对方是不是我好友
+    if (![[ItelAction action] userInFriendBook:[self.state valueForKey:kPeerAccount]]) {
+        // 提示用户 陌生人或者不存在的号码
+        [[IMTipImp defaultTip] warningTip:@"对方不在线或者账号不存在"];
+    }else{
+        [[IMTipImp defaultTip] warningTip:@"好友不在线"];
+    }
+    //查询失败了.终止session
 //    [self endSession];
-//    
+//
 }
 
 // 主叫方收到了的应答
 - (void) answeringDataDidReceived:(NSNotification*) answeringData{
+    long receivedSSID = [[answeringData.userInfo valueForKey:@"srcssid"] longValue];
+    long mySSID = [[[self myState] valueForKey:kMySSID] longValue];
+    if (self.busy && receivedSSID == mySSID) {
+        //开始获取p2p通道，保持session的数据包可以停止发送了。
+        [self.keepSessionAlive invalidate];
+        self.keepSessionAlive = nil;
+        //停止主叫方的超时定时器
+        [self.monitor invalidate];
+        self.monitor = nil;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTransportAndNotify:) name:P2PTUNNEL_SUCCESS object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transportFailed:) name:P2PTUNNEL_FAILED object:nil];
+        //告诉引擎，目前是否是视频通话
+        [self setIsVideoCall: [[answeringData.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]&&self.canVideo&&self.isVideoCall];
+        [answeringData.userInfo setValue:[NSNumber numberWithBool:self.isVideoCall] forKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO];
+        self.isInP2P = @(1);
+        NSLog(@"主叫收到应答时,传递给引擎的穿透数据:%@",answeringData.userInfo);
+        [self.engine tunnelWith:answeringData.userInfo];
+
+    }else{
+        
+        NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 主叫方收到非成对的ssid通话应答");
+        [self haltSession:@{
+                            DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                            SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[answeringData.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                            SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self myState] valueForKey:kMyAccount],
+                            SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_BUSY
+                            }];
+    }
     
+
 }
 // 被叫方收到了请求
 - (void) callingDataDidCame:(NSNotification*) callingData{
     if (self.busy) {
-        //发送拒绝信令
+        NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 被叫方忙,收到通话请求");
+        [self haltSession:@{
+                             DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                             SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[callingData.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                             SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self myState] valueForKey:kMyAccount],
+                             SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_BUSY
+                             }];
         return;
     }
-    // 是否是1024
-    
+    // 是否是
+    //根据收到的usevideo和自身是否支持视频 设置自己是否有视频选项
+    [self setIsVideoCall: [[callingData.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]&&self.canVideo];
+    [callingData.userInfo setValue:[NSNumber numberWithBool:self.isVideoCall] forKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO];
     self.basicState = @(basicStateAnswering);
     //通知界面,弹出接听界面
-    [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:Nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:Nil userInfo:callingData.userInfo];
 }
 //收到了对方的挂断消息
 - (void) sessionHaltDataDidCome:(NSNotification* ) peerHaltData{
     //如果是忙碌状态. 发送endSession消息
     if (self.busy) {
         //做相关处理
+        [self.keepSessionAlive invalidate];
+        self.keepSessionAlive = nil;
+        //收到拒绝也应该终止超时定时器
+        [self.monitor invalidate];
+        self.monitor = nil;
+        NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 收到挂断");
+        NSString* haltType = [peerHaltData.userInfo valueForKey:SESSION_HALT_FIELD_TYPE_KEY];
+        if ([SESSION_HALT_FILED_ACTION_BUSY isEqualToString:haltType]) {
+            [self endSession];
+        }else if ([SESSION_HALT_FILED_ACTION_REFUSE isEqualToString:haltType]){
+            self.recentLog = @{
+                               kStatus:STATUS_REFUSED,
+                               kPeerNumber:[peerHaltData.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                               kCreateDate:[NSDate date]
+                               };
+            
+            [self endSession];
+            [self saveCommnicationLog];
+        }else if ([SESSION_HALT_FILED_ACTION_END isEqualToString:haltType]){
+            //        [self.engine stopTransport];
+            [self endSession];
+            [self saveCommnicationLog];
+        }else{
+            //
+        }
+        
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
+    }else{
+         NSLog(@"no busy: 收到的挂断请求:%@",peerHaltData.userInfo);
     }
     
 }
@@ -181,7 +351,18 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
     [multiLoginAlert show];
     
 }
-
+// 从信令服务器注销
+- (void)logoutFromSignalServer{
+    self.messageBuilder = [IMLogoutFromSignalServerMessageBuilder new];
+    NSDictionary* data = [self.messageBuilder
+                          buildWithParams:@{
+                                            CMID_APP_LOGIN_SSS_REQ_FIELD_ACCOUNT_KEY: [self myAccount]
+                                            }];
+#if SIGNAL_MESSAGE
+    NSLog(@"信令服务器的注销请求：%@",data);
+#endif
+    [self.TCPcommunicator send:data];
+}
 - (void) connectToSignalServer:(NSNotification*) signalServerData{
     //设置长连接地址
     NSDictionary* addressData = signalServerData.userInfo;
@@ -255,9 +436,16 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
 
 - (void)sendCallingData{
     [[IMTipImp defaultTip] showTip:@"发送数据 主叫 >>> 被叫"];
+    self.basicState = @(basicStateCalling);
+    // 使用主叫通信链路信令构造器构造通信链路数据.
+    self.messageBuilder = [[IMSessionPeriodRequestMessageBuilder alloc] init];
+    [self sendSessionDataFor:[NSNumber numberWithInt:SESSION_PERIOD_CALLING_TYPE]];
 }
 - (void)sendAnsweringData{
     [[IMTipImp defaultTip] showTip:@"发送数据 主叫 <<< 被叫"];
+    // 使用主叫通信链路信令构造器构造通信链路数据.
+    self.messageBuilder = [[IMSessionPeriodResponseMessageBuilder alloc] init];
+    [self sendSessionDataFor:[NSNumber numberWithInt:SESSION_PERIOD_ANSWERING_TYPE]];
 }
 
 - (void) assertState:(int)expectState{
@@ -288,6 +476,12 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
     
 }
 
+// 依赖注入
+- (void)injectDependency {
+    self.engine = [[IMEngineImp alloc] init];// 引擎
+    self.TCPcommunicator = [[IMTCPCommunicator alloc] init];// 网络通信器
+    self.UDPcommunicator = [[IMUDPCommunicator alloc] init];
+}
 //根据数据的具体类型做操作路由
 - (void) route:(NSDictionary*) data{
     NSInteger type = -1;
@@ -403,21 +597,58 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
     
     
 }
+
+- (void)checkDeviceAuthorizationStatus
+{
+	NSString *mediaType = AVMediaTypeVideo;
+	
+	[AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
+		if (granted)
+		{
+			//Granted access to mediaType
+			[self setDeviceAuthorized:YES];
+		}
+		else
+		{
+			//Not granted access to mediaType
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[[[UIAlertView alloc] initWithTitle:@"iTel"
+											message:@"如果不开启摄像头和mic权限,将无法使用视频及音频功能"
+										   delegate:self
+								  cancelButtonTitle:@"我知道了"
+								  otherButtonTitles:nil] show];
+				[self setDeviceAuthorized:NO];
+			});
+		}
+	}];
+}
 #pragma mark - life cycle
 
 - (void)setup{
     self.basicState = @(basicStateIdle);
     self.isInP2P  = @(0);
-    //监视basicState的状态改变.
-    [self addObserver:self forKeyPath:@"basicState" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:&basicStateIndentifer];
-    [self addObserver:self forKeyPath:@"isInP2P" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:&p2pIndentifer];
     [self registerNotifications];
+    [self checkDeviceAuthorizationStatus];
+    [self injectDependency];
+    [self.engine initNetwork];
+    //监视basicState的状态改变.
+    if (hasObserver == 0) {
+        [self addObserver:self forKeyPath:@"basicState" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:&basicStateIndentifer];
+        [self addObserver:self forKeyPath:@"isInP2P" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:&p2pIndentifer];
+        hasObserver = 1;
+    }
+
+
 }
 - (void) tearDown{
     self.basicState = @(basicStateIdle);
     self.isInP2P = @(0);
-    [self removeObserver:self forKeyPath:@"basicState" context:&basicStateIndentifer];
-    [self removeObserver:self forKeyPath:@"isInP2P" context:&p2pIndentifer];
+    if (hasObserver == 1) {
+        [self removeObserver:self forKeyPath:@"basicState" context:&basicStateIndentifer];
+        [self removeObserver:self forKeyPath:@"isInP2P" context:&p2pIndentifer];
+        hasObserver = 0;
+    }
+
 }
 
 - (void) connectToSignalServer{
@@ -453,7 +684,7 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
     [self.state setValue:[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] forKey:kForwardPort];
     [self.state setValue:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY] forKey:kPeerAccount];
     //被叫方发送链路数据给主叫方
-    [self sendSessionDataFor:[NSNumber numberWithInt:SESSION_PERIOD_ANSWERING_TYPE]];
+    [self sendAnsweringData];
     // 开始获取p2p通道
     [self.keepSessionAlive invalidate];
     self.keepSessionAlive = nil;
@@ -465,6 +696,7 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transportFailed:) name:P2PTUNNEL_FAILED object:nil];
     //开始建立通道
     self.isInP2P = @(1);
+    NSLog(@"被叫接受请求时,传递给引擎的穿透数据:%@",notify.userInfo);
     [self.engine tunnelWith:notify.userInfo];
 }
 /**
@@ -540,7 +772,37 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(droppedFromSignal:) name:DROPPED_FROM_SIGNAL_NOTIFICATION object:nil];
 }
 
-
+/**
+ *  注销用户时删除保存的本地数据
+ */
+- (void) clearTable{
+    //删除所有表中的数据
+    NSArray* tableNames = @[
+                            @"HostItelUser",
+                            @"Message",
+                            @"ItelUser",
+                            @"Recent"
+                            
+                            ];
+    NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
+    if (currentContext) {
+        //从数组中获得表名.依次删除
+        NSError* error;
+        for (NSString* tableName in tableNames) {
+            NSFetchRequest* clearTableRequest = [NSFetchRequest fetchRequestWithEntityName:tableName];
+            NSArray* hostUsers = [currentContext executeFetchRequest:clearTableRequest error:&error];
+            for (NSManagedObject* o in hostUsers) {
+                [currentContext deleteObject:o];
+            }
+            
+        }
+        [[IMCoreDataManager defaulManager] saveContext:currentContext];
+        
+        
+    }
+    
+    
+}
 #pragma mark -  actions
 //保持外网ip有效的心跳方法
 - (void) keepSession:(NSTimer*) timer{
@@ -550,10 +812,38 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
     NSInteger port = [[param valueForKey:PROBE_PORT_KEY] integerValue];
     [self.engine keepSessionAlive:probeServerIP port:port];
 }
+// 被叫接听回掉
+- (void) startTransportAndNotify:(NSNotification*) notify{
+    self.isInP2P = @(0);
+    //如果是空闲. 白穿透了.
+    if ([self.basicState intValue] == basicStateIdle) {
+        return;
+    }
+    //进入通话状态
+    self.basicState = @(basicStateInSession);
+    [self.engine startTransport];
+    //开始通话计时
+    self.recentLog = @{
+                       kStatus:STATUS_CALLED,
+                       kPeerNumber:[notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                       kCreateDate:[NSDate date]
+                       };
+#if OTHER_MESSAGE
+    NSLog(@"the log to be saved : %@",self.recentLog);
+#endif
+    [self startCommunicationCounting];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:P2PTUNNEL_SUCCESS object:nil];
+    //通知view可以切换的到“通话中"界面了
+    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_INSESSION_VIEW_NOTIFICATION
+                                                        object:nil
+                                                      userInfo:notify.userInfo];
+}
+
+
 //被叫方开启通道
 - (void) justStartTransport:(NSNotification*) notify{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:P2PTUNNEL_SUCCESS object:nil];
-    self.isInP2P = 0;
+    self.isInP2P =@(0);
     //如果是空闲. 白穿透了.
     if ([self.basicState intValue] == basicStateIdle) {
         return;
@@ -578,6 +868,7 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:P2PTUNNEL_FAILED object:nil];
     //还原p2p状态为0 这样才能让self.busy变成0
     self.isInP2P = @(0);
+    //endsession
 }
 
 - (void) durationTick{
@@ -598,6 +889,19 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
     [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前通话持续时间:%f,当前收到的数据长度:%d",self.duration,self.lossCount]];
 }
 
+// 没有接听 超时,发sessionend
+- (void) notPickup{
+    //停止定时器
+    [self.monitor invalidate];
+    self.monitor = nil;
+    [[IMTipImp defaultTip] showTip:@"无人接听"];
+    //发送终止信令
+    [self haltSession:@{
+                        SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self myAccount],
+                        SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[self.state valueForKey:kPeerAccount],
+                        SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
+                        }];
+}
 
 #pragma mark - alert view delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -692,5 +996,9 @@ static void* p2pIndentifer = (void*)&p2pIndentifer;
 
 - (double)checkDuration{
     return self.duration;
+}
+
+- (NSDictionary *)myState{
+    return self.state;
 }
 @end

@@ -229,7 +229,6 @@
 		BAC4A0DF187CE1E200BC856F /* ItelBookInterfaceImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */; };
 		BACD8282188C36DB0066F143 /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BACD8281188C36DB0066F143 /* area.sqlite */; };
 		BADA3C6D1890AEA10029CB61 /* IMManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA3C6C1890AEA10029CB61 /* IMManagerImp.m */; };
-		BADA3C731890D8450029CB61 /* IMManagerImp2.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA3C721890D8450029CB61 /* IMManagerImp2.m */; };
 		BADDFD2418768C4F00D10DDC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BADDFD2218768C4F00D10DDC /* Model.xcdatamodeld */; };
 		BADDFD681876901500D10DDC /* IMCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BADDFD671876901500D10DDC /* IMCoreDataManager.m */; };
 		BADDFD6A1876915200D10DDC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADDFD691876915200D10DDC /* CoreData.framework */; };
@@ -654,8 +653,6 @@
 		BACD8281188C36DB0066F143 /* area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = area.sqlite; sourceTree = "<group>"; };
 		BADA3C6B1890AEA10029CB61 /* IMManagerImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMManagerImp.h; sourceTree = "<group>"; };
 		BADA3C6C1890AEA10029CB61 /* IMManagerImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMManagerImp.m; sourceTree = "<group>"; };
-		BADA3C711890D8450029CB61 /* IMManagerImp2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMManagerImp2.h; sourceTree = "<group>"; };
-		BADA3C721890D8450029CB61 /* IMManagerImp2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMManagerImp2.m; sourceTree = "<group>"; };
 		BADDFD2318768C4F00D10DDC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BADDFD661876901500D10DDC /* IMCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMCoreDataManager.h; sourceTree = "<group>"; };
 		BADDFD671876901500D10DDC /* IMCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMCoreDataManager.m; sourceTree = "<group>"; };
@@ -1101,8 +1098,6 @@
 		479EF01C1859D47C0012EE29 /* domains */ = {
 			isa = PBXGroup;
 			children = (
-				BADA3C711890D8450029CB61 /* IMManagerImp2.h */,
-				BADA3C721890D8450029CB61 /* IMManagerImp2.m */,
 				BA959A951860565C009B8A4C /* IMUDPCommunicator.h */,
 				BA959A961860565C009B8A4C /* IMUDPCommunicator.m */,
 				479EF01D1859D47C0012EE29 /* ConstantHeader.h */,
@@ -1850,7 +1845,6 @@
 				47E2DB8C18595A5A00D455EF /* SearchNavController.m in Sources */,
 				4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */,
 				BADDFD681876901500D10DDC /* IMCoreDataManager.m in Sources */,
-				BADA3C731890D8450029CB61 /* IMManagerImp2.m in Sources */,
 				47B89DE11834D40000022FE5 /* main.m in Sources */,
 				BA338B58187E839C00242DAF /* HostItelUser.m in Sources */,
 				479EF0601859D47C0012EE29 /* NSData+Byte.m in Sources */,

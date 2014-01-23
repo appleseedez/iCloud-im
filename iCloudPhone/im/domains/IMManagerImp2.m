@@ -653,6 +653,7 @@
 }
 // 被叫接听回掉
 - (void) startTransportAndNotify:(NSNotification*) notify{
+    
     [self.engine startTransport];
     //开始通话计时
     self.recentLog = @{
