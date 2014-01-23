@@ -299,7 +299,7 @@ UIImageView* _pview_local;
             if (ret) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
             }else{
-                [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_FAILED object:nil userInfo:params];
             }
         });
     });

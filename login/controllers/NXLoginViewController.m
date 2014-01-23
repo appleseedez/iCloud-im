@@ -72,7 +72,7 @@ static int loginCount=0;
     }
     else{
         self.btnLogin.enabled=NO;
-        [self requestToLogin1];
+        [self requestToLogin];
     }
 }
 -(void)requestToLogin{
