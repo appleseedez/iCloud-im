@@ -23,6 +23,7 @@ static IMTipImp* _instance;
 }
 
 + (instancetype)defaultTip{
+    
     return _instance;
 }
 
@@ -66,7 +67,12 @@ static IMTipImp* _instance;
     banner.showAnimationDuration = .25;
     banner.hideAnimationDuration = .2;
 
-    [banner show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ALAlertBanner hideAllAlertBanners];
+        [banner show];
+    });
+    
+    self.style = ALAlertBannerStyleSuccess;
     
 }
 @end

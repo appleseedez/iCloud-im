@@ -11,9 +11,7 @@
 #import "ConstantHeader.h"
 #import "IMSuggestResultCell.h"
 #import "ItelAction.h"
-#import "ItelUser.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 @interface IMDailViewController ()
 @property(nonatomic) NSDictionary* touchToneMap; //按键的拨号音，系统默认就有的
@@ -80,9 +78,7 @@
 }
 
 - (IBAction)voiceDialing:(UIButton *)sender {
-#if MANAGER_DEBUG
-    NSLog(@"音频通话");
-#endif
+    [[IMTipImp defaultTip]showTip:@"开启音频通话"];
     [self.manager setIsVideoCall:NO];//告诉manager是音频通话
     NSString* peerAccount = self.peerAccount.text;
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
@@ -167,7 +163,7 @@
 
 #pragma mark - actions
 - (IBAction)videoDialing:(UIButton *)sender {
-    NSLog(@"TODO: 视频通话");
+    [[IMTipImp defaultTip] showTip:@"开启视频通话"];
     [self.manager setIsVideoCall:YES];
     NSString* peerAccount = self.peerAccount.text;
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {

@@ -35,14 +35,8 @@
 }
 
 - (void) sendHeartBeat{
-#if COMMUNICATOR_DEBUG
-    NSLog(@"开始心跳了");
-#endif
     if ([self.sock isConnected]) {
         [self sendRequest:self.heartBeatPKG type:HEART_BEAT_REQ_TYPE];
-    }else{
-        [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
-        [NSException exceptionWithName:@"断开连接了！" reason:@"断开连接了！" userInfo:nil];
     }
 }
 
@@ -79,17 +73,12 @@
 // GCDAysncSocket 接口
 // 链接上了服务器
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
-#if COMMUNICATOR_DEBUG
-    NSLog(@"连接上了信令服务器");
-#endif
+    [[IMTipImp defaultTip] showTip:@"连接上了信令服务器"];
     [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
 }
 // 断开了服务器链接
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
-#if COMMUNICATOR_DEBUG
-    NSLog(@"从服务器断开了~");
-    NSLog(@"是否应该重连");
-#endif
+    [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
 }
 
 // 有数据来。我们的数据是分成两部分的 :
@@ -150,15 +139,12 @@
     }
 
     if (![self.sock connectToHost:self.ip onPort:self.port error:&error]) {
-        [NSException exceptionWithName:@"403:connect to signal sever failed" reason:@"链接信令服务器失败" userInfo:nil];
+        [[IMTipImp defaultTip] errorTip:@"链接信令服务器失败"];
     }
     
 }
 
 - (void)disconnect{
-#if COMMUNICATOR_DEBUG
-    NSLog(@"尝试主动断开链接");
-#endif
     // 终止心跳
     [self.heartBeat invalidate];
     [self.sock disconnect];
@@ -166,17 +152,11 @@
 
 - (void)send:(NSDictionary*) data{
     NSInteger type = [[[data valueForKey:HEAD_SECTION_KEY] valueForKey:DATA_TYPE_KEY] integerValue];
-#if COMMUNICATOR_DEBUG
-    NSLog(@"[账号:%@]:发出的数据：%@",[data valueForKey:SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY],data);
-#endif
     [self sendRequest:data type:type];
 }
 
 - (void)receive:(NSDictionary*) data{
     //通知相应的业务，数据来了
-#if COMMUNICATOR_DEBUG
-    NSLog(@"有数据来了");
-#endif
     [[NSNotificationCenter defaultCenter] postNotificationName:DATA_RECEIVED_NOTIFICATION object:nil userInfo:data];
 }
 

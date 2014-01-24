@@ -59,7 +59,7 @@ static int hasObserver = 0;
     // 从空闲进入查询
     if ([self.basicState intValue]  == basicStateIdle && [self canBeCalled:account]) {
         self.basicState =@(basicStateQuering);
-        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>当前状态:%@,当前是否busy:%d",self.basicState,self.busy);
+        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>当前状态:%@,BUSY?:%d<<<<<<<<<<<<<<<<<<<<<<<<<<",[self describeState:self.basicState],self.busy);
         [[IMTipImp defaultTip] showTip:[self describeState:self.basicState]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
         //2.2 注册查询失败通知.
@@ -86,9 +86,7 @@ static int hasObserver = 0;
     [self assertState:basicStateQuering];
     self.basicState = @(basicStateIdle);
     //TODO 在状态回到空闲时,释放资源
-//    [self endSession];
     //提示用户
-    NSLog(@"业务服务器异常，请稍后再试");
     [[IMTipImp defaultTip] showTip:@"对方不在线,请稍后重试"];
 }
 /**
@@ -97,9 +95,6 @@ static int hasObserver = 0;
  */
 
 -(void) sessionHaltRequest:(NSDictionary*) refuseData{
-#if MANAGER_DEBUG
-    NSLog(@"发送拒绝信令");
-#endif
     //停止可能的保持session的包定时器
     [self.keepSessionAlive invalidate];
     self.keepSessionAlive = nil;
@@ -110,9 +105,7 @@ static int hasObserver = 0;
                              SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[refuseData valueForKey:SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY],
                              SESSION_HALT_FIELD_TYPE_KEY:[refuseData valueForKey:SESSION_HALT_FIELD_TYPE_KEY]
                              };
-#if MANAGER_DEBUG
     NSLog(@"准备发送的终止信令：%@",params);
-#endif
     self.messageBuilder = [[IMSessionRefuseMessageBuilder alloc] init];
     NSDictionary* data =  [self.messageBuilder buildWithParams:params];
     [self.TCPcommunicator send:data];
@@ -130,7 +123,7 @@ static int hasObserver = 0;
                            kCreateDate:[NSDate date]
                            };
     }
-    //    [self.engine stopTransport];
+
     [self sessionHaltRequest:data];
     [self endSession];
     [self saveCommnicationLog];
@@ -140,19 +133,9 @@ static int hasObserver = 0;
 
 
 - (void)endSession{
-    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
     if([self.engine stopDetectP2P] == 0){
             self.isInP2P = @(0);
     };
-
-    self.basicState = @(basicStateIdle);
-    if ([[self.state valueForKey:kPeerAccount] isEqualToString:IDLE]) {
-        [self restoreState];
-        return;
-    }
-    
-    
-    [self restoreState];
     //从非idle状态变回idle状态. 说明需要挂断. 给提示
     [[IMTipImp defaultTip] showTip:@"挂断中..."];
     
@@ -160,6 +143,9 @@ static int hasObserver = 0;
     
     [self.engine stopTransport];
     
+    [self restoreState];
+    self.basicState = @(basicStateIdle);
+    [self performSelector:@selector(notifyInterfaceToEndSession) withObject:nil afterDelay:0];
 }
 
 //结束本次通话计时
@@ -254,10 +240,10 @@ static int hasObserver = 0;
     }else{
         
         NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 主叫方收到非成对的ssid通话应答");
-        [self haltSession:@{
+        [self sessionHaltRequest:@{
                             DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
-                            SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[answeringData.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
-                            SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self myState] valueForKey:kMyAccount],
+                            SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[[self myState] valueForKey:kMyAccount],
+                            SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[answeringData.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
                             SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_BUSY
                             }];
     }
@@ -268,12 +254,20 @@ static int hasObserver = 0;
 - (void) callingDataDidCame:(NSNotification*) callingData{
     if (self.busy) {
         NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 被叫方忙,收到通话请求");
-        [self haltSession:@{
+        [self sessionHaltRequest:@{
                              DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
-                             SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[callingData.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
-                             SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self myState] valueForKey:kMyAccount],
+                             SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[[self myState] valueForKey:kMyAccount],
+                             SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[callingData.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
                              SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_BUSY
                              }];
+        return;
+    }else if([[ItelAction action] userInBlackBook:[callingData.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]]){
+        [self sessionHaltRequest:@{
+                                   DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                                   SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[[self myState] valueForKey:kMyAccount],
+                                   SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[callingData.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_REFUSE
+                                   }];
         return;
     }
     // 是否是
@@ -287,7 +281,8 @@ static int hasObserver = 0;
 //收到了对方的挂断消息
 - (void) sessionHaltDataDidCome:(NSNotification* ) peerHaltData{
     //如果是忙碌状态. 发送endSession消息
-    if (self.busy) {
+    if (self.busy &&
+        [[peerHaltData.userInfo valueForKey:SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY] isEqualToString:self.myAccount]){
         //做相关处理
         [self.keepSessionAlive invalidate];
         self.keepSessionAlive = nil;
@@ -315,12 +310,14 @@ static int hasObserver = 0;
             //
         }
         
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
-    }else{
-         NSLog(@"no busy: 收到的挂断请求:%@",peerHaltData.userInfo);
+        [self performSelector:@selector(notifyInterfaceToEndSession) withObject:nil afterDelay:1];
     }
+
     
+}
+
+- (void) notifyInterfaceToEndSession{
+    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
 // 收到服务器认证的返回值
 - (void) authHasResult:(NSNotification*) result{
@@ -371,7 +368,7 @@ static int hasObserver = 0;
     [self restoreState];
     
     //连接信令服务器
-    [self.TCPcommunicator connect:self.selfAccount];
+    [self.TCPcommunicator connect:[self myAccount]];
     [self.TCPcommunicator keepAlive];
 #if MANAGER_DEBUG
     NSLog(@"目前的本机帐号：%@",[self myAccount]);
@@ -403,6 +400,9 @@ static int hasObserver = 0;
 #pragma mark - private
 //判断账号是否可以拨打
 - (BOOL) canBeCalled:(NSString*) account{
+    if ([account isEqualToString:BLANK_STRING] ||[account isEqualToString:[self myAccount]]) {
+        return NO;
+    }
     return YES;
 }
 - (NSString*) describeState:(NSNumber*) state{
@@ -450,7 +450,9 @@ static int hasObserver = 0;
 
 - (void) assertState:(int)expectState{
     NSString* reason = [NSString stringWithFormat:@"期望状态是%@",[self describeState: @(expectState)]];
-    NSAssert([self.basicState intValue] == expectState,reason );
+    if ([self.basicState intValue] != expectState) {
+        [[IMTipImp defaultTip] errorTip:[NSString stringWithFormat:@"%@",reason]];
+    }
 }
 
 
@@ -663,7 +665,10 @@ static int hasObserver = 0;
 #endif
     [self.UDPcommunicator setupIP:self.routeIP];
     [self.UDPcommunicator setupPort:self.port];
-    [self.UDPcommunicator connect:self.selfAccount];
+    if(self.selfAccount == nil){
+        [[IMTipImp defaultTip] errorTip:@"用户帐号信息为空"];
+    }
+    [self.UDPcommunicator connect:[self myAccount]];
 }
 
 - (void) disconnectToSignalServer{
@@ -817,6 +822,7 @@ static int hasObserver = 0;
     self.isInP2P = @(0);
     //如果是空闲. 白穿透了.
     if ([self.basicState intValue] == basicStateIdle) {
+        NSLog(@"主叫方P2P成功 但是状态是idle");
         return;
     }
     //进入通话状态
@@ -846,6 +852,7 @@ static int hasObserver = 0;
     self.isInP2P =@(0);
     //如果是空闲. 白穿透了.
     if ([self.basicState intValue] == basicStateIdle) {
+        NSLog(@"被叫方P2P成功 但是状态是idle");
         return;
     }
     //进入通话状态
@@ -868,7 +875,10 @@ static int hasObserver = 0;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:P2PTUNNEL_FAILED object:nil];
     //还原p2p状态为0 这样才能让self.busy变成0
     self.isInP2P = @(0);
-    //endsession
+    [self endSession];
+    [self saveCommnicationLog];
+    //通知界面，关闭相应的视图
+    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
 
 - (void) durationTick{
