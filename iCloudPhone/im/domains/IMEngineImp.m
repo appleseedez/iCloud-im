@@ -351,7 +351,6 @@ UIImageView* _pview_local;
 #if ENGINE_MSG
     NSLog(@"显示摄像头");
 #endif
-    self.pInterfaceApi->SwitchCamera(10);
     [self openCamera];
 //    self.pInterfaceApi->SetMuteEnble(MTVie, true);
 //    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
