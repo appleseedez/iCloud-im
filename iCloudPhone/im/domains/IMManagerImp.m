@@ -650,6 +650,21 @@ static int hasObserver = 0;
         [self removeObserver:self forKeyPath:@"isInP2P" context:&p2pIndentifer];
         hasObserver = 0;
     }
+    //保存所有修改
+    //TODO: 断线时保存修改
+    //从业务服务器断开
+    [self disconnectToSignalServer];
+    //销毁引擎
+    [self.engine tearDown];
+    self.engine = nil;
+    //销毁tcp连接器
+    [self.TCPcommunicator tearDown];
+    self.TCPcommunicator =  nil;
+    //销毁udp连接器
+    [self.UDPcommunicator tearDown];
+    self.UDPcommunicator = nil;
+    //信令构造器销毁
+    self.messageBuilder = nil;
 
 }
 
@@ -878,7 +893,8 @@ static int hasObserver = 0;
     [self endSession];
     [self saveCommnicationLog];
     //通知界面，关闭相应的视图
-    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
+    [self performSelector:@selector(notifyInterfaceToEndSession) withObject:nil afterDelay:1];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
 
 - (void) durationTick{

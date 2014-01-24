@@ -118,7 +118,7 @@ enum emDataType
 #define SESSION_HALT_FILED_ACTION_END @"endsession" //接收方要终止传输
 
 #define SEQ_BASE 0 // 发送包的序列号基底
-#define HEART_BEAT_INTERVAL 15 // 心跳间隔15秒
+#define HEART_BEAT_INTERVAL 5 // 心跳间隔15秒
 #define HEART_BEAT_REQ_TYPE 0x00000000 //心跳包请求类型
 
 #define ROUTE_SERVER_IP_REQ_TYPE 0x00000001 // 目录服务器地址请求

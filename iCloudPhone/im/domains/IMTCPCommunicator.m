@@ -36,6 +36,7 @@
 
 - (void) sendHeartBeat{
     if ([self.sock isConnected]) {
+        NSLog(@"咚咚");
         [self sendRequest:self.heartBeatPKG type:HEART_BEAT_REQ_TYPE];
     }
 }
