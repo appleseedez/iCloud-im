@@ -53,17 +53,15 @@ static int soundCount;
 
 - (IBAction)cancelCalling:(UIButton *)sender {
     NSDictionary* cancelCallParams =  @{
-                                                                  SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[[self.manager myState] valueForKey:kPeerAccount],
-                                                                  SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self.manager myState] valueForKey:kMyAccount],
+                                                                  SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[[self.manager myState] valueForKey:kMyAccount],
+                                                                  SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self.manager myState] valueForKey:kPeerAccount],
                                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                                                                   };
+    NSLog(@"波大方:发送挂断.%@",cancelCallParams);
     [self.manager haltSession:cancelCallParams];
-//    [self sessionClosed:nil];
 }
 
 - (void) setup{
-    
-
    ItelUser* peerUser =  [[ItelAction action] userInFriendBook:[[self.manager myState] valueForKey:kPeerAccount]];
     NSString* peerDisplayName = BLANK_STRING;
     if (!peerUser) {

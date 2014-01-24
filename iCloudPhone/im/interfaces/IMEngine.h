@@ -42,4 +42,5 @@
 - (void) tearDown;
 - (void) keepSessionAlive:(NSString*) probeServerIP port:(NSInteger) port;
 - (int) countTopSize; //统计每秒的数据传输量
+- (int) stopDetectP2P;
 @end

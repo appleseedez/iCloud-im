@@ -35,7 +35,12 @@
 
 
 - (void) reconnect:(NSNotification*) notify{
-    [self.manager connectToSignalServer];
+    [[IMTipImp defaultTip] showTip:@"开始重连"];
+    NSAssert(self.manager, @"manager = nil");
+    if (self.manager && ![[self.manager myAccount] isEqualToString: BLANK_STRING]) {
+        [self.manager connectToSignalServer];
+    }
+
 }
 
 -(void)setupManagers{

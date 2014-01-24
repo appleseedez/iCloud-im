@@ -35,8 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"传入的信息:%@",self.inSessionNotify);
-    
     if (![self.manager isVideoCall]) {
         self.remoteRenderView = nil;
         
@@ -114,7 +112,12 @@
     if (self.remoteRenderView) {
         [self.remoteRenderView removeFromSuperview];
     }
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    if (self.navigationController) {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 - (IBAction)endSession:(UIButton *)sender {
     //构造通话结束信令
@@ -123,7 +126,6 @@
                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                                                   }];
     
-    NSLog(@"通话终止时按键方提供的数据：%@",endSessionDataMut);
     //终止会话
     [self.manager haltSession:endSessionDataMut];
     [self sessionClosed:nil];

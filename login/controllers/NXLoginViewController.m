@@ -72,7 +72,7 @@ static int loginCount=0;
     }
     else{
         self.btnLogin.enabled=NO;
-        [self requestToLogin1];
+        [self requestToLogin];
     }
 }
 -(void)requestToLogin{
@@ -98,6 +98,13 @@ static int loginCount=0;
         
         if ([json isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic=[json objectForKey:@"message"];
+            if ([dic objectForKey:@"ret"] == nil) {
+                [self.actWaitingToLogin stopAnimating];
+                self.txtInuptCheckMessage.text=[dic objectForKey:@"msg"];
+                self.btnLogin.enabled=YES;
+                NSLog(@"登录失败:%@",[dic objectForKey:@"msg"]);
+                return ;
+            }
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 HostItelUser *host=[HostItelUser userWithDictionary:[[dic objectForKey:@"data"] mutableCopy]];
