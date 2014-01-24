@@ -120,6 +120,7 @@
     
 }
 - (IBAction)endSession:(UIButton *)sender {
+    sender.enabled = NO;
     //构造通话结束信令
     NSMutableDictionary* endSessionDataMut = [self.inSessionNotify.userInfo mutableCopy];
     [endSessionDataMut addEntriesFromDictionary:@{
@@ -128,7 +129,6 @@
     
     //终止会话
     [self.manager haltSession:endSessionDataMut];
-    [self sessionClosed:nil];
 }
 - (IBAction)toggleHUD:(UITapGestureRecognizer *)sender {
 // 点击会让HUD收缩

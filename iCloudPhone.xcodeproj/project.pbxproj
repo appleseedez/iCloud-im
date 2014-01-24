@@ -216,16 +216,6 @@
 		BA9845C218718D5C00F5AF83 /* IMRecentContactDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9845C118718D5C00F5AF83 /* IMRecentContactDetailsViewController.m */; };
 		BAAEA49018726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
 		BAAEA49118726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
-		BABFEB151888412300FDB696 /* ALAlertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BABFEB091888412300FDB696 /* ALAlertBanner.m */; };
-		BABFEB161888412300FDB696 /* ALAlertBannerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BABFEB0B1888412300FDB696 /* ALAlertBannerManager.m */; };
-		BABFEB171888412300FDB696 /* bannerAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB0D1888412300FDB696 /* bannerAlert.png */; };
-		BABFEB181888412300FDB696 /* bannerAlert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB0E1888412300FDB696 /* bannerAlert@2x.png */; };
-		BABFEB191888412300FDB696 /* bannerFailure.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB0F1888412300FDB696 /* bannerFailure.png */; };
-		BABFEB1A1888412300FDB696 /* bannerFailure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB101888412300FDB696 /* bannerFailure@2x.png */; };
-		BABFEB1B1888412300FDB696 /* bannerNotify.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB111888412300FDB696 /* bannerNotify.png */; };
-		BABFEB1C1888412300FDB696 /* bannerNotify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB121888412300FDB696 /* bannerNotify@2x.png */; };
-		BABFEB1D1888412300FDB696 /* bannerSuccess.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB131888412300FDB696 /* bannerSuccess.png */; };
-		BABFEB1E1888412300FDB696 /* bannerSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABFEB141888412300FDB696 /* bannerSuccess@2x.png */; };
 		BAC4A0DF187CE1E200BC856F /* ItelBookInterfaceImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */; };
 		BACD8282188C36DB0066F143 /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BACD8281188C36DB0066F143 /* area.sqlite */; };
 		BADA3C6D1890AEA10029CB61 /* IMManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA3C6C1890AEA10029CB61 /* IMManagerImp.m */; };
@@ -239,6 +229,18 @@
 		BAE9C909187C31B800E41A9E /* ItelUserInterfaceImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C905187C31B800E41A9E /* ItelUserInterfaceImp.m */; };
 		BAE9C912187C3AA900E41A9E /* Message+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C911187C3AA900E41A9E /* Message+CRUD.m */; };
 		BAE9C915187C415800E41A9E /* ItelUser+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C914187C415800E41A9E /* ItelUser+CRUD.m */; };
+		BAF70BE1189305FC00044097 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
+		BAF70BE6189305FC00044097 /* libAlalertBanner.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BAF70BE5189305FC00044097 /* libAlalertBanner.h */; };
+		BAF70BE8189305FC00044097 /* libAlalertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF70BE7189305FC00044097 /* libAlalertBanner.m */; };
+		BAF70BEE189305FC00044097 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DF31834D40000022FE5 /* XCTest.framework */; };
+		BAF70BEF189305FC00044097 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
+		BAF70BF0189305FC00044097 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD81834D40000022FE5 /* UIKit.framework */; };
+		BAF70BF3189305FC00044097 /* liblibAlalertBanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF70BE0189305FC00044097 /* liblibAlalertBanner.a */; };
+		BAF70BF9189305FC00044097 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BAF70BF7189305FC00044097 /* InfoPlist.strings */; };
+		BAF70BFB189305FC00044097 /* libAlalertBannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF70BFA189305FC00044097 /* libAlalertBannerTests.m */; };
+		BAF70C111893062600044097 /* ALAlertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF70C051893062600044097 /* ALAlertBanner.m */; };
+		BAF70C121893062600044097 /* ALAlertBannerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF70C071893062600044097 /* ALAlertBannerManager.m */; };
+		BAF70C131893066A00044097 /* liblibAlalertBanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF70BE0189305FC00044097 /* liblibAlalertBanner.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,6 +258,13 @@
 			remoteGlobalIDString = 47B89DD01834D40000022FE5;
 			remoteInfo = iCloudPhone;
 		};
+		BAF70BF1189305FC00044097 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47B89DC91834D40000022FE5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BAF70BDF189305FC00044097;
+			remoteInfo = libAlalertBanner;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -266,6 +275,16 @@
 			dstSubfolderSpec = 16;
 			files = (
 				479EF0A21859D9A50012EE29 /* GCDSocket.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAF70BDE189305FC00044097 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				BAF70BE6189305FC00044097 /* libAlalertBanner.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,19 +654,6 @@
 		BAAEA48D187256CD00C05BCF /* IMDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManager.h; sourceTree = "<group>"; };
 		BAAEA48E18726DF200C05BCF /* IMRecentContactItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRecentContactItem.h; sourceTree = "<group>"; };
 		BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRecentContactItem.m; sourceTree = "<group>"; };
-		BABFEB071888412300FDB696 /* ALAlertBanner+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAlertBanner+Private.h"; sourceTree = "<group>"; };
-		BABFEB081888412300FDB696 /* ALAlertBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAlertBanner.h; sourceTree = "<group>"; };
-		BABFEB091888412300FDB696 /* ALAlertBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAlertBanner.m; sourceTree = "<group>"; };
-		BABFEB0A1888412300FDB696 /* ALAlertBannerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAlertBannerManager.h; sourceTree = "<group>"; };
-		BABFEB0B1888412300FDB696 /* ALAlertBannerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAlertBannerManager.m; sourceTree = "<group>"; };
-		BABFEB0D1888412300FDB696 /* bannerAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerAlert.png; sourceTree = "<group>"; };
-		BABFEB0E1888412300FDB696 /* bannerAlert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerAlert@2x.png"; sourceTree = "<group>"; };
-		BABFEB0F1888412300FDB696 /* bannerFailure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerFailure.png; sourceTree = "<group>"; };
-		BABFEB101888412300FDB696 /* bannerFailure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerFailure@2x.png"; sourceTree = "<group>"; };
-		BABFEB111888412300FDB696 /* bannerNotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerNotify.png; sourceTree = "<group>"; };
-		BABFEB121888412300FDB696 /* bannerNotify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerNotify@2x.png"; sourceTree = "<group>"; };
-		BABFEB131888412300FDB696 /* bannerSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerSuccess.png; sourceTree = "<group>"; };
-		BABFEB141888412300FDB696 /* bannerSuccess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerSuccess@2x.png"; sourceTree = "<group>"; };
 		BAC4A0DD187CE1E200BC856F /* ItelBookInterfaceImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelBookInterfaceImp.h; sourceTree = "<group>"; };
 		BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelBookInterfaceImp.m; sourceTree = "<group>"; };
 		BACD8281188C36DB0066F143 /* area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = area.sqlite; sourceTree = "<group>"; };
@@ -676,6 +682,27 @@
 		BAE9C911187C3AA900E41A9E /* Message+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Message+CRUD.m"; sourceTree = "<group>"; };
 		BAE9C913187C415800E41A9E /* ItelUser+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ItelUser+CRUD.h"; sourceTree = "<group>"; };
 		BAE9C914187C415800E41A9E /* ItelUser+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ItelUser+CRUD.m"; sourceTree = "<group>"; };
+		BAF70BE0189305FC00044097 /* liblibAlalertBanner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibAlalertBanner.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAF70BE4189305FC00044097 /* libAlalertBanner-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libAlalertBanner-Prefix.pch"; sourceTree = "<group>"; };
+		BAF70BE5189305FC00044097 /* libAlalertBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libAlalertBanner.h; sourceTree = "<group>"; };
+		BAF70BE7189305FC00044097 /* libAlalertBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = libAlalertBanner.m; sourceTree = "<group>"; };
+		BAF70BED189305FC00044097 /* libAlalertBannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libAlalertBannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAF70BF6189305FC00044097 /* libAlalertBannerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libAlalertBannerTests-Info.plist"; sourceTree = "<group>"; };
+		BAF70BF8189305FC00044097 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BAF70BFA189305FC00044097 /* libAlalertBannerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = libAlalertBannerTests.m; sourceTree = "<group>"; };
+		BAF70C031893062600044097 /* ALAlertBanner+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAlertBanner+Private.h"; sourceTree = "<group>"; };
+		BAF70C041893062600044097 /* ALAlertBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAlertBanner.h; sourceTree = "<group>"; };
+		BAF70C051893062600044097 /* ALAlertBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAlertBanner.m; sourceTree = "<group>"; };
+		BAF70C061893062600044097 /* ALAlertBannerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAlertBannerManager.h; sourceTree = "<group>"; };
+		BAF70C071893062600044097 /* ALAlertBannerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAlertBannerManager.m; sourceTree = "<group>"; };
+		BAF70C091893062600044097 /* bannerAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerAlert.png; sourceTree = "<group>"; };
+		BAF70C0A1893062600044097 /* bannerAlert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerAlert@2x.png"; sourceTree = "<group>"; };
+		BAF70C0B1893062600044097 /* bannerFailure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerFailure.png; sourceTree = "<group>"; };
+		BAF70C0C1893062600044097 /* bannerFailure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerFailure@2x.png"; sourceTree = "<group>"; };
+		BAF70C0D1893062600044097 /* bannerNotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerNotify.png; sourceTree = "<group>"; };
+		BAF70C0E1893062600044097 /* bannerNotify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerNotify@2x.png"; sourceTree = "<group>"; };
+		BAF70C0F1893062600044097 /* bannerSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerSuccess.png; sourceTree = "<group>"; };
+		BAF70C101893062600044097 /* bannerSuccess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerSuccess@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -702,6 +729,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF70C131893066A00044097 /* liblibAlalertBanner.a in Frameworks */,
 				BADDFD6A1876915200D10DDC /* CoreData.framework in Frameworks */,
 				479EF0C81859DA1B0012EE29 /* libGCDSocket.a in Frameworks */,
 				47CDFEA4184ED17800673C2B /* Security.framework in Frameworks */,
@@ -732,6 +760,25 @@
 				47B89DF41834D40000022FE5 /* XCTest.framework in Frameworks */,
 				47B89DF61834D40000022FE5 /* UIKit.framework in Frameworks */,
 				47B89DF51834D40000022FE5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAF70BDD189305FC00044097 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAF70BE1189305FC00044097 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAF70BEA189305FC00044097 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAF70BEE189305FC00044097 /* XCTest.framework in Frameworks */,
+				BAF70BF3189305FC00044097 /* liblibAlalertBanner.a in Frameworks */,
+				BAF70BF0189305FC00044097 /* UIKit.framework in Frameworks */,
+				BAF70BEF189305FC00044097 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,7 +1104,7 @@
 		479EF00C1859D47C0012EE29 /* im */ = {
 			isa = PBXGroup;
 			children = (
-				BABFEB061888412300FDB696 /* ALAlertBanner */,
+				BAF70C021893062600044097 /* ALAlertBanner */,
 				BA1A74D4187A77F40071E83F /* utils */,
 				BA8242FA18758E8A001903CE /* resources */,
 				BA959A9118605639009B8A4C /* timer */,
@@ -1339,6 +1386,8 @@
 				47B89DF91834D40000022FE5 /* iCloudPhoneTests */,
 				479EF09E1859D9A50012EE29 /* GCDSocket */,
 				479EF0B01859D9A50012EE29 /* GCDSocketTests */,
+				BAF70BE2189305FC00044097 /* libAlalertBanner */,
+				BAF70BF4189305FC00044097 /* libAlalertBannerTests */,
 				47B89DD31834D40000022FE5 /* Frameworks */,
 				47B89DD21834D40000022FE5 /* Products */,
 			);
@@ -1351,6 +1400,8 @@
 				47B89DF21834D40000022FE5 /* iCloudPhoneTests.xctest */,
 				479EF09C1859D9A40012EE29 /* libGCDSocket.a */,
 				479EF0A91859D9A50012EE29 /* GCDSocketTests.xctest */,
+				BAF70BE0189305FC00044097 /* liblibAlalertBanner.a */,
+				BAF70BED189305FC00044097 /* libAlalertBannerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1522,34 +1573,6 @@
 			path = timer;
 			sourceTree = "<group>";
 		};
-		BABFEB061888412300FDB696 /* ALAlertBanner */ = {
-			isa = PBXGroup;
-			children = (
-				BABFEB071888412300FDB696 /* ALAlertBanner+Private.h */,
-				BABFEB081888412300FDB696 /* ALAlertBanner.h */,
-				BABFEB091888412300FDB696 /* ALAlertBanner.m */,
-				BABFEB0A1888412300FDB696 /* ALAlertBannerManager.h */,
-				BABFEB0B1888412300FDB696 /* ALAlertBannerManager.m */,
-				BABFEB0C1888412300FDB696 /* Images */,
-			);
-			path = ALAlertBanner;
-			sourceTree = "<group>";
-		};
-		BABFEB0C1888412300FDB696 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				BABFEB0D1888412300FDB696 /* bannerAlert.png */,
-				BABFEB0E1888412300FDB696 /* bannerAlert@2x.png */,
-				BABFEB0F1888412300FDB696 /* bannerFailure.png */,
-				BABFEB101888412300FDB696 /* bannerFailure@2x.png */,
-				BABFEB111888412300FDB696 /* bannerNotify.png */,
-				BABFEB121888412300FDB696 /* bannerNotify@2x.png */,
-				BABFEB131888412300FDB696 /* bannerSuccess.png */,
-				BABFEB141888412300FDB696 /* bannerSuccess@2x.png */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
 		BAE9C90A187C31C700E41A9E /* interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -1559,6 +1582,70 @@
 				BAE9C90E187C31C700E41A9E /* ItelUserInterface.h */,
 			);
 			path = interface;
+			sourceTree = "<group>";
+		};
+		BAF70BE2189305FC00044097 /* libAlalertBanner */ = {
+			isa = PBXGroup;
+			children = (
+				BAF70BE5189305FC00044097 /* libAlalertBanner.h */,
+				BAF70BE7189305FC00044097 /* libAlalertBanner.m */,
+				BAF70BE3189305FC00044097 /* Supporting Files */,
+			);
+			path = libAlalertBanner;
+			sourceTree = "<group>";
+		};
+		BAF70BE3189305FC00044097 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BAF70BE4189305FC00044097 /* libAlalertBanner-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BAF70BF4189305FC00044097 /* libAlalertBannerTests */ = {
+			isa = PBXGroup;
+			children = (
+				BAF70BFA189305FC00044097 /* libAlalertBannerTests.m */,
+				BAF70BF5189305FC00044097 /* Supporting Files */,
+			);
+			path = libAlalertBannerTests;
+			sourceTree = "<group>";
+		};
+		BAF70BF5189305FC00044097 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BAF70BF6189305FC00044097 /* libAlalertBannerTests-Info.plist */,
+				BAF70BF7189305FC00044097 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BAF70C021893062600044097 /* ALAlertBanner */ = {
+			isa = PBXGroup;
+			children = (
+				BAF70C031893062600044097 /* ALAlertBanner+Private.h */,
+				BAF70C041893062600044097 /* ALAlertBanner.h */,
+				BAF70C051893062600044097 /* ALAlertBanner.m */,
+				BAF70C061893062600044097 /* ALAlertBannerManager.h */,
+				BAF70C071893062600044097 /* ALAlertBannerManager.m */,
+				BAF70C081893062600044097 /* Images */,
+			);
+			path = ALAlertBanner;
+			sourceTree = "<group>";
+		};
+		BAF70C081893062600044097 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BAF70C091893062600044097 /* bannerAlert.png */,
+				BAF70C0A1893062600044097 /* bannerAlert@2x.png */,
+				BAF70C0B1893062600044097 /* bannerFailure.png */,
+				BAF70C0C1893062600044097 /* bannerFailure@2x.png */,
+				BAF70C0D1893062600044097 /* bannerNotify.png */,
+				BAF70C0E1893062600044097 /* bannerNotify@2x.png */,
+				BAF70C0F1893062600044097 /* bannerSuccess.png */,
+				BAF70C101893062600044097 /* bannerSuccess@2x.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		BAFEE13818744FDA00DB1AC6 /* db */ = {
@@ -1666,6 +1753,41 @@
 			productReference = 47B89DF21834D40000022FE5 /* iCloudPhoneTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		BAF70BDF189305FC00044097 /* libAlalertBanner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BAF70BFC189305FD00044097 /* Build configuration list for PBXNativeTarget "libAlalertBanner" */;
+			buildPhases = (
+				BAF70BDC189305FC00044097 /* Sources */,
+				BAF70BDD189305FC00044097 /* Frameworks */,
+				BAF70BDE189305FC00044097 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libAlalertBanner;
+			productName = libAlalertBanner;
+			productReference = BAF70BE0189305FC00044097 /* liblibAlalertBanner.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		BAF70BEC189305FC00044097 /* libAlalertBannerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BAF70BFF189305FD00044097 /* Build configuration list for PBXNativeTarget "libAlalertBannerTests" */;
+			buildPhases = (
+				BAF70BE9189305FC00044097 /* Sources */,
+				BAF70BEA189305FC00044097 /* Frameworks */,
+				BAF70BEB189305FC00044097 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BAF70BF2189305FC00044097 /* PBXTargetDependency */,
+			);
+			name = libAlalertBannerTests;
+			productName = libAlalertBannerTests;
+			productReference = BAF70BED189305FC00044097 /* libAlalertBannerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1683,6 +1805,9 @@
 						DevelopmentTeam = KAH6228XJ2;
 					};
 					47B89DF11834D40000022FE5 = {
+						TestTargetID = 47B89DD01834D40000022FE5;
+					};
+					BAF70BEC189305FC00044097 = {
 						TestTargetID = 47B89DD01834D40000022FE5;
 					};
 				};
@@ -1705,6 +1830,8 @@
 				47B89DF11834D40000022FE5 /* iCloudPhoneTests */,
 				479EF09B1859D9A40012EE29 /* GCDSocket */,
 				479EF0A81859D9A50012EE29 /* GCDSocketTests */,
+				BAF70BDF189305FC00044097 /* libAlalertBanner */,
+				BAF70BEC189305FC00044097 /* libAlalertBannerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1723,9 +1850,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4757D0551855C5F0001A9639 /* itel输入提示.png in Resources */,
-				BABFEB171888412300FDB696 /* bannerAlert.png in Resources */,
 				BACD8282188C36DB0066F143 /* area.sqlite in Resources */,
-				BABFEB1D1888412300FDB696 /* bannerSuccess.png in Resources */,
 				BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */,
 				479DC49D183A544200C3F3F2 /* 广告.png in Resources */,
 				478594C0185026FF00AFF6BF /* tab_bar.png in Resources */,
@@ -1738,24 +1863,18 @@
 				BA8242FC18758EA2001903CE /* jgb.m4a in Resources */,
 				479ED42C186C65C40084EED1 /* itelLOGO.png in Resources */,
 				47E2DB8E185985C800D455EF /* 本机联系人.png in Resources */,
-				BABFEB1A1888412300FDB696 /* bannerFailure@2x.png in Resources */,
-				BABFEB1B1888412300FDB696 /* bannerNotify.png in Resources */,
 				47E2DB9518598B0500D455EF /* 邀请.png in Resources */,
 				479ED42E186C66290084EED1 /* AboutLogo.png in Resources */,
 				BA06AFAE187873910099C3F7 /* iCloudPhone.storyboard in Resources */,
 				47E05DC318519C9C009FDCED /* 头像.png in Resources */,
 				47E2DB9C185997F000D455EF /* 登录logo.png in Resources */,
 				4757D0591855CAD6001A9639 /* 短信提示.png in Resources */,
-				BABFEB1C1888412300FDB696 /* bannerNotify@2x.png in Resources */,
 				47E05DC018517418009FDCED /* searchuser.png in Resources */,
 				47E05DC118517418009FDCED /* checkAddress.png in Resources */,
 				47B89DED1834D40000022FE5 /* Images.xcassets in Resources */,
 				47B89DDF1834D40000022FE5 /* InfoPlist.strings in Resources */,
 				478814051839E7120085224D /* mockhead.png in Resources */,
 				4757D0511855C078001A9639 /* 企业注册.png in Resources */,
-				BABFEB1E1888412300FDB696 /* bannerSuccess@2x.png in Resources */,
-				BABFEB191888412300FDB696 /* bannerFailure.png in Resources */,
-				BABFEB181888412300FDB696 /* bannerAlert@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1764,6 +1883,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				47B89DFE1834D40000022FE5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAF70BEB189305FC00044097 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAF70BF9189305FC00044097 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1878,7 +2005,6 @@
 				479AD2EB18862AB2009B3278 /* Area+toString.m in Sources */,
 				479F138F186178C7006DF67B /* HostHeadImageCell.m in Sources */,
 				473748CF1863E5A500F112AF /* HostEditQQViewController.m in Sources */,
-				BABFEB151888412300FDB696 /* ALAlertBanner.m in Sources */,
 				479EF0651859D47C0012EE29 /* IMSuggestResultCell.m in Sources */,
 				47A10DA71865951000FB9FED /* PassWayViewController.m in Sources */,
 				479EF05C1859D47C0012EE29 /* IMSessionPeriodRequestMessageBuilder.m in Sources */,
@@ -1898,7 +2024,6 @@
 				47A0DEEE1862D56200BD28AB /* UIImage+Compress.m in Sources */,
 				478813DF1839C35E0085224D /* USArrayWrapper.m in Sources */,
 				479F13981861791B006DF67B /* HostSexCell.m in Sources */,
-				BABFEB161888412300FDB696 /* ALAlertBannerManager.m in Sources */,
 				47952D9418582DBA0044CF64 /* MBProgressHUD.m in Sources */,
 				475165571875683500628C8A /* MoreSIgnOutCell.m in Sources */,
 				47A10D9D18654AF500FB9FED /* SecurityChangePasswordViewController.m in Sources */,
@@ -1965,6 +2090,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BAF70BDC189305FC00044097 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAF70C121893062600044097 /* ALAlertBannerManager.m in Sources */,
+				BAF70BE8189305FC00044097 /* libAlalertBanner.m in Sources */,
+				BAF70C111893062600044097 /* ALAlertBanner.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAF70BE9189305FC00044097 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAF70BFB189305FC00044097 /* libAlalertBannerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1977,6 +2120,11 @@
 			isa = PBXTargetDependency;
 			target = 47B89DD01834D40000022FE5 /* iCloudPhone */;
 			targetProxy = 47B89DF71834D40000022FE5 /* PBXContainerItemProxy */;
+		};
+		BAF70BF2189305FC00044097 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BAF70BDF189305FC00044097 /* libAlalertBanner */;
+			targetProxy = BAF70BF1189305FC00044097 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2012,6 +2160,14 @@
 			);
 			name = iCloudPhone.storyboard;
 			path = "预切片";
+			sourceTree = "<group>";
+		};
+		BAF70BF7189305FC00044097 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BAF70BF8189305FC00044097 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2059,7 +2215,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iCloudPhone.app/iCloudPhone";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2086,7 +2242,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iCloudPhone.app/iCloudPhone";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2187,19 +2343,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lingyu Zeng (KAH6228XJ2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lingyu Zeng (KAH6228XJ2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCloudPhone/iCloudPhone-Prefix.pch";
 				INFOPLIST_FILE = "iCloudPhone/iCloudPhone-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./iCloudPhone/im/sdk,
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "iTel 2.0Test";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "BC3EBB27-8B13-4A47-9F82-419B5C62A51C";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -2211,19 +2367,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lingyu Zeng (KAH6228XJ2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lingyu Zeng (KAH6228XJ2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCloudPhone/iCloudPhone-Prefix.pch";
 				INFOPLIST_FILE = "iCloudPhone/iCloudPhone-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./iCloudPhone/im/sdk,
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "iTel 2.0Test";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "BC3EBB27-8B13-4A47-9F82-419B5C62A51C";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -2234,7 +2390,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iCloudPhone.app/iCloudPhone";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2257,7 +2413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iCloudPhone.app/iCloudPhone";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2267,6 +2423,86 @@
 				GCC_PREFIX_HEADER = "iCloudPhone/iCloudPhone-Prefix.pch";
 				INFOPLIST_FILE = "iCloudPhoneTests/iCloudPhoneTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		BAF70BFD189305FD00044097 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				DSTROOT = /tmp/libAlalertBanner.dst;
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libAlalertBanner/libAlalertBanner-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BAF70BFE189305FD00044097 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				DSTROOT = /tmp/libAlalertBanner.dst;
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libAlalertBanner/libAlalertBanner-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		BAF70C00189305FD00044097 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libAlalertBanner/libAlalertBanner-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "libAlalertBannerTests/libAlalertBannerTests-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		BAF70C01189305FD00044097 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libAlalertBanner/libAlalertBanner-Prefix.pch";
+				INFOPLIST_FILE = "libAlalertBannerTests/libAlalertBannerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -2319,6 +2555,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		BAF70BFC189305FD00044097 /* Build configuration list for PBXNativeTarget "libAlalertBanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BAF70BFD189305FD00044097 /* Debug */,
+				BAF70BFE189305FD00044097 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BAF70BFF189305FD00044097 /* Build configuration list for PBXNativeTarget "libAlalertBannerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BAF70C00189305FD00044097 /* Debug */,
+				BAF70C01189305FD00044097 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

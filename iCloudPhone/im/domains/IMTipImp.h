@@ -10,4 +10,5 @@
 #import "IMTip.h"
 @interface IMTipImp : NSObject<IMTip>
 +(instancetype) defaultTip;
+
 @end

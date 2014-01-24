@@ -87,7 +87,9 @@ static int hasObserver = 0;
     self.basicState = @(basicStateIdle);
     //TODO 在状态回到空闲时,释放资源
     //提示用户
-    [[IMTipImp defaultTip] showTip:@"对方不在线,请稍后重试"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[IMTipImp defaultTip] showTip:@"对方不在线,请稍后重试"];
+    });
 }
 /**
  *  通话拒绝
@@ -133,18 +135,21 @@ static int hasObserver = 0;
 
 
 - (void)endSession{
+    [self.monitor invalidate];
+    [self.keepSessionAlive invalidate];
     if([self.engine stopDetectP2P] == 0){
-            self.isInP2P = @(0);
-    };
+        self.isInP2P = @(0);
+    }
+
     //从非idle状态变回idle状态. 说明需要挂断. 给提示
     [[IMTipImp defaultTip] showTip:@"挂断中..."];
     
     [self stopCommunicationCounting];
     
-    [self.engine stopTransport];
     
     [self restoreState];
     self.basicState = @(basicStateIdle);
+    [self.engine tearDown];
     [self performSelector:@selector(notifyInterfaceToEndSession) withObject:nil afterDelay:0];
 }
 
@@ -187,11 +192,12 @@ static int hasObserver = 0;
     
     
 
-    //主叫方组装通信链路数据,发送给peer 不再需要传递数据.直接从manager.state里面去取
-    [self sendCallingData];
+
     //6. 设置40秒超时，如果没有收到接受通话的回复则转到拒绝流程
     [self.monitor invalidate];
     self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_peer_pickup_queue", DISPATCH_QUEUE_CONCURRENT)];
+    //主叫方组装通信链路数据,发送给peer 不再需要传递数据.直接从manager.state里面去取
+    [self sendCallingData];
 }
 
 //通话查询请求失败
@@ -222,6 +228,7 @@ static int hasObserver = 0;
     long receivedSSID = [[answeringData.userInfo valueForKey:@"srcssid"] longValue];
     long mySSID = [[[self myState] valueForKey:kMySSID] longValue];
     if (self.busy && receivedSSID == mySSID) {
+        [self.monitor invalidate];
         //开始获取p2p通道，保持session的数据包可以停止发送了。
         [self.keepSessionAlive invalidate];
         self.keepSessionAlive = nil;
@@ -270,6 +277,7 @@ static int hasObserver = 0;
                                    }];
         return;
     }
+    [self.monitor invalidate];
     // 是否是
     //根据收到的usevideo和自身是否支持视频 设置自己是否有视频选项
     [self setIsVideoCall: [[callingData.userInfo valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]&&self.canVideo];
@@ -442,13 +450,14 @@ static int hasObserver = 0;
 }
 - (void)sendAnsweringData{
     [[IMTipImp defaultTip] showTip:@"发送数据 主叫 <<< 被叫"];
+    self.basicState = @(basicStateAnswering);
     // 使用主叫通信链路信令构造器构造通信链路数据.
     self.messageBuilder = [[IMSessionPeriodResponseMessageBuilder alloc] init];
     [self sendSessionDataFor:[NSNumber numberWithInt:SESSION_PERIOD_ANSWERING_TYPE]];
 }
 
 - (void) assertState:(int)expectState{
-    NSString* reason = [NSString stringWithFormat:@"期望状态是%@",[self describeState: @(expectState)]];
+    NSString* reason = [NSString stringWithFormat:@"期望状态是:%@,但是实际上却是:%@",[self describeState: @(expectState)],[self describeState:self.basicState]];
     if ([self.basicState intValue] != expectState) {
         [[IMTipImp defaultTip] errorTip:[NSString stringWithFormat:@"%@",reason]];
     }
@@ -627,7 +636,7 @@ static int hasObserver = 0;
     [self registerNotifications];
     [self checkDeviceAuthorizationStatus];
     [self injectDependency];
-    [self.engine initNetwork];
+//    [self.engine initNetwork];
     //监视basicState的状态改变.
     if (hasObserver == 0) {
         [self addObserver:self forKeyPath:@"basicState" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:&basicStateIndentifer];
@@ -720,6 +729,7 @@ static int hasObserver = 0;
  *  @param peerType 主叫方发送:SESSION_PERIOD_PROCEED_TYPE 被叫方发送:SESSION_PERIOD_ANSWERING_TYPE
  */
 - (void) sendSessionDataFor:(NSNumber*) peerType{
+    [self.engine initNetwork];
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
     if ([[self.state valueForKey:kUseVideo] boolValue]){

@@ -44,6 +44,7 @@ static IMTipImp* _instance;
 - (void)hideTip{
     [self.countDown invalidate];
     self.countDown =nil;
+    [ALAlertBanner hideAllAlertBanners];
 }
 - (void) errorTip:(NSString *)tip{
     self.style = ALAlertBannerStyleFailure;
@@ -58,6 +59,7 @@ static IMTipImp* _instance;
     [self showTip:tip];
 }
 - (void)showTip:(NSString *)tip forSeconds:(int)seconds{
+    [self hideTip];
     self.tip = tip;
     NSCAppDelegate *appDelegate = (NSCAppDelegate *)[[UIApplication sharedApplication] delegate];
     ALAlertBannerStyle randomStyle = self.style;// (ALAlertBannerStyle)(arc4random_uniform(4));
@@ -66,13 +68,8 @@ static IMTipImp* _instance;
     banner.secondsToShow = 1.5;
     banner.showAnimationDuration = .25;
     banner.hideAnimationDuration = .2;
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [ALAlertBanner hideAllAlertBanners];
-        NSLog(@"我在弹:%@",self.tip);
-        [banner show];
-    });
-    
+    [banner show];
+    NSLog(@"我在弹:%@",self.tip);
     self.style = ALAlertBannerStyleSuccess;
     
 }

@@ -20,21 +20,26 @@ UIImageView* _pview_local;
 @property(nonatomic,copy) NSString* currentInterIP;
 @property(nonatomic) int cameraIndex;
 @property(nonatomic) BOOL isCameraOpened;
+@property(nonatomic) int netWorkPort;
 @end
 
 @implementation IMEngineImp
 - (id)init{
     if (self = [super init]) {
-        if (_pInterfaceApi == nil) {
-            _pInterfaceApi = new CAVInterfaceAPI();
             self.canVideoCalling = YES;
             self.cameraIndex = 1;
             self.isCameraOpened = NO;
-        }
+            self.netWorkPort = LOCAL_PORT;
+            _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
     }
     return self;
 }
-
+- (CAVInterfaceAPI *)pInterfaceApi{
+    if (_pInterfaceApi == nil) {
+        _pInterfaceApi = new CAVInterfaceAPI();
+    }
+    return _pInterfaceApi;
+}
 + (NSString*) localAddress{
     struct ifaddrs *interfaces = NULL;
     struct ifaddrs *temp_addr = NULL;
@@ -93,10 +98,11 @@ UIImageView* _pview_local;
 }
 
 #pragma mark - INTERFACE
-
+static int localNetPortSuffix = 0;
 // IMEngine接口 见接口定义
 - (void)initNetwork{
-    if (false == self.pInterfaceApi->NetWorkInit(LOCAL_PORT)) {
+    self.netWorkPort = LOCAL_PORT + (++localNetPortSuffix)%9;
+    if (false == self.pInterfaceApi->NetWorkInit(self.netWorkPort)) {
         [NSException exceptionWithName:@"400: init network failed" reason:@"引擎初始化网络失败" userInfo:nil];
     }else{
         [self initMedia];
@@ -122,7 +128,7 @@ UIImageView* _pview_local;
             {
                 //是支持视频的
                 self.m_type = InitTypeVoeAndVie;
-                _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
+//                _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
             }
                 break;
             case AFNetworkReachabilityStatusReachableViaWWAN:
@@ -191,7 +197,7 @@ UIImageView* _pview_local;
             SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY: self.currentInterIP,
              SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY:[NSNumber numberWithInt:self_inter_port],
              SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY:[[self class] localAddress],
-             SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY:[NSNumber numberWithInt:LOCAL_PORT]
+             SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY:[NSNumber numberWithInt:self.netWorkPort]
              };
 }
 
@@ -297,7 +303,7 @@ UIImageView* _pview_local;
 - (BOOL)startTransport{
     
     
-    return NO;
+    return YES;
 }
 
 - (void)stopTransport{
@@ -377,6 +383,7 @@ UIImageView* _pview_local;
     }
         if (self.isCameraOpened )
         {
+            [[IMTipImp defaultTip] showTip:@"设置小窗口"];
             // 摆正摄像头位置
             self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
             // 开启摄像头
@@ -428,11 +435,9 @@ NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
             break;
     }
     if (self.isCameraOpened) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             self.pInterfaceApi->SwitchCamera(self.cameraIndex);
             // 摆正摄像头位置
             self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
-        });
 
     }
 
@@ -441,6 +446,9 @@ NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
     [self stopTransport];
     bool ret  = self.pInterfaceApi->Terminate();
     NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<关闭引擎>>>>>>>>>>>>>>:%d",ret);
+    delete _pInterfaceApi;
+    _pInterfaceApi = nil;
+    
 
 }
 
@@ -454,6 +462,9 @@ NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
 
 
 - (int) stopDetectP2P{
+    if (_pInterfaceApi == nil) {
+        return -1;
+    }
     int ret  = self.pInterfaceApi -> StopDetect();
     NSLog(@"<<<<<<<<<<<<<<<终止P2P>>>>>>>>>> :%d",ret);
     return ret;

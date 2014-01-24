@@ -52,13 +52,14 @@ static int soundCount;
 }
 
 - (IBAction)cancelCalling:(UIButton *)sender {
+    sender.enabled = NO;
     NSDictionary* cancelCallParams =  @{
                                                                   SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[[self.manager myState] valueForKey:kMyAccount],
                                                                   SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self.manager myState] valueForKey:kPeerAccount],
                                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                                                                   };
-    NSLog(@"波大方:发送挂断.%@",cancelCallParams);
     [self.manager haltSession:cancelCallParams];
+    
 }
 
 - (void) setup{

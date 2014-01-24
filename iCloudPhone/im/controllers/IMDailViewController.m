@@ -163,15 +163,18 @@
 
 #pragma mark - actions
 - (IBAction)videoDialing:(UIButton *)sender {
-    [[IMTipImp defaultTip] showTip:@"开启视频通话"];
+    sender.enabled =NO;
     [self.manager setIsVideoCall:YES];
     NSString* peerAccount = self.peerAccount.text;
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
+        [[IMTipImp defaultTip] warningTip:@"再点我就把你喝掉"];
         return;
     }
+    [[IMTipImp defaultTip] showTip:@"开启视频通话"];
     sender.backgroundColor =[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1.0f];
     sender.titleLabel.textColor = [UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f];
     [self.manager dial:peerAccount];
+    sender.enabled = YES;
 }
 - (IBAction)buttonPress:(UIButton*)sender{
     //高亮

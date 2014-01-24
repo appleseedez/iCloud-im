@@ -88,6 +88,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 }
 #pragma mark - USER INTERACT
 - (IBAction)answerCall:(UIButton *)sender {
+    sender.enabled = NO;
     [self.manager acceptSession:self.callingNotify];
     [self performSegueWithIdentifier:@"acceptSessionSegue" sender:self];
     
@@ -104,6 +105,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 }
 - (IBAction)refuseCall:(UIButton *)sender {
     //终止会话
+    sender.enabled = NO;
     NSMutableDictionary* refusedSessionNotifyMut = [self.callingNotify.userInfo mutableCopy];
     [refusedSessionNotifyMut addEntriesFromDictionary:@{
                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_REFUSE
