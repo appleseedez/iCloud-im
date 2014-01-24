@@ -73,13 +73,27 @@
 #endif
     self.navigationController.delegate=self;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem.title = @"编辑";
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
-
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    // Make sure you call super first
+    [super setEditing:editing animated:animated];
+    
+    if (editing)
+    {
+        self.editButtonItem.title = @"完成";
+    }
+    else
+    {
+        self.editButtonItem.title = @"编辑";
+    }
+}
 - (void)dealloc{
 #if OTHER_MESSAGE
     NSLog(@"IMRecentContactListViewController被销毁了");

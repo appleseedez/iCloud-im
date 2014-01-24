@@ -368,12 +368,11 @@ static int hasObserver = 0;
     [self restoreState];
     
     //连接信令服务器
-    [self.TCPcommunicator connect:[self myAccount]];
+    [self.TCPcommunicator connect:[self myAccount] withAuthInfo: [self authInfoWith:self.selfAccount cert:@"chengjianjun"]];
     [self.TCPcommunicator keepAlive];
 #if MANAGER_DEBUG
     NSLog(@"目前的本机帐号：%@",[self myAccount]);
 #endif
-    [self auth:self.selfAccount cert:@"chengjianjun"];
 }
 #pragma mark - KVO callback
 //做基本状态的监听.如果状态发生改变
@@ -537,20 +536,16 @@ static int hasObserver = 0;
     
 }
 // 向信令服务器做一次验证
-- (void) auth:(NSString*) selfAccount
+- (NSDictionary*) authInfoWith:(NSString*) selfAccount
          cert:(NSString*) cert{
     NSString* token = BLANK_STRING; // 推送用到的token
     self.messageBuilder = [[IMAuthMessageBuilder alloc] init];
-    NSDictionary* data = [self.messageBuilder buildWithParams:@{
+    return [self.messageBuilder buildWithParams:@{
                                                                 CMID_APP_LOGIN_SSS_REQ_FIELD_ACCOUNT_KEY:selfAccount,
                                                                 CMID_APP_LOGIN_SSS_REQ_FIELD_CLIENT_TYPE_KEY:[NSNumber numberWithInt:ACT_IOS],
                                                                 CMID_APP_LOGIN_SSS_REQ_FIELD_CLIENT_STATUS_KEY:[NSNumber numberWithInt:AST_ONLINE],
                                                                 CMID_APP_LOGIN_SSS_REQ_FIELD_TOKEN_KEY:token
                                                                 }];
-#if SIGNAL_MESSAGE
-    NSLog(@"信令服务器的验证请求：%@",data);
-#endif
-    [self.TCPcommunicator send:data];
 }
 
 // 信令回复数据的处理 采用通知来完成
@@ -727,7 +722,10 @@ static int hasObserver = 0;
 - (void) sendSessionDataFor:(NSNumber*) peerType{
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
-    
+    if ([[self.state valueForKey:kUseVideo] boolValue]){
+       BOOL ret =  [self.engine openCamera];
+        [self.state setValue:[NSNumber numberWithBool:ret] forKey:kUseVideo];
+    }
     // 3.获取本机natType
     NatType natType = StunTypeBlocked;
     

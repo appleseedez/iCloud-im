@@ -69,6 +69,7 @@ static IMTipImp* _instance;
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [ALAlertBanner hideAllAlertBanners];
+        NSLog(@"我在弹:%@",self.tip);
         [banner show];
     });
     

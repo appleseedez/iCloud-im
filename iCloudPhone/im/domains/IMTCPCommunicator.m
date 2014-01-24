@@ -12,6 +12,7 @@
 @property(nonatomic) GCDAsyncSocket* sock; // tcp长链接端点
 @property(nonatomic) MSWeakTimer* heartBeat; // 心跳定时器
 @property(nonatomic) NSDictionary* heartBeatPKG; // 心跳包
+@property(nonatomic) NSDictionary* authInfo; //登录信息
 @end
 
 @implementation IMTCPCommunicator
@@ -76,6 +77,7 @@
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
     [[IMTipImp defaultTip] showTip:@"连接上了信令服务器"];
     [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
+    [self send:self.authInfo];
 }
 // 断开了服务器链接
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
@@ -134,17 +136,18 @@
     }
 }
 // IMCommunicator接口
-- (void)connect:(NSString*) account{
+- (void)connect:(NSString*) account withAuthInfo:(NSDictionary *)authInfo{
     NSError* error;
     self.account = account;
     if ([self.sock isConnected]) {
         [self disconnect];
     }
-
+    self.authInfo = authInfo;
     if (![self.sock connectToHost:self.ip onPort:self.port error:&error]) {
         [[IMTipImp defaultTip] errorTip:@"链接信令服务器失败"];
+        [self disconnect];
     }
-    
+
 }
 
 - (void)disconnect{

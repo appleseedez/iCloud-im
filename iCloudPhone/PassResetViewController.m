@@ -52,6 +52,15 @@
             [self startHud];
             [[PassManager defaultManager] modifyPassword:self.txtPassword.text];
         
+    }else if(![NXInputChecker checkEmpty:self.txtPassword.text]){
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码失败" message:@"密码不能为空" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+        [alert show];
+
+    }
+    else if(![NXInputChecker checkEmpty:self.txtRePassword.text]){
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码失败" message:@"确认密码不能为空" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+        [alert show];
+        
     }
     else if(![NXInputChecker checkPassword:self.txtPassword.text]){
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码失败" message:@"密码格式不正确" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];

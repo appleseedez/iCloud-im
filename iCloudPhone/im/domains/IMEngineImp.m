@@ -251,6 +251,7 @@ UIImageView* _pview_local;
         //如果已经完成p2p穿透,就终止
 //        self.pInterfaceApi->StopDetect();
         dispatch_async(dispatch_get_main_queue(), ^{
+              [[IMTipImp defaultTip] showTip:@"<<<<<<p2p成功>>>>>>>"];
             NSLog(@"媒体类型:%d",self.m_type);
             NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
             long long  dTime =endTime - startTime;
@@ -261,6 +262,7 @@ UIImageView* _pview_local;
                 return;
             }
             NSLog(@"isLocal的状态：%d",argc.islocal);
+            [[IMTipImp defaultTip] showTip:@"准备startmedia"];
             if (argc.islocal)
             {
                 NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
@@ -282,6 +284,7 @@ UIImageView* _pview_local;
             }
 
             if (ret) {
+                [[IMTipImp defaultTip] showTip:@"紧接着p2p,媒体开启成功"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
             }else{
                 [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_FAILED object:nil userInfo:params];
@@ -348,15 +351,18 @@ UIImageView* _pview_local;
 #if ENGINE_MSG
     NSLog(@"显示摄像头");
 #endif
-    self.pInterfaceApi->SetMuteEnble(MTVie, true);
-    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
+    self.pInterfaceApi->SwitchCamera(10);
+    [self openCamera];
+//    self.pInterfaceApi->SetMuteEnble(MTVie, true);
+//    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
 }
 - (void)hideCam{
 #if ENGINE_MSG
     NSLog(@"隐藏摄像头");
 #endif
-    self.pInterfaceApi->SetMuteEnble(MTVie, false);
-    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
+    self.pInterfaceApi->SwitchCamera(10);
+//    self.pInterfaceApi->SetMuteEnble(MTVie, false);
+//    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
 }
 
 @synthesize canVideoCalling = _canVideoCalling;
@@ -370,21 +376,42 @@ UIImageView* _pview_local;
     if (!remoteRenderView) {
         return;
     }
-        if (self.pInterfaceApi->StartCamera(self.cameraIndex) >= 0)
+        if (self.isCameraOpened )
         {
-            self.isCameraOpened = YES;
-                // 摆正摄像头位置
-                self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
-                // 开启摄像头
-                [_pview_local setFrame:CGRectMake(0, 0, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
-                [localView addSubview:_pview_local];
-                [localView setFrame:CGRectMake(FULL_SCREEN.size.width*.7, FULL_SCREEN.size.height*.7, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
-                self.pInterfaceApi->VieAddRemoteRenderer((__bridge void*)remoteRenderView);
+            // 摆正摄像头位置
+            self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
+            // 开启摄像头
+            [_pview_local setFrame:CGRectMake(0, 0, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
+            [localView addSubview:_pview_local];
+            [localView setFrame:CGRectMake(FULL_SCREEN.size.width*.7, FULL_SCREEN.size.height*.7, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
+            self.pInterfaceApi->VieAddRemoteRenderer((__bridge void*)remoteRenderView);
 
 
         }
   
 
+}
+
+- (BOOL) openCamera{
+    NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        int r = 0;
+        //先把摄像头关了
+        self.pInterfaceApi->SwitchCamera(10);
+        if ((r = self.pInterfaceApi->StartCamera(self.cameraIndex)) >= 0) {
+            self.isCameraOpened = YES;
+            // 摆正摄像头位置
+            self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
+        }else{
+            NSLog(@"摄像头关闭失败:%d",r);
+            self.isCameraOpened = NO;
+        }
+    });
+NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
+    long long duration =endTime-startTime;
+    [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"开启摄像头耗时:%llu",duration]];
+    return self.isCameraOpened;
 }
 - (void)closeScreen{
 }
@@ -402,9 +429,12 @@ UIImageView* _pview_local;
             break;
     }
     if (self.isCameraOpened) {
-        self.pInterfaceApi->SwitchCamera(self.cameraIndex);
-        // 摆正摄像头位置
-        self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            self.pInterfaceApi->SwitchCamera(self.cameraIndex);
+            // 摆正摄像头位置
+            self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
+        });
+
     }
 
 }
