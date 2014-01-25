@@ -175,7 +175,16 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationWillResignActive");
 #endif
-   
+    if ([self.manager myState]&&![[[self.manager myState] valueForKey:kPeerAccount] isEqualToString:IDLE] && [self.manager myAccount]) {
+        [self.manager haltSession:@{
+                                    DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                                    SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self.manager myAccount],
+                                    SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self.manager myState] valueForKey:kPeerAccount] ,
+                                    SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
+                                    
+                                    }];
+
+    }
     [self.manager tearDown];
     [[ItelMessageInterfaceImp defaultMessageInterface] tearDown];
     [self removeNotifications];

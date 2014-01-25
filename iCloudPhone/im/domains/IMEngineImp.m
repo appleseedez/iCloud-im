@@ -250,6 +250,7 @@ static int localNetPortSuffix = 0;
         NSLog(@"通话参数：对方ssid：%i",argc.otherSsid);
         NSLog(@"通话参数：自己ssid：%i",argc.selfSsid);
         NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
+        
         if (self.pInterfaceApi->GetP2PPeer(argc) != 0) {
 //            return -1;
             ret = false;

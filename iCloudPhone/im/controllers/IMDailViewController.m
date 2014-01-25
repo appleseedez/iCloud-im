@@ -168,6 +168,7 @@
     NSString* peerAccount = self.peerAccount.text;
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
         [[IMTipImp defaultTip] warningTip:@"再点我就把你喝掉"];
+        sender.enabled = YES;
         return;
     }
     [[IMTipImp defaultTip] showTip:@"开启视频通话"];

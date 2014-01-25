@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
 	<string>云电话 2.0 alpha</string>
 	<key>CFBundleExecutable</key>
@@ -32,7 +32,10 @@
 	<string>iCloudPhone</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
+		<string>wifi</string>
 		<string>armv7</string>
+		<string>microphone</string>
+		<string>front-facing-camera</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<false/>
