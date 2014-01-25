@@ -149,8 +149,8 @@ enum emDataType
 #define IN_USE @"IN_USE"
 #define IDLE @"IDLE"
 #define BLANK_STRING @""
-#define SCREEN_WIDTH 144
-#define SCREEN_HEIGHT 192
+#define SCREEN_WIDTH 240
+#define SCREEN_HEIGHT 360
 #define SCREEN_HEIGHT_FOR_LOW 176
 //#define SIGNAL_SERVER_IP @"211.149.147.73"
 //#define SIGNAL_SERVER_IP @"211.149.144.15"

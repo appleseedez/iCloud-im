@@ -29,6 +29,7 @@ static int soundCount;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self answerCall:nil];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];

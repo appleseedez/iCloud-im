@@ -27,7 +27,7 @@ UIImageView* _pview_local;
 - (id)init{
     if (self = [super init]) {
             self.canVideoCalling = YES;
-            self.cameraIndex = 1;
+            self.cameraIndex = 0;
             self.isCameraOpened = NO;
             self.netWorkPort = LOCAL_PORT;
             _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
