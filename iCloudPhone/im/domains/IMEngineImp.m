@@ -183,7 +183,7 @@ static int localNetPortSuffix = 0;
 }
 
 - (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort{
-    [[IMTipImp defaultTip] showTip:@"开始外网地址探测"];
+//    [[IMTipImp defaultTip] showTip:@"开始外网地址探测"];
     char self_inter_ip[16];
     uint16_t self_inter_port;
     //获取本机外网ip和端口
@@ -259,7 +259,7 @@ static int localNetPortSuffix = 0;
         //如果已经完成p2p穿透,就终止
 //        self.pInterfaceApi->StopDetect();
         dispatch_async(dispatch_get_main_queue(), ^{
-              [[IMTipImp defaultTip] showTip:@"<<<<<<p2p成功>>>>>>>"];
+//              [[IMTipImp defaultTip] showTip:@"<<<<<<p2p成功>>>>>>>"];
             NSLog(@"媒体类型:%d",self.m_type);
             NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
             long long  dTime =endTime - startTime;
@@ -270,7 +270,7 @@ static int localNetPortSuffix = 0;
                 return;
             }
             NSLog(@"isLocal的状态：%d",argc.islocal);
-            [[IMTipImp defaultTip] showTip:@"准备startmedia"];
+//            [[IMTipImp defaultTip] showTip:@"准备startmedia"];
             if (argc.islocal)
             {
                 NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
@@ -288,11 +288,11 @@ static int localNetPortSuffix = 0;
             }
             if (!ret)
             {
-                [[IMTipImp defaultTip] errorTip:@"传输通道开启失败"];
+//                [[IMTipImp defaultTip] errorTip:@"传输通道开启失败"];
             }
 
             if (ret) {
-                [[IMTipImp defaultTip] showTip:@"紧接着p2p,媒体开启成功"];
+//                [[IMTipImp defaultTip] showTip:@"紧接着p2p,媒体开启成功"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
             }else{
                 [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_FAILED object:nil userInfo:params];
@@ -385,7 +385,7 @@ static int localNetPortSuffix = 0;
     }
         if (self.isCameraOpened )
         {
-            [[IMTipImp defaultTip] showTip:@"设置小窗口"];
+//            [[IMTipImp defaultTip] showTip:@"设置小窗口"];
             // 摆正摄像头位置
             self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
             // 开启摄像头
@@ -418,7 +418,7 @@ static int localNetPortSuffix = 0;
     });
 NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
     long long duration =endTime-startTime;
-    [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"开启摄像头耗时:%llu",duration]];
+//    [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"开启摄像头耗时:%llu",duration]];
     return self.isCameraOpened;
 }
 - (void)closeScreen{

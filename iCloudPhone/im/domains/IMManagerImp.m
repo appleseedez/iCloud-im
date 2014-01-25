@@ -60,7 +60,7 @@ static int hasObserver = 0;
     if ([self.basicState intValue]  == basicStateIdle && [self canBeCalled:account]) {
         self.basicState =@(basicStateQuering);
         NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>当前状态:%@,BUSY?:%d<<<<<<<<<<<<<<<<<<<<<<<<<<",[self describeState:self.basicState],self.busy);
-        [[IMTipImp defaultTip] showTip:[self describeState:self.basicState]];
+//        [[IMTipImp defaultTip] showTip:[self describeState:self.basicState]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
         //2.2 注册查询失败通知.
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInitFail:) name:SIGNAL_ERROR_NOTIFICATION object:nil];
@@ -834,7 +834,7 @@ static int hasObserver = 0;
 #pragma mark -  actions
 //保持外网ip有效的心跳方法
 - (void) keepSession:(NSTimer*) timer{
-    [[IMTipImp defaultTip] showTip:@"开始发送保持session的数据包"];
+//    [[IMTipImp defaultTip] showTip:@"开始发送保持session的数据包"];
     NSDictionary* param = [timer userInfo];
     NSString* probeServerIP = [param valueForKey:PROBE_SERVER_KEY];
     NSInteger port = [[param valueForKey:PROBE_PORT_KEY] integerValue];
@@ -920,7 +920,7 @@ static int hasObserver = 0;
                             }];
     }
     self.lossCount++;
-    [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前通话持续时间:%f,当前收到的数据长度:%d",self.duration,self.lossCount]];
+//    [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前通话持续时间:%f,当前收到的数据长度:%d",self.duration,self.lossCount]];
 }
 
 // 没有接听 超时,发sessionend
