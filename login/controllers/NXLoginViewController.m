@@ -143,6 +143,7 @@ static int loginCount=0;
         [self.actWaitingToLogin stopAnimating];
         self.txtInuptCheckMessage.text = @"网络不通";
         self.btnLogin.enabled = YES;
+        [self requestToLogin];
     };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
 }
@@ -222,9 +223,9 @@ static int loginCount=0;
     [super viewDidLoad];
     [self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
     self.actWaitingToLogin.hidesWhenStopped=YES;
-    //self.txtUserCloudNumber.text=@"500009";
+    self.txtUserCloudNumber.text=@"913";
 
-    //self.txtUserPassword.text=@"111111";
+    self.txtUserPassword.text=@"222222";
   
     NXImageView *logo=[[NXImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 75)];
     [logo setRect:3 cornerRadius:10 borderColor:[UIColor whiteColor]];
@@ -239,6 +240,7 @@ static int loginCount=0;
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(conformKeyBoard:) name:UIKeyboardWillChangeFrameNotification object:Nil];
     [self.btnLogin setUI];
+    [self requestToLogin];
     
 }
 -(void)conformKeyBoard:(NSNotification*)notification{

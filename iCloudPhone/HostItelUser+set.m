@@ -32,8 +32,8 @@
             
             host.userId=[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]];
             
-            host.telNum=[dic objectForKey:@"phone"];
-            
+//            host.telNum=[dic objectForKey:@"phone"];
+        
             host.countType=[NSNumber numberWithBool:[[dic objectForKey:@"user_type"] boolValue]];
             [host setPersonal:dic];
             [[IMCoreDataManager defaulManager] saveContext:host.managedObjectContext];
