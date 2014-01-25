@@ -103,7 +103,8 @@ static int localNetPortSuffix = 0;
 - (void)initNetwork{
     self.netWorkPort = LOCAL_PORT + (++localNetPortSuffix)%9;
     if (false == self.pInterfaceApi->NetWorkInit(self.netWorkPort)) {
-        [NSException exceptionWithName:@"400: init network failed" reason:@"引擎初始化网络失败" userInfo:nil];
+//        [NSException exceptionWithName:@"400: init network failed" reason:@"引擎初始化网络失败" userInfo:nil];
+        [[IMTipImp defaultTip] errorTip:@"引擎初始化网络失败"];
     }else{
         [self initMedia];
     }

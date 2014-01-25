@@ -34,7 +34,7 @@
 	}
 	if (![self.udpSock beginReceiving:&error])
 	{
-        [[IMTipImp defaultTip] errorTip:@"upd绑定端口失败了"];
+        [[IMTipImp defaultTip] errorTip:@"upd开始接收数据失败了"];
 		return;
 	}
     //从登陆服务器获取
