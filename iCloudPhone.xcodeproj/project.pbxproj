@@ -1802,7 +1802,7 @@
 						TestTargetID = 47B89DD01834D40000022FE5;
 					};
 					47B89DD01834D40000022FE5 = {
-						DevelopmentTeam = KAH6228XJ2;
+						DevelopmentTeam = MB56WXZ49W;
 					};
 					47B89DF11834D40000022FE5 = {
 						TestTargetID = 47B89DD01834D40000022FE5;
@@ -2563,6 +2563,7 @@
 				BAF70BFE189305FD00044097 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BAF70BFF189305FD00044097 /* Build configuration list for PBXNativeTarget "libAlalertBannerTests" */ = {
 			isa = XCConfigurationList;
@@ -2571,6 +2572,7 @@
 				BAF70C01189305FD00044097 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
