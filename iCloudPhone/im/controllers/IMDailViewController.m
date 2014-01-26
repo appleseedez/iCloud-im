@@ -78,12 +78,15 @@
 }
 
 - (IBAction)voiceDialing:(UIButton *)sender {
-    [[IMTipImp defaultTip]showTip:@"开启音频通话"];
+
     [self.manager setIsVideoCall:NO];//告诉manager是音频通话
     NSString* peerAccount = self.peerAccount.text;
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
         return;
     }
+#if debug
+    [[IMTipImp defaultTip]showTip:@"开启音频通话"];
+#endif
 //    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
 //                                                                                                                       SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:peerAccount,
 //                                                                                                                       SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self.manager myAccount]
@@ -167,11 +170,15 @@
     [self.manager setIsVideoCall:YES];
     NSString* peerAccount = self.peerAccount.text;
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
+#if debug
         [[IMTipImp defaultTip] warningTip:@"再点我就把你喝掉"];
+#endif
         sender.enabled = YES;
         return;
     }
+#if debug
     [[IMTipImp defaultTip] showTip:@"开启视频通话"];
+#endif
     sender.backgroundColor =[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1.0f];
     sender.titleLabel.textColor = [UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f];
     [self.manager dial:peerAccount];

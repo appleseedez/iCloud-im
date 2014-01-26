@@ -50,7 +50,6 @@
 }
 - (void) presentAnswerDialView:(NSNotification*) notify{
    //弹出通话接听界面
-    [[IMTipImp defaultTip] showTip:@"来电..."];
     self.callingNotification = notify;
 }
 - (IBAction)popDialPanel:(UIBarButtonItem *)sender {

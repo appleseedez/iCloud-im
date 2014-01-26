@@ -72,15 +72,29 @@
     self.hideHUD = NO; //初始显示控制板
     self.hideSelfCam = NO; //初始显示小窗口
     self.hideCam = NO; //初始开启摄像头
-    self.enableSpeaker = NO; //初始关闭扬声器
+    self.enableSpeaker = YES; //初始关闭扬声器
+    [self.manager enableSpeaker];
     self.switchFrontAndBackCamBtn.hidden = YES; //初始隐藏交换摄像头按钮
     [self performSelector:@selector(toggleHUD:) withObject:nil afterDelay:3];
     // 设置好名字版
     
     ItelUser* peerUser = [[ItelAction action] userInFriendBook:[[self.inSessionNotify userInfo] valueForKey:@"destaccount"]];
-    ((UILabel*)[self.nameHUDView viewWithTag:1]).text= peerUser.nickName;
-    ((UILabel*)[self.nameHUDView viewWithTag:2]).text= peerUser.itelNum;
-    ((UILabel*)[self.nameHUDView viewWithTag:4]).text = [Area idForArea:peerUser.address].toString;
+    NSString* nickName = BLANK_STRING;
+    NSString* itelNum = BLANK_STRING;
+    NSString* address = BLANK_STRING;
+    
+    if (peerUser) {
+        nickName = peerUser.nickName;
+        itelNum = peerUser.itelNum;
+        address = [Area idForArea:peerUser.address].toString;
+    }else{
+        nickName = @"陌生人";
+        itelNum =[[self.inSessionNotify userInfo] valueForKey:@"destaccount"];
+    }
+    
+    ((UILabel*)[self.nameHUDView viewWithTag:1]).text= nickName;
+    ((UILabel*)[self.nameHUDView viewWithTag:2]).text= itelNum;
+    ((UILabel*)[self.nameHUDView viewWithTag:4]).text = address;
     [self.peerAvatar setImageWithURL:[NSURL URLWithString: peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     if ([self.manager isVideoCall]) {
         [self.peerAvatar setHidden:YES ];

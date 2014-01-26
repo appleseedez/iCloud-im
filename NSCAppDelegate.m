@@ -37,7 +37,9 @@
 - (void) reconnect:(NSNotification*) notify{
 
     if (self.manager && ![[self.manager myAccount] isEqualToString: BLANK_STRING]) {
+#if usertip
         [[IMTipImp defaultTip] showTip:@"开始重连"];
+#endif
         [self.manager connectToSignalServer];
     }
 

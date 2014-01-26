@@ -29,18 +29,24 @@
 	
 	if (![self.udpSock bindToPort:0 error:&error])
 	{
+#if debug
         [[IMTipImp defaultTip] errorTip:@"upd绑定端口失败了"];
+#endif
 		return;
 	}
 	if (![self.udpSock beginReceiving:&error])
 	{
+#if debug
         [[IMTipImp defaultTip] errorTip:@"upd开始接收数据失败了"];
+#endif
 		return;
 	}
     //从登陆服务器获取
     self.account = account;
     if (!self.account) {
+#if usertip
         [[IMTipImp defaultTip] errorTip:@"帐号为空! 无法登录"];
+#endif
         [NSException exceptionWithName:@"account is nil" reason:@"账号为空" userInfo:nil];
     }
 //    self.ip = ROUTE_SERVER_IP;

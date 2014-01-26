@@ -216,7 +216,9 @@
     if (isNormal) {
         [self.navigationController popViewControllerAnimated:YES];
     }else{
+#if usertip
         [[IMTipImp defaultTip] errorTip:@"当前网络异常,删除失败"];
+#endif
     }
 }
 - (void)actionSheetCancel:(UIActionSheet *)actionSheet{

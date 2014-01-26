@@ -59,8 +59,13 @@ static int hasObserver = 0;
     // 从空闲进入查询
     if ([self.basicState intValue]  == basicStateIdle && [self canBeCalled:account]) {
         self.basicState =@(basicStateQuering);
+#if usertip
+        [[IMTipImp defaultTip] showTip:@"拨号中..."];
+#endif
         NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>当前状态:%@,BUSY?:%d<<<<<<<<<<<<<<<<<<<<<<<<<<",[self describeState:self.basicState],self.busy);
+#if debug
         [[IMTipImp defaultTip] showTip:[self describeState:self.basicState]];
+#endif
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
         //2.2 注册查询失败通知.
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInitFail:) name:SIGNAL_ERROR_NOTIFICATION object:nil];
@@ -76,7 +81,9 @@ static int hasObserver = 0;
         [self.monitor invalidate];
         self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(haltCallingProgress) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_queue", DISPATCH_QUEUE_CONCURRENT)];
     }else{
+#if usertip
         [[IMTipImp defaultTip] showTip:@"本机正处于拨打状态.请稍后重试"];
+#endif
     }
 }
 
@@ -88,7 +95,9 @@ static int hasObserver = 0;
     //TODO 在状态回到空闲时,释放资源
     //提示用户
     dispatch_async(dispatch_get_main_queue(), ^{
+#if usertip
         [[IMTipImp defaultTip] showTip:@"对方不在线,请稍后重试"];
+#endif
     });
 }
 /**
@@ -142,7 +151,9 @@ static int hasObserver = 0;
     }
 
     //从非idle状态变回idle状态. 说明需要挂断. 给提示
+#if usertip
     [[IMTipImp defaultTip] showTip:@"挂断中..."];
+#endif
     
     [self stopCommunicationCounting];
     
@@ -214,9 +225,13 @@ static int hasObserver = 0;
     //对方是不是我好友
     if (![[ItelAction action] userInFriendBook:[self.state valueForKey:kPeerAccount]]) {
         // 提示用户 陌生人或者不存在的号码
+#if usertip
         [[IMTipImp defaultTip] warningTip:@"对方不在线或者账号不存在"];
+#endif
     }else{
+#if usertip
         [[IMTipImp defaultTip] warningTip:@"好友不在线"];
+#endif
     }
     //查询失败了.终止session
 //    [self endSession];
@@ -438,18 +453,24 @@ static int hasObserver = 0;
 }
 // 通话查询成功后, 处理收到的数据.
 - (void)queryDataProcess{
+#if debug
     [[IMTipImp defaultTip] showTip:@"处理收到的通话查询记录"];
+#endif
 }
 
 - (void)sendCallingData{
+#if debug
     [[IMTipImp defaultTip] showTip:@"发送数据 主叫 >>> 被叫"];
+#endif
     self.basicState = @(basicStateCalling);
     // 使用主叫通信链路信令构造器构造通信链路数据.
     self.messageBuilder = [[IMSessionPeriodRequestMessageBuilder alloc] init];
     [self sendSessionDataFor:[NSNumber numberWithInt:SESSION_PERIOD_CALLING_TYPE]];
 }
 - (void)sendAnsweringData{
+#if debug
     [[IMTipImp defaultTip] showTip:@"发送数据 主叫 <<< 被叫"];
+#endif
     self.basicState = @(basicStateAnswering);
     // 使用主叫通信链路信令构造器构造通信链路数据.
     self.messageBuilder = [[IMSessionPeriodResponseMessageBuilder alloc] init];
@@ -459,7 +480,9 @@ static int hasObserver = 0;
 - (void) assertState:(int)expectState{
     NSString* reason = [NSString stringWithFormat:@"期望状态是:%@,但是实际上却是:%@",[self describeState: @(expectState)],[self describeState:self.basicState]];
     if ([self.basicState intValue] != expectState) {
+#if debug
         [[IMTipImp defaultTip] errorTip:[NSString stringWithFormat:@"%@",reason]];
+#endif
     }
 }
 
@@ -578,7 +601,7 @@ static int hasObserver = 0;
     if (!peer) {
         peerRemarkName = @"陌生人";
         peerNickName = @"陌生人";
-        peerAvatar  = @"http://wwc.taobaocdn.com/avatar/getAvatar.do?userId=352958000&width=100&height=100&type=sns";
+        peerAvatar  = @"";
     }else{
         peerRemarkName = peer.remarkName;
         peerNickName = peer.nickName;
@@ -685,7 +708,9 @@ static int hasObserver = 0;
     [self.UDPcommunicator setupIP:self.routeIP];
     [self.UDPcommunicator setupPort:self.port];
     if(self.selfAccount == nil){
+#if usertip
         [[IMTipImp defaultTip] errorTip:@"用户帐号信息为空"];
+#endif
     }
     [self.UDPcommunicator connect:[self myAccount]];
 }
@@ -742,7 +767,9 @@ static int hasObserver = 0;
     //4. 获取本机的链路列表. 中继服务器目前充当外网地址探测
     NSDictionary* communicationAddress = [self.engine endPointAddressWithProbeServer:[self.state valueForKey:kForwardIP] port:[[self.state valueForKey:kForwardPort] integerValue]];
     //5.获取到外网地址后，开始发送数据包到外网地址探测服务器，直到收到对等方的回复。
+#if debug
     [[IMTipImp defaultTip] showTip:@"开始进行保持外网session的数据包发送"];
+#endif
     [self.keepSessionAlive invalidate];
     
     
@@ -834,7 +861,9 @@ static int hasObserver = 0;
 #pragma mark -  actions
 //保持外网ip有效的心跳方法
 - (void) keepSession:(NSTimer*) timer{
+#if debug
     [[IMTipImp defaultTip] showTip:@"开始发送保持session的数据包"];
+#endif
     NSDictionary* param = [timer userInfo];
     NSString* probeServerIP = [param valueForKey:PROBE_SERVER_KEY];
     NSInteger port = [[param valueForKey:PROBE_PORT_KEY] integerValue];
@@ -920,7 +949,9 @@ static int hasObserver = 0;
                             }];
     }
     self.lossCount++;
+#if debug
     [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前通话持续时间:%f,当前收到的数据长度:%d",self.duration,self.lossCount]];
+#endif
 }
 
 // 没有接听 超时,发sessionend
@@ -928,7 +959,11 @@ static int hasObserver = 0;
     //停止定时器
     [self.monitor invalidate];
     self.monitor = nil;
-    [[IMTipImp defaultTip] showTip:@"无人接听"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+#if usertip
+        [[IMTipImp defaultTip] showTip:@"无人接听"];
+#endif
+    });
     //发送终止信令
     [self haltSession:@{
                         SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self myAccount],

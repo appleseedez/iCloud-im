@@ -75,7 +75,9 @@
 // GCDAysncSocket 接口
 // 链接上了服务器
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
+#if usertip
     [[IMTipImp defaultTip] showTip:@"连接上了信令服务器"];
+#endif
     [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
     [self send:self.authInfo];
 }
@@ -144,7 +146,9 @@
     }
     self.authInfo = authInfo;
     if (![self.sock connectToHost:self.ip onPort:self.port error:&error]) {
+#if debug
         [[IMTipImp defaultTip] errorTip:@"链接信令服务器失败"];
+#endif
         [self disconnect];
     }
 

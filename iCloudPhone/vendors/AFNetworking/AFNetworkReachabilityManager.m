@@ -32,9 +32,9 @@ NSString * AFStringFromNetworkReachabilityStatus(AFNetworkReachabilityStatus sta
         case AFNetworkReachabilityStatusNotReachable:
             return NSLocalizedStringFromTable(@"Not Reachable", @"AFNetworking", nil);
         case AFNetworkReachabilityStatusReachableViaWWAN:
-            return NSLocalizedStringFromTable(@"Reachable via WWAN", @"AFNetworking", nil);
+            return NSLocalizedStringFromTable(@"当前网络环境2G/3G,建议音频通话", @"AFNetworking", nil);
         case AFNetworkReachabilityStatusReachableViaWiFi:
-            return NSLocalizedStringFromTable(@"Reachable via WiFi", @"AFNetworking", nil);
+            return NSLocalizedStringFromTable(@"当前网络环境Wi-Fi,可以畅快享受视频通话的乐趣", @"AFNetworking", nil);
         case AFNetworkReachabilityStatusUnknown:
         default:
             return NSLocalizedStringFromTable(@"Unknown", @"AFNetworking", nil);
