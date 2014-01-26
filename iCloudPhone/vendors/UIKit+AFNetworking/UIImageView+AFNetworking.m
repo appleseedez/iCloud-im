@@ -134,8 +134,9 @@ static char kAFResponseSerializerKey;
 
         self.af_imageRequestOperation = nil;
     } else {
-        self.image = placeholderImage;
-
+//        self.image = placeholderImage;
+        //修改为默认的头像
+        self.image = [UIImage imageNamed:@"standedHeader"];
         __weak __typeof(self)weakSelf = self;
         self.af_imageRequestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
         self.af_imageRequestOperation.responseSerializer = self.imageResponseSerializer;

@@ -434,7 +434,6 @@ static int localNetPortSuffix = 0;
             self.isCameraOpened = NO;
         }
     });
-
     return self.isCameraOpened;
 }
 - (void)closeScreen{

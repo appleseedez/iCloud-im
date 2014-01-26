@@ -7,7 +7,7 @@
 //
 
 #import "NXImageView.h"
-
+#import "UIImageView+AFNetworking.h"
 @implementation NXImageView
 
 - (id)initWithFrame:(CGRect)frame
@@ -23,7 +23,7 @@
     [self.layer   setBorderWidth:borderWidth]; //边框宽度
     CGColor *border=borderColor.CGColor;
     [self.layer   setBorderColor:border];//边框颜色
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bitch"]];
+    self.backgroundColor = [UIColor lightGrayColor];
     [self setClipsToBounds:YES];
 
 }
