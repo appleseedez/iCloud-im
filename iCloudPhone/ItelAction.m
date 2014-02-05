@@ -139,8 +139,8 @@
     [self.itelNetRequestActionDelegate addToBlackList:parameters];
 }
 -(void) addItelUserBlackResponse:(NSDictionary*)userDic{
-    NSString* itelNum = [userDic valueForKeyPath:@"data.itel"];
-    NSAssert(itelNum, @"服务端没有itel字段");
+    NSString* itelNum = [userDic valueForKey:@"itel"];
+
     HostItelUser* hostUser = [self getHost];
     if (!hostUser) {
         return;
@@ -241,7 +241,7 @@
     
 }
 //回调
--(void) searchStrangerResponse:(id)response isEnd:(BOOL)isEnd{
+-(void) searchStrangerResponse:(id)response{
     [self NotifyForNormalResponse:SEARCH_STRANGER_NOTIFICATION parameters:response];
 }
 #pragma mark - 上传图片
@@ -281,7 +281,7 @@
     [self.itelNetRequestActionDelegate checkNewTelNum:parameters];
 }
 -(void)checkPhoneNumberResponse:(NSDictionary*)response{
-    [self NotifyForNormalResponse:@"modifyPhone" parameters:nil];
+    [self NotifyForNormalResponse:@"modifyPhone" parameters:response];
 }
 #pragma mark - 修改手机-发送短信验证码
 -(void)phoneCheckCode:(NSString*)checkCode phone:(NSString*)phone{

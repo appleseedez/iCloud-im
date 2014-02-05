@@ -77,7 +77,7 @@
                 cell.textLabel.text=@"性别";
                 UIImageView *sexImg=[[UIImageView alloc] initWithFrame:CGRectMake(60, 10, 20, 20)];
                 [cell.contentView addSubview:sexImg];
-                if (self.user.sex) {
+                if ([self.user.sex intValue]) {
                     sexImg.image=[UIImage imageNamed:@"female"];
                 }
                 else sexImg.image=[UIImage imageNamed:@"male"];

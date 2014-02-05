@@ -32,7 +32,7 @@
 -(void) checkAddressBookMatchingResponse:(NSArray*)matchingItelUsers;
 //查找陌生人
 -(void) searchStranger:(NSString*)searchMessage newSearch:(BOOL)newSearch;
--(void) searchStrangerResponse:(id)response isEnd:(BOOL)isEnd;
+-(void) searchStrangerResponse:(id)response;
 //添加好友
 -(void) inviteItelUserFriend:(NSString*)itel;
 -(void) inviteItelUserFriendResponse:(NSString*)itel;
