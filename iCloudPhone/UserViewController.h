@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ItelUser.h"
-@interface UserViewController : UIViewController<UIAlertViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>
+#import "BaseViewController.h"
+@interface UserViewController : BaseViewController <UIAlertViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) ItelUser *user;
 @end

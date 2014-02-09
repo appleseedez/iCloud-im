@@ -11,7 +11,7 @@
 #import "ItelAction.h"
 #import "NetRequester.h"
 #import "NXInputChecker.h"
-
+#import "ItelIntentImp.h"
 #define  SUCCESS void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
 #define  FAILURE void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error)
 static ItelNetInterfaceImp* manager;
@@ -52,7 +52,9 @@ static ItelNetInterfaceImp* manager;
                 
             }
             else {
-                NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"] };
+                id <ItelIntent> intent =  [ItelIntentImp  newIntent:intentTypeMessage];
+                intent.userInfo=@{@"title":  @"操作失败",@"body":[dic objectForKey:@"msg"] };
+                NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"],@"intent":intent };
                 [[NSNotificationCenter defaultCenter] postNotificationName:notifyName object:nil userInfo:userInfo];
             }
         }

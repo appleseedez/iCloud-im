@@ -14,6 +14,7 @@
 #import "ItelMessageInterfaceImp.h"
 #import "ItelBookInterfaceImp.h"
 #import "AddressBook.h"
+#import "ItelIntentImp.h"
 @interface ItelMessageInterfaceImp()
 + (instancetype) defaultMessageInterface;
 @end
@@ -109,7 +110,10 @@
 //回调
 -(void)inviteItelUserFriendResponse:(NSString*)itel{
     [self.itelBookActionDelegate addItelUserIntoAddedList:itel];
-    [self NotifyForNormalResponse:ADD_FIRIEND_NOTIFICATION parameters:itel];
+    
+    id <ItelIntent> intent=[ItelIntentImp newIntent:intentTypeMessage];
+    intent.userInfo=@{@"tittle":@"发送成功",@"body":@"请等待对方确认"};
+    [self NotifyForNormalResponse:ADD_FIRIEND_NOTIFICATION intent:intent];
 }
 #pragma mark - 删除好友
 /*
@@ -157,8 +161,9 @@
     [self.itelBookActionDelegate addUserToBlackBook:user];
     //在block结尾保存数据
     [[IMCoreDataManager defaulManager] saveContext:currentContext];
-    
-    [self NotifyForNormalResponse:ADD_TO_BLACK_LIST_NOTIFICATION parameters:nil];
+    id <ItelIntent> intent=[ItelIntentImp newIntent:intentTypeMessage];
+    intent.userInfo=@{@"tittle":@"添加成功",@"body":@"该用户已被添加到黑名单中"};
+    [self NotifyForNormalResponse:ADD_TO_BLACK_LIST_NOTIFICATION intent:intent];
     
 }
 
@@ -228,8 +233,9 @@
         [self.itelBookActionDelegate resetUserInBlackBook:u];
     }
     [[IMCoreDataManager defaulManager] saveContext:currentContext];
+    id <ItelIntent> intent=[ItelIntentImp newIntent:intentTypeReloadData];
     
-    [self NotifyForNormalResponse:@"resetAlias" parameters:u];
+    [self NotifyForNormalResponse:@"resetAlias" intent:intent];
 }
 #pragma mark - 查找陌生人
 /*
@@ -419,5 +425,14 @@
     NSDictionary *userInfo=@{@"isNormal": @"1",@"reason":@"1" };
     [[NSNotificationCenter defaultCenter]postNotificationName:name object:parameters userInfo:userInfo];
     //TODO:统一保存
+}
+-(void) NotifyForNormalResponse:(NSString*)name intent:(id<ItelIntent>)intent{
+    if (intent!=nil) {
+         NSDictionary *userInfo=@{@"isNormal": @"1",@"reason":@"1" ,@"intent":intent };
+         [[NSNotificationCenter defaultCenter]postNotificationName:name object:nil userInfo:userInfo];
+    }
+   
+   
+   
 }
 @end

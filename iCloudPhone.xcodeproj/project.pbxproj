@@ -188,6 +188,11 @@
 		47CDFEA2184ED17000673C2B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CDFEA1184ED17000673C2B /* CFNetwork.framework */; };
 		47CDFEA4184ED17800673C2B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CDFEA3184ED17800673C2B /* Security.framework */; };
 		47D6974E186B1AC000CF836E /* SecuretyQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D6974D186B1AC000CF836E /* SecuretyQuestionViewController.m */; };
+		47DD063218A72AC100BD0E47 /* ItelMessageIntent.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DD063118A72AC100BD0E47 /* ItelMessageIntent.m */; };
+		47DD063518A744B000BD0E47 /* ItelIntentImp.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DD063418A744B000BD0E47 /* ItelIntentImp.m */; };
+		47DD063A18A74A3400BD0E47 /* BaseCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DD063918A74A3400BD0E47 /* BaseCoreDataTableViewController.m */; };
+		47DD063D18A754F000BD0E47 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DD063C18A754F000BD0E47 /* BaseViewController.m */; };
+		47DD064018A771D600BD0E47 /* ItelIntentRefreshData.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DD063F18A771D600BD0E47 /* ItelIntentRefreshData.m */; };
 		47E05DC018517418009FDCED /* searchuser.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E05DBE18517418009FDCED /* searchuser.png */; };
 		47E05DC118517418009FDCED /* checkAddress.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E05DBF18517418009FDCED /* checkAddress.png */; };
 		47E05DC318519C9C009FDCED /* 头像.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E05DC218519C9C009FDCED /* 头像.png */; };
@@ -607,6 +612,18 @@
 		47CDFEA3184ED17800673C2B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		47D6974C186B1AC000CF836E /* SecuretyQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecuretyQuestionViewController.h; sourceTree = "<group>"; };
 		47D6974D186B1AC000CF836E /* SecuretyQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecuretyQuestionViewController.m; sourceTree = "<group>"; };
+		47DD062E18A721B100BD0E47 /* ItelIntent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelIntent.h; sourceTree = "<group>"; };
+		47DD062F18A7241000BD0E47 /* intentContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = intentContext.h; sourceTree = "<group>"; };
+		47DD063018A72AC100BD0E47 /* ItelMessageIntent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelMessageIntent.h; sourceTree = "<group>"; };
+		47DD063118A72AC100BD0E47 /* ItelMessageIntent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelMessageIntent.m; sourceTree = "<group>"; };
+		47DD063318A744B000BD0E47 /* ItelIntentImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelIntentImp.h; sourceTree = "<group>"; };
+		47DD063418A744B000BD0E47 /* ItelIntentImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelIntentImp.m; sourceTree = "<group>"; };
+		47DD063818A74A3400BD0E47 /* BaseCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCoreDataTableViewController.h; sourceTree = "<group>"; };
+		47DD063918A74A3400BD0E47 /* BaseCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCoreDataTableViewController.m; sourceTree = "<group>"; };
+		47DD063B18A754F000BD0E47 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		47DD063C18A754F000BD0E47 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		47DD063E18A771D600BD0E47 /* ItelIntentRefreshData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelIntentRefreshData.h; sourceTree = "<group>"; };
+		47DD063F18A771D600BD0E47 /* ItelIntentRefreshData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelIntentRefreshData.m; sourceTree = "<group>"; };
 		47E05DBE18517418009FDCED /* searchuser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchuser.png; sourceTree = "<group>"; };
 		47E05DBF18517418009FDCED /* checkAddress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkAddress.png; sourceTree = "<group>"; };
 		47E05DC218519C9C009FDCED /* 头像.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "头像.png"; sourceTree = "<group>"; };
@@ -1381,6 +1398,7 @@
 				479EF00C1859D47C0012EE29 /* im */,
 				47B89DE31834D40000022FE5 /* NSCAppDelegate.h */,
 				479E9350185AB7F8001AF6ED /* NSCAppDelegate.m */,
+				47DD062D18A7217400BD0E47 /* base */,
 				479EF04B1859D47C0012EE29 /* views */,
 				47B89DDA1834D40000022FE5 /* iCloudPhone */,
 				47B89DF91834D40000022FE5 /* iCloudPhoneTests */,
@@ -1500,6 +1518,41 @@
 				47B89DFC1834D40000022FE5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		47DD062D18A7217400BD0E47 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				47DD063718A7486E00BD0E47 /* baseContext */,
+				47DD063618A7485500BD0E47 /* intent */,
+			);
+			name = base;
+			sourceTree = "<group>";
+		};
+		47DD063618A7485500BD0E47 /* intent */ = {
+			isa = PBXGroup;
+			children = (
+				47DD062E18A721B100BD0E47 /* ItelIntent.h */,
+				47DD063318A744B000BD0E47 /* ItelIntentImp.h */,
+				47DD063418A744B000BD0E47 /* ItelIntentImp.m */,
+				47DD063018A72AC100BD0E47 /* ItelMessageIntent.h */,
+				47DD063118A72AC100BD0E47 /* ItelMessageIntent.m */,
+				47DD063E18A771D600BD0E47 /* ItelIntentRefreshData.h */,
+				47DD063F18A771D600BD0E47 /* ItelIntentRefreshData.m */,
+			);
+			name = intent;
+			sourceTree = "<group>";
+		};
+		47DD063718A7486E00BD0E47 /* baseContext */ = {
+			isa = PBXGroup;
+			children = (
+				47DD062F18A7241000BD0E47 /* intentContext.h */,
+				47DD063818A74A3400BD0E47 /* BaseCoreDataTableViewController.h */,
+				47DD063918A74A3400BD0E47 /* BaseCoreDataTableViewController.m */,
+				47DD063B18A754F000BD0E47 /* BaseViewController.h */,
+				47DD063C18A754F000BD0E47 /* BaseViewController.m */,
+			);
+			name = baseContext;
 			sourceTree = "<group>";
 		};
 		47E05DBD18517403009FDCED /* qq截图 */ = {
@@ -1972,6 +2025,7 @@
 				47E2DB8C18595A5A00D455EF /* SearchNavController.m in Sources */,
 				4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */,
 				BADDFD681876901500D10DDC /* IMCoreDataManager.m in Sources */,
+				47DD064018A771D600BD0E47 /* ItelIntentRefreshData.m in Sources */,
 				47B89DE11834D40000022FE5 /* main.m in Sources */,
 				BA338B58187E839C00242DAF /* HostItelUser.m in Sources */,
 				479EF0601859D47C0012EE29 /* NSData+Byte.m in Sources */,
@@ -2010,6 +2064,7 @@
 				479EF05C1859D47C0012EE29 /* IMSessionPeriodRequestMessageBuilder.m in Sources */,
 				BA9845C218718D5C00F5AF83 /* IMRecentContactDetailsViewController.m in Sources */,
 				472B4A661846E4ED002971EE /* CustonTarbarItem.m in Sources */,
+				47DD063A18A74A3400BD0E47 /* BaseCoreDataTableViewController.m in Sources */,
 				47A10DA418658F9700FB9FED /* PassViewController.m in Sources */,
 				47E2DB931859875A00D455EF /* InviteButton.m in Sources */,
 				479EF04E1859D47C0012EE29 /* IMAnsweringViewController.m in Sources */,
@@ -2018,6 +2073,7 @@
 				479DB4B418648F8300421C10 /* CommonSettingViewController.m in Sources */,
 				479DB4B718648F9900421C10 /* BlackListViewController.m in Sources */,
 				479EF05D1859D47C0012EE29 /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
+				47DD063518A744B000BD0E47 /* ItelIntentImp.m in Sources */,
 				478813C81839C35E0085224D /* AFHTTPSessionManager.m in Sources */,
 				47E2DB9A185991BD00D455EF /* MoreViewController.m in Sources */,
 				BA2BC1291885F691001EB5C3 /* IMTipImp.m in Sources */,
@@ -2044,6 +2100,7 @@
 				478813CB1839C35E0085224D /* AFURLConnectionOperation.m in Sources */,
 				BADDFD2418768C4F00D10DDC /* Model.xcdatamodeld in Sources */,
 				478813CC1839C35E0085224D /* AFURLRequestSerialization.m in Sources */,
+				47DD063218A72AC100BD0E47 /* ItelMessageIntent.m in Sources */,
 				478813CE1839C35E0085224D /* AFURLSessionManager.m in Sources */,
 				478813CD1839C35E0085224D /* AFURLResponseSerialization.m in Sources */,
 				479B908418376DE3005D8CCB /* ItelBook.m in Sources */,
@@ -2059,6 +2116,7 @@
 				471F00DB1868324700D3DAFD /* HostMesViewController.m in Sources */,
 				478813D51839C35E0085224D /* FMResultSet.m in Sources */,
 				BA959A971860565C009B8A4C /* IMUDPCommunicator.m in Sources */,
+				47DD063D18A754F000BD0E47 /* BaseViewController.m in Sources */,
 				BADDFD7018769DF600D10DDC /* CoreDataTableViewController.m in Sources */,
 				47212EE718447F1D00F148C7 /* EditAliasViewController.m in Sources */,
 				47212EE418446E5400F148C7 /* UserViewController.m in Sources */,

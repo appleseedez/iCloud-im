@@ -168,6 +168,10 @@
 - (void)addToBlack:(UIButton *)sender {
     [[ItelAction action] addItelUserBlack:self.user.itelNum];
 }
+-(void)reloadData:(id)userInfo{
+    [self refreshMessage];
+    [self.tableView reloadData];
+}
 -(void)refreshMessage{
     if([self.user.remarkName length]>0){
         self.lbShowName.text=[NSString stringWithFormat:@"%@(%@)",self.user.remarkName,self.user.nickName];
@@ -191,36 +195,24 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self registerNotifcations];
+    
     [self.imageView setImageWithURL:[NSURL URLWithString:self.user.imageurl]];
     
     [self.imageView setRect:2.0 cornerRadius:self.imageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
     
 }
-
-
-- (void) registerNotifcations{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAliasChanged:) name:@"resetAlias" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didAddBlack:) name:@"addBlack" object:nil];
-    //删除成功通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delNotification:) name:@"delItelUser" object:nil];
+-(NSArray*)notifications{
     
+    return @[@"resetAlias",@"addBlack",@"delItelUser"];
 }
+
+
 -(void)callActionSheet{
     UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除联系人" otherButtonTitles:@"添加黑名单",@"编辑备注", nil];
     [actionSheet showInView: self.view];
     
 }
-- (void) delNotification:(NSNotification*) notify{
-    BOOL isNormal = [[notify.userInfo objectForKey:@"isNormal"] boolValue];
-    if (isNormal) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }else{
-#if usertip
-        [[IMTipImp defaultTip] errorTip:@"当前网络异常,删除失败"];
-#endif
-    }
-}
+
 - (void)actionSheetCancel:(UIActionSheet *)actionSheet{
     actionSheet.delegate = nil;
     actionSheet = nil;
@@ -256,24 +248,7 @@
     }
     else return 40;
 }
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-  
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
-}
--(void)didAddBlack:(NSNotification*)notification{
-    BOOL isNormal = [[notification.userInfo objectForKey:@"isNormal"]boolValue];
-    NSString *result=nil;
-    if (isNormal) {
-        result=@"添加黑名单成功";
-    }
-    else {
-        result = @"添加黑名单失败";
-    }
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:result message:@"该用户已在您的黑名单列表中" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
-    [alert show];
-    
-}
+
 -(void)userAliasChanged:(NSNotification*)notification{
     ItelUser *user=(ItelUser*)notification.object ;
     self.user=user ;
