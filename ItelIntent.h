@@ -13,7 +13,8 @@
 typedef NS_ENUM(NSInteger, intentType) {
     intentTypeMessage = 1,
     intentTypeNextStep = 1 << 1,
-    intentTypeReloadData=2 << 1
+    intentTypeReloadData=2 << 1,
+    intentTypeProcessStart=3 <<1
 };
 
 @protocol ItelIntent <NSObject>

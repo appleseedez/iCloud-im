@@ -32,6 +32,9 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
 }
+-(void)goForewardStep:(id)userInfo{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     switch (section) {
         case 1:

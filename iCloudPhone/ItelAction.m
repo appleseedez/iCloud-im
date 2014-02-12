@@ -130,7 +130,8 @@
 -(void)delFriendFromItelBookResponse:(NSString*)itel{
     [self.itelBookActionDelegate delItelUserIntoAddedList:itel];
     [self.itelBookActionDelegate delUserFromFriendBook:itel];
-    [self NotifyForNormalResponse:DEL_USER_NOTIFICATION parameters:nil];
+    id <ItelIntent> intent=[ItelIntentImp newIntent:intentTypeProcessStart];
+    [self NotifyForNormalResponse:DEL_USER_NOTIFICATION intent:intent];
 }
 #pragma mark - 添加到黑名单
 /*

@@ -54,4 +54,7 @@
 -(void)acceptIvitation:(NSDictionary*)parameters;
 //退出登录
 -(void)logout:(NSDictionary*)parameters;
+
+#pragma mark - 115接口
+-(void)search115:(NSDictionary *)parameters;
 @end

@@ -9,6 +9,7 @@
 #import "ItelIntentImp.h"
 #import "ItelMessageIntent.h"
 #import "ItelIntentRefreshData.h"
+#import "ItelProcessIntent.h"
 @implementation ItelIntentImp
 
 +(id<ItelIntent>)newIntent:(intentType)type{
@@ -20,7 +21,9 @@
         case intentTypeReloadData:
             intent=[[ItelIntentRefreshData alloc] init];
             break;
-            
+        case intentTypeProcessStart:
+            intent=[[ItelProcessIntent alloc] init];
+            break;
         default:
             break;
     }

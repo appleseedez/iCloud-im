@@ -23,11 +23,36 @@ static int currPage=0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self addSubButtons];
     self.rootDelegate=((NSCAppDelegate*)[UIApplication sharedApplication].delegate).RootVC;
     self.view.backgroundColor=[UIColor whiteColor];
 	// Do any additional setup after loading the view.
 }
-
+-(void)addSubButtons{
+    float deltaHeight=0.0;
+    
+    UIButton *btn115=[[UIButton alloc]init];
+    btn115.frame=CGRectMake(7, 481,76 , 76);
+    [btn115 setTitle:@"115" forState:UIControlStateNormal];
+    deltaHeight=deltaHeight+btn115.frame.size.height+2*10;
+    [btn115 addTarget:self action:@selector(go115) forControlEvents:UIControlEventTouchUpInside];
+    btn115.backgroundColor=[UIColor orangeColor];
+    [self.contentScrollView addSubview:btn115];
+    
+    self.contentScrollView.contentSize=CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height+deltaHeight);
+}
+-(void)go115{
+    UIStoryboard *story=[UIStoryboard storyboardWithName:@"115" bundle:nil];
+    if (story) {
+        UIViewController *vc115=[story instantiateViewControllerWithIdentifier:@"main115"];
+        
+        NSCAppDelegate *app=(NSCAppDelegate*)[UIApplication sharedApplication].delegate;
+        [app.RootVC presentViewController:vc115 animated:YES completion:^{
+            
+        }];
+    }
+}
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 
