@@ -10,6 +10,9 @@
 #import "Detail115Cell.h"
 #import "NXImageView.h"
 #import "UIImageView+AFNetworking.h"
+#import "Button115.h"
+#import "NSCAppDelegate.h"
+#import "IMDailViewController.h"
 @interface Detail115ViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -25,7 +28,17 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
-
+- (IBAction)dial:(id)sender {
+    [self presentCallingView];
+}
+- (void) presentCallingView{
+    
+    NSCAppDelegate *delegate=(NSCAppDelegate*)[UIApplication sharedApplication].delegate ;
+    [delegate.manager dial:[self.parameters objectForKey:@"itel"]];
+    //[delegate.manager dial:@"911"];
+    
+    
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     Detail115Cell *cell=[tableView dequeueReusableCellWithIdentifier:@"detail115cell"];
     NSDictionary *pro=nil;
@@ -38,10 +51,10 @@
             pro=@{@"title": @"电子邮箱：",@"detail":[self.parameters valueForKey:@"mail"]};
             break;
         case 2:
-            pro=@{@"title": @"联系电话：",@"detail":@"接口没返回电话"};
+            pro=@{@"title": @"联系电话：",@"detail":[self.parameters valueForKey:@"phone"]};
             break;
         case 3:
-            pro=@{@"title": @"主页：",@"detail":@"服务器没这字段"};
+            pro=@{@"title": @"主页：",@"detail":@""};
             break;
         case 4:
             pro=@{@"title": @"企业简介：",@"detail":[self.parameters valueForKey:@"recommend"]};
@@ -73,6 +86,12 @@
     self.navigationItem.titleView=title;
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(pop)];
     [self.navigationItem.leftBarButtonItem setTintColor:[UIColor whiteColor]];
+    
+    for(Button115 *btn in self.view.subviews ){
+        if ([btn isKindOfClass:[Button115 class]]) {
+            [btn setUI];
+        }
+    }
 	// Do any additional setup after loading the view.
 }
 -(void)pop{

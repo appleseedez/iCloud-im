@@ -89,6 +89,7 @@
 		4797E8CB188546510075BD9B /* Area.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8CA188546510075BD9B /* Area.m */; };
 		4797E8CF18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8CE18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m */; };
 		4797E8D4188567DA0075BD9B /* HostSecondAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8D3188567DA0075BD9B /* HostSecondAddressViewController.m */; };
+		47987DD618AC6132008CC5F5 /* Button115.m in Sources */ = {isa = PBXBuildFile; fileRef = 47987DD518AC6132008CC5F5 /* Button115.m */; };
 		4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */ = {isa = PBXBuildFile; fileRef = 4798A26D183DD45300060DDB /* HostItelUser+set.m */; };
 		479AD2EB18862AB2009B3278 /* Area+toString.m in Sources */ = {isa = PBXBuildFile; fileRef = 479AD2EA18862AB2009B3278 /* Area+toString.m */; };
 		479B90791837660B005D8CCB /* SearchNewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B90781837660B005D8CCB /* SearchNewFriendViewController.m */; };
@@ -458,6 +459,8 @@
 		4797E8CE18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IMCoreDataManager+FMDB_TO_COREDATA.m"; sourceTree = "<group>"; };
 		4797E8D2188567DA0075BD9B /* HostSecondAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostSecondAddressViewController.h; sourceTree = "<group>"; };
 		4797E8D3188567DA0075BD9B /* HostSecondAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostSecondAddressViewController.m; sourceTree = "<group>"; };
+		47987DD418AC6132008CC5F5 /* Button115.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button115.h; sourceTree = "<group>"; };
+		47987DD518AC6132008CC5F5 /* Button115.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Button115.m; sourceTree = "<group>"; };
 		4798A26C183DD45300060DDB /* HostItelUser+set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HostItelUser+set.h"; sourceTree = "<group>"; };
 		4798A26D183DD45300060DDB /* HostItelUser+set.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HostItelUser+set.m"; sourceTree = "<group>"; };
 		479AD2E918862AB2009B3278 /* Area+toString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Area+toString.h"; sourceTree = "<group>"; };
@@ -953,6 +956,8 @@
 				4769EC6718AB3ED700F76DB5 /* List115ViewController.m */,
 				4769EC7F18AB5D4300F76DB5 /* Detail115ViewController.h */,
 				4769EC8018AB5D4300F76DB5 /* Detail115ViewController.m */,
+				47987DD418AC6132008CC5F5 /* Button115.h */,
+				47987DD518AC6132008CC5F5 /* Button115.m */,
 			);
 			name = 115Controller;
 			sourceTree = "<group>";
@@ -2088,6 +2093,7 @@
 				47952D9D18585F600044CF64 /* RegNextButton.m in Sources */,
 				478813D21839C35E0085224D /* FMDatabaseAdditions.m in Sources */,
 				479EF05B1859D47C0012EE29 /* IMSessionInitMessageBuilder.m in Sources */,
+				47987DD618AC6132008CC5F5 /* Button115.m in Sources */,
 				479C7BAE185DDB480046B1D7 /* RegTipLabel.m in Sources */,
 				478813D71839C35E0085224D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				471F00D51868156500D3DAFD /* HostEditEmailViewController.m in Sources */,

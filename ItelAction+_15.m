@@ -33,6 +33,8 @@
 //    
     NSLog(@"%@",data);
     id <ItelIntent> intent;
+    if ([data isKindOfClass:[NSArray class]]) {
+    
     if ([data count]) {
         intent=[ItelIntentImp newIntent:intentTypeProcessStart ];
          NSDictionary *userInfo=@{@"list":data};
@@ -42,6 +44,11 @@
         intent=[ItelIntentImp newIntent:intentTypeMessage];
         intent.userInfo=@{@"title":@"没有找到符合要求的用户",@"message":@"该号码未注册，没有企业相关信息"};
     }
+    }else{
+        intent=[ItelIntentImp newIntent:intentTypeMessage];
+        intent.userInfo=@{@"title":@"服务器错误",@"message":@"服务器返回异常"};
+    }
     [self NotifyForNormalResponse:@"115search" intent:intent];
+    
 }
 @end

@@ -14,6 +14,7 @@
 #import "NewMessageView.h"
 #import "ItelAction.h"
 #import "IMDailViewController.h"
+#import "115MainViewController.h"
 @interface RootViewController ()
 @property (nonatomic,strong) CustomTabbar *customTabbar;
 @property (nonatomic,strong) NewMessageView *newMessage;
@@ -137,6 +138,8 @@
 //    callingViewController.callingNotify = notify;
     //获取到当前的顶层viewContorller
     if ([self.presentedViewController isKindOfClass:[IMDailViewController class]]) {
+        [self.presentedViewController presentViewController:callingViewNavController animated:YES completion:nil];
+    }else if ([self.presentedViewController isKindOfClass:[UINavigationController class]]) {
         [self.presentedViewController presentViewController:callingViewNavController animated:YES completion:nil];
     }else{
         [self presentViewController:callingViewNavController animated:YES completion:nil];

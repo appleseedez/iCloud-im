@@ -35,6 +35,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    if (self.directNumber) {
+//        self.peerAccount.text=self.directNumber ;
+//        self.backspaceButton.hidden = NO;
+//        self.dialBackGroundView.backgroundColor = [UIColor colorWithRed:0.267 green:0.643 blue:0.859 alpha:1];
+//    }
     self.touchToneMap = @{
                           @"0":[NSNumber numberWithInt:1200],
                           @"1":[NSNumber numberWithInt:1201],
@@ -70,6 +75,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [self tearDown];
+    self.directNumber=nil;
 }
 - (void)didReceiveMemoryWarning
 {
