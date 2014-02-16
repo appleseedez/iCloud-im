@@ -88,8 +88,8 @@
     [[IMTipImp defaultTip]showTip:@"开启音频通话"];
 #endif
 //    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
-//                                                                                                                       SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:peerAccount,
-//                                                                                                                       SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self.manager myAccount]
+//                                                                                                                       kDestAccount:peerAccount,
+//                                                                                                                       kSrcAccount:[self.manager myAccount]
 //                                                                                                                       }];
     [self.manager dial:peerAccount];
     

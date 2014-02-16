@@ -125,9 +125,9 @@
         self.autoLogin=1;
         [[ItelAction action] setHostItelUser:currUser];
         NSDictionary* params = @{
-                                 ROUTE_SERVER_IP_KEY:currUser.domain,
-                                 ROUTE_SERVER_PORT_KEY:currUser.port,
-                                 HOST_ITEL_NUMBER:currUser.itelNum
+                                 kDomain:currUser.domain,
+                                 kPort:currUser.port,
+                                 kHostItelNumber:currUser.itelNum
                                     };
         [[ItelAction action] checkAddressBookMatchingItel];
         [self setupIMManager:params];
@@ -152,9 +152,9 @@
         NSString *hostItel=[[ItelAction action]getHost].itelNum;
         [[NSUserDefaults standardUserDefaults] setObject:hostItel forKey:@"currUser"];
         NSDictionary* params = @{
-                                 ROUTE_SERVER_IP_KEY:[info valueForKey:ROUTE_SERVER_IP_KEY],
-                                 ROUTE_SERVER_PORT_KEY:[info valueForKey:ROUTE_SERVER_PORT_KEY],
-                                 HOST_ITEL_NUMBER:hostItel
+                                 kDomain:[info valueForKey:kDomain],
+                                 kPort:[info valueForKey:kPort],
+                                 kHostItelNumber:hostItel
                                  };
         [self setupIMManager:params];
         [self.manager setup];
@@ -166,9 +166,9 @@
 
 - (void) setupIMManager:(NSDictionary*) params{
     if ([[params allKeys] count] == 3) {
-        [self.manager setRouteSeverIP:[params valueForKey:ROUTE_SERVER_IP_KEY]];
-        [self.manager setRouteServerPort:[[params valueForKey:ROUTE_SERVER_PORT_KEY] intValue]];
-        [self.manager setMyAccount:[params valueForKey:HOST_ITEL_NUMBER]];
+        [self.manager setRouteSeverIP:[params valueForKey:kDomain]];
+        [self.manager setRouteServerPort:[[params valueForKey:kPort] intValue]];
+        [self.manager setMyAccount:[params valueForKey:kHostItelNumber]];
 
     }
 }
@@ -179,10 +179,10 @@
 #endif
     if ([self.manager myState]&&![[[self.manager myState] valueForKey:kPeerAccount] isEqualToString:IDLE] && [self.manager myAccount]) {
         [self.manager haltSession:@{
-                                    DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
-                                    SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self.manager myAccount],
-                                    SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self.manager myState] valueForKey:kPeerAccount] ,
-                                    SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
+                                    kType:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                                    kSrcAccount:[self.manager myAccount],
+                                    kDestAccount:[[self.manager myState] valueForKey:kPeerAccount] ,
+                                    kHaltType:kEndSession
                                     
                                     }];
 

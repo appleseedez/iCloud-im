@@ -142,7 +142,7 @@
     //构造通话结束信令
     NSMutableDictionary* endSessionDataMut = [self.inSessionNotify.userInfo mutableCopy];
     [endSessionDataMut addEntriesFromDictionary:@{
-                                                  SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
+                                                  kHaltType:kEndSession
                                                   }];
     
     //终止会话

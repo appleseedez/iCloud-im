@@ -54,15 +54,15 @@
     self.tag = ROUTE_SRV_TAG;
     NSLog(@"udpConnector.ip:%@",self.ip);
     [self send:@{
-                 HEAD_SECTION_KEY:@{
-                         DATA_TYPE_KEY:[NSNumber numberWithInt:ROUTE_SERVER_IP_REQ_TYPE ],
-                         DATA_SEQ_KEY: [NSNumber numberWithInteger: [[IMSeqenceGen class] seq]],
+                 kHead:@{
+                         kType:[NSNumber numberWithInt:ROUTE_SERVER_IP_REQ_TYPE ],
+                         kSeq: [NSNumber numberWithInteger: [[IMSeqenceGen class] seq]],
                          
-                         DATA_STATUS_KEY:[NSNumber numberWithInteger:NORMAL_STATUS]
+                         kStatus:[NSNumber numberWithInteger:NORMAL_STATUS]
                          },
-                 BODY_SECTION_KEY:@{
-                         UDP_INDEX_REQ_FIELD_ACCOUNT_KEY:self.account,
-                         UDP_INDEX_REQ_FIELD_SRVTYPE_KEY:UDP_INDEX_ROUTE_SERVER_TYPE
+                 kBody:@{
+                         kAccount:self.account,
+                         kSrvType:UDP_INDEX_ROUTE_SERVER_TYPE
                          }
                  }];
     
@@ -118,23 +118,23 @@
     NSError* error = nil;
     NSDictionary* response = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
   
-    self.ip = [[response valueForKey:BODY_SECTION_KEY] valueForKey:UDP_INDEX_RES_FIELD_SERVER_IP_KEY];
-    self.port = [[[response valueForKey:BODY_SECTION_KEY] valueForKey:UDP_INDEX_RES_FIELD_SERVER_PORT_KEY] intValue];
+    self.ip = [[response valueForKey:kBody] valueForKey:kIP];
+    self.port = [[[response valueForKey:kBody] valueForKey:kPort] intValue];
     if (self.tag == ROUTE_GATEWAY_TAG) {
         [self send:@{
-                     HEAD_SECTION_KEY:@{
-                             DATA_TYPE_KEY:[NSNumber numberWithInt:ROUTE_SERVER_IP_REQ_TYPE ],
-                             DATA_SEQ_KEY: [NSNumber numberWithInteger: [[IMSeqenceGen class] seq]],
-                             DATA_STATUS_KEY:[NSNumber numberWithInteger:NORMAL_STATUS]
+                     kHead:@{
+                             kType:[NSNumber numberWithInt:ROUTE_SERVER_IP_REQ_TYPE ],
+                             kSeq: [NSNumber numberWithInteger: [[IMSeqenceGen class] seq]],
+                             kStatus:[NSNumber numberWithInteger:NORMAL_STATUS]
                              },
-                     BODY_SECTION_KEY:@{
-                             UDP_INDEX_REQ_FIELD_ACCOUNT_KEY:self.account,
-                             UDP_INDEX_REQ_FIELD_SRVTYPE_KEY:UDP_INDEX_GATEWAY_SERVER_TYPE
+                     kBody:@{
+                             kAccount:self.account,
+                             kSrvType:UDP_INDEX_GATEWAY_SERVER_TYPE
                              }
                      }];
     }else if (self.tag == ROUTE_UDP_SEQENCE_END_TAG){
 //         NSLog(@"最后拿到的ip:%@,port:%d",self.ip,self.port);
-//        [[response valueForKey:BODY_SECTION_KEY] setValue:@"10.0.0.30" forKey:UDP_INDEX_RES_FIELD_SERVER_IP_KEY];
+//        [[response valueForKey:kBody] setValue:@"10.0.0.30" forKey:kIP];
 #if UDP_MESSAGE
         NSLog(@"最后登录的业务服务器：%@",response);
 #endif

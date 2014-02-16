@@ -161,7 +161,7 @@
 }
 
 - (void)send:(NSDictionary*) data{
-    NSInteger type = [[[data valueForKey:HEAD_SECTION_KEY] valueForKey:DATA_TYPE_KEY] integerValue];
+    NSInteger type = [[[data valueForKey:kHead] valueForKey:kType] integerValue];
     [self sendRequest:data type:type];
 }
 

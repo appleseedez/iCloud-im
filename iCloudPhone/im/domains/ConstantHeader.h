@@ -39,14 +39,7 @@ enum emDataType
 #define PARSED_DATA_KEY @"PARSED_DATA_KEY" //数据暂存池的key
 #define DIALING_SOUND_ID 1152 //拨号的声音
 
-//manager.state
-#define kMyAccount @"myAccount"
-#define kPeerAccount @"peerAccount"
-#define kPeerSSID @"peerSSID"
-#define kMySSID @"mySSID"
-#define kForwardIP @"ForwardIP"
-#define kForwardPort @"ForwardPort"
-#define kUseVideo @"useVideo"
+
 
 #define PRESENT_DIAL_VIEW_NOTIFICATION @"PRESENT_DIAL_VIEW_NOTIFICATION" //
 #define UDP_LOOKUP_COMPLETE_NOTIFICATION @"UDP_LOOKUP_COMPLETE_NOTIFICATION" //udp查询完成,应该能够获得信令服务器地址
@@ -66,56 +59,62 @@ enum emDataType
 #define P2PTUNNEL_SUCCESS @"P2PTUNNEL_SUCCESS"
 #define P2PTUNNEL_FAILED @"P2PTUNNEL_FAILED"
 #define RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION @"reconnect"
-#define HEAD_SECTION_KEY @"head"
-#define BODY_SECTION_KEY @"body"
-#define DATA_TYPE_KEY @"type"
-#define DATA_STATUS_KEY @"status"
-#define DATA_SEQ_KEY @"seq"
-#define DATA_CONTENT_KEY @"data"
-#define DATA_CONTENT_TYPE @"datatype"
-#define ROUTE_SERVER_IP_KEY @"domain"
-#define ROUTE_SERVER_PORT_KEY @"port"
-#define HOST_ITEL_NUMBER @"hostItelNumber"
+//manager.state
+#define kMyAccount @"myAccount"
+#define kPeerAccount @"peerAccount"
+#define kPeerSSID @"peerSSID"
+#define kMySSID @"mySSID"
+#define kForwardIP @"ForwardIP"
+#define kForwardPort @"ForwardPort"
+// signal keys
+
+#define kHead @"head"
+#define kBody @"body"
+#define kType @"type"
+#define kStatus @"status"
+#define kSeq @"seq"
+#define kData @"data"
+#define kDataType @"datatype"
+#define kAccount @"account"
+#define kDomain @"domain"
+#define kHostItelNumber @"hostItelNumber"
+#define kSrvType @"srvtype"
+#define kIP @"ip"
+#define kPort @"port"
+
+// 信令服务器认证信令字段
+#define kClientType @"clienttype"
+#define kClientStatus @"clientstatus"
+#define kToken @"token"
 
 // 目录服务器请求字段
-#define UDP_INDEX_REQ_FIELD_ACCOUNT_KEY @"account"
-#define UDP_INDEX_REQ_FIELD_SRVTYPE_KEY @"srvtype"
-#define UDP_INDEX_RES_FIELD_SERVER_IP_KEY @"ip"
-#define UDP_INDEX_RES_FIELD_SERVER_PORT_KEY @"port"
 #define UDP_INDEX_ROUTE_SERVER_TYPE @0
 #define UDP_INDEX_GATEWAY_SERVER_TYPE @1
 
 
-// 信令服务器认证信令字段
-#define CMID_APP_LOGIN_SSS_REQ_FIELD_ACCOUNT_KEY @"account"
-//#define CMID_APP_LOGIN_SSS_REQ_FIELD_CERT_KEY @"keys"
-#define CMID_APP_LOGIN_SSS_REQ_FIELD_CLIENT_TYPE_KEY @"clienttype"
-#define CMID_APP_LOGIN_SSS_REQ_FIELD_CLIENT_STATUS_KEY @"clientstatus"
-#define CMID_APP_LOGIN_SSS_REQ_FIELD_TOKEN_KEY @"token"
 // 通话查询信令字段
-#define SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY @"destaccount" // 请求: destAccount
-#define SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY @"srcaccount" // 请求：srcAccount
+#define kDestAccount @"destaccount" // 请求: destAccount
+#define kSrcAccount @"srcaccount" // 请求：srcAccount
 
-#define SESSION_INIT_RES_FIELD_SSID_KEY @"sessionid" // 回复: ssid
+#define kSessionID @"sessionid" // 回复: ssid
+#define kSrcSSID @"srcssid"
+#define kDestSSID @"destssid"
 
-#define SESSION_SRC_SSID_KEY @"srcssid"
-#define SESSION_DEST_SSID_KEY @"destssid"
-
-#define SESSION_INIT_RES_FIELD_FORWARD_IP_KEY @"relayip" // 回复： forwardIP
-#define SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY @"relayport" // 回复： forwardIP
+#define kRelayIP @"relayip" // 回复： forwardIP
+#define kRelayPort @"relayport" // 回复： forwardIP
 
 // 通话信令字段
-#define SESSION_PERIOD_FIELD_PEER_NAT_TYPE_KEY @"peerNATType" //发送给对方的，本机的NAT类型
-#define SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY @"peerInterIP"
-#define SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY @"peerInterPort"
-#define SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY @"peerLocalIP"
-#define SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY @"peerLocalPort"
-#define SESSION_PERIOD_FIELD_PEER_USE_VIDEO @"useVideo"
+#define kPeerNATType @"peerNATType" //发送给对方的，本机的NAT类型
+#define kPeerInterIP @"peerInterIP"
+#define kPeerPort @"peerInterPort"
+#define kPeerLocalIP @"peerLocalIP"
+#define kPeerLocalPort @"peerLocalPort"
+#define kUseVideo @"useVideo"
 //通话终止信令字段
-#define SESSION_HALT_FIELD_TYPE_KEY @"halttype"
-#define SESSION_HALT_FILED_ACTION_REFUSE @"refusesession" //接收方需要终止session
-#define SESSION_HALT_FILED_ACTION_BUSY @"busy" //接收方只需要终止session
-#define SESSION_HALT_FILED_ACTION_END @"endsession" //接收方要终止传输
+#define kHaltType @"halttype"
+#define kRefuseSession @"refusesession" //接收方需要终止session
+#define kBusy @"busy" //接收方只需要终止session
+#define kEndSession @"endsession" //接收方要终止传输
 
 #define SEQ_BASE 0 // 发送包的序列号基底
 #define HEART_BEAT_INTERVAL 5 // 心跳间隔15秒
@@ -152,8 +151,6 @@ enum emDataType
 #define SCREEN_WIDTH 144
 #define SCREEN_HEIGHT 192
 #define SCREEN_HEIGHT_FOR_LOW 176
-//#define SIGNAL_SERVER_IP @"211.149.147.73"
-//#define SIGNAL_SERVER_IP @"211.149.144.15"
 #define SIGNAL_SERVER_PORT 9989
 #define ROUTE_SERVER_IP @"192.168.1.110"
 #define ROUTE_SERVER_PORT 9000 // 通话模块会先绑定登陆服务器的9000端口,用于请求路由,网关服务器的地址.
@@ -161,8 +158,6 @@ enum emDataType
 #define ROUTE_GATEWAY_TAG 0x000000fe
 #define ROUTE_UDP_SEQENCE_END_TAG 0x000000ff
 #define LOCAL_PORT 11111
-//#define PROBE_SERVER "118.123.7.92"
-//#define PROBE_PORT 11111
 #define PROBE_SERVER_KEY @"PROBE_SERVER"
 #define PROBE_PORT_KEY @"PROBE_PORT"
 #define DIAL_PAN_VIEW_CONTROLLER_ID @"DialPanView"
@@ -187,7 +182,6 @@ enum emDataType
 #define kPeerNumber @"peerNumber"
 #define kPeerNick @"peerNick"
 #define kCreateDate @"createDate"
-#define kStatus @"status"
 #define kDuration @"duration"
 #define kHostUserNumber @"hostUserNumber"
 

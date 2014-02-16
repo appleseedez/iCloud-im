@@ -202,10 +202,10 @@ static int localNetPortSuffix = 0;
         self.currentInterIP =[NSString stringWithUTF8String:self_inter_ip];
     }
     return @{
-             SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY: self.currentInterIP,
-             SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY:[NSNumber numberWithInt:self_inter_port],
-             SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY:[[self class] localAddress],
-             SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY:[NSNumber numberWithInt:self.netWorkPort]
+             kPeerInterIP: self.currentInterIP,
+             kPeerPort:[NSNumber numberWithInt:self_inter_port],
+             kPeerLocalIP:[[self class] localAddress],
+             kPeerLocalPort:[NSNumber numberWithInt:self.netWorkPort]
              };
 }
 - (int)tunnelWith:(NSDictionary*) params{
@@ -218,26 +218,26 @@ static int localNetPortSuffix = 0;
         NSLog(@"开始获取p2p通道,%@", [NSDate date]);
         
         //根据传入的useVideo参数,确定最终穿透以后是走音频还是视频.
-        if ([self canVideoCalling]&&[[params valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]) {
+        if ([self canVideoCalling]&&[[params valueForKey:kUseVideo] boolValue]) {
             self.m_type = InitTypeVoeAndVie;
         }else{
             self.m_type = InitTypeVoe;
         }
         NSLog(@"穿透时使用的类型:%@",[self mediaTypeString:self.m_type]);
         // 外网地址
-        ::strncpy(argc.otherInterIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY] UTF8String], sizeof(argc.otherInterIP));
-        argc.otherInterPort = [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY] intValue];
+        ::strncpy(argc.otherInterIP, [[params valueForKey:kPeerInterIP] UTF8String], sizeof(argc.otherInterIP));
+        argc.otherInterPort = [[params valueForKey:kPeerPort] intValue];
         // 内网地址
-        ::strncpy(argc.otherLocalIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY] UTF8String], sizeof(argc.otherLocalIP));
-        argc.otherLocalPort =  [[params valueForKey:SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY] intValue];
+        ::strncpy(argc.otherLocalIP, [[params valueForKey:kPeerLocalIP] UTF8String], sizeof(argc.otherLocalIP));
+        argc.otherLocalPort =  [[params valueForKey:kPeerLocalPort] intValue];
         // 转发地址
-        ::strncpy(argc.otherForwardIP,[[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY] UTF8String], sizeof(argc.otherForwardIP));
-        argc.otherForwardPort = [[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] intValue];
+        ::strncpy(argc.otherForwardIP,[[params valueForKey:kRelayIP] UTF8String], sizeof(argc.otherForwardIP));
+        argc.otherForwardPort = [[params valueForKey:kRelayPort] intValue];
         
         // 对方的ssid
-        argc.otherSsid = [[params valueForKey:SESSION_DEST_SSID_KEY] intValue];
+        argc.otherSsid = [[params valueForKey:kDestSSID] intValue];
         // 自己的ssid
-        argc.selfSsid = [[params valueForKey:SESSION_SRC_SSID_KEY] intValue];
+        argc.selfSsid = [[params valueForKey:kSrcSSID] intValue];
         
         //如果内网的ip相同.设置argc.localable = true;
         

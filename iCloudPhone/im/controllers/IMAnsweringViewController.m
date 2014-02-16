@@ -46,7 +46,7 @@ static int soundCount;
 }
 
 - (void) setup{
-    self.peerAccountLabel.text = [NSString stringWithFormat:@"用户 %@ 来电...", [self.callingNotify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]];
+    self.peerAccountLabel.text = [NSString stringWithFormat:@"用户 %@ 来电...", [self.callingNotify.userInfo valueForKey:kDestAccount]];
     soundCount = 0;//给拨号音计数，响八次就可以结束
     //系统声音播放是一个异步过程。要循环播放则必须借助回调
     AudioServicesAddSystemSoundCompletion(DIALING_SOUND_ID,NULL,NULL,soundPlayCallback1,NULL);
@@ -108,7 +108,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     sender.enabled = NO;
     NSMutableDictionary* refusedSessionNotifyMut = [self.callingNotify.userInfo mutableCopy];
     [refusedSessionNotifyMut addEntriesFromDictionary:@{
-                                                  SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_REFUSE
+                                                  kHaltType:kRefuseSession
                                                   }];
     [self.manager haltSession:refusedSessionNotifyMut];
 }
