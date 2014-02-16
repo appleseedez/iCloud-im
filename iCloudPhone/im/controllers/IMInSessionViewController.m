@@ -41,6 +41,10 @@
     }
     //开启视频窗口，调整摄像头
     [self.view sendSubviewToBack:self.remoteRenderView];
+    [self performSelector:@selector(openScreen) withObject:Nil afterDelay:2];
+}
+
+- (void) openScreen{
     [self.manager openScreen:self.remoteRenderView localView:self.selfCamView];
 }
 - (void)viewDidAppear:(BOOL)animated{

@@ -138,4 +138,22 @@ inline uint32 GetBE32(const void* memory) {
     (static_cast<uint32>(Get8(memory, 3)) << 0);
 }
 
+typedef struct stVideoConfigInfo
+{
+    unsigned short      width;
+    unsigned short      height;
+    unsigned int        startBitrate;
+    unsigned int        maxBitrate;
+    unsigned char       maxFramerate;
+    
+    stVideoConfigInfo()
+    {
+        width = 144;
+        height = 176;
+        startBitrate = 80;
+        maxBitrate = 250;
+        maxFramerate = 12;
+    }
+}TVideoConfigInfo;
+
 #endif

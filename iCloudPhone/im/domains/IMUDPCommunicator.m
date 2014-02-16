@@ -29,14 +29,14 @@
 	
 	if (![self.udpSock bindToPort:0 error:&error])
 	{
-#if debug
+#if DEBUG
         [[IMTipImp defaultTip] errorTip:@"upd绑定端口失败了"];
 #endif
 		return;
 	}
 	if (![self.udpSock beginReceiving:&error])
 	{
-#if debug
+#if DEBUG
         [[IMTipImp defaultTip] errorTip:@"upd开始接收数据失败了"];
 #endif
 		return;

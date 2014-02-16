@@ -44,13 +44,6 @@ enum BasicStates
 static void* basicStateIndentifer = (void*)&basicStateIndentifer;
 static void* p2pIndentifer = (void*)&p2pIndentifer;
 static int hasObserver = 0;
-#pragma mark - basic
-//TODO: kvo监听状态显示在tip里面
-
-
-
-
-
 #pragma mark - bussiness
 - (BOOL)sessionStartedWithAccount:(NSString *)destAccount{
     return YES;
@@ -63,7 +56,7 @@ static int hasObserver = 0;
         [[IMTipImp defaultTip] showTip:@"拨号中..."];
 #endif
         NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>当前状态:%@,BUSY?:%d<<<<<<<<<<<<<<<<<<<<<<<<<<",[self describeState:self.basicState],self.busy);
-#if debug
+#if DEBUG
         [[IMTipImp defaultTip] showTip:[self describeState:self.basicState]];
 #endif
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
@@ -144,12 +137,9 @@ static int hasObserver = 0;
 
 
 - (void)endSession{
+     self.isInP2P = @(0);
     [self.monitor invalidate];
     [self.keepSessionAlive invalidate];
-    if([self.engine stopDetectP2P] == 0){
-        self.isInP2P = @(0);
-    }
-
     //从非idle状态变回idle状态. 说明需要挂断. 给提示
 #if usertip
     [[IMTipImp defaultTip] showTip:@"挂断中..."];
@@ -160,7 +150,8 @@ static int hasObserver = 0;
     
     [self restoreState];
     self.basicState = @(basicStateIdle);
-    [self.engine tearDown];
+    [self.engine stopTransport];
+//    [self.engine tearDown];
     [self performSelector:@selector(notifyInterfaceToEndSession) withObject:nil afterDelay:0];
 }
 
@@ -453,13 +444,13 @@ static int hasObserver = 0;
 }
 // 通话查询成功后, 处理收到的数据.
 - (void)queryDataProcess{
-#if debug
+#if DEBUG
     [[IMTipImp defaultTip] showTip:@"处理收到的通话查询记录"];
 #endif
 }
 
 - (void)sendCallingData{
-#if debug
+#if DEBUG
     [[IMTipImp defaultTip] showTip:@"发送数据 主叫 >>> 被叫"];
 #endif
     self.basicState = @(basicStateCalling);
@@ -468,7 +459,7 @@ static int hasObserver = 0;
     [self sendSessionDataFor:[NSNumber numberWithInt:SESSION_PERIOD_CALLING_TYPE]];
 }
 - (void)sendAnsweringData{
-#if debug
+#if DEBUG
     [[IMTipImp defaultTip] showTip:@"发送数据 主叫 <<< 被叫"];
 #endif
     self.basicState = @(basicStateAnswering);
@@ -480,7 +471,7 @@ static int hasObserver = 0;
 - (void) assertState:(int)expectState{
     NSString* reason = [NSString stringWithFormat:@"期望状态是:%@,但是实际上却是:%@",[self describeState: @(expectState)],[self describeState:self.basicState]];
     if ([self.basicState intValue] != expectState) {
-#if debug
+#if DEBUG
         [[IMTipImp defaultTip] errorTip:[NSString stringWithFormat:@"%@",reason]];
 #endif
     }
@@ -659,7 +650,7 @@ static int hasObserver = 0;
     [self registerNotifications];
     [self checkDeviceAuthorizationStatus];
     [self injectDependency];
-//    [self.engine initNetwork];
+    [self.engine initMedia];
     //监视basicState的状态改变.
     if (hasObserver == 0) {
         [self addObserver:self forKeyPath:@"basicState" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:&basicStateIndentifer];
@@ -754,20 +745,22 @@ static int hasObserver = 0;
  *  @param peerType 主叫方发送:SESSION_PERIOD_PROCEED_TYPE 被叫方发送:SESSION_PERIOD_ANSWERING_TYPE
  */
 - (void) sendSessionDataFor:(NSNumber*) peerType{
-    [self.engine initNetwork];
+
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
     if ([[self.state valueForKey:kUseVideo] boolValue]){
        BOOL ret =  [self.engine openCamera];
         [self.state setValue:[NSNumber numberWithBool:ret] forKey:kUseVideo];
     }
+    //主叫和被叫都在发送数据之前初始化网络. 等待即将到来的p2p数据
+    [self.engine initNetwork];
     // 3.获取本机natType
     NatType natType = StunTypeBlocked;
     
     //4. 获取本机的链路列表. 中继服务器目前充当外网地址探测
     NSDictionary* communicationAddress = [self.engine endPointAddressWithProbeServer:[self.state valueForKey:kForwardIP] port:[[self.state valueForKey:kForwardPort] integerValue]];
     //5.获取到外网地址后，开始发送数据包到外网地址探测服务器，直到收到对等方的回复。
-#if debug
+#if DEBUG
     [[IMTipImp defaultTip] showTip:@"开始进行保持外网session的数据包发送"];
 #endif
     [self.keepSessionAlive invalidate];
@@ -861,7 +854,7 @@ static int hasObserver = 0;
 #pragma mark -  actions
 //保持外网ip有效的心跳方法
 - (void) keepSession:(NSTimer*) timer{
-#if debug
+#if DEBUG
     [[IMTipImp defaultTip] showTip:@"开始发送保持session的数据包"];
 #endif
     NSDictionary* param = [timer userInfo];
@@ -949,7 +942,7 @@ static int hasObserver = 0;
                             }];
     }
     self.lossCount++;
-#if debug
+#if DEBUG
     [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前通话持续时间:%f,当前收到的数据长度:%d",self.duration,self.lossCount]];
 #endif
 }

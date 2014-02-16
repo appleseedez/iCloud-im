@@ -219,6 +219,7 @@
 		BA959A971860565C009B8A4C /* IMUDPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA959A961860565C009B8A4C /* IMUDPCommunicator.m */; };
 		BA959A981860565C009B8A4C /* IMUDPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA959A961860565C009B8A4C /* IMUDPCommunicator.m */; };
 		BA9845C218718D5C00F5AF83 /* IMRecentContactDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9845C118718D5C00F5AF83 /* IMRecentContactDetailsViewController.m */; };
+		BA9D481518A8BCE4001A78C8 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9D481418A8BCE4001A78C8 /* Store.m */; };
 		BAAEA49018726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
 		BAAEA49118726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
 		BAC4A0DF187CE1E200BC856F /* ItelBookInterfaceImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */; };
@@ -668,6 +669,8 @@
 		BA959A961860565C009B8A4C /* IMUDPCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMUDPCommunicator.m; sourceTree = "<group>"; };
 		BA9845C018718D5C00F5AF83 /* IMRecentContactDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRecentContactDetailsViewController.h; sourceTree = "<group>"; };
 		BA9845C118718D5C00F5AF83 /* IMRecentContactDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRecentContactDetailsViewController.m; sourceTree = "<group>"; };
+		BA9D481318A8BCE4001A78C8 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		BA9D481418A8BCE4001A78C8 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
 		BAAEA48D187256CD00C05BCF /* IMDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManager.h; sourceTree = "<group>"; };
 		BAAEA48E18726DF200C05BCF /* IMRecentContactItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRecentContactItem.h; sourceTree = "<group>"; };
 		BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRecentContactItem.m; sourceTree = "<group>"; };
@@ -1704,6 +1707,8 @@
 		BAFEE13818744FDA00DB1AC6 /* db */ = {
 			isa = PBXGroup;
 			children = (
+				BA9D481318A8BCE4001A78C8 /* Store.h */,
+				BA9D481418A8BCE4001A78C8 /* Store.m */,
 				BA338B59187E839C00242DAF /* ItelUser.h */,
 				BA338B5A187E839C00242DAF /* ItelUser.m */,
 				BA338B56187E839C00242DAF /* HostItelUser.h */,
@@ -1855,7 +1860,7 @@
 						TestTargetID = 47B89DD01834D40000022FE5;
 					};
 					47B89DD01834D40000022FE5 = {
-						DevelopmentTeam = 849L563F75;
+						DevelopmentTeam = KAH6228XJ2;
 					};
 					47B89DF11834D40000022FE5 = {
 						TestTargetID = 47B89DD01834D40000022FE5;
@@ -2050,6 +2055,7 @@
 				478813DC1839C35E0085224D /* UIWebView+AFNetworking.m in Sources */,
 				BAE9C912187C3AA900E41A9E /* Message+CRUD.m in Sources */,
 				472B4A631846E45D002971EE /* CustomTabbar.m in Sources */,
+				BA9D481518A8BCE4001A78C8 /* Store.m in Sources */,
 				47A10DAD18659D3E00FB9FED /* PassSecuretyQuestiongViewController.m in Sources */,
 				479EF05F1859D47C0012EE29 /* IMTCPCommunicator.m in Sources */,
 				BAE9C908187C31B800E41A9E /* ItelNetInterfaceImp.m in Sources */,

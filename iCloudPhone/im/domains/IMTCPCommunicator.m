@@ -146,7 +146,7 @@
     }
     self.authInfo = authInfo;
     if (![self.sock connectToHost:self.ip onPort:self.port error:&error]) {
-#if debug
+#if DEBUG
         [[IMTipImp defaultTip] errorTip:@"链接信令服务器失败"];
 #endif
         [self disconnect];

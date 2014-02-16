@@ -26,11 +26,11 @@ UIImageView* _pview_local;
 @implementation IMEngineImp
 - (id)init{
     if (self = [super init]) {
-            self.canVideoCalling = YES;
-            self.cameraIndex = 1;
-            self.isCameraOpened = NO;
-            self.netWorkPort = LOCAL_PORT;
-            _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
+        self.canVideoCalling = YES;
+        self.cameraIndex = 1;
+        self.isCameraOpened = NO;
+        self.netWorkPort = LOCAL_PORT;
+        _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
     }
     return self;
 }
@@ -72,7 +72,7 @@ UIImageView* _pview_local;
     }
     NSString *addr = wifiAddress ? wifiAddress : cellAddress;
     
-
+    
     return addr;
 }
 
@@ -102,29 +102,27 @@ static int localNetPortSuffix = 0;
 // IMEngine接口 见接口定义
 - (void)initNetwork{
     self.netWorkPort = LOCAL_PORT + (++localNetPortSuffix)%9;
-    if (false == self.pInterfaceApi->NetWorkInit(self.netWorkPort)) {
-#if debug
+    if (false == self.pInterfaceApi->OpenNetWork(self.netWorkPort)) {
+#if DEBUG
         [[IMTipImp defaultTip] errorTip:@"引擎初始化网络失败"];
 #endif
     }else{
-        [self initMedia];
+        
     }
 }
 /**
  *  初始化本机的媒体库。 根据网络状况确定是否支持视频
  */
 - (void)initMedia{
-    // 首先，初始化媒体。此时返回的m_type可以表明本机是否有能力进行视频。
-    self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeVoeAndVie);
-   // TODO:在媒体初始化时,获取访问摄像头和麦克的权限. 另外如果没有获取到这些权限应该怎么办?
-
-
+    // TODO:在媒体初始化时,获取访问摄像头和麦克的权限. 另外如果没有获取到这些权限应该怎么办?
     
     
-   //接下来，本地根据网络情况，会重新评估一次是否支持视频
+    self.pInterfaceApi->MediaInit();
+    
+    //接下来，本地根据网络情况，会重新评估一次是否支持视频
     AFNetworkReachabilityManager* reachabilityManager = [AFNetworkReachabilityManager sharedManager];
     [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-#if debug
+#if DEBUG
         [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前网络:%@",AFStringFromNetworkReachabilityStatus(status)]];
 #endif
         switch (status) {
@@ -132,7 +130,7 @@ static int localNetPortSuffix = 0;
             {
                 //是支持视频的
                 self.m_type = InitTypeVoeAndVie;
-//                _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
+                //                _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
             }
                 break;
             case AFNetworkReachabilityStatusReachableViaWWAN:
@@ -156,11 +154,11 @@ static int localNetPortSuffix = 0;
                 break;
         }
     }];
-#if debug
+#if DEBUG
     [[IMTipImp defaultTip] showTip:[self mediaTypeString:self.m_type]];
 #endif
     [reachabilityManager startMonitoring];
-
+    
 }
 
 - (NSString*) mediaTypeString:(InitType)mediaType{
@@ -188,7 +186,7 @@ static int localNetPortSuffix = 0;
 }
 
 - (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort{
-#if debug
+#if DEBUG
     [[IMTipImp defaultTip] showTip:@"开始外网地址探测"];
 #endif
     char self_inter_ip[16];
@@ -197,20 +195,19 @@ static int localNetPortSuffix = 0;
     int ret = self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], probeServerPort, self_inter_ip, self_inter_port);
     if (ret != 0) {
         self.currentInterIP = BLANK_STRING;
-#if debug
+#if DEBUG
         [[IMTipImp defaultTip] showTip:@"没有获取到本机的外网地址.很有可能转发哦"];
 #endif
     }else{
         self.currentInterIP =[NSString stringWithUTF8String:self_inter_ip];
     }
     return @{
-            SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY: self.currentInterIP,
+             SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY: self.currentInterIP,
              SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY:[NSNumber numberWithInt:self_inter_port],
              SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY:[[self class] localAddress],
              SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY:[NSNumber numberWithInt:self.netWorkPort]
              };
 }
-
 - (int)tunnelWith:(NSDictionary*) params{
     bool __block ret = true;
     TP2PPeerArgc __block argc;
@@ -219,7 +216,7 @@ static int localNetPortSuffix = 0;
     dispatch_async(q, ^{
         //
         NSLog(@"开始获取p2p通道,%@", [NSDate date]);
-
+        
         //根据传入的useVideo参数,确定最终穿透以后是走音频还是视频.
         if ([self canVideoCalling]&&[[params valueForKey:SESSION_PERIOD_FIELD_PEER_USE_VIDEO] boolValue]) {
             self.m_type = InitTypeVoeAndVie;
@@ -236,12 +233,12 @@ static int localNetPortSuffix = 0;
         // 转发地址
         ::strncpy(argc.otherForwardIP,[[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY] UTF8String], sizeof(argc.otherForwardIP));
         argc.otherForwardPort = [[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] intValue];
-
+        
         // 对方的ssid
         argc.otherSsid = [[params valueForKey:SESSION_DEST_SSID_KEY] intValue];
         // 自己的ssid
         argc.selfSsid = [[params valueForKey:SESSION_SRC_SSID_KEY] intValue];
-
+        
         //如果内网的ip相同.设置argc.localable = true;
         
         if ([self.currentInterIP isEqualToString:[NSString stringWithUTF8String:argc.otherInterIP]]) {
@@ -249,7 +246,7 @@ static int localNetPortSuffix = 0;
         }else{
             argc.localEnble = false;
         }
-
+        
         NSLog(@"本机的外网ip：%@",self.currentInterIP);
         NSLog(@"对方的外网ip：%@",[NSString stringWithUTF8String:argc.otherInterIP]);
         NSLog(@"设置localable为：%d",argc.localEnble);
@@ -262,14 +259,14 @@ static int localNetPortSuffix = 0;
         NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
         
         if (self.pInterfaceApi->GetP2PPeer(argc) != 0) {
-//            return -1;
+            //            return -1;
             ret = false;
         }
         //如果已经完成p2p穿透,就终止
-//        self.pInterfaceApi->StopDetect();
+        //        self.pInterfaceApi->StopDetect();
         dispatch_async(dispatch_get_main_queue(), ^{
-#if debug
-              [[IMTipImp defaultTip] showTip:@"<<<<<<p2p成功>>>>>>>"];
+#if DEBUG
+            [[IMTipImp defaultTip] showTip:@"<<<<<<p2p成功>>>>>>>"];
 #endif
             NSLog(@"媒体类型:%d",self.m_type);
             NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
@@ -281,42 +278,53 @@ static int localNetPortSuffix = 0;
                 return;
             }
             NSLog(@"isLocal的状态：%d",argc.islocal);
-#if debug
+#if DEBUG
             [[IMTipImp defaultTip] showTip:@"准备startmedia"];
 #endif
+            
+            TVideoConfigInfo vieConfig;
+            vieConfig.height = 192;
+            vieConfig.width = 144;
+            vieConfig.maxFramerate = 15;
+            vieConfig.startBitrate = 160;
+            vieConfig.maxBitrate = 360;
             if (argc.islocal)
             {
                 NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
-                ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherLocalIP, argc.otherLocalPort);// 要判断返回值
+                if (self.canVideoCalling ) {
+                    ret = self.pInterfaceApi->StartVieMedia(argc.otherLocalIP, argc.otherLocalPort,vieConfig);// 要判断返回值
+                }else{
+                    ret = self.pInterfaceApi->StartVoeMedia(argc.otherLocalIP, argc.otherLocalPort);
+                }
             }
             else if (argc.isInter)
             {
                 NSLog(@"外网可用[%s:%d]", argc.otherInterIP, argc.otherInterPort);
-                ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherInterIP, argc.otherInterPort);// 要判断返回值
+                if (self.canVideoCalling) {
+                    ret = self.pInterfaceApi->StartVieMedia(argc.otherInterIP, argc.otherInterPort,vieConfig);// 要判断返回值
+                }else{
+                    ret = self.pInterfaceApi->StartVoeMedia(argc.otherInterIP, argc.otherInterPort);
+                }
             }
             else
             {
                 NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
-                ret = self.pInterfaceApi->StartMedia(InitTypeVoe, argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
+                ret = self.pInterfaceApi->StartVoeMedia(argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
             }
             if (!ret)
             {
-#if debug
                 [[IMTipImp defaultTip] errorTip:@"传输通道开启失败"];
-#endif
             }
-
+            
             if (ret) {
-#if debug
                 [[IMTipImp defaultTip] showTip:@"紧接着p2p,媒体开启成功"];
-#endif
                 [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
             }else{
                 [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_FAILED object:nil userInfo:params];
             }
         });
     });
-
+    
     return  ret;
 }
 - (BOOL)startTransport{
@@ -326,11 +334,17 @@ static int localNetPortSuffix = 0;
 }
 
 - (void)stopTransport{
-    bool ret = self.pInterfaceApi->StopMedia(self.m_type);
-    if (ret) {
-        self.isCameraOpened = NO;
-        NSLog(@"<<<<<<<<<<<<<<<<<<<<关闭传输通道成功：>>>>>>>>>>>>>>>>>>>>>>%d",ret);
+    bool retCloseMedia = true;
+    if (self.canVideoCalling) {
+        retCloseMedia    = self.pInterfaceApi->StopVieMedia();
+    }else{
+        retCloseMedia = self.pInterfaceApi->StopVoeMedia();
     }
+    bool retCloseNet = self.pInterfaceApi->CloseNetWork();
+    if (retCloseMedia &&retCloseNet) {
+        self.isCameraOpened = NO;
+    }
+    NSLog(@"<<<<<<<<<<<<<<<<<<<<closeMedia:%d,closeNet:%d >>>>>>>>>>>>>>>>>>>>>>>>>>>>",retCloseMedia,retCloseNet);
 }
 
 - (void)mute{
@@ -377,16 +391,16 @@ static int localNetPortSuffix = 0;
     NSLog(@"显示摄像头");
 #endif
     [self openCamera];
-//    self.pInterfaceApi->SetMuteEnble(MTVie, true);
-//    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
+    //    self.pInterfaceApi->SetMuteEnble(MTVie, true);
+    //    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
 }
 - (void)hideCam{
 #if ENGINE_MSG
     NSLog(@"隐藏摄像头");
 #endif
     self.pInterfaceApi->SwitchCamera(10);
-//    self.pInterfaceApi->SetMuteEnble(MTVie, false);
-//    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
+    //    self.pInterfaceApi->SetMuteEnble(MTVie, false);
+    //    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
 }
 
 @synthesize canVideoCalling = _canVideoCalling;
@@ -400,28 +414,25 @@ static int localNetPortSuffix = 0;
     if (!remoteRenderView) {
         return;
     }
-        if (self.isCameraOpened )
-        {
-#if debug
-            [[IMTipImp defaultTip] showTip:@"设置小窗口"];
-#endif
-            // 摆正摄像头位置
-            self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
-            // 开启摄像头
-            [_pview_local setFrame:CGRectMake(0, 0, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
-            [localView addSubview:_pview_local];
-            [localView setFrame:CGRectMake(FULL_SCREEN.size.width*.7, FULL_SCREEN.size.height*.7, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
-            self.pInterfaceApi->VieAddRemoteRenderer((__bridge void*)remoteRenderView);
-
-
-        }
-  
-
+    if (self.isCameraOpened )
+    {
+        [[IMTipImp defaultTip] showTip:@"设置小窗口"];
+        // 摆正摄像头位置
+        self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
+        // 开启摄像头
+        [_pview_local setFrame:CGRectMake(0, 0, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
+        [localView addSubview:_pview_local];
+        [localView setFrame:CGRectMake(FULL_SCREEN.size.width*.7, FULL_SCREEN.size.height*.7, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
+        self.pInterfaceApi->VieAddRemoteRenderer((__bridge void*)remoteRenderView);
+        
+        
+    }
+    
+    
 }
 
 - (BOOL) openCamera{
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
         int r = 0;
         //先把摄像头关了
         self.pInterfaceApi->SwitchCamera(10);
@@ -429,8 +440,9 @@ static int localNetPortSuffix = 0;
             self.isCameraOpened = YES;
             // 摆正摄像头位置
             self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
+            NSLog(@"本地摄像头开启成功");
         }else{
-            NSLog(@"摄像头关闭失败:%d",r);
+            NSLog(@"摄像头开启失败:%d",r);
             self.isCameraOpened = NO;
         }
     });
@@ -452,21 +464,20 @@ static int localNetPortSuffix = 0;
             break;
     }
     if (self.isCameraOpened) {
-            self.pInterfaceApi->SwitchCamera(self.cameraIndex);
-            // 摆正摄像头位置
-            self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
-
+        self.pInterfaceApi->SwitchCamera(self.cameraIndex);
+        // 摆正摄像头位置
+        self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
+        
     }
-
+    
 }
 - (void)tearDown{
-    [self stopTransport];
-    bool ret  = self.pInterfaceApi->Terminate();
-    NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<关闭引擎>>>>>>>>>>>>>>:%d",ret);
+    //    [self stopTransport];
+    bool ret  = self.pInterfaceApi->Terminate(); NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<关闭引擎>>>>>>>>>>>>>>:%d",ret);
     delete _pInterfaceApi;
     _pInterfaceApi = nil;
     
-
+    
 }
 
 - (void)keepSessionAlive:(NSString*) probeServerIP port:(NSInteger)port{
