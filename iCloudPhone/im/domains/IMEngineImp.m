@@ -13,7 +13,7 @@
 #import "video_render_ios_view.h"
 
 #import "IMTipImp.h"
-UIImageView* _pview_local;
+UIView*  _pview_local;
 @interface IMEngineImp ()
 @property(nonatomic) CAVInterfaceAPI* pInterfaceApi;
 @property(nonatomic) InitType m_type;
@@ -30,7 +30,7 @@ UIImageView* _pview_local;
         self.cameraIndex = 1;
         self.isCameraOpened = NO;
         self.netWorkPort = LOCAL_PORT;
-        _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
+        _pview_local = [[UIView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
     }
     return self;
 }
@@ -137,7 +137,7 @@ static int localNetPortSuffix = 0;
             {
                 //由于使用3g网络。不支持视频
                 self.m_type = InitTypeVoe;
-                _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0,0)];
+                _pview_local = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0,0)];
             }
                 break;
             default:
@@ -410,24 +410,20 @@ static int localNetPortSuffix = 0;
 - (BOOL)canVideoCalling{
     return _canVideoCalling;
 }
-- (void)openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView *)localView{
+- (int)openScreen:(VideoRenderIosView*) remoteRenderView{
     if (!remoteRenderView) {
-        return;
+        return 0;
     }
+    int ret = 0;
     if (self.isCameraOpened )
     {
         [[IMTipImp defaultTip] showTip:@"设置小窗口"];
         // 摆正摄像头位置
         self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
         // 开启摄像头
-        [_pview_local setFrame:CGRectMake(0, 0, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
-        [localView addSubview:_pview_local];
-        [localView setFrame:CGRectMake(FULL_SCREEN.size.width*.7, FULL_SCREEN.size.height*.7, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
-        self.pInterfaceApi->VieAddRemoteRenderer((__bridge void*)remoteRenderView);
-        
-        
+        ret = self.pInterfaceApi->VieAddRemoteRenderer((__bridge void*)remoteRenderView);
     }
-    
+    return ret;
     
 }
 
@@ -441,8 +437,13 @@ static int localNetPortSuffix = 0;
             // 摆正摄像头位置
             self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
             NSLog(@"本地摄像头开启成功");
+            //当摄像头开启成功, 把_pview_local作为通知内容发出去
+            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_CAMERA_SUCCESS_NOTIFICATION object:Nil userInfo:@{
+                                                                                                @"preview":_pview_local
+                                                                                                }];
         }else{
             NSLog(@"摄像头开启失败:%d",r);
+            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_CAMERA_FAILED_NOTIFICATION object:nil userInfo:nil];
             self.isCameraOpened = NO;
         }
     });

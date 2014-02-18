@@ -199,7 +199,7 @@ static int hasObserver = 0;
     [self.monitor invalidate];
     self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_peer_pickup_queue", DISPATCH_QUEUE_CONCURRENT)];
     //主叫方组装通信链路数据,发送给peer 不再需要传递数据.直接从manager.state里面去取
-    [self sendCallingData];
+//    [self sendCallingData];
 }
 
 //通话查询请求失败
@@ -749,7 +749,7 @@ static int hasObserver = 0;
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
     if ([[self.state valueForKey:kUseVideo] boolValue]){
-       BOOL ret =  [self.engine openCamera];
+        BOOL ret =  [self.engine openCamera];
         [self.state setValue:[NSNumber numberWithBool:ret] forKey:kUseVideo];
     }
     //主叫和被叫都在发送数据之前初始化网络. 等待即将到来的p2p数据
@@ -976,8 +976,8 @@ static int hasObserver = 0;
 
 #pragma mark - accessories
 
-- (void)openScreen:(VideoRenderIosView *)remoteRenderView localView:(UIView *)localView{
-    [self.engine openScreen:remoteRenderView localView:localView];
+- (int)openScreen:(VideoRenderIosView *)remoteRenderView{
+   return [self.engine openScreen:remoteRenderView];
 }
 - (void)closeScreen{
 }

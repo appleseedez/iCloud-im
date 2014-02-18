@@ -30,14 +30,14 @@
 	if (![self.udpSock bindToPort:0 error:&error])
 	{
 #if DEBUG
-        [[IMTipImp defaultTip] errorTip:@"upd绑定端口失败了"];
+        [[IMTipImp defaultTip] errorTip:@"udp绑定端口失败了"];
 #endif
 		return;
 	}
 	if (![self.udpSock beginReceiving:&error])
 	{
 #if DEBUG
-        [[IMTipImp defaultTip] errorTip:@"upd开始接收数据失败了"];
+        [[IMTipImp defaultTip] errorTip:@"udp开始接收数据失败了"];
 #endif
 		return;
 	}
@@ -66,12 +66,6 @@
                          }
                  }];
     
-//    [self.udpSock connectToHost:ROUTE_SERVER_IP onPort:ROUTE_SERVER_PORT error:&error];
-//    if (error) {
-//        NSLog(@"链接服务器的异常:%@",error);
-//    }
-
-	
 }
 - (void)disconnect{
 }
@@ -133,8 +127,6 @@
                              }
                      }];
     }else if (self.tag == ROUTE_UDP_SEQENCE_END_TAG){
-//         NSLog(@"最后拿到的ip:%@,port:%d",self.ip,self.port);
-//        [[response valueForKey:kBody] setValue:@"10.0.0.30" forKey:kIP];
 #if UDP_MESSAGE
         NSLog(@"最后登录的业务服务器：%@",response);
 #endif

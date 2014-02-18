@@ -28,7 +28,7 @@
 - (void) connectToSignalServer;
 // 断开连接
 -(void) disconnectToSignalServer;
-
+-(void) sendCallingData;
 -(void) clearTable;
 //从信令业务服务器注销
 - (void) logoutFromSignalServer;
@@ -41,7 +41,7 @@
 - (void) lockScreenForSession;
 - (void) unlockScreenForSession;
 //设置视频输出窗口
-- (void) openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView*) localView;
+- (int) openScreen:(VideoRenderIosView*) remoteRenderView;
 //关闭视频窗口
 - (void) closeScreen;
 //静音

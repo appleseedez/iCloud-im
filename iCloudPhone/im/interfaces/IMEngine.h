@@ -35,7 +35,7 @@
 - (void)setCanVideoCalling:(BOOL)canVideoCalling;
 - (BOOL)canVideoCalling;
 //开启远端视频输入窗口
-- (void) openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView*) localView;
+- (int) openScreen:(VideoRenderIosView*) remoteRenderView;
 //关闭远端视频输入窗口
 - (void) closeScreen;
 - (void) switchCamera;

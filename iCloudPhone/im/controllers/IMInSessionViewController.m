@@ -20,17 +20,15 @@
 @property(nonatomic) MSWeakTimer* clock;
 
 @end
-
+/**
+ 只要流程进入到开始p2p就应该到达本页面
+ 如果是视频通话, 首先,本页面应该展示本人的视频预览
+ 待p2p结束,加载远端图像
+ 
+ 
+ **/
 @implementation IMInSessionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -41,11 +39,12 @@
     }
     //开启视频窗口，调整摄像头
     [self.view sendSubviewToBack:self.remoteRenderView];
+    
     [self performSelector:@selector(openScreen) withObject:Nil afterDelay:2];
 }
 
 - (void) openScreen{
-    [self.manager openScreen:self.remoteRenderView localView:self.selfCamView];
+    [self.manager openScreen:self.remoteRenderView];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [self setup];
@@ -221,4 +220,6 @@
     [self.manager switchCamera];
     sender.enabled = YES;
 }
+
+
 @end
