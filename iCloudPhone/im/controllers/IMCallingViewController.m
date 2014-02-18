@@ -11,7 +11,6 @@
 #import "ConstantHeader.h"
 #import "IMInSessionViewController.h"
 #import "ItelAction.h"
-#import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 #import "Area+toString.h"
 static int soundCount;
@@ -115,7 +114,6 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupPreview:) name:OPEN_CAMERA_SUCCESS_NOTIFICATION object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionClosed:) name:END_SESSION_NOTIFICATION object:nil];
-    NSLog(@"notifyBinding");
 }
 -(void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

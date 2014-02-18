@@ -914,6 +914,11 @@ static int hasObserver = 0;
     NSLog(@"the log to be saved : %@",self.recentLog);
 #endif
     [self startCommunicationCounting];
+    
+    //通知view可以切换的到“通话中"界面了
+    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_INSESSION_VIEW_NOTIFICATION
+                                                        object:nil
+                                                      userInfo:nil];
 
 }
 - (void) transportFailed:(NSNotification*) notify{
