@@ -45,10 +45,6 @@
 
 }
 
--(void)setupManagers{
-
-}
-
 
 - (void) registerNotifications{
     
@@ -66,11 +62,9 @@
         [self.phoneBook loadAddressBook];
     }
     [[IMCoreDataManager defaulManager] isAreaInCoreData]; //地名插入coredata
-    [self setupManagers];
     //初始化ItelMessageInterface
-    [ItelMessageInterfaceImp defaultMessageInterface];
-
     RootViewController *rootVC= (RootViewController*) self.window.rootViewController;
+    //实例化manager
     self.manager = [[IMManagerImp alloc] init];
     [self.manager setup];
     [self registerNotifications];
@@ -101,6 +95,7 @@
     [self.window makeKeyAndVisible];
    return YES;
 }
+
 -(void)checkAutoLogin{
      //查询currUser
      HostItelUser *currUser=nil;
@@ -134,7 +129,6 @@
         [[ItelAction action] checkAddressBookMatchingItel];
         [self setupIMManager:params];
         if ([[ItelAction action] getHost]) {
-//            [self.manager setup];
             [self.manager connectToSignalServer];
         }
         
