@@ -1884,9 +1884,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				47B89DD01834D40000022FE5 /* iCloudPhone */,
 				47B89DF11834D40000022FE5 /* iCloudPhoneTests */,
 				479EF09B1859D9A40012EE29 /* GCDSocket */,
+				47B89DD01834D40000022FE5 /* iCloudPhone */,
 				479EF0A81859D9A50012EE29 /* GCDSocketTests */,
 				BAF70BDF189305FC00044097 /* libAlalertBanner */,
 				BAF70BEC189305FC00044097 /* libAlalertBannerTests */,

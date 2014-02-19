@@ -78,6 +78,9 @@
 #if usertip
     [[IMTipImp defaultTip] showTip:@"连接上了信令服务器"];
 #endif
+    [sock performBlock:^{
+        [sock enableBackgroundingOnSocket];
+    }];
     [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
     [self send:self.authInfo];
 }

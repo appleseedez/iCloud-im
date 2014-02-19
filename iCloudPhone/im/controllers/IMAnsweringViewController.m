@@ -142,6 +142,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 }
 
 - (void) presentAnsweringModeHUD{
+    [self.cameraPreview setHidden:YES];
     [self.inSessionNameHUD setHidden:YES];
     [self.inSessionActionHUD setHidden:YES];
     [self.answeringNameHUD setHidden:NO];
@@ -153,6 +154,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 - (void) presentSessionModeHUD{
     [self.answeringNameHUD setHidden:YES];
     [self.answeringActionHUD setHidden:YES];
+    [self.cameraPreview setHidden:NO];
     [self.inSessionNameHUD setHidden:NO];
     [self.inSessionActionHUD setHidden:NO];
     self.currentNameHUD = self.inSessionNameHUD;
@@ -191,6 +193,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     [self.cameraPreview addSubview:preview];
 }
 - (void)intoSession{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:PRESENT_INSESSION_VIEW_NOTIFICATION object:nil];
     self.currentMode = @(inSessionMode);
     if (0 == [self.manager openScreen:self.remoteRenderView] ) {
         [UIView animateWithDuration:.3 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
@@ -204,8 +207,14 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     //调整预览窗框大小
     CGRect smallSize =  CGRectMake(0, 0, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3);
     [self.cameraPreview setFrame:CGRectMake(FULL_SCREEN.size.width*.7, FULL_SCREEN.size.height*.7, FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
+    if ([[self.cameraPreview subviews] count]) {
+        [self.cameraPreview setHidden:NO];
+        [[((UIView*)[self.cameraPreview subviews][0]).layer sublayers][0] setFrame:smallSize];
+    }else{
+        [self.cameraPreview setHidden:YES];
+    }
     
-    [[((UIView*)[self.cameraPreview subviews][0]).layer sublayers][0] setFrame:smallSize];
+    
 }
 
 - (void) decoratePreview{
@@ -217,6 +226,9 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 
 
 - (void) setupInSessionState{
+    //终止拨号音
+    AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
+    AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
     //通话过程中,禁止锁屏
     [self.manager lockScreenForSession];
     //定时器用于显示通话时长

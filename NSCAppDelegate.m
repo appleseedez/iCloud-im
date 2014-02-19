@@ -72,7 +72,9 @@
 
     RootViewController *rootVC= (RootViewController*) self.window.rootViewController;
     self.manager = [[IMManagerImp alloc] init];
-    
+    [self.manager setup];
+    [self registerNotifications];
+    [[ItelMessageInterfaceImp defaultMessageInterface] setup];
     rootVC.manager=self.manager;
     self.RootVC=rootVC;
    
@@ -94,7 +96,7 @@
         [self.window setRootViewController:loginVC];
         
     }
-    
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
    return YES;
@@ -131,6 +133,10 @@
                                     };
         [[ItelAction action] checkAddressBookMatchingItel];
         [self setupIMManager:params];
+        if ([[ItelAction action] getHost]) {
+//            [self.manager setup];
+            [self.manager connectToSignalServer];
+        }
         
     }
 }
@@ -157,7 +163,7 @@
                                  kHostItelNumber:hostItel
                                  };
         [self setupIMManager:params];
-        [self.manager setup];
+//        [self.manager setup];
         [self.manager connectToSignalServer];
    }
     [UIView commitAnimations];
@@ -187,9 +193,9 @@
                                     }];
 
     }
-    [self.manager tearDown];
+//    [self.manager tearDown];
     [[ItelMessageInterfaceImp defaultMessageInterface] tearDown];
-    [self removeNotifications];
+//    [self removeNotifications];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -197,7 +203,18 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationDidEnterBackground");
 #endif
-     
+    
+    BOOL backgroundAccepted = [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
+        if ([[ItelAction action] getHost]) {
+//            [self.manager setup];
+            [self.manager connectToSignalServer];
+        }
+    
+    }];
+    if (backgroundAccepted)
+    {
+        NSLog(@"VOIP backgrounding accepted");
+    }
 //    [self.manager tearDown];
 }
 
@@ -206,6 +223,7 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationWillEnterForeground ");
 #endif
+    [[UIApplication sharedApplication] clearKeepAliveTimeout];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -215,10 +233,10 @@
 #endif
     
     if ([[ItelAction action] getHost]) {
-        [self.manager setup];
-        [self.manager connectToSignalServer];
+//        [self.manager setup];
+//        [self.manager connectToSignalServer];
     }
-    [self registerNotifications];
+//    [self registerNotifications];
     [[ItelMessageInterfaceImp defaultMessageInterface] setup];
 }
 

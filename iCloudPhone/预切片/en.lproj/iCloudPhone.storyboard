@@ -3150,6 +3150,17 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NnA-ze-LqH" userLabel="switchBtn">
+                                <rect key="frame" x="250" y="44" width="53" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" image="switch_cam_btn">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchCamera:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="alm-k7-rbm"/>
+                                    <action selector="switchCamera:" destination="kEe-Cf-lem" eventType="touchUpInside" id="uhm-yW-PVl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -3164,6 +3175,7 @@
                         <outlet property="inSessionNameHUD" destination="Gtf-cX-u87" id="8VJ-UU-BtK"/>
                         <outlet property="peerAccountLabel" destination="mHu-kO-dql" id="u68-DL-F8j"/>
                         <outlet property="remoteRenderView" destination="Scq-Uo-cwB" id="XFO-AP-ZXr"/>
+                        <outlet property="switchCameraBtn" destination="NnA-ze-LqH" id="2GK-D0-r8X"/>
                         <segue destination="kEe-Cf-lem" kind="push" identifier="sessionRequestAcceptedByPeerSegue" id="ps9-HW-4k5"/>
                     </connections>
                 </viewController>
@@ -3409,7 +3421,6 @@
                         <outlet property="inSessionNameHUD" destination="OL9-0c-54b" id="FI3-TT-D9f"/>
                         <outlet property="isVideoCallICONView" destination="by7-vx-8Ul" id="DWp-Vz-Y6w"/>
                         <outlet property="peerAccountLabel" destination="SMX-5o-nlt" id="KMe-gn-7MS"/>
-                        <outlet property="peerAvatarImageView" destination="by7-vx-8Ul" id="TR2-Ps-56Q"/>
                         <outlet property="remoteRenderView" destination="8I1-ov-q6l" id="jad-zL-000"/>
                         <segue destination="kEe-Cf-lem" kind="push" identifier="acceptSessionSegue" id="5y8-TJ-QOU"/>
                     </connections>
@@ -3945,6 +3956,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5y8-TJ-QOU"/>
+        <segue reference="ps9-HW-4k5"/>
     </inferredMetricsTieBreakers>
 </document>
