@@ -12,6 +12,7 @@
 #import "IMCoreDataManager.h"
 #import "ItelAction.h"
 #import "Recent+CRUD.h"
+#import "NSCAppDelegate.h"
 @interface IMManagerImp()
 // state显示是一个信息收集的工具
 @property (nonatomic) NSMutableDictionary* state;
@@ -163,6 +164,24 @@ static int hasObserver = 0;
     }
     
 }
+- (void)presentDialRelatedPanel{
+    if ([((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow isHidden]){
+        [UIView beginAnimations:@"showOff" context:Nil];
+        [UIView setAnimationDuration:0.3];
+        [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow setHidden:NO];
+        [UIView commitAnimations];
+    }
+}
+
+- (void) dismissDialRelatedPanel{
+    
+    if (![((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow isHidden]){
+        [UIView beginAnimations:@"showOff" context:Nil];
+        [UIView setAnimationDuration:.3];
+        [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow setHidden:YES];
+        [UIView commitAnimations];
+    }
+}
 #pragma mark - callbacks
 //通话查询请求成功
 - (void) sessionInited:(NSNotification*) notify{
@@ -188,6 +207,7 @@ static int hasObserver = 0;
     [self.state setValue:[notify.userInfo valueForKey:kRelayIP] forKey:kForwardIP];
     // 转发port
     [self.state setValue: [notify.userInfo valueForKey:kRelayPort] forKey:kForwardPort];
+    [self presentDialRelatedPanel];
     //4. 通知界面弹起拨号中界面 信息从manager.state里面取状态 不再通过通知传递了 接收通知的结果就是主叫方会弹出正在拨号界面
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:nil];
 
@@ -355,8 +375,9 @@ static int hasObserver = 0;
         [self endSession];
         [self saveCommnicationLog];
     }
-    
-    [self tearDown];
+    //通知系统,登出当前用户
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"signOut" object:nil userInfo:nil];
+//    [self tearDown];
     //提示用户
     UIAlertView* multiLoginAlert = [[UIAlertView alloc] initWithTitle:@"被踢下线通知" message:@"您的账号已在别处登陆.如果不是您本人操作,那么账号有可能被盗.请联系客服." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
     [multiLoginAlert show];
@@ -972,8 +993,8 @@ static int hasObserver = 0;
 
 #pragma mark - alert view delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    //通知系统,登出当前用户
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"signOut" object:nil userInfo:nil];
+//    //通知系统,登出当前用户
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"signOut" object:nil userInfo:nil];
 }
 - (void)alertViewCancel:(UIAlertView *)alertView{
     alertView.delegate = nil;

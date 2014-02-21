@@ -14,6 +14,10 @@
 #import "ItelMessageInterfaceImp.h"
 #import "ItelAction.h"
 #import "IMCoreDataManager+FMDB_TO_COREDATA.h"
+
+#import "IMDailViewController.h"
+#import "IMCallingViewController.h"
+#import "IMAnsweringViewController.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 
 @interface ItelMessageInterfaceImp()
@@ -28,9 +32,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"currUser"];
 
     [self.manager logoutFromSignalServer];
-    [self.manager tearDown];
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
     [self.manager clearTable];
+    [self.manager tearDown];
 }
 
 
@@ -51,6 +55,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
     //绑定重连通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reconnect:) name:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentCallingView:) name:PRESENT_CALLING_VIEW_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentAnsweringView:) name:SESSION_PERIOD_REQ_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentDialPanelView:) name:PRESENT_DIAL_VIEW_NOTIFICATION object:Nil];
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -70,6 +77,10 @@
     [self registerNotifications];
     [[ItelMessageInterfaceImp defaultMessageInterface] setup];
     rootVC.manager=self.manager;
+    
+    self.dialPanelWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, FULL_SCREEN.size.width, FULL_SCREEN.size.height)];
+    self.dialPanelWindow.windowLevel = UIWindowLevelAlert;
+    
     self.RootVC=rootVC;
    
     
@@ -145,7 +156,7 @@
         [self.manager tearDown];
         [self.manager disconnectToSignalServer];
         [self.manager setMyAccount:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
     }
     else if(Type==RootViewControllerMain){
         [self.window setRootViewController:self.RootVC];
@@ -171,6 +182,11 @@
         [self.manager setMyAccount:[params valueForKey:kHostItelNumber]];
 
     }
+}
+
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return NO;
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -200,7 +216,6 @@
     
     BOOL backgroundAccepted = [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
         if ([[ItelAction action] getHost]) {
-//            [self.manager setup];
             [self.manager connectToSignalServer];
         }
     
@@ -209,7 +224,6 @@
     {
         NSLog(@"VOIP backgrounding accepted");
     }
-//    [self.manager tearDown];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -225,13 +239,6 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationDidBecomeActive ");
 #endif
-    
-    if ([[ItelAction action] getHost]) {
-//        [self.manager setup];
-//        [self.manager connectToSignalServer];
-    }
-//    [self registerNotifications];
-    [[ItelMessageInterfaceImp defaultMessageInterface] setup];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -244,5 +251,44 @@
     [[ItelMessageInterfaceImp defaultMessageInterface] tearDown];
     [self removeNotifications];
 }
+#pragma mark - HANDLER
+- (void) presentDialPanelView:(NSNotification*) notify{
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
+    IMDailViewController* dialViewController = (IMDailViewController*) [sb instantiateViewControllerWithIdentifier:DIAL_PAN_VIEW_CONTROLLER_ID];
+    dialViewController.manager = self.manager;
+    self.dialPanelWindow.rootViewController =dialViewController;
+    [self.manager presentDialRelatedPanel];
+    
+}
 
+- (void) presentCallingView:(NSNotification*) notify{
+#if ROOT_TABBAR_DEBUG
+    NSLog(@"收到通知，将要加载CallingView");
+#endif
+    //加载“拨号中”界面
+    //加载stroyboard
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
+    UINavigationController* callingViewNavController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
+    IMCallingViewController* callingViewController = (IMCallingViewController*) callingViewNavController.topViewController;
+    callingViewController.manager = self.manager;
+    self.dialPanelWindow.rootViewController =callingViewController;
+    [self.manager presentDialRelatedPanel];
+    
+}
+- (void) presentAnsweringView:(NSNotification*) notify{
+    
+#if ROOT_TABBAR_DEBUG
+    NSLog(@"收到通知，将要加载AnsweringView");
+#endif
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
+    UINavigationController* answeringViewNavController =[sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
+    IMAnsweringViewController* answeringViewController = (IMAnsweringViewController*) answeringViewNavController.topViewController;
+    answeringViewController.manager = self.manager;
+    answeringViewController.callingNotify = notify;
+    
+    self.dialPanelWindow.rootViewController =answeringViewController;
+    [self.manager presentDialRelatedPanel];
+    
+    
+}
 @end

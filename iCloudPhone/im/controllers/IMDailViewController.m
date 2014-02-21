@@ -13,6 +13,7 @@
 #import "ItelAction.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "UIImageView+AFNetworking.h"
+
 @interface IMDailViewController ()
 @property(nonatomic) NSDictionary* touchToneMap; //按键的拨号音，系统默认就有的
 @property(nonatomic) BOOL hidePan;// 标识出当前拨号盘是否可见。
@@ -109,7 +110,8 @@
 }
 - (void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authOK:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleDialPan:) name:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
+
+
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -117,15 +119,6 @@
 - (void) authOK:(NSNotification*) notify{
 }
 
-- (void) toggleDialPan:(NSNotification*) notify{
-    if (self.hidePan) {
-        // show the pan
-        
-    }else{
-        //hide the pan
-    }
-    
-}
 
 
 #pragma mark - table delegate & datasource
@@ -279,6 +272,7 @@
 }
 
 - (IBAction)showRecentContactList:(UIButton *)sender {
+    [self.manager dismissDialRelatedPanel];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)autoFill:(UIButton *)sender {

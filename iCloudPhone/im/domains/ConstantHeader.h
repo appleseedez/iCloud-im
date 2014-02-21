@@ -163,6 +163,7 @@ enum emDataType
 #define PROBE_SERVER_KEY @"PROBE_SERVER"
 #define PROBE_PORT_KEY @"PROBE_PORT"
 #define DIAL_PAN_VIEW_CONTROLLER_ID @"DialPanView"
+#define DIAL_MANAGER_VIEW_CONTROLLER_ID @"Dial Panel ViewController"
 #define CALLING_VIEW_CONTROLLER_ID @"CallingView"
 #define ANSWERING_VIEW_CONTROLLER_ID @"AnsweringView"
 #define INSESSION_VIEW_CONTROLLER_ID @"InSessionWithVoiceView"

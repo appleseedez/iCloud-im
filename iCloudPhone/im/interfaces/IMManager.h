@@ -61,4 +61,6 @@
 - (void) setCanVideo:(BOOL)canVideo;
 - (BOOL) canVideo;
 - (double) checkDuration;
+- (void) presentDialRelatedPanel;
+- (void) dismissDialRelatedPanel;
 @end

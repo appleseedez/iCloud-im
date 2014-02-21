@@ -13,6 +13,7 @@
 #import "ItelAction.h"
 #import "UIImageView+AFNetworking.h"
 #import "Area+toString.h"
+#import "NSCAppDelegate.h"
 static int soundCount;
 @interface IMCallingViewController ()
 @property(nonatomic) NSNotification* inSessionNotify;
@@ -46,13 +47,15 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self registerNotifications];
-    [self.manager sendCallingData ];
+
+
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self registerNotifications];
     [self setup];
+    [self.manager sendCallingData ];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -60,7 +63,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 }
 - (void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self tearDown];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,7 +83,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 }
 
 - (void) setup{
-   ItelUser* peerUser =  [[ItelAction action] userInFriendBook:[[self.manager myState] valueForKey:kPeerAccount]];
+    ItelUser* peerUser =  [[ItelAction action] userInFriendBook:[[self.manager myState] valueForKey:kPeerAccount]];
     NSString* peerDisplayName = BLANK_STRING;
     if (!peerUser) {
         peerDisplayName = [[self.manager myState] valueForKey:kPeerAccount];
@@ -107,6 +110,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
     AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
     [self removeNotifications];
+    [((NSCAppDelegate*)[UIApplication sharedApplication].delegate).dialPanelWindow setHidden:YES];
 }
 -(void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(intoSession:) name:PRESENT_INSESSION_VIEW_NOTIFICATION object:nil];
@@ -132,7 +136,8 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
 }
 
 - (void) sessionClosed:(NSNotification*) notify{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self tearDown];
+    [self.manager dismissDialRelatedPanel] ;
 }
 
 #pragma mark - HANDLER

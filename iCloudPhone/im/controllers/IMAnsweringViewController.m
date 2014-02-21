@@ -12,6 +12,7 @@
 #import "ItelAction.h"
 #import "UIImageView+AFNetworking.h"
 #import "Area+toString.h"
+#import "NSCAppDelegate.h"
 static int soundCount;
 @interface IMAnsweringViewController ()
 @property(nonatomic) NSNumber* currentMode;
@@ -56,7 +57,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self tearDown];
+
 }
 - (void)didReceiveMemoryWarning
 {
@@ -83,6 +84,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
     AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
     [self removeNotifications];
+     [((NSCAppDelegate*)[UIApplication sharedApplication].delegate).dialPanelWindow setHidden:YES];
 }
 //循环播放声音
 void soundPlayCallback1(SystemSoundID soundId, void *clientData){
@@ -108,8 +110,8 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 }
 
 - (void) sessionClosed:(NSNotification*) notify{
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self tearDown];
+    [self.manager dismissDialRelatedPanel];
 }
 
 

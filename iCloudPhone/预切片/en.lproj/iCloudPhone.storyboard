@@ -1537,6 +1537,29 @@
             </objects>
             <point key="canvasLocation" x="941" y="833"/>
         </scene>
+        <!--Dial Manager View Controller-->
+        <scene sceneID="hYu-rs-JRC">
+            <objects>
+                <viewController storyboardIdentifier="Dial Panel ViewController" id="WE0-va-grE" customClass="IMDialManagerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="myZ-Ya-dlL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vyj-iw-NNF">
+                                <rect key="frame" x="112" y="380" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FMs-xX-Z3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1100" y="902"/>
+        </scene>
         <!--Content View Controller - 主页-->
         <scene sceneID="nfj-8q-YVJ">
             <objects>
