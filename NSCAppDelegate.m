@@ -14,6 +14,7 @@
 #import "ItelMessageInterfaceImp.h"
 #import "ItelAction.h"
 #import "IMCoreDataManager+FMDB_TO_COREDATA.h"
+#import "NXInputChecker.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 
 @interface ItelMessageInterfaceImp()
@@ -48,7 +49,54 @@
 -(void)setupManagers{
 
 }
-
+#pragma mark - 被快鱼掉起来
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+  
+    
+    
+   
+    
+    NSDictionary *dic=[NXInputChecker parmetersInUrl:url];
+   
+    if ([self.window.rootViewController isKindOfClass:[NXLoginViewController class]]) {
+        HostItelUser *host=[HostItelUser userWithDictionary:[dic  mutableCopy]];
+        
+        NSDictionary *tokens=[dic objectForKey:@"tokens"];
+        if (tokens) {
+            host.sessionId=[tokens objectForKey:@"jsessionid"];
+            host.spring_security_remember_me_cookie=[tokens objectForKey:@"spring_security_remember_me_cookie"];
+            host.token=[tokens objectForKey:@"token"];
+        }
+        
+        
+        [[ItelAction action] setHostItelUser:host];
+       
+        
+        [[ItelAction action] resetContact];
+        
+       
+        [self changeRootViewController:RootViewControllerMain userInfo:dic];
+        
+        [[ItelAction action] checkAddressBookMatchingItel];
+        [[ItelAction action] getItelBlackList:0];
+        [[ItelAction action] getItelFriendList:0];
+    }else {
+        if (![[[ItelAction action] getHost].itelNum isEqualToString:[dic objectForKey:@"itel"]]) {
+            [self signOut];
+          UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"自动登录失败" message:@"当前用户与自动登录用户冲突 请重新登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] ;
+            
+            [alert performSelector:@selector(show) withObject:nil afterDelay:0.2];
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    return YES;
+}
 
 - (void) registerNotifications{
     

@@ -157,4 +157,62 @@
      
     return result;
 }
+
+#pragma mark - url编解码
++(NSDictionary*)parmetersInUrl:(NSURL*)url{
+    NSString *strUrl=[url.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:[strUrl dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+    
+    return dic;
+}
+
+
+
+#pragma mark - 字节编解码
++(NSData*)dataForByteString:(NSString*)byteString{
+    int start = 0;
+    int end = 0 ;
+    BOOL isEnd=NO;
+    NSMutableData *objectData=[[NSMutableData alloc] init];
+    while (end < byteString.length) {
+        if (isEnd) {
+            break;
+        }
+        int length=1;
+        BOOL isByte=NO;
+        NSMutableString *byte=[[NSMutableString alloc]init];
+        //读取一个字节
+        while (!isByte) {
+            NSRange range;
+            range.length=1;
+            range.location=start+length;
+            NSString *n=[byteString substringWithRange:range];
+            if ([n isEqualToString:@"E"]) {
+                isEnd=YES;
+                break;
+            }else
+            if ([n isEqualToString:@"%"]) {
+                end=range.location;
+                isByte=YES;
+                length=1;
+            }else{
+                length++;
+                [byte appendString:n];
+            }
+            
+            
+        }
+        uint8_t b=(uint8_t)[byte intValue];
+        [objectData appendByte:b];
+        NSLog(@"%@",byte);
+        start=end;
+        
+        
+       
+        
+        
+    }
+    
+    return objectData;
+}
 @end

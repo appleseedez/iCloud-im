@@ -37,7 +37,7 @@ static ItelMessageInterfaceImp* _instance;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendSearching) userInfo:nil repeats:YES];
 }
 -(void)sendSearching{
-    NSAssert([[ItelAction action] getHost], @"host没有");
+   // NSAssert([[ItelAction action] getHost], @"host没有");
     if ([[ItelAction action] getHost]) {
         [[ItelAction action] searchForNewMessage];
     }

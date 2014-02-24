@@ -27,4 +27,7 @@
 
 //检查邮箱格式
 +(BOOL)checkEmail:(NSString *)email;
++(NSDictionary*)parmetersInUrl:(NSURL*)url;
+
++(NSData*)dataForByteString:(NSString*)byteString;
 @end
