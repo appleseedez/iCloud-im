@@ -59,7 +59,11 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-
+    //开始拨号了。播放声音
+    soundCount = 0;//给拨号音计数，响八次就可以结束
+    //系统声音播放是一个异步过程。要循环播放则必须借助回调
+    AudioServicesAddSystemSoundCompletion(DIALING_SOUND_ID,NULL,NULL,soundPlayCallback,NULL);
+    AudioServicesPlaySystemSound(DIALING_SOUND_ID);
 }
 - (void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -95,11 +99,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     self.PeerAvatarImageView.layer.masksToBounds = YES;
     
     [self.PeerAvatarImageView setImageWithURL:[NSURL URLWithString:peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
-    //开始拨号了。播放声音
-    soundCount = 0;//给拨号音计数，响八次就可以结束
-    //系统声音播放是一个异步过程。要循环播放则必须借助回调
-    AudioServicesAddSystemSoundCompletion(DIALING_SOUND_ID,NULL,NULL,soundPlayCallback,NULL);
-    AudioServicesPlaySystemSound(DIALING_SOUND_ID);
+
     self.currentMode = @(inCallingMode);
 
 

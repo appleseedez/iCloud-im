@@ -78,7 +78,7 @@
     [[ItelMessageInterfaceImp defaultMessageInterface] setup];
     rootVC.manager=self.manager;
     
-    self.dialPanelWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, FULL_SCREEN.size.width, FULL_SCREEN.size.height)];
+    self.dialPanelWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, APP_SCREEN.size.width, APP_SCREEN.size.height)];
     self.dialPanelWindow.windowLevel = UIWindowLevelAlert;
     
     self.RootVC=rootVC;
@@ -230,6 +230,8 @@
 {
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationWillEnterForeground ");
+    
+    
 #endif
     [[UIApplication sharedApplication] clearKeepAliveTimeout];
 }
@@ -239,6 +241,9 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationDidBecomeActive ");
 #endif
+    if ([[ItelAction action] getHost]) {
+        [self.manager checkTCPAlive];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

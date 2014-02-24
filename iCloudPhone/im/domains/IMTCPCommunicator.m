@@ -37,8 +37,16 @@
 
 - (void) sendHeartBeat{
     if ([self.sock isConnected]) {
-        NSLog(@"咚咚");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[IMTipImp defaultTip] showTip:@"还连着"];
+        });
+        
         [self sendRequest:self.heartBeatPKG type:HEART_BEAT_REQ_TYPE];
+    }else{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[IMTipImp defaultTip] showTip:@"断开了"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
+    });
     }
 }
 

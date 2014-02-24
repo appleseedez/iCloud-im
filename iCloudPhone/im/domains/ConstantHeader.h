@@ -160,6 +160,7 @@ enum emDataType
 #define ROUTE_GATEWAY_TAG 0x000000fe
 #define ROUTE_UDP_SEQENCE_END_TAG 0x000000ff
 #define LOCAL_PORT 11111
+#define LOCAL_UDP_PORT 44444
 #define PROBE_SERVER_KEY @"PROBE_SERVER"
 #define PROBE_PORT_KEY @"PROBE_PORT"
 #define DIAL_PAN_VIEW_CONTROLLER_ID @"DialPanView"
@@ -173,6 +174,7 @@ enum emDataType
 
 #define STATUS_BAR_HEIGHT 30 // 顶部status bar的高度
 #define FULL_SCREEN [[UIScreen mainScreen] bounds]
+#define APP_SCREEN [[UIScreen mainScreen] applicationFrame]
 #define PATH_OF_APP_HOME    NSHomeDirectory()
 #define PATH_OF_TEMP        NSTemporaryDirectory()
 #define PATH_OF_DOCUMENT    [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]

@@ -12,7 +12,7 @@
 {
 }
 @property(nonatomic) GCDAsyncUdpSocket* udpSock; //udp 链接 用于请求目录服务器
-
+@property(nonatomic) int udpPort;
 @end
 
 @implementation IMUDPCommunicator
@@ -23,15 +23,20 @@
     }
     return self;
 }
+static int localUDPNetPortSuffix = 0;
 - (void)connect:(NSString*) account{
-    
+        self.udpPort = LOCAL_UDP_PORT + (++localUDPNetPortSuffix)%9;
 	NSError *error = nil;
 	
-	if (![self.udpSock bindToPort:0 error:&error])
+	if (![self.udpSock bindToPort:self.udpPort error:&error])
 	{
 #if DEBUG
         [[IMTipImp defaultTip] errorTip:@"udp绑定端口失败了"];
 #endif
+        NSLog(@"bind error:%@",error);
+        NSAssert(self.udpSock, @"udpsock is nil");
+        [self.udpSock close];
+//        [self connect:account];
 		return;
 	}
 	if (![self.udpSock beginReceiving:&error])

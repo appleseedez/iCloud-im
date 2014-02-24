@@ -273,7 +273,7 @@
 
 - (IBAction)showRecentContactList:(UIButton *)sender {
     [self.manager dismissDialRelatedPanel];
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)autoFill:(UIButton *)sender {
     //如果有筛选结果

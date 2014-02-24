@@ -28,6 +28,7 @@ static int soundCount;
 enum modes
 {
     inAnsweringMode  = 0, //接听中
+    acceptCallMode,
     inSessionMode // 通话中
 };
 @implementation IMAnsweringViewController
@@ -66,6 +67,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 }
 
 - (void) setup{
+
     self.peerAccountLabel.text = [NSString stringWithFormat:@"%@ 来电...", [self.callingNotify.userInfo valueForKey:kDestAccount]];
     soundCount = 0;//给拨号音计数，响八次就可以结束
     //系统声音播放是一个异步过程。要循环播放则必须借助回调
@@ -137,6 +139,12 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
                 [self setupInSessionState];
             }
                 break;
+            case acceptCallMode:
+            {
+                [self presentAcceptCallModeHUD];
+//                [self.manager acceptSession:self.callingNotify];
+            }
+                break;
             default:
                 break;
         }
@@ -163,6 +171,11 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     self.currentActionHUD = self.inSessionActionHUD;
 }
 
+- (void)presentAcceptCallModeHUD{
+    [self.answeringActionHUD setHidden:YES];
+//    [self.inSessionActionHUD setHidden:NO];
+}
+
 - (void) tearDownInSessionState{
     [self.manager unlockScreenForSession];
     [self.clock invalidate];
@@ -173,7 +186,9 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 
 - (IBAction)answerCall:(UIButton *)sender {
     sender.enabled = NO;
-    [self.manager acceptSession:self.callingNotify];
+    self.currentMode = @(acceptCallMode);
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendData:) name:@"sendData" object:Nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendData" object:Nil];
     
 }
 
@@ -193,6 +208,11 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     [preview setFrame:previewSize];
     [[preview.layer sublayers][0] setFrame:previewSize];
     [self.cameraPreview addSubview:preview];
+}
+
+- (void) sendData:(NSNotification*) notify{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"sendData" object:Nil];
+     [self.manager acceptSession:self.callingNotify];
 }
 - (void)intoSession{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:PRESENT_INSESSION_VIEW_NOTIFICATION object:nil];

@@ -15,12 +15,15 @@
 #import "IMTipImp.h"
 UIView*  _pview_local;
 @interface IMEngineImp ()
-@property(nonatomic) CAVInterfaceAPI* pInterfaceApi;
+@property(atomic) CAVInterfaceAPI* pInterfaceApi;
 @property(nonatomic) InitType m_type;
 @property(nonatomic,copy) NSString* currentInterIP;
 @property(nonatomic) int cameraIndex;
 @property(nonatomic) BOOL isCameraOpened;
 @property(nonatomic) int netWorkPort;
+@property(nonatomic) dispatch_queue_t q;
+@property(nonatomic) dispatch_queue_t m;
+@property(atomic) BOOL p2pFinished;
 @end
 
 @implementation IMEngineImp
@@ -30,15 +33,26 @@ UIView*  _pview_local;
         self.cameraIndex = 1;
         self.isCameraOpened = NO;
         self.netWorkPort = LOCAL_PORT;
+        self.pInterfaceApi =new CAVInterfaceAPI();
+        self.q = dispatch_queue_create("com.itelland.p2ptunnelprivatequeue", NULL);//dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0); //dispatch_queue_create("com.itelland.p2ptunnelprivatequeue", NULL );//
+        self.m =dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);//dispatch_queue_create("com.itelland.stopP2Pprivatequeue", NULL );
         _pview_local = [[UIView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
+        self.p2pFinished = YES;
     }
     return self;
 }
-- (CAVInterfaceAPI *)pInterfaceApi{
-    if (_pInterfaceApi == nil) {
-        _pInterfaceApi = new CAVInterfaceAPI();
-    }
-    return _pInterfaceApi;
+//- (CAVInterfaceAPI *)pInterfaceApi{
+//    if (_pInterfaceApi == nil) {
+//        _pInterfaceApi = new CAVInterfaceAPI();
+//    }
+//    return _pInterfaceApi;
+//}
+- (BOOL)isP2PFinished{
+    return self.p2pFinished;
+}
+
+-(dispatch_queue_t)p2pQueue{
+    return self.q;
 }
 + (NSString*) localAddress{
     struct ifaddrs *interfaces = NULL;
@@ -115,10 +129,7 @@ static int localNetPortSuffix = 0;
  */
 - (void)initMedia{
     // TODO:在媒体初始化时,获取访问摄像头和麦克的权限. 另外如果没有获取到这些权限应该怎么办?
-    
-    
     self.pInterfaceApi->MediaInit();
-    
     //接下来，本地根据网络情况，会重新评估一次是否支持视频
     AFNetworkReachabilityManager* reachabilityManager = [AFNetworkReachabilityManager sharedManager];
     [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
@@ -211,9 +222,8 @@ static int localNetPortSuffix = 0;
 - (int)tunnelWith:(NSDictionary*) params{
     bool __block ret = true;
     TP2PPeerArgc __block argc;
-    dispatch_queue_t q =// dispatch_get_main_queue();// dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-    dispatch_queue_create("com.itelland.p2ptunnelprivatequeue", NULL );
-    dispatch_async(q, ^{
+ 
+    dispatch_async(self.q, ^{
         //
         NSLog(@"开始获取p2p通道,%@", [NSDate date]);
         
@@ -241,7 +251,8 @@ static int localNetPortSuffix = 0;
         
         //如果内网的ip相同.设置argc.localable = true;
         
-        if ([self.currentInterIP isEqualToString:[NSString stringWithUTF8String:argc.otherInterIP]]) {
+        if ([self.currentInterIP isEqualToString:[NSString stringWithUTF8String:argc.otherInterIP]]
+            || [self.currentInterIP isEqualToString:BLANK_STRING ]|| [[NSString stringWithUTF8String:argc.otherInterIP] isEqualToString:BLANK_STRING ]) {
             argc.localEnble = true;
         }else{
             argc.localEnble = false;
@@ -257,23 +268,24 @@ static int localNetPortSuffix = 0;
         NSLog(@"通话参数：对方ssid：%i",argc.otherSsid);
         NSLog(@"通话参数：自己ssid：%i",argc.selfSsid);
         NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
-        
-        if (self.pInterfaceApi->GetP2PPeer(argc) != 0) {
+        NSAssert(_pInterfaceApi != nil, @"pInterface is nilA");
+        self.p2pFinished = NO;
+        if (_pInterfaceApi && _pInterfaceApi->GetP2PPeer(argc) != 0) {
             //            return -1;
             ret = false;
         }
-        //如果已经完成p2p穿透,就终止
-        //        self.pInterfaceApi->StopDetect();
         dispatch_async(dispatch_get_main_queue(), ^{
 #if DEBUG
-            [[IMTipImp defaultTip] showTip:@"<<<<<<p2p成功>>>>>>>"];
+            [[IMTipImp defaultTip] showTip:@"<<<<<<p2p结束>>>>>>>"];
 #endif
+            self.p2pFinished = YES;
             NSLog(@"媒体类型:%d",self.m_type);
             NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
             long long  dTime =endTime - startTime;
             NSLog(@"调用时间间隔：%@",[NSString stringWithFormat:@"%llu",dTime]);
             //如果p2p失败, 立即通知
             if (ret == false) {
+                NSLog(@"execute here5");
                 [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_FAILED object:nil userInfo:params];
                 return;
             }
@@ -324,7 +336,6 @@ static int localNetPortSuffix = 0;
             }
         });
     });
-    
     return  ret;
 }
 - (BOOL)startTransport{
@@ -335,15 +346,22 @@ static int localNetPortSuffix = 0;
 
 - (void)stopTransport{
     bool retCloseMedia = true;
+    bool retCloseNet = NO;
     if (self.canVideoCalling) {
+        self.pInterfaceApi->SwitchCamera(10);
         retCloseMedia    = self.pInterfaceApi->StopVieMedia();
     }else{
         retCloseMedia = self.pInterfaceApi->StopVoeMedia();
     }
-    bool retCloseNet = self.pInterfaceApi->CloseNetWork();
+    if (self.p2pFinished) {
+       retCloseNet =  self.pInterfaceApi->CloseNetWork();
+    }
     if (retCloseMedia &&retCloseNet) {
         self.isCameraOpened = NO;
     }
+    //在结束通话时,将音频session终止
+    NSError* error= Nil;
+    [[AVAudioSession sharedInstance] setActive:NO error:&error];
     NSLog(@"<<<<<<<<<<<<<<<<<<<<closeMedia:%d,closeNet:%d >>>>>>>>>>>>>>>>>>>>>>>>>>>>",retCloseMedia,retCloseNet);
 }
 
@@ -431,7 +449,7 @@ static int localNetPortSuffix = 0;
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         int r = 0;
         //先把摄像头关了
-        self.pInterfaceApi->SwitchCamera(10);
+//        self.pInterfaceApi->SwitchCamera(10);
         if ((r = self.pInterfaceApi->StartCamera(self.cameraIndex)) >= 0) {
             self.isCameraOpened = YES;
             // 摆正摄像头位置
@@ -491,11 +509,19 @@ static int localNetPortSuffix = 0;
 
 
 - (int) stopDetectP2P{
+    int __block ret = -1;
     if (_pInterfaceApi == nil) {
-        return -1;
+        return ret;
     }
-    int ret  = self.pInterfaceApi -> StopDetect();
-    NSLog(@"<<<<<<<<<<<<<<<终止P2P>>>>>>>>>> :%d",ret);
-    return ret;
+    dispatch_async(self.m, ^{
+        NSLog(@"stopp2p start");
+        ret  = _pInterfaceApi -> StopDetect();
+        NSLog(@"<<<<<<<<<<<<<<<终止P2P>>>>>>>>>> :%d",ret);
+        NSLog(@"stopp2p end");
+    });
+
+
+
+    return 0;
 }
 @end
