@@ -173,6 +173,7 @@ static int endTime = 0;
     if ([((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow isHidden]){
         [UIView beginAnimations:@"showOff" context:Nil];
         [UIView setAnimationDuration:0.3];
+        
         [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow setHidden:NO];
         [UIView commitAnimations];
     }

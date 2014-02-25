@@ -28,4 +28,5 @@ typedef NS_ENUM(NSInteger, setRootViewController) {
 @property (nonatomic,strong) RootViewController *RootVC;
 @property (nonatomic,strong) id <IMManager> manager;
 @property  (nonatomic)AddressBook *phoneBook;  //电话联系人列表
+@property (nonatomic) NSDictionary *startExtra;
 @end

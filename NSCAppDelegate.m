@@ -61,10 +61,13 @@
    
     
     NSDictionary *dic=[NXInputChecker parmetersInUrl:url];
-   
-    if ([self.window.rootViewController isKindOfClass:[NXLoginViewController class]]) {
+    self.startExtra=[dic objectForKey:@"extra"];
+    if (dic) {
         HostItelUser *host=[HostItelUser userWithDictionary:[dic  mutableCopy]];
+    
+    if ([self.window.rootViewController isKindOfClass:[NXLoginViewController class]]) {
         
+        [self.manager setup];
         NSDictionary *tokens=[dic objectForKey:@"tokens"];
         if (tokens) {
             host.sessionId=[tokens objectForKey:@"jsessionid"];
@@ -90,6 +93,14 @@
           UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"自动登录失败" message:@"当前用户与自动登录用户冲突 请重新登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] ;
             
             [alert performSelector:@selector(show) withObject:nil afterDelay:0.2];
+            return YES ;
+        }else{
+            [[ItelAction action] setHostItelUser:host];
+        }
+    }
+        if (self.startExtra) {
+            [self doExtra];
+            
         }
         
         
@@ -101,7 +112,10 @@
     
     return YES;
 }
-
+-(void)doExtra{
+    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_DIAL_VIEW_NOTIFICATION object:nil userInfo:[self.startExtra copy]];
+    self.startExtra=nil;
+}
 - (void) registerNotifications{
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
