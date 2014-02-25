@@ -81,7 +81,7 @@ static int count = 0;
     int i= [self.customTabbar.items indexOfObject:sender];
     if (i==0&&presentDialingView==YES) {
 //        [self presentDialingViewController];
-        [self.manager presentDialRelatedPanel];
+//        [self.manager presentDialRelatedPanel];
         [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
     }
     [self setSelectedIndex:i];

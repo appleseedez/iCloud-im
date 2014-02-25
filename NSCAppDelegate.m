@@ -310,6 +310,10 @@
     UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
     IMDailViewController* dialViewController = (IMDailViewController*) [sb instantiateViewControllerWithIdentifier:DIAL_PAN_VIEW_CONTROLLER_ID];
     dialViewController.manager = self.manager;
+    
+    if ([notify.userInfo valueForKey:@"itelNumber"]) {
+        dialViewController.directNumber = [notify.userInfo valueForKey:@"itelNumber"];
+    }
     self.dialPanelWindow.rootViewController =dialViewController;
     [self.manager presentDialRelatedPanel];
     

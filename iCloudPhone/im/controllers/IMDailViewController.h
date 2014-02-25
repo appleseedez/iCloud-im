@@ -26,5 +26,5 @@
 @property (weak, nonatomic) IBOutlet UIView *dialPanView;
 - (IBAction)autoFill:(UIButton *)sender;
 - (IBAction)expandSuggestResults:(UIButton *)sender;
-@property (nonatomic,strong)NSString *directNumber;
+@property (nonatomic,copy)NSString *directNumber;
 @end

@@ -36,11 +36,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    if (self.directNumber) {
-//        self.peerAccount.text=self.directNumber ;
-//        self.backspaceButton.hidden = NO;
-//        self.dialBackGroundView.backgroundColor = [UIColor colorWithRed:0.267 green:0.643 blue:0.859 alpha:1];
-//    }
     self.touchToneMap = @{
                           @"0":[NSNumber numberWithInt:1200],
                           @"1":[NSNumber numberWithInt:1201],
@@ -56,28 +51,38 @@
                           @"#":[NSNumber numberWithInt:1211]
                           
                           };
-
-
-}
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+    if (self.directNumber) {
+        self.peerAccount.text=self.directNumber ;
+        self.backspaceButton.hidden = NO;
+        self.dialBackGroundView.backgroundColor = [UIColor colorWithRed:0.267 green:0.643 blue:0.859 alpha:1];
+    }
+    
+    
+    
     if (![self.peerAccount.text length]) {
         self.backspaceButton.hidden = YES;
     }else{
         self.backspaceButton.hidden = NO;
     }
     [self setup];
+
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 
 }
-
+#warning wont call
 -(void)viewWillDisappear:(BOOL)animated{
     [self tearDown];
     self.directNumber=nil;
 }
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -45,6 +45,10 @@
 #pragma mark - HANDLER
 - (void) presentDialPanelView:(NSNotification*) notify{
     IMDailViewController* dialViewController = (IMDailViewController*) [self.storyboard instantiateViewControllerWithIdentifier:DIAL_PAN_VIEW_CONTROLLER_ID];
+    
+    if ([notify.userInfo valueForKey:@"itelNumber"]) {
+        dialViewController.directNumber = [notify.userInfo valueForKey:@"itelNumber"];
+    }
     dialViewController.manager = self.manager;
     
 }

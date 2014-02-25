@@ -223,7 +223,6 @@
 		BA338B55187E839B00242DAF /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B54187E839B00242DAF /* Message.m */; };
 		BA338B58187E839C00242DAF /* HostItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B57187E839C00242DAF /* HostItelUser.m */; };
 		BA338B5B187E839C00242DAF /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B5A187E839C00242DAF /* ItelUser.m */; };
-		BA719DCF18B73E65000C01A5 /* IMDialManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA719DCD18B73E5B000C01A5 /* IMDialManagerViewController.m */; };
 		BA772EDA1875F02400CD8982 /* IMDBManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA772ED91875F02400CD8982 /* IMDBManagerImp.m */; };
 		BA8242FC18758EA2001903CE /* jgb.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BA8242FB18758EA2001903CE /* jgb.m4a */; };
 		BA8F235F185AA5E600DB043B /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8F235C185AA5E600DB043B /* libAVInterface.a */; };
@@ -688,8 +687,6 @@
 		BA338B57187E839C00242DAF /* HostItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostItelUser.m; sourceTree = "<group>"; };
 		BA338B59187E839C00242DAF /* ItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUser.h; sourceTree = "<group>"; };
 		BA338B5A187E839C00242DAF /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
-		BA719DCC18B73E5B000C01A5 /* IMDialManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDialManagerViewController.h; sourceTree = "<group>"; };
-		BA719DCD18B73E5B000C01A5 /* IMDialManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDialManagerViewController.m; sourceTree = "<group>"; };
 		BA772ED81875F02400CD8982 /* IMDBManagerImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManagerImp.h; sourceTree = "<group>"; };
 		BA772ED91875F02400CD8982 /* IMDBManagerImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDBManagerImp.m; sourceTree = "<group>"; };
 		BA8242FB18758EA2001903CE /* jgb.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jgb.m4a; sourceTree = "<group>"; };
@@ -1235,8 +1232,6 @@
 		479EF00D1859D47C0012EE29 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BA719DCC18B73E5B000C01A5 /* IMDialManagerViewController.h */,
-				BA719DCD18B73E5B000C01A5 /* IMDialManagerViewController.m */,
 				479EF00E1859D47C0012EE29 /* IMAnsweringViewController.h */,
 				479EF00F1859D47C0012EE29 /* IMAnsweringViewController.m */,
 				479EF0101859D47C0012EE29 /* IMCallingViewController.h */,
@@ -2146,7 +2141,6 @@
 				479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */,
 				4797E8D4188567DA0075BD9B /* HostSecondAddressViewController.m in Sources */,
 				479E934F185AB7D4001AF6ED /* NXLoginViewController.m in Sources */,
-				BA719DCF18B73E65000C01A5 /* IMDialManagerViewController.m in Sources */,
 				47955C2618852B1B00AEBF09 /* HostAddressViewController.m in Sources */,
 				472251D2184DBDF000C44857 /* NXImageView.m in Sources */,
 				47A557811863280A0062EFFF /* HostEditNicknameViewController.m in Sources */,
