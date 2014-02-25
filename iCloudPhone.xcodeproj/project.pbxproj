@@ -223,6 +223,7 @@
 		BA338B55187E839B00242DAF /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B54187E839B00242DAF /* Message.m */; };
 		BA338B58187E839C00242DAF /* HostItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B57187E839C00242DAF /* HostItelUser.m */; };
 		BA338B5B187E839C00242DAF /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B5A187E839C00242DAF /* ItelUser.m */; };
+		BA719DCF18B73E65000C01A5 /* IMDialManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA719DCD18B73E5B000C01A5 /* IMDialManagerViewController.m */; };
 		BA772EDA1875F02400CD8982 /* IMDBManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA772ED91875F02400CD8982 /* IMDBManagerImp.m */; };
 		BA8242FC18758EA2001903CE /* jgb.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BA8242FB18758EA2001903CE /* jgb.m4a */; };
 		BA8F235F185AA5E600DB043B /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8F235C185AA5E600DB043B /* libAVInterface.a */; };
@@ -230,6 +231,7 @@
 		BA959A971860565C009B8A4C /* IMUDPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA959A961860565C009B8A4C /* IMUDPCommunicator.m */; };
 		BA959A981860565C009B8A4C /* IMUDPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA959A961860565C009B8A4C /* IMUDPCommunicator.m */; };
 		BA9845C218718D5C00F5AF83 /* IMRecentContactDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9845C118718D5C00F5AF83 /* IMRecentContactDetailsViewController.m */; };
+		BA9D481518A8BCE4001A78C8 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9D481418A8BCE4001A78C8 /* Store.m */; };
 		BAAEA49018726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
 		BAAEA49118726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
 		BAC4A0DF187CE1E200BC856F /* ItelBookInterfaceImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */; };
@@ -686,6 +688,8 @@
 		BA338B57187E839C00242DAF /* HostItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostItelUser.m; sourceTree = "<group>"; };
 		BA338B59187E839C00242DAF /* ItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUser.h; sourceTree = "<group>"; };
 		BA338B5A187E839C00242DAF /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
+		BA719DCC18B73E5B000C01A5 /* IMDialManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDialManagerViewController.h; sourceTree = "<group>"; };
+		BA719DCD18B73E5B000C01A5 /* IMDialManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDialManagerViewController.m; sourceTree = "<group>"; };
 		BA772ED81875F02400CD8982 /* IMDBManagerImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManagerImp.h; sourceTree = "<group>"; };
 		BA772ED91875F02400CD8982 /* IMDBManagerImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDBManagerImp.m; sourceTree = "<group>"; };
 		BA8242FB18758EA2001903CE /* jgb.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jgb.m4a; sourceTree = "<group>"; };
@@ -700,6 +704,8 @@
 		BA959A961860565C009B8A4C /* IMUDPCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMUDPCommunicator.m; sourceTree = "<group>"; };
 		BA9845C018718D5C00F5AF83 /* IMRecentContactDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRecentContactDetailsViewController.h; sourceTree = "<group>"; };
 		BA9845C118718D5C00F5AF83 /* IMRecentContactDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRecentContactDetailsViewController.m; sourceTree = "<group>"; };
+		BA9D481318A8BCE4001A78C8 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		BA9D481418A8BCE4001A78C8 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
 		BAAEA48D187256CD00C05BCF /* IMDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManager.h; sourceTree = "<group>"; };
 		BAAEA48E18726DF200C05BCF /* IMRecentContactItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRecentContactItem.h; sourceTree = "<group>"; };
 		BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRecentContactItem.m; sourceTree = "<group>"; };
@@ -1229,6 +1235,8 @@
 		479EF00D1859D47C0012EE29 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BA719DCC18B73E5B000C01A5 /* IMDialManagerViewController.h */,
+				BA719DCD18B73E5B000C01A5 /* IMDialManagerViewController.m */,
 				479EF00E1859D47C0012EE29 /* IMAnsweringViewController.h */,
 				479EF00F1859D47C0012EE29 /* IMAnsweringViewController.m */,
 				479EF0101859D47C0012EE29 /* IMCallingViewController.h */,
@@ -1797,6 +1805,8 @@
 		BAFEE13818744FDA00DB1AC6 /* db */ = {
 			isa = PBXGroup;
 			children = (
+				BA9D481318A8BCE4001A78C8 /* Store.h */,
+				BA9D481418A8BCE4001A78C8 /* Store.m */,
 				BA338B59187E839C00242DAF /* ItelUser.h */,
 				BA338B5A187E839C00242DAF /* ItelUser.m */,
 				BA338B56187E839C00242DAF /* HostItelUser.h */,
@@ -1948,7 +1958,7 @@
 						TestTargetID = 47B89DD01834D40000022FE5;
 					};
 					47B89DD01834D40000022FE5 = {
-						DevelopmentTeam = 849L563F75;
+						DevelopmentTeam = KAH6228XJ2;
 					};
 					47B89DF11834D40000022FE5 = {
 						TestTargetID = 47B89DD01834D40000022FE5;
@@ -1972,9 +1982,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				47B89DD01834D40000022FE5 /* iCloudPhone */,
 				47B89DF11834D40000022FE5 /* iCloudPhoneTests */,
 				479EF09B1859D9A40012EE29 /* GCDSocket */,
+				47B89DD01834D40000022FE5 /* iCloudPhone */,
 				479EF0A81859D9A50012EE29 /* GCDSocketTests */,
 				BAF70BDF189305FC00044097 /* libAlalertBanner */,
 				BAF70BEC189305FC00044097 /* libAlalertBannerTests */,
@@ -2136,6 +2146,7 @@
 				479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */,
 				4797E8D4188567DA0075BD9B /* HostSecondAddressViewController.m in Sources */,
 				479E934F185AB7D4001AF6ED /* NXLoginViewController.m in Sources */,
+				BA719DCF18B73E65000C01A5 /* IMDialManagerViewController.m in Sources */,
 				47955C2618852B1B00AEBF09 /* HostAddressViewController.m in Sources */,
 				472251D2184DBDF000C44857 /* NXImageView.m in Sources */,
 				47A557811863280A0062EFFF /* HostEditNicknameViewController.m in Sources */,
@@ -2148,6 +2159,7 @@
 				478813DC1839C35E0085224D /* UIWebView+AFNetworking.m in Sources */,
 				BAE9C912187C3AA900E41A9E /* Message+CRUD.m in Sources */,
 				472B4A631846E45D002971EE /* CustomTabbar.m in Sources */,
+				BA9D481518A8BCE4001A78C8 /* Store.m in Sources */,
 				47A10DAD18659D3E00FB9FED /* PassSecuretyQuestiongViewController.m in Sources */,
 				479EF05F1859D47C0012EE29 /* IMTCPCommunicator.m in Sources */,
 				BAE9C908187C31B800E41A9E /* ItelNetInterfaceImp.m in Sources */,

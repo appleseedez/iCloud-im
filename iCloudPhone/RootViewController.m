@@ -63,8 +63,10 @@
     [super viewDidAppear:animated];
      [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewAppear" object:nil];
 }
+static int count = 0;
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    NSLog(@"rootviewcontroller %d",++count);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
 }
 -(void)changeController:(CustonTarbarItem*)sender {
@@ -78,8 +80,9 @@
      [sender isSelected:YES];
     int i= [self.customTabbar.items indexOfObject:sender];
     if (i==0&&presentDialingView==YES) {
-        //[[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
-        [self presentDialingViewController];
+//        [self presentDialingViewController];
+        [self.manager presentDialRelatedPanel];
+        [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
     }
     [self setSelectedIndex:i];
 }
@@ -101,9 +104,9 @@
 }
 #pragma mark - PRIVATE
 - (void) registerNotifications{
-    // 当manager要求加载“拨打中”界面时，收到该通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentCallingView:) name:PRESENT_CALLING_VIEW_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentAnsweringView:) name:SESSION_PERIOD_REQ_NOTIFICATION object:nil];
+//    // 当manager要求加载“拨打中”界面时，收到该通知
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentCallingView:) name:PRESENT_CALLING_VIEW_NOTIFICATION object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentAnsweringView:) name:SESSION_PERIOD_REQ_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCustomTabbarHidden:) name:@"hideTab" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNewMessage:) name:@"searchForNewMessage" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNewMessage:) name:@"checkNewMessage" object:nil];
@@ -121,48 +124,6 @@
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - HANDLER
-- (void) presentCallingView:(NSNotification*) notify{
-#if ROOT_TABBAR_DEBUG
-    NSLog(@"收到通知，将要加载CallingView");
-#endif
-    //加载“拨号中”界面
-    //加载stroyboard
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
-    UINavigationController* callingViewNavController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
-    IMCallingViewController* callingViewController = (IMCallingViewController*) callingViewNavController.topViewController;
-    callingViewController.manager = self.manager;
-    //不再需要传递参数 在manager.state可以取到
-//    callingViewController.callingNotify = notify;
-    //获取到当前的顶层viewContorller
-    if ([self.presentedViewController isKindOfClass:[IMDailViewController class]]) {
-        [self.presentedViewController presentViewController:callingViewNavController animated:YES completion:nil];
-    }else if ([self.presentedViewController isKindOfClass:[UINavigationController class]]) {
-        [self.presentedViewController presentViewController:callingViewNavController animated:YES completion:nil];
-    }else{
-        [self presentViewController:callingViewNavController animated:YES completion:nil];
-    }
-   
-}
-- (void) presentAnsweringView:(NSNotification*) notify{
-
-#if ROOT_TABBAR_DEBUG
-    NSLog(@"收到通知，将要加载AnsweringView");
-#endif
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
-    UINavigationController* answeringViewNavController =[sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
-    IMAnsweringViewController* answeringViewController = (IMAnsweringViewController*) answeringViewNavController.topViewController;
-    answeringViewController.manager = self.manager;
-    answeringViewController.callingNotify = notify;
-    //获取到当前的顶层viewContorller
-    if ([self.presentedViewController isKindOfClass:[IMDailViewController class]]) {
-        [self.presentedViewController presentViewController:answeringViewNavController animated:YES completion:nil];
-    }else{
-        [self presentViewController:answeringViewNavController animated:YES completion:nil];
-    }
-    
 }
 
 @end

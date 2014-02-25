@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, setRootViewController) {
 -(void)changeRootViewController:(setRootViewController)Type userInfo:(NSDictionary*) info ;
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow* dialPanelWindow; //将拨号盘做成独立的window
 @property (nonatomic) BOOL autoLogin;
 @property (strong,nonatomic) NXLoginViewController *loginVC;
 @property (nonatomic,strong) RootViewController *RootVC;

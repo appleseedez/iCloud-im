@@ -13,6 +13,7 @@
 #import "ItelAction.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "UIImageView+AFNetworking.h"
+
 @interface IMDailViewController ()
 @property(nonatomic) NSDictionary* touchToneMap; //按键的拨号音，系统默认就有的
 @property(nonatomic) BOOL hidePan;// 标识出当前拨号盘是否可见。
@@ -90,12 +91,12 @@
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
         return;
     }
-#if debug
+#if DEBUG
     [[IMTipImp defaultTip]showTip:@"开启音频通话"];
 #endif
 //    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
-//                                                                                                                       SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:peerAccount,
-//                                                                                                                       SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self.manager myAccount]
+//                                                                                                                       kDestAccount:peerAccount,
+//                                                                                                                       kSrcAccount:[self.manager myAccount]
 //                                                                                                                       }];
     [self.manager dial:peerAccount];
     
@@ -115,7 +116,8 @@
 }
 - (void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authOK:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleDialPan:) name:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
+
+
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -123,15 +125,6 @@
 - (void) authOK:(NSNotification*) notify{
 }
 
-- (void) toggleDialPan:(NSNotification*) notify{
-    if (self.hidePan) {
-        // show the pan
-        
-    }else{
-        //hide the pan
-    }
-    
-}
 
 
 #pragma mark - table delegate & datasource
@@ -176,13 +169,13 @@
     [self.manager setIsVideoCall:YES];
     NSString* peerAccount = self.peerAccount.text;
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
-#if debug
+#if DEBUG
         [[IMTipImp defaultTip] warningTip:@"再点我就把你喝掉"];
 #endif
         sender.enabled = YES;
         return;
     }
-#if debug
+#if DEBUG
     [[IMTipImp defaultTip] showTip:@"开启视频通话"];
 #endif
     sender.backgroundColor =[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1.0f];
@@ -285,7 +278,8 @@
 }
 
 - (IBAction)showRecentContactList:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.manager dismissDialRelatedPanel];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)autoFill:(UIButton *)sender {
     //如果有筛选结果

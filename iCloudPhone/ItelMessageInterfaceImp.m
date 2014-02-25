@@ -24,6 +24,7 @@ static ItelMessageInterfaceImp* _instance;
 
 
 - (void) setup{
+    NSLog(@"ItelMessageInterfaceImp calling setup");
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startSearching) name:@"rootViewAppear" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopSearching) name:@"rootViewDisappear" object:nil];
@@ -37,9 +38,11 @@ static ItelMessageInterfaceImp* _instance;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendSearching) userInfo:nil repeats:YES];
 }
 -(void)sendSearching{
-   // NSAssert([[ItelAction action] getHost], @"host没有");
     if ([[ItelAction action] getHost]) {
         [[ItelAction action] searchForNewMessage];
+    }else{
+        [self.timer invalidate];
+        self.timer=nil;
     }
     
 }

@@ -35,7 +35,7 @@
 - (void)setCanVideoCalling:(BOOL)canVideoCalling;
 - (BOOL)canVideoCalling;
 //开启远端视频输入窗口
-- (void) openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView*) localView;
+- (int) openScreen:(VideoRenderIosView*) remoteRenderView;
 //关闭远端视频输入窗口
 - (void) closeScreen;
 - (void) switchCamera;
@@ -44,4 +44,6 @@
 - (int) countTopSize; //统计每秒的数据传输量
 - (int) stopDetectP2P;
 - (BOOL) openCamera;
+- (dispatch_queue_t) p2pQueue;
+- (BOOL) isP2PFinished;
 @end

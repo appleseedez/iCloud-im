@@ -17,12 +17,12 @@
 
 - (NSDictionary*)buildWithParams:(NSDictionary *)params{
     return @{
-             HEAD_SECTION_KEY:@{
-                     DATA_TYPE_KEY: [NSNumber numberWithInt:SESSION_INIT_REQ_TYPE],
-                     DATA_STATUS_KEY:[NSNumber numberWithInt:NORMAL_STATUS],
-                     DATA_SEQ_KEY:[NSNumber numberWithInteger:[IMSeqenceGen seq]]
+             kHead:@{
+                     kType: [NSNumber numberWithInt:SESSION_INIT_REQ_TYPE],
+                     kStatus:[NSNumber numberWithInt:NORMAL_STATUS],
+                     kSeq:[NSNumber numberWithInteger:[IMSeqenceGen seq]]
                      },
-             BODY_SECTION_KEY:params
+             kBody:params
              
              };
 }

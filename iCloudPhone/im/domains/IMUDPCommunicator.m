@@ -12,7 +12,7 @@
 {
 }
 @property(nonatomic) GCDAsyncUdpSocket* udpSock; //udp 链接 用于请求目录服务器
-
+@property(nonatomic) int udpPort;
 @end
 
 @implementation IMUDPCommunicator
@@ -23,21 +23,26 @@
     }
     return self;
 }
+static int localUDPNetPortSuffix = 0;
 - (void)connect:(NSString*) account{
-    
+        self.udpPort = LOCAL_UDP_PORT + (++localUDPNetPortSuffix)%9;
 	NSError *error = nil;
 	
-	if (![self.udpSock bindToPort:0 error:&error])
+	if (![self.udpSock bindToPort:self.udpPort error:&error])
 	{
-#if debug
-        [[IMTipImp defaultTip] errorTip:@"upd绑定端口失败了"];
+#if DEBUG
+        [[IMTipImp defaultTip] errorTip:@"udp绑定端口失败了"];
 #endif
+        NSLog(@"bind error:%@",error);
+        NSAssert(self.udpSock, @"udpsock is nil");
+        [self.udpSock close];
+//        [self connect:account];
 		return;
 	}
 	if (![self.udpSock beginReceiving:&error])
 	{
-#if debug
-        [[IMTipImp defaultTip] errorTip:@"upd开始接收数据失败了"];
+#if DEBUG
+        [[IMTipImp defaultTip] errorTip:@"udp开始接收数据失败了"];
 #endif
 		return;
 	}
@@ -54,24 +59,18 @@
     self.tag = ROUTE_SRV_TAG;
     NSLog(@"udpConnector.ip:%@",self.ip);
     [self send:@{
-                 HEAD_SECTION_KEY:@{
-                         DATA_TYPE_KEY:[NSNumber numberWithInt:ROUTE_SERVER_IP_REQ_TYPE ],
-                         DATA_SEQ_KEY: [NSNumber numberWithInteger: [[IMSeqenceGen class] seq]],
+                 kHead:@{
+                         kType:[NSNumber numberWithInt:ROUTE_SERVER_IP_REQ_TYPE ],
+                         kSeq: [NSNumber numberWithInteger: [[IMSeqenceGen class] seq]],
                          
-                         DATA_STATUS_KEY:[NSNumber numberWithInteger:NORMAL_STATUS]
+                         kStatus:[NSNumber numberWithInteger:NORMAL_STATUS]
                          },
-                 BODY_SECTION_KEY:@{
-                         UDP_INDEX_REQ_FIELD_ACCOUNT_KEY:self.account,
-                         UDP_INDEX_REQ_FIELD_SRVTYPE_KEY:UDP_INDEX_ROUTE_SERVER_TYPE
+                 kBody:@{
+                         kAccount:self.account,
+                         kSrvType:UDP_INDEX_ROUTE_SERVER_TYPE
                          }
                  }];
     
-//    [self.udpSock connectToHost:ROUTE_SERVER_IP onPort:ROUTE_SERVER_PORT error:&error];
-//    if (error) {
-//        NSLog(@"链接服务器的异常:%@",error);
-//    }
-
-	
 }
 - (void)disconnect{
 }
@@ -118,23 +117,21 @@
     NSError* error = nil;
     NSDictionary* response = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
   
-    self.ip = [[response valueForKey:BODY_SECTION_KEY] valueForKey:UDP_INDEX_RES_FIELD_SERVER_IP_KEY];
-    self.port = [[[response valueForKey:BODY_SECTION_KEY] valueForKey:UDP_INDEX_RES_FIELD_SERVER_PORT_KEY] intValue];
+    self.ip = [[response valueForKey:kBody] valueForKey:kIP];
+    self.port = [[[response valueForKey:kBody] valueForKey:kPort] intValue];
     if (self.tag == ROUTE_GATEWAY_TAG) {
         [self send:@{
-                     HEAD_SECTION_KEY:@{
-                             DATA_TYPE_KEY:[NSNumber numberWithInt:ROUTE_SERVER_IP_REQ_TYPE ],
-                             DATA_SEQ_KEY: [NSNumber numberWithInteger: [[IMSeqenceGen class] seq]],
-                             DATA_STATUS_KEY:[NSNumber numberWithInteger:NORMAL_STATUS]
+                     kHead:@{
+                             kType:[NSNumber numberWithInt:ROUTE_SERVER_IP_REQ_TYPE ],
+                             kSeq: [NSNumber numberWithInteger: [[IMSeqenceGen class] seq]],
+                             kStatus:[NSNumber numberWithInteger:NORMAL_STATUS]
                              },
-                     BODY_SECTION_KEY:@{
-                             UDP_INDEX_REQ_FIELD_ACCOUNT_KEY:self.account,
-                             UDP_INDEX_REQ_FIELD_SRVTYPE_KEY:UDP_INDEX_GATEWAY_SERVER_TYPE
+                     kBody:@{
+                             kAccount:self.account,
+                             kSrvType:UDP_INDEX_GATEWAY_SERVER_TYPE
                              }
                      }];
     }else if (self.tag == ROUTE_UDP_SEQENCE_END_TAG){
-//         NSLog(@"最后拿到的ip:%@,port:%d",self.ip,self.port);
-//        [[response valueForKey:BODY_SECTION_KEY] setValue:@"10.0.0.30" forKey:UDP_INDEX_RES_FIELD_SERVER_IP_KEY];
 #if UDP_MESSAGE
         NSLog(@"最后登录的业务服务器：%@",response);
 #endif

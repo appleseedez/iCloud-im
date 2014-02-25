@@ -15,6 +15,10 @@
 #import "ItelAction.h"
 #import "IMCoreDataManager+FMDB_TO_COREDATA.h"
 #import "NXInputChecker.h"
+
+#import "IMDailViewController.h"
+#import "IMCallingViewController.h"
+#import "IMAnsweringViewController.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 
 @interface ItelMessageInterfaceImp()
@@ -29,9 +33,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"currUser"];
 
     [self.manager logoutFromSignalServer];
-    [self.manager tearDown];
     [self changeRootViewController:RootViewControllerLogin userInfo:nil];
     [self.manager clearTable];
+    [self.manager tearDown];
 }
 
 
@@ -103,6 +107,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
     //绑定重连通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reconnect:) name:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentCallingView:) name:PRESENT_CALLING_VIEW_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentAnsweringView:) name:SESSION_PERIOD_REQ_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentDialPanelView:) name:PRESENT_DIAL_VIEW_NOTIFICATION object:Nil];
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -114,14 +121,18 @@
         [self.phoneBook loadAddressBook];
     }
     [[IMCoreDataManager defaulManager] isAreaInCoreData]; //地名插入coredata
-    [self setupManagers];
     //初始化ItelMessageInterface
-    [ItelMessageInterfaceImp defaultMessageInterface];
-
     RootViewController *rootVC= (RootViewController*) self.window.rootViewController;
+    //实例化manager
     self.manager = [[IMManagerImp alloc] init];
-    
+    [self.manager setup];
+    [self registerNotifications];
+    [[ItelMessageInterfaceImp defaultMessageInterface] setup];
     rootVC.manager=self.manager;
+    
+    self.dialPanelWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, APP_SCREEN.size.width, APP_SCREEN.size.height)];
+    self.dialPanelWindow.windowLevel = UIWindowLevelAlert;
+    
     self.RootVC=rootVC;
    
     
@@ -142,11 +153,12 @@
         [self.window setRootViewController:loginVC];
         
     }
-    
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
    return YES;
 }
+
 -(void)checkAutoLogin{
      //查询currUser
      HostItelUser *currUser=nil;
@@ -173,12 +185,15 @@
         self.autoLogin=1;
         [[ItelAction action] setHostItelUser:currUser];
         NSDictionary* params = @{
-                                 ROUTE_SERVER_IP_KEY:currUser.domain,
-                                 ROUTE_SERVER_PORT_KEY:currUser.port,
-                                 HOST_ITEL_NUMBER:currUser.itelNum
+                                 kDomain:currUser.domain,
+                                 kPort:currUser.port,
+                                 kHostItelNumber:currUser.itelNum
                                     };
         [[ItelAction action] checkAddressBookMatchingItel];
         [self setupIMManager:params];
+        if ([[ItelAction action] getHost]) {
+            [self.manager connectToSignalServer];
+        }
         
     }
 }
@@ -193,19 +208,19 @@
         [self.manager tearDown];
         [self.manager disconnectToSignalServer];
         [self.manager setMyAccount:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
     }
     else if(Type==RootViewControllerMain){
         [self.window setRootViewController:self.RootVC];
         NSString *hostItel=[[ItelAction action]getHost].itelNum;
         [[NSUserDefaults standardUserDefaults] setObject:hostItel forKey:@"currUser"];
         NSDictionary* params = @{
-                                 ROUTE_SERVER_IP_KEY:[info valueForKey:ROUTE_SERVER_IP_KEY],
-                                 ROUTE_SERVER_PORT_KEY:[info valueForKey:ROUTE_SERVER_PORT_KEY],
-                                 HOST_ITEL_NUMBER:hostItel
+                                 kDomain:[info valueForKey:kDomain],
+                                 kPort:[info valueForKey:kPort],
+                                 kHostItelNumber:hostItel
                                  };
         [self setupIMManager:params];
-        [self.manager setup];
+//        [self.manager setup];
         [self.manager connectToSignalServer];
    }
     [UIView commitAnimations];
@@ -214,12 +229,14 @@
 
 - (void) setupIMManager:(NSDictionary*) params{
     if ([[params allKeys] count] == 3) {
-        [self.manager setRouteSeverIP:[params valueForKey:ROUTE_SERVER_IP_KEY]];
-        [self.manager setRouteServerPort:[[params valueForKey:ROUTE_SERVER_PORT_KEY] intValue]];
-        [self.manager setMyAccount:[params valueForKey:HOST_ITEL_NUMBER]];
+        [self.manager setRouteSeverIP:[params valueForKey:kDomain]];
+        [self.manager setRouteServerPort:[[params valueForKey:kPort] intValue]];
+        [self.manager setMyAccount:[params valueForKey:kHostItelNumber]];
 
     }
 }
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 #if APP_DELEGATE_DEBUG
@@ -227,17 +244,17 @@
 #endif
     if ([self.manager myState]&&![[[self.manager myState] valueForKey:kPeerAccount] isEqualToString:IDLE] && [self.manager myAccount]) {
         [self.manager haltSession:@{
-                                    DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
-                                    SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self.manager myAccount],
-                                    SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[[self.manager myState] valueForKey:kPeerAccount] ,
-                                    SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
+                                    kType:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                                    kSrcAccount:[self.manager myAccount],
+                                    kDestAccount:[[self.manager myState] valueForKey:kPeerAccount] ,
+                                    kHaltType:kEndSession
                                     
                                     }];
 
     }
-    [self.manager tearDown];
+//    [self.manager tearDown];
     [[ItelMessageInterfaceImp defaultMessageInterface] tearDown];
-    [self removeNotifications];
+//    [self removeNotifications];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -245,15 +262,27 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationDidEnterBackground");
 #endif
-     
-//    [self.manager tearDown];
+    
+    BOOL backgroundAccepted = [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
+        if ([[ItelAction action] getHost]) {
+            [self.manager connectToSignalServer];
+        }
+    
+    }];
+    if (backgroundAccepted)
+    {
+        NSLog(@"VOIP backgrounding accepted");
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationWillEnterForeground ");
+    
+    
 #endif
+    [[UIApplication sharedApplication] clearKeepAliveTimeout];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -261,13 +290,9 @@
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationDidBecomeActive ");
 #endif
-    
     if ([[ItelAction action] getHost]) {
-        [self.manager setup];
-        [self.manager connectToSignalServer];
+        [self.manager checkTCPAlive];
     }
-    [self registerNotifications];
-    [[ItelMessageInterfaceImp defaultMessageInterface] setup];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -280,5 +305,44 @@
     [[ItelMessageInterfaceImp defaultMessageInterface] tearDown];
     [self removeNotifications];
 }
+#pragma mark - HANDLER
+- (void) presentDialPanelView:(NSNotification*) notify{
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
+    IMDailViewController* dialViewController = (IMDailViewController*) [sb instantiateViewControllerWithIdentifier:DIAL_PAN_VIEW_CONTROLLER_ID];
+    dialViewController.manager = self.manager;
+    self.dialPanelWindow.rootViewController =dialViewController;
+    [self.manager presentDialRelatedPanel];
+    
+}
 
+- (void) presentCallingView:(NSNotification*) notify{
+#if ROOT_TABBAR_DEBUG
+    NSLog(@"收到通知，将要加载CallingView");
+#endif
+    //加载“拨号中”界面
+    //加载stroyboard
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
+    UINavigationController* callingViewNavController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
+    IMCallingViewController* callingViewController = (IMCallingViewController*) callingViewNavController.topViewController;
+    callingViewController.manager = self.manager;
+    self.dialPanelWindow.rootViewController =callingViewController;
+    [self.manager presentDialRelatedPanel];
+    
+}
+- (void) presentAnsweringView:(NSNotification*) notify{
+    
+#if ROOT_TABBAR_DEBUG
+    NSLog(@"收到通知，将要加载AnsweringView");
+#endif
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
+    UINavigationController* answeringViewNavController =[sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
+    IMAnsweringViewController* answeringViewController = (IMAnsweringViewController*) answeringViewNavController.topViewController;
+    answeringViewController.manager = self.manager;
+    answeringViewController.callingNotify = notify;
+    
+    self.dialPanelWindow.rootViewController =answeringViewController;
+    [self.manager presentDialRelatedPanel];
+    
+    
+}
 @end

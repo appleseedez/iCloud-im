@@ -173,8 +173,8 @@
     NSCAppDelegate *appDelegate = (NSCAppDelegate*)[UIApplication sharedApplication].delegate;
     HostItelUser *host=[[ItelAction action] getHost];
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
-                                                                                                                       SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:user.itelNum,
-                                                                                                                       SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:host.itelNum
+                                                                                                                       kDestAccount:user.itelNum,
+                                                                                                                       kSrcAccount:host.itelNum
                                                                                                                        }];
     [appDelegate.manager dial:user.itelNum];
 }

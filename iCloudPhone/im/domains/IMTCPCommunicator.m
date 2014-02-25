@@ -37,8 +37,16 @@
 
 - (void) sendHeartBeat{
     if ([self.sock isConnected]) {
-        NSLog(@"咚咚");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[IMTipImp defaultTip] showTip:@"还连着"];
+        });
+        
         [self sendRequest:self.heartBeatPKG type:HEART_BEAT_REQ_TYPE];
+    }else{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[IMTipImp defaultTip] showTip:@"断开了"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
+    });
     }
 }
 
@@ -78,6 +86,9 @@
 #if usertip
     [[IMTipImp defaultTip] showTip:@"连接上了信令服务器"];
 #endif
+    [sock performBlock:^{
+        [sock enableBackgroundingOnSocket];
+    }];
     [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
     [self send:self.authInfo];
 }
@@ -146,7 +157,7 @@
     }
     self.authInfo = authInfo;
     if (![self.sock connectToHost:self.ip onPort:self.port error:&error]) {
-#if debug
+#if DEBUG
         [[IMTipImp defaultTip] errorTip:@"链接信令服务器失败"];
 #endif
         [self disconnect];
@@ -161,7 +172,7 @@
 }
 
 - (void)send:(NSDictionary*) data{
-    NSInteger type = [[[data valueForKey:HEAD_SECTION_KEY] valueForKey:DATA_TYPE_KEY] integerValue];
+    NSInteger type = [[[data valueForKey:kHead] valueForKey:kType] integerValue];
     [self sendRequest:data type:type];
 }
 

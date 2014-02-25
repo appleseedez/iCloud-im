@@ -1,4 +1,3 @@
-
 //
 //  NatTypeImpl.h
 //  AVInterface

@@ -146,7 +146,7 @@
     
 }
 -(void) registerNotifications{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentPan) name:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentPan) name:PRESENT_DIAL_VIEW_NOTIFICATION object:nil];
 }
 
 #pragma mark - Table view data source
