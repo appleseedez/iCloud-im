@@ -13,7 +13,6 @@
     NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
     HostItelUser* host = nil;
     if (currentContext) {
-
             host = [NSEntityDescription insertNewObjectForEntityForName:@"HostItelUser" inManagedObjectContext:currentContext];
             host.domain =[dic objectForKey:@"domain"];
             

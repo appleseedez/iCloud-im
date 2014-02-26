@@ -155,9 +155,7 @@ static int endTime = 0;
     
     [self restoreState];
     self.basicState = @(basicStateIdle);
-        NSLog(@"excute here");
     [self.engine stopTransport];
-        NSLog(@"excute here2");
     [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
 
@@ -257,13 +255,12 @@ static int endTime = 0;
 
 // 主叫方收到了的应答
 - (void) answeringDataDidReceived:(NSNotification*) answeringData{
+    NSLog(@"主叫方收到的answeringData:%@",answeringData.userInfo);
     long receivedSSID = [[answeringData.userInfo valueForKey:@"srcssid"] longValue];
     long mySSID = [[[self myState] valueForKey:kMySSID] longValue];
     if (self.busy && receivedSSID == mySSID) {
         [self.monitor invalidate];
-        //开始获取p2p通道，保持session的数据包可以停止发送了。
-        [self.keepSessionAlive invalidate];
-        self.keepSessionAlive = nil;
+
         //停止主叫方的超时定时器
         [self.monitor invalidate];
         self.monitor = nil;
@@ -294,6 +291,7 @@ static int endTime = 0;
 }
 // 被叫方收到了请求
 - (void) callingDataDidCame:(NSNotification*) callingData{
+    NSLog(@"被叫方收到的calling数据:%@",callingData.userInfo);
     if (self.busy) {
         NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 被叫方忙,收到通话请求");
         [self sessionHaltRequest:@{
@@ -776,10 +774,10 @@ static int endTime = 0;
     //被叫方发送链路数据给主叫方
     [self sendAnsweringData];
     // 开始获取p2p通道
-    [self.keepSessionAlive invalidate];
-    self.keepSessionAlive = nil;
-#if MANAGER_DEBUG
-    NSLog(@"接受通话请求，停止session保持数据包的发送，开始获取p2p通道");
+//    [self.keepSessionAlive invalidate];
+//    self.keepSessionAlive = nil;
+#if DEBUG
+    NSLog(@"接受通话请求.开始获取p2p通道");
 #endif
     if (![self.engine isP2PFinished]) {
         return;
@@ -800,12 +798,15 @@ static int endTime = 0;
  */
 - (void) sendSessionDataFor:(NSNumber*) peerType{
 
-
+    NSTimeInterval startInitNet =  [[NSDate date] timeIntervalSince1970];
     //主叫和被叫都在发送数据之前初始化网络. 等待即将到来的p2p数据
     [self.engine initNetwork];
+    NSLog(@"host.stunserver:%@",[[ItelAction action] getHost].stunServer);
+    NSLog(@"当前本机的nat类型为:%d",[self.engine currentNATType]);
     // 3.获取本机natType
-    NatType natType = [self.engine natType]; //StunTypeBlocked;
-    
+    NSTimeInterval endInitNet = [[NSDate date] timeIntervalSince1970];
+    long long duration =endInitNet - startInitNet;
+    NSLog(@"初始化网络耗时：%@",[NSString stringWithFormat:@"%llu",duration]);
     //4. 获取本机的链路列表. 中继服务器目前充当外网地址探测
     NSDictionary* communicationAddress = [self.engine endPointAddressWithProbeServer:[self.state valueForKey:kForwardIP] port:[[self.state valueForKey:kForwardPort] integerValue]];
     //5.获取到外网地址后，开始发送数据包到外网地址探测服务器，直到收到对等方的回复。
@@ -815,7 +816,7 @@ static int endTime = 0;
     [self.keepSessionAlive invalidate];
     
     
-    self.keepSessionAlive = [MSWeakTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(keepSession:) userInfo:@{PROBE_PORT_KEY:[self.state valueForKey:kForwardPort],PROBE_SERVER_KEY:[self.state valueForKey:kForwardIP]} repeats:YES dispatchQueue:dispatch_queue_create("com.itelland.keepIPSession", DISPATCH_QUEUE_CONCURRENT)];
+    self.keepSessionAlive = [MSWeakTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(keepSession:) userInfo:@{PROBE_PORT_KEY:[self.state valueForKey:kForwardPort],PROBE_SERVER_KEY:[self.state valueForKey:kForwardIP]} repeats:YES dispatchQueue:dispatch_queue_create("com.itelland.keepIPSession", NULL)];
     // 6. 把数据组装准备发送.
     //此处我需要做的是字典的数据融合！！！
     NSMutableDictionary* mergeData = [communicationAddress mutableCopy];
@@ -834,7 +835,7 @@ static int endTime = 0;
                                           kDestSSID:[self.state valueForKey:kMySSID],
                                           kDestAccount: self.selfAccount,
                                           kSrcAccount:[self.state valueForKey:kPeerAccount],
-                                          kPeerNATType: [NSNumber numberWithInt:natType],
+                                          kPeerNATType: [NSNumber numberWithInt:[self.engine currentNATType]],
                                           kUseVideo:[self.state valueForKey:kUseVideo]
                                           }];
     
@@ -913,6 +914,10 @@ static int endTime = 0;
 }
 // 被叫接听回掉
 - (void) startTransportAndNotify:(NSNotification*) notify{
+    //开始获取p2p通道，保持session的数据包可以停止发送了。
+    NSLog(@"主叫方停止了保持session的数据包发送");
+    [self.keepSessionAlive invalidate];
+    self.keepSessionAlive = nil;
     self.isInP2P = @(0);
     //如果是空闲. 白穿透了.
     if ([self.basicState intValue] == basicStateIdle) {
@@ -937,11 +942,16 @@ static int endTime = 0;
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_INSESSION_VIEW_NOTIFICATION
                                                         object:nil
                                                       userInfo:notify.userInfo];
+    
 }
 
 
 //被叫方开启通道
 - (void) justStartTransport:(NSNotification*) notify{
+    //开始获取p2p通道，保持session的数据包可以停止发送了。
+    NSLog(@"被叫方停止了保持session的数据包发送");
+    [self.keepSessionAlive invalidate];
+    self.keepSessionAlive = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:P2PTUNNEL_SUCCESS object:nil];
     self.isInP2P =@(0);
     //如果是空闲. 白穿透了.

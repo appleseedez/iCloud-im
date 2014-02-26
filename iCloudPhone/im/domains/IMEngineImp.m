@@ -24,6 +24,7 @@ UIView*  _pview_local;
 @property(nonatomic) dispatch_queue_t q;
 @property(nonatomic) dispatch_queue_t m;
 @property(atomic) BOOL p2pFinished;
+@property(nonatomic) int selfNATType;
 @end
 
 @implementation IMEngineImp
@@ -121,7 +122,6 @@ static int localNetPortSuffix = 0;
         [[IMTipImp defaultTip] errorTip:@"引擎初始化网络失败"];
 #endif
     }else{
-        
     }
 }
 /**
@@ -130,12 +130,16 @@ static int localNetPortSuffix = 0;
 - (void)initMedia{
     // TODO:在媒体初始化时,获取访问摄像头和麦克的权限. 另外如果没有获取到这些权限应该怎么办?
     self.pInterfaceApi->MediaInit();
+    //初始化媒体时获取一次本机的nat
+    [self setCurrentNATType:[self natType]];
     //接下来，本地根据网络情况，会重新评估一次是否支持视频
     AFNetworkReachabilityManager* reachabilityManager = [AFNetworkReachabilityManager sharedManager];
     [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
 #if DEBUG
         [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前网络:%@",AFStringFromNetworkReachabilityStatus(status)]];
 #endif
+        //网络发生变化时,再次获取nat
+        [self setCurrentNATType:[self natType]];
         switch (status) {
             case AFNetworkReachabilityStatusReachableViaWiFi:
             {
@@ -147,8 +151,8 @@ static int localNetPortSuffix = 0;
             case AFNetworkReachabilityStatusReachableViaWWAN:
             {
                 //由于使用3g网络。不支持视频
-                self.m_type = InitTypeVoe;
-                _pview_local = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0,0)];
+                self.m_type = InitTypeVoeAndVie;
+//                _pview_local = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0,0)];
             }
                 break;
             default:
@@ -193,7 +197,9 @@ static int localNetPortSuffix = 0;
 
 - (NatType)natType{
     NatTypeImpl nat;
-    return nat.GetNatType("stun.fwdnet.net:3478");
+    
+    return nat.GetNatType("stunserver.org");
+//    return nat.GetNatType("stun.fwdnet.net:3478");
 }
 
 - (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort{
@@ -234,6 +240,7 @@ static int localNetPortSuffix = 0;
             self.m_type = InitTypeVoe;
         }
         NSLog(@"穿透时使用的类型:%@",[self mediaTypeString:self.m_type]);
+        NSLog(@"穿透时使用的NAT类型:%@",[params valueForKey:kPeerNATType]);
         // 外网地址
         ::strncpy(argc.otherInterIP, [[params valueForKey:kPeerInterIP] UTF8String], sizeof(argc.otherInterIP));
         argc.otherInterPort = [[params valueForKey:kPeerPort] intValue];
@@ -249,6 +256,8 @@ static int localNetPortSuffix = 0;
         // 自己的ssid
         argc.selfSsid = [[params valueForKey:kSrcSSID] intValue];
         
+        argc.otherNATType =[[params valueForKey:kPeerNATType] intValue];
+        argc.selfNATType = self.currentNATType;
         //如果内网的ip相同.设置argc.localable = true;
         
         if ([self.currentInterIP isEqualToString:[NSString stringWithUTF8String:argc.otherInterIP]]
@@ -409,16 +418,12 @@ static int localNetPortSuffix = 0;
     NSLog(@"显示摄像头");
 #endif
     [self openCamera];
-    //    self.pInterfaceApi->SetMuteEnble(MTVie, true);
-    //    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
 }
 - (void)hideCam{
 #if ENGINE_MSG
     NSLog(@"隐藏摄像头");
 #endif
     self.pInterfaceApi->SwitchCamera(10);
-    //    self.pInterfaceApi->SetMuteEnble(MTVie, false);
-    //    self.pInterfaceApi->SetMuteEnble(MTVoe, true);
 }
 
 @synthesize canVideoCalling = _canVideoCalling;
@@ -491,7 +496,6 @@ static int localNetPortSuffix = 0;
     
 }
 - (void)tearDown{
-    //    [self stopTransport];
     bool ret  = self.pInterfaceApi->Terminate(); NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<关闭引擎>>>>>>>>>>>>>>:%d",ret);
     delete _pInterfaceApi;
     _pInterfaceApi = nil;
@@ -523,5 +527,12 @@ static int localNetPortSuffix = 0;
 
 
     return 0;
+}
+
+- (int)currentNATType{
+    return self.selfNATType;
+}
+- (void) setCurrentNATType:(int)nat{
+    self.selfNATType = nat;
 }
 @end
