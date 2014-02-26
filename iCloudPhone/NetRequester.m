@@ -14,7 +14,11 @@
                 andParameters:(NSDictionary*)parameters
                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
+    NSString *token=[[ItelAction action] getHost].token;
     
+    if (token) {
+        url=[NSString stringWithFormat:@"%@?sessiontoken=%@",url,token];
+    }
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     for (NSString *s in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) {
@@ -33,17 +37,28 @@
     [operation setCompletionBlockWithSuccess:success failure:failure];
     [operation start];
     
+    NSLog(@"%@",url);
 }
 +(void)jsonGetRequestWithUrl:(NSString*)url
                andParameters:(NSDictionary*)parameters
                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
+     NSMutableDictionary *tokenParameters=[parameters mutableCopy];
+    NSString *token=[[ItelAction action] getHost].token;
     
-    NSMutableURLRequest *request=[[AFJSONRequestSerializer serializer] requestWithMethod:@"get" URLString:url parameters:parameters];
+    if (token) {
+        [tokenParameters setValue:token forKey:@"sessiontoken"];
+    }
+
+   
+    
+    
+    NSMutableURLRequest *request=[[AFJSONRequestSerializer serializer] requestWithMethod:@"get" URLString:url parameters:tokenParameters];
     
     AFHTTPRequestOperation *operation=[[AFHTTPRequestOperation alloc]initWithRequest:request];
     [operation setCompletionBlockWithSuccess:success failure:failure];
     [operation start];
+    NSLog(@"%@",request.URL);
     
 }
 +(void)uploadImagePostRequestWithUrl:(NSString*)url
@@ -52,13 +67,19 @@
                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
+    NSString *token=[[ItelAction action] getHost].token;
+    
+    if (token) {
+        url=[NSString stringWithFormat:@"%@?sessiontoken=%@",url,token];
+    }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-        NSLog(@"上传图片的长度:%d",imageData.length);
+    
         [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
          [formData appendPartWithFileData:imageData    name:@"image" fileName:@"header.png" mimeType:@"image/png"];
     } success:success failure:failure];
+    NSLog(@"%@",url);
     
-   }
+}
 
 @end

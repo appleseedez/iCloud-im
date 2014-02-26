@@ -67,7 +67,7 @@
     
     if ([self.window.rootViewController isKindOfClass:[NXLoginViewController class]]) {
         
-        [self.manager setup];
+        
         NSDictionary *tokens=[dic objectForKey:@"tokens"];
         if (tokens) {
             host.sessionId=[tokens objectForKey:@"jsessionid"];
@@ -134,12 +134,20 @@
         self.phoneBook = [[AddressBook alloc] init];
         [self.phoneBook loadAddressBook];
     }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        while (self.UUID==nil) {
+            self.UUID = [[[UIDevice currentDevice]identifierForVendor ] UUIDString];
+        }
+       
+    });
+    
     [[IMCoreDataManager defaulManager] isAreaInCoreData]; //地名插入coredata
     //初始化ItelMessageInterface
     RootViewController *rootVC= (RootViewController*) self.window.rootViewController;
     //实例化manager
     self.manager = [[IMManagerImp alloc] init];
-    [self.manager setup];
+    //[self.manager setup];
     [self registerNotifications];
     [[ItelMessageInterfaceImp defaultMessageInterface] setup];
     rootVC.manager=self.manager;
@@ -228,6 +236,7 @@
         [self.window setRootViewController:self.RootVC];
         NSString *hostItel=[[ItelAction action]getHost].itelNum;
         [[NSUserDefaults standardUserDefaults] setObject:hostItel forKey:@"currUser"];
+        [self.manager setup];
         NSDictionary* params = @{
                                  kDomain:[info valueForKey:kDomain],
                                  kPort:[info valueForKey:kPort],

@@ -31,6 +31,9 @@ static ItelNetInterfaceImp* manager;
 
 -(void)requestWithName:(NSString*)name parameters:(NSDictionary*)parameters Method:(int)method responseSelector:(SEL)selector userInfo:(id)userInfo   notifyName:(NSString*)notifyName{
     NSString *url=[NSString stringWithFormat:@"%@%@",SIGNAL_SERVER,name];
+  
+ 
+    
     SUCCESS{
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if ([json isKindOfClass:[NSDictionary class]]) {

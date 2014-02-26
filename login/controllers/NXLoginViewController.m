@@ -9,7 +9,7 @@
 #import "NXLoginViewController.h"
 #import "NXInputChecker.h"
 #import "NXRegViewController.h"
-
+#import "NSCAppDelegate.h"
 
 #import "AFNetworking.h"
 #import "NSCAppDelegate.h"
@@ -84,9 +84,9 @@ static int loginCount=0;
     
     loginCount ++;
     NSLog(@"登录了%d次",loginCount);
-    
-    
-    NSDictionary *parameters=  @{@"itel": self.txtUserCloudNumber.text,@"password":self.txtUserPassword.text,@"type":@"IOS"};
+    NSString *uuid=((NSCAppDelegate*)[UIApplication sharedApplication].delegate).UUID;
+    //ecommerce-android
+    NSDictionary *parameters=  @{@"itel": self.txtUserCloudNumber.text,@"password":self.txtUserPassword.text,@"type":@"phone-ios",@"onlymark":uuid,@"phonecode":@""};
     
     
     
@@ -108,12 +108,8 @@ static int loginCount=0;
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 HostItelUser *host=[HostItelUser userWithDictionary:[[dic objectForKey:@"data"] mutableCopy]];
-                NSDictionary *tokens=[json objectForKey:@"tokens"];
-                if (tokens) {
-                    host.sessionId=[tokens objectForKey:@"jsessionid"];
-                    host.spring_security_remember_me_cookie=[tokens objectForKey:@"spring_security_remember_me_cookie"];
-                    host.token=[tokens objectForKey:@"token"];
-                }
+                
+                
                 
                 
                 [[ItelAction action] setHostItelUser:host];

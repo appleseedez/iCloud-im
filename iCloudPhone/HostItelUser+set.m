@@ -20,8 +20,8 @@
             NSNumber *port = [dic objectForKey:@"port"];
             host.port=[NSString stringWithFormat:@"%@",port ];
             host.stunServer=[dic objectForKey:@"stun_server"];
-            NSString *token=[dic objectForKey:@"token"];
-            if ([token isEqual: [NSNull null]]) {
+            NSString *token=[dic objectForKey:@"sessiontoken"];
+            if ([token isEqual: [NSNull null]]||token==nil) {
                 host.token=@"djsadfkjafaklfji";
                 
             }
