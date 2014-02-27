@@ -209,6 +209,9 @@ static int localNetPortSuffix = 0;
     char self_inter_ip[16];
     uint16_t self_inter_port;
     //获取本机外网ip和端口
+//    self.pInterfaceApi->GetSelfInterAddr("115.29.145.142", 11111, self_inter_ip, self_inter_port);
+    
+    self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], 22222, self_inter_ip, self_inter_port);
     int ret = self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], probeServerPort, self_inter_ip, self_inter_port);
     if (ret != 0) {
         self.currentInterIP = BLANK_STRING;
