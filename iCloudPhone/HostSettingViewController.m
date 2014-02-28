@@ -110,7 +110,7 @@ UITableViewCell <HostCell> *getCellWithIndexPath(NSIndexPath *indexPath,UITableV
     
     UIImage *compressedImage=[UIImage imageWithData:compressed];
     
-    
+    NSLog(@"压缩后图片大小：%d",compressed.length);
    
     
     [[ItelAction action] uploadImage:compressedImage];

@@ -43,6 +43,9 @@ static int currPage=0;
     
     self.contentScrollView.contentSize=CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height+deltaHeight);
 }
+- (IBAction)goFish:(id)sender {
+    [[ItelAction action ] loginOtherApp:nil];
+}
 -(void)go115{
     UIStoryboard *story=[UIStoryboard storyboardWithName:@"115" bundle:nil];
     if (story) {

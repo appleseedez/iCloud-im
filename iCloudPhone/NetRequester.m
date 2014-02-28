@@ -37,7 +37,7 @@
     [operation setCompletionBlockWithSuccess:success failure:failure];
     [operation start];
     
-    NSLog(@"%@",url);
+    //NSLog(@"%@",url);
 }
 +(void)jsonGetRequestWithUrl:(NSString*)url
                andParameters:(NSDictionary*)parameters
@@ -58,7 +58,7 @@
     AFHTTPRequestOperation *operation=[[AFHTTPRequestOperation alloc]initWithRequest:request];
     [operation setCompletionBlockWithSuccess:success failure:failure];
     [operation start];
-    NSLog(@"%@",request.URL);
+    //NSLog(@"%@",request.URL);
     
 }
 +(void)uploadImagePostRequestWithUrl:(NSString*)url
@@ -78,7 +78,7 @@
         [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
          [formData appendPartWithFileData:imageData    name:@"image" fileName:@"header.png" mimeType:@"image/png"];
     } success:success failure:failure];
-    NSLog(@"%@",url);
+    //NSLog(@"%@",url);
     
 }
 

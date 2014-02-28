@@ -36,6 +36,10 @@ static ItelNetInterfaceImp* manager;
     
     SUCCESS{
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        if(json==nil){
+            NSString *response=[[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog( @"%@",response);
+        }
         if ([json isKindOfClass:[NSDictionary class]]) {
             
             NSDictionary *dic=(NSDictionary*)json;
@@ -234,8 +238,44 @@ static ItelNetInterfaceImp* manager;
 -(void)acceptIvitation:(NSDictionary*)parameters{
     [self requestWithName:MESSAGE_ACCEPT_INVITITION_INTERFACE parameters:parameters Method:0 responseSelector:NSSelectorFromString(@"acceptFriendIvicationResponse:") userInfo:@"dic" notifyName:@"acceptFriends"];
 }
+#pragma mark - 启动快鱼
+-(void)startOtherApp:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/appSwtching.json",SIGNAL_SERVER];
+    
+    
+    void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([json isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic=[json objectForKey:@"message"];
+            if ([dic objectForKey:@"ret"] == nil) {
+                
+                return ;
+            }
+            int ret=[[dic objectForKey:@"ret"] intValue];
+            if (ret==0) {
+                NSDictionary *host=[dic objectForKey:@"data"];
+                
+                [[ItelAction action] loginOtherAppResponse:host];
+                
+                
+            }
+            else {
+                NSString *msg=[[json valueForKey:@"message"] valueForKey:@"msg"];
+                [[[UIAlertView alloc]initWithTitle:@"启动快鱼失败" message:msg delegate:nil cancelButtonTitle:@"好吧" otherButtonTitles: nil] show];
+            }
+        }//如果请求失败 则执行failure
+    };
+    void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+        
+    };
+    [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
+}
+#pragma mark - 退出登录
 -(void)logout:(NSDictionary*)parameters{
-    [self requestWithName:@"/j_spring_security_logout" parameters:parameters Method:1 responseSelector:Nil userInfo:Nil notifyName:@"null"];
+    [self requestWithName:@"/logoutSuccess.do" parameters:parameters Method:1 responseSelector:NSSelectorFromString(@"logoutResponse") userInfo:Nil notifyName:@"logout"];
     
 }
 @end

@@ -100,6 +100,9 @@
 -(NSArray*)searchInFirendBook:(NSString*)search;
 /*keypath 查找好友列表 keypath为需要匹配得iteluser的属性 如字符串的形式如 昵称 @“nickName”  电话 @“telNum” 备注 @“remarkName” 返回itelbook 如需要多种搜索 多次调用用appendingByItelBook拼接返回的itelBook*/
 -(ItelBook*)searchInFriendBookWithKeyPath:(NSString*)keyPath andSearch:(NSString*)search;
+//启动快鱼
+-(void)loginOtherApp:(NSDictionary*)type;
+-(void)loginOtherAppResponse:(NSDictionary*)data;
 #pragma mark - 消息接口
 //查询新消息
 -(void)searchForNewMessage;

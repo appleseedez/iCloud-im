@@ -15,6 +15,7 @@
 #import "ItelBookInterfaceImp.h"
 #import "AddressBook.h"
 #import "ItelIntentImp.h"
+#import "NSCAppDelegate.h"
 @interface ItelMessageInterfaceImp()
 + (instancetype) defaultMessageInterface;
 @end
@@ -253,9 +254,10 @@
 }
 #pragma mark - 上传图片
 -(void)uploadImage:(UIImage*)image{
-    NSData *imgData=UIImagePNGRepresentation(image);
+    NSData *imgData=UIImageJPEGRepresentation(image, 0.1);
     NSAssert(imgData, @"空的数据");
     //NSData *imgData=UIImageJPEGRepresentation(image, 1);
+    NSLog(@"jpeg图片大小：%d",imgData.length);
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
     NSDictionary *parameters = @{@"userId":hostUser.userId ,@"itelCode":hostUser.itelNum,@"token":hostUser.token};
     [self.itelNetRequestActionDelegate uploadImage:imgData parameters:parameters];
@@ -397,9 +399,34 @@
 -(void)acceptFriendIvicationResponse:(NSDictionary*)data{
     [self NotifyForNormalResponse:@"acceptFriends" parameters:data];
 }
+#pragma mark - 启动其他app
+-(void)loginOtherApp:(NSDictionary*)type{
+    
+    NSDictionary *parameters=@{@"sessiontoken":[self getHost].token,@"type":@"ecommerce-ios",@"phonecode":@""};
+    [self.itelNetRequestActionDelegate startOtherApp:parameters];
+    
+}
+-(void)loginOtherAppResponse:(NSDictionary*)data{
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString: @"itelFish://itelland.com"]]) {
+        NSMutableDictionary *login=[data mutableCopy];
+       
+        NSData *json=[NSJSONSerialization dataWithJSONObject:login options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *strParameters=[[[NSString alloc ] initWithData:json encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
+        
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"itelFish://itelland.com/?%@",strParameters]];
+        
+        [[UIApplication sharedApplication] openURL:url];
+
+    
+    
+}
+}
 #pragma mark - 退出登录
 -(void)logout{
-    
+    HostItelUser *hostUser =[self.itelUserActionDelegate hostUser];
+    NSCAppDelegate *app=(NSCAppDelegate*)[UIApplication sharedApplication].delegate;
+    NSDictionary *parameters=@{@"itel":hostUser.itelNum,@"onlymark":app.UUID};
+    [self.itelNetRequestActionDelegate logout:parameters];
 }
 -(void)logoutResponse{
     [self NotifyForNormalResponse:@"logout" parameters:nil];

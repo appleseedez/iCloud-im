@@ -54,6 +54,8 @@
 -(void)acceptIvitation:(NSDictionary*)parameters;
 //退出登录
 -(void)logout:(NSDictionary*)parameters;
+//启动快鱼
+-(void)startOtherApp:(NSDictionary*)parameters;
 
 #pragma mark - 115接口
 -(void)search115:(NSDictionary *)parameters;
