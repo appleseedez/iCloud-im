@@ -48,9 +48,14 @@
 
 - (IBAction)modifyPassword:(RegNextButton *)sender {
     if ([self.txtPassword.text isEqualToString:self.txtRePassword.text]&&[NXInputChecker checkPassword:self.txtPassword.text]) {
-      
+        NSString *password=self.txtPassword.text;
+#if USING_PASSWORD_ENCODE
+        
+        password=[NXInputChecker encodePassWord:password];
+#endif
+
             [self startHud];
-            [[PassManager defaultManager] modifyPassword:self.txtPassword.text];
+            [[PassManager defaultManager] modifyPassword:password];
         
     }else if(![NXInputChecker checkEmpty:self.txtPassword.text]){
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码失败" message:@"密码不能为空" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];

@@ -183,7 +183,16 @@ static float animatedDuration=1.0;
     NSString *localCheck=[self checkInputFormat];
     if (localCheck==nil) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[ItelAction action] modifyUserPassword:self.txtOldPassword.text newPassword:self.txtNewPassword.text];
+        NSString *newPassword=self.txtNewPassword.text;
+        NSString *oldPassword=self.txtOldPassword.text;
+#if USING_PASSWORD_ENCODE
+        
+        newPassword=[NXInputChecker encodePassWord:newPassword];
+        oldPassword=[NXInputChecker encodePassWord:oldPassword];
+#endif
+
+        
+        [[ItelAction action] modifyUserPassword:oldPassword newPassword:newPassword];
     }
     else {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"验证失败" message:localCheck delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];

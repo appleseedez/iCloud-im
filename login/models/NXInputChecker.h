@@ -30,4 +30,6 @@
 +(NSDictionary*)parmetersInUrl:(NSURL*)url;
 
 +(NSData*)dataForByteString:(NSString*)byteString;
+//密码加密
++(NSString*)encodePassWord:(NSString*)password;
 @end

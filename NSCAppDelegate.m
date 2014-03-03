@@ -90,7 +90,7 @@
     }else {
         if (![[[ItelAction action] getHost].itelNum isEqualToString:[dic objectForKey:@"itel"]]) {
             [self signOut];
-          UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"自动登录失败" message:@"当前用户与自动登录用户冲突 请重新登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] ;
+          UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"自动登录失败" message:@"当前启动用户与自动登录用户冲突 请重新登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] ;
             
             [alert performSelector:@selector(show) withObject:nil afterDelay:0.2];
             return YES ;

@@ -7,7 +7,7 @@
 //
 
 #import "NXInputChecker.h"
-
+#import "NSString+MD5.h"
 @implementation NXInputChecker
 +(BOOL)checkCloudNumber:(NSString*)cloudNumber{
    //非空检测
@@ -214,5 +214,8 @@
     }
     
     return objectData;
+}
++(NSString*)encodePassWord:(NSString*)password{
+    return [password MD5];
 }
 @end

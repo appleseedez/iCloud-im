@@ -33,4 +33,5 @@
     #define ENGINE_MSG 0
 
     #define usertip 1
+    #define USING_PASSWORD_ENCODE 1
 #endif

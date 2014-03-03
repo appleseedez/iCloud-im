@@ -86,7 +86,13 @@ static int loginCount=0;
     NSLog(@"登录了%d次",loginCount);
     NSString *uuid=((NSCAppDelegate*)[UIApplication sharedApplication].delegate).UUID;
     //ecommerce-android
-    NSDictionary *parameters=  @{@"itel": self.txtUserCloudNumber.text,@"password":self.txtUserPassword.text,@"type":@"phone-ios",@"onlymark":uuid,@"phonecode":@""};
+    
+    NSString *password=self.txtUserPassword.text;
+#if USING_PASSWORD_ENCODE
+    
+    password=[NXInputChecker encodePassWord:password];
+#endif
+    NSDictionary *parameters=  @{@"itel": self.txtUserCloudNumber.text,@"password":password,@"type":@"phone-ios",@"onlymark":uuid,@"phonecode":@""};
     
     
     
