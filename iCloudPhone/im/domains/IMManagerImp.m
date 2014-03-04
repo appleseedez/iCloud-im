@@ -167,24 +167,14 @@ static int endTime = 0;
     }
     
 }
-- (void)presentDialRelatedPanel{
-    if ([((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow isHidden]){
-        [UIView beginAnimations:@"showOff" context:Nil];
-        [UIView setAnimationDuration:0.3];
-        
-        [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow setHidden:NO];
-        [UIView commitAnimations];
-    }
+- (void)presentDialRelatedPanel:(UIViewController*) rootViewController{
+    [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow makeKeyAndVisible];
+    ((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow.rootViewController = rootViewController;
 }
 
 - (void) dismissDialRelatedPanel{
-    
-    if (![((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow isHidden]){
-        [UIView beginAnimations:@"showOff" context:Nil];
-        [UIView setAnimationDuration:.3];
-        [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow setHidden:YES];
-        [UIView commitAnimations];
-    }
+    ((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow.rootViewController = nil;
+    [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).window makeKeyAndVisible];
 }
 #pragma mark - callbacks
 //通话查询请求成功
@@ -211,7 +201,6 @@ static int endTime = 0;
     [self.state setValue:[notify.userInfo valueForKey:kRelayIP] forKey:kForwardIP];
     // 转发port
     [self.state setValue: [notify.userInfo valueForKey:kRelayPort] forKey:kForwardPort];
-    [self presentDialRelatedPanel];
     //4. 通知界面弹起拨号中界面 信息从manager.state里面取状态 不再通过通知传递了 接收通知的结果就是主叫方会弹出正在拨号界面
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:nil];
 
@@ -273,6 +262,10 @@ static int endTime = 0;
             return;
         }
         self.isInP2P = @(1);
+        //开始获取p2p通道，保持session的数据包可以停止发送了。
+        NSLog(@"主叫方停止了保持session的数据包发送");
+        [self.keepSessionAlive invalidate];
+        self.keepSessionAlive = nil;
         NSLog(@"主叫收到应答时,传递给引擎的穿透数据:%@",answeringData.userInfo);
         [self.engine tunnelWith:answeringData.userInfo];
 
@@ -280,13 +273,11 @@ static int endTime = 0;
         NSString* haltType = (self.busy)?kBusy:kEndSession;
         NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 主叫方收到非成对的ssid通话应答");
         [self sessionHaltRequest:@{
-//                            kType:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
                             kSrcAccount:[[self myState] valueForKey:kMyAccount],
                             kDestAccount:[answeringData.userInfo valueForKey:kDestAccount],
                             kHaltType:haltType
                             }];
     }
-    
 
 }
 // 被叫方收到了请求
@@ -295,7 +286,6 @@ static int endTime = 0;
     if (self.busy) {
         NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 被叫方忙,收到通话请求");
         [self sessionHaltRequest:@{
-//                             kType:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
                              kSrcAccount:[[self myState] valueForKey:kMyAccount],
                              kDestAccount:[callingData.userInfo valueForKey:kDestAccount],
                              kHaltType:kBusy
@@ -303,7 +293,6 @@ static int endTime = 0;
         return;
     }else if([[ItelAction action] userInBlackBook:[callingData.userInfo valueForKey:kDestAccount]]){
         [self sessionHaltRequest:@{
-//                                   kType:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
                                    kSrcAccount:[[self myState] valueForKey:kMyAccount],
                                    kDestAccount:[callingData.userInfo valueForKey:kDestAccount],
                                    kHaltType:kRefuseSession
@@ -786,11 +775,15 @@ static int endTime = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(justStartTransport:) name:P2PTUNNEL_SUCCESS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transportFailed:) name:P2PTUNNEL_FAILED object:nil];
     //开始建立通道
-
     self.isInP2P = @(1);
+    //开始获取p2p通道，保持session的数据包可以停止发送了。
+    NSLog(@"被叫方停止了保持session的数据包发送");
+    [self.keepSessionAlive invalidate];
+    self.keepSessionAlive = nil;
     NSLog(@"被叫接受请求时,传递给引擎的穿透数据:%@",notify.userInfo);
     [self.engine tunnelWith:notify.userInfo];
 }
+
 /**
  *  主叫,被叫方都通过这个方法发送链路列表数据
  *
@@ -914,10 +907,7 @@ static int endTime = 0;
 }
 // 被叫接听回掉
 - (void) startTransportAndNotify:(NSNotification*) notify{
-    //开始获取p2p通道，保持session的数据包可以停止发送了。
-    NSLog(@"主叫方停止了保持session的数据包发送");
-    [self.keepSessionAlive invalidate];
-    self.keepSessionAlive = nil;
+
     self.isInP2P = @(0);
     //如果是空闲. 白穿透了.
     if ([self.basicState intValue] == basicStateIdle) {
@@ -948,10 +938,6 @@ static int endTime = 0;
 
 //被叫方开启通道
 - (void) justStartTransport:(NSNotification*) notify{
-    //开始获取p2p通道，保持session的数据包可以停止发送了。
-    NSLog(@"被叫方停止了保持session的数据包发送");
-    [self.keepSessionAlive invalidate];
-    self.keepSessionAlive = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:P2PTUNNEL_SUCCESS object:nil];
     self.isInP2P =@(0);
     //如果是空闲. 白穿透了.

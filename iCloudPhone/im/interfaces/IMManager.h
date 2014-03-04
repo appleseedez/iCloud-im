@@ -63,6 +63,6 @@
 - (void) setCanVideo:(BOOL)canVideo;
 - (BOOL) canVideo;
 - (double) checkDuration;
-- (void) presentDialRelatedPanel;
+- (void) presentDialRelatedPanel:(UIViewController*) rootViewController;
 - (void) dismissDialRelatedPanel;
 @end

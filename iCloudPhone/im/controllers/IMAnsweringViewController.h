@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIView *inSessionNameHUD;
 @property (weak, nonatomic) IBOutlet UIView *inSessionActionHUD;
 @property (weak, nonatomic) IBOutlet UIView* cameraPreview;
+@property (weak, nonatomic) IBOutlet UIButton* switchCameraBtn;
 @property (weak, nonatomic) IBOutlet VideoRenderIosView *remoteRenderView;
 - (IBAction)toggleHUD:(UITapGestureRecognizer *)sender;
 - (IBAction)toggleMute:(UIButton *)sender;

@@ -2980,7 +2980,7 @@
         <!--Calling View Controller-->
         <scene sceneID="AU6-3U-6eC">
             <objects>
-                <viewController id="RXn-9S-Bdt" customClass="IMCallingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CallingView" id="RXn-9S-Bdt" customClass="IMCallingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mU2-SA-HiG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3214,7 +3214,7 @@
         <!--Answering View Controller-->
         <scene sceneID="TYr-bc-RzA">
             <objects>
-                <viewController id="qS2-tk-E1c" customClass="IMAnsweringViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AnsweringView" id="qS2-tk-E1c" customClass="IMAnsweringViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QH2-P1-dbb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3432,6 +3432,18 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZVU-ex-hrY" userLabel="switchBtn">
+                                <rect key="frame" x="250" y="44" width="53" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" image="switch_cam_btn">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchCamera:" destination="qS2-tk-E1c" eventType="touchUpInside" id="SV6-GJ-oCV"/>
+                                    <action selector="switchCamera:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="lve-bM-oSS"/>
+                                    <action selector="switchCamera:" destination="kEe-Cf-lem" eventType="touchUpInside" id="vov-eh-irG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -3445,6 +3457,7 @@
                         <outlet property="isVideoCallICONView" destination="by7-vx-8Ul" id="DWp-Vz-Y6w"/>
                         <outlet property="peerAccountLabel" destination="SMX-5o-nlt" id="KMe-gn-7MS"/>
                         <outlet property="remoteRenderView" destination="8I1-ov-q6l" id="jad-zL-000"/>
+                        <outlet property="switchCameraBtn" destination="ZVU-ex-hrY" id="tcA-7k-Qf9"/>
                         <segue destination="kEe-Cf-lem" kind="push" identifier="acceptSessionSegue" id="5y8-TJ-QOU"/>
                     </connections>
                 </viewController>
@@ -3456,42 +3469,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1397" y="2094"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="f7I-QK-0Og">
-            <objects>
-                <navigationController storyboardIdentifier="AnsweringView" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="vrt-KP-XEC" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zmd-VQ-VRu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="qS2-tk-E1c" kind="relationship" relationship="rootViewController" id="zdZ-no-bZ0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PhG-rh-LOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="962" y="2108"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="WVb-9Y-aS1">
-            <objects>
-                <navigationController storyboardIdentifier="CallingView" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="yau-is-DHc" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2NY-Th-xM2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="RXn-9S-Bdt" kind="relationship" relationship="rootViewController" id="PDQ-9c-6GN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iOU-Dr-vgt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="929" y="1426"/>
         </scene>
         <!--Recent Contact List View Controller - 通话记录-->
         <scene sceneID="FUF-TP-Mgc">
@@ -3979,6 +3956,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ps9-HW-4k5"/>
+        <segue reference="5y8-TJ-QOU"/>
     </inferredMetricsTieBreakers>
 </document>

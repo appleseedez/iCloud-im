@@ -200,7 +200,7 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
     }
 }
 - (void) setupPreview:(NSNotification*) notify{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:OPEN_CAMERA_SUCCESS_NOTIFICATION object:Nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:OPEN_CAMERA_SUCCESS_NOTIFICATION object:Nil];
     CGRect previewSize = CGRectMake(0, 0, self.cameraPreview.bounds.size.width, self.cameraPreview.bounds.size.height);
     UIView* preview = (UIView*) [notify.userInfo valueForKey:@"preview"];
     [preview setFrame:previewSize];

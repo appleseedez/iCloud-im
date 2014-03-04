@@ -76,7 +76,7 @@
     [super viewDidAppear:animated];
 
 }
-#warning wont call
+
 -(void)viewWillDisappear:(BOOL)animated{
     [self tearDown];
     self.directNumber=nil;
@@ -111,7 +111,7 @@
     self.suggestBtnView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.suggestBtnView.layer.borderWidth = .5;
     self.searchResultView.hidden = YES;
-    self.selfAccountLabel.text = @"";//[NSString stringWithFormat:@"本机号码：%@", [self.manager myAccount]];
+    self.selfAccountLabel.text = @"";
     [[ItelAction action] getItelFriendList:0];
 }
 - (void) tearDown{
@@ -284,7 +284,6 @@
 
 - (IBAction)showRecentContactList:(UIButton *)sender {
     [self.manager dismissDialRelatedPanel];
-//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)autoFill:(UIButton *)sender {
     //如果有筛选结果

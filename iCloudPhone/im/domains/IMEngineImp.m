@@ -372,8 +372,8 @@ static int localNetPortSuffix = 0;
         self.isCameraOpened = NO;
     }
     //在结束通话时,将音频session终止
-    NSError* error= Nil;
-    [[AVAudioSession sharedInstance] setActive:NO error:&error];
+//    NSError* error= Nil;
+//    [[AVAudioSession sharedInstance] setActive:NO error:&error];
     NSLog(@"<<<<<<<<<<<<<<<<<<<<closeMedia:%d,closeNet:%d >>>>>>>>>>>>>>>>>>>>>>>>>>>>",retCloseMedia,retCloseNet);
 }
 
@@ -494,7 +494,10 @@ static int localNetPortSuffix = 0;
         self.pInterfaceApi->SwitchCamera(self.cameraIndex);
         // 摆正摄像头位置
         self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
-        
+        //当摄像头开启成功, 把_pview_local作为通知内容发出去
+         [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_CAMERA_SUCCESS_NOTIFICATION object:Nil userInfo:@{
+                                                                                                                           @"preview":_pview_local
+                                                                                                                           }];
     }
     
 }

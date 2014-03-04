@@ -145,7 +145,7 @@
     rootVC.manager=self.manager;
     
     self.dialPanelWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, APP_SCREEN.size.width, APP_SCREEN.size.height)];
-    self.dialPanelWindow.windowLevel = UIWindowLevelAlert;
+    self.dialPanelWindow.windowLevel = UIWindowLevelNormal;
     
     self.RootVC=rootVC;
    
@@ -328,8 +328,7 @@
     if ([notify.userInfo valueForKey:@"itelNumber"]) {
         dialViewController.directNumber = [notify.userInfo valueForKey:@"itelNumber"];
     }
-    self.dialPanelWindow.rootViewController =dialViewController;
-    [self.manager presentDialRelatedPanel];
+    [self.manager presentDialRelatedPanel:dialViewController];
     
 }
 
@@ -340,11 +339,9 @@
     //加载“拨号中”界面
     //加载stroyboard
     UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
-    UINavigationController* callingViewNavController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
-    IMCallingViewController* callingViewController = (IMCallingViewController*) callingViewNavController.topViewController;
+    IMCallingViewController* callingViewController = (IMCallingViewController*) [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
     callingViewController.manager = self.manager;
-    self.dialPanelWindow.rootViewController =callingViewController;
-    [self.manager presentDialRelatedPanel];
+    [self.manager presentDialRelatedPanel:callingViewController];
     
 }
 - (void) presentAnsweringView:(NSNotification*) notify{
@@ -353,13 +350,11 @@
     NSLog(@"收到通知，将要加载AnsweringView");
 #endif
     UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
-    UINavigationController* answeringViewNavController =[sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
-    IMAnsweringViewController* answeringViewController = (IMAnsweringViewController*) answeringViewNavController.topViewController;
+    IMAnsweringViewController* answeringViewController = (IMAnsweringViewController*) [sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
     answeringViewController.manager = self.manager;
     answeringViewController.callingNotify = notify;
     
-    self.dialPanelWindow.rootViewController =answeringViewController;
-    [self.manager presentDialRelatedPanel];
+    [self.manager presentDialRelatedPanel:answeringViewController];
     
     
 }
