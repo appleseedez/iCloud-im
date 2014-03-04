@@ -247,8 +247,13 @@ static float animatedDuration=1.0;
     if (localCheck==nil) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         RegManager *manager=[RegManager defaultManager];
+        NSString *password=self.txtPassword.text;
+#if USING_PASSWORD_ENCODE
+        
+        password=[NXInputChecker encodePassWord:password];
+#endif
         manager.regItel=self.txtItel.text;
-        manager.regPassword=self.txtPassword.text;
+        manager.regPassword=password;
         manager.regPhoneNumber=self.txtPhoneNumber.text;
         [manager checkNumberInterface];
     }

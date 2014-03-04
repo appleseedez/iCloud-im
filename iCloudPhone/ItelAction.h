@@ -120,4 +120,10 @@
 //退出登录
 -(void)logout;
 -(void)logoutResponse;
+//检查更新
+-(void)checkNewVersion:(id)parameters;
+-(void)checkNewVersionResponse:(NSDictionary*)data;
+//精确查找用户
+-(void)searchMatchingUserWithItel:(NSString*)itel;
+-(void)searchMatchingUserWithItelResponse:(NSDictionary*)data;
 @end

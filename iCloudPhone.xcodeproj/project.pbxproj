@@ -186,6 +186,7 @@
 		47B89DF61834D40000022FE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD81834D40000022FE5 /* UIKit.framework */; };
 		47B89DFE1834D40000022FE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47B89DFC1834D40000022FE5 /* InfoPlist.strings */; };
 		47B89E001834D40000022FE5 /* iCloudPhoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B89DFF1834D40000022FE5 /* iCloudPhoneTests.m */; };
+		47BE0A3C18C58FAF007F5423 /* MoreAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BE0A3B18C58FAF007F5423 /* MoreAboutViewController.m */; };
 		47CDFE90184ED0F700673C2B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CDFE8F184ED0F700673C2B /* AVFoundation.framework */; };
 		47CDFE92184ED10500673C2B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CDFE91184ED10500673C2B /* CoreImage.framework */; };
 		47CDFE94184ED10E00673C2B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CDFE93184ED10E00673C2B /* QuartzCore.framework */; };
@@ -630,6 +631,8 @@
 		47B89DFB1834D40000022FE5 /* iCloudPhoneTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iCloudPhoneTests-Info.plist"; sourceTree = "<group>"; };
 		47B89DFD1834D40000022FE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		47B89DFF1834D40000022FE5 /* iCloudPhoneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iCloudPhoneTests.m; sourceTree = "<group>"; };
+		47BE0A3A18C58FAF007F5423 /* MoreAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreAboutViewController.h; sourceTree = "<group>"; };
+		47BE0A3B18C58FAF007F5423 /* MoreAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreAboutViewController.m; sourceTree = "<group>"; };
 		47CDFE8F184ED0F700673C2B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		47CDFE91184ED10500673C2B /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		47CDFE93184ED10E00673C2B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1679,6 +1682,8 @@
 				479F138C18617890006DF67B /* hostSetting */,
 				47E2DB98185991BD00D455EF /* MoreViewController.h */,
 				47E2DB99185991BD00D455EF /* MoreViewController.m */,
+				47BE0A3A18C58FAF007F5423 /* MoreAboutViewController.h */,
+				47BE0A3B18C58FAF007F5423 /* MoreAboutViewController.m */,
 				479C7BA5185DA7170046B1D7 /* moreViews */,
 			);
 			name = more;
@@ -2130,6 +2135,7 @@
 				4769EC8118AB5D4300F76DB5 /* Detail115ViewController.m in Sources */,
 				47DD064018A771D600BD0E47 /* ItelIntentRefreshData.m in Sources */,
 				47B89DE11834D40000022FE5 /* main.m in Sources */,
+				47BE0A3C18C58FAF007F5423 /* MoreAboutViewController.m in Sources */,
 				BA338B58187E839C00242DAF /* HostItelUser.m in Sources */,
 				479EF0601859D47C0012EE29 /* NSData+Byte.m in Sources */,
 				473F62E3183889B0006CAE31 /* AddressBook.m in Sources */,

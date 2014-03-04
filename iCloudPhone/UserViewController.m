@@ -203,6 +203,8 @@
     
     [self.imageView setRect:2.0 cornerRadius:self.imageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
     
+    
+    
 }
 -(NSArray*)notifications{
     

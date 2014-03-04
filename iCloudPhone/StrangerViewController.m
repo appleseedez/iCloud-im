@@ -176,6 +176,8 @@
     [self.btnAddUser setTitle:@"添加到通讯录" forState:UIControlStateHighlighted];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(callActionSheet)];
     [self.headImageView setRect:2.0 cornerRadius:self.headImageView.frame.size.width/6.0 borderColor:[UIColor whiteColor]];
+    
+    [[ItelAction action]searchMatchingUserWithItel:self.user.itelNum];
     //[self.navigationController setNavigationBarHidden:YES];
 }
 -(void)viewDidAppear:(BOOL)animated{

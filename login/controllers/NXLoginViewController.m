@@ -131,6 +131,7 @@ static int loginCount=0;
                 [[ItelAction action] checkAddressBookMatchingItel];
                 [[ItelAction action] getItelBlackList:0];
                 [[ItelAction action] getItelFriendList:0];
+                [[ItelAction action] checkNewVersion:nil];
                 self.btnLogin.enabled=YES;
             }
             else {

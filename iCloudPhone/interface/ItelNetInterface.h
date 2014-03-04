@@ -56,7 +56,10 @@
 -(void)logout:(NSDictionary*)parameters;
 //启动快鱼
 -(void)startOtherApp:(NSDictionary*)parameters;
-
+//检查更新
+-(void)checkForNewVersion:(NSDictionary*)parameters;
+//远程精确查找
+-(void)searchMatchingUserWithItel:(NSDictionary*)parameters;
 #pragma mark - 115接口
 -(void)search115:(NSDictionary *)parameters;
 @end

@@ -273,6 +273,15 @@ static ItelNetInterfaceImp* manager;
     };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
 }
+#pragma mark - 远程精确查找
+-(void)searchMatchingUserWithItel:(NSDictionary*)parameters{
+    [self requestWithName:@"/user/queryUser.json" parameters:parameters Method:1 responseSelector:NSSelectorFromString(@"searchMatchingUserWithItelResponse:") userInfo:@"dic" notifyName:@"exactlyUser"];
+}
+
+#pragma mark - 检查更新
+-(void)checkForNewVersion:(NSDictionary*)parameters{
+    [self requestWithName:@"/safety/checkUpdates.json" parameters:parameters Method:1 responseSelector:NSSelectorFromString(@"checkNewVersionResponse:") userInfo:@"dic" notifyName:@"checkNewVersion"];
+}
 #pragma mark - 退出登录
 -(void)logout:(NSDictionary*)parameters{
     [self requestWithName:@"/logoutSuccess.do" parameters:parameters Method:1 responseSelector:NSSelectorFromString(@"logoutResponse") userInfo:Nil notifyName:@"logout"];

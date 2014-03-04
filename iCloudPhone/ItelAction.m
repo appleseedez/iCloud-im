@@ -113,7 +113,7 @@
     [self.itelBookActionDelegate addItelUserIntoAddedList:itel];
     
     id <ItelIntent> intent=[ItelIntentImp newIntent:intentTypeMessage];
-    intent.userInfo=@{@"tittle":@"发送成功",@"body":@"请等待对方确认"};
+    intent.userInfo=@{@"title":@"发送成功",@"body":@"请等待对方确认"};
     [self NotifyForNormalResponse:ADD_FIRIEND_NOTIFICATION intent:intent];
 }
 #pragma mark - 删除好友
@@ -430,6 +430,24 @@
 }
 -(void)logoutResponse{
     [self NotifyForNormalResponse:@"logout" parameters:nil];
+}
+#pragma mark - 检查更新
+-(void)checkNewVersion:(id)parameters{
+    NSDictionary *p=@{@"version": @"1.0.1",@"type":@"phone-ios",@"token":@""};
+    [self.itelNetRequestActionDelegate checkForNewVersion:p];
+}
+-(void)checkNewVersionResponse:(NSDictionary*)data{
+   
+    [self NotifyForNormalResponse:@"checkForNewVersion" parameters:data];
+}
+#pragma mark - 远程精确查找
+-(void)searchMatchingUserWithItel:(NSString*)itel{
+    NSDictionary *parameters=@{@"username": @"186677"};
+    [self.itelNetRequestActionDelegate searchMatchingUserWithItel:parameters];
+}
+-(void)searchMatchingUserWithItelResponse:(NSDictionary*)data{
+    [self NotifyForNormalResponse:@"exactlyUser" parameters:data];
+    
 }
 //查找好友列表
 -(ItelUser*)userInFriendBook:(NSString*)itel{

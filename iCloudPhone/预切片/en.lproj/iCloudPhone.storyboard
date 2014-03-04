@@ -483,7 +483,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yUT-7p-bMp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1588" y="1660"/>
+            <point key="canvasLocation" x="-1808" y="1703"/>
         </scene>
         <!--Host Second Address View Controller-->
         <scene sceneID="O1T-aw-iu1">
@@ -854,10 +854,10 @@
             </objects>
             <point key="canvasLocation" x="-1174" y="2361"/>
         </scene>
-        <!--View Controller - 关于云电话-->
+        <!--More About View Controller - 关于云电话-->
         <scene sceneID="jtK-ec-Xya">
             <objects>
-                <viewController id="v7M-lF-hrv" sceneMemberID="viewController">
+                <viewController id="v7M-lF-hrv" customClass="MoreAboutViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gK9-Dy-McR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -912,6 +912,16 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zo9-Yc-B8G">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="checkNewVersion:" destination="v7M-lF-hrv" eventType="touchDragInside" id="fwb-Ov-USk"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
