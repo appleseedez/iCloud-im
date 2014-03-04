@@ -53,12 +53,14 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
 
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -159,6 +161,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     [self.answeringActionHUD setHidden:NO];
     self.currentNameHUD = self.answeringNameHUD;
     self.currentActionHUD = self.answeringActionHUD;
+    [self.switchCameraBtn setHidden:YES];
 }
 
 - (void) presentSessionModeHUD{
@@ -169,6 +172,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     [self.inSessionActionHUD setHidden:NO];
     self.currentNameHUD = self.inSessionNameHUD;
     self.currentActionHUD = self.inSessionActionHUD;
+    [self.switchCameraBtn setHidden:YES];
 }
 
 - (void)presentAcceptCallModeHUD{
@@ -202,7 +206,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     [self.manager haltSession:refusedSessionNotifyMut];
 }
 - (void) setupPreview:(NSNotification*) notify{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:OPEN_CAMERA_SUCCESS_NOTIFICATION object:Nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:OPEN_CAMERA_SUCCESS_NOTIFICATION object:Nil];
     CGRect previewSize = CGRectMake(0, 0, self.cameraPreview.bounds.size.width, self.cameraPreview.bounds.size.height);
     UIView* preview = (UIView*) [notify.userInfo valueForKey:@"preview"];
     [preview setFrame:previewSize];
@@ -300,8 +304,12 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 - (void)toggleHUD:(UITapGestureRecognizer *)sender{
     if ([self.currentNameHUD isHidden]) {
         [self.currentNameHUD setHidden:NO];
+        [self.switchCameraBtn setHidden:YES];
     }else{
         [self.currentNameHUD setHidden:YES];
+        if ([self.currentMode intValue] == inSessionMode) {
+            [self.switchCameraBtn setHidden:NO];
+        }
     }
     if ([self.currentActionHUD isHidden]) {
         [self.currentActionHUD  setHidden:NO];
