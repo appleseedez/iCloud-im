@@ -25,6 +25,7 @@ UIView*  _pview_local;
 @property(nonatomic) dispatch_queue_t m;
 @property(atomic) BOOL p2pFinished;
 @property(nonatomic) int selfNATType;
+@property(nonatomic,copy) NSString* stunServer;
 @end
 
 @implementation IMEngineImp
@@ -118,9 +119,9 @@ static int localNetPortSuffix = 0;
 - (void)initNetwork{
     self.netWorkPort = LOCAL_PORT + (++localNetPortSuffix)%9;
     if (false == self.pInterfaceApi->OpenNetWork(self.netWorkPort)) {
-#if DEBUG
-        [[IMTipImp defaultTip] errorTip:@"引擎初始化网络失败"];
-#endif
+//#if DEBUG
+//        [[IMTipImp defaultTip] errorTip:@"引擎初始化网络失败"];
+//#endif
     }else{
     }
 }
@@ -135,9 +136,9 @@ static int localNetPortSuffix = 0;
     //接下来，本地根据网络情况，会重新评估一次是否支持视频
     AFNetworkReachabilityManager* reachabilityManager = [AFNetworkReachabilityManager sharedManager];
     [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-#if DEBUG
-        [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前网络:%@",AFStringFromNetworkReachabilityStatus(status)]];
-#endif
+//#if DEBUG
+//        [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前网络:%@",AFStringFromNetworkReachabilityStatus(status)]];
+//#endif
         //网络发生变化时,再次获取nat
         [self setCurrentNATType:[self natType]];
         switch (status) {
@@ -169,9 +170,9 @@ static int localNetPortSuffix = 0;
                 break;
         }
     }];
-#if DEBUG
-    [[IMTipImp defaultTip] showTip:[self mediaTypeString:self.m_type]];
-#endif
+//#if DEBUG
+//    [[IMTipImp defaultTip] showTip:[self mediaTypeString:self.m_type]];
+//#endif
     [reachabilityManager startMonitoring];
     
 }
@@ -198,26 +199,28 @@ static int localNetPortSuffix = 0;
 - (NatType)natType{
     NatTypeImpl nat;
     
-    return nat.GetNatType("stunserver.org");
+    return nat.GetNatType([self.stunServer UTF8String]);
 //    return nat.GetNatType("stun.fwdnet.net:3478");
 }
 
-- (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort{
-#if DEBUG
-    [[IMTipImp defaultTip] showTip:@"开始外网地址探测"];
-#endif
+- (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort bakPort:(NSInteger) bakPort{
+//#if DEBUG
+//    [[IMTipImp defaultTip] showTip:@"开始外网地址探测"];
+//#endif
     char self_inter_ip[16];
     uint16_t self_inter_port;
     //获取本机外网ip和端口
-//    self.pInterfaceApi->GetSelfInterAddr("115.29.145.142", 11111, self_inter_ip, self_inter_port);
-    
-    self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], 22222, self_inter_ip, self_inter_port);
+// 1st time
+    NSLog(@"use backport:%d for the 1st get",bakPort);
+    self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], bakPort, self_inter_ip, self_inter_port);
+    // 2nd time
+    NSLog(@"use probeport:%d for the 2nd get",probeServerPort);
     int ret = self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], probeServerPort, self_inter_ip, self_inter_port);
     if (ret != 0) {
         self.currentInterIP = BLANK_STRING;
-#if DEBUG
-        [[IMTipImp defaultTip] showTip:@"没有获取到本机的外网地址.很有可能转发哦"];
-#endif
+//#if DEBUG
+//        [[IMTipImp defaultTip] showTip:@"没有获取到本机的外网地址.很有可能转发哦"];
+//#endif
     }else{
         self.currentInterIP =[NSString stringWithUTF8String:self_inter_ip];
     }
@@ -287,9 +290,9 @@ static int localNetPortSuffix = 0;
             ret = false;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-#if DEBUG
-            [[IMTipImp defaultTip] showTip:@"<<<<<<p2p结束>>>>>>>"];
-#endif
+//#if DEBUG
+//            [[IMTipImp defaultTip] showTip:@"<<<<<<p2p结束>>>>>>>"];
+//#endif
             self.p2pFinished = YES;
             NSLog(@"媒体类型:%d",self.m_type);
             NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
@@ -302,9 +305,9 @@ static int localNetPortSuffix = 0;
                 return;
             }
             NSLog(@"isLocal的状态：%d",argc.islocal);
-#if DEBUG
-            [[IMTipImp defaultTip] showTip:@"准备startmedia"];
-#endif
+//#if DEBUG
+//            [[IMTipImp defaultTip] showTip:@"准备startmedia"];
+//#endif
             
             TVideoConfigInfo vieConfig;
             vieConfig.height = 192;
@@ -337,11 +340,11 @@ static int localNetPortSuffix = 0;
             }
             if (!ret)
             {
-                [[IMTipImp defaultTip] errorTip:@"传输通道开启失败"];
+//                [[IMTipImp defaultTip] errorTip:@"传输通道开启失败"];
             }
             
             if (ret) {
-                [[IMTipImp defaultTip] showTip:@"紧接着p2p,媒体开启成功"];
+//                [[IMTipImp defaultTip] showTip:@"紧接着p2p,媒体开启成功"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_SUCCESS object:nil userInfo:params];
             }else{
                 [[NSNotificationCenter defaultCenter] postNotificationName:P2PTUNNEL_FAILED object:nil userInfo:params];
@@ -443,7 +446,7 @@ static int localNetPortSuffix = 0;
     int ret = 0;
     if (self.isCameraOpened )
     {
-        [[IMTipImp defaultTip] showTip:@"设置小窗口"];
+//        [[IMTipImp defaultTip] showTip:@"设置小窗口"];
         // 摆正摄像头位置
         self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
         // 开启摄像头
@@ -540,5 +543,9 @@ static int localNetPortSuffix = 0;
 }
 - (void) setCurrentNATType:(int)nat{
     self.selfNATType = nat;
+}
+
+- (void)setSTUNSrv:(NSString *)stunServer{
+    self.stunServer = stunServer;
 }
 @end

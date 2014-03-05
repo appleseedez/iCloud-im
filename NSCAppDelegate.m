@@ -44,7 +44,7 @@
 
     if (self.manager && ![[self.manager myAccount] isEqualToString: BLANK_STRING]) {
 #if usertip
-        [[IMTipImp defaultTip] showTip:@"开始重连"];
+        [[IMTipImp defaultTip] showTip:@"连接断开"];
 #endif
         [self.manager connectToSignalServer];
     }
@@ -218,6 +218,7 @@
         [[ItelAction action] checkAddressBookMatchingItel];
         [self setupIMManager:params];
         if ([[ItelAction action] getHost]) {
+            [self.manager setup];
             [self.manager connectToSignalServer];
         }
         
@@ -255,6 +256,7 @@
 }
 
 - (void) setupIMManager:(NSDictionary*) params{
+    NSLog(@"setupIMMAnger:params:%@",params);
     if ([[params allKeys] count] == 3) {
         [self.manager setRouteSeverIP:[params valueForKey:kDomain]];
         [self.manager setRouteServerPort:[[params valueForKey:kPort] intValue]];

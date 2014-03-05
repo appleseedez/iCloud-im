@@ -141,9 +141,9 @@
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
         return;
     }
-#if DEBUG
-    [[IMTipImp defaultTip]showTip:@"开启音频通话"];
-#endif
+//#if DEBUG
+//    [[IMTipImp defaultTip]showTip:@"开启音频通话"];
+//#endif
 //    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
 //                                                                                                                       kDestAccount:peerAccount,
 //                                                                                                                       kSrcAccount:[self.manager myAccount]
@@ -219,15 +219,15 @@
     [self.manager setIsVideoCall:YES];
     NSString* peerAccount = self.peerAccount.text;
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
-#if DEBUG
-        [[IMTipImp defaultTip] warningTip:@"再点我就把你喝掉"];
-#endif
+//#if DEBUG
+//        [[IMTipImp defaultTip] warningTip:@"再点我就把你喝掉"];
+//#endif
         sender.enabled = YES;
         return;
     }
-#if DEBUG
-    [[IMTipImp defaultTip] showTip:@"开启视频通话"];
-#endif
+//#if DEBUG
+//    [[IMTipImp defaultTip] showTip:@"开启视频通话"];
+//#endif
     sender.backgroundColor =[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1.0f];
     sender.titleLabel.textColor = [UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f];
     [self.manager dial:peerAccount];

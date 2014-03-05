@@ -25,7 +25,8 @@
 }
 static int localUDPNetPortSuffix = 0;
 - (void)connect:(NSString*) account{
-        self.udpPort = LOCAL_UDP_PORT + (++localUDPNetPortSuffix)%9;
+    NSLog(@"calling %@",NSStringFromSelector(_cmd));
+    self.udpPort = LOCAL_UDP_PORT + (++localUDPNetPortSuffix)%9;
 	NSError *error = nil;
 	
 	if (![self.udpSock bindToPort:self.udpPort error:&error])
@@ -37,6 +38,7 @@ static int localUDPNetPortSuffix = 0;
         NSAssert(self.udpSock, @"udpsock is nil");
         [self.udpSock close];
 //        [self connect:account];
+        [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil];
 		return;
 	}
 	if (![self.udpSock beginReceiving:&error])
@@ -146,10 +148,8 @@ static int localUDPNetPortSuffix = 0;
     
 }
 - (void)tearDown{
-    if (![self.udpSock isClosed]) {
-        [self.udpSock close];
-    }
-    
+    [self.udpSock close];
+    localUDPNetPortSuffix = 0;
     self.udpSock.delegate = nil;
     self.udpSock = nil;
 }
