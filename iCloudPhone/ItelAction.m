@@ -433,7 +433,9 @@
 }
 #pragma mark - 检查更新
 -(void)checkNewVersion:(id)parameters{
-    NSDictionary *p=@{@"version": @"1.0.1",@"type":@"phone-ios",@"token":@""};
+    NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+    NSLog(@"version:%@",version);
+    NSDictionary *p=@{@"version": version,@"type":@"phone-ios",@"token":@""};
     [self.itelNetRequestActionDelegate checkForNewVersion:p];
 }
 -(void)checkNewVersionResponse:(NSDictionary*)data{

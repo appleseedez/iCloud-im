@@ -18,19 +18,67 @@
 @property(nonatomic) NSDictionary* touchToneMap; //按键的拨号音，系统默认就有的
 @property(nonatomic) BOOL hidePan;// 标识出当前拨号盘是否可见。
 @property(nonatomic) BOOL showSuggest; //标识当前是否显示建议面板
-
+@property(nonatomic) UIView *addView;
+@property(nonatomic) UIView *addFailureView;
 @property(nonatomic) NSMutableArray* currentSuggestDataSource; //用于接收近似的itel号码
 @end
 
 @implementation IMDailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-
+-(UIView*)addFailureView{
+    if (_addFailureView==nil) {
+        _addFailureView=[[UIView alloc]init];
+        _addFailureView.frame=CGRectMake(0, 0, 320, 45);
+        _addFailureView.backgroundColor=[UIColor colorWithRed:1 green:0.8 blue:0.6 alpha:1];
+        UIImageView *imgFailuer=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dial_addfailuer"]];
+        imgFailuer.frame=CGRectMake(40, 8, 30, 30);
+        
+        [_addFailureView addSubview:imgFailuer];
+        UILabel *lbFailure=[[UILabel alloc]init];
+        lbFailure.frame=CGRectMake(70, 0, 320-70, 45);
+        lbFailure.backgroundColor=[UIColor clearColor];
+        lbFailure.text=@"未找到您输入的号码的相关信息";
+        [lbFailure setFont:[UIFont fontWithName:@"HeiTi SC" size:15]];
+        [lbFailure setTextColor:[UIColor colorWithRed:1 green:0.6 blue:0.2 alpha:1]];
+        [_addFailureView addSubview:lbFailure];
+        
+        
+        
     }
-    return self;
+    return _addFailureView;
+}
+-(UIView*)addView{
+    if (_addView==nil) {
+        _addView=[[UIView alloc]init];
+        _addView.frame=CGRectMake(40, 0, 230, 50);
+        _addView.backgroundColor=[UIColor clearColor];
+        UIImageView *imgAdd=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dial_addbtn"]];
+        imgAdd.frame=CGRectMake(40, 8, 30, 30);
+        [_addView addSubview:imgAdd];
+        UIButton *btnAdd=[[UIButton alloc]init];
+        btnAdd.frame=CGRectMake(55, 0, 150, 45);
+        btnAdd.backgroundColor=[UIColor clearColor];
+        [btnAdd setTitle:@"添加到通信录" forState:UIControlStateNormal];
+        [btnAdd setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [btnAdd addTarget:self action:@selector(addUser) forControlEvents:UIControlEventTouchUpInside];
+        [_addView addSubview:btnAdd];
+        
+    }
+    return _addView;
+}
+-(void)addUser{
+    [[ItelAction action]inviteItelUserFriend:self.peerAccount.text];
+}
+-(void)addUserResponse:(NSNotification*)notification{
+    NSDictionary *info=notification.userInfo;
+    int isNormal=[[info objectForKey:@"isNormal"]intValue];
+    if (isNormal) {
+        [[[UIAlertView alloc]initWithTitle:@"邀请已经发出" message:@"请等待对方确认" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
+    }else{
+        [self.addView removeFromSuperview];
+        [self.suggestBtnView addSubview:self.addFailureView];
+        [[[UIAlertView alloc]initWithTitle:@"邀请失败" message:[info objectForKey:@"reason"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
+    }
 }
 
 - (void)viewDidLoad
@@ -69,25 +117,22 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addUserResponse:) name:@"inviteItelUser" object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [self tearDown];
     self.directNumber=nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 - (IBAction)voiceDialing:(UIButton *)sender {
 
@@ -229,12 +274,14 @@
 }
 - (void) setupSuggestView{
     //把其中的第一条数据放到建议面板
+    [self.addFailureView removeFromSuperview];
     UIImageView* suggestClosestPeerAvatar = (UIImageView*) [self.suggestBtnView viewWithTag:1];
     UILabel* suggestClosestPeerNameLabel = (UILabel*) [self.suggestBtnView viewWithTag:2];
     UILabel* suggestClosestPeerItelNumber = (UILabel*) [self.suggestBtnView viewWithTag:3];
     UIButton* suggestExpandBtn = (UIButton*) [self.suggestBtnView viewWithTag:5];
     UILabel* itelTag = (UILabel*) [self.suggestBtnView viewWithTag:4];
     if ([self.currentSuggestDataSource count]) {
+        [self.addView removeFromSuperview];
         ItelUser* firstSuggestUser = [self.currentSuggestDataSource firstObject];
         [suggestClosestPeerAvatar setImageWithURL:[NSURL URLWithString:firstSuggestUser.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
         [suggestClosestPeerNameLabel setText:firstSuggestUser.nickName];
@@ -252,6 +299,8 @@
         itelTag.hidden = YES;
         [suggestExpandBtn setTitle:@"0" forState:UIControlStateNormal];
         [suggestExpandBtn setHidden:YES];
+        [self.suggestBtnView addSubview:self.addView];
+        
     }
 }
 - (IBAction)backspace:(UIButton *)sender {

@@ -280,7 +280,7 @@ static ItelNetInterfaceImp* manager;
 
 #pragma mark - 检查更新
 -(void)checkForNewVersion:(NSDictionary*)parameters{
-    [self requestWithName:@"/safety/checkUpdates.json" parameters:parameters Method:1 responseSelector:NSSelectorFromString(@"checkNewVersionResponse:") userInfo:@"dic" notifyName:@"checkNewVersion"];
+    [self requestWithName:@"/safety/checkUpdates.json" parameters:parameters Method:1 responseSelector:NSSelectorFromString(@"checkNewVersionResponse:") userInfo:@"dic" notifyName:@"checkForNewVersion"];
 }
 #pragma mark - 退出登录
 -(void)logout:(NSDictionary*)parameters{
