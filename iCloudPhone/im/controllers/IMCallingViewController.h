@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *inSessionActionHUD;
 @property (weak, nonatomic) IBOutlet UIButton* switchCameraBtn;
 @property (weak, nonatomic) IBOutlet UIView* cameraPreview;
+@property (weak, nonatomic) IBOutlet UIImageView* isVideoIconView;
 @property (weak, nonatomic) IBOutlet VideoRenderIosView *remoteRenderView;
 - (IBAction)cancelCalling:(UIButton *)sender;
 - (IBAction)toggleHUD:(UITapGestureRecognizer *)sender;

@@ -99,7 +99,12 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     self.PeerAvatarImageView.layer.masksToBounds = YES;
     
     [self.PeerAvatarImageView setImageWithURL:[NSURL URLWithString:peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
-
+    
+    if ([self.manager isVideoCall]) {
+        self.isVideoIconView.image = [UIImage imageNamed:@"videoCall_ico"];
+    }else{
+        self.isVideoIconView.image = [UIImage imageNamed:@"voiceCall_ico"];
+    }
     self.currentMode = @(inCallingMode);
 
 
@@ -273,10 +278,11 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
     ((UILabel*)[self.inSessionNameHUD viewWithTag:2]).text= itelNum;
     ((UILabel*)[self.inSessionNameHUD viewWithTag:4]).text = address;
 //    [self.peerAvatar setImageWithURL:[NSURL URLWithString: peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
+    
     if ([self.manager isVideoCall]) {
-//        [self.peerAvatar setHidden:YES ];
+        self.isVideoIconView.image = [UIImage imageNamed:@"videoCall_ico"];
     }else{
-//        [self.peerAvatar setHidden:NO];
+        self.isVideoIconView.image = [UIImage imageNamed:@"voiceCall_ico"];
     }
 }
 
