@@ -19,6 +19,7 @@
 #import "IMDailViewController.h"
 #import "IMCallingViewController.h"
 #import "IMAnsweringViewController.h"
+#import "ItelUpdateManager.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 
 @interface ItelMessageInterfaceImp()
@@ -116,10 +117,13 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_DIAL_VIEW_NOTIFICATION object:nil userInfo:[self.startExtra copy]];
     self.startExtra=nil;
 }
+
 - (void) registerNotifications{
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
+    
     //绑定重连通知
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reconnect:) name:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentCallingView:) name:PRESENT_CALLING_VIEW_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentAnsweringView:) name:SESSION_PERIOD_REQ_NOTIFICATION object:nil];
@@ -310,6 +314,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [[ItelUpdateManager defaultManager] checkUpdate];
+    
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationDidBecomeActive ");
 #endif
