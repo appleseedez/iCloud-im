@@ -44,8 +44,10 @@ static ItelNetInterfaceImp* manager;
             
             NSDictionary *dic=(NSDictionary*)json;
             int ret=[[dic objectForKey:@"ret"] intValue];
+            int code=[[dic objectForKey:@"code"]intValue];
+             ItelAction *action=[ItelAction action];
             if (ret==0) {
-                ItelAction *action=[ItelAction action];
+               
                 if ([action respondsToSelector:selector]) {
                     if ([userInfo isEqualToString:@"data"]) {
                         [action performSelector:selector withObject:[dic objectForKey:@"data"]];
@@ -57,8 +59,9 @@ static ItelNetInterfaceImp* manager;
                     }
                 }
                 
-            }
-            else {
+            }else if(code==222){
+                [action performSelector:selector withObject:dic];
+            }else {
                 id <ItelIntent> intent =  [ItelIntentImp  newIntent:intentTypeMessage];
                 intent.userInfo=@{@"title":  @"操作失败",@"body":[dic objectForKey:@"msg"] };
                 NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":[dic objectForKey:@"msg"],@"intent":intent };

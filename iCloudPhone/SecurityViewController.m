@@ -60,7 +60,7 @@ static bool isConnecting=0;
     BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"]boolValue];
     isConnecting=0;
     if (isNormal) {
-        if ([notification.object isEqual:[NSNull null]]) {
+        if ([[notification.object objectForKey:@"code"]intValue]==222) {
             [self pushToSettingView];
         }
         else{

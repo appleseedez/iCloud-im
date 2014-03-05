@@ -52,10 +52,10 @@
             return 1;
             break;
         case 1:
-            return 3;
+            return 2;
             break;
         case 2:
-            return 2;
+            return 1;
             break;
         case 3:
             return 1;
@@ -112,10 +112,10 @@
                 case 0:
                      identifier=@"notificationSetting";
                     break;
+//                case 1:
+//                   identifier=@"notificationPush";
+//                    break;
                 case 1:
-                   identifier=@"notificationPush";
-                    break;
-                case 2:
                    identifier=@"personal";
                     break;
                     
@@ -125,10 +125,10 @@
         }
         else if (indexPath.section==2){
             switch (indexPath.row) {
+//                case 0:
+//                    identifier=@"itelCeter";
+//                    break;
                 case 0:
-                    identifier=@"itelCeter";
-                    break;
-                case 1:
                     identifier=@"aboutItel";
                     break;
                     
