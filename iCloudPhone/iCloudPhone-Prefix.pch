@@ -32,6 +32,6 @@
     #define SIGNAL_MESSAGE 0
     #define ENGINE_MSG 0
 
-    #define usertip 0
+    #define usertip 1
     #define USING_PASSWORD_ENCODE 0
 #endif
