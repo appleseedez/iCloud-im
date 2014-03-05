@@ -38,6 +38,7 @@ static int localUDPNetPortSuffix = 0;
         NSAssert(self.udpSock, @"udpsock is nil");
         [self.udpSock close];
 //        [self connect:account];
+        [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil];
 		return;
 	}
 	if (![self.udpSock beginReceiving:&error])

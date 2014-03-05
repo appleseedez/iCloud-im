@@ -37,14 +37,14 @@
 
 - (void) sendHeartBeat{
     if ([self.sock isConnected]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[IMTipImp defaultTip] showTip:@"还连着"];
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+////            [[IMTipImp defaultTip] showTip:@"还连着"];
+//        });
         
         [self sendRequest:self.heartBeatPKG type:HEART_BEAT_REQ_TYPE];
     }else{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[IMTipImp defaultTip] showTip:@"断开了"];
+//            [[IMTipImp defaultTip] showTip:@"断开了"];
             [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
     });
     }
@@ -84,7 +84,7 @@
 // 链接上了服务器
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
 #if usertip
-    [[IMTipImp defaultTip] showTip:@"连接上了信令服务器"];
+    [[IMTipImp defaultTip] showTip:@"连接完成"];
 #endif
     [sock performBlock:^{
         [sock enableBackgroundingOnSocket];
@@ -157,9 +157,9 @@
     }
     self.authInfo = authInfo;
     if (![self.sock connectToHost:self.ip onPort:self.port error:&error]) {
-#if DEBUG
-        [[IMTipImp defaultTip] errorTip:@"链接信令服务器失败"];
-#endif
+//#if DEBUG
+//        [[IMTipImp defaultTip] errorTip:@"链接信令服务器失败"];
+//#endif
         [self disconnect];
     }
 

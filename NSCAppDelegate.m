@@ -43,7 +43,7 @@
 
     if (self.manager && ![[self.manager myAccount] isEqualToString: BLANK_STRING]) {
 #if usertip
-        [[IMTipImp defaultTip] showTip:@"开始重连"];
+        [[IMTipImp defaultTip] showTip:@"连接断开"];
 #endif
         [self.manager connectToSignalServer];
     }
@@ -214,6 +214,7 @@
         [[ItelAction action] checkAddressBookMatchingItel];
         [self setupIMManager:params];
         if ([[ItelAction action] getHost]) {
+            [self.manager setup];
             [self.manager connectToSignalServer];
         }
         

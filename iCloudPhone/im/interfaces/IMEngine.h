@@ -49,4 +49,5 @@
 
 - (int) currentNATType;
 - (void) setCurrentNATType:(int) nat;
+- (void) setSTUNSrv:(NSString*) stunServer;
 @end
