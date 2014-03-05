@@ -251,6 +251,7 @@
 }
 
 - (void) setupIMManager:(NSDictionary*) params{
+    NSLog(@"setupIMMAnger:params:%@",params);
     if ([[params allKeys] count] == 3) {
         [self.manager setRouteSeverIP:[params valueForKey:kDomain]];
         [self.manager setRouteServerPort:[[params valueForKey:kPort] intValue]];

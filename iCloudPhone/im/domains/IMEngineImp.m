@@ -202,16 +202,18 @@ static int localNetPortSuffix = 0;
 //    return nat.GetNatType("stun.fwdnet.net:3478");
 }
 
-- (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort{
+- (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort bakPort:(NSInteger) bakPort{
 #if DEBUG
     [[IMTipImp defaultTip] showTip:@"开始外网地址探测"];
 #endif
     char self_inter_ip[16];
     uint16_t self_inter_port;
     //获取本机外网ip和端口
-//    self.pInterfaceApi->GetSelfInterAddr("115.29.145.142", 11111, self_inter_ip, self_inter_port);
-    
-    self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], 22222, self_inter_ip, self_inter_port);
+// 1st time
+    NSLog(@"use backport:%d for the 1st get",bakPort);
+    self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], bakPort, self_inter_ip, self_inter_port);
+    // 2nd time
+    NSLog(@"use probeport:%d for the 2nd get",probeServerPort);
     int ret = self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], probeServerPort, self_inter_ip, self_inter_port);
     if (ret != 0) {
         self.currentInterIP = BLANK_STRING;

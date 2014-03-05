@@ -187,7 +187,8 @@ static int endTime = 0;
     //1. 终止掉超时定时器.这样,后续流程才能进行下去.
     [self.monitor invalidate];
     self.monitor = nil;
-
+    NSLog(@"呼叫查询成功的应答:%@",notify.userInfo);
+    
     //3.通话查询已经成功返回. 将本机的state设置成为接收到的信息
     // peerAccount
     [self.state setValue:[notify.userInfo valueForKey:kDestAccount] forKey:kPeerAccount];
@@ -201,6 +202,8 @@ static int endTime = 0;
     [self.state setValue:[notify.userInfo valueForKey:kRelayIP] forKey:kForwardIP];
     // 转发port
     [self.state setValue: [notify.userInfo valueForKey:kRelayPort] forKey:kForwardPort];
+    // 外网第一次ip探测时的bakport
+    [self.state setValue: [notify.userInfo valueForKey:kBakPort] forKey:kBakPort];
     //4. 通知界面弹起拨号中界面 信息从manager.state里面取状态 不再通过通知传递了 接收通知的结果就是主叫方会弹出正在拨号界面
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:nil];
 
@@ -521,7 +524,8 @@ static int endTime = 0;
                                                                   kPeerSSID:@(-1), //空闲
                                                                   kForwardIP:BLANK_STRING,
                                                                   kForwardPort:@(-1),
-                                                                  kUseVideo:@(-1)
+                                                                  kUseVideo:@(-1),
+                                                                  kBakPort:@(-1)
                                                                   }];
 }
 
@@ -537,9 +541,6 @@ static int endTime = 0;
 
 // 依赖注入
 - (void)injectDependency {
-    self.engine = [[IMEngineImp alloc] init];// 引擎
-    self.TCPcommunicator = [[IMTCPCommunicator alloc] init];// 网络通信器
-    self.UDPcommunicator = [[IMUDPCommunicator alloc] init];
 }
 //根据数据的具体类型做操作路由
 - (void) route:(NSDictionary*) data{
@@ -733,6 +734,8 @@ static int endTime = 0;
 #endif
     [self.UDPcommunicator setupIP:self.routeIP];
     [self.UDPcommunicator setupPort:self.port];
+    NSLog(@"udp port:%d",self.port);
+    NSAssert(self.selfAccount, @"selfAccount is nil");
     if(self.selfAccount == nil){
 #if usertip
         [[IMTipImp defaultTip] errorTip:@"用户帐号信息为空"];
@@ -760,6 +763,7 @@ static int endTime = 0;
     [self.state setValue:[notify.userInfo valueForKey:kRelayIP] forKey:kForwardIP];
     [self.state setValue:[notify.userInfo valueForKey:kRelayPort] forKey:kForwardPort];
     [self.state setValue:[notify.userInfo valueForKey:kDestAccount] forKey:kPeerAccount];
+    [self.state setValue: [notify.userInfo valueForKey:kBakPort] forKey:kBakPort];
     //被叫方发送链路数据给主叫方
     [self sendAnsweringData];
     // 开始获取p2p通道
@@ -801,7 +805,8 @@ static int endTime = 0;
     long long duration =endInitNet - startInitNet;
     NSLog(@"初始化网络耗时：%@",[NSString stringWithFormat:@"%llu",duration]);
     //4. 获取本机的链路列表. 中继服务器目前充当外网地址探测
-    NSDictionary* communicationAddress = [self.engine endPointAddressWithProbeServer:[self.state valueForKey:kForwardIP] port:[[self.state valueForKey:kForwardPort] integerValue]];
+    NSDictionary* communicationAddress =
+    [self.engine endPointAddressWithProbeServer:[self.state valueForKey:kForwardIP] port:[[self.state valueForKey:kForwardPort] integerValue] bakPort:[[self.state valueForKey:kBakPort] integerValue]];
     //5.获取到外网地址后，开始发送数据包到外网地址探测服务器，直到收到对等方的回复。
 #if DEBUG
     [[IMTipImp defaultTip] showTip:@"开始进行保持外网session的数据包发送"];
@@ -829,7 +834,8 @@ static int endTime = 0;
                                           kDestAccount: self.selfAccount,
                                           kSrcAccount:[self.state valueForKey:kPeerAccount],
                                           kPeerNATType: [NSNumber numberWithInt:[self.engine currentNATType]],
-                                          kUseVideo:[self.state valueForKey:kUseVideo]
+                                          kUseVideo:[self.state valueForKey:kUseVideo],
+                                          kBakPort:[self.state valueForKey:kBakPort]
                                           }];
     
     
@@ -1111,5 +1117,23 @@ static int endTime = 0;
 
 - (NSDictionary *)myState{
     return self.state;
+}
+- (id<IMEngine>)engine{
+    if (_engine == nil) {
+        _engine = [[IMEngineImp alloc] init];// 引擎
+    }
+    return _engine;
+}
+- (id<IMCommunicator>)TCPcommunicator{
+    if (_TCPcommunicator == nil) {
+        _TCPcommunicator = [[IMTCPCommunicator alloc] init];
+    }
+    return _TCPcommunicator;
+}
+- (id<IMCommunicator>)UDPcommunicator{
+    if (_UDPcommunicator == nil) {
+        _UDPcommunicator = [[IMUDPCommunicator alloc] init];
+    }
+    return _UDPcommunicator;
 }
 @end

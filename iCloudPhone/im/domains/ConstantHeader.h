@@ -104,7 +104,7 @@ enum emDataType
 
 #define kRelayIP @"relayip" // 回复： forwardIP
 #define kRelayPort @"relayport" // 回复： forwardIP
-
+#define kBakPort @"bakport" // 外网探测时第一次ip探测的port
 // 通话信令字段
 #define kPeerNATType @"peerNATType" //发送给对方的，本机的NAT类型
 #define kPeerInterIP @"peerInterIP"
