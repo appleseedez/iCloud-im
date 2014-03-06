@@ -20,6 +20,7 @@
 #import "IMCallingViewController.h"
 #import "IMAnsweringViewController.h"
 #import "ItelUpdateManager.h"
+#import "IMIphoneViewController.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 
 @interface ItelMessageInterfaceImp()
@@ -356,9 +357,9 @@
     //加载“拨号中”界面
     //加载stroyboard
     UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
-    IMCallingViewController* callingViewController = (IMCallingViewController*) [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
-    callingViewController.manager = self.manager;
-    [self.manager presentDialRelatedPanel:callingViewController];
+    IMIphoneViewController* phoneViewController =  (IMIphoneViewController*)[sb instantiateViewControllerWithIdentifier:@"PhoneView"];
+    phoneViewController.manager = self.manager;
+    [self.manager presentDialRelatedPanel:phoneViewController];
     
 }
 - (void) presentAnsweringView:(NSNotification*) notify{
