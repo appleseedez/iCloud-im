@@ -185,7 +185,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
     Recent* record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
+    // find a itel user with the itel number in recent
+    NSFetchRequest* findAItelUser = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
+    NSPredicate* findOneWithNumber = [NSPredicate predicateWithFormat:@"itelNum = %@",record.peerNumber];
+
+    NSError* error = nil;
+    findAItelUser.predicate = findOneWithNumber;
+    findAItelUser.sortDescriptors = @[];
+    NSArray* matched = [record.managedObjectContext executeFetchRequest:findAItelUser error:&error];
+    if ([matched count]){
+        [record setWithUser:matched[0]];
+    }
+
         UIImageView* avatarView = (UIImageView*)[cell.contentView viewWithTag:1];
     UILabel* nameLabel = (UILabel*) [cell.contentView viewWithTag:2];
     UILabel* numberLabel = (UILabel*) [cell.contentView viewWithTag:3];

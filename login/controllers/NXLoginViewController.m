@@ -66,7 +66,18 @@ static int loginCount=0;
 
 
 #pragma mark - 点击登录按钮
+-(BOOL)checkEmpty{
+    if (!self.txtUserPassword.text.length||!self.txtUserCloudNumber.text.length) {
+         self.txtInuptCheckMessage.text=@"输入不能为空";
+        return NO;
+    }
+    return YES;
+}
 - (IBAction)loginButtonPushed:(UIButton *)sender {
+   
+    if (![self checkEmpty]) {
+        return;
+    }
     if (![self checkUserInput]) {
          self.txtInuptCheckMessage.text=@"输入不正确";
     }

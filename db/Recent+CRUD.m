@@ -48,9 +48,11 @@
     return aRecent;
 }
 -(void)setWithUser:(ItelUser*)user{
+    NSError* error;
     self.peerAvatar=user.imageurl;
     self.peerNick=user.nickName;
     self.peerNumber=user.itelNum;
     self.peerRealName=user.remarkName;
+    [self.managedObjectContext save:&error];
 }
 @end

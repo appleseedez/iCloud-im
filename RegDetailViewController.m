@@ -221,7 +221,7 @@ static float animatedDuration=1.0;
         NSLog(@"%@",notification.object);
         if (ret==0) {
             //跳转页面
-            NSString *alertMessage=[NSString stringWithFormat:@"系统即将给您的手机：%@发送一条验证短信，点击取消将不发送",self.txtPhoneNumber.text];
+            NSString *alertMessage=[NSString stringWithFormat:@"进行手机验证，系统将发一条验证码验证给手机%@，点击取消将不发送",self.txtPhoneNumber.text];
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"将要开始手机验证" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             [alert show];
             
