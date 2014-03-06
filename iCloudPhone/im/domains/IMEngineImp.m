@@ -12,7 +12,6 @@
 #import "ConstantHeader.h"
 #import "video_render_ios_view.h"
 
-#import "IMTipImp.h"
 UIView*  _pview_local;
 @interface IMEngineImp ()
 @property(atomic) CAVInterfaceAPI* pInterfaceApi;

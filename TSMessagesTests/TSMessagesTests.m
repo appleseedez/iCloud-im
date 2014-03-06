@@ -1,18 +1,18 @@
 //
-//  libAlalertBannerTests.m
-//  libAlalertBannerTests
+//  TSMessagesTests.m
+//  TSMessagesTests
 //
-//  Created by Pharaoh on 1/25/14.
+//  Created by Pharaoh on 3/6/14.
 //  Copyright (c) 2014 NX. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface libAlalertBannerTests : XCTestCase
+@interface TSMessagesTests : XCTestCase
 
 @end
 
-@implementation libAlalertBannerTests
+@implementation TSMessagesTests
 
 - (void)setUp
 {

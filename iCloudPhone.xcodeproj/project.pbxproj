@@ -221,10 +221,40 @@
 		BA06AFAE187873910099C3F7 /* iCloudPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB0187873910099C3F7 /* iCloudPhone.storyboard */; };
 		BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB11878757B0099C3F7 /* zh-cn.strings */; };
 		BA1A74D7187A780A0071E83F /* IMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1A74D6187A780A0071E83F /* IMUtils.m */; };
-		BA2BC1291885F691001EB5C3 /* IMTipImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2BC1281885F691001EB5C3 /* IMTipImp.m */; };
 		BA338B55187E839B00242DAF /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B54187E839B00242DAF /* Message.m */; };
 		BA338B58187E839C00242DAF /* HostItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B57187E839C00242DAF /* HostItelUser.m */; };
 		BA338B5B187E839C00242DAF /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA338B5A187E839C00242DAF /* ItelUser.m */; };
+		BA54857918C8C431003B2716 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
+		BA54857E18C8C431003B2716 /* TSMessages.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BA54857D18C8C431003B2716 /* TSMessages.h */; };
+		BA54858018C8C431003B2716 /* TSMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = BA54857F18C8C431003B2716 /* TSMessages.m */; };
+		BA54858618C8C431003B2716 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DF31834D40000022FE5 /* XCTest.framework */; };
+		BA54858718C8C431003B2716 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
+		BA54858818C8C431003B2716 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD81834D40000022FE5 /* UIKit.framework */; };
+		BA54858B18C8C431003B2716 /* libTSMessages.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA54857818C8C430003B2716 /* libTSMessages.a */; };
+		BA54859118C8C431003B2716 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA54858F18C8C431003B2716 /* InfoPlist.strings */; };
+		BA54859318C8C431003B2716 /* TSMessagesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA54859218C8C431003B2716 /* TSMessagesTests.m */; };
+		BA5485BC18C8C459003B2716 /* TSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = BA54859D18C8C459003B2716 /* TSMessage.m */; };
+		BA5485BD18C8C459003B2716 /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5485A118C8C459003B2716 /* HexColor.m */; };
+		BA5485BE18C8C459003B2716 /* TSBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5485B918C8C459003B2716 /* TSBlurView.m */; };
+		BA5485BF18C8C459003B2716 /* TSMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5485BB18C8C459003B2716 /* TSMessageView.m */; };
+		BA5485C018C8C77B003B2716 /* libTSMessages.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA54857818C8C430003B2716 /* libTSMessages.a */; };
+		BA5485C118C8CAA7003B2716 /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = BA5485B618C8C459003B2716 /* TSMessagesDefaultDesign.json */; };
+		BA5485D318C8D1C4003B2716 /* NotificationBackgroundError.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485C318C8D1C3003B2716 /* NotificationBackgroundError.png */; };
+		BA5485D418C8D1C4003B2716 /* NotificationBackgroundError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485C418C8D1C3003B2716 /* NotificationBackgroundError@2x.png */; };
+		BA5485D518C8D1C4003B2716 /* NotificationBackgroundErrorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485C518C8D1C3003B2716 /* NotificationBackgroundErrorIcon.png */; };
+		BA5485D618C8D1C4003B2716 /* NotificationBackgroundErrorIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485C618C8D1C3003B2716 /* NotificationBackgroundErrorIcon@2x.png */; };
+		BA5485D718C8D1C4003B2716 /* NotificationBackgroundMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485C718C8D1C3003B2716 /* NotificationBackgroundMessage.png */; };
+		BA5485D818C8D1C4003B2716 /* NotificationBackgroundMessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485C818C8D1C3003B2716 /* NotificationBackgroundMessage@2x.png */; };
+		BA5485D918C8D1C4003B2716 /* NotificationBackgroundSuccess.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485C918C8D1C3003B2716 /* NotificationBackgroundSuccess.png */; };
+		BA5485DA18C8D1C4003B2716 /* NotificationBackgroundSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485CA18C8D1C3003B2716 /* NotificationBackgroundSuccess@2x.png */; };
+		BA5485DB18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485CB18C8D1C3003B2716 /* NotificationBackgroundSuccessIcon.png */; };
+		BA5485DC18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485CC18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon@2x.png */; };
+		BA5485DD18C8D1C4003B2716 /* NotificationBackgroundWarning.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485CD18C8D1C4003B2716 /* NotificationBackgroundWarning.png */; };
+		BA5485DE18C8D1C4003B2716 /* NotificationBackgroundWarning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485CE18C8D1C4003B2716 /* NotificationBackgroundWarning@2x.png */; };
+		BA5485DF18C8D1C4003B2716 /* NotificationBackgroundWarningIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485CF18C8D1C4003B2716 /* NotificationBackgroundWarningIcon.png */; };
+		BA5485E018C8D1C4003B2716 /* NotificationBackgroundWarningIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485D018C8D1C4003B2716 /* NotificationBackgroundWarningIcon@2x.png */; };
+		BA5485E118C8D1C4003B2716 /* NotificationButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485D118C8D1C4003B2716 /* NotificationButtonBackground.png */; };
+		BA5485E218C8D1C4003B2716 /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485D218C8D1C4003B2716 /* NotificationButtonBackground@2x.png */; };
 		BA772EDA1875F02400CD8982 /* IMDBManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA772ED91875F02400CD8982 /* IMDBManagerImp.m */; };
 		BA8242FC18758EA2001903CE /* jgb.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BA8242FB18758EA2001903CE /* jgb.m4a */; };
 		BA8F235F185AA5E600DB043B /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8F235C185AA5E600DB043B /* libAVInterface.a */; };
@@ -248,18 +278,6 @@
 		BAE9C909187C31B800E41A9E /* ItelUserInterfaceImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C905187C31B800E41A9E /* ItelUserInterfaceImp.m */; };
 		BAE9C912187C3AA900E41A9E /* Message+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C911187C3AA900E41A9E /* Message+CRUD.m */; };
 		BAE9C915187C415800E41A9E /* ItelUser+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C914187C415800E41A9E /* ItelUser+CRUD.m */; };
-		BAF70BE1189305FC00044097 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
-		BAF70BE6189305FC00044097 /* libAlalertBanner.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BAF70BE5189305FC00044097 /* libAlalertBanner.h */; };
-		BAF70BE8189305FC00044097 /* libAlalertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF70BE7189305FC00044097 /* libAlalertBanner.m */; };
-		BAF70BEE189305FC00044097 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DF31834D40000022FE5 /* XCTest.framework */; };
-		BAF70BEF189305FC00044097 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
-		BAF70BF0189305FC00044097 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD81834D40000022FE5 /* UIKit.framework */; };
-		BAF70BF3189305FC00044097 /* liblibAlalertBanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF70BE0189305FC00044097 /* liblibAlalertBanner.a */; };
-		BAF70BF9189305FC00044097 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BAF70BF7189305FC00044097 /* InfoPlist.strings */; };
-		BAF70BFB189305FC00044097 /* libAlalertBannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF70BFA189305FC00044097 /* libAlalertBannerTests.m */; };
-		BAF70C111893062600044097 /* ALAlertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF70C051893062600044097 /* ALAlertBanner.m */; };
-		BAF70C121893062600044097 /* ALAlertBannerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF70C071893062600044097 /* ALAlertBannerManager.m */; };
-		BAF70C131893066A00044097 /* liblibAlalertBanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF70BE0189305FC00044097 /* liblibAlalertBanner.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,12 +295,12 @@
 			remoteGlobalIDString = 47B89DD01834D40000022FE5;
 			remoteInfo = iCloudPhone;
 		};
-		BAF70BF1189305FC00044097 /* PBXContainerItemProxy */ = {
+		BA54858918C8C431003B2716 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 47B89DC91834D40000022FE5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BAF70BDF189305FC00044097;
-			remoteInfo = libAlalertBanner;
+			remoteGlobalIDString = BA54857718C8C430003B2716;
+			remoteInfo = TSMessages;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -297,13 +315,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BAF70BDE189305FC00044097 /* CopyFiles */ = {
+		BA54857618C8C430003B2716 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				BAF70BE6189305FC00044097 /* libAlalertBanner.h in CopyFiles */,
+				BA54857E18C8C431003B2716 /* TSMessages.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,14 +703,47 @@
 		BA1A74D5187A780A0071E83F /* IMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMUtils.h; sourceTree = "<group>"; };
 		BA1A74D6187A780A0071E83F /* IMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMUtils.m; sourceTree = "<group>"; };
 		BA2BC1261885F55E001EB5C3 /* IMTip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMTip.h; sourceTree = "<group>"; };
-		BA2BC1271885F691001EB5C3 /* IMTipImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMTipImp.h; sourceTree = "<group>"; };
-		BA2BC1281885F691001EB5C3 /* IMTipImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMTipImp.m; sourceTree = "<group>"; };
 		BA338B53187E839B00242DAF /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		BA338B54187E839B00242DAF /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		BA338B56187E839C00242DAF /* HostItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostItelUser.h; sourceTree = "<group>"; };
 		BA338B57187E839C00242DAF /* HostItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostItelUser.m; sourceTree = "<group>"; };
 		BA338B59187E839C00242DAF /* ItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUser.h; sourceTree = "<group>"; };
 		BA338B5A187E839C00242DAF /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
+		BA54857818C8C430003B2716 /* libTSMessages.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTSMessages.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA54857C18C8C431003B2716 /* TSMessages-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TSMessages-Prefix.pch"; sourceTree = "<group>"; };
+		BA54857D18C8C431003B2716 /* TSMessages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMessages.h; sourceTree = "<group>"; };
+		BA54857F18C8C431003B2716 /* TSMessages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMessages.m; sourceTree = "<group>"; };
+		BA54858518C8C431003B2716 /* TSMessagesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TSMessagesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA54858E18C8C431003B2716 /* TSMessagesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TSMessagesTests-Info.plist"; sourceTree = "<group>"; };
+		BA54859018C8C431003B2716 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BA54859218C8C431003B2716 /* TSMessagesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMessagesTests.m; sourceTree = "<group>"; };
+		BA54859C18C8C459003B2716 /* TSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessage.h; sourceTree = "<group>"; };
+		BA54859D18C8C459003B2716 /* TSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessage.m; sourceTree = "<group>"; };
+		BA5485A018C8C459003B2716 /* HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexColor.h; sourceTree = "<group>"; };
+		BA5485A118C8C459003B2716 /* HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexColor.m; sourceTree = "<group>"; };
+		BA5485A218C8C459003B2716 /* LICENCE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENCE; sourceTree = "<group>"; };
+		BA5485A318C8C459003B2716 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BA5485B618C8C459003B2716 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
+		BA5485B818C8C459003B2716 /* TSBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSBlurView.h; sourceTree = "<group>"; };
+		BA5485B918C8C459003B2716 /* TSBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSBlurView.m; sourceTree = "<group>"; };
+		BA5485BA18C8C459003B2716 /* TSMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessageView.h; sourceTree = "<group>"; };
+		BA5485BB18C8C459003B2716 /* TSMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessageView.m; sourceTree = "<group>"; };
+		BA5485C318C8D1C3003B2716 /* NotificationBackgroundError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundError.png; sourceTree = "<group>"; };
+		BA5485C418C8D1C3003B2716 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
+		BA5485C518C8D1C3003B2716 /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
+		BA5485C618C8D1C3003B2716 /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
+		BA5485C718C8D1C3003B2716 /* NotificationBackgroundMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundMessage.png; sourceTree = "<group>"; };
+		BA5485C818C8D1C3003B2716 /* NotificationBackgroundMessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundMessage@2x.png"; sourceTree = "<group>"; };
+		BA5485C918C8D1C3003B2716 /* NotificationBackgroundSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundSuccess.png; sourceTree = "<group>"; };
+		BA5485CA18C8D1C3003B2716 /* NotificationBackgroundSuccess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundSuccess@2x.png"; sourceTree = "<group>"; };
+		BA5485CB18C8D1C3003B2716 /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
+		BA5485CC18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
+		BA5485CD18C8D1C4003B2716 /* NotificationBackgroundWarning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundWarning.png; sourceTree = "<group>"; };
+		BA5485CE18C8D1C4003B2716 /* NotificationBackgroundWarning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundWarning@2x.png"; sourceTree = "<group>"; };
+		BA5485CF18C8D1C4003B2716 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
+		BA5485D018C8D1C4003B2716 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
+		BA5485D118C8D1C4003B2716 /* NotificationButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationButtonBackground.png; sourceTree = "<group>"; };
+		BA5485D218C8D1C4003B2716 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
 		BA772ED81875F02400CD8982 /* IMDBManagerImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManagerImp.h; sourceTree = "<group>"; };
 		BA772ED91875F02400CD8982 /* IMDBManagerImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDBManagerImp.m; sourceTree = "<group>"; };
 		BA8242FB18758EA2001903CE /* jgb.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jgb.m4a; sourceTree = "<group>"; };
@@ -740,27 +791,6 @@
 		BAE9C911187C3AA900E41A9E /* Message+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Message+CRUD.m"; sourceTree = "<group>"; };
 		BAE9C913187C415800E41A9E /* ItelUser+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ItelUser+CRUD.h"; sourceTree = "<group>"; };
 		BAE9C914187C415800E41A9E /* ItelUser+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ItelUser+CRUD.m"; sourceTree = "<group>"; };
-		BAF70BE0189305FC00044097 /* liblibAlalertBanner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibAlalertBanner.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAF70BE4189305FC00044097 /* libAlalertBanner-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libAlalertBanner-Prefix.pch"; sourceTree = "<group>"; };
-		BAF70BE5189305FC00044097 /* libAlalertBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libAlalertBanner.h; sourceTree = "<group>"; };
-		BAF70BE7189305FC00044097 /* libAlalertBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = libAlalertBanner.m; sourceTree = "<group>"; };
-		BAF70BED189305FC00044097 /* libAlalertBannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libAlalertBannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAF70BF6189305FC00044097 /* libAlalertBannerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libAlalertBannerTests-Info.plist"; sourceTree = "<group>"; };
-		BAF70BF8189305FC00044097 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BAF70BFA189305FC00044097 /* libAlalertBannerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = libAlalertBannerTests.m; sourceTree = "<group>"; };
-		BAF70C031893062600044097 /* ALAlertBanner+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAlertBanner+Private.h"; sourceTree = "<group>"; };
-		BAF70C041893062600044097 /* ALAlertBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAlertBanner.h; sourceTree = "<group>"; };
-		BAF70C051893062600044097 /* ALAlertBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAlertBanner.m; sourceTree = "<group>"; };
-		BAF70C061893062600044097 /* ALAlertBannerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAlertBannerManager.h; sourceTree = "<group>"; };
-		BAF70C071893062600044097 /* ALAlertBannerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAlertBannerManager.m; sourceTree = "<group>"; };
-		BAF70C091893062600044097 /* bannerAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerAlert.png; sourceTree = "<group>"; };
-		BAF70C0A1893062600044097 /* bannerAlert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerAlert@2x.png"; sourceTree = "<group>"; };
-		BAF70C0B1893062600044097 /* bannerFailure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerFailure.png; sourceTree = "<group>"; };
-		BAF70C0C1893062600044097 /* bannerFailure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerFailure@2x.png"; sourceTree = "<group>"; };
-		BAF70C0D1893062600044097 /* bannerNotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerNotify.png; sourceTree = "<group>"; };
-		BAF70C0E1893062600044097 /* bannerNotify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerNotify@2x.png"; sourceTree = "<group>"; };
-		BAF70C0F1893062600044097 /* bannerSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bannerSuccess.png; sourceTree = "<group>"; };
-		BAF70C101893062600044097 /* bannerSuccess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bannerSuccess@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -787,7 +817,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAF70C131893066A00044097 /* liblibAlalertBanner.a in Frameworks */,
+				BA5485C018C8C77B003B2716 /* libTSMessages.a in Frameworks */,
 				BADDFD6A1876915200D10DDC /* CoreData.framework in Frameworks */,
 				479EF0C81859DA1B0012EE29 /* libGCDSocket.a in Frameworks */,
 				47CDFEA4184ED17800673C2B /* Security.framework in Frameworks */,
@@ -821,22 +851,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BAF70BDD189305FC00044097 /* Frameworks */ = {
+		BA54857518C8C430003B2716 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAF70BE1189305FC00044097 /* Foundation.framework in Frameworks */,
+				BA54857918C8C431003B2716 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BAF70BEA189305FC00044097 /* Frameworks */ = {
+		BA54858218C8C431003B2716 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAF70BEE189305FC00044097 /* XCTest.framework in Frameworks */,
-				BAF70BF3189305FC00044097 /* liblibAlalertBanner.a in Frameworks */,
-				BAF70BF0189305FC00044097 /* UIKit.framework in Frameworks */,
-				BAF70BEF189305FC00044097 /* Foundation.framework in Frameworks */,
+				BA54858B18C8C431003B2716 /* libTSMessages.a in Frameworks */,
+				BA54858618C8C431003B2716 /* XCTest.framework in Frameworks */,
+				BA54858818C8C431003B2716 /* UIKit.framework in Frameworks */,
+				BA54858718C8C431003B2716 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1222,7 +1252,7 @@
 		479EF00C1859D47C0012EE29 /* im */ = {
 			isa = PBXGroup;
 			children = (
-				BAF70C021893062600044097 /* ALAlertBanner */,
+				BA54859A18C8C459003B2716 /* TSMessages */,
 				BA1A74D4187A77F40071E83F /* utils */,
 				BA8242FA18758E8A001903CE /* resources */,
 				BA959A9118605639009B8A4C /* timer */,
@@ -1294,8 +1324,6 @@
 				BA772ED91875F02400CD8982 /* IMDBManagerImp.m */,
 				BAE9C8D9187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.h */,
 				BAE9C8DA187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m */,
-				BA2BC1271885F691001EB5C3 /* IMTipImp.h */,
-				BA2BC1281885F691001EB5C3 /* IMTipImp.m */,
 				BADA3C6B1890AEA10029CB61 /* IMManagerImp.h */,
 				BADA3C6C1890AEA10029CB61 /* IMManagerImp.m */,
 			);
@@ -1506,8 +1534,8 @@
 				47B89DF91834D40000022FE5 /* iCloudPhoneTests */,
 				479EF09E1859D9A50012EE29 /* GCDSocket */,
 				479EF0B01859D9A50012EE29 /* GCDSocketTests */,
-				BAF70BE2189305FC00044097 /* libAlalertBanner */,
-				BAF70BF4189305FC00044097 /* libAlalertBannerTests */,
+				BA54857A18C8C431003B2716 /* TSMessages */,
+				BA54858C18C8C431003B2716 /* TSMessagesTests */,
 				47B89DD31834D40000022FE5 /* Frameworks */,
 				47B89DD21834D40000022FE5 /* Products */,
 			);
@@ -1520,8 +1548,8 @@
 				47B89DF21834D40000022FE5 /* iCloudPhoneTests.xctest */,
 				479EF09C1859D9A40012EE29 /* libGCDSocket.a */,
 				479EF0A91859D9A50012EE29 /* GCDSocketTests.xctest */,
-				BAF70BE0189305FC00044097 /* liblibAlalertBanner.a */,
-				BAF70BED189305FC00044097 /* libAlalertBannerTests.xctest */,
+				BA54857818C8C430003B2716 /* libTSMessages.a */,
+				BA54858518C8C431003B2716 /* TSMessagesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1703,6 +1731,124 @@
 			path = utils;
 			sourceTree = "<group>";
 		};
+		BA54857A18C8C431003B2716 /* TSMessages */ = {
+			isa = PBXGroup;
+			children = (
+				BA54857D18C8C431003B2716 /* TSMessages.h */,
+				BA54857F18C8C431003B2716 /* TSMessages.m */,
+				BA54857B18C8C431003B2716 /* Supporting Files */,
+			);
+			path = TSMessages;
+			sourceTree = "<group>";
+		};
+		BA54857B18C8C431003B2716 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BA54857C18C8C431003B2716 /* TSMessages-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BA54858C18C8C431003B2716 /* TSMessagesTests */ = {
+			isa = PBXGroup;
+			children = (
+				BA54859218C8C431003B2716 /* TSMessagesTests.m */,
+				BA54858D18C8C431003B2716 /* Supporting Files */,
+			);
+			path = TSMessagesTests;
+			sourceTree = "<group>";
+		};
+		BA54858D18C8C431003B2716 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BA54858E18C8C431003B2716 /* TSMessagesTests-Info.plist */,
+				BA54858F18C8C431003B2716 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BA54859A18C8C459003B2716 /* TSMessages */ = {
+			isa = PBXGroup;
+			children = (
+				BA54859B18C8C459003B2716 /* Classes */,
+				BA54859E18C8C459003B2716 /* HexColors */,
+				BA5485A418C8C459003B2716 /* Resources */,
+				BA5485B718C8C459003B2716 /* Views */,
+			);
+			path = TSMessages;
+			sourceTree = "<group>";
+		};
+		BA54859B18C8C459003B2716 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BA54859C18C8C459003B2716 /* TSMessage.h */,
+				BA54859D18C8C459003B2716 /* TSMessage.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		BA54859E18C8C459003B2716 /* HexColors */ = {
+			isa = PBXGroup;
+			children = (
+				BA54859F18C8C459003B2716 /* Classes */,
+				BA5485A218C8C459003B2716 /* LICENCE */,
+				BA5485A318C8C459003B2716 /* README.md */,
+			);
+			path = HexColors;
+			sourceTree = "<group>";
+		};
+		BA54859F18C8C459003B2716 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BA5485A018C8C459003B2716 /* HexColor.h */,
+				BA5485A118C8C459003B2716 /* HexColor.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		BA5485A418C8C459003B2716 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BA5485C218C8D1C3003B2716 /* Images */,
+				BA5485B618C8C459003B2716 /* TSMessagesDefaultDesign.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BA5485B718C8C459003B2716 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BA5485B818C8C459003B2716 /* TSBlurView.h */,
+				BA5485B918C8C459003B2716 /* TSBlurView.m */,
+				BA5485BA18C8C459003B2716 /* TSMessageView.h */,
+				BA5485BB18C8C459003B2716 /* TSMessageView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BA5485C218C8D1C3003B2716 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BA5485C318C8D1C3003B2716 /* NotificationBackgroundError.png */,
+				BA5485C418C8D1C3003B2716 /* NotificationBackgroundError@2x.png */,
+				BA5485C518C8D1C3003B2716 /* NotificationBackgroundErrorIcon.png */,
+				BA5485C618C8D1C3003B2716 /* NotificationBackgroundErrorIcon@2x.png */,
+				BA5485C718C8D1C3003B2716 /* NotificationBackgroundMessage.png */,
+				BA5485C818C8D1C3003B2716 /* NotificationBackgroundMessage@2x.png */,
+				BA5485C918C8D1C3003B2716 /* NotificationBackgroundSuccess.png */,
+				BA5485CA18C8D1C3003B2716 /* NotificationBackgroundSuccess@2x.png */,
+				BA5485CB18C8D1C3003B2716 /* NotificationBackgroundSuccessIcon.png */,
+				BA5485CC18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon@2x.png */,
+				BA5485CD18C8D1C4003B2716 /* NotificationBackgroundWarning.png */,
+				BA5485CE18C8D1C4003B2716 /* NotificationBackgroundWarning@2x.png */,
+				BA5485CF18C8D1C4003B2716 /* NotificationBackgroundWarningIcon.png */,
+				BA5485D018C8D1C4003B2716 /* NotificationBackgroundWarningIcon@2x.png */,
+				BA5485D118C8D1C4003B2716 /* NotificationButtonBackground.png */,
+				BA5485D218C8D1C4003B2716 /* NotificationButtonBackground@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		BA8242FA18758E8A001903CE /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1741,70 +1887,6 @@
 				BAE9C90E187C31C700E41A9E /* ItelUserInterface.h */,
 			);
 			path = interface;
-			sourceTree = "<group>";
-		};
-		BAF70BE2189305FC00044097 /* libAlalertBanner */ = {
-			isa = PBXGroup;
-			children = (
-				BAF70BE5189305FC00044097 /* libAlalertBanner.h */,
-				BAF70BE7189305FC00044097 /* libAlalertBanner.m */,
-				BAF70BE3189305FC00044097 /* Supporting Files */,
-			);
-			path = libAlalertBanner;
-			sourceTree = "<group>";
-		};
-		BAF70BE3189305FC00044097 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				BAF70BE4189305FC00044097 /* libAlalertBanner-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		BAF70BF4189305FC00044097 /* libAlalertBannerTests */ = {
-			isa = PBXGroup;
-			children = (
-				BAF70BFA189305FC00044097 /* libAlalertBannerTests.m */,
-				BAF70BF5189305FC00044097 /* Supporting Files */,
-			);
-			path = libAlalertBannerTests;
-			sourceTree = "<group>";
-		};
-		BAF70BF5189305FC00044097 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				BAF70BF6189305FC00044097 /* libAlalertBannerTests-Info.plist */,
-				BAF70BF7189305FC00044097 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		BAF70C021893062600044097 /* ALAlertBanner */ = {
-			isa = PBXGroup;
-			children = (
-				BAF70C031893062600044097 /* ALAlertBanner+Private.h */,
-				BAF70C041893062600044097 /* ALAlertBanner.h */,
-				BAF70C051893062600044097 /* ALAlertBanner.m */,
-				BAF70C061893062600044097 /* ALAlertBannerManager.h */,
-				BAF70C071893062600044097 /* ALAlertBannerManager.m */,
-				BAF70C081893062600044097 /* Images */,
-			);
-			path = ALAlertBanner;
-			sourceTree = "<group>";
-		};
-		BAF70C081893062600044097 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				BAF70C091893062600044097 /* bannerAlert.png */,
-				BAF70C0A1893062600044097 /* bannerAlert@2x.png */,
-				BAF70C0B1893062600044097 /* bannerFailure.png */,
-				BAF70C0C1893062600044097 /* bannerFailure@2x.png */,
-				BAF70C0D1893062600044097 /* bannerNotify.png */,
-				BAF70C0E1893062600044097 /* bannerNotify@2x.png */,
-				BAF70C0F1893062600044097 /* bannerSuccess.png */,
-				BAF70C101893062600044097 /* bannerSuccess@2x.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		BAFEE13818744FDA00DB1AC6 /* db */ = {
@@ -1914,39 +1996,39 @@
 			productReference = 47B89DF21834D40000022FE5 /* iCloudPhoneTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BAF70BDF189305FC00044097 /* libAlalertBanner */ = {
+		BA54857718C8C430003B2716 /* TSMessages */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BAF70BFC189305FD00044097 /* Build configuration list for PBXNativeTarget "libAlalertBanner" */;
+			buildConfigurationList = BA54859418C8C431003B2716 /* Build configuration list for PBXNativeTarget "TSMessages" */;
 			buildPhases = (
-				BAF70BDC189305FC00044097 /* Sources */,
-				BAF70BDD189305FC00044097 /* Frameworks */,
-				BAF70BDE189305FC00044097 /* CopyFiles */,
+				BA54857418C8C430003B2716 /* Sources */,
+				BA54857518C8C430003B2716 /* Frameworks */,
+				BA54857618C8C430003B2716 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = libAlalertBanner;
-			productName = libAlalertBanner;
-			productReference = BAF70BE0189305FC00044097 /* liblibAlalertBanner.a */;
+			name = TSMessages;
+			productName = TSMessages;
+			productReference = BA54857818C8C430003B2716 /* libTSMessages.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		BAF70BEC189305FC00044097 /* libAlalertBannerTests */ = {
+		BA54858418C8C431003B2716 /* TSMessagesTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BAF70BFF189305FD00044097 /* Build configuration list for PBXNativeTarget "libAlalertBannerTests" */;
+			buildConfigurationList = BA54859718C8C431003B2716 /* Build configuration list for PBXNativeTarget "TSMessagesTests" */;
 			buildPhases = (
-				BAF70BE9189305FC00044097 /* Sources */,
-				BAF70BEA189305FC00044097 /* Frameworks */,
-				BAF70BEB189305FC00044097 /* Resources */,
+				BA54858118C8C431003B2716 /* Sources */,
+				BA54858218C8C431003B2716 /* Frameworks */,
+				BA54858318C8C431003B2716 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BAF70BF2189305FC00044097 /* PBXTargetDependency */,
+				BA54858A18C8C431003B2716 /* PBXTargetDependency */,
 			);
-			name = libAlalertBannerTests;
-			productName = libAlalertBannerTests;
-			productReference = BAF70BED189305FC00044097 /* libAlalertBannerTests.xctest */;
+			name = TSMessagesTests;
+			productName = TSMessagesTests;
+			productReference = BA54858518C8C431003B2716 /* TSMessagesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1968,7 +2050,7 @@
 					47B89DF11834D40000022FE5 = {
 						TestTargetID = 47B89DD01834D40000022FE5;
 					};
-					BAF70BEC189305FC00044097 = {
+					BA54858418C8C431003B2716 = {
 						TestTargetID = 47B89DD01834D40000022FE5;
 					};
 				};
@@ -1991,8 +2073,8 @@
 				479EF09B1859D9A40012EE29 /* GCDSocket */,
 				47B89DD01834D40000022FE5 /* iCloudPhone */,
 				479EF0A81859D9A50012EE29 /* GCDSocketTests */,
-				BAF70BDF189305FC00044097 /* libAlalertBanner */,
-				BAF70BEC189305FC00044097 /* libAlalertBannerTests */,
+				BA54857718C8C430003B2716 /* TSMessages */,
+				BA54858418C8C431003B2716 /* TSMessagesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2016,15 +2098,26 @@
 				479DC49D183A544200C3F3F2 /* 广告.png in Resources */,
 				478594C0185026FF00AFF6BF /* tab_bar.png in Resources */,
 				47A5F8B8186D650A00B8CEC8 /* Itel ICON-IOS.png in Resources */,
+				BA5485E118C8D1C4003B2716 /* NotificationButtonBackground.png in Resources */,
+				BA5485DB18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon.png in Resources */,
 				479E934C185AB7A3001AF6ED /* Login_iPhone.storyboard in Resources */,
+				BA5485D518C8D1C4003B2716 /* NotificationBackgroundErrorIcon.png in Resources */,
+				BA5485E018C8D1C4003B2716 /* NotificationBackgroundWarningIcon@2x.png in Resources */,
 				479C9C291835019D00DE40D8 /* 头像.jpg in Resources */,
+				BA5485DA18C8D1C4003B2716 /* NotificationBackgroundSuccess@2x.png in Resources */,
 				47E05DC51851A2CE009FDCED /* 详细按钮.png in Resources */,
 				4788140B1839ED7F0085224D /* itel.png in Resources */,
+				BA5485D818C8D1C4003B2716 /* NotificationBackgroundMessage@2x.png in Resources */,
+				BA5485DE18C8D1C4003B2716 /* NotificationBackgroundWarning@2x.png in Resources */,
 				4757D0531855C083001A9639 /* 个人注册.png in Resources */,
+				BA5485D318C8D1C4003B2716 /* NotificationBackgroundError.png in Resources */,
+				BA5485E218C8D1C4003B2716 /* NotificationButtonBackground@2x.png in Resources */,
 				BA8242FC18758EA2001903CE /* jgb.m4a in Resources */,
+				BA5485DD18C8D1C4003B2716 /* NotificationBackgroundWarning.png in Resources */,
 				479ED42C186C65C40084EED1 /* itelLOGO.png in Resources */,
 				47E2DB8E185985C800D455EF /* 本机联系人.png in Resources */,
 				47E2DB9518598B0500D455EF /* 邀请.png in Resources */,
+				BA5485D418C8D1C4003B2716 /* NotificationBackgroundError@2x.png in Resources */,
 				479ED42E186C66290084EED1 /* AboutLogo.png in Resources */,
 				BA06AFAE187873910099C3F7 /* iCloudPhone.storyboard in Resources */,
 				47E05DC318519C9C009FDCED /* 头像.png in Resources */,
@@ -2032,11 +2125,17 @@
 				4757D0591855CAD6001A9639 /* 短信提示.png in Resources */,
 				4769EC6218AB2F4300F76DB5 /* 115.storyboard in Resources */,
 				47E05DC018517418009FDCED /* searchuser.png in Resources */,
+				BA5485C118C8CAA7003B2716 /* TSMessagesDefaultDesign.json in Resources */,
+				BA5485DF18C8D1C4003B2716 /* NotificationBackgroundWarningIcon.png in Resources */,
 				47E05DC118517418009FDCED /* checkAddress.png in Resources */,
 				47B89DED1834D40000022FE5 /* Images.xcassets in Resources */,
 				47B89DDF1834D40000022FE5 /* InfoPlist.strings in Resources */,
+				BA5485D618C8D1C4003B2716 /* NotificationBackgroundErrorIcon@2x.png in Resources */,
 				478814051839E7120085224D /* mockhead.png in Resources */,
 				4757D0511855C078001A9639 /* 企业注册.png in Resources */,
+				BA5485D718C8D1C4003B2716 /* NotificationBackgroundMessage.png in Resources */,
+				BA5485DC18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon@2x.png in Resources */,
+				BA5485D918C8D1C4003B2716 /* NotificationBackgroundSuccess.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2048,11 +2147,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BAF70BEB189305FC00044097 /* Resources */ = {
+		BA54858318C8C431003B2716 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAF70BF9189305FC00044097 /* InfoPlist.strings in Resources */,
+				BA54859118C8C431003B2716 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2194,7 +2293,6 @@
 				478813C81839C35E0085224D /* AFHTTPSessionManager.m in Sources */,
 				47E2DB9A185991BD00D455EF /* MoreViewController.m in Sources */,
 				4798DEDE18C70C2F0068BFF1 /* ItelUpdateManager.m in Sources */,
-				BA2BC1291885F691001EB5C3 /* IMTipImp.m in Sources */,
 				47A0DEEE1862D56200BD28AB /* UIImage+Compress.m in Sources */,
 				47DD064718A8A47200BD0E47 /* ItelProcessIntent.m in Sources */,
 				478813DF1839C35E0085224D /* USArrayWrapper.m in Sources */,
@@ -2270,21 +2368,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BAF70BDC189305FC00044097 /* Sources */ = {
+		BA54857418C8C430003B2716 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAF70C121893062600044097 /* ALAlertBannerManager.m in Sources */,
-				BAF70BE8189305FC00044097 /* libAlalertBanner.m in Sources */,
-				BAF70C111893062600044097 /* ALAlertBanner.m in Sources */,
+				BA5485BC18C8C459003B2716 /* TSMessage.m in Sources */,
+				BA54858018C8C431003B2716 /* TSMessages.m in Sources */,
+				BA5485BE18C8C459003B2716 /* TSBlurView.m in Sources */,
+				BA5485BD18C8C459003B2716 /* HexColor.m in Sources */,
+				BA5485BF18C8C459003B2716 /* TSMessageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BAF70BE9189305FC00044097 /* Sources */ = {
+		BA54858118C8C431003B2716 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAF70BFB189305FC00044097 /* libAlalertBannerTests.m in Sources */,
+				BA54859318C8C431003B2716 /* TSMessagesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2301,10 +2401,10 @@
 			target = 47B89DD01834D40000022FE5 /* iCloudPhone */;
 			targetProxy = 47B89DF71834D40000022FE5 /* PBXContainerItemProxy */;
 		};
-		BAF70BF2189305FC00044097 /* PBXTargetDependency */ = {
+		BA54858A18C8C431003B2716 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BAF70BDF189305FC00044097 /* libAlalertBanner */;
-			targetProxy = BAF70BF1189305FC00044097 /* PBXContainerItemProxy */;
+			target = BA54857718C8C430003B2716 /* TSMessages */;
+			targetProxy = BA54858918C8C431003B2716 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2342,10 +2442,10 @@
 			path = "预切片";
 			sourceTree = "<group>";
 		};
-		BAF70BF7189305FC00044097 /* InfoPlist.strings */ = {
+		BA54858F18C8C431003B2716 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BAF70BF8189305FC00044097 /* en */,
+				BA54859018C8C431003B2716 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2610,14 +2710,13 @@
 			};
 			name = Release;
 		};
-		BAF70BFD189305FD00044097 /* Debug */ = {
+		BA54859518C8C431003B2716 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				DSTROOT = /tmp/libAlalertBanner.dst;
-				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				DSTROOT = /tmp/TSMessages.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "libAlalertBanner/libAlalertBanner-Prefix.pch";
+				GCC_PREFIX_HEADER = "TSMessages/TSMessages-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -2627,28 +2726,25 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
-		BAF70BFE189305FD00044097 /* Release */ = {
+		BA54859618C8C431003B2716 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				DSTROOT = /tmp/libAlalertBanner.dst;
-				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				DSTROOT = /tmp/TSMessages.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "libAlalertBanner/libAlalertBanner-Prefix.pch";
+				GCC_PREFIX_HEADER = "TSMessages/TSMessages-Prefix.pch";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};
-		BAF70C00189305FD00044097 /* Debug */ = {
+		BA54859818C8C431003B2716 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
@@ -2659,13 +2755,13 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "libAlalertBanner/libAlalertBanner-Prefix.pch";
+				GCC_PREFIX_HEADER = "TSMessages/TSMessages-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "libAlalertBannerTests/libAlalertBannerTests-Info.plist";
-				ONLY_ACTIVE_ARCH = YES;
+				INFOPLIST_FILE = "TSMessagesTests/TSMessagesTests-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -2673,7 +2769,7 @@
 			};
 			name = Debug;
 		};
-		BAF70C01189305FD00044097 /* Release */ = {
+		BA54859918C8C431003B2716 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
@@ -2684,8 +2780,9 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "libAlalertBanner/libAlalertBanner-Prefix.pch";
-				INFOPLIST_FILE = "libAlalertBannerTests/libAlalertBannerTests-Info.plist";
+				GCC_PREFIX_HEADER = "TSMessages/TSMessages-Prefix.pch";
+				INFOPLIST_FILE = "TSMessagesTests/TSMessagesTests-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -2741,23 +2838,21 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BAF70BFC189305FD00044097 /* Build configuration list for PBXNativeTarget "libAlalertBanner" */ = {
+		BA54859418C8C431003B2716 /* Build configuration list for PBXNativeTarget "TSMessages" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BAF70BFD189305FD00044097 /* Debug */,
-				BAF70BFE189305FD00044097 /* Release */,
+				BA54859518C8C431003B2716 /* Debug */,
+				BA54859618C8C431003B2716 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		BAF70BFF189305FD00044097 /* Build configuration list for PBXNativeTarget "libAlalertBannerTests" */ = {
+		BA54859718C8C431003B2716 /* Build configuration list for PBXNativeTarget "TSMessagesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BAF70C00189305FD00044097 /* Debug */,
-				BAF70C01189305FD00044097 /* Release */,
+				BA54859818C8C431003B2716 /* Debug */,
+				BA54859918C8C431003B2716 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

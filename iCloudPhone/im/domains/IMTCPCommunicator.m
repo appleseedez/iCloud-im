@@ -84,7 +84,9 @@
 // 链接上了服务器
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
 #if usertip
-    [[IMTipImp defaultTip] showTip:@"连接完成"];
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"连接完成", nil)
+                                subtitle:nil
+                                    type:TSMessageNotificationTypeSuccess];
 #endif
     [sock performBlock:^{
         [sock enableBackgroundingOnSocket];

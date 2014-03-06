@@ -7,7 +7,6 @@
 //
 
 #import "IMManagerImp.h"
-#import "IMTipImp.h"
 #import "ConstantHeader.h"
 #import "IMCoreDataManager.h"
 #import "ItelAction.h"
@@ -63,13 +62,8 @@ static int hasObserver = 0;
     // 从空闲进入查询
     if ([self.basicState intValue]  == basicStateIdle && [self canBeCalled:account]) {
         self.basicState =@(basicStateQuering);
-#if usertip
-        [[IMTipImp defaultTip] showTip:@"拨号中..."];
-#endif
-//        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>当前状态:%@,BUSY?:%d<<<<<<<<<<<<<<<<<<<<<<<<<<",[self describeState:self.basicState],self.busy);
-//#if DEBUG
-//        [[IMTipImp defaultTip] showTip:[self describeState:self.basicState]];
-//#endif
+
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
         //2.2 注册查询失败通知.
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInitFail:) name:SIGNAL_ERROR_NOTIFICATION object:nil];
@@ -86,7 +80,9 @@ static int hasObserver = 0;
         self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(haltCallingProgress) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_queue", DISPATCH_QUEUE_CONCURRENT)];
     }else{
 #if usertip
-        [[IMTipImp defaultTip] showTip:@"本机正处于拨打状态.请稍后重试"];
+        [TSMessage showNotificationWithTitle:nil
+                                    subtitle:NSLocalizedString(@"正处于拨打状态.请稍后重试", nil)
+                                        type:TSMessageNotificationTypeWarning];
 #endif
     }
 }
@@ -100,7 +96,9 @@ static int hasObserver = 0;
     //提示用户
     dispatch_async(dispatch_get_main_queue(), ^{
 #if usertip
-        [[IMTipImp defaultTip] showTip:@"对方不在线,请稍后重试"];
+        [TSMessage showNotificationWithTitle:nil
+                                    subtitle:NSLocalizedString(@"对方不在线,请稍后重试", nil)
+                                        type:TSMessageNotificationTypeWarning];
 #endif
     });
 }
@@ -157,7 +155,10 @@ static int endTime = 0;
     [self.keepSessionAlive invalidate];
     //从非idle状态变回idle状态. 说明需要挂断. 给提示
 #if usertip
-    [[IMTipImp defaultTip] showTip:@"挂断中..."];
+    [TSMessage showNotificationWithTitle:nil
+                                subtitle:NSLocalizedString(@"挂断中...", nil)
+                                    type:TSMessageNotificationTypeMessage];
+//    [[IMTipImp defaultTip] showTip:@"挂断中..."];
 #endif
     
     [self stopCommunicationCounting];
@@ -248,11 +249,17 @@ static int endTime = 0;
     if (![[ItelAction action] userInFriendBook:[self.state valueForKey:kPeerAccount]]) {
         // 提示用户 陌生人或者不存在的号码
 #if usertip
-        [[IMTipImp defaultTip] warningTip:@"对方不在线或者账号不存在"];
+        [TSMessage showNotificationWithTitle:nil
+                                    subtitle:NSLocalizedString(@"对方不在线或者账号不存在!", nil)
+                                        type:TSMessageNotificationTypeWarning];
+//        [[IMTipImp defaultTip] warningTip:@"对方不在线或者账号不存在"];
 #endif
     }else{
 #if usertip
-        [[IMTipImp defaultTip] warningTip:@"好友不在线"];
+        [TSMessage showNotificationWithTitle:nil
+                                    subtitle:NSLocalizedString(@"好友不在线!", nil)
+                                        type:TSMessageNotificationTypeWarning];
+//        [[IMTipImp defaultTip] warningTip:@"好友不在线"];
 #endif
     }
     //查询失败了.终止session
@@ -485,16 +492,16 @@ static int endTime = 0;
 }
 // 通话查询成功后, 处理收到的数据.
 - (void)queryDataProcess{
-//#if DEBUG
-//    [[IMTipImp defaultTip] showTip:@"处理收到的通话查询记录"];
-//#endif
 }
 
 - (void)sendCallingData{
-//#if DEBUG
-//    [[IMTipImp defaultTip] showTip:@"发送数据 主叫 >>> 被叫"];
-//#endif
     self.basicState = @(basicStateCalling);
+#if usertip
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"拨号中...", nil)
+                                subtitle:nil
+                                    type:TSMessageNotificationTypeMessage];
+#endif
+    
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
     if ([[self.state valueForKey:kUseVideo] boolValue]){
@@ -707,6 +714,13 @@ static int endTime = 0;
     if (!self.needSetup) {
         return;
     }
+    if ([((NSCAppDelegate*)[UIApplication sharedApplication].delegate).window isKeyWindow]){
+        [TSMessage setDefaultViewController:((NSCAppDelegate*)[UIApplication sharedApplication].delegate).window.rootViewController];
+    }else{
+        [TSMessage setDefaultViewController:((NSCAppDelegate*)[UIApplication sharedApplication].delegate).dialPanelWindow.rootViewController];
+    }
+    
+    ;
     self.needSetup = NO;
     self.basicState = @(basicStateIdle);
     self.isInP2P  = @(0);
@@ -762,12 +776,9 @@ static int endTime = 0;
 #endif
     [self.UDPcommunicator setupIP:self.routeIP];
     [self.UDPcommunicator setupPort:self.port];
-//    NSLog(@"udp port:%d",self.port);
-//    NSAssert(self.selfAccount, @"selfAccount is nil");
+
     if(self.selfAccount == nil){
-#if usertip
-        [[IMTipImp defaultTip] errorTip:@"用户帐号信息为空"];
-#endif
+        return;
     }
     [self.UDPcommunicator connect:[self myAccount]];
 }
@@ -835,9 +846,7 @@ static int endTime = 0;
     NSDictionary* communicationAddress =
     [self.engine endPointAddressWithProbeServer:[self.state valueForKey:kForwardIP] port:[[self.state valueForKey:kForwardPort] integerValue] bakPort:[[self.state valueForKey:kBakPort] integerValue]];
     //5.获取到外网地址后，开始发送数据包到外网地址探测服务器，直到收到对等方的回复。
-#if DEBUG
-    [[IMTipImp defaultTip] showTip:@"开始进行保持外网session的数据包发送"];
-#endif
+
     [self.keepSessionAlive invalidate];
     
     
@@ -1026,9 +1035,7 @@ static int endTime = 0;
         });
     }
     self.lossCount++;
-#if DEBUG
-    [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前通话持续时间:%f,当前收到的数据长度:%d",self.duration,self.lossCount]];
-#endif
+
 }
 
 // 没有接听 超时,发sessionend
@@ -1038,7 +1045,10 @@ static int endTime = 0;
     self.monitor = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
 #if usertip
-            [[IMTipImp defaultTip] showTip:@"无人接听"];
+        [TSMessage showNotificationWithTitle:nil
+                                    subtitle:NSLocalizedString(@"无人接听", nil)
+                                        type:TSMessageNotificationTypeMessage];
+//            [[IMTipImp defaultTip] showTip:@"无人接听"];
 #endif
         //发送终止信令
         [self haltSession:@{

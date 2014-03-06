@@ -16,7 +16,6 @@
 #import "NSCAppDelegate.h"
 #import "UIImageView+AFNetworking.h"
 #import "Area+toString.h"
-#import "IMTipImp.h"
 @interface UserViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbShowName;
 @property (weak, nonatomic) IBOutlet NXImageView *imageView;

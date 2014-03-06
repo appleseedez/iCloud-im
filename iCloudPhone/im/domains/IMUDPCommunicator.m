@@ -32,7 +32,10 @@ static int localUDPNetPortSuffix = 0;
 	if (![self.udpSock bindToPort:self.udpPort error:&error])
 	{
 #if DEBUG
-        [[IMTipImp defaultTip] errorTip:@"udp绑定端口失败了"];
+        [TSMessage showNotificationWithTitle:nil
+                                    subtitle:NSLocalizedString(@"连接中...", nil)
+                                        type:TSMessageNotificationTypeWarning];
+//        [[IMTipImp defaultTip] errorTip:@"udp绑定端口失败了"];
 #endif
         NSLog(@"bind error:%@",error);
         NSAssert(self.udpSock, @"udpsock is nil");
@@ -44,7 +47,7 @@ static int localUDPNetPortSuffix = 0;
 	if (![self.udpSock beginReceiving:&error])
 	{
 #if DEBUG
-        [[IMTipImp defaultTip] errorTip:@"udp开始接收数据失败了"];
+//        [[IMTipImp defaultTip] errorTip:@"udp开始接收数据失败了"];
 #endif
 		return;
 	}
@@ -52,7 +55,10 @@ static int localUDPNetPortSuffix = 0;
     self.account = account;
     if (!self.account) {
 #if usertip
-        [[IMTipImp defaultTip] errorTip:@"帐号为空! 无法登录"];
+        [TSMessage showNotificationWithTitle:nil
+                                    subtitle:NSLocalizedString(@"帐号为空! 无法登录", nil)
+                                        type:TSMessageNotificationTypeWarning];
+//        [[IMTipImp defaultTip] errorTip:@"帐号为空! 无法登录"];
 #endif
         [NSException exceptionWithName:@"account is nil" reason:@"账号为空" userInfo:nil];
     }
