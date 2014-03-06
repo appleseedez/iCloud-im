@@ -401,7 +401,14 @@
 }
 #pragma mark - 启动其他app
 -(void)loginOtherApp:(NSDictionary*)type{
+    if (![[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"itelFish://itelland.com"]]) {
+        
     
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"未发现快鱼，请先安装" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+
     NSDictionary *parameters=@{@"sessiontoken":[self getHost].token,@"type":@"ecommerce-ios",@"phonecode":@""};
     [self.itelNetRequestActionDelegate startOtherApp:parameters];
     
@@ -414,8 +421,13 @@
         NSString *strParameters=[[[NSString alloc ] initWithData:json encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
         
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"itelFish://itelland.com/?%@",strParameters]];
-        
-        [[UIApplication sharedApplication] openURL:url];
+        if ([[UIApplication sharedApplication]canOpenURL:url]) {
+             [[UIApplication sharedApplication] openURL:url];
+        }else{
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"未发现快鱼，请先安装" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+        }
+       
 
     
     

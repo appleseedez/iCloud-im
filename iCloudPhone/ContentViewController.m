@@ -24,7 +24,7 @@ static int currPage=0;
 {
     [super viewDidLoad];
     
-    [self addSubButtons];
+    //[self addSubButtons];
     self.rootDelegate=((NSCAppDelegate*)[UIApplication sharedApplication].delegate).RootVC;
     self.view.backgroundColor=[UIColor whiteColor];
 	// Do any additional setup after loading the view.
