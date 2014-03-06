@@ -2828,7 +2828,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="ESK-dh-ubK" userLabel="history">
-                                        <rect key="frame" x="0.0" y="181" width="49" height="49"/>
+                                        <rect key="frame" x="0.0" y="181" width="98" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.92549026012420654" green="0.92549026012420654" blue="0.92549026012420654" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
@@ -2841,16 +2841,6 @@
                                             <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="MBK-HC-wU7"/>
                                             <action selector="showRecentContactList:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="Lov-RI-JL9"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="PId-1y-z0Z" userLabel="action">
-                                        <rect key="frame" x="50" y="181" width="48" height="49"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <color key="backgroundColor" red="0.92549026012420654" green="0.92549026012420654" blue="0.92549026012420654" alpha="1" colorSpace="deviceRGB"/>
-                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
-                                        <state key="normal" image="action_btn">
-                                            <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="KAW-Ok-hLz" userLabel="dial">
                                         <rect key="frame" x="99" y="181" width="122" height="49"/>
@@ -2866,7 +2856,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="HzJ-01-BAU" userLabel="video">
-                                        <rect key="frame" x="271" y="181" width="49" height="49"/>
+                                        <rect key="frame" x="222" y="181" width="98" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.92549026012420654" green="0.92549026012420654" blue="0.92549026012420654" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
@@ -2879,16 +2869,6 @@
                                             <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="h4h-TW-FGw"/>
                                             <action selector="videoDialing:" destination="CmA-yR-FtJ" eventType="touchUpInside" id="8Yo-N0-qhs"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="7tl-jj-am5" userLabel="message">
-                                        <rect key="frame" x="222" y="181" width="48" height="49"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <color key="backgroundColor" red="0.92549026012420654" green="0.92549026012420654" blue="0.92549026012420654" alpha="1" colorSpace="deviceRGB"/>
-                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
-                                        <state key="normal" image="message_btn">
-                                            <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -3845,7 +3825,6 @@
         <image name="Itel ICON-IOS" width="57" height="57"/>
         <image name="aboutItel" width="24" height="24"/>
         <image name="aboutlogo" width="90" height="46"/>
-        <image name="action_btn" width="19" height="19"/>
         <image name="action_contact_detail_btn" width="32" height="32"/>
         <image name="ad_a" width="320" height="150"/>
         <image name="ad_b" width="320" height="150"/>
@@ -3864,7 +3843,6 @@
         <image name="itel.png" width="251" height="120"/>
         <image name="itelCentre" width="24" height="24"/>
         <image name="itel_logo" width="64" height="64"/>
-        <image name="message_btn" width="22" height="19"/>
         <image name="message_contact_detail_btn" width="32" height="28"/>
         <image name="mute_disable_btn" width="25" height="32"/>
         <image name="peerAvatar" width="64" height="64"/>
@@ -3894,6 +3872,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5y8-TJ-QOU"/>
+        <segue reference="ps9-HW-4k5"/>
     </inferredMetricsTieBreakers>
 </document>

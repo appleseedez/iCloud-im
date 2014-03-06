@@ -115,7 +115,6 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
     AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
     [self removeNotifications];
-    [((NSCAppDelegate*)[UIApplication sharedApplication].delegate).dialPanelWindow setHidden:YES];
 }
 -(void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(intoSession:) name:PRESENT_INSESSION_VIEW_NOTIFICATION object:nil];

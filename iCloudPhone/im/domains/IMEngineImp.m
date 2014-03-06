@@ -27,7 +27,7 @@ UIView*  _pview_local;
 @property(nonatomic) int selfNATType;
 @property(nonatomic,copy) NSString* stunServer;
 @end
-
+static BOOL firstOpenCam = YES;
 @implementation IMEngineImp
 - (id)init{
     if (self = [super init]) {
@@ -43,12 +43,7 @@ UIView*  _pview_local;
     }
     return self;
 }
-//- (CAVInterfaceAPI *)pInterfaceApi{
-//    if (_pInterfaceApi == nil) {
-//        _pInterfaceApi = new CAVInterfaceAPI();
-//    }
-//    return _pInterfaceApi;
-//}
+
 - (BOOL)isP2PFinished{
     return self.p2pFinished;
 }
@@ -119,9 +114,7 @@ static int localNetPortSuffix = 0;
 - (void)initNetwork{
     self.netWorkPort = LOCAL_PORT + (++localNetPortSuffix)%9;
     if (false == self.pInterfaceApi->OpenNetWork(self.netWorkPort)) {
-//#if DEBUG
-//        [[IMTipImp defaultTip] errorTip:@"引擎初始化网络失败"];
-//#endif
+
     }else{
     }
 }
@@ -136,9 +129,6 @@ static int localNetPortSuffix = 0;
     //接下来，本地根据网络情况，会重新评估一次是否支持视频
     AFNetworkReachabilityManager* reachabilityManager = [AFNetworkReachabilityManager sharedManager];
     [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-//#if DEBUG
-//        [[IMTipImp defaultTip] showTip:[NSString stringWithFormat:@"当前网络:%@",AFStringFromNetworkReachabilityStatus(status)]];
-//#endif
         //网络发生变化时,再次获取nat
         [self setCurrentNATType:[self natType]];
         switch (status) {
@@ -146,7 +136,6 @@ static int localNetPortSuffix = 0;
             {
                 //是支持视频的
                 self.m_type = InitTypeVoeAndVie;
-                //                _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,FULL_SCREEN.size.width*.3, FULL_SCREEN.size.height*.3)];
             }
                 break;
             case AFNetworkReachabilityStatusReachableViaWWAN:
@@ -170,9 +159,6 @@ static int localNetPortSuffix = 0;
                 break;
         }
     }];
-//#if DEBUG
-//    [[IMTipImp defaultTip] showTip:[self mediaTypeString:self.m_type]];
-//#endif
     [reachabilityManager startMonitoring];
     
 }
@@ -429,7 +415,7 @@ static int localNetPortSuffix = 0;
 #if ENGINE_MSG
     NSLog(@"隐藏摄像头");
 #endif
-    self.pInterfaceApi->SwitchCamera(10);
+    self.pInterfaceApi->StopCamera();
 }
 
 @synthesize canVideoCalling = _canVideoCalling;
@@ -460,8 +446,13 @@ static int localNetPortSuffix = 0;
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         int r = 0;
         //先把摄像头关了
-//        self.pInterfaceApi->SwitchCamera(10);
         if ((r = self.pInterfaceApi->StartCamera(self.cameraIndex)) >= 0) {
+            if (firstOpenCam) {
+                firstOpenCam = NO;
+            }else{
+                self.pInterfaceApi->ConnectCaptureDevice();
+            }
+            
             self.isCameraOpened = YES;
             // 摆正摄像头位置
             self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
