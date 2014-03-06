@@ -228,7 +228,7 @@ static int endTime = 0;
 
     //6. 设置40秒超时，如果没有收到接受通话的回复则转到拒绝流程
     [self.monitor invalidate];
-    self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_peer_pickup_queue", DISPATCH_QUEUE_CONCURRENT)];
+    self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(notPickup) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_peer_pickup_queue", DISPATCH_QUEUE_CONCURRENT)];
     //主叫方组装通信链路数据,发送给peer 不再需要传递数据.直接从manager.state里面去取
 //    [self sendCallingData];
 }
@@ -1017,11 +1017,13 @@ static int endTime = 0;
         return;
     }
     if (self.lossCount>=20) {
-        [self haltSession:@{
-                            kSrcAccount:[self myAccount],
-                            kDestAccount:[self.state valueForKey:kPeerAccount],
-                            kHaltType:kEndSession
-                            }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self haltSession:@{
+                                kSrcAccount:[self myAccount],
+                                kDestAccount:[self.state valueForKey:kPeerAccount],
+                                kHaltType:kEndSession
+                                }];
+        });
     }
     self.lossCount++;
 #if DEBUG
@@ -1036,14 +1038,14 @@ static int endTime = 0;
     self.monitor = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
 #if usertip
-        [[IMTipImp defaultTip] showTip:@"无人接听"];
+            [[IMTipImp defaultTip] showTip:@"无人接听"];
 #endif
-    //发送终止信令
-    [self haltSession:@{
-                        kSrcAccount:[self myAccount],
-                        kDestAccount:[self.state valueForKey:kPeerAccount],
-                        kHaltType:kEndSession
-                        }];
+        //发送终止信令
+        [self haltSession:@{
+                            kSrcAccount:[self myAccount],
+                            kDestAccount:[self.state valueForKey:kPeerAccount],
+                            kHaltType:kEndSession
+                            }];
     });
 
     
