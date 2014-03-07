@@ -30,10 +30,12 @@
                                   },
                           @"body":@{}
                           };
+
         
     }
     return self;
 }
+
 
 - (void) sendHeartBeat{
     if ([self.sock isConnected]) {

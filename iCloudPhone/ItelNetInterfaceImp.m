@@ -283,7 +283,22 @@ static ItelNetInterfaceImp* manager;
 
 #pragma mark - 检查更新
 -(void)checkForNewVersion:(NSDictionary*)parameters{
-    [self requestWithName:@"/safety/checkUpdates.json" parameters:parameters Method:1 responseSelector:NSSelectorFromString(@"checkNewVersionResponse:") userInfo:@"dic" notifyName:@"checkForNewVersion"];
+    
+    SUCCESS{
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            [[ItelAction action] checkNewVersionResponse:responseObject];
+        }
+    };
+    FAILURE{
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"checkForNewVersion" object:nil userInfo:@{
+                                                                          @"isNormal":@"0",
+                                                                          @"reason":@"网络异常"
+                                                                          }];
+    };
+    [NetRequester checkoutNewVersionFromAppleOnSuccess:success failure:failure];
+//
+//    [self requestWithName:@"/safety/checkUpdates.json" parameters:parameters Method:1 responseSelector:NSSelectorFromString(@"checkNewVersionResponse:") userInfo:@"dic" notifyName:@"checkForNewVersion"];
 }
 #pragma mark - 退出登录
 -(void)logout:(NSDictionary*)parameters{

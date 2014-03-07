@@ -104,6 +104,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionClosed:) name:END_SESSION_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(intoSession) name:PRESENT_INSESSION_VIEW_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupPreview:) name:OPEN_CAMERA_SUCCESS_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeRemoteForRelayTransport:) name:CLOSE_REMOTE_VIEW_FOR_RELAY_TRANSPORT object:nil];
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -119,6 +120,12 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 }
 
 
+- (void) closeRemoteForRelayTransport:(NSNotification*) notify{
+    NSLog(@"answering view close the preview");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.cameraPreview setHidden:YES];
+    });
+}
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -193,7 +200,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     self.currentMode = @(acceptCallMode);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendData:) name:@"sendData" object:Nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"sendData" object:Nil];
-    
+    return;
 }
 
 - (IBAction)refuseCall:(UIButton *)sender {
@@ -212,6 +219,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     [preview setFrame:previewSize];
     [[preview.layer sublayers][0] setFrame:previewSize];
     [self.cameraPreview addSubview:preview];
+    [self.cameraPreview setHidden:NO];
 }
 
 - (void) sendData:(NSNotification*) notify{
@@ -307,7 +315,7 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
         [self.switchCameraBtn setHidden:YES];
     }else{
         [self.currentNameHUD setHidden:YES];
-        if ([self.currentMode intValue] == inSessionMode) {
+        if ([self.manager isVideoCall]&&[self.currentMode intValue] == inSessionMode) {
             [self.switchCameraBtn setHidden:NO];
         }
     }

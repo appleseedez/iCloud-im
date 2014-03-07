@@ -143,6 +143,10 @@ static int localNetPortSuffix = 0;
                 self.m_type = InitTypeVoeAndVie;
 //                _pview_local = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0,0)];
             }
+            case AFNetworkReachabilityStatusNotReachable:
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NO_CONNECTION_NOTIFICATION object:nil];
+            }
                 break;
             default:
                 break;
@@ -268,7 +272,7 @@ static int localNetPortSuffix = 0;
         NSLog(@"通话参数：对方ssid：%i",argc.otherSsid);
         NSLog(@"通话参数：自己ssid：%i",argc.selfSsid);
         NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
-        NSAssert(_pInterfaceApi != nil, @"pInterface is nilA");
+//        NSAssert(_pInterfaceApi != nil, @"pInterface is nilA");
         self.p2pFinished = NO;
         if (_pInterfaceApi && _pInterfaceApi->GetP2PPeer(argc) != 0) {
             //            return -1;
@@ -321,6 +325,7 @@ static int localNetPortSuffix = 0;
             else
             {
                 NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
+                [[NSNotificationCenter defaultCenter] postNotificationName:CLOSE_REMOTE_VIEW_FOR_RELAY_TRANSPORT object:nil];
                 ret = self.pInterfaceApi->StartVoeMedia(argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
             }
             if (!ret)

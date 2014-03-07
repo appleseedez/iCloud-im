@@ -848,6 +848,7 @@
                                         </state>
                                         <connections>
                                             <action selector="checkNewVersion:" destination="v7M-lF-hrv" eventType="touchDragInside" id="M6N-xB-qyK"/>
+                                            <action selector="gotoJudge:" destination="v7M-lF-hrv" eventType="touchUpInside" id="No8-Jv-RAQ"/>
                                         </connections>
                                     </button>
                                 </subviews>

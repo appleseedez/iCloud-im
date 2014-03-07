@@ -637,7 +637,7 @@
 		47A5F8B7186D650A00B8CEC8 /* Itel ICON-IOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Itel ICON-IOS.png"; sourceTree = "<group>"; };
 		47B66DD5186AC3FA00AAD771 /* SecurityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityViewController.h; sourceTree = "<group>"; };
 		47B66DD6186AC3FA00AAD771 /* SecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityViewController.m; sourceTree = "<group>"; };
-		47B89DD11834D40000022FE5 /* iTel 2.0Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iTel 2.0Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47B89DD11834D40000022FE5 /* iTelPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTelPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47B89DD41834D40000022FE5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		47B89DD61834D40000022FE5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		47B89DD81834D40000022FE5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1544,7 +1544,7 @@
 		47B89DD21834D40000022FE5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				47B89DD11834D40000022FE5 /* iTel 2.0Test.app */,
+				47B89DD11834D40000022FE5 /* iTelPhone.app */,
 				47B89DF21834D40000022FE5 /* iCloudPhoneTests.xctest */,
 				479EF09C1859D9A40012EE29 /* libGCDSocket.a */,
 				479EF0A91859D9A50012EE29 /* GCDSocketTests.xctest */,
@@ -1975,7 +1975,7 @@
 			);
 			name = iCloudPhone;
 			productName = iCloudPhone;
-			productReference = 47B89DD11834D40000022FE5 /* iTel 2.0Test.app */;
+			productReference = 47B89DD11834D40000022FE5 /* iTelPhone.app */;
 			productType = "com.apple.product-type.application";
 		};
 		47B89DF11834D40000022FE5 /* iCloudPhoneTests */ = {
@@ -2635,8 +2635,8 @@
 					./iCloudPhone/im/sdk,
 				);
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_NAME = "iTel 2.0Test";
-				PROVISIONING_PROFILE = "501D316E-B9A3-4CED-8B13-521075702CE9";
+				PRODUCT_NAME = iTelPhone;
+				PROVISIONING_PROFILE = "43C8AD25-7103-4E17-A8E3-33C0D4C3AE73";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -2660,8 +2660,8 @@
 					./iCloudPhone/im/sdk,
 				);
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_NAME = "iTel 2.0Test";
-				PROVISIONING_PROFILE = "501D316E-B9A3-4CED-8B13-521075702CE9";
+				PRODUCT_NAME = iTelPhone;
+				PROVISIONING_PROFILE = "43C8AD25-7103-4E17-A8E3-33C0D4C3AE73";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -2845,6 +2845,7 @@
 				BA54859618C8C431003B2716 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA54859718C8C431003B2716 /* Build configuration list for PBXNativeTarget "TSMessagesTests" */ = {
 			isa = XCConfigurationList;
@@ -2853,6 +2854,7 @@
 				BA54859918C8C431003B2716 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

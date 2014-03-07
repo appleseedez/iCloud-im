@@ -42,12 +42,11 @@
 
 - (void) reconnect:(NSNotification*) notify{
 
-    if (self.manager && ![[self.manager myAccount] isEqualToString: BLANK_STRING]) {
+    if ([[ItelAction action] getHost] && self.manager && ![[self.manager myAccount] isEqualToString: BLANK_STRING]) {
 #if usertip
         [TSMessage showNotificationWithTitle:nil
                                     subtitle:NSLocalizedString(@"连接中...", nil)
                                         type:TSMessageNotificationTypeWarning];
-//        [[IMTipImp defaultTip] showTip:@"连接断开"];
 #endif
         [self.manager connectToSignalServer];
     }

@@ -12,45 +12,41 @@
 {
 }
 @property(nonatomic) GCDAsyncUdpSocket* udpSock; //udp 链接 用于请求目录服务器
-@property(nonatomic) int udpPort;
+@property(nonatomic) BOOL isBind;
 @end
 
 @implementation IMUDPCommunicator
+static int localUDPNetPortSuffix = 0;
 - (id)init{
     if (self=[super init]) {
-        _udpSock = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
         _tag = ROUTE_UDP_SEQENCE_END_TAG;
+
     }
+
     return self;
 }
-static int localUDPNetPortSuffix = 0;
+- (BOOL) prepareSock{
+    if (self.udpSock == nil) {
+        self.udpSock = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+        self.isBind = NO;
+        NSError* error;
+        if(![self.udpSock bindToPort:0 error:&error]){
+            [self.udpSock close];
+            self.udpSock.delegate = nil;
+            self.udpSock = nil;
+            [self prepareSock];
+        }else{
+            self.isBind = YES;
+        }
+    }
+    return self.isBind;
+}
 - (void)connect:(NSString*) account{
     NSLog(@"calling %@",NSStringFromSelector(_cmd));
-    self.udpPort = LOCAL_UDP_PORT + (++localUDPNetPortSuffix)%9;
-	NSError *error = nil;
-	
-	if (![self.udpSock bindToPort:self.udpPort error:&error])
-	{
-#if DEBUG
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:NSLocalizedString(@"连接中...", nil)
-                                        type:TSMessageNotificationTypeWarning];
-//        [[IMTipImp defaultTip] errorTip:@"udp绑定端口失败了"];
-#endif
-        NSLog(@"bind error:%@",error);
-        NSAssert(self.udpSock, @"udpsock is nil");
-        [self.udpSock close];
-//        [self connect:account];
-        [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil];
-		return;
-	}
-	if (![self.udpSock beginReceiving:&error])
-	{
-#if DEBUG
-//        [[IMTipImp defaultTip] errorTip:@"udp开始接收数据失败了"];
-#endif
-		return;
-	}
+    [self prepareSock];
+    NSError* error;
+    [self.udpSock pauseReceiving];
+    [self.udpSock beginReceiving:&error];
     //从登陆服务器获取
     self.account = account;
     if (!self.account) {
@@ -58,12 +54,9 @@ static int localUDPNetPortSuffix = 0;
         [TSMessage showNotificationWithTitle:nil
                                     subtitle:NSLocalizedString(@"帐号为空! 无法登录", nil)
                                         type:TSMessageNotificationTypeWarning];
-//        [[IMTipImp defaultTip] errorTip:@"帐号为空! 无法登录"];
 #endif
         [NSException exceptionWithName:@"account is nil" reason:@"账号为空" userInfo:nil];
     }
-//    self.ip = ROUTE_SERVER_IP;
-//    self.port = ROUTE_SERVER_PORT;
     self.tag = ROUTE_SRV_TAG;
     NSLog(@"udpConnector.ip:%@",self.ip);
     [self send:@{

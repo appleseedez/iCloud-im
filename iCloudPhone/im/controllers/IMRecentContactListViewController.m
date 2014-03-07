@@ -45,7 +45,7 @@
 - (id<IMManager>)manager{
     if (_manager == nil) {
         NSCAppDelegate* app = (NSCAppDelegate*) [UIApplication sharedApplication].delegate;
-        NSAssert(app.manager, @"没有immanager");
+//        NSAssert(app.manager, @"没有immanager");
         _manager = (id<IMManager>) app.manager;
     }
     return _manager;
@@ -194,7 +194,7 @@
     findAItelUser.sortDescriptors = @[];
     NSArray* matched = [record.managedObjectContext executeFetchRequest:findAItelUser error:&error];
     if ([matched count]){
-        [record setWithUser:matched[0]];
+//        [record setWithUser:matched[0]];
     }
 
         UIImageView* avatarView = (UIImageView*)[cell.contentView viewWithTag:1];

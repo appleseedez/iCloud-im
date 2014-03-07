@@ -493,12 +493,6 @@ static int endTime = 0;
 
 - (void)sendCallingData{
     self.basicState = @(basicStateCalling);
-//#if usertip
-//    [TSMessage showNotificationWithTitle:NSLocalizedString(@"拨号中...", nil)
-//                                subtitle:nil
-//                                    type:TSMessageNotificationTypeMessage];
-//#endif
-    
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
     if ([[self.state valueForKey:kUseVideo] boolValue]){
@@ -897,6 +891,8 @@ static int endTime = 0;
     
     //收到了被服务器踢下线通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(droppedFromSignal:) name:DROPPED_FROM_SIGNAL_NOTIFICATION object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection:) name:NO_CONNECTION_NOTIFICATION object:nil];
 }
 
 /**
@@ -1053,6 +1049,11 @@ static int endTime = 0;
     });
 
     
+}
+- (void) noConnection:(NSNotification*) notify{
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"网络异常", nil)
+                                subtitle:nil
+                                    type:TSMessageNotificationTypeError];
 }
 
 #pragma mark - alert view delegate

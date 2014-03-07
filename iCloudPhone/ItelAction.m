@@ -255,7 +255,7 @@
 #pragma mark - 上传图片
 -(void)uploadImage:(UIImage*)image{
     NSData *imgData=UIImageJPEGRepresentation(image, 0.1);
-    NSAssert(imgData, @"空的数据");
+//    NSAssert(imgData, @"空的数据");
     //NSData *imgData=UIImageJPEGRepresentation(image, 1);
     NSLog(@"jpeg图片大小：%d",imgData.length);
     HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
@@ -445,14 +445,44 @@
 }
 #pragma mark - 检查更新
 -(void)checkNewVersion:(id)parameters{
-    NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
-    NSLog(@"version:%@",version);
-    NSDictionary *p=@{@"version": version,@"type":@"phone-ios",@"token":@""};
-    [self.itelNetRequestActionDelegate checkForNewVersion:p];
+    
+    [self.itelNetRequestActionDelegate checkForNewVersion:nil];
+
 }
 -(void)checkNewVersionResponse:(NSDictionary*)data{
-   
-    [self NotifyForNormalResponse:@"checkForNewVersion" parameters:data];
+    
+    NSArray *infoArray = [data objectForKey:@"results"];
+    if (0 == [infoArray count]) {
+        NSDictionary* versionNotifyDic = @{
+                                           @"msg":@"产品未上架",
+                                           @"isNormal":@"0"
+                                           };
+        
+        [self NotifyForNormalResponse:@"checkForNewVersion" parameters:versionNotifyDic];
+        return;
+    }
+    NSDictionary *releaseInfo = [infoArray objectAtIndex:0];
+    NSString *latestVersion = [releaseInfo objectForKey:@"version"];
+    NSString *trackViewUrl = [releaseInfo objectForKey:@"trackViewUrl"];
+    NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+    int latestFirst = [[latestVersion componentsSeparatedByString:@"."][0] intValue];
+    int localFisrt = [[version componentsSeparatedByString:@"."][0] intValue];
+    NSString *update_level = nil;
+    if ( latestFirst - localFisrt > 0) {
+        update_level = @"1";
+    }else{
+        update_level = @"0";
+    }
+    NSDictionary* versionNotifyDic = @{
+                                       @"data":@{
+                                         @"update_level":update_level,
+                                         @"version":latestVersion,
+                                         @"update_url":trackViewUrl
+                                               },
+                                       @"isNormal":@"1"
+                                       };
+    
+    [self NotifyForNormalResponse:@"checkForNewVersion" parameters:versionNotifyDic];
 }
 #pragma mark - 远程精确查找
 -(void)searchMatchingUserWithItel:(NSString*)itel{

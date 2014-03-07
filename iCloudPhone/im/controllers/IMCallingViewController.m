@@ -114,7 +114,9 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 
 
 }
-
+- (void) closeRemoteForRelayTransport:(NSNotification*) notify{
+    [self.cameraPreview setHidden:YES];
+}
 - (void) tearDown{
     //终止拨号音
     AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
@@ -123,6 +125,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 }
 -(void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(intoSession:) name:PRESENT_INSESSION_VIEW_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeRemoteForRelayTransport:) name:CLOSE_REMOTE_VIEW_FOR_RELAY_TRANSPORT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setup:) name:PEER_FOUND_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupPreview:) name:OPEN_CAMERA_SUCCESS_NOTIFICATION object:nil];
     
@@ -221,6 +224,7 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
     [preview setFrame:previewSize];
     [[preview.layer sublayers][0] setFrame:previewSize];
     [self.cameraPreview addSubview:preview];
+    [self.cameraPreview setHidden:NO];
 }
 - (void)intoSession:(NSNotification*) notify{
     self.inSessionNotify = notify;

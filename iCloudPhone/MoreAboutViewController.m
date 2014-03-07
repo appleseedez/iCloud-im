@@ -17,10 +17,15 @@
 @property (nonatomic) NSString *updateUrl;
 @property (nonatomic,weak )  UIAlertView *go800alert;
 @property (nonatomic,weak)  UIAlertView *updateAlert;
+
 @end
 
 @implementation MoreAboutViewController
-
+- (IBAction)gotoJudge:(id)sender{
+    NSString *str = [NSString stringWithFormat:
+                     @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",APPID]; //appID 解释如下
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
 
 -(IBAction)checkNewVersion:(id)sender{
     self.btnCheckUpdate.enabled=NO;
@@ -68,7 +73,7 @@
             [alert show];
         }
     }else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"目前版本已经是最新" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"网络不通" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     }
 }
