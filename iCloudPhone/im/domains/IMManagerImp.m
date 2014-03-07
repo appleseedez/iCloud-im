@@ -30,6 +30,8 @@
 @property (nonatomic) NSDictionary* recentLog; //作为最近通话记录的status字段
 @property(nonatomic) BOOL deviceAuthorized;
 @property (nonatomic) BOOL needSetup;
+
+@property (nonatomic) dispatch_queue_t tcpQueue;
 @end
 enum BasicStates
 {
@@ -62,7 +64,7 @@ static int hasObserver = 0;
     // 从空闲进入查询
     if ([self.basicState intValue]  == basicStateIdle && [self canBeCalled:account]) {
         self.basicState =@(basicStateQuering);
-
+        [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:nil]; 
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
         //2.2 注册查询失败通知.
@@ -70,9 +72,6 @@ static int hasObserver = 0;
         //2.3 构造通话查询信令
         self.messageBuilder = [[IMSessionInitMessageBuilder alloc] init];
         NSDictionary* data = [self.messageBuilder buildWithParams:@{kDestAccount: account}];
-//#if SIGNAL_MESSAGE
-//        NSLog(@"发起通话查询请求：%@",data);
-//#endif
         //2.4 发送信令数据到信令服务器
         [self.TCPcommunicator send:data];
         //2.5 开启一个1.5秒的定时器,监视信令业务服务器的查询返回情况,如果在这个时间内都没有返回.则主叫方主动挂断
@@ -221,7 +220,7 @@ static int endTime = 0;
     // 外网第一次ip探测时的bakport
     [self.state setValue: [notify.userInfo valueForKey:kBakPort] forKey:kBakPort];
     //4. 通知界面弹起拨号中界面 信息从manager.state里面取状态 不再通过通知传递了 接收通知的结果就是主叫方会弹出正在拨号界面
-    [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PEER_FOUND_NOTIFICATION object:nil userInfo:nil];
 
     
     
@@ -252,18 +251,16 @@ static int endTime = 0;
         [TSMessage showNotificationWithTitle:nil
                                     subtitle:NSLocalizedString(@"对方不在线或者账号不存在!", nil)
                                         type:TSMessageNotificationTypeWarning];
-//        [[IMTipImp defaultTip] warningTip:@"对方不在线或者账号不存在"];
 #endif
     }else{
 #if usertip
         [TSMessage showNotificationWithTitle:nil
                                     subtitle:NSLocalizedString(@"好友不在线!", nil)
                                         type:TSMessageNotificationTypeWarning];
-//        [[IMTipImp defaultTip] warningTip:@"好友不在线"];
 #endif
     }
     //查询失败了.终止session
-//    [self endSession];
+    [self endSession];
 //
 }
 
@@ -496,11 +493,11 @@ static int endTime = 0;
 
 - (void)sendCallingData{
     self.basicState = @(basicStateCalling);
-#if usertip
-    [TSMessage showNotificationWithTitle:NSLocalizedString(@"拨号中...", nil)
-                                subtitle:nil
-                                    type:TSMessageNotificationTypeMessage];
-#endif
+//#if usertip
+//    [TSMessage showNotificationWithTitle:NSLocalizedString(@"拨号中...", nil)
+//                                subtitle:nil
+//                                    type:TSMessageNotificationTypeMessage];
+//#endif
     
     // 2. 记录当前是准备和对方视频通话还是音频通话
     [self.state setValue:[NSNumber numberWithBool:self.isVideoCall&&self.canVideo] forKey:kUseVideo];
@@ -513,9 +510,6 @@ static int endTime = 0;
     [self sendSessionDataFor:[NSNumber numberWithInt:SESSION_PERIOD_CALLING_TYPE]];
 }
 - (void)sendAnsweringData{
-//#if DEBUG
-//    [[IMTipImp defaultTip] showTip:@"发送数据 主叫 <<< 被叫"];
-//#endif
     self.basicState = @(basicStateAnswering);
     // 使用主叫通信链路信令构造器构造通信链路数据.
     self.messageBuilder = [[IMSessionPeriodResponseMessageBuilder alloc] init];
@@ -719,7 +713,7 @@ static int endTime = 0;
     }else{
         [TSMessage setDefaultViewController:((NSCAppDelegate*)[UIApplication sharedApplication].delegate).dialPanelWindow.rootViewController];
     }
-    
+    self.tcpQueue = dispatch_queue_create("VideoQueue", DISPATCH_QUEUE_SERIAL);
     ;
     self.needSetup = NO;
     self.basicState = @(basicStateIdle);

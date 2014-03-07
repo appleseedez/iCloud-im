@@ -442,7 +442,7 @@ static int localNetPortSuffix = 0;
 }
 
 - (BOOL) openCamera{
-    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_sync(self.q, ^{
         int r = 0;
         //先把摄像头关了
         if ((r = self.pInterfaceApi->StartCamera(self.cameraIndex)) >= 0) {
@@ -457,9 +457,11 @@ static int localNetPortSuffix = 0;
             self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(self.cameraIndex)]);
             NSLog(@"本地摄像头开启成功");
             //当摄像头开启成功, 把_pview_local作为通知内容发出去
+            dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_CAMERA_SUCCESS_NOTIFICATION object:Nil userInfo:@{
                                                                                                 @"preview":_pview_local
                                                                                                 }];
+            });
         }else{
             NSLog(@"摄像头开启失败:%d",r);
             [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_CAMERA_FAILED_NOTIFICATION object:nil userInfo:nil];

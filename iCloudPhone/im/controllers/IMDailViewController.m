@@ -221,16 +221,15 @@
     [self.manager setIsVideoCall:YES];
     NSString* peerAccount = self.peerAccount.text;
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
-//#if DEBUG
-//        [[IMTipImp defaultTip] warningTip:@"再点我就把你喝掉"];
-//#endif
         sender.enabled = YES;
+        
+        [TSMessage showNotificationWithTitle:NSLocalizedString(@"号码为空", nil)
+                                    subtitle:NSLocalizedString(@"请输入对方的iTel号码", nil)
+                                        type:TSMessageNotificationTypeError];
         return;
     }
-//#if DEBUG
-//    [[IMTipImp defaultTip] showTip:@"开启视频通话"];
-//#endif
 
+       
     [self.manager dial:peerAccount];
     sender.enabled = YES;
 }

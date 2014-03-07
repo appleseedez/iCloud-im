@@ -54,8 +54,8 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 {
     [super viewDidLoad];
     [self registerNotifications];
-    [self setup];
-    [self.manager sendCallingData ];
+    self.currentMode = @(inCallingMode);
+
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -64,6 +64,8 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     //系统声音播放是一个异步过程。要循环播放则必须借助回调
     AudioServicesAddSystemSoundCompletion(DIALING_SOUND_ID,NULL,NULL,soundPlayCallback,NULL);
     AudioServicesPlaySystemSound(DIALING_SOUND_ID);
+    self.PeerAvatarImageView.layer.cornerRadius = 10;
+    self.PeerAvatarImageView.layer.masksToBounds = YES;
 }
 - (void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -85,7 +87,10 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     [self.manager haltSession:cancelCallParams];
     
 }
-
+- (void) setup:(NSNotification*) notify{
+    [self setup];
+    [self.manager sendCallingData ];
+}
 - (void) setup{
     ItelUser* peerUser =  [[ItelAction action] userInFriendBook:[[self.manager myState] valueForKey:kPeerAccount]];
     NSString* peerDisplayName = BLANK_STRING;
@@ -95,8 +100,8 @@ static void* modeIdentifier = (void*) &modeIdentifier;
         peerDisplayName = peerUser.nickName;
     }
     self.peerAccountLabel.text = [NSString stringWithFormat:@"%@ 拨号中...",peerDisplayName];
-    self.PeerAvatarImageView.layer.cornerRadius = 10;
-    self.PeerAvatarImageView.layer.masksToBounds = YES;
+//    self.PeerAvatarImageView.layer.cornerRadius = 10;
+//    self.PeerAvatarImageView.layer.masksToBounds = YES;
     
     [self.PeerAvatarImageView setImageWithURL:[NSURL URLWithString:peerUser.imageurl] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     
@@ -105,7 +110,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     }else{
         self.isVideoIconView.image = [UIImage imageNamed:@"voiceCall_ico"];
     }
-    self.currentMode = @(inCallingMode);
+
 
 
 }
@@ -118,6 +123,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 }
 -(void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(intoSession:) name:PRESENT_INSESSION_VIEW_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setup:) name:PEER_FOUND_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupPreview:) name:OPEN_CAMERA_SUCCESS_NOTIFICATION object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionClosed:) name:END_SESSION_NOTIFICATION object:nil];
@@ -195,7 +201,12 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
         [self.switchCameraBtn setHidden:YES];
     }else{
         [self.currentNameHUD setHidden:YES];
-        [self.switchCameraBtn setHidden:NO];
+        if ([self.manager isVideoCall]) {
+            [self.switchCameraBtn setHidden:NO];
+        }else{
+            [self.switchCameraBtn setHidden:YES];
+        }
+        
     }
     if ([self.currentActionHUD isHidden]) {
         [self.currentActionHUD  setHidden:NO];
