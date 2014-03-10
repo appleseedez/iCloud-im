@@ -45,6 +45,7 @@
 		4769EC7A18AB4BDB00F76DB5 /* ItelNetInterfaceImp+_15.m in Sources */ = {isa = PBXBuildFile; fileRef = 4769EC7918AB4BDB00F76DB5 /* ItelNetInterfaceImp+_15.m */; };
 		4769EC8118AB5D4300F76DB5 /* Detail115ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4769EC8018AB5D4300F76DB5 /* Detail115ViewController.m */; };
 		4769EC8418AB5E8900F76DB5 /* Detail115Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4769EC8318AB5E8900F76DB5 /* Detail115Cell.m */; };
+		4778F8FF18CD55C900682F92 /* IMPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4778F8FE18CD55C900682F92 /* IMPhoneViewController.m */; };
 		4781464D1855F79800362E53 /* RegDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4781464C1855F79800362E53 /* RegDetailViewController.m */; };
 		478146531856298F00362E53 /* RegMesCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478146521856298F00362E53 /* RegMesCheckViewController.m */; };
 		4783A24918404AEF0046871C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4783A24818404AEF0046871C /* MessageUI.framework */; };
@@ -96,12 +97,10 @@
 		479B90791837660B005D8CCB /* SearchNewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B90781837660B005D8CCB /* SearchNewFriendViewController.m */; };
 		479B907E18376DA1005D8CCB /* ItelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B907D18376DA1005D8CCB /* ItelAction.m */; };
 		479B908418376DE3005D8CCB /* ItelBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B908318376DE3005D8CCB /* ItelBook.m */; };
-		479BE66518C8395E00E5032A /* IMIphoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479BE66418C8395E00E5032A /* IMIphoneViewController.m */; };
 		479BE66818C83ABE00E5032A /* IMPhoneVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479BE66718C83ABE00E5032A /* IMPhoneVideoViewController.m */; };
 		479BE66B18C83AD200E5032A /* IMPhoneAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479BE66A18C83AD200E5032A /* IMPhoneAudioViewController.m */; };
 		479BE66F18C83C1000E5032A /* IMPhoneOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = 479BE66E18C83C1000E5032A /* IMPhoneOperator.m */; };
 		479BE67318C8557900E5032A /* IMPhoneOperatorAudioCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 479BE67218C8557900E5032A /* IMPhoneOperatorAudioCall.m */; };
-		479BE67618C8682F00E5032A /* IMPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479BE67518C8682F00E5032A /* IMPhoneViewController.m */; };
 		479C7BA8185DA78E0046B1D7 /* MoreHostViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BA7185DA78E0046B1D7 /* MoreHostViewCell.m */; };
 		479C7BAB185DA7A30046B1D7 /* MoreOtherViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BAA185DA7A30046B1D7 /* MoreOtherViewCell.m */; };
 		479C7BAE185DDB480046B1D7 /* RegTipLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BAD185DDB480046B1D7 /* RegTipLabel.m */; };
@@ -384,6 +383,8 @@
 		4769EC8018AB5D4300F76DB5 /* Detail115ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail115ViewController.m; sourceTree = "<group>"; };
 		4769EC8218AB5E8900F76DB5 /* Detail115Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Detail115Cell.h; sourceTree = "<group>"; };
 		4769EC8318AB5E8900F76DB5 /* Detail115Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail115Cell.m; sourceTree = "<group>"; };
+		4778F8FD18CD55C900682F92 /* IMPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMPhoneViewController.h; sourceTree = "<group>"; };
+		4778F8FE18CD55C900682F92 /* IMPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMPhoneViewController.m; sourceTree = "<group>"; };
 		4781464B1855F79800362E53 /* RegDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegDetailViewController.h; sourceTree = "<group>"; };
 		4781464C1855F79800362E53 /* RegDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegDetailViewController.m; sourceTree = "<group>"; };
 		478146511856298F00362E53 /* RegMesCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegMesCheckViewController.h; sourceTree = "<group>"; };
@@ -481,8 +482,6 @@
 		479B907D18376DA1005D8CCB /* ItelAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelAction.m; sourceTree = "<group>"; };
 		479B908218376DE3005D8CCB /* ItelBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelBook.h; sourceTree = "<group>"; };
 		479B908318376DE3005D8CCB /* ItelBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelBook.m; sourceTree = "<group>"; };
-		479BE66318C8395E00E5032A /* IMIphoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMIphoneViewController.h; sourceTree = "<group>"; };
-		479BE66418C8395E00E5032A /* IMIphoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMIphoneViewController.m; sourceTree = "<group>"; };
 		479BE66618C83ABE00E5032A /* IMPhoneVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMPhoneVideoViewController.h; sourceTree = "<group>"; };
 		479BE66718C83ABE00E5032A /* IMPhoneVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMPhoneVideoViewController.m; sourceTree = "<group>"; };
 		479BE66918C83AD200E5032A /* IMPhoneAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMPhoneAudioViewController.h; sourceTree = "<group>"; };
@@ -492,8 +491,6 @@
 		479BE67018C8402300E5032A /* IMPhoneOperatorContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMPhoneOperatorContext.h; sourceTree = "<group>"; };
 		479BE67118C8557900E5032A /* IMPhoneOperatorAudioCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMPhoneOperatorAudioCall.h; sourceTree = "<group>"; };
 		479BE67218C8557900E5032A /* IMPhoneOperatorAudioCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMPhoneOperatorAudioCall.m; sourceTree = "<group>"; };
-		479BE67418C8682F00E5032A /* IMPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMPhoneViewController.h; sourceTree = "<group>"; };
-		479BE67518C8682F00E5032A /* IMPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMPhoneViewController.m; sourceTree = "<group>"; };
 		479C7BA6185DA78E0046B1D7 /* MoreHostViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreHostViewCell.h; sourceTree = "<group>"; };
 		479C7BA7185DA78E0046B1D7 /* MoreHostViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreHostViewCell.m; sourceTree = "<group>"; };
 		479C7BA9185DA7A30046B1D7 /* MoreOtherViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreOtherViewCell.h; sourceTree = "<group>"; };
@@ -1187,10 +1184,8 @@
 			isa = PBXGroup;
 			children = (
 				479BE67018C8402300E5032A /* IMPhoneOperatorContext.h */,
-				479BE67418C8682F00E5032A /* IMPhoneViewController.h */,
-				479BE67518C8682F00E5032A /* IMPhoneViewController.m */,
-				479BE66318C8395E00E5032A /* IMIphoneViewController.h */,
-				479BE66418C8395E00E5032A /* IMIphoneViewController.m */,
+				4778F8FD18CD55C900682F92 /* IMPhoneViewController.h */,
+				4778F8FE18CD55C900682F92 /* IMPhoneViewController.m */,
 				479BE66618C83ABE00E5032A /* IMPhoneVideoViewController.h */,
 				479BE66718C83ABE00E5032A /* IMPhoneVideoViewController.m */,
 				479BE66918C83AD200E5032A /* IMPhoneAudioViewController.h */,
@@ -2307,15 +2302,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4778F8FF18CD55C900682F92 /* IMPhoneViewController.m in Sources */,
 				4732A03018432AEF009AD32D /* ItelUserTest.m in Sources */,
-				479BE67618C8682F00E5032A /* IMPhoneViewController.m in Sources */,
 				479BE66F18C83C1000E5032A /* IMPhoneOperator.m in Sources */,
 				478814011839E66C0085224D /* NXInputCheckerTest.m in Sources */,
 				4732A03418432F61009AD32D /* NXInputChecker.m in Sources */,
 				478814021839E66C0085224D /* NXLoginViewControllerTest.m in Sources */,
 				479BE66B18C83AD200E5032A /* IMPhoneAudioViewController.m in Sources */,
 				47B89E001834D40000022FE5 /* iCloudPhoneTests.m in Sources */,
-				479BE66518C8395E00E5032A /* IMIphoneViewController.m in Sources */,
 				479BE67318C8557900E5032A /* IMPhoneOperatorAudioCall.m in Sources */,
 				BAAEA49118726DF200C05BCF /* IMRecentContactItem.m in Sources */,
 				479BE66818C83ABE00E5032A /* IMPhoneVideoViewController.m in Sources */,
