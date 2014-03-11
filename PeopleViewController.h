@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseCoreDataTableViewController.h"
 @interface PeopleViewController : BaseCoreDataTableViewController <UISearchBarDelegate,UIScrollViewDelegate,UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableVIew;
+
 
 @end

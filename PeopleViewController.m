@@ -42,6 +42,7 @@
     [super viewDidLoad];
     self.navigationController.delegate=self;
     self.searchBar.delegate = self;
+    [(UIScrollView*)self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, self.tableView.contentOffset.y+44)];
    	
 }
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{

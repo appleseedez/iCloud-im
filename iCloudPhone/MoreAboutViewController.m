@@ -32,7 +32,7 @@
     [[ItelAction action] checkNewVersion:nil];
 }
 - (IBAction)call800:(id)sender {
-   UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"要拨打800人工热线吗？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拨打", nil];
+   UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"要拨打8890人工热线吗？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拨打", nil];
 
     self.go800alert=alert;
     [alert show];
@@ -82,7 +82,7 @@
         if (buttonIndex==1) {
             NSCAppDelegate *app=(NSCAppDelegate*)[UIApplication sharedApplication].delegate;
             [app.manager setIsVideoCall:NO];
-            [app.manager  dial:@"800"];
+            [app.manager  dial:@"8890"];
         }
         
         

@@ -20,7 +20,7 @@ static PassManager *manager=nil;
     return manager;
 }
 -(void) checkMessageCode:(NSString*)code{
-    NSString *url=[NSString stringWithFormat:@"%@/com/modifyPhone.json",SIGNAL_SERVER];
+    NSString *url=[NSString stringWithFormat:@"%@/com/checkPhoneCode.json",SIGNAL_SERVER];
      NSDictionary *parameters=@{@"userId":self.userId ,@"itelCode":self.itel,@"token":@"fdffafaf",@"captcha":code,@"phone":self.telephone};
     SUCCESS{
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
