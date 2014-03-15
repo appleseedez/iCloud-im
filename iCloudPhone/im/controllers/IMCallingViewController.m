@@ -182,6 +182,7 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
 
     [self.inSessionNameHUD setHidden:YES];
     [self.inSessionActionHUD setHidden:YES];
+    [self.inSessionVoiceActionHUD setHidden:YES];
     [self.callingNameHUD setHidden:NO];
     [self.callingActionHUD setHidden:NO];
     self.currentNameHUD = self.callingNameHUD;
@@ -192,9 +193,16 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
     [self.callingNameHUD setHidden:YES];
     [self.callingActionHUD setHidden:YES];
     [self.inSessionNameHUD setHidden:NO];
-    [self.inSessionActionHUD setHidden:NO];
+    if ([self.manager isVideoCall]) {
+        [self.inSessionActionHUD setHidden:NO];
+        [self.inSessionVoiceActionHUD setHidden:YES];
+        self.currentActionHUD = self.inSessionActionHUD;
+    }else{
+        [self.inSessionVoiceActionHUD setHidden:NO];
+        [self.inSessionActionHUD setHidden:YES];
+        self.currentActionHUD = self.inSessionVoiceActionHUD;
+    }
     self.currentNameHUD = self.inSessionNameHUD;
-    self.currentActionHUD = self.inSessionActionHUD;
     [self.switchCameraBtn setHidden:YES];
     
 }

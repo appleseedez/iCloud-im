@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pj0-BP-Pa6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pj0-BP-Pa6">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <development version="5000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--User View Controller - 联系人详情-->
@@ -21,6 +21,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NSx-zN-z0l">
                                         <rect key="frame" x="88" y="7" width="30" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="voiceCall_contact_detail_btn">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -31,6 +32,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r43-Hy-qZR">
                                         <rect key="frame" x="150" y="7" width="28" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="vidoeCall_contact_detail_btn">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -41,6 +43,7 @@
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rSW-ED-fwh">
                                         <rect key="frame" x="206" y="9" width="32" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="message_contact_detail_btn">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -48,6 +51,7 @@
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DKp-Wr-fc6">
                                         <rect key="frame" x="266" y="7" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="action_contact_detail_btn">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -900,6 +904,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dso-1c-3ox" customClass="RegNextButton">
                                 <rect key="frame" x="5" y="174" width="310" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="下一步">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1361,7 +1366,7 @@
                                     <segue destination="DSm-nj-mW0" kind="push" id="Z3L-Xd-FFS"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="birthday" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="QQ" rowHeight="44" id="uky-mc-yhD" customClass="HostQQCell">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="qq" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="QQ" rowHeight="44" id="uky-mc-yhD" customClass="HostQQCell">
                                 <rect key="frame" x="0.0" y="476" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uky-mc-yhD" id="0El-fG-Olj">
@@ -1869,6 +1874,7 @@
                                             <rect key="frame" x="1" y="0.0" width="79" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" image="voiceCall_contact_detail_btn">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -1880,6 +1886,7 @@
                                             <rect key="frame" x="81" y="0.0" width="78" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" image="vidoeCall_contact_detail_btn">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -1891,6 +1898,7 @@
                                             <rect key="frame" x="160" y="0.0" width="78" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -1899,6 +1907,7 @@
                                             <rect key="frame" x="239" y="0.0" width="80" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -2069,6 +2078,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YX5-BF-HyX">
                                         <rect key="frame" x="88" y="7" width="30" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="voiceCall_contact_detail_btn">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2080,6 +2090,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jb8-8W-Tsz">
                                         <rect key="frame" x="150" y="7" width="28" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="vidoeCall_contact_detail_btn">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2091,6 +2102,7 @@
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CXq-ZS-6mJ">
                                         <rect key="frame" x="206" y="9" width="32" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="message_contact_detail_btn">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2098,6 +2110,7 @@
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Q4y-dP-8Be">
                                         <rect key="frame" x="266" y="7" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="action_contact_detail_btn">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2214,198 +2227,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znl-d6-Tcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="574" y="1161"/>
-        </scene>
-        <!--In Session View Controller-->
-        <scene sceneID="dKB-Nr-hPr">
-            <objects>
-                <viewController storyboardIdentifier="InSessionWithVoiceView" id="kEe-Cf-lem" customClass="IMInSessionViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Rqk-eR-UMN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Bif-db-ZaU">
-                                <rect key="frame" x="90" y="170" width="140" height="140"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" id="8Fc-F3-Ii1" customClass="VideoRenderIosView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="QKn-Rt-qcO" userLabel="selfView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="566"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="yfK-rr-RZ1" userLabel="hud">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" id="4Bu-gC-DE4" userLabel="actionHud">
-                                        <rect key="frame" x="0.0" y="396" width="320" height="172"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DWl-Cu-eLW" userLabel="hang up">
-                                                <rect key="frame" x="1" y="122" width="318" height="49"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="23"/>
-                                                <state key="normal" title="挂断">
-                                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="endSession:" destination="kEe-Cf-lem" eventType="touchUpInside" id="A0e-fu-Dgb"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="hhY-xs-OQI" userLabel="hide small window">
-                                                <rect key="frame" x="1" y="61" width="158" height="60"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
-                                                <inset key="titleEdgeInsets" minX="0.0" minY="36" maxX="28" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="60" minY="-16" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="隐藏小窗口" image="hideSelfCam_btn">
-                                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                                </state>
-                                                <state key="selected" title="显示小窗口" image="close_self_window_disable_btn">
-                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="togglePreviewCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="xQb-Ry-Gbc"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="hBp-5c-I2e" userLabel="toggle cam">
-                                                <rect key="frame" x="160" y="61" width="159" height="60"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
-                                                <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="28" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="60" minY="-16" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="关闭摄像头" image="stop_video_btn">
-                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <state key="selected" title="开启摄像头" image="closeCamera_disable_btn">
-                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="toggleCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="hvW-Os-wln"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="vyO-gB-Cvk" userLabel="toggle mute">
-                                                <rect key="frame" x="1" y="0.0" width="158" height="60"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
-                                                <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="24" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="28" minY="-12" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="静音" image="silence_btn">
-                                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                                </state>
-                                                <state key="disabled" image="mute_disable_btn"/>
-                                                <state key="selected" title="静音" image="mute_disable_btn">
-                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted" image="mute_disable_btn"/>
-                                                <connections>
-                                                    <action selector="toggleMute:" destination="kEe-Cf-lem" eventType="touchUpInside" id="SlJ-Dh-BQK"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="7Fr-G6-IxL" userLabel="toggle speaker">
-                                                <rect key="frame" x="160" y="0.0" width="159" height="60"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
-                                                <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="28" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="36" minY="-16" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="扬声器" image="speaker_btn">
-                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <state key="selected" title="扬声器" image="speaker_disable_btn">
-                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="toggleSpeeker:" destination="kEe-Cf-lem" eventType="touchUpInside" id="URA-eO-qJg"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="E3b-dd-xck" userLabel="nameHud">
-                                        <rect key="frame" x="0.0" y="20" width="320" height="70"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CpY-cP-0Xf">
-                                                <rect key="frame" x="20" y="13" width="150" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vt4-dP-PsZ">
-                                                <rect key="frame" x="209" y="13" width="91" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址加载中..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RCQ-RD-FLo">
-                                                <rect key="frame" x="185" y="42" width="115" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f8l-du-Jh3">
-                                                <rect key="frame" x="20" y="42" width="150" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="3Kk-US-hRw" appends="YES" id="wPp-YZ-NaM"/>
-                                </connections>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="I0X-1v-8Vr" userLabel="switchBtn">
-                                <rect key="frame" x="250" y="44" width="53" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <state key="normal" image="switch_cam_btn">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="switchCamera:" destination="kEe-Cf-lem" eventType="touchUpInside" id="taf-eD-XWg"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="tn0-xA-11T"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <connections>
-                        <outlet property="actionHUDView" destination="4Bu-gC-DE4" id="138-v0-OGh"/>
-                        <outlet property="nameHUDView" destination="E3b-dd-xck" id="UdB-zM-TMv"/>
-                        <outlet property="peerAvatar" destination="Bif-db-ZaU" id="XaS-XS-DH1"/>
-                        <outlet property="remoteRenderView" destination="8Fc-F3-Ii1" id="H9F-iG-drK"/>
-                        <outlet property="selfCamView" destination="QKn-Rt-qcO" id="r2g-z8-W92"/>
-                        <outlet property="switchFrontAndBackCamBtn" destination="I0X-1v-8Vr" id="aP1-0v-HFe"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n7c-rb-dfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="3Kk-US-hRw">
-                    <connections>
-                        <action selector="toggleHUD:" destination="kEe-Cf-lem" id="TUQ-eA-cQK"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="1930" y="1419"/>
         </scene>
         <!--Dail View Controller-->
         <scene sceneID="Z6h-56-3Sa">
@@ -2952,7 +2773,6 @@
                                         </state>
                                         <connections>
                                             <action selector="endSession:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="BV6-aL-YKp"/>
-                                            <action selector="endSession:" destination="kEe-Cf-lem" eventType="touchUpInside" id="sAJ-Pp-iMA"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="sVC-VY-72j" userLabel="hide small window">
@@ -2970,7 +2790,6 @@
                                         </state>
                                         <connections>
                                             <action selector="togglePreviewCam:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="02g-yH-iLw"/>
-                                            <action selector="togglePreviewCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="N2s-IT-QOV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="cUY-7K-785" userLabel="toggle cam">
@@ -2987,7 +2806,6 @@
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="toggleCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="75N-kR-PeM"/>
                                             <action selector="toggleCam:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="XIi-4E-kp1"/>
                                         </connections>
                                     </button>
@@ -3008,7 +2826,6 @@
                                         <state key="highlighted" image="mute_disable_btn"/>
                                         <connections>
                                             <action selector="toggleMute:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="QfB-tt-GDD"/>
-                                            <action selector="toggleMute:" destination="kEe-Cf-lem" eventType="touchUpInside" id="Z2z-C1-H8T"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="XOd-Fm-bfE" userLabel="toggle speaker">
@@ -3025,7 +2842,6 @@
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="toggleSpeeker:" destination="kEe-Cf-lem" eventType="touchUpInside" id="2xp-gU-BlO"/>
                                             <action selector="toggleSpeeker:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="aXn-cP-8eh"/>
                                         </connections>
                                     </button>
@@ -3070,15 +2886,71 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" id="3fc-Xk-wGN" userLabel="inSessionVoiceActionHUD">
+                                <rect key="frame" x="0.0" y="456" width="320" height="112"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="71r-sB-mWM" userLabel="hang up">
+                                        <rect key="frame" x="1" y="62" width="318" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="23"/>
+                                        <state key="normal" title="挂断">
+                                            <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="endSession:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="o8M-rp-p0u"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="omn-M6-mAx" userLabel="toggle mute">
+                                        <rect key="frame" x="1" y="1" width="158" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="24" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="28" minY="-12" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="静音" image="silence_btn">
+                                            <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        </state>
+                                        <state key="disabled" image="mute_disable_btn"/>
+                                        <state key="selected" title="静音" image="mute_disable_btn">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="mute_disable_btn"/>
+                                        <connections>
+                                            <action selector="toggleMute:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="VYy-Mb-QZg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Qy0-vm-Z5X" userLabel="toggle speaker">
+                                        <rect key="frame" x="160" y="1" width="159" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="28" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="36" minY="-16" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="扬声器" image="speaker_btn">
+                                            <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected" title="扬声器" image="speaker_disable_btn">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toggleSpeeker:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="pxx-n5-MsQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NnA-ze-LqH" userLabel="switchBtn">
                                 <rect key="frame" x="250" y="44" width="53" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="switch_cam_btn">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="switchCamera:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="alm-k7-rbm"/>
-                                    <action selector="switchCamera:" destination="kEe-Cf-lem" eventType="touchUpInside" id="uhm-yW-PVl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -3093,11 +2965,11 @@
                         <outlet property="cameraPreview" destination="k8X-ft-Kh9" id="tip-TV-CfV"/>
                         <outlet property="inSessionActionHUD" destination="y7V-QM-xn5" id="AVU-P3-NNg"/>
                         <outlet property="inSessionNameHUD" destination="Gtf-cX-u87" id="8VJ-UU-BtK"/>
+                        <outlet property="inSessionVoiceActionHUD" destination="3fc-Xk-wGN" id="9yA-HF-z53"/>
                         <outlet property="isVideoIconView" destination="eEj-d0-2uM" id="f1b-CK-eEA"/>
                         <outlet property="peerAccountLabel" destination="mHu-kO-dql" id="u68-DL-F8j"/>
                         <outlet property="remoteRenderView" destination="Scq-Uo-cwB" id="XFO-AP-ZXr"/>
                         <outlet property="switchCameraBtn" destination="NnA-ze-LqH" id="2GK-D0-r8X"/>
-                        <segue destination="kEe-Cf-lem" kind="push" identifier="sessionRequestAcceptedByPeerSegue" id="ps9-HW-4k5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7PM-KB-2Xs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3157,7 +3029,6 @@
                                         <connections>
                                             <action selector="endSession:" destination="qS2-tk-E1c" eventType="touchUpInside" id="3UM-E8-bLp"/>
                                             <action selector="endSession:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="3zq-3W-qV2"/>
-                                            <action selector="endSession:" destination="kEe-Cf-lem" eventType="touchUpInside" id="hhN-9c-lZF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="gO5-Rs-xo5" userLabel="hide small window">
@@ -3175,7 +3046,6 @@
                                         </state>
                                         <connections>
                                             <action selector="togglePreviewCam:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="JYr-pS-BRz"/>
-                                            <action selector="togglePreviewCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="OV1-nu-fJl"/>
                                             <action selector="togglePreviewCam:" destination="qS2-tk-E1c" eventType="touchUpInside" id="Xis-uP-n1N"/>
                                         </connections>
                                     </button>
@@ -3195,7 +3065,6 @@
                                         <connections>
                                             <action selector="toggleCam:" destination="qS2-tk-E1c" eventType="touchUpInside" id="1eG-TI-maA"/>
                                             <action selector="toggleCam:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="SuO-fj-Y9e"/>
-                                            <action selector="toggleCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="X3Y-Bs-sMP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="FDE-Cy-Qos" userLabel="toggle mute">
@@ -3216,7 +3085,6 @@
                                         <connections>
                                             <action selector="toggleMute:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="4iF-x3-fo0"/>
                                             <action selector="toggleMute:" destination="qS2-tk-E1c" eventType="touchUpInside" id="Eto-Eu-UZ2"/>
-                                            <action selector="toggleMute:" destination="kEe-Cf-lem" eventType="touchUpInside" id="iZH-ZH-f6k"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="KZm-kK-JZD" userLabel="toggle speaker">
@@ -3235,7 +3103,6 @@
                                         <connections>
                                             <action selector="toggleSpeeker:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="6ZD-K4-w7k"/>
                                             <action selector="toggleSpeeker:" destination="qS2-tk-E1c" eventType="touchUpInside" id="RPj-xb-ooM"/>
-                                            <action selector="toggleSpeeker:" destination="kEe-Cf-lem" eventType="touchUpInside" id="e8g-Wb-0ay"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3297,6 +3164,7 @@
                                         <rect key="frame" x="0.0" y="50" width="320" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="refuseShortCut_btn">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -3330,16 +3198,75 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" id="1oY-xx-zig" userLabel="inSessionVoiceActionHUD">
+                                <rect key="frame" x="0.0" y="456" width="320" height="112"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bb5-06-1FX" userLabel="hang up">
+                                        <rect key="frame" x="1" y="62" width="318" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="23"/>
+                                        <state key="normal" title="挂断">
+                                            <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="endSession:" destination="qS2-tk-E1c" eventType="touchUpInside" id="2RT-UA-Vib"/>
+                                            <action selector="endSession:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="2Zl-4u-QRe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="UOx-Bh-DaP" userLabel="toggle mute">
+                                        <rect key="frame" x="1" y="1" width="158" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="24" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="28" minY="-12" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="静音" image="silence_btn">
+                                            <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        </state>
+                                        <state key="disabled" image="mute_disable_btn"/>
+                                        <state key="selected" title="静音" image="mute_disable_btn">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="mute_disable_btn"/>
+                                        <connections>
+                                            <action selector="toggleMute:" destination="qS2-tk-E1c" eventType="touchUpInside" id="5uT-Y5-XIn"/>
+                                            <action selector="toggleMute:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="a4J-cm-ItD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="iDk-rw-AwL" userLabel="toggle speaker">
+                                        <rect key="frame" x="160" y="1" width="159" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="28" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="36" minY="-16" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="扬声器" image="speaker_btn">
+                                            <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected" title="扬声器" image="speaker_disable_btn">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toggleSpeeker:" destination="qS2-tk-E1c" eventType="touchUpInside" id="eZ0-uQ-Lk8"/>
+                                            <action selector="toggleSpeeker:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="xqL-BN-5jv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZVU-ex-hrY" userLabel="switchBtn">
                                 <rect key="frame" x="250" y="44" width="53" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="switch_cam_btn">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="switchCamera:" destination="qS2-tk-E1c" eventType="touchUpInside" id="SV6-GJ-oCV"/>
                                     <action selector="switchCamera:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="lve-bM-oSS"/>
-                                    <action selector="switchCamera:" destination="kEe-Cf-lem" eventType="touchUpInside" id="vov-eh-irG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -3352,11 +3279,11 @@
                         <outlet property="cameraPreview" destination="AI7-A9-LEv" id="moR-z8-IJo"/>
                         <outlet property="inSessionActionHUD" destination="3Vb-xS-I9F" id="qBX-0f-tOt"/>
                         <outlet property="inSessionNameHUD" destination="OL9-0c-54b" id="FI3-TT-D9f"/>
+                        <outlet property="inSessionVoiceActionHUD" destination="1oY-xx-zig" id="CcY-8e-OOb"/>
                         <outlet property="isVideoCallICONView" destination="by7-vx-8Ul" id="DWp-Vz-Y6w"/>
                         <outlet property="peerAccountLabel" destination="SMX-5o-nlt" id="KMe-gn-7MS"/>
                         <outlet property="remoteRenderView" destination="8I1-ov-q6l" id="jad-zL-000"/>
                         <outlet property="switchCameraBtn" destination="ZVU-ex-hrY" id="tcA-7k-Qf9"/>
-                        <segue destination="kEe-Cf-lem" kind="push" identifier="acceptSessionSegue" id="5y8-TJ-QOU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kgu-zw-56C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3503,6 +3430,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yKy-dg-qri" customClass="RegNextButton">
                                         <rect key="frame" x="5" y="198" width="310" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="完成">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -3552,6 +3480,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="b6T-D3-6Vo" customClass="RegNextButton">
                                 <rect key="frame" x="5" y="240" width="310" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="下一步">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -3620,6 +3549,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hg9-lU-I4j" customClass="RegNextButton">
                                 <rect key="frame" x="5" y="209" width="310" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="下一步">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -3851,7 +3781,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="ps9-HW-4k5"/>
-    </inferredMetricsTieBreakers>
 </document>
