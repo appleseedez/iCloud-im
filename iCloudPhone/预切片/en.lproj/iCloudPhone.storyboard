@@ -3157,6 +3157,7 @@
                         <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" id="dwS-Sd-12w"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="PeerAvatarImageView" destination="d7n-jI-8mw" id="Oiu-Rc-Bo9"/>
                         <outlet property="callingActionHUD" destination="OCe-4d-apY" id="oXu-79-29P"/>
@@ -3164,6 +3165,7 @@
                         <outlet property="cameraPreview" destination="k8X-ft-Kh9" id="tip-TV-CfV"/>
                         <outlet property="inSessionActionHUD" destination="y7V-QM-xn5" id="AVU-P3-NNg"/>
                         <outlet property="inSessionNameHUD" destination="Gtf-cX-u87" id="8VJ-UU-BtK"/>
+                        <outlet property="inSessionVoiceActionHUD" destination="3fc-Xk-wGN" id="1JI-uy-Dn5"/>
                         <outlet property="isVideoIconView" destination="eEj-d0-2uM" id="f1b-CK-eEA"/>
                         <outlet property="peerAccountLabel" destination="mHu-kO-dql" id="u68-DL-F8j"/>
                         <outlet property="remoteRenderView" destination="Scq-Uo-cwB" id="XFO-AP-ZXr"/>
@@ -3484,6 +3486,7 @@
                         <outlet property="cameraPreview" destination="AI7-A9-LEv" id="moR-z8-IJo"/>
                         <outlet property="inSessionActionHUD" destination="3Vb-xS-I9F" id="qBX-0f-tOt"/>
                         <outlet property="inSessionNameHUD" destination="OL9-0c-54b" id="FI3-TT-D9f"/>
+                        <outlet property="inSessionVoiceActionHUD" destination="1oY-xx-zig" id="18H-GC-XJp"/>
                         <outlet property="isVideoCallICONView" destination="by7-vx-8Ul" id="DWp-Vz-Y6w"/>
                         <outlet property="peerAccountLabel" destination="SMX-5o-nlt" id="KMe-gn-7MS"/>
                         <outlet property="remoteRenderView" destination="8I1-ov-q6l" id="jad-zL-000"/>
@@ -3987,6 +3990,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ps9-HW-4k5"/>
+        <segue reference="5y8-TJ-QOU"/>
     </inferredMetricsTieBreakers>
 </document>
