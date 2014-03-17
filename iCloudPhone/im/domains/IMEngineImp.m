@@ -299,11 +299,16 @@ static int localNetPortSuffix = 0;
 //#endif
             
             TVideoConfigInfo vieConfig;
-            vieConfig.height = 192;
+//            if (iPhone5) {
+//                vieConfig.height = 192;
+//            }else{
+//                vieConfig.height = 176;
+//            }
+            vieConfig.height = 176;
             vieConfig.width = 144;
             vieConfig.maxFramerate = 15;
-            vieConfig.startBitrate = 160;
-            vieConfig.maxBitrate = 360;
+            vieConfig.startBitrate = 80;
+            vieConfig.maxBitrate = 600;
             if (argc.islocal)
             {
                 NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);

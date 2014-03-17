@@ -265,6 +265,9 @@
 		BA9D481518A8BCE4001A78C8 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9D481418A8BCE4001A78C8 /* Store.m */; };
 		BAAEA49018726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
 		BAAEA49118726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
+		BABD8EFF18D4BB1B00FBE74A /* callingSound.aac in Resources */ = {isa = PBXBuildFile; fileRef = BABD8EFE18D4BB1B00FBE74A /* callingSound.aac */; };
+		BABD8F0118D5328500FBE74A /* sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BABD8F0018D5328500FBE74A /* sample.m4a */; };
+		BABD8F0318D5348200FBE74A /* calling.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BABD8F0218D5348200FBE74A /* calling.m4a */; };
 		BAC4A0DF187CE1E200BC856F /* ItelBookInterfaceImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */; };
 		BACD8282188C36DB0066F143 /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BACD8281188C36DB0066F143 /* area.sqlite */; };
 		BADA3C6D1890AEA10029CB61 /* IMManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA3C6C1890AEA10029CB61 /* IMManagerImp.m */; };
@@ -763,6 +766,9 @@
 		BAAEA48D187256CD00C05BCF /* IMDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManager.h; sourceTree = "<group>"; };
 		BAAEA48E18726DF200C05BCF /* IMRecentContactItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRecentContactItem.h; sourceTree = "<group>"; };
 		BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRecentContactItem.m; sourceTree = "<group>"; };
+		BABD8EFE18D4BB1B00FBE74A /* callingSound.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = callingSound.aac; sourceTree = "<group>"; };
+		BABD8F0018D5328500FBE74A /* sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.m4a; sourceTree = "<group>"; };
+		BABD8F0218D5348200FBE74A /* calling.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = calling.m4a; sourceTree = "<group>"; };
 		BAC4A0DD187CE1E200BC856F /* ItelBookInterfaceImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelBookInterfaceImp.h; sourceTree = "<group>"; };
 		BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelBookInterfaceImp.m; sourceTree = "<group>"; };
 		BACD8281188C36DB0066F143 /* area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = area.sqlite; sourceTree = "<group>"; };
@@ -1601,6 +1607,9 @@
 		47B89DDB1834D40000022FE5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BABD8F0218D5348200FBE74A /* calling.m4a */,
+				BABD8F0018D5328500FBE74A /* sample.m4a */,
+				BABD8EFE18D4BB1B00FBE74A /* callingSound.aac */,
 				BACD8281188C36DB0066F143 /* area.sqlite */,
 				478594AA185026FF00AFF6BF /* 预切片 */,
 				47B89DDC1834D40000022FE5 /* iCloudPhone-Info.plist */,
@@ -2092,13 +2101,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BABD8F0118D5328500FBE74A /* sample.m4a in Resources */,
 				4757D0551855C5F0001A9639 /* itel输入提示.png in Resources */,
 				BACD8282188C36DB0066F143 /* area.sqlite in Resources */,
 				BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */,
 				479DC49D183A544200C3F3F2 /* 广告.png in Resources */,
+				BABD8F0318D5348200FBE74A /* calling.m4a in Resources */,
 				478594C0185026FF00AFF6BF /* tab_bar.png in Resources */,
 				47A5F8B8186D650A00B8CEC8 /* Itel ICON-IOS.png in Resources */,
 				BA5485E118C8D1C4003B2716 /* NotificationButtonBackground.png in Resources */,
+				BABD8EFF18D4BB1B00FBE74A /* callingSound.aac in Resources */,
 				BA5485DB18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon.png in Resources */,
 				479E934C185AB7A3001AF6ED /* Login_iPhone.storyboard in Resources */,
 				BA5485D518C8D1C4003B2716 /* NotificationBackgroundErrorIcon.png in Resources */,
