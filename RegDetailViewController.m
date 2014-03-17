@@ -32,6 +32,9 @@
 @implementation RegDetailViewController
 static long currEditingTextTag=0;
 static float animatedDuration=1.0;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if (textField==self.txtItel) {
@@ -72,26 +75,30 @@ static float animatedDuration=1.0;
 -(UIView*)inputAccessoryView{
     if (_inputAccessoryView==nil) {
         _inputAccessoryView=[[UIView alloc]init];
-        _inputAccessoryView.bounds=CGRectMake(0, 0, 320, 44);
-        _inputAccessoryView.backgroundColor=[UIColor grayColor];
-        UIButton *foreward=[[UIButton alloc]initWithFrame:CGRectMake(106, 0, 109, 44)];
+        _inputAccessoryView.bounds=CGRectMake(0, 0, 320, 44.5);
+        _inputAccessoryView.backgroundColor=[UIColor whiteColor];
+        UIButton *foreward=[[UIButton alloc]initWithFrame:CGRectMake(106, 0, 109, 43)];
         [foreward setTitle:@"下一个" forState:UIControlStateNormal];
-        foreward.backgroundColor=[UIColor whiteColor];
+        [foreward setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_normal"] forState:UIControlStateNormal];
+        [foreward setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_high"] forState:UIControlStateHighlighted];
         [foreward addTarget:self action:@selector(chanegeToNextText) forControlEvents:UIControlEventTouchUpInside];
         [foreward setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_inputAccessoryView addSubview:foreward];
-        UIButton *backward=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 44)];
+        UIButton *backward=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 43)];
         [backward setTitle:@"上一个" forState:UIControlStateNormal];
         backward.backgroundColor=[UIColor whiteColor];
         [backward addTarget:self action:@selector(changeToLast) forControlEvents:UIControlEventTouchUpInside];
         [_inputAccessoryView addSubview:backward];
         [backward setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        UIButton *end=[[UIButton alloc]initWithFrame:CGRectMake(216, 0, 106, 44)];
+        UIButton *end=[[UIButton alloc]initWithFrame:CGRectMake(216, 0, 106, 43)];
         [end setTitle:@"结束" forState:UIControlStateNormal];
-        end.backgroundColor=[UIColor whiteColor];
+        [backward setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_normal"] forState:UIControlStateNormal];
+        [backward setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_high"] forState:UIControlStateHighlighted];
         [end addTarget:self action:@selector(returnKeyBoard) forControlEvents:UIControlEventTouchUpInside];
         [_inputAccessoryView addSubview:end];
-        [end setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [end setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [end setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_normal"] forState:UIControlStateNormal];
+        [end setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_high"] forState:UIControlStateHighlighted];
     }
     return _inputAccessoryView;
 }
@@ -184,7 +191,7 @@ static float animatedDuration=1.0;
     UIScrollView *scroll=self.scrollView;
     UIView *txt=[self.view viewWithTag:currEditingTextTag];
     float currTextY=txt.frame.origin.y;
-    [UIView animateKeyframesWithDuration:animatedDuration delay:0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
+      [UIView animateWithDuration:0.30 delay:0.2 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         if (keyBoardHeightDelta>0) {
             scroll.frame=CGRectMake(0, 0, scroll.bounds.size.width, scroll.bounds.size.height-keyBoardHeightDelta);
             scroll.contentSize=self.view.bounds.size;
@@ -281,7 +288,7 @@ static float animatedDuration=1.0;
     }
     
     if (![NXInputChecker checkPassword:self.txtPassword.text]) {
-        return @"密码格式不正确，请输入长度大于6位的密码";
+        return @"密码格式不正确，请输入长度大于6位小于20位的密码";
     }
     
     if (![self.txtPassword.text isEqualToString:self.txtRePassword.text]) {

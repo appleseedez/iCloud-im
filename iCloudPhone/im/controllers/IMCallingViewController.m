@@ -14,8 +14,9 @@
 #import "UIImageView+AFNetworking.h"
 #import "Area+toString.h"
 #import "NSCAppDelegate.h"
-static int soundCount;
-@interface IMCallingViewController ()
+//#import "CMOpenALSoundManager.h"
+//static int soundCount;
+@interface IMCallingViewController ()<AVAudioPlayerDelegate>
 @property(nonatomic) NSNotification* inSessionNotify;
 @property(nonatomic) NSNumber* currentMode;
 @property(nonatomic,weak) UIView* currentNameHUD;
@@ -26,6 +27,7 @@ static int soundCount;
 @property(nonatomic) BOOL hideCam; //标志是否关闭摄像头
 @property(nonatomic) BOOL enableSpeaker; //标志是否开启扬声器
 @property(nonatomic) MSWeakTimer* clock;
+@property(nonatomic) AVAudioPlayer* soudMgr;
 @end
 enum modes
 {
@@ -42,8 +44,26 @@ static void* modeIdentifier = (void*) &modeIdentifier;
         [self addObserver:self forKeyPath:@"currentMode" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:&modeIdentifier];
             hasObserver = 1;
         }
+        NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: [[NSBundle mainBundle] pathForResource:@"callingSound" ofType:@"m4a"]];
+        self.soudMgr = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+        if (self.soudMgr) {
+            self.soudMgr.numberOfLoops = -1;
+            self.soudMgr.delegate = self;
+        }
+        
+        [[AVAudioSession sharedInstance] setDelegate: self];
+        
+        NSError *setCategoryError = nil;
+        
+        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayAndRecord error: &setCategoryError];
+        if (setCategoryError) NSLog(@"Error setting category! %d", setCategoryError.code);
     }
     return self;
+}
+- (void)dealloc{
+    [self.soudMgr stop];
+    self.soudMgr.delegate = nil;
+    self.soudMgr = nil;
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -59,13 +79,9 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //开始拨号了。播放声音
-    soundCount = 0;//给拨号音计数，响八次就可以结束
-    //系统声音播放是一个异步过程。要循环播放则必须借助回调
-    AudioServicesAddSystemSoundCompletion(DIALING_SOUND_ID,NULL,NULL,soundPlayCallback,NULL);
-    AudioServicesPlaySystemSound(DIALING_SOUND_ID);
     self.PeerAvatarImageView.layer.cornerRadius = 10;
     self.PeerAvatarImageView.layer.masksToBounds = YES;
+    [self.soudMgr play];
 }
 - (void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -75,6 +91,23 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+
+- (void)audioPlayerBeginInterruption:(AVAudioPlayer *)p
+{
+	NSLog(@"Interruption begin. Updating UI for new state");
+    [p pause];
+}
+
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)p
+{
+	NSLog(@"Interruption ended. Resuming playback");
+    if ([self.currentMode intValue] == inSessionMode) {
+        [p stop];
+    }else{
+        [p play];
+    }
 }
 
 - (IBAction)cancelCalling:(UIButton *)sender {
@@ -118,9 +151,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     [self.cameraPreview setHidden:YES];
 }
 - (void) tearDown{
-    //终止拨号音
-    AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
-    AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
+    [self.soudMgr stop];
     [self removeNotifications];
 }
 -(void) registerNotifications{
@@ -138,15 +169,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
         hasObserver =0;
     }
 }
-//循环播放声音
-void soundPlayCallback(SystemSoundID soundId, void *clientData){
-    if (soundCount>9) {
-        AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
-        AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
-    }
-    soundCount++;
-    AudioServicesPlaySystemSound(DIALING_SOUND_ID);
-}
+
 
 - (void) sessionClosed:(NSNotification*) notify{
     [self tearDown];
@@ -182,6 +205,7 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
 
     [self.inSessionNameHUD setHidden:YES];
     [self.inSessionActionHUD setHidden:YES];
+    [self.inSessionVoiceActionHUD setHidden:YES];
     [self.callingNameHUD setHidden:NO];
     [self.callingActionHUD setHidden:NO];
     self.currentNameHUD = self.callingNameHUD;
@@ -192,9 +216,16 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
     [self.callingNameHUD setHidden:YES];
     [self.callingActionHUD setHidden:YES];
     [self.inSessionNameHUD setHidden:NO];
-    [self.inSessionActionHUD setHidden:NO];
+    if ([self.manager isVideoCall]) {
+        [self.inSessionActionHUD setHidden:NO];
+        [self.inSessionVoiceActionHUD setHidden:YES];
+        self.currentActionHUD = self.inSessionActionHUD;
+    }else{
+        [self.inSessionVoiceActionHUD setHidden:NO];
+        [self.inSessionActionHUD setHidden:YES];
+        self.currentActionHUD = self.inSessionVoiceActionHUD;
+    }
     self.currentNameHUD = self.inSessionNameHUD;
-    self.currentActionHUD = self.inSessionActionHUD;
     [self.switchCameraBtn setHidden:YES];
     
 }
@@ -227,6 +258,9 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
     [self.cameraPreview setHidden:NO];
 }
 - (void)intoSession:(NSNotification*) notify{
+    if ([self.soudMgr isPlaying]) {
+        [self.soudMgr pause];
+    }
     self.inSessionNotify = notify;
     self.currentMode = @(inSessionMode);
     if (0 == [self.manager openScreen:self.remoteRenderView] ) {
@@ -257,9 +291,7 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
     self.cameraPreview.layer.masksToBounds = YES;
 }
 - (void) setupInSessionState{
-    //终止拨号音
-    AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
-    AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
+
     //通话过程中,禁止锁屏
     [self.manager lockScreenForSession];
     //定时器用于显示通话时长

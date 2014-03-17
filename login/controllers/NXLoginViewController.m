@@ -264,12 +264,19 @@ static int loginCount=0;
     CGRect endRect=[[info objectForKey:UIKeyboardFrameEndUserInfoKey]CGRectValue];
     keyBoardHeightDelta=beginRect.origin.y-endRect.origin.y;
 
-    [UIView animateKeyframesWithDuration:0.30 delay:0.2 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
-        
+    [UIView animateWithDuration:0.30 delay:0.2 options:UIViewAnimationOptionLayoutSubviews animations:^{
         self.view.center=CGPointMake(self.view.center.x, self.view.center.y-keyBoardHeightDelta/2);
-            } completion:^(BOOL finished) {
+    } completion:^(BOOL finished) {
         
     }];
+    
+    
+//    [UIView animateKeyframesWithDuration:0.30 delay:0.2 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
+//        
+//        self.view.center=CGPointMake(self.view.center.x, self.view.center.y-keyBoardHeightDelta/2);
+//            } completion:^(BOOL finished) {
+//        
+//    }];
 
 }
 -(void)viewWillDisappear:(BOOL)animated{

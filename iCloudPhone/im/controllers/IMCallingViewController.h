@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIView *callingActionHUD; //拨号界面的操作按钮板
 @property (weak, nonatomic) IBOutlet UIView *inSessionNameHUD; //
 @property (weak, nonatomic) IBOutlet UIView *inSessionActionHUD;
+@property (weak, nonatomic) IBOutlet UIView *inSessionVoiceActionHUD; //音频控制,去掉摄像头和小窗口的空战按钮
 @property (weak, nonatomic) IBOutlet UIButton* switchCameraBtn;
 @property (weak, nonatomic) IBOutlet UIView* cameraPreview;
 @property (weak, nonatomic) IBOutlet UIImageView* isVideoIconView;

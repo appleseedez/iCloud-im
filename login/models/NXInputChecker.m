@@ -41,7 +41,9 @@
     if (passLength<6) {
         return NO;
     }
-    
+    if (passLength>20) {
+        return NO;
+    }
     
     return YES;
 }

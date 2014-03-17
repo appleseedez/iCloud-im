@@ -37,12 +37,23 @@
     }
     return _searchText;
 }
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y<=0) {
+        if (![self.searchBar isFirstResponder]) {
+            [self.searchBar becomeFirstResponder];
+        }
+        
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationController.delegate=self;
     self.searchBar.delegate = self;
-   	
+    NSLog(@"隐藏前%f",self.tableView.contentOffset.y);
+    [(UIScrollView*)self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, self.tableView.contentOffset.y+54)];
+   	NSLog(@"隐藏后%f",self.tableView.contentOffset.y);
 }
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     if (viewController!=self) {

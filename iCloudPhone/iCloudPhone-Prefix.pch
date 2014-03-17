@@ -16,6 +16,7 @@
     #import <ifaddrs.h>
     #import <arpa/inet.h>
     #import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
     #import <CoreData/CoreData.h>
     #import "NSData+Byte.h"
     #import "MSWeakTimer.h"

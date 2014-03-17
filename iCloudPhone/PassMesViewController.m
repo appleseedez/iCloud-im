@@ -136,9 +136,9 @@ static int waitingTime=60;
     }
     else{
         NSString *msg=[notification.userInfo objectForKey:@"reason"];
-        if (![msg intValue]) {
-            msg =@"请稍后重试";
-        }
+//        if (![msg intValue]) {
+//            msg =@"请稍后重试";
+//        }
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"短信验证失败" message:msg  delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
         [alert show];
     }
