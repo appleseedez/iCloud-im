@@ -265,10 +265,10 @@
 		BA9D481518A8BCE4001A78C8 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9D481418A8BCE4001A78C8 /* Store.m */; };
 		BAAEA49018726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
 		BAAEA49118726DF200C05BCF /* IMRecentContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */; };
-		BABD8EFF18D4BB1B00FBE74A /* callingSound.aac in Resources */ = {isa = PBXBuildFile; fileRef = BABD8EFE18D4BB1B00FBE74A /* callingSound.aac */; };
-		BABD8F0118D5328500FBE74A /* sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BABD8F0018D5328500FBE74A /* sample.m4a */; };
-		BABD8F0318D5348200FBE74A /* calling.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BABD8F0218D5348200FBE74A /* calling.m4a */; };
 		BAC4A0DF187CE1E200BC856F /* ItelBookInterfaceImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */; };
+		BACCBF0518D79BCA00215FA7 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BACCBF0418D79BCA00215FA7 /* OpenAL.framework */; };
+		BACCBF0C18D7B04D00215FA7 /* inComingSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BACCBF0A18D7B04D00215FA7 /* inComingSound.m4a */; };
+		BACCBF0D18D7B04D00215FA7 /* callingSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BACCBF0B18D7B04D00215FA7 /* callingSound.m4a */; };
 		BACD8282188C36DB0066F143 /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BACD8281188C36DB0066F143 /* area.sqlite */; };
 		BADA3C6D1890AEA10029CB61 /* IMManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA3C6C1890AEA10029CB61 /* IMManagerImp.m */; };
 		BADDFD2418768C4F00D10DDC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BADDFD2218768C4F00D10DDC /* Model.xcdatamodeld */; };
@@ -282,6 +282,17 @@
 		BAE9C912187C3AA900E41A9E /* Message+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C911187C3AA900E41A9E /* Message+CRUD.m */; };
 		BAE9C915187C415800E41A9E /* ItelUser+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE9C914187C415800E41A9E /* ItelUser+CRUD.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		BACCBF0318D79B7E00215FA7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		479EF0AD1859D9A50012EE29 /* PBXContainerItemProxy */ = {
@@ -766,11 +777,11 @@
 		BAAEA48D187256CD00C05BCF /* IMDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManager.h; sourceTree = "<group>"; };
 		BAAEA48E18726DF200C05BCF /* IMRecentContactItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRecentContactItem.h; sourceTree = "<group>"; };
 		BAAEA48F18726DF200C05BCF /* IMRecentContactItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRecentContactItem.m; sourceTree = "<group>"; };
-		BABD8EFE18D4BB1B00FBE74A /* callingSound.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = callingSound.aac; sourceTree = "<group>"; };
-		BABD8F0018D5328500FBE74A /* sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.m4a; sourceTree = "<group>"; };
-		BABD8F0218D5348200FBE74A /* calling.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = calling.m4a; sourceTree = "<group>"; };
 		BAC4A0DD187CE1E200BC856F /* ItelBookInterfaceImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelBookInterfaceImp.h; sourceTree = "<group>"; };
 		BAC4A0DE187CE1E200BC856F /* ItelBookInterfaceImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelBookInterfaceImp.m; sourceTree = "<group>"; };
+		BACCBF0418D79BCA00215FA7 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		BACCBF0A18D7B04D00215FA7 /* inComingSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = inComingSound.m4a; sourceTree = "<group>"; };
+		BACCBF0B18D7B04D00215FA7 /* callingSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = callingSound.m4a; sourceTree = "<group>"; };
 		BACD8281188C36DB0066F143 /* area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = area.sqlite; sourceTree = "<group>"; };
 		BADA3C6B1890AEA10029CB61 /* IMManagerImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMManagerImp.h; sourceTree = "<group>"; };
 		BADA3C6C1890AEA10029CB61 /* IMManagerImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMManagerImp.m; sourceTree = "<group>"; };
@@ -823,6 +834,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BACCBF0518D79BCA00215FA7 /* OpenAL.framework in Frameworks */,
 				BA5485C018C8C77B003B2716 /* libTSMessages.a in Frameworks */,
 				BADDFD6A1876915200D10DDC /* CoreData.framework in Frameworks */,
 				479EF0C81859DA1B0012EE29 /* libGCDSocket.a in Frameworks */,
@@ -1563,6 +1575,7 @@
 		47B89DD31834D40000022FE5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BACCBF0418D79BCA00215FA7 /* OpenAL.framework */,
 				BADDFD691876915200D10DDC /* CoreData.framework */,
 				47CDFEA3184ED17800673C2B /* Security.framework */,
 				47CDFEA1184ED17000673C2B /* CFNetwork.framework */,
@@ -1607,9 +1620,8 @@
 		47B89DDB1834D40000022FE5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BABD8F0218D5348200FBE74A /* calling.m4a */,
-				BABD8F0018D5328500FBE74A /* sample.m4a */,
-				BABD8EFE18D4BB1B00FBE74A /* callingSound.aac */,
+				BACCBF0A18D7B04D00215FA7 /* inComingSound.m4a */,
+				BACCBF0B18D7B04D00215FA7 /* callingSound.m4a */,
 				BACD8281188C36DB0066F143 /* area.sqlite */,
 				478594AA185026FF00AFF6BF /* 预切片 */,
 				47B89DDC1834D40000022FE5 /* iCloudPhone-Info.plist */,
@@ -1979,6 +1991,7 @@
 				47B89DCF1834D40000022FE5 /* Resources */,
 			);
 			buildRules = (
+				BACCBF0318D79B7E00215FA7 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -2101,16 +2114,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BABD8F0118D5328500FBE74A /* sample.m4a in Resources */,
 				4757D0551855C5F0001A9639 /* itel输入提示.png in Resources */,
 				BACD8282188C36DB0066F143 /* area.sqlite in Resources */,
 				BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */,
+				BACCBF0C18D7B04D00215FA7 /* inComingSound.m4a in Resources */,
 				479DC49D183A544200C3F3F2 /* 广告.png in Resources */,
-				BABD8F0318D5348200FBE74A /* calling.m4a in Resources */,
 				478594C0185026FF00AFF6BF /* tab_bar.png in Resources */,
 				47A5F8B8186D650A00B8CEC8 /* Itel ICON-IOS.png in Resources */,
 				BA5485E118C8D1C4003B2716 /* NotificationButtonBackground.png in Resources */,
-				BABD8EFF18D4BB1B00FBE74A /* callingSound.aac in Resources */,
 				BA5485DB18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon.png in Resources */,
 				479E934C185AB7A3001AF6ED /* Login_iPhone.storyboard in Resources */,
 				BA5485D518C8D1C4003B2716 /* NotificationBackgroundErrorIcon.png in Resources */,
@@ -2122,6 +2133,7 @@
 				BA5485D818C8D1C4003B2716 /* NotificationBackgroundMessage@2x.png in Resources */,
 				BA5485DE18C8D1C4003B2716 /* NotificationBackgroundWarning@2x.png in Resources */,
 				4757D0531855C083001A9639 /* 个人注册.png in Resources */,
+				BACCBF0D18D7B04D00215FA7 /* callingSound.m4a in Resources */,
 				BA5485D318C8D1C4003B2716 /* NotificationBackgroundError.png in Resources */,
 				BA5485E218C8D1C4003B2716 /* NotificationButtonBackground@2x.png in Resources */,
 				BA8242FC18758EA2001903CE /* jgb.m4a in Resources */,
@@ -2504,7 +2516,7 @@
 		479EF0BC1859D9A50012EE29 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTelPhone.app/iTelPhone";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2530,7 +2542,7 @@
 		479EF0BD1859D9A50012EE29 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTelPhone.app/iTelPhone";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2676,7 +2688,7 @@
 		47B89E071834D40000022FE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTelPhone.app/iTelPhone";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2698,7 +2710,7 @@
 		47B89E081834D40000022FE5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTelPhone.app/iTelPhone";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2748,7 +2760,7 @@
 		BA54859818C8C431003B2716 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTelPhone.app/iTelPhone";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2772,7 +2784,7 @@
 		BA54859918C8C431003B2716 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTel 2.0Test.app/iTel 2.0Test";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iTelPhone.app/iTelPhone";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
