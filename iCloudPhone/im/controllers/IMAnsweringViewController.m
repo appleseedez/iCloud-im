@@ -74,6 +74,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.soudMgr play];
+    AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
