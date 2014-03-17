@@ -27,7 +27,6 @@
 @property(nonatomic) BOOL hideCam; //标志是否关闭摄像头
 @property(nonatomic) BOOL enableSpeaker; //标志是否开启扬声器
 @property(nonatomic) MSWeakTimer* clock;
-//@property (nonatomic, strong) CMOpenALSoundManager *soundMgr;
 @property(nonatomic) AVAudioPlayer* soudMgr;
 @end
 enum modes
@@ -35,9 +34,6 @@ enum modes
     inCallingMode  = 0, //拨号中
     inSessionMode // 通话中
 };
-//enum mySoundIds {
-//	AUDIOEFFECT
-//};
 @implementation IMCallingViewController
 static int hasObserver = 0;
 static void* modeIdentifier = (void*) &modeIdentifier;
@@ -173,15 +169,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
         hasObserver =0;
     }
 }
-////循环播放声音
-//void soundPlayCallback(SystemSoundID soundId, void *clientData){
-//    if (soundCount>9) {
-//        AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
-//        AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
-//    }
-//    soundCount++;
-//    AudioServicesPlaySystemSound(DIALING_SOUND_ID);
-//}
+
 
 - (void) sessionClosed:(NSNotification*) notify{
     [self tearDown];
@@ -303,9 +291,6 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     self.cameraPreview.layer.masksToBounds = YES;
 }
 - (void) setupInSessionState{
-    //终止拨号音
-//    AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
-//    AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
 
     //通话过程中,禁止锁屏
     [self.manager lockScreenForSession];
