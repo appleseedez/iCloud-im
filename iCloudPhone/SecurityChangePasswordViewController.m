@@ -137,7 +137,8 @@ static float animatedDuration=1.0;
     UIScrollView *scroll=self.scrollView;
     UIView *txt=[self.view viewWithTag:currEditingTextTag];
     float currTextY=txt.frame.origin.y;
-    [UIView animateKeyframesWithDuration:animatedDuration delay:0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:0.30 delay:0.2 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+       
         if (keyBoardHeightDelta>0) {
             scroll.frame=CGRectMake(0, 0, scroll.bounds.size.width, scroll.bounds.size.height-keyBoardHeightDelta);
             scroll.contentSize=self.view.bounds.size;
@@ -206,10 +207,10 @@ static float animatedDuration=1.0;
 -(NSString*)checkInputFormat{
     
     if (![NXInputChecker checkPassword:self.txtOldPassword.text]) {
-        return @"密码格式不正确";
+        return @"密码格式不正确,请输入长度为6-20位的密码";
     }
     if (![NXInputChecker checkPassword:self.txtNewPassword.text]) {
-        return @"新密码格式不正确";
+        return @"新密码格式不正确,请输入长度为6-20位的密码";
     }
     if (![self.txtNewPassword.text isEqualToString:self.txtRepeatPassword.text]) {
         return @"两次输入密码不一致";

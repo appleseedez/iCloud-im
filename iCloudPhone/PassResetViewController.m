@@ -68,7 +68,7 @@
         
     }
     else if(![NXInputChecker checkPassword:self.txtPassword.text]){
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码失败" message:@"密码格式不正确" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"修改密码失败" message:@"密码格式不正确,请输入长度为6-20位的密码" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
         [alert show];
 
     }

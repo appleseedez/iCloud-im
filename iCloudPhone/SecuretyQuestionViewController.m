@@ -153,7 +153,7 @@ static float animatedDuration=1.0;
     UIScrollView *scroll=self.scrollView;
     UIView *txt=[self.view viewWithTag:currEditingTextTag];
     float currTextY=txt.frame.origin.y;
-    [UIView animateKeyframesWithDuration:animatedDuration delay:0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:0.30 delay:0.2 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         if (keyBoardHeightDelta>0) {
             scroll.frame=CGRectMake(0, 0, scroll.bounds.size.width, scroll.bounds.size.height-keyBoardHeightDelta);
             scroll.contentSize=self.view.bounds.size;

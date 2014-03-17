@@ -302,8 +302,8 @@ static int localNetPortSuffix = 0;
             vieConfig.height = 192;
             vieConfig.width = 144;
             vieConfig.maxFramerate = 15;
-            vieConfig.startBitrate = 160;
-            vieConfig.maxBitrate = 360;
+            vieConfig.startBitrate = 80;
+            vieConfig.maxBitrate =                        0;
             if (argc.islocal)
             {
                 NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
