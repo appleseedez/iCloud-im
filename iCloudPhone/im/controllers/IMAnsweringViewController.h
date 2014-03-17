@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *answeringActionHUD;
 @property (weak, nonatomic) IBOutlet UIView *inSessionNameHUD;
 @property (weak, nonatomic) IBOutlet UIView *inSessionActionHUD;
+@property (weak, nonatomic) IBOutlet UIView *inSessionVoiceActionHUD; //音频控制,去掉摄像头和小窗口的空战按钮
 @property (weak, nonatomic) IBOutlet UIView* cameraPreview;
 @property (weak, nonatomic) IBOutlet UIButton* switchCameraBtn;
 @property (weak, nonatomic) IBOutlet VideoRenderIosView *remoteRenderView;

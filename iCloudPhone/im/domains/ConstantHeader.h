@@ -199,4 +199,7 @@ enum emDataType
 #define STATUS_REFUSED @"refused"
 #define APPID @"836406972"
 
+
+#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
 #endif
