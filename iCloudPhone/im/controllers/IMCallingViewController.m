@@ -263,6 +263,10 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     }
     self.inSessionNotify = notify;
     self.currentMode = @(inSessionMode);
+    if (!isPad) {
+        CGFloat detaY = ([UIScreen mainScreen].bounds.size.height - 480)*.5;
+        self.remoteRenderView.frame = CGRectMake(0, detaY, 320, 480);
+    }
     if (0 == [self.manager openScreen:self.remoteRenderView] ) {
         [UIView animateWithDuration:.3 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
             [self resizePreviewInSession];
