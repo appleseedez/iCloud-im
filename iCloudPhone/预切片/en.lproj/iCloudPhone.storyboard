@@ -2826,10 +2826,11 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.92549026012420654" green="0.92549026012420654" blue="0.92549026012420654" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
-                                        <state key="normal" image="history_btn">
+                                        <state key="normal" image="closeDialPan">
                                             <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="selected" image="closeDialPan_hl"/>
                                         <connections>
                                             <action selector="buttonPress:" destination="CmA-yR-FtJ" eventType="touchDown" id="XVX-PY-5jk"/>
                                             <action selector="buttonReleaseOutSide:" destination="CmA-yR-FtJ" eventType="touchUpOutside" id="MBK-HC-wU7"/>
@@ -3959,13 +3960,14 @@
         <image name="backspace_press_btn" width="27" height="21"/>
         <image name="checkAddress.png" width="80" height="80"/>
         <image name="closeCamera_disable_btn" width="27" height="32"/>
+        <image name="closeDialPan" width="32" height="29"/>
+        <image name="closeDialPan_hl" width="32" height="29"/>
         <image name="close_self_window_disable_btn" width="30" height="30"/>
         <image name="commonSetting" width="24" height="24"/>
         <image name="detail_more_action_btn" width="24" height="20"/>
         <image name="dial_btn" width="25" height="27"/>
         <image name="expand_btn" width="12" height="11"/>
         <image name="hideSelfCam_btn" width="30" height="30"/>
-        <image name="history_btn" width="21" height="21"/>
         <image name="itel.png" width="251" height="120"/>
         <image name="itelCentre" width="24" height="24"/>
         <image name="itel_logo" width="64" height="64"/>
