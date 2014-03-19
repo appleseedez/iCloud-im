@@ -91,10 +91,10 @@ static BOOL firstOpenCam = YES;
     UIInterfaceOrientation displatyRotation = [[UIApplication sharedApplication] statusBarOrientation];
     NSInteger degrees = 0;
     switch (displatyRotation) {
-        case UIInterfaceOrientationPortrait: degrees = 0; break;
-        case UIInterfaceOrientationLandscapeLeft: degrees = 90; break;
-        case UIInterfaceOrientationPortraitUpsideDown: degrees = 180; break;
-        case UIInterfaceOrientationLandscapeRight: degrees = 270; break;
+        case UIInterfaceOrientationPortrait: degrees = 180; break;
+        case UIInterfaceOrientationLandscapeLeft: degrees = 270; break;
+        case UIInterfaceOrientationPortraitUpsideDown: degrees = 0; break;
+        case UIInterfaceOrientationLandscapeRight: degrees = 90; break;
     }
     
     NSInteger result = 0;

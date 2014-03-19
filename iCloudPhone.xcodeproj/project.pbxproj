@@ -22,6 +22,7 @@
 		4732A03018432AEF009AD32D /* ItelUserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732A02F18432AEF009AD32D /* ItelUserTest.m */; };
 		4732A03418432F61009AD32D /* NXInputChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813F41839E6490085224D /* NXInputChecker.m */; };
 		4734957A18458BEA00972FD9 /* StrangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4734957918458BEA00972FD9 /* StrangerViewController.m */; };
+		4735CBD118D97B9F0056D43D /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4735CBCF18D97B850056D43D /* libAVInterface.a */; };
 		473748CC1863D8C700F112AF /* HostQQCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 473748CB1863D8C700F112AF /* HostQQCell.m */; };
 		473748CF1863E5A500F112AF /* HostEditQQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473748CE1863E5A500F112AF /* HostEditQQViewController.m */; };
 		473F62D718386B04006CAE31 /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473F62D618386B04006CAE31 /* AddressBookViewController.m */; };
@@ -257,7 +258,6 @@
 		BA5485E218C8D1C4003B2716 /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485D218C8D1C4003B2716 /* NotificationButtonBackground@2x.png */; };
 		BA772EDA1875F02400CD8982 /* IMDBManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA772ED91875F02400CD8982 /* IMDBManagerImp.m */; };
 		BA8242FC18758EA2001903CE /* jgb.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BA8242FB18758EA2001903CE /* jgb.m4a */; };
-		BA8F235F185AA5E600DB043B /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8F235C185AA5E600DB043B /* libAVInterface.a */; };
 		BA959A9418605639009B8A4C /* MSWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA959A9318605639009B8A4C /* MSWeakTimer.m */; };
 		BA959A971860565C009B8A4C /* IMUDPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA959A961860565C009B8A4C /* IMUDPCommunicator.m */; };
 		BA959A981860565C009B8A4C /* IMUDPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA959A961860565C009B8A4C /* IMUDPCommunicator.m */; };
@@ -369,6 +369,7 @@
 		4732A02F18432AEF009AD32D /* ItelUserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUserTest.m; sourceTree = "<group>"; };
 		4734957818458BEA00972FD9 /* StrangerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrangerViewController.h; sourceTree = "<group>"; };
 		4734957918458BEA00972FD9 /* StrangerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrangerViewController.m; sourceTree = "<group>"; };
+		4735CBCF18D97B850056D43D /* libAVInterface.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAVInterface.a; sourceTree = "<group>"; };
 		473748CA1863D8C700F112AF /* HostQQCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostQQCell.h; sourceTree = "<group>"; };
 		473748CB1863D8C700F112AF /* HostQQCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostQQCell.m; sourceTree = "<group>"; };
 		473748CD1863E5A500F112AF /* HostEditQQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEditQQViewController.h; sourceTree = "<group>"; };
@@ -763,7 +764,6 @@
 		BA8242FB18758EA2001903CE /* jgb.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jgb.m4a; sourceTree = "<group>"; };
 		BA8F235A185AA5E600DB043B /* APITypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APITypes.h; sourceTree = "<group>"; };
 		BA8F235B185AA5E600DB043B /* AVInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVInterface.h; sourceTree = "<group>"; };
-		BA8F235C185AA5E600DB043B /* libAVInterface.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAVInterface.a; sourceTree = "<group>"; };
 		BA8F235D185AA5E600DB043B /* NatTypeImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatTypeImpl.h; sourceTree = "<group>"; };
 		BA8F235E185AA5E600DB043B /* video_render_ios_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video_render_ios_view.h; sourceTree = "<group>"; };
 		BA959A9218605639009B8A4C /* MSWeakTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWeakTimer.h; sourceTree = "<group>"; };
@@ -846,8 +846,8 @@
 				47CDFE9A184ED13600673C2B /* CoreVideo.framework in Frameworks */,
 				47CDFE98184ED12E00673C2B /* CoreMedia.framework in Frameworks */,
 				47CDFE96184ED12000673C2B /* libstdc++.6.0.9.dylib in Frameworks */,
+				4735CBD118D97B9F0056D43D /* libAVInterface.a in Frameworks */,
 				47CDFE94184ED10E00673C2B /* QuartzCore.framework in Frameworks */,
-				BA8F235F185AA5E600DB043B /* libAVInterface.a in Frameworks */,
 				47CDFE92184ED10500673C2B /* CoreImage.framework in Frameworks */,
 				47CDFE90184ED0F700673C2B /* AVFoundation.framework in Frameworks */,
 				4783A24918404AEF0046871C /* MessageUI.framework in Frameworks */,
@@ -1883,7 +1883,7 @@
 			children = (
 				BA8F235A185AA5E600DB043B /* APITypes.h */,
 				BA8F235B185AA5E600DB043B /* AVInterface.h */,
-				BA8F235C185AA5E600DB043B /* libAVInterface.a */,
+				4735CBCF18D97B850056D43D /* libAVInterface.a */,
 				BA8F235D185AA5E600DB043B /* NatTypeImpl.h */,
 				BA8F235E185AA5E600DB043B /* video_render_ios_view.h */,
 			);
@@ -2650,6 +2650,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./iCloudPhone/im/sdk,
+					"$(PROJECT_DIR)/iCloudPhone/im/sdk",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
@@ -2675,6 +2676,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./iCloudPhone/im/sdk,
+					"$(PROJECT_DIR)/iCloudPhone/im/sdk",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = iTelPhone;
@@ -2701,6 +2703,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "iCloudPhoneTests/iCloudPhoneTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iCloudPhone/im/sdk",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -2719,6 +2725,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCloudPhone/iCloudPhone-Prefix.pch";
 				INFOPLIST_FILE = "iCloudPhoneTests/iCloudPhoneTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iCloudPhone/im/sdk",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
