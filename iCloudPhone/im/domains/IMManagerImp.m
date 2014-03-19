@@ -275,7 +275,6 @@ static int endTime = 0;
     long receivedSSID = [[answeringData.userInfo valueForKey:@"srcssid"] longValue];
     long mySSID = [[[self myState] valueForKey:kMySSID] longValue];
     if (self.busy && receivedSSID == mySSID) {
-        [self.monitor invalidate];
 
         //停止主叫方的超时定时器
         [self.monitor invalidate];
@@ -792,6 +791,8 @@ static int endTime = 0;
 //被叫方接受了本次通话请求
 - (void) acceptSession:(NSNotification*) notify{
     [self assertState:basicStateAnswering];
+    [self.monitor invalidate];
+    self.monitor = nil;
     //获取p2p任务盒子
     [self restoreState];
     // 将收到的对方链路列表中的数据提取出来.
