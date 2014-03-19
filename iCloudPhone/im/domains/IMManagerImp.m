@@ -222,7 +222,12 @@ static int endTime = 0;
     //4. 通知界面弹起拨号中界面 信息从manager.state里面取状态 不再通过通知传递了 接收通知的结果就是主叫方会弹出正在拨号界面
     [[NSNotificationCenter defaultCenter] postNotificationName:PEER_FOUND_NOTIFICATION object:nil userInfo:nil];
 
-    
+    //开始通话计时
+    self.recentLog = @{
+                       kStatus:STATUS_CALLED,
+                       kPeerNumber:[notify.userInfo valueForKey:kDestAccount],
+                       kCreateDate:[NSDate date]
+                       };
     
 
 
@@ -321,7 +326,14 @@ static int endTime = 0;
                                    }];
         return;
     }
+    
+    self.recentLog = @{
+                       kStatus:STATUS_MISSED,
+                       kPeerNumber:[callingData.userInfo valueForKey:kDestAccount],
+                       kCreateDate:[NSDate date]
+                       };
     [self.monitor invalidate];
+    self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(missedPickup:) userInfo:callingData.userInfo repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_peer_pickup_queue", DISPATCH_QUEUE_CONCURRENT)];
     // 是否是
     //根据收到的usevideo和自身是否支持视频 设置自己是否有视频选项
     [self setIsVideoCall: [[callingData.userInfo valueForKey:kUseVideo] boolValue]&&self.canVideo];
@@ -355,11 +367,11 @@ static int endTime = 0;
         if ([kBusy isEqualToString:haltType]) {
             [self endSession];
         }else if ([kRefuseSession isEqualToString:haltType]){
-            self.recentLog = @{
-                               kStatus:STATUS_REFUSED,
-                               kPeerNumber:[peerHaltData.userInfo valueForKey:kDestAccount],
-                               kCreateDate:[NSDate date]
-                               };
+//            self.recentLog = @{
+//                               kStatus:STATUS_REFUSED,
+//                               kPeerNumber:[peerHaltData.userInfo valueForKey:kDestAccount],
+//                               kCreateDate:[NSDate date]
+//                               };
             
             [self endSession];
             [self saveCommnicationLog];
@@ -626,7 +638,6 @@ static int endTime = 0;
 }
 //在通话session结束时,停止通话计时.保存.
 - (void) saveCommnicationLog{
-    //如果recentLog为空,则不需要记录.因为只有在通信通道(p2p通道/转发通道)建立后才会有recentLog
     if (![self.recentLog valueForKey:kPeerNumber]) {
         return;
     }
@@ -949,12 +960,12 @@ static int endTime = 0;
     //进入通话状态
     self.basicState = @(basicStateInSession);
     [self.engine startTransport];
-    //开始通话计时
-    self.recentLog = @{
-                       kStatus:STATUS_CALLED,
-                       kPeerNumber:[notify.userInfo valueForKey:kDestAccount],
-                       kCreateDate:[NSDate date]
-                       };
+//    //开始通话计时
+//    self.recentLog = @{
+//                       kStatus:STATUS_CALLED,
+//                       kPeerNumber:[notify.userInfo valueForKey:kDestAccount],
+//                       kCreateDate:[NSDate date]
+//                       };
 #if OTHER_MESSAGE
     NSLog(@"the log to be saved : %@",self.recentLog);
 #endif
@@ -1034,12 +1045,9 @@ static int endTime = 0;
     [self.monitor invalidate];
     self.monitor = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
-#if usertip
         [TSMessage showNotificationWithTitle:nil
                                     subtitle:NSLocalizedString(@"无人接听", nil)
                                         type:TSMessageNotificationTypeMessage];
-//            [[IMTipImp defaultTip] showTip:@"无人接听"];
-#endif
         //发送终止信令
         [self haltSession:@{
                             kSrcAccount:[self myAccount],
@@ -1047,8 +1055,25 @@ static int endTime = 0;
                             kHaltType:kEndSession
                             }];
     });
-
-    
+}
+- (void) missedPickup:(NSNotification*) notify{
+    //停止定时器
+    [self.monitor invalidate];
+    self.monitor = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //开始通话计时
+        self.recentLog = @{
+                           kStatus:STATUS_MISSED,
+                           kPeerNumber:[notify.userInfo valueForKey:kDestAccount],
+                           kCreateDate:[NSDate date]
+                           };
+        //发送终止信令
+        [self haltSession:@{
+                            kSrcAccount:[self myAccount],
+                            kDestAccount:[self.state valueForKey:kPeerAccount],
+                            kHaltType:kEndSession
+                            }];
+    });
 }
 - (void) noConnection:(NSNotification*) notify{
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"网络异常", nil)

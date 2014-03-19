@@ -330,8 +330,13 @@ static int localNetPortSuffix = 0;
             else
             {
                 NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
-                [[NSNotificationCenter defaultCenter] postNotificationName:CLOSE_REMOTE_VIEW_FOR_RELAY_TRANSPORT object:nil];
-                ret = self.pInterfaceApi->StartVoeMedia(argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
+                if (self.canVideoCalling) {
+                    ret = self.pInterfaceApi->StartVieMedia(argc.otherForwardIP, argc.otherForwardPort,vieConfig);// 要判断返回值
+                }else{
+                    ret = self.pInterfaceApi->StartVoeMedia(argc.otherForwardIP, argc.otherForwardPort);
+                }
+//                [[NSNotificationCenter defaultCenter] postNotificationName:CLOSE_REMOTE_VIEW_FOR_RELAY_TRANSPORT object:nil];
+//                ret = self.pInterfaceApi->StartVoeMedia(argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
             }
             if (!ret)
             {
