@@ -99,6 +99,12 @@ static int hasObserver = 0;
                                     subtitle:NSLocalizedString(@"对方不在线,请稍后重试", nil)
                                         type:TSMessageNotificationTypeWarning];
 #endif
+        //发送终止信令
+        [self haltSession:@{
+                            kSrcAccount:[self myAccount],
+                            kDestAccount:[self.state valueForKey:kPeerAccount],
+                            kHaltType:kEndSession
+                            }];
     });
 }
 /**
