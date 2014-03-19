@@ -32,32 +32,6 @@
 // For more information see: https://github.com/robbiehanson/CocoaAsyncSocket/wiki/ARC
 #endif
 
-/**
- * Does ARC support support GCD objects?
- * It does if the minimum deployment target is iOS 6+ or Mac OS X 10.8+
-**/
-#if TARGET_OS_IPHONE
-
-  // Compiling for iOS
-
-  #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000 // iOS 6.0 or later
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
-  #else                                         // iOS 5.X or earlier
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 1
-  #endif
-
-#else
-
-  // Compiling for Mac OS X
-
-  #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080     // Mac OS X 10.8 or later
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
-  #else
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 1     // Mac OS X 10.7 or earlier
-  #endif
-
-#endif
-
 
 #if 0
 
@@ -411,7 +385,7 @@ enum GCDAsyncSocketConfig
 
 - (void)ensureCapacityForWrite:(size_t)numBytes
 {
-	size_t availableSpace = preBufferSize - (writePointer - readPointer);
+	size_t availableSpace = [self availableSpace];
 	
 	if (numBytes > availableSpace)
 	{
@@ -444,7 +418,7 @@ enum GCDAsyncSocketConfig
 - (void)getReadBuffer:(uint8_t **)bufferPtr availableBytes:(size_t *)availableBytesPtr
 {
 	if (bufferPtr) *bufferPtr = readPointer;
-	if (availableBytesPtr) *availableBytesPtr = writePointer - readPointer;
+	if (availableBytesPtr) *availableBytesPtr = [self availableBytes];
 }
 
 - (void)didRead:(size_t)bytesRead
@@ -461,7 +435,7 @@ enum GCDAsyncSocketConfig
 
 - (size_t)availableSpace
 {
-	return preBufferSize - (writePointer - readPointer);
+	return preBufferSize - (writePointer - preBuffer);
 }
 
 - (uint8_t *)writeBuffer
@@ -472,7 +446,7 @@ enum GCDAsyncSocketConfig
 - (void)getWriteBuffer:(uint8_t **)bufferPtr availableSpace:(size_t *)availableSpacePtr
 {
 	if (bufferPtr) *bufferPtr = writePointer;
-	if (availableSpacePtr) *availableSpacePtr = preBufferSize - (writePointer - readPointer);
+	if (availableSpacePtr) *availableSpacePtr = [self availableSpace];
 }
 
 - (void)didWrite:(size_t)bytesWritten
@@ -1051,7 +1025,7 @@ enum GCDAsyncSocketConfig
 		delegate = aDelegate;
 		delegateQueue = dq;
 		
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		if (dq) dispatch_retain(dq);
 		#endif
 		
@@ -1069,7 +1043,7 @@ enum GCDAsyncSocketConfig
 			         @"The given socketQueue parameter must not be a concurrent queue.");
 			
 			socketQueue = sq;
-			#if NEEDS_DISPATCH_RETAIN_RELEASE
+			#if !OS_OBJECT_USE_OBJC
 			dispatch_retain(sq);
 			#endif
 		}
@@ -1128,12 +1102,12 @@ enum GCDAsyncSocketConfig
 	
 	delegate = nil;
 	
-	#if NEEDS_DISPATCH_RETAIN_RELEASE
+	#if !OS_OBJECT_USE_OBJC
 	if (delegateQueue) dispatch_release(delegateQueue);
 	#endif
 	delegateQueue = NULL;
 	
-	#if NEEDS_DISPATCH_RETAIN_RELEASE
+	#if !OS_OBJECT_USE_OBJC
 	if (socketQueue) dispatch_release(socketQueue);
 	#endif
 	socketQueue = NULL;
@@ -1212,7 +1186,7 @@ enum GCDAsyncSocketConfig
 {
 	dispatch_block_t block = ^{
 		
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		if (delegateQueue) dispatch_release(delegateQueue);
 		if (newDelegateQueue) dispatch_retain(newDelegateQueue);
 		#endif
@@ -1269,7 +1243,7 @@ enum GCDAsyncSocketConfig
 		
 		delegate = newDelegate;
 		
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		if (delegateQueue) dispatch_release(delegateQueue);
 		if (newDelegateQueue) dispatch_retain(newDelegateQueue);
 		#endif
@@ -1675,7 +1649,7 @@ enum GCDAsyncSocketConfig
 			
 			dispatch_source_set_cancel_handler(accept4Source, ^{
 				
-				#if NEEDS_DISPATCH_RETAIN_RELEASE
+				#if !OS_OBJECT_USE_OBJC
 				LogVerbose(@"dispatch_release(accept4Source)");
 				dispatch_release(acceptSource);
 				#endif
@@ -1709,7 +1683,7 @@ enum GCDAsyncSocketConfig
 			
 			dispatch_source_set_cancel_handler(accept6Source, ^{
 				
-				#if NEEDS_DISPATCH_RETAIN_RELEASE
+				#if !OS_OBJECT_USE_OBJC
 				LogVerbose(@"dispatch_release(accept6Source)");
 				dispatch_release(acceptSource);
 				#endif
@@ -1846,7 +1820,7 @@ enum GCDAsyncSocketConfig
 			}
 			
 			// Release the socket queue returned from the delegate (it was retained by acceptedSocket)
-			#if NEEDS_DISPATCH_RETAIN_RELEASE
+			#if !OS_OBJECT_USE_OBJC
 			if (childSocketQueue) dispatch_release(childSocketQueue);
 			#endif
 			
@@ -2524,11 +2498,11 @@ enum GCDAsyncSocketConfig
 	NSString *host = [self connectedHost];
 	uint16_t port = [self connectedPort];
 	
-	if (delegateQueue && [delegate respondsToSelector:@selector(socket:didConnectToHost:port:)])
+	__strong id theDelegate = delegate;
+
+	if (delegateQueue && [theDelegate respondsToSelector:@selector(socket:didConnectToHost:port:)])
 	{
 		SetupStreamsPart1();
-		
-		__strong id theDelegate = delegate;
 		
 		dispatch_async(delegateQueue, ^{ @autoreleasepool {
 			
@@ -2601,7 +2575,7 @@ enum GCDAsyncSocketConfig
 			[self doConnectTimeout];
 		}});
 		
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		dispatch_source_t theConnectTimer = connectTimer;
 		dispatch_source_set_cancel_handler(connectTimer, ^{
 			LogVerbose(@"dispatch_release(connectTimer)");
@@ -2609,7 +2583,7 @@ enum GCDAsyncSocketConfig
 		});
 		#endif
 		
-		dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (timeout * NSEC_PER_SEC));
+		dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC));
 		dispatch_source_set_timer(connectTimer, tt, DISPATCH_TIME_FOREVER, 0);
 		
 		dispatch_resume(connectTimer);
@@ -2800,10 +2774,10 @@ enum GCDAsyncSocketConfig
 	
 	if (shouldCallDelegate)
 	{
-		if (delegateQueue && [delegate respondsToSelector: @selector(socketDidDisconnect:withError:)])
+		__strong id theDelegate = delegate;
+
+		if (delegateQueue && [theDelegate respondsToSelector: @selector(socketDidDisconnect:withError:)])
 		{
-			__strong id theDelegate = delegate;
-			
 			dispatch_async(delegateQueue, ^{ @autoreleasepool {
 				
 				[theDelegate socketDidDisconnect:self withError:error];
@@ -3668,7 +3642,7 @@ enum GCDAsyncSocketConfig
 	
 	__block int socketFDRefCount = 2;
 	
-	#if NEEDS_DISPATCH_RETAIN_RELEASE
+	#if !OS_OBJECT_USE_OBJC
 	dispatch_source_t theReadSource = readSource;
 	dispatch_source_t theWriteSource = writeSource;
 	#endif
@@ -3677,7 +3651,7 @@ enum GCDAsyncSocketConfig
 		
 		LogVerbose(@"readCancelBlock");
 		
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		LogVerbose(@"dispatch_release(readSource)");
 		dispatch_release(theReadSource);
 		#endif
@@ -3693,7 +3667,7 @@ enum GCDAsyncSocketConfig
 		
 		LogVerbose(@"writeCancelBlock");
 		
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		LogVerbose(@"dispatch_release(writeSource)");
 		dispatch_release(theWriteSource);
 		#endif
@@ -4244,8 +4218,8 @@ enum GCDAsyncSocketConfig
 		return;
 	}
 	
-	BOOL hasBytesAvailable;
-	unsigned long estimatedBytesAvailable;
+	BOOL hasBytesAvailable = NO;
+	unsigned long estimatedBytesAvailable = 0;
 	
 	if ([self usingCFStreamForTLS])
 	{
@@ -4263,9 +4237,9 @@ enum GCDAsyncSocketConfig
 	}
 	else
 	{
-		#if SECURE_TRANSPORT_MAYBE_AVAILABLE
-		
 		estimatedBytesAvailable = socketFDBytesAvailable;
+		
+		#if SECURE_TRANSPORT_MAYBE_AVAILABLE
 		
 		if (flags & kSocketSecure)
 		{
@@ -4303,9 +4277,9 @@ enum GCDAsyncSocketConfig
 			estimatedBytesAvailable += sslInternalBufSize;
 		}
 		
-		hasBytesAvailable = (estimatedBytesAvailable > 0);
-		
 		#endif
+		
+		hasBytesAvailable = (estimatedBytesAvailable > 0);
 	}
 	
 	if ((hasBytesAvailable == NO) && ([preBuffer availableBytes] == 0))
@@ -4583,7 +4557,7 @@ enum GCDAsyncSocketConfig
 					size_t loop_bytesRead = 0;
 					
 					result = SSLRead(sslContext, loop_buffer, loop_bytesToRead, &loop_bytesRead);
-					LogVerbose(@"read from secure socket = %u", (unsigned)bytesRead);
+					LogVerbose(@"read from secure socket = %u", (unsigned)loop_bytesRead);
 					
 					bytesRead += loop_bytesRead;
 					
@@ -4858,10 +4832,11 @@ enum GCDAsyncSocketConfig
 	else if (totalBytesReadForCurrentRead > 0)
 	{
 		// We're not done read type #2 or #3 yet, but we have read in some bytes
+
+		__strong id theDelegate = delegate;
 		
-		if (delegateQueue && [delegate respondsToSelector:@selector(socket:didReadPartialDataOfLength:tag:)])
+		if (delegateQueue && [theDelegate respondsToSelector:@selector(socket:didReadPartialDataOfLength:tag:)])
 		{
-			__strong id theDelegate = delegate;
 			long theReadTag = currentRead->tag;
 			
 			dispatch_async(delegateQueue, ^{ @autoreleasepool {
@@ -4910,7 +4885,7 @@ enum GCDAsyncSocketConfig
 		[self flushSSLBuffers];
 	}
 	
-	BOOL shouldDisconnect;
+	BOOL shouldDisconnect = NO;
 	NSError *error = nil;
 	
 	if ((flags & kStartingReadTLS) || (flags & kStartingWriteTLS))
@@ -4974,10 +4949,10 @@ enum GCDAsyncSocketConfig
 			
 			// Notify the delegate that we're going half-duplex
 			
-			if (delegateQueue && [delegate respondsToSelector:@selector(socketDidCloseReadStream:)])
+			__strong id theDelegate = delegate;
+
+			if (delegateQueue && [theDelegate respondsToSelector:@selector(socketDidCloseReadStream:)])
 			{
-				__strong id theDelegate = delegate;
-				
 				dispatch_async(delegateQueue, ^{ @autoreleasepool {
 					
 					[theDelegate socketDidCloseReadStream:self];
@@ -4999,23 +4974,25 @@ enum GCDAsyncSocketConfig
 	{
 		if (error == nil)
 		{
-			if ([self usingSecureTransportForTLS])
-			{
-				#if SECURE_TRANSPORT_MAYBE_AVAILABLE
-				if (sslErrCode != noErr && sslErrCode != errSSLClosedGraceful)
+			#if SECURE_TRANSPORT_MAYBE_AVAILABLE
+				if ([self usingSecureTransportForTLS])
 				{
-					error = [self sslError:sslErrCode];
+					if (sslErrCode != noErr && sslErrCode != errSSLClosedGraceful)
+					{
+						error = [self sslError:sslErrCode];
+					}
+					else
+					{
+						error = [self connectionClosedError];
+					}
 				}
 				else
 				{
 					error = [self connectionClosedError];
 				}
-				#endif
-			}
-			else
-			{
-				error = [self connectionClosedError];
-			}
+			#else
+					error = [self connectionClosedError];
+			#endif
 		}
 		[self closeWithError:error];
 	}
@@ -5037,7 +5014,7 @@ enum GCDAsyncSocketConfig
 	NSAssert(currentRead, @"Trying to complete current read when there is no current read.");
 	
 	
-	NSData *result;
+	NSData *result = nil;
 	
 	if (currentRead->bufferOwner)
 	{
@@ -5068,9 +5045,10 @@ enum GCDAsyncSocketConfig
 		result = [NSData dataWithBytesNoCopy:buffer length:currentRead->bytesDone freeWhenDone:NO];
 	}
 	
-	if (delegateQueue && [delegate respondsToSelector:@selector(socket:didReadData:withTag:)])
+	__strong id theDelegate = delegate;
+
+	if (delegateQueue && [theDelegate respondsToSelector:@selector(socket:didReadData:withTag:)])
 	{
-		__strong id theDelegate = delegate;
 		GCDAsyncReadPacket *theRead = currentRead; // Ensure currentRead retained since result may not own buffer
 		
 		dispatch_async(delegateQueue, ^{ @autoreleasepool {
@@ -5104,7 +5082,7 @@ enum GCDAsyncSocketConfig
 			[self doReadTimeout];
 		}});
 		
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		dispatch_source_t theReadTimer = readTimer;
 		dispatch_source_set_cancel_handler(readTimer, ^{
 			LogVerbose(@"dispatch_release(readTimer)");
@@ -5112,7 +5090,7 @@ enum GCDAsyncSocketConfig
 		});
 		#endif
 		
-		dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (timeout * NSEC_PER_SEC));
+		dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC));
 		
 		dispatch_source_set_timer(readTimer, tt, DISPATCH_TIME_FOREVER, 0);
 		dispatch_resume(readTimer);
@@ -5128,9 +5106,10 @@ enum GCDAsyncSocketConfig
 	
 	flags |= kReadsPaused;
 	
-	if (delegateQueue && [delegate respondsToSelector:@selector(socket:shouldTimeoutReadWithTag:elapsed:bytesDone:)])
+	__strong id theDelegate = delegate;
+
+	if (delegateQueue && [theDelegate respondsToSelector:@selector(socket:shouldTimeoutReadWithTag:elapsed:bytesDone:)])
 	{
-		__strong id theDelegate = delegate;
 		GCDAsyncReadPacket *theRead = currentRead;
 		
 		dispatch_async(delegateQueue, ^{ @autoreleasepool {
@@ -5162,7 +5141,7 @@ enum GCDAsyncSocketConfig
 			currentRead->timeout += timeoutExtension;
 			
 			// Reschedule the timer
-			dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (timeoutExtension * NSEC_PER_SEC));
+			dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeoutExtension * NSEC_PER_SEC));
 			dispatch_source_set_timer(readTimer, tt, DISPATCH_TIME_FOREVER, 0);
 			
 			// Unpause reads, and continue
@@ -5532,7 +5511,8 @@ enum GCDAsyncSocketConfig
 				BOOL keepLooping = YES;
 				while (keepLooping)
 				{
-					size_t sslBytesToWrite = MIN(bytesRemaining, 32768);
+					const size_t sslMaxBytesToWrite = 32768;
+					size_t sslBytesToWrite = MIN(bytesRemaining, sslMaxBytesToWrite);
 					size_t sslBytesWritten = 0;
 					
 					result = SSLWrite(sslContext, buffer, sslBytesToWrite, &sslBytesWritten);
@@ -5652,7 +5632,7 @@ enum GCDAsyncSocketConfig
 		// We were unable to finish writing the data,
 		// so we're waiting for another callback to notify us of available space in the lower-level output buffer.
 		
-		if (!waiting & !error)
+		if (!waiting && !error)
 		{
 			// This would be the case if our write was able to accept some data, but not all of it.
 			
@@ -5668,9 +5648,10 @@ enum GCDAsyncSocketConfig
 		{
 			// We're not done with the entire write, but we have written some bytes
 			
-			if (delegateQueue && [delegate respondsToSelector:@selector(socket:didWritePartialDataOfLength:tag:)])
+			__strong id theDelegate = delegate;
+
+			if (delegateQueue && [theDelegate respondsToSelector:@selector(socket:didWritePartialDataOfLength:tag:)])
 			{
-				__strong id theDelegate = delegate;
 				long theWriteTag = currentWrite->tag;
 				
 				dispatch_async(delegateQueue, ^{ @autoreleasepool {
@@ -5697,10 +5678,11 @@ enum GCDAsyncSocketConfig
 	
 	NSAssert(currentWrite, @"Trying to complete current write when there is no current write.");
 	
+
+	__strong id theDelegate = delegate;
 	
-	if (delegateQueue && [delegate respondsToSelector:@selector(socket:didWriteDataWithTag:)])
+	if (delegateQueue && [theDelegate respondsToSelector:@selector(socket:didWriteDataWithTag:)])
 	{
-		__strong id theDelegate = delegate;
 		long theWriteTag = currentWrite->tag;
 		
 		dispatch_async(delegateQueue, ^{ @autoreleasepool {
@@ -5734,7 +5716,7 @@ enum GCDAsyncSocketConfig
 			[self doWriteTimeout];
 		}});
 		
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		dispatch_source_t theWriteTimer = writeTimer;
 		dispatch_source_set_cancel_handler(writeTimer, ^{
 			LogVerbose(@"dispatch_release(writeTimer)");
@@ -5742,7 +5724,7 @@ enum GCDAsyncSocketConfig
 		});
 		#endif
 		
-		dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (timeout * NSEC_PER_SEC));
+		dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC));
 		
 		dispatch_source_set_timer(writeTimer, tt, DISPATCH_TIME_FOREVER, 0);
 		dispatch_resume(writeTimer);
@@ -5758,9 +5740,10 @@ enum GCDAsyncSocketConfig
 	
 	flags |= kWritesPaused;
 	
-	if (delegateQueue && [delegate respondsToSelector:@selector(socket:shouldTimeoutWriteWithTag:elapsed:bytesDone:)])
+	__strong id theDelegate = delegate;
+
+	if (delegateQueue && [theDelegate respondsToSelector:@selector(socket:shouldTimeoutWriteWithTag:elapsed:bytesDone:)])
 	{
-		__strong id theDelegate = delegate;
 		GCDAsyncWritePacket *theWrite = currentWrite;
 		
 		dispatch_async(delegateQueue, ^{ @autoreleasepool {
@@ -5792,7 +5775,7 @@ enum GCDAsyncSocketConfig
 			currentWrite->timeout += timeoutExtension;
 			
 			// Reschedule the timer
-			dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (timeoutExtension * NSEC_PER_SEC));
+			dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeoutExtension * NSEC_PER_SEC));
 			dispatch_source_set_timer(writeTimer, tt, DISPATCH_TIME_FOREVER, 0);
 			
 			// Unpause writes, and continue
@@ -6537,10 +6520,10 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		
 		flags |=  kSocketSecure;
 		
-		if (delegateQueue && [delegate respondsToSelector:@selector(socketDidSecure:)])
+		__strong id theDelegate = delegate;
+
+		if (delegateQueue && [theDelegate respondsToSelector:@selector(socketDidSecure:)])
 		{
-			__strong id theDelegate = delegate;
-			
 			dispatch_async(delegateQueue, ^{ @autoreleasepool {
 				
 				[theDelegate socketDidSecure:self];
@@ -6586,10 +6569,10 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		
 		flags |= kSocketSecure;
 		
-		if (delegateQueue && [delegate respondsToSelector:@selector(socketDidSecure:)])
+		__strong id theDelegate = delegate;
+
+		if (delegateQueue && [theDelegate respondsToSelector:@selector(socketDidSecure:)])
 		{
-			__strong id theDelegate = delegate;
-		
 			dispatch_async(delegateQueue, ^{ @autoreleasepool {
 				
 				[theDelegate socketDidSecure:self];
@@ -6712,6 +6695,9 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 
 #if TARGET_OS_IPHONE
 
++ (void)ignore:(id)_
+{}
+
 + (void)startCFStreamThreadIfNeeded
 {
 	static dispatch_once_t predicate;
@@ -6723,9 +6709,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		[cfstreamThread start];
 	});
 }
-- (void) doNothingAtAll:(NSNotification*) notify{
-    
-}
+
 + (void)cfstreamThread { @autoreleasepool
 {
 	[[NSThread currentThread] setName:GCDAsyncSocketThreadName];
@@ -6736,7 +6720,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	// So we'll just create a timer that will never fire - unless the server runs for decades.
 	[NSTimer scheduledTimerWithTimeInterval:[[NSDate distantFuture] timeIntervalSinceNow]
 	                                 target:self
-	                               selector:@selector(doNothingAtAll:)
+	                               selector:@selector(ignore:)
 	                               userInfo:nil
 	                                repeats:YES];
 	
