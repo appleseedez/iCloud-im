@@ -21,6 +21,8 @@
 @property(nonatomic) UIView *addView;
 @property(nonatomic) UIView *addFailureView;
 @property(nonatomic) NSMutableArray* currentSuggestDataSource; //用于接收近似的itel号码
+@property (nonatomic) UIButton *backButton;
+@property (nonatomic) UILongPressGestureRecognizer *backRecognizer;
 @end
 
 @implementation IMDailViewController
@@ -84,6 +86,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIButton *btnBack=[[UIButton alloc] init];
+    btnBack.frame=CGRectMake(10, 39, 40, 40);
+    btnBack.backgroundColor=[UIColor clearColor];
+    [btnBack setBackgroundImage:[UIImage imageNamed:@"dial_back_button_normal"] forState:UIControlStateNormal];
+    [btnBack setBackgroundImage:[UIImage imageNamed:@"dial_back_button_high"] forState:UIControlStateHighlighted];
+    [btnBack addTarget:self.manager action:@selector(dismissDialRelatedPanel) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnBack];
+    self.backButton=btnBack;
+    
+    UILongPressGestureRecognizer *backLongPress=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+    backLongPress.allowableMovement=50.0;
+    [self.backspaceButton addGestureRecognizer:backLongPress];
+    self.backRecognizer=backLongPress;
     self.touchToneMap = @{
                           @"0":[NSNumber numberWithInt:1200],
                           @"1":[NSNumber numberWithInt:1201],
@@ -115,6 +130,14 @@
     [self setup];
 
 }
+
+-(void)longPress:(UIButton*)sender{
+    self.peerAccount.text=@"0";
+
+    
+    [self backspace:sender];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addUserResponse:) name:@"inviteItelUser" object:nil];
@@ -257,9 +280,11 @@
 
     if ([self.peerAccount.text length] > 0) {
         self.backspaceButton.hidden = NO;
+        self.backButton.hidden=YES;
         self.dialBackGroundView.backgroundColor = [UIColor colorWithRed:0.267 green:0.643 blue:0.859 alpha:1];
     }else{
         self.backspaceButton.hidden = YES;
+        self.backButton.hidden=NO;
     }
     // 从itelAction接口查询出符合条件的itelUser
     self.currentSuggestDataSource =  [[[ItelAction action] searchInFirendBook:self.peerAccount.text] mutableCopy];
@@ -307,6 +332,8 @@
     NSInteger length = [self.peerAccount.text length];
     if (length == 1) {
         self.backspaceButton.hidden = YES;
+        self.backButton.hidden=NO;
+        
         self.dialBackGroundView.backgroundColor = [UIColor whiteColor];
         if (self.showSuggest) {
             [UIView animateWithDuration:.1 delay:.1 options:UIViewAnimationCurveEaseInOut animations:^{
@@ -324,11 +351,15 @@
         }
         
     }
+    if (length>=1 ) {
+        
+    
     NSString* temp = [self.peerAccount.text substringToIndex:length-1];
     self.peerAccount.text = temp;
     // 从itelAction接口查询出符合条件的itelUser
     self.currentSuggestDataSource =  [[[ItelAction action] searchInFirendBook:self.peerAccount.text] mutableCopy];
     [self setupSuggestView];
+    }
 }
 
 - (IBAction)showRecentContactList:(UIButton *)sender {
