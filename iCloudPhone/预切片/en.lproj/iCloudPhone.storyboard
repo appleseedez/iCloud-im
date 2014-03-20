@@ -232,7 +232,7 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="联系人" id="TjG-fK-WLj">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="T3z-0G-rBH">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="T3z-0G-rBH">
                             <connections>
                                 <segue destination="qBE-kF-5X4" kind="push" id="WIQ-3M-s5v"/>
                             </connections>
@@ -244,7 +244,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rt0-qi-mLA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29" y="320"/>
+            <point key="canvasLocation" x="-478" y="180"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="cdK-R4-Rky">
