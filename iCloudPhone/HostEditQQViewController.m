@@ -34,10 +34,14 @@
     self.QQText.text=[[ItelAction action]getHost].qq ;
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (range.location>=13) {
+    if (string.length>0) {
+        
+    
+        if (textField.text.length+string.length>13) {
         return NO;
+        }
     }
-    else return YES;
+     return YES;
 }
 
 @end

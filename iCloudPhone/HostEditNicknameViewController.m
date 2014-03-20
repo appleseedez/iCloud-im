@@ -34,9 +34,12 @@
     self.txtNIckName.text=[[ItelAction action]getHost].nickName ;
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (textField.text.length+string.length>=8) {
+    if (string.length>0) {
+        
+        if (textField.text.length+string.length>8) {
         return NO;
+        }
     }
-    else return YES;
+  return YES;
 }
 @end

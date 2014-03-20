@@ -35,9 +35,12 @@
     self.signEditView.text=[[ItelAction action]getHost].personalitySignature ;
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if (textView.text.length+text.length>=50) {
-        return NO;
+    if (text.length>0) {
+        if (textView.text.length+text.length>50) {
+            return NO;
+        }
     }
-    else return YES;
-    }
+   
+        return YES;
+}
 @end
