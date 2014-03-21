@@ -44,11 +44,11 @@
    
         self.lbNickName.backgroundColor=[UIColor clearColor];
         self.lbItelNumber.backgroundColor=[UIColor clearColor];
-        [self.lbItelNumber setFont:[UIFont fontWithName:@"HeiTi SC" size:12]];
+        [self.lbItelNumber setFont:[UIFont fontWithName:@"HeiTi SC" size:14]];
         self.lbItelNumber.numberOfLines=0;
         [self.lbItelNumber setTextColor:[UIColor grayColor]];
     
-        [self.imgPhoto setRect:3.0 cornerRadius:self.imgPhoto.frame.size.width/4.0 borderColor:[UIColor whiteColor]];
+        [self.imgPhoto setRect:0.0 cornerRadius:self.imgPhoto.frame.size.width/4.0 borderColor:[UIColor whiteColor]];
      
         self.imgPhoto.clipsToBounds=YES;
   

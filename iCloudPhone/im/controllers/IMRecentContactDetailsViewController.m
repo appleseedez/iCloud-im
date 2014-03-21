@@ -262,7 +262,7 @@ static NSString* kOperationReason = @"reason";
         
         [moreActionSheet setDestructiveButtonIndex:1];
     }else{
-        moreActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"加为好友", @"加入黑名单",@"删除记录",nil];
+        moreActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"加入通信录", @"加入黑名单",@"删除记录",nil];
         
         [moreActionSheet setDestructiveButtonIndex:2];
     }
