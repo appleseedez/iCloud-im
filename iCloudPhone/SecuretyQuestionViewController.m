@@ -138,6 +138,9 @@ static float animatedDuration=1.0;
 }
 
 -(NSString*)checkInput{
+    if ( self.question1.text.length>20||self.question2.text.length>20||self.question3.text.length>20||self.answer1.text.length>20||self.answer2.text.length>20||self.answer3.text.length>20) {
+          return @"请输入少于20个汉字的问题和答案";
+    }
     return nil;
 }
 -(void)conformKeyBoard:(NSNotification *)notification

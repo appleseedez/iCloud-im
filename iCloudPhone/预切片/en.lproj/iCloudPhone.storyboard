@@ -811,7 +811,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4Hd-tn-aNN">
                                         <rect key="frame" x="95" y="9" width="112" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="8890">
+                                        <state key="normal" title="800">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -876,7 +876,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiC-c0-Q0u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-672" y="2141"/>
+            <point key="canvasLocation" x="-1174" y="2123"/>
         </scene>
         <!--Securety Answer Question View Controller-->
         <scene sceneID="RV5-ox-dVD">
