@@ -132,7 +132,7 @@
     MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
     picker.messageComposeDelegate = self;
     
-    picker.body=@"我注册了云电话,可以视频 可以聊天 还能开店铺呢 都是免费得 快来试试吧！！  http://www.itelland.com   =====测试功能 骚扰见谅--宁少春  ";
+    picker.body=@"我注册了云电话，可以免费视频通话哦，赶快注册一个给我打视频电话吧~~~app store输入itel找到云电话即可下载";
     NSArray *array = @[number];
     picker.recipients = array;
     [self.navigationController presentViewController:picker animated:YES completion:^{
