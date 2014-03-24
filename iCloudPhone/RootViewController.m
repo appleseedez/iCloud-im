@@ -43,6 +43,7 @@
 {
     [super viewDidLoad];
     [self.tabBar setHidden:YES];
+    self.hidesBottomBarWhenPushed=YES;
 #if ROOT_TABBAR_DEBUG
     NSLog(@"tabbar 加载了");
     NSAssert(self.manager, @"注入manager到tabroot失败");

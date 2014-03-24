@@ -17,6 +17,8 @@
 		47225148184D804D00C44857 /* NewFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47225147184D804D00C44857 /* NewFriendListViewController.m */; };
 		472251CF184DB01400C44857 /* ContactCellTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 472251CE184DB01400C44857 /* ContactCellTopView.m */; };
 		472251D2184DBDF000C44857 /* NXImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 472251D1184DBDF000C44857 /* NXImageView.m */; };
+		472643AA18E01D9F00162A98 /* NSCTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472643A918E01D9F00162A98 /* NSCTabbarViewController.m */; };
+		472643AB18E022A200162A98 /* NSCTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472643A918E01D9F00162A98 /* NSCTabbarViewController.m */; };
 		472B4A631846E45D002971EE /* CustomTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B4A621846E45D002971EE /* CustomTabbar.m */; };
 		472B4A661846E4ED002971EE /* CustonTarbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B4A651846E4ED002971EE /* CustonTarbarItem.m */; };
 		4732A03018432AEF009AD32D /* ItelUserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732A02F18432AEF009AD32D /* ItelUserTest.m */; };
@@ -362,6 +364,8 @@
 		472251CE184DB01400C44857 /* ContactCellTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCellTopView.m; sourceTree = "<group>"; };
 		472251D0184DBDF000C44857 /* NXImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXImageView.h; sourceTree = "<group>"; };
 		472251D1184DBDF000C44857 /* NXImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXImageView.m; sourceTree = "<group>"; };
+		472643A818E01D9F00162A98 /* NSCTabbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCTabbarViewController.h; sourceTree = "<group>"; };
+		472643A918E01D9F00162A98 /* NSCTabbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSCTabbarViewController.m; sourceTree = "<group>"; };
 		472B4A611846E45D002971EE /* CustomTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabbar.h; sourceTree = "<group>"; };
 		472B4A621846E45D002971EE /* CustomTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabbar.m; sourceTree = "<group>"; };
 		472B4A641846E4ED002971EE /* CustonTarbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustonTarbarItem.h; sourceTree = "<group>"; };
@@ -1676,6 +1680,8 @@
 			children = (
 				47DD063718A7486E00BD0E47 /* baseContext */,
 				47DD063618A7485500BD0E47 /* intent */,
+				472643A818E01D9F00162A98 /* NSCTabbarViewController.h */,
+				472643A918E01D9F00162A98 /* NSCTabbarViewController.m */,
 			);
 			name = base;
 			sourceTree = "<group>";
@@ -2330,6 +2336,7 @@
 				BAE9C8DB187BEBC100E41A9E /* IMLogoutFromSignalServerMessageBuilder.m in Sources */,
 				BADA3C6D1890AEA10029CB61 /* IMManagerImp.m in Sources */,
 				479C7BA8185DA78E0046B1D7 /* MoreHostViewCell.m in Sources */,
+				472643AB18E022A200162A98 /* NSCTabbarViewController.m in Sources */,
 				479EF0591859D47C0012EE29 /* IMMessageParserImp.m in Sources */,
 				478813DB1839C35E0085224D /* UIProgressView+AFNetworking.m in Sources */,
 				479F13A418617A44006DF67B /* HostImageCell.m in Sources */,
@@ -2388,6 +2395,7 @@
 				47B89E001834D40000022FE5 /* iCloudPhoneTests.m in Sources */,
 				BAAEA49118726DF200C05BCF /* IMRecentContactItem.m in Sources */,
 				BA959A981860565C009B8A4C /* IMUDPCommunicator.m in Sources */,
+				472643AA18E01D9F00162A98 /* NSCTabbarViewController.m in Sources */,
 				478814031839E66C0085224D /* NXRegViewControllerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

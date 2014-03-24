@@ -86,6 +86,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIView *v=[self.view viewWithTag:28];
+    v.backgroundColor=[UIColor clearColor];
     UIButton *btnBack=[[UIButton alloc] init];
     btnBack.frame=CGRectMake(10, 39, 40, 40);
     btnBack.backgroundColor=[UIColor clearColor];

@@ -19,7 +19,7 @@
      
         self.label = [[UILabel alloc]init];
         [self addSubview:self.label];
-        
+        self.label.backgroundColor=[UIColor clearColor];
     }
     return self;
 }

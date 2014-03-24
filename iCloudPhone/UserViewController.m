@@ -68,11 +68,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     [cell.textLabel setFont:[UIFont fontWithName:@"HeiTi SC" size:14]];
+    cell.textLabel.backgroundColor=[UIColor clearColor];
     UILabel *prop=[[UILabel alloc]init];
         [cell.contentView addSubview:prop];
                    prop.frame=CGRectMake(60, 10, 220, 20);
     [prop setTextColor:[UIColor grayColor]];
     [prop setFont:[UIFont fontWithName:@"HeiTi SC" size:13]];
+    prop.backgroundColor =[UIColor clearColor];
     if (indexPath.section==1) {
         switch (indexPath.row) {
             case 0:

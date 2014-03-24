@@ -67,6 +67,7 @@
     prop.frame=CGRectMake(60, 10, 260, 25);
     [prop setTextColor:[UIColor grayColor]];
     [prop setFont:[UIFont fontWithName:@"HeiTi SC" size:13]];
+    prop.backgroundColor=[UIColor clearColor];
     if (indexPath.section==1) {
         switch (indexPath.row) {
             case 0:

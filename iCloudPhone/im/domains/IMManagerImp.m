@@ -683,7 +683,9 @@ static int endTime = 0;
 - (void)checkDeviceAuthorizationStatus
 {
 	NSString *mediaType = AVMediaTypeVideo;
-	
+    float version=	[[UIDevice currentDevice].systemVersion floatValue];
+    if (version>=7.0) {
+    
 	[AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
 		if (granted)
 		{
@@ -711,6 +713,10 @@ static int endTime = 0;
 			});
 		}
 	}];
+    }else {
+       
+        [self setDeviceAuthorized:YES];
+    }
 }
 #pragma mark - life cycle
 
