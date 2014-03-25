@@ -1658,7 +1658,6 @@
         <!--Root View Controller-->
         <scene sceneID="Nq9-f8-8mv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S3N-ic-91O" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="rootVC" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pj0-BP-Pa6" customClass="RootViewController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" hidden="YES" contentMode="scaleToFill" id="AU4-44-Y73">
@@ -1674,6 +1673,7 @@
                         <segue destination="lIH-3k-bGY" kind="relationship" relationship="viewControllers" id="0ah-bN-Qqg"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S3N-ic-91O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3034" y="2540"/>
         </scene>
