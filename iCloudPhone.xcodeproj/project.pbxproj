@@ -182,7 +182,7 @@
 		47B89DD51834D40000022FE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
 		47B89DD71834D40000022FE5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD61834D40000022FE5 /* CoreGraphics.framework */; };
 		47B89DD91834D40000022FE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD81834D40000022FE5 /* UIKit.framework */; };
-		47B89DDF1834D40000022FE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47B89DDD1834D40000022FE5 /* InfoPlist.strings */; };
+		47B89DDF1834D40000022FE5 /* (zh-Hans)InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47B89DDD1834D40000022FE5 /* (zh-Hans)InfoPlist.strings */; };
 		47B89DE11834D40000022FE5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B89DE01834D40000022FE5 /* main.m */; };
 		47B89DED1834D40000022FE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47B89DEC1834D40000022FE5 /* Images.xcassets */; };
 		47B89DF41834D40000022FE5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DF31834D40000022FE5 /* XCTest.framework */; };
@@ -286,12 +286,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
+		479A8BEA18E139C800F73BA8 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = text.plist.strings;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# builtin-copyStrings\n";
+		};
 		BACCBF0318D79B7E00215FA7 /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.proxy.script;
 			fileType = pattern.proxy;
 			isEditable = 1;
 			outputFiles = (
+				"$(DERIVED_FILE_DIR)/(zh-Hans)InfoPlist.strings",
 			);
 		};
 /* End PBXBuildRule section */
@@ -505,6 +515,11 @@
 		4798A26D183DD45300060DDB /* HostItelUser+set.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HostItelUser+set.m"; sourceTree = "<group>"; };
 		4798DEDC18C70C2F0068BFF1 /* ItelUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUpdateManager.h; sourceTree = "<group>"; };
 		4798DEDD18C70C2F0068BFF1 /* ItelUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUpdateManager.m; sourceTree = "<group>"; };
+		479A8BEB18E13B4400F73BA8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/iCloudPhone.storyboard"; sourceTree = "<group>"; };
+		479A8BEC18E13B4400F73BA8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/(zh-Hans)InfoPlist.strings"; sourceTree = "<group>"; };
+		479A8BED18E13B4400F73BA8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		479A8BEE18E13B4400F73BA8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		479A8BEF18E13B4400F73BA8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		479AD2E918862AB2009B3278 /* Area+toString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Area+toString.h"; sourceTree = "<group>"; };
 		479AD2EA18862AB2009B3278 /* Area+toString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Area+toString.m"; sourceTree = "<group>"; };
 		479B90771837660B005D8CCB /* SearchNewFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNewFriendViewController.h; sourceTree = "<group>"; };
@@ -661,7 +676,7 @@
 		47B89DD61834D40000022FE5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		47B89DD81834D40000022FE5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		47B89DDC1834D40000022FE5 /* iCloudPhone-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iCloudPhone-Info.plist"; sourceTree = "<group>"; };
-		47B89DDE1834D40000022FE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		47B89DDE1834D40000022FE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/(zh-Hans)InfoPlist.strings"; sourceTree = "<group>"; };
 		47B89DE01834D40000022FE5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		47B89DE21834D40000022FE5 /* iCloudPhone-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iCloudPhone-Prefix.pch"; sourceTree = "<group>"; };
 		47B89DE31834D40000022FE5 /* NSCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NSCAppDelegate.h; path = iCloudPhone/NSCAppDelegate.h; sourceTree = "<group>"; };
@@ -1631,7 +1646,7 @@
 				47B89DDC1834D40000022FE5 /* iCloudPhone-Info.plist */,
 				BA06AFB0187873910099C3F7 /* iCloudPhone.storyboard */,
 				479E934B185AB7A3001AF6ED /* Login_iPhone.storyboard */,
-				47B89DDD1834D40000022FE5 /* InfoPlist.strings */,
+				47B89DDD1834D40000022FE5 /* (zh-Hans)InfoPlist.strings */,
 				479ED42B186C65C40084EED1 /* itelLOGO.png */,
 				47A5F8B7186D650A00B8CEC8 /* Itel ICON-IOS.png */,
 				479ED42D186C66290084EED1 /* AboutLogo.png */,
@@ -1997,6 +2012,7 @@
 				47B89DCF1834D40000022FE5 /* Resources */,
 			);
 			buildRules = (
+				479A8BEA18E139C800F73BA8 /* PBXBuildRule */,
 				BACCBF0318D79B7E00215FA7 /* PBXBuildRule */,
 			);
 			dependencies = (
@@ -2159,7 +2175,7 @@
 				BA5485DF18C8D1C4003B2716 /* NotificationBackgroundWarningIcon.png in Resources */,
 				47E05DC118517418009FDCED /* checkAddress.png in Resources */,
 				47B89DED1834D40000022FE5 /* Images.xcassets in Resources */,
-				47B89DDF1834D40000022FE5 /* InfoPlist.strings in Resources */,
+				47B89DDF1834D40000022FE5 /* (zh-Hans)InfoPlist.strings in Resources */,
 				BA5485D618C8D1C4003B2716 /* NotificationBackgroundErrorIcon@2x.png in Resources */,
 				478814051839E7120085224D /* mockhead.png in Resources */,
 				4757D0511855C078001A9639 /* 企业注册.png in Resources */,
@@ -2445,22 +2461,25 @@
 			isa = PBXVariantGroup;
 			children = (
 				479EF0B41859D9A50012EE29 /* en */,
+				479A8BEE18E13B4400F73BA8 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		47B89DDD1834D40000022FE5 /* InfoPlist.strings */ = {
+		47B89DDD1834D40000022FE5 /* (zh-Hans)InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				47B89DDE1834D40000022FE5 /* en */,
+				479A8BEC18E13B4400F73BA8 /* zh-Hans */,
 			);
-			name = InfoPlist.strings;
+			name = "(zh-Hans)InfoPlist.strings";
 			sourceTree = "<group>";
 		};
 		47B89DFC1834D40000022FE5 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				47B89DFD1834D40000022FE5 /* en */,
+				479A8BED18E13B4400F73BA8 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2469,6 +2488,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BA06AFAF187873910099C3F7 /* en */,
+				479A8BEB18E13B4400F73BA8 /* zh-Hans */,
 			);
 			name = iCloudPhone.storyboard;
 			path = "预切片";
@@ -2478,6 +2498,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BA54859018C8C431003B2716 /* en */,
+				479A8BEF18E13B4400F73BA8 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
