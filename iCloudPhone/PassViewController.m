@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *codeImage;
 @property (weak, nonatomic) IBOutlet regDetailTextField *txtItel;
 @property (weak, nonatomic) IBOutlet regDetailTextField *txtVerifyCode;
-
+@property (weak,nonatomic) UIAlertView *failAlert;
 
 @end
 #define  SUCCESS void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
@@ -33,19 +33,21 @@
     }
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (string.length>0){
     if (textField==self.txtItel) {
-        if (range.location>=12) {
+        if (textField.text.length>=11) {
             return NO;
         }
-        else return YES;
+      
     }
     else {
-        if (range.location>=4) {
+        if (textField.text.length>=4) {
             return NO;
         }
-        else return YES;
+           }
     }
-   
+    return YES;
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
@@ -94,14 +96,20 @@
     
     
     NSURL *url  =[NSURL URLWithString:strurl];
-    NSURLRequest *request=[NSURLRequest requestWithURL:url];
-    
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
+    [request setTimeoutInterval:3];
     NSOperationQueue *queue=[[NSOperationQueue alloc]init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (connectionError) {
             NSLog(@"%@",connectionError);
             
-            
+            UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"连接服务器失败" message:@"点击“确定“重新连接,“返回“则退出" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:@"确定", nil];
+            self.failAlert=alert;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 [alert show];
+            });
+           
+
         }
         else{
             NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -121,6 +129,17 @@
     
 
 }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView==self.failAlert) {
+        if (buttonIndex==0) {
+             [self dismissViewControllerAnimated:YES completion:^{
+                 
+             }];
+        }else if (buttonIndex==1){
+            [self getToken];
+        }
+    }
+}
 -(void)getImage{
     NSString *strurl=[NSString stringWithFormat:@"%@/printImage",SIGNAL_SERVER];
   
@@ -135,6 +154,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.codeImage.image=[UIImage imageNamed:@"code_placeholder"];
             });
+            [self getToken];
             
         }
         else{

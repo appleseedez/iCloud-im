@@ -31,35 +31,38 @@
 
 @implementation RegDetailViewController
 static long currEditingTextTag=0;
-static float animatedDuration=1.0;
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (string.length>0) {
+   
     if (textField==self.txtItel) {
-        if (range.location>=12) {
+        if (textField.text.length>=11) {
             return NO;
         }
         else return YES;
     }
     else if(textField==self.txtPassword){
-        if (range.location>=18) {
+        if (textField.text.length>=20) {
             return NO;
         }
         else return YES;
     }
     else if(textField==self.txtRePassword){
-        if (range.location>=18) {
+        if (textField.text.length>=20) {
             return NO;
         }
         else return YES;
     }
     else if(textField==self.txtPhoneNumber){
-        if (range.location>=11) {
+        if (textField.text.length>=11) {
             return NO;
         }
         else return YES;
+    }
     }
     return YES;
 }
@@ -280,13 +283,16 @@ static float animatedDuration=1.0;
        
         return @"云号码不能为空";
     }
-    if (![NXInputChecker checkCloudNumber:self.txtItel.text]) {
-        return @"云号码格式不正确";
-    }
+   
     if (![NXInputChecker checkEmpty:self.txtPassword.text]) {
         return @"密码不能为空";
     }
-    
+    if (![NXInputChecker checkEmpty:self.txtPhoneNumber.text]) {
+        return @"手机号码不能为空";
+    }
+    if (![NXInputChecker checkCloudNumber:self.txtItel.text]) {
+        return @"云号码格式不正确";
+    }
     if (![NXInputChecker checkPassword:self.txtPassword.text]) {
         return @"密码格式不正确，请输入长度大于6位小于20位的密码";
     }
@@ -294,9 +300,7 @@ static float animatedDuration=1.0;
     if (![self.txtPassword.text isEqualToString:self.txtRePassword.text]) {
         return @"两次输入密码不一致";
     }
-    if (![NXInputChecker checkEmpty:self.txtPhoneNumber.text]) {
-        return @"手机号码不能为空";
-    }
+   
 
     if (![NXInputChecker checkPhoneNumberIsMobile:self.txtPhoneNumber.text]) {
         return @"手机号码格式不正确";
