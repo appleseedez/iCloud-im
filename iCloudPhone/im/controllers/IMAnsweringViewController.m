@@ -51,10 +51,9 @@ static void* modeIdentifier = (void*) &modeIdentifier;
         }
         
         [[AVAudioSession sharedInstance] setDelegate: self];
-        
         NSError *setCategoryError = nil;
         
-        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayAndRecord error: &setCategoryError];
+        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error: &setCategoryError];
         if (setCategoryError) NSLog(@"Error setting category! %d", setCategoryError.code);
     }
     return self;

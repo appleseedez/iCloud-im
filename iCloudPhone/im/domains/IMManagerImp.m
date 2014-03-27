@@ -31,6 +31,8 @@
 @property(nonatomic) BOOL deviceAuthorized;
 @property (nonatomic) BOOL needSetup;
 
+
+@property(nonatomic) NSDictionary* signalServerAddress;
 @property (nonatomic) dispatch_queue_t tcpQueue;
 @end
 enum BasicStates
@@ -76,7 +78,7 @@ static int hasObserver = 0;
         [self.TCPcommunicator send:data];
         //2.5 开启一个1.5秒的定时器,监视信令业务服务器的查询返回情况,如果在这个时间内都没有返回.则主叫方主动挂断
         [self.monitor invalidate];
-        self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(haltCallingProgress) userInfo:nil repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_queue", DISPATCH_QUEUE_CONCURRENT)];
+        self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(haltCallingProgress:) userInfo:@{kPeerAccount:account} repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_queue", DISPATCH_QUEUE_CONCURRENT)];
     }else{
 #if usertip
         [TSMessage showNotificationWithTitle:nil
@@ -87,7 +89,7 @@ static int hasObserver = 0;
 }
 
 //如果超时未收到信令业务服务器的通话查询回复.则终止流程(通过终止接收信令服务器的通话查询返回.
-- (void) haltCallingProgress{
+- (void) haltCallingProgress:(NSNotification*) notify{
     // 状态回到空闲
     [self assertState:basicStateQuering];
     self.basicState = @(basicStateIdle);
@@ -102,7 +104,7 @@ static int hasObserver = 0;
         //发送终止信令
         [self haltSession:@{
                             kSrcAccount:[self myAccount],
-                            kDestAccount:[self.state valueForKey:kPeerAccount],
+                            kDestAccount:[notify.userInfo valueForKey:kPeerAccount],
                             kHaltType:kEndSession
                             }];
     });
@@ -348,8 +350,10 @@ static int endTime = 0;
     if ([UIApplication sharedApplication].backgroundTimeRemaining > 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             UILocalNotification * notificationInBackground = [[UILocalNotification alloc] init];
-            notificationInBackground.alertBody = NSLocalizedString(@"coming call", Nil);
+            notificationInBackground.alertBody = NSLocalizedString(@"有呼叫来啦~", Nil);
             [[UIApplication sharedApplication] presentLocalNotificationNow:notificationInBackground];
+            
+            
         });
 
     }
@@ -439,13 +443,14 @@ static int endTime = 0;
 - (void) connectToSignalServer:(NSNotification*) signalServerData{
     //设置长连接地址
     NSDictionary* addressData = signalServerData.userInfo;
+    [self restoreState];
+    self.signalServerAddress = addressData;
     [self.TCPcommunicator setupIP: [[addressData valueForKey:kBody] valueForKey:kIP]];
     [self.TCPcommunicator setupPort:[[[addressData valueForKey:kBody] valueForKey:kPort] intValue]];
-    [self restoreState];
     
     //连接信令服务器
     [self.TCPcommunicator connect:[self myAccount] withAuthInfo: [self authInfoWith:self.selfAccount cert:@"chengjianjun"]];
-    [self.TCPcommunicator keepAlive];
+//    [self.TCPcommunicator keepAlive];
 #if MANAGER_DEBUG
     NSLog(@"目前的本机帐号：%@",[self myAccount]);
 #endif
@@ -775,6 +780,12 @@ static int endTime = 0;
 }
 
 - (void) connectToSignalServer{
+    
+    if (self.signalServerAddress) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:UDP_LOOKUP_COMPLETE_NOTIFICATION object:nil userInfo:self.signalServerAddress];
+        return;
+    }
+    
 #if MANAGER_DEBUG
     NSLog(@"开始连接信令服务器");
 #endif
@@ -798,7 +809,7 @@ static int endTime = 0;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)checkTCPAlive{
-    [self.TCPcommunicator keepAlive];
+//    [self.TCPcommunicator keepAlive];
 }
 //被叫方接受了本次通话请求
 - (void) acceptSession:(NSNotification*) notify{

@@ -8,6 +8,7 @@
 
 #import "IMTCPCommunicator.h"
 #import "ConstantHeader.h"
+#import "NSCAppDelegate.h"
 @interface IMTCPCommunicator ()<GCDAsyncSocketDelegate>
 @property(nonatomic) GCDAsyncSocket* sock; // tcp长链接端点
 @property(nonatomic) MSWeakTimer* heartBeat; // 心跳定时器
@@ -98,6 +99,16 @@
 }
 // 断开了服务器链接
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
+    if ([UIApplication sharedApplication].backgroundTimeRemaining > 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UILocalNotification * notificationInBackground = [[UILocalNotification alloc] init];
+            notificationInBackground.alertBody = NSLocalizedString(@"链接断开了", Nil);
+            [[UIApplication sharedApplication] presentLocalNotificationNow:notificationInBackground];
+            [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
+        });
+        
+        return;
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
     });
@@ -152,6 +163,7 @@
             break;
     }
 }
+
 // IMCommunicator接口
 - (void)connect:(NSString*) account withAuthInfo:(NSDictionary *)authInfo{
     NSError* error;

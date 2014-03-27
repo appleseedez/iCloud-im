@@ -50,13 +50,7 @@ static void* modeIdentifier = (void*) &modeIdentifier;
             self.soudMgr.numberOfLoops = -1;
             self.soudMgr.delegate = self;
         }
-        
-        [[AVAudioSession sharedInstance] setDelegate: self];
-        
-        NSError *setCategoryError = nil;
-        
-        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayAndRecord error: &setCategoryError];
-        if (setCategoryError) NSLog(@"Error setting category! %d", setCategoryError.code);
+       
     }
     return self;
 }
@@ -81,6 +75,21 @@ static void* modeIdentifier = (void*) &modeIdentifier;
     [super viewDidAppear:animated];
     self.PeerAvatarImageView.layer.cornerRadius = 10;
     self.PeerAvatarImageView.layer.masksToBounds = YES;
+    
+    
+    [[AVAudioSession sharedInstance] setDelegate: self];
+    
+    NSError *setCategoryError = nil;
+    if ([self.manager isVideoCall]) {
+        
+        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker  error: &setCategoryError];
+    }else{
+        
+        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayAndRecord  error: &setCategoryError];
+    }
+    
+    if (setCategoryError) NSLog(@"Error setting category! %d", setCategoryError.code);
+    
     [self.soudMgr play];
 }
 - (void) viewWillDisappear:(BOOL)animated{
