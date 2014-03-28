@@ -37,7 +37,9 @@
     return self;
 }
 
-
+- (BOOL) isConnected{
+    return [self.sock isConnected];
+}
 - (void) sendHeartBeat{
     if ([self.sock isConnected]) {
 //        dispatch_async(dispatch_get_main_queue(), ^{
@@ -113,6 +115,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
     });
 }
+
 
 // 有数据来。我们的数据是分成两部分的 :
 // head_pkg | data_pkg

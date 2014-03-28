@@ -28,4 +28,8 @@
 - (void) setupPort:(u_int16_t) port;
 
 - (void) tearDown;
+
+- (BOOL) isConnected;
+
+- (void) sendHeartbeat;
 @end

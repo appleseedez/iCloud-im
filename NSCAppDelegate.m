@@ -294,15 +294,19 @@
     NSLog(@"调用 applicationDidEnterBackground");
 #endif
     
-    BOOL backgroundAccepted = [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
+    BOOL backgroundAccepted = [[UIApplication sharedApplication] setKeepAliveTimeout:NSTimeIntervalSince1970 handler:^{
         if ([[ItelAction action] getHost]) {
-            [self.manager connectToSignalServer];
+//            [self.manager sendHeartbeat];
         }
     
     }];
     if (backgroundAccepted)
     {
         NSLog(@"VOIP backgrounding accepted");
+        NSError* error = nil;
+        [[AVAudioSession sharedInstance]setActive:YES error:&error];
+        [[AVAudioSession sharedInstance]setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:&error];
+
     }
 }
 
@@ -313,6 +317,7 @@
     
     
 #endif
+    
     [[UIApplication sharedApplication] clearKeepAliveTimeout];
 }
 

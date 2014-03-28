@@ -30,7 +30,7 @@
 @property (nonatomic) NSDictionary* recentLog; //作为最近通话记录的status字段
 @property(nonatomic) BOOL deviceAuthorized;
 @property (nonatomic) BOOL needSetup;
-
+@property (nonatomic) NSTimeInterval disconnectTime;
 
 @property(nonatomic) NSDictionary* signalServerAddress;
 @property (nonatomic) dispatch_queue_t tcpQueue;
@@ -780,6 +780,10 @@ static int endTime = 0;
 }
 
 - (void) connectToSignalServer{
+    if ([self.TCPcommunicator isConnected]) {
+        return;
+    }
+    
     
     if (self.signalServerAddress) {
         [[NSNotificationCenter defaultCenter] postNotificationName:UDP_LOOKUP_COMPLETE_NOTIFICATION object:nil userInfo:self.signalServerAddress];
@@ -810,6 +814,7 @@ static int endTime = 0;
 }
 - (void)checkTCPAlive{
 //    [self.TCPcommunicator keepAlive];
+    NSLog(@"should connecte to server:%i",[self.TCPcommunicator isConnected]);
 }
 //被叫方接受了本次通话请求
 - (void) acceptSession:(NSNotification*) notify{
@@ -928,6 +933,7 @@ static int endTime = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(droppedFromSignal:) name:DROPPED_FROM_SIGNAL_NOTIFICATION object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection:) name:NO_CONNECTION_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chageNetwork:) name:CHANGE_CONNECTION_NOTIFICATION object:nil];
 }
 
 /**
@@ -1099,12 +1105,25 @@ static int endTime = 0;
                             }];
     });
 }
+- (void) chageNetwork:(NSNotification*) notify{
+    NSLog(@"time insterval %f",[NSDate timeIntervalSinceReferenceDate] - self.disconnectTime);
+    if ([NSDate timeIntervalSinceReferenceDate] - self.disconnectTime < 10.0 ) {
+        return;
+    }
+    NSLog(@"当前 sock 是否链接:%i",[self.TCPcommunicator isConnected]);
+    [self.TCPcommunicator disconnect];
+    self.disconnectTime = [NSDate timeIntervalSinceReferenceDate];
+}
+
 - (void) noConnection:(NSNotification*) notify{
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"网络异常", nil)
                                 subtitle:nil
                                     type:TSMessageNotificationTypeError];
 }
 
+- (void)sendHeartbeat{
+    [self.TCPcommunicator sendHeartbeat];
+}
 #pragma mark - alert view delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 //    //通知系统,登出当前用户

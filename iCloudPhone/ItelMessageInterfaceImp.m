@@ -35,7 +35,7 @@ static ItelMessageInterfaceImp* _instance;
 -(void)startSearching{
     
     [self sendSearching];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendSearching) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(sendSearching) userInfo:nil repeats:YES];
 }
 -(void)sendSearching{
     if ([[ItelAction action] getHost]) {

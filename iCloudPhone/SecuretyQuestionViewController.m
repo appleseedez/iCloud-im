@@ -179,5 +179,10 @@ static float animatedDuration=1.0;
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (string.length != 0 &&  textField.text.length + string.length > 15) {
+        return NO;
+    }
+    return YES;
+}
 @end

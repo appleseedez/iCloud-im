@@ -49,12 +49,11 @@ static void* modeIdentifier = (void*) &modeIdentifier;
             self.soudMgr.numberOfLoops = -1;
             self.soudMgr.delegate = self;
         }
-        
+
         [[AVAudioSession sharedInstance] setDelegate: self];
-        NSError *setCategoryError = nil;
-        
-        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error: &setCategoryError];
-        if (setCategoryError) NSLog(@"Error setting category! %d", setCategoryError.code);
+        [[AVAudioSession sharedInstance] setActive:YES error:nil];
+        [self.soudMgr play];
+        AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     }
     return self;
 }
@@ -72,8 +71,20 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.soudMgr play];
-    AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+//
+//    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
+    NSError *setCategoryError = nil;
+    
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error: &setCategoryError];
+
+    if (setCategoryError){
+        NSLog(@"Error setting category! %d", setCategoryError.code);
+    }
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -297,9 +308,6 @@ static void* modeIdentifier = (void*) &modeIdentifier;
 
 
 - (void) setupInSessionState{
-    //终止拨号音
-    AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
-    AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
     //通话过程中,禁止锁屏
     [self.manager lockScreenForSession];
     //定时器用于显示通话时长

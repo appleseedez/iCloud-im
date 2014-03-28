@@ -65,4 +65,5 @@
 - (double) checkDuration;
 - (void) presentDialRelatedPanel:(UIViewController*) rootViewController;
 - (void) dismissDialRelatedPanel;
+- (void) sendHeartbeat;
 @end

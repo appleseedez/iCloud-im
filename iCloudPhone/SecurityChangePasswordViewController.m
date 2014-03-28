@@ -219,4 +219,10 @@ static float animatedDuration=1.0;
     
     return nil;
 }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (string.length != 0 &&  textField.text.length + string.length > 20) {
+        return NO;
+    }
+    return YES;
+}
 @end
