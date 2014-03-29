@@ -44,9 +44,11 @@
 
     if ([[ItelAction action] getHost] && self.manager && ![[self.manager myAccount] isEqualToString: BLANK_STRING]) {
 #if usertip
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:NSLocalizedString(@"连接中...", nil)
-                                        type:TSMessageNotificationTypeWarning];
+////        [TSMessage showNotificationWithTitle:nil
+//                                    subtitle:NSLocalizedString(@"连接中...", nil)
+//                                        type:TSMessageNotificationTypeWarning];
+        
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"连接中...", nil) subtitle:nil type:TSMessageNotificationTypeWarning duration:0.5 canBeDismissedByUser:NO];
 #endif
         [self.manager connectToSignalServer];
     }
@@ -270,6 +272,7 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    self.ignoreOnce = NO;
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationWillResignActive");
 #endif
@@ -290,10 +293,10 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+
 #if APP_DELEGATE_DEBUG
     NSLog(@"调用 applicationDidEnterBackground");
 #endif
-    
     BOOL backgroundAccepted = [[UIApplication sharedApplication] setKeepAliveTimeout:NSTimeIntervalSince1970 handler:^{
         if ([[ItelAction action] getHost]) {
 //            [self.manager sendHeartbeat];
@@ -323,6 +326,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+
+    self.ignoreOnce= YES;
     [[ItelUpdateManager defaultManager] checkUpdate];
     
 #if APP_DELEGATE_DEBUG

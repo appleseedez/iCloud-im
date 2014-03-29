@@ -89,9 +89,10 @@
 // 链接上了服务器
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
 #if usertip
-    [TSMessage showNotificationWithTitle:NSLocalizedString(@"连接完成", nil)
-                                subtitle:nil
-                                    type:TSMessageNotificationTypeSuccess];
+////    [TSMessage showNotificationWithTitle:NSLocalizedString(@"连接完成", nil)
+//                                subtitle:nil
+//                                    type:TSMessageNotificationTypeSuccess];
+    [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"连接完成", nil) subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.5 canBeDismissedByUser:NO];
 #endif
     [sock performBlock:^{
         [sock enableBackgroundingOnSocket];
@@ -111,6 +112,7 @@
         
         return;
     }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
     });

@@ -248,9 +248,11 @@
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
         sender.enabled = YES;
         
-        [TSMessage showNotificationWithTitle:NSLocalizedString(@"号码为空", nil)
-                                    subtitle:NSLocalizedString(@"请输入对方的iTel号码", nil)
-                                        type:TSMessageNotificationTypeError];
+//        [TSMessage showNotificationWithTitle:NSLocalizedString(@"号码为空", nil)
+//                                    subtitle:NSLocalizedString(@"请输入对方的iTel号码", nil)
+//                                        type:TSMessageNotificationTypeError];
+        
+            [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"号码为空", nil) subtitle:NSLocalizedString(@"请输入对方的iTel号码", nil) type:TSMessageNotificationTypeError duration:0.5 canBeDismissedByUser:NO];
         return;
     }
 
