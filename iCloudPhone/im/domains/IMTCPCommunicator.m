@@ -104,9 +104,9 @@
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
     if ([UIApplication sharedApplication].backgroundTimeRemaining > 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            UILocalNotification * notificationInBackground = [[UILocalNotification alloc] init];
-            notificationInBackground.alertBody = NSLocalizedString(@"链接断开了", Nil);
-            [[UIApplication sharedApplication] presentLocalNotificationNow:notificationInBackground];
+//            UILocalNotification * notificationInBackground = [[UILocalNotification alloc] init];
+//            notificationInBackground.alertBody = NSLocalizedString(@"链接断开了", Nil);
+//            [[UIApplication sharedApplication] presentLocalNotificationNow:notificationInBackground];
             [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
         });
         
