@@ -22,8 +22,14 @@
 
 @implementation MoreAboutViewController
 - (IBAction)gotoJudge:(id)sender{
-    NSString *str = [NSString stringWithFormat:
+    NSString *str;
+    float verson=[[[UIDevice currentDevice] systemVersion] floatValue];
+    if (verson>=7.0) {
+        str= [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APPID];
+    }else {
+   str = [NSString stringWithFormat:
                      @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",APPID]; //appID 解释如下
+    }
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
