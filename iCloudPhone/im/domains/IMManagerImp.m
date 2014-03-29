@@ -81,9 +81,10 @@ static int hasObserver = 0;
         self.monitor = [MSWeakTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(haltCallingProgress:) userInfo:@{kPeerAccount:account} repeats:NO dispatchQueue:dispatch_queue_create("com.itelland.monitor_queue", DISPATCH_QUEUE_CONCURRENT)];
     }else{
 #if usertip
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:NSLocalizedString(@"正处于拨打状态.请稍后重试", nil)
-                                        type:TSMessageNotificationTypeWarning];
+//        [TSMessage showNotificationWithTitle:nil
+//                                    subtitle:NSLocalizedString(@"正处于拨打状态.请稍后重试", nil)
+//                                        type:TSMessageNotificationTypeWarning];
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"正处于拨打状态.请稍后重试", nil) subtitle:nil type:TSMessageNotificationTypeWarning duration:0.5 canBeDismissedByUser:NO];
 #endif
     }
 }
@@ -97,10 +98,15 @@ static int hasObserver = 0;
     //提示用户
     dispatch_async(dispatch_get_main_queue(), ^{
 #if usertip
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:NSLocalizedString(@"对方不在线,请稍后重试", nil)
-                                        type:TSMessageNotificationTypeWarning];
+//        [TSMessage showNotificationWithTitle:nil
+//                                    subtitle:NSLocalizedString(@"对方不在线,请稍后重试", nil)
+//         
+//                                        type:TSMessageNotificationTypeWarning];
+//        
+        
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"对方不在线,请稍后重试", nil) subtitle:nil type:TSMessageNotificationTypeWarning duration:0.5 canBeDismissedByUser:NO];
 #endif
+        
         //发送终止信令
         [self haltSession:@{
                             kSrcAccount:[self myAccount],
@@ -162,10 +168,11 @@ static int endTime = 0;
     [self.keepSessionAlive invalidate];
     //从非idle状态变回idle状态. 说明需要挂断. 给提示
 #if usertip
-    [TSMessage showNotificationWithTitle:nil
-                                subtitle:NSLocalizedString(@"挂断中...", nil)
-                                    type:TSMessageNotificationTypeMessage];
+//    [TSMessage showNotificationWithTitle:nil
+//                                subtitle:NSLocalizedString(@"挂断中...", nil)
+//                                    type:TSMessageNotificationTypeMessage];
 //    [[IMTipImp defaultTip] showTip:@"挂断中..."];
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"挂断中...", nil) subtitle:nil type:TSMessageNotificationTypeMessage duration:0.5 canBeDismissedByUser:NO];
 #endif
     
     [self stopCommunicationCounting];
@@ -261,15 +268,18 @@ static int endTime = 0;
     if (![[ItelAction action] userInFriendBook:[self.state valueForKey:kPeerAccount]]) {
         // 提示用户 陌生人或者不存在的号码
 #if usertip
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:NSLocalizedString(@"对方不在线或者账号不存在!", nil)
-                                        type:TSMessageNotificationTypeWarning];
+//        [TSMessage showNotificationWithTitle:nil
+//                                    subtitle:NSLocalizedString(@"对方不在线或者账号不存在!", nil)
+//                                        type:TSMessageNotificationTypeWarning];
+//        
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"对方不在线或者账号不存在!", nil) subtitle:nil type:TSMessageNotificationTypeWarning duration:0.5 canBeDismissedByUser:NO];
 #endif
     }else{
 #if usertip
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:NSLocalizedString(@"好友不在线!", nil)
-                                        type:TSMessageNotificationTypeWarning];
+//        [TSMessage showNotificationWithTitle:nil
+//                                    subtitle:NSLocalizedString(@"好友不在线!", nil)
+//                                        type:TSMessageNotificationTypeWarning];
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"好友不在线!", nil) subtitle:nil type:TSMessageNotificationTypeWarning duration:0.5 canBeDismissedByUser:NO];
 #endif
     }
     //查询失败了.终止session
@@ -783,8 +793,7 @@ static int endTime = 0;
     if ([self.TCPcommunicator isConnected]) {
         return;
     }
-    
-    
+
     if (self.signalServerAddress) {
         [[NSNotificationCenter defaultCenter] postNotificationName:UDP_LOOKUP_COMPLETE_NOTIFICATION object:nil userInfo:self.signalServerAddress];
         return;
@@ -1075,9 +1084,10 @@ static int endTime = 0;
     [self.monitor invalidate];
     self.monitor = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:NSLocalizedString(@"无人接听", nil)
-                                        type:TSMessageNotificationTypeMessage];
+//        [TSMessage showNotificationWithTitle:nil
+//                                    subtitle:NSLocalizedString(@"无人接听", nil)
+//                                        type:TSMessageNotificationTypeMessage];
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"无人接听!", nil) subtitle:nil type:TSMessageNotificationTypeMessage duration:0.5 canBeDismissedByUser:NO];
         //发送终止信令
         [self haltSession:@{
                             kSrcAccount:[self myAccount],
@@ -1106,19 +1116,29 @@ static int endTime = 0;
     });
 }
 - (void) chageNetwork:(NSNotification*) notify{
-    NSLog(@"time insterval %f",[NSDate timeIntervalSinceReferenceDate] - self.disconnectTime);
-    if ([NSDate timeIntervalSinceReferenceDate] - self.disconnectTime < 10.0 ) {
+//    NSLog(@"time insterval %f",[NSDate timeIntervalSinceReferenceDate] - self.disconnectTime);
+    //如果切换网络的时间少于10.0秒,就不要断开重连
+    if ([NSDate timeIntervalSinceReferenceDate] - self.disconnectTime < 30.0 ) {
         return;
     }
-    NSLog(@"当前 sock 是否链接:%i",[self.TCPcommunicator isConnected]);
+    // 如果正在通话中,就不要重连.防止转发的请求中断
+    if ([self.basicState intValue] != basicStateIdle ) {
+        return;
+    }
+    if (((NSCAppDelegate*) [UIApplication sharedApplication].delegate).ignoreOnce) {
+        ((NSCAppDelegate*) [UIApplication sharedApplication].delegate).ignoreOnce = NO;
+        return;
+    }
     [self.TCPcommunicator disconnect];
     self.disconnectTime = [NSDate timeIntervalSinceReferenceDate];
 }
 
 - (void) noConnection:(NSNotification*) notify{
-    [TSMessage showNotificationWithTitle:NSLocalizedString(@"网络异常", nil)
-                                subtitle:nil
-                                    type:TSMessageNotificationTypeError];
+//    [TSMessage showNotificationWithTitle:NSLocalizedString(@"网络异常", nil)
+//                                subtitle:nil
+//                                    type:TSMessageNotificationTypeError
+//     ];
+    [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"网络异常", nil) subtitle:nil type:TSMessageNotificationTypeError duration:.5 canBeDismissedByUser:NO];
 }
 
 - (void)sendHeartbeat{

@@ -51,9 +51,12 @@ static int localUDPNetPortSuffix = 0;
     self.account = account;
     if (!self.account) {
 #if usertip
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:NSLocalizedString(@"帐号为空! 无法登录", nil)
-                                        type:TSMessageNotificationTypeWarning];
+//        [TSMessage showNotificationWithTitle:nil
+//                                    subtitle:NSLocalizedString(@"帐号为空! 无法登录", nil)
+//                                        type:TSMessageNotificationTypeWarning];
+        
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"帐号为空,无法登录!", nil) subtitle:nil type:TSMessageNotificationTypeWarning duration:0.5 canBeDismissedByUser:NO];
+        
 #endif
         [NSException exceptionWithName:@"account is nil" reason:@"账号为空" userInfo:nil];
     }

@@ -29,4 +29,5 @@ typedef NS_ENUM(NSInteger, setRootViewController) {
 @property (nonatomic,strong) id <IMManager> manager;
 @property  (nonatomic)AddressBook *phoneBook;  //电话联系人列表
 @property (nonatomic) NSDictionary *startExtra;
+@property (nonatomic) BOOL ignoreOnce; // 当前是否是后台状态
 @end
