@@ -69,6 +69,7 @@
     return _addView;
 }
 -(void)addUser{
+          
     [[ItelAction action]inviteItelUserFriend:self.peerAccount.text];
 }
 -(void)addUserResponse:(NSNotification*)notification{

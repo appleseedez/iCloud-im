@@ -95,14 +95,22 @@
     return [self.itelBookActionDelegate checkItelInAddedList:itel];
 }
 -(void)inviteItelUserFriend:(NSString*)itel{
+    HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+    if ([itel isEqualToString:hostUser.itelNum]) {
+        NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"请不要添加自己" };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"inviteItelUser" object:nil userInfo:userInfo];
+        return;
+    }
+    
     if (![self checkItelAdded:itel]) {
         
         
-        HostItelUser *hostUser =  [self.itelUserActionDelegate hostUser];
+        
         NSDictionary *parameters = @{@"userId":hostUser.userId ,@"hostItel":hostUser.itelNum,@"targetItel":itel,@"token":hostUser.token};
         
         [self.itelNetRequestActionDelegate addUser:parameters];
     }
+    
     else {
         NSDictionary *userInfo=@{@"isNormal": @"0",@"reason":@"请不要重复发送邀请" };
         [[NSNotificationCenter defaultCenter] postNotificationName:@"inviteItelUser" object:nil userInfo:userInfo];
