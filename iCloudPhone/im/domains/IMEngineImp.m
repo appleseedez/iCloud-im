@@ -135,7 +135,7 @@ static int localNetPortSuffix = 0;
             {
                 //是支持视频的
                 self.m_type = InitTypeVoeAndVie;
-                NSLog(@"Wifi8888888888888888888888");
+                NSLog(@"Wifi");
                 [[NSNotificationCenter defaultCenter] postNotificationName:CHANGE_CONNECTION_NOTIFICATION object:nil];
             }
                 break;
@@ -143,10 +143,11 @@ static int localNetPortSuffix = 0;
             {
                 //由于使用3g网络。不支持视频
                 self.m_type = InitTypeVoeAndVie;
-                NSLog(@"3G8888888888888888888888888");
+                NSLog(@"3G");
                 [[NSNotificationCenter defaultCenter] postNotificationName:CHANGE_CONNECTION_NOTIFICATION object:nil];
 //                _pview_local = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0,0)];
             }
+                break;
             case AFNetworkReachabilityStatusNotReachable:
             {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NO_CONNECTION_NOTIFICATION object:nil];
@@ -154,7 +155,7 @@ static int localNetPortSuffix = 0;
             }
                 break;
             default:
-                NSLog(@"default8888888888888888888888888888888888888888");
+                NSLog(@"default");
                 
                 break;
         }

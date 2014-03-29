@@ -1139,6 +1139,7 @@ static int endTime = 0;
 //                                    type:TSMessageNotificationTypeError
 //     ];
     [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"网络异常", nil) subtitle:nil type:TSMessageNotificationTypeError duration:.5 canBeDismissedByUser:NO];
+    
 }
 
 - (void)sendHeartbeat{

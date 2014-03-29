@@ -37,7 +37,7 @@ static ItelNetInterfaceImp* manager;
     SUCCESS{
         
         if ([notifyName isEqualToString:@"searchForNewMessage"]) {
-            NSLog(@"8888888888888888888888888888");
+//            NSLog(@"8888888888888888888888888888");
         }
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if(json==nil){
