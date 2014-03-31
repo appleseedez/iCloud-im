@@ -11,4 +11,5 @@
 #import "HostItelUser.h"
 @interface HostItelUser (set)
 +(HostItelUser*)userWithDictionary:(NSDictionary*)dic;
+-(void)setPersonal:(NSDictionary*)data;
 @end

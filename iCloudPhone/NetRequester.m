@@ -61,6 +61,38 @@
     //NSLog(@"%@",request.URL);
     
 }
++(NSDictionary*)syncJsonPostRequestWithUrl:(NSString*)url parameters:(NSDictionary*)parameters{
+    NSString *token=[[ItelAction action] getHost].token;
+    
+    if (token) {
+        url=[NSString stringWithFormat:@"%@?sessiontoken=%@",url,token];
+    }
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+ 
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSData *httpBody=[NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:nil];
+    [request setHTTPBody:httpBody];
+    NSURLResponse *response=nil;
+    NSError *error=nil;
+    NSData *responseData= [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    if (error) {
+        NSLog(@"%@",error);
+        return nil;
+    }
+    NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
+    if ([dic isKindOfClass:[NSDictionary class]]) {
+        return dic;
+    }
+    return nil;
+    
+}
 +(void)uploadImagePostRequestWithUrl:(NSString*)url
                            imageData:(NSData*)imageData
                        andParameters:(NSDictionary*)parameters

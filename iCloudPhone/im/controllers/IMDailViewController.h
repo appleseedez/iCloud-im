@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *searchResultView;
 @property (weak, nonatomic) IBOutlet UIView *suggestBtnView;
 @property (weak, nonatomic) IBOutlet UIView *dialPanView;
+
 - (IBAction)autoFill:(UIButton *)sender;
 - (IBAction)expandSuggestResults:(UIButton *)sender;
 @property (nonatomic,copy)NSString *directNumber;

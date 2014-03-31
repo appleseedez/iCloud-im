@@ -131,7 +131,9 @@
         self.backspaceButton.hidden = NO;
     }
     [self setup];
-
+    if (self.backspaceButton.hidden==NO) {
+        self.backButton.hidden=YES;
+    }
 }
 
 -(void)longPress:(UIButton*)sender{

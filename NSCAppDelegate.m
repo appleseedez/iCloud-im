@@ -20,6 +20,7 @@
 #import "IMCallingViewController.h"
 #import "IMAnsweringViewController.h"
 #import "ItelUpdateManager.h"
+#import "NetRequester.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 
 @interface ItelMessageInterfaceImp()
@@ -65,10 +66,43 @@
     
    
     
-    NSDictionary *dic=[NXInputChecker parmetersInUrl:url];
-    self.startExtra=[dic objectForKey:@"extra"];
+    NSDictionary *pass=[NXInputChecker parmetersInUrl:url];
+    NSString *sessiontoken=[pass objectForKey:@"token"];
+    if ([sessiontoken isEqual:[NSNull null]]) {
+        
+        [self returnAppCall:[pass objectForKey:@"typeUrl"]];
+        return YES;
+    }
+    NSString *backURL=[pass objectForKey:@"typeUrl"];
+    
+    
+    
+    NSString *logUrl=[NSString stringWithFormat:@"%@/loginBySessiontoken.json",SIGNAL_SERVER];
+    NSDictionary *parameters=@{@"type":@"phone-ios",@"itel":[pass objectForKey:@"itel"],@"sessiontoken":sessiontoken};
+    
+    NSDictionary *loginDic= [NetRequester syncJsonPostRequestWithUrl:logUrl parameters:parameters];
+    if (loginDic==nil) {
+        [self returnAppCall:backURL];
+        return YES;
+    }
+    
+    id ret= [loginDic objectForKey:@"ret"];
+    if (ret==nil||[ret intValue]!=0) {
+         [self returnAppCall:backURL];
+        return YES;
+    }
+    NSDictionary *dic=[[loginDic objectForKey:@"message"] objectForKey:@"data"];
+    self.startExtra=@{@"itelNumber":[pass objectForKey:@"targetItel"]};
     if (dic) {
-        HostItelUser *host=[HostItelUser userWithDictionary:[dic  mutableCopy]];
+        
+        
+        HostItelUser *host=[[ItelAction action]getHost];
+        
+        if (host==nil) {
+             host=[HostItelUser userWithDictionary:[dic  mutableCopy]];
+        }
+        [host setPersonal:dic];
+       host.token=[dic objectForKey:@"sessiontoken"];
     
     if ([self.window.rootViewController isKindOfClass:[NXLoginViewController class]]) {
         
@@ -116,6 +150,15 @@
     
     
     return YES;
+}
+-(void)returnAppCall:(NSString*)url{
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]]) {
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+    }else{
+        [self signOut];
+    }
+    
 }
 -(void)doExtra{
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_DIAL_VIEW_NOTIFICATION object:nil userInfo:[self.startExtra copy]];
@@ -356,6 +399,7 @@
     
     if ([notify.userInfo valueForKey:@"itelNumber"]) {
         dialViewController.directNumber = [notify.userInfo valueForKey:@"itelNumber"];
+
     }
     [self.manager presentDialRelatedPanel:dialViewController];
     
