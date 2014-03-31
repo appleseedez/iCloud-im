@@ -99,7 +99,10 @@
     [self.tableView reloadData];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.view endEditing:YES];
+    if (scrollView.contentOffset.y>=10) {
+         [self.view endEditing:YES];
+    }
+   
 }
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
     
