@@ -255,7 +255,7 @@ static ItelNetInterfaceImp* manager;
         id json=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
         if ([json isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dic=[json objectForKey:@"message"];
+            NSDictionary *dic=json;
             if ([dic objectForKey:@"ret"] == nil) {
                 
                 return ;

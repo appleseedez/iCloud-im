@@ -409,7 +409,7 @@
 }
 #pragma mark - 启动其他app
 -(void)loginOtherApp:(NSDictionary*)type{
-    if (![[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"itelFish://itelland.com"]]) {
+    if (![[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"itelKuaiYu://itelland.com"]]) {
         
     
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"未发现快鱼，请先安装" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -422,13 +422,13 @@
     
 }
 -(void)loginOtherAppResponse:(NSDictionary*)data{
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString: @"itelFish://itelland.com"]]) {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString: @"itelKuaiYu://itelland.com"]]) {
         NSMutableDictionary *login=[data mutableCopy];
        
         NSData *json=[NSJSONSerialization dataWithJSONObject:login options:NSJSONWritingPrettyPrinted error:nil];
         NSString *strParameters=[[[NSString alloc ] initWithData:json encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
         
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"itelFish://itelland.com/?%@",strParameters]];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"itelKuaiYu://itelland.com/?%@",strParameters]];
         if ([[UIApplication sharedApplication]canOpenURL:url]) {
              [[UIApplication sharedApplication] openURL:url];
         }else{
