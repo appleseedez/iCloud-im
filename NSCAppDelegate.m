@@ -276,13 +276,16 @@
 
 
 -(void)changeRootViewController:(setRootViewController)Type userInfo:(NSDictionary *)info{
-    [UIView beginAnimations:@"memory" context:nil];
+    CATransition *trans=[CATransition animation];
+    trans.duration=0.5;
+    trans.type=@"oglFlip";
     if (Type==RootViewControllerLogin) {
         [self.window setRootViewController:self.loginVC];
         [self.manager tearDown];
         [self.manager disconnectToSignalServer];
         [self.manager setMyAccount:nil];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
+        trans.subtype=@"fromTop";
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
     }
     else if(Type==RootViewControllerMain){
         [self.window setRootViewController:self.RootVC];
@@ -297,8 +300,10 @@
         [self setupIMManager:params];
 //        [self.manager setup];
         [self.manager connectToSignalServer];
+         trans.subtype=@"fromBottom";
    }
-    [UIView commitAnimations];
+    [self.window.layer addAnimation:trans forKey:nil];
+
 //    [self saveStoredCookies];
 }
 
