@@ -956,6 +956,7 @@ static int endTime = 0;
 
 - (void)markServerHeart:(NSNotification*) notify{
     self.latestServerHeart = [NSDate timeIntervalSinceReferenceDate];
+    NSLog(@"服务器心跳");
 }
 
 - (void) checkConnectionToServer{
