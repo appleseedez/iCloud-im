@@ -16,7 +16,11 @@ typedef NS_ENUM(NSInteger, setRootViewController) {
     RootViewControllerMain = 1 << 1,
    
 };
-
+typedef NS_ENUM(NSInteger, ConnectionFlag) {
+    ConnectionFlagNoConnection = 0,
+    ConnectionFlagPending,
+    ConnectionFlagConnected
+};
 @interface NSCAppDelegate : UIResponder <UIApplicationDelegate>
 
 -(void)changeRootViewController:(setRootViewController)Type userInfo:(NSDictionary*) info ;
@@ -30,4 +34,7 @@ typedef NS_ENUM(NSInteger, setRootViewController) {
 @property  (nonatomic)AddressBook *phoneBook;  //电话联系人列表
 @property (nonatomic) NSDictionary *startExtra;
 @property (nonatomic) BOOL ignoreOnce; // 当前是否是后台状态
+
+
+@property (nonatomic) NSNumber* connectionFlag;
 @end

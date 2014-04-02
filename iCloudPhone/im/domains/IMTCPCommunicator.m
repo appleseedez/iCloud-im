@@ -98,8 +98,10 @@
         [sock enableBackgroundingOnSocket];
     }];
     [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
+    NSLog(@"验证信息:%@",self.authInfo);
     [self send:self.authInfo];
 }
+
 // 断开了服务器链接
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
     if ([UIApplication sharedApplication].backgroundTimeRemaining > 0) {
@@ -178,10 +180,8 @@
     }
     self.authInfo = authInfo;
     if (![self.sock connectToHost:self.ip onPort:self.port error:&error]) {
-//#if DEBUG
-//        [[IMTipImp defaultTip] errorTip:@"链接信令服务器失败"];
-//#endif
-        [self disconnect];
+//        [self disconnect];
+        NSLog(@"连接 tcp 信令服务器没有成功");
     }
 
 }

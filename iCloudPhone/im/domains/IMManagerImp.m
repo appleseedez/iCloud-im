@@ -34,6 +34,7 @@
 
 @property(nonatomic) NSDictionary* signalServerAddress;
 @property (nonatomic) dispatch_queue_t tcpQueue;
+@property(nonatomic) NSTimeInterval latestServerHeart;
 @end
 enum BasicStates
 {
@@ -42,7 +43,6 @@ enum BasicStates
     basicStateCalling,// 拨打中
     basicStateAnswering,// 接听中
     basicStateInSession //通话中
-    
 };
 
 @implementation IMManagerImp
@@ -55,6 +55,9 @@ static int hasObserver = 0;
     self = [super init];
     if (self) {
         self.needSetup = YES;
+        
+        self.disconnectTime = [NSDate timeIntervalSinceReferenceDate] - 40;
+        self.latestServerHeart = [NSDate timeIntervalSinceReferenceDate];
     }
     return self;
 }
@@ -410,6 +413,8 @@ static int endTime = 0;
 
 // 收到服务器认证的返回值
 - (void) authHasResult:(NSNotification*) result{
+    self.disconnectTime = [NSDate timeIntervalSinceReferenceDate];
+    [TSMessage dismissActiveNotification];
 #if MANAGER_DEBUG
     NSLog(@"收到信令服务器端帐号验证响应~");
 #endif
@@ -630,6 +635,9 @@ static int endTime = 0;
             break;
         case CMID_APP_DROPPED_SSS_REQ_TYPE:
             [[NSNotificationCenter defaultCenter] postNotificationName:DROPPED_FROM_SIGNAL_NOTIFICATION object:nil userInfo:bodySection];
+            break;
+        case HEART_BEAT_REQ_TYPE:
+            [[NSNotificationCenter defaultCenter] postNotificationName:SERVER_HEART object:nil userInfo:nil];
             break;
         default:
             break;
@@ -943,8 +951,22 @@ static int endTime = 0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection:) name:NO_CONNECTION_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chageNetwork:) name:CHANGE_CONNECTION_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(markServerHeart:) name:SERVER_HEART object:nil];
 }
 
+- (void)markServerHeart:(NSNotification*) notify{
+    self.latestServerHeart = [NSDate timeIntervalSinceReferenceDate];
+}
+
+- (void) checkConnectionToServer{
+    if ([NSDate timeIntervalSinceReferenceDate] - self.latestServerHeart > 60) {
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"网络异常,请点击此处重连.", nil) subtitle:nil image:nil type:TSMessageNotificationTypeWarning duration:30 callback:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
+            [TSMessage dismissActiveNotification];
+        } buttonTitle:nil buttonCallback:nil atPosition:TSMessageNotificationPositionBottom canBeDismissedByUser:YES];
+//       [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
+    }
+}
 /**
  *  注销用户时删除保存的本地数据
  */
@@ -1117,27 +1139,31 @@ static int endTime = 0;
 }
 - (void) chageNetwork:(NSNotification*) notify{
 //    NSLog(@"time insterval %f",[NSDate timeIntervalSinceReferenceDate] - self.disconnectTime);
-    //如果切换网络的时间少于10.0秒,就不要断开重连
-    if ([NSDate timeIntervalSinceReferenceDate] - self.disconnectTime < 30.0 ) {
-        return;
-    }
+//    //如果切换网络的时间少于10.0秒,就不要断开重连
+//    if ([NSDate timeIntervalSinceReferenceDate] - self.disconnectTime < 30.0 ) {
+//        NSLog(@"time insterval %f",[NSDate timeIntervalSinceReferenceDate] - self.disconnectTime);
+//        return;
+//    }
     // 如果正在通话中,就不要重连.防止转发的请求中断
     if ([self.basicState intValue] != basicStateIdle ) {
         return;
     }
-    if (((NSCAppDelegate*) [UIApplication sharedApplication].delegate).ignoreOnce) {
-        ((NSCAppDelegate*) [UIApplication sharedApplication].delegate).ignoreOnce = NO;
-        return;
+//    if (((NSCAppDelegate*) [UIApplication sharedApplication].delegate).ignoreOnce) {
+//        ((NSCAppDelegate*) [UIApplication sharedApplication].delegate).ignoreOnce = NO;
+//        return;
+//    }
+    if ([self.TCPcommunicator isConnected]) {
+        NSLog(@"连着的");
+        
+        [self.TCPcommunicator disconnect];
+    }else{
+        NSLog(@"没连着");
+        [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
     }
-    [self.TCPcommunicator disconnect];
-    self.disconnectTime = [NSDate timeIntervalSinceReferenceDate];
+
 }
 
 - (void) noConnection:(NSNotification*) notify{
-//    [TSMessage showNotificationWithTitle:NSLocalizedString(@"网络异常", nil)
-//                                subtitle:nil
-//                                    type:TSMessageNotificationTypeError
-//     ];
     [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"网络异常", nil) subtitle:nil type:TSMessageNotificationTypeError duration:.5 canBeDismissedByUser:NO];
     
 }

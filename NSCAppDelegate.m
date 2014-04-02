@@ -179,8 +179,11 @@
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+static long ConnectionFlagKVOContext = 0;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self addObserver:self forKeyPath:@"connectionFlag" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:&ConnectionFlagKVOContext];
     if (self.phoneBook == nil) {
         self.phoneBook = [[AddressBook alloc] init];
         [self.phoneBook loadAddressBook];
@@ -273,7 +276,21 @@
 }
 
 
-
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if (context == &ConnectionFlagKVOContext) {
+        // 只有在登录状态下面才有操作
+        if ([[ItelAction action] getHost]) {
+            NSInteger newValue = [[change objectForKey:@"new"] integerValue];
+            if (newValue == ConnectionFlagNoConnection) {
+                
+            }else if (newValue == ConnectionFlagPending){
+                
+            }else if(newValue == ConnectionFlagConnected){
+                
+            }
+        }
+    }
+}
 
 -(void)changeRootViewController:(setRootViewController)Type userInfo:(NSDictionary *)info{
     CATransition *trans=[CATransition animation];
@@ -374,7 +391,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-
+    
     self.ignoreOnce= YES;
     [[ItelUpdateManager defaultManager] checkUpdate];
     
@@ -382,7 +399,8 @@
     NSLog(@"调用 applicationDidBecomeActive ");
 #endif
     if ([[ItelAction action] getHost]) {
-        [self.manager checkTCPAlive];
+//        [self.manager checkTCPAlive];
+        [self.manager checkConnectionToServer];
     }
 }
 

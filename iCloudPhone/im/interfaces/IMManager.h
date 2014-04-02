@@ -66,4 +66,5 @@
 - (void) presentDialRelatedPanel:(UIViewController*) rootViewController;
 - (void) dismissDialRelatedPanel;
 - (void) sendHeartbeat;
+- (void) checkConnectionToServer;
 @end

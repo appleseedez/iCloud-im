@@ -145,7 +145,6 @@ static int localNetPortSuffix = 0;
                 self.m_type = InitTypeVoeAndVie;
                 NSLog(@"3G");
                 [[NSNotificationCenter defaultCenter] postNotificationName:CHANGE_CONNECTION_NOTIFICATION object:nil];
-//                _pview_local = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0,0)];
             }
                 break;
             case AFNetworkReachabilityStatusNotReachable:
@@ -170,8 +169,6 @@ static int localNetPortSuffix = 0;
                 break;
         }
     }];
-    [reachabilityManager startMonitoring];
-    
 }
 
 - (NSString*) mediaTypeString:(InitType)mediaType{
