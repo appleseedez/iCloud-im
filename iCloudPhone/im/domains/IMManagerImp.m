@@ -34,7 +34,9 @@
 
 @property(nonatomic) NSDictionary* signalServerAddress;
 @property (nonatomic) dispatch_queue_t tcpQueue;
+@property (nonatomic) dispatch_queue_t connectionTimerQueue;
 @property(nonatomic) NSTimeInterval latestServerHeart;
+@property(nonatomic) MSWeakTimer* frontConnectionTimer;
 @end
 enum BasicStates
 {
@@ -409,12 +411,20 @@ static int endTime = 0;
 
     
 }
-
-
+@synthesize  connectionTimerQueue = _connectionTimerQueue;
+- (dispatch_queue_t)connectionTimerQueue{
+    if (!_connectionTimerQueue) {
+        _connectionTimerQueue = dispatch_queue_create("com.itelland.connectiontq", NULL);
+    }
+    return _connectionTimerQueue;
+}
 // 收到服务器认证的返回值
 - (void) authHasResult:(NSNotification*) result{
     self.disconnectTime = [NSDate timeIntervalSinceReferenceDate];
     [TSMessage dismissActiveNotification];
+    NSLog(@"开启定时器");
+    [self.frontConnectionTimer invalidate];
+    self.frontConnectionTimer = [MSWeakTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(checkConnectionToServer) userInfo:nil repeats:YES dispatchQueue:self.connectionTimerQueue];
 #if MANAGER_DEBUG
     NSLog(@"收到信令服务器端帐号验证响应~");
 #endif
@@ -445,6 +455,7 @@ static int endTime = 0;
 }
 // 从信令服务器注销
 - (void)logoutFromSignalServer{
+    [self.frontConnectionTimer invalidate];
     self.messageBuilder = [IMLogoutFromSignalServerMessageBuilder new];
     NSDictionary* data = [self.messageBuilder
                           buildWithParams:@{
@@ -956,13 +967,13 @@ static int endTime = 0;
 
 - (void)markServerHeart:(NSNotification*) notify{
     self.latestServerHeart = [NSDate timeIntervalSinceReferenceDate];
-    [self checkConnectionToServer];
     NSLog(@"服务器心跳");
+    [TSMessage dismissActiveNotification];
 }
 
 - (void) checkConnectionToServer{
-    if ([NSDate timeIntervalSinceReferenceDate] - self.latestServerHeart > 60) {
-        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"网络异常,请点击此处重连.", nil) subtitle:nil image:nil type:TSMessageNotificationTypeWarning duration:30 callback:^{
+    if ([NSDate timeIntervalSinceReferenceDate] - self.latestServerHeart > 40) {
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"网络异常,请点击此处重连.", nil) subtitle:nil image:nil type:TSMessageNotificationTypeWarning duration:36000 callback:^{
             [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
             [TSMessage dismissActiveNotification];
         } buttonTitle:nil buttonCallback:nil atPosition:TSMessageNotificationPositionBottom canBeDismissedByUser:YES];
