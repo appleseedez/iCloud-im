@@ -422,6 +422,8 @@ static int endTime = 0;
 }
 // 收到服务器认证的返回值
 - (void) authHasResult:(NSNotification*) result{
+    //每次认证成功都算是一次心跳
+    self.latestServerHeart = [NSDate timeIntervalSinceReferenceDate];
     self.disconnectTime = [NSDate timeIntervalSinceReferenceDate];
     [TSMessage dismissActiveNotification];
     NSLog(@"开启定时器");
@@ -974,6 +976,7 @@ static int endTime = 0;
 }
 
 - (void) checkConnectionToServer{
+//    NSLog(@"差:%f",[NSDate timeIntervalSinceReferenceDate] - self.latestServerHeart);
     if ([NSDate timeIntervalSinceReferenceDate] - self.latestServerHeart > 40) {
         [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"网络异常,请点击此处重连.", nil) subtitle:nil image:nil type:TSMessageNotificationTypeWarning duration:36000 callback:^{
             [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
@@ -1179,8 +1182,8 @@ static int endTime = 0;
 }
 
 - (void) noConnection:(NSNotification*) notify{
-    [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"网络异常", nil) subtitle:nil type:TSMessageNotificationTypeError duration:.5 canBeDismissedByUser:NO];
-    
+    self.latestServerHeart = 0;
+    [self checkConnectionToServer];
 }
 
 - (void)sendHeartbeat{

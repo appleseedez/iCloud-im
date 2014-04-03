@@ -101,23 +101,36 @@
     NSLog(@"验证信息:%@",self.authInfo);
     [self send:self.authInfo];
 }
-
+static int reconnectTryCount = 0;
 // 断开了服务器链接
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
-    if ([UIApplication sharedApplication].backgroundTimeRemaining > 0) {
+//    if ([UIApplication sharedApplication].backgroundTimeRemaining > 0) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+////            UILocalNotification * notificationInBackground = [[UILocalNotification alloc] init];
+////            notificationInBackground.alertBody = NSLocalizedString(@"链接断开了", Nil);
+////            [[UIApplication sharedApplication] presentLocalNotificationNow:notificationInBackground];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
+//        });
+//        
+//        return;
+//    }
+//
+    if (reconnectTryCount < 3) {
+        reconnectTryCount++;
         dispatch_async(dispatch_get_main_queue(), ^{
-//            UILocalNotification * notificationInBackground = [[UILocalNotification alloc] init];
-//            notificationInBackground.alertBody = NSLocalizedString(@"链接断开了", Nil);
-//            [[UIApplication sharedApplication] presentLocalNotificationNow:notificationInBackground];
+            NSLog(@"重连");
             [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
         });
-        
-        return;
+    }else{
+        reconnectTryCount = 0;
+        //
+        NSLog(@"连接失败了,停止尝试");
+        [TSMessage dismissActiveNotification];
+        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"网络异常.", nil) subtitle:nil image:nil type:TSMessageNotificationTypeError duration:36000 callback:^{
+            [TSMessage dismissActiveNotification];
+        } buttonTitle:nil buttonCallback:nil atPosition:TSMessageNotificationPositionBottom canBeDismissedByUser:YES];
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
-    });
+
 }
 
 
