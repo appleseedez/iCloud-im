@@ -54,7 +54,11 @@
     for (CustonTarbarItem *item in self.customTabbar.items) {
         [item addTarget:self action:@selector(changeController:) forControlEvents:UIControlEventTouchDown];
     }
+    [self changeMain];
+}
+-(void)changeMain{
     [self changeController:[self.customTabbar.items objectAtIndex:2] presentDialingView:NO];
+    [self setSelectedIndex:2];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

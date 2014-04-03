@@ -17,5 +17,5 @@
 
 @interface RootViewController : UITabBarController<RoorViewChangingSubPageDelegate>
 @property (nonatomic,weak) id <IMManager> manager;
-
+-(void)changeMain;
 @end

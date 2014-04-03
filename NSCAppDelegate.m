@@ -306,7 +306,7 @@ static long ConnectionFlagKVOContext = 0;
         //        [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
     }
     else if(Type==RootViewControllerMain){
-        [self.RootVC changeSubViewAtIndex:2];
+        [self.RootVC changeMain];
         [self.window setRootViewController:self.RootVC];
         NSString *hostItel=[[ItelAction action]getHost].itelNum;
         [[NSUserDefaults standardUserDefaults] setObject:hostItel forKey:@"currUser"];
