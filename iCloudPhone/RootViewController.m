@@ -59,6 +59,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self registerNotifications];
+    [self.view bringSubviewToFront:self.customTabbar];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];

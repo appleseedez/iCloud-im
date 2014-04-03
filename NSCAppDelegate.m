@@ -32,6 +32,7 @@
 @implementation NSCAppDelegate
 -(void) signOut{
     [[ItelAction action] logout];
+    [self.manager dismissDialRelatedPanel];
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"currUser"];
 
     [self.manager logoutFromSignalServer];
@@ -305,6 +306,7 @@ static long ConnectionFlagKVOContext = 0;
         //        [[NSNotificationCenter defaultCenter] postNotificationName:@"rootViewDisappear" object:nil];
     }
     else if(Type==RootViewControllerMain){
+        [self.RootVC changeSubViewAtIndex:2];
         [self.window setRootViewController:self.RootVC];
         NSString *hostItel=[[ItelAction action]getHost].itelNum;
         [[NSUserDefaults standardUserDefaults] setObject:hostItel forKey:@"currUser"];
