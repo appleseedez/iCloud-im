@@ -198,6 +198,7 @@ static int endTime = 0;
     
 }
 - (void)presentDialRelatedPanel:(UIViewController*) rootViewController{
+    ((NSCAppDelegate*) [UIApplication sharedApplication].delegate).window.userInteractionEnabled = NO;
     [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow makeKeyAndVisible];
     ((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow.rootViewController = rootViewController;
 }
@@ -206,6 +207,7 @@ static int endTime = 0;
     
     [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).window makeKeyAndVisible];
 
+    ((NSCAppDelegate*) [UIApplication sharedApplication].delegate).window.userInteractionEnabled = YES;
     [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow.rootViewController.view removeFromSuperview];
     ((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow.rootViewController = nil;
     [((NSCAppDelegate*) [UIApplication sharedApplication].delegate).dialPanelWindow setHidden:YES];
