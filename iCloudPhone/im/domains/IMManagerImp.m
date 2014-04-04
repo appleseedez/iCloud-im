@@ -165,6 +165,7 @@ static int hasObserver = 0;
 static int endTime = 0;
 - (void)endSession{
     NSLog(@"end session times:%d",endTime++);
+    [self unlockScreenForSession];
     if (![self.engine isP2PFinished]) {
         [self.engine stopDetectP2P];
          return;
