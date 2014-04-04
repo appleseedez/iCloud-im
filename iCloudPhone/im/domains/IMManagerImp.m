@@ -977,7 +977,7 @@ static int endTime = 0;
 
 - (void) checkConnectionToServer{
 //    NSLog(@"差:%f",[NSDate timeIntervalSinceReferenceDate] - self.latestServerHeart);
-    if ([NSDate timeIntervalSinceReferenceDate] - self.latestServerHeart > 40) {
+    if ([NSDate timeIntervalSinceReferenceDate] - self.latestServerHeart > 60) {
         [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"网络异常,请点击此处重连.", nil) subtitle:nil image:nil type:TSMessageNotificationTypeWarning duration:36000 callback:^{
             [[NSNotificationCenter defaultCenter] postNotificationName:RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION object:nil userInfo:nil];
             [TSMessage dismissActiveNotification];
