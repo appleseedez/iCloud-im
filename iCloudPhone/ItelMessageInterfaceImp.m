@@ -10,59 +10,69 @@
 #import "ItelAction.h"
 #import "Message+CRUD.h"
 #import "IMCoreDataManager.h"
-@interface ItelMessageInterfaceImp()
-@property(nonatomic) NSTimer* timer;
+@interface ItelMessageInterfaceImp ()
+@property(nonatomic) NSTimer *timer;
 @end
-static ItelMessageInterfaceImp* _instance;
+static ItelMessageInterfaceImp *_instance;
 @implementation ItelMessageInterfaceImp
-+(void)initialize{
-    _instance = [ItelMessageInterfaceImp new];
++ (void)initialize {
+  _instance = [ItelMessageInterfaceImp new];
 }
-+ (instancetype) defaultMessageInterface{
-    return _instance;
++ (instancetype)defaultMessageInterface {
+  return _instance;
 }
 
+- (void)setup {
+  NSLog(@"ItelMessageInterfaceImp calling setup");
+  //注册通知
+  //  [[NSNotificationCenter defaultCenter] addObserver:self
+  //                                           selector:@selector(startSearching)
+  //                                               name:@"rootViewAppear"
+  //                                             object:nil];
+  //  [[NSNotificationCenter defaultCenter] addObserver:self
+  //                                           selector:@selector(stopSearching)
+  //                                               name:@"rootViewDisappear"
+  //                                             object:nil];
+}
+- (void)tearDown {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)startSearching {
 
-- (void) setup{
-    NSLog(@"ItelMessageInterfaceImp calling setup");
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startSearching) name:@"rootViewAppear" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopSearching) name:@"rootViewDisappear" object:nil];
+  [self sendSearching];
+  //  self.timer = [NSTimer scheduledTimerWithTimeInterval:30
+  //                                                target:self
+  //                                              selector:@selector(sendSearching)
+  //                                              userInfo:nil
+  //                                               repeats:YES];
 }
--(void)tearDown{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
--(void)startSearching{
-    
-    [self sendSearching];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(sendSearching) userInfo:nil repeats:YES];
-}
--(void)sendSearching{
-    if ([[ItelAction action] getHost]) {
-        [[ItelAction action] searchForNewMessage];
-    }else{
-        [self.timer invalidate];
-        self.timer=nil;
-    }
-    
-}
--(void)stopSearching{
+- (void)sendSearching {
+  if ([[ItelAction action] getHost]) {
+    [[ItelAction action] searchForNewMessage];
+  } else {
     [self.timer invalidate];
-    self.timer=nil;
+    self.timer = nil;
+  }
 }
--(void)addNewMessages:(NSArray*)data{
-    
-    if ([data isKindOfClass:[NSArray class]]) {
-        NSManagedObjectContext* currentContext =[IMCoreDataManager defaulManager].managedObjectContext;
-            for(NSDictionary *mesDic in data ){
-                [Message messageWithDic:mesDic inContext:currentContext];
-            }
-            [[IMCoreDataManager defaulManager] saveContext:currentContext];
-    }
+- (void)stopSearching {
+  [self.timer invalidate];
+  self.timer = nil;
 }
--(NSArray*)getSystemMessages{
+- (void)addNewMessages:(NSArray *)data {
 
-    return [Message allMessagesInContext:[IMCoreDataManager defaulManager].managedObjectContext];
+  if ([data isKindOfClass:[NSArray class]]) {
+    NSManagedObjectContext *currentContext = [IMCoreDataManager defaulManager]
+                                                 .managedObjectContext;
+    for (NSDictionary *mesDic in data) {
+      [Message messageWithDic:mesDic inContext:currentContext];
+    }
+    [[IMCoreDataManager defaulManager] saveContext:currentContext];
+  }
+}
+- (NSArray *)getSystemMessages {
+
+  return [Message allMessagesInContext:[IMCoreDataManager defaulManager]
+                                           .managedObjectContext];
 }
 
 @end

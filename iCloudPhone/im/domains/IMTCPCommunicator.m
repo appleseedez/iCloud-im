@@ -189,8 +189,11 @@ static int reconnectTryCount = 0;
     NSError* error;
     self.account = account;
     if ([self.sock isConnected]) {
-        [self disconnect];
+        NSLog(@"socket 还连着,不再连接");
+        return;
+//        [self disconnect];
     }
+    NSLog(@"我检测 socket 是断开的 准备再次连接");
     self.authInfo = authInfo;
     if (![self.sock connectToHost:self.ip onPort:self.port error:&error]) {
 //        [self disconnect];

@@ -10,26 +10,26 @@
 
 @protocol IMCommunicator <NSObject>
 //建立链接
-- (void) connect:(NSString*) account withAuthInfo:(NSDictionary*) authInfo;
+- (void)connect:(NSString *)account withAuthInfo:(NSDictionary *)authInfo;
 // 断开链接
-- (void) disconnect;
+- (void)disconnect;
 // 发送数据
-- (void) send:(NSDictionary*) data;
+- (void)send:(NSDictionary *)data;
 // 接收数据
-- (void) receive:(NSDictionary*) data;
+- (void)receive:(NSDictionary *)data;
 
 @optional
 // 长链接
-- (void)connect:(NSString*) account;
-- (void) keepAlive;
+- (void)connect:(NSString *)account;
+- (void)keepAlive;
 
-- (void) setupIP:(NSString*) ip;
+- (void)setupIP:(NSString *)ip;
 
-- (void) setupPort:(u_int16_t) port;
+- (void)setupPort:(u_int16_t)port;
 
-- (void) tearDown;
+- (void)tearDown;
 
-- (BOOL) isConnected;
+- (BOOL)isConnected;
 
-- (void) sendHeartbeat;
+- (void) sendHeartBeat;
 @end
