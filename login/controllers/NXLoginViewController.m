@@ -17,6 +17,8 @@
 #import "NXImageView.h"
 #import "ItelAction.h"
 #import "NetRequester.h"
+#import "RAC_NetRequest_Signal.h"
+#import "ReactiveCocoa.h"
 #define mockServer [AFHTTPSessionManager manager]
 
 @interface NXLoginViewController ()
@@ -83,7 +85,7 @@ static int loginCount=0;
     }
     else{
         self.btnLogin.enabled=NO;
-        [self requestToLogin];
+        [self requestToLogin1];
     }
 }
 -(void)requestToLogin{
@@ -165,33 +167,50 @@ static int loginCount=0;
     [self.view endEditing:YES];
     self.txtInuptCheckMessage.text=@"登录中...";
     [self.actWaitingToLogin startAnimating];
-    NSString *url=[NSString stringWithFormat:@"%@/login",SIGNAL_SERVER];
+    NSString *url=[NSString stringWithFormat:@"%@/login.json",SIGNAL_SERVER];
     
     loginCount ++;
     NSLog(@"登录了%d次",loginCount);
+    NSString *uuid=((NSCAppDelegate*)[UIApplication sharedApplication].delegate).UUID;
+    //ecommerce-android
+    
+    NSString *password=self.txtUserPassword.text;
+#if USING_PASSWORD_ENCODE
+    
+    password=[NXInputChecker encodePassWord:password];
+#endif
+    NSDictionary *parameters=  @{@"itel": self.txtUserCloudNumber.text,@"password":password,@"type":@"phone-ios",@"onlymark":uuid,@"phonecode":@""};
+    
+
     
     
-    NSDictionary *parameters=  @{@"itel": self.txtUserCloudNumber.text,@"password":self.txtUserPassword.text,@"type":@"IOS",@"_spring_security_remember_me":@"true"};
+    
   
-   
-    
-    
-    //success封装了一段代码表示如果请求成功 执行这段代码
-    void (^success)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject){
-        
-        id json=responseObject;
-        
-        if ([json isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dic=[json objectForKey:@"message"];
+    RACSignal *loginSignal=[RAC_NetRequest_Signal signalWithUrl:url parameters:parameters type:1];
+     [loginSignal subscribeError:^(NSError *error) {
+         [self.actWaitingToLogin stopAnimating];
+         self.txtInuptCheckMessage.text = @"网络不通";
+         self.btnLogin.enabled = YES;
+         
+         NSLog(@"%@",error);
+
+         NSLog(@"%@",error);
+     }];
+    [loginSignal subscribeNext:^(NSDictionary *responseDic ) {
+        if (responseDic!=nil) {
+            NSDictionary *dic=[responseDic objectForKey:@"message"];
+            if ([dic objectForKey:@"ret"] == nil) {
+                [self.actWaitingToLogin stopAnimating];
+                self.txtInuptCheckMessage.text=[dic objectForKey:@"msg"];
+                self.btnLogin.enabled=YES;
+                NSLog(@"登录失败:%@",[dic objectForKey:@"msg"]);
+                return ;
+            }
             int ret=[[dic objectForKey:@"ret"] intValue];
             if (ret==0) {
                 HostItelUser *host=[HostItelUser userWithDictionary:[[dic objectForKey:@"data"] mutableCopy]];
-                NSDictionary *tokens=[json objectForKey:@"tokens"];
-                if (tokens) {
-                    host.sessionId=[tokens objectForKey:@"jsessionid"];
-                    host.spring_security_remember_me_cookie=[tokens objectForKey:@"spring_security_remember_me_cookie"];
-                    host.token=[tokens objectForKey:@"token"];
-                }
+                
+                
                 
                 
                 [[ItelAction action] setHostItelUser:host];
@@ -202,11 +221,12 @@ static int loginCount=0;
                 
                 
                 NSCAppDelegate *delegate =   (NSCAppDelegate*) [UIApplication sharedApplication].delegate;
-                [delegate changeRootViewController:RootViewControllerMain userInfo:[[json valueForKey:@"message"] valueForKey:@"data"]];
+                [delegate changeRootViewController:RootViewControllerMain userInfo:[[responseDic valueForKey:@"message"] valueForKey:@"data"]];
                 
                 [[ItelAction action] checkAddressBookMatchingItel];
                 [[ItelAction action] getItelBlackList:0];
                 [[ItelAction action] getItelFriendList:0];
+                [[ItelAction action] checkNewVersion:nil];
                 self.btnLogin.enabled=YES;
             }
             else {
@@ -214,15 +234,9 @@ static int loginCount=0;
                 self.txtInuptCheckMessage.text=[dic objectForKey:@"msg"];
                 self.btnLogin.enabled=YES;
             }
-        }//如果请求失败 则执行failure
-    };
-    void (^failure)(AFHTTPRequestOperation *operation, NSError *error)   = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
-        [self.actWaitingToLogin stopAnimating];
-        self.txtInuptCheckMessage.text = @"网络不通";
-        self.btnLogin.enabled = YES;
-    };
-    [[AFHTTPRequestOperationManager manager]POST:url parameters:parameters success:success failure:failure];
+
+        }
+    }];
 }
 #pragma mark - 检测用户输入
 

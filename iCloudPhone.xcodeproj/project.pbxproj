@@ -34,10 +34,6 @@
 		473F62E3183889B0006CAE31 /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 473F62E2183889B0006CAE31 /* AddressBook.m */; };
 		475165571875683500628C8A /* MoreSIgnOutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 475165561875683500628C8A /* MoreSIgnOutCell.m */; };
 		4757D04F1855BC69001A9639 /* NetRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757D04E1855BC69001A9639 /* NetRequester.m */; };
-		4757D0511855C078001A9639 /* 企业注册.png in Resources */ = {isa = PBXBuildFile; fileRef = 4757D0501855C078001A9639 /* 企业注册.png */; };
-		4757D0531855C083001A9639 /* 个人注册.png in Resources */ = {isa = PBXBuildFile; fileRef = 4757D0521855C083001A9639 /* 个人注册.png */; };
-		4757D0551855C5F0001A9639 /* itel输入提示.png in Resources */ = {isa = PBXBuildFile; fileRef = 4757D0541855C5F0001A9639 /* itel输入提示.png */; };
-		4757D0591855CAD6001A9639 /* 短信提示.png in Resources */ = {isa = PBXBuildFile; fileRef = 4757D0581855CAD6001A9639 /* 短信提示.png */; };
 		47592C3E1872923A003FB827 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47592C3D1872923A003FB827 /* MessageCell.m */; };
 		4769EC6218AB2F4300F76DB5 /* 115.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4769EC6118AB2F4300F76DB5 /* 115.storyboard */; };
 		4769EC6518AB399A00F76DB5 /* 115MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4769EC6418AB399A00F76DB5 /* 115MainViewController.m */; };
@@ -82,9 +78,7 @@
 		478814011839E66C0085224D /* NXInputCheckerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813FE1839E66C0085224D /* NXInputCheckerTest.m */; };
 		478814021839E66C0085224D /* NXLoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 478813FF1839E66C0085224D /* NXLoginViewControllerTest.m */; };
 		478814031839E66C0085224D /* NXRegViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 478814001839E66C0085224D /* NXRegViewControllerTest.m */; };
-		478814051839E7120085224D /* mockhead.png in Resources */ = {isa = PBXBuildFile; fileRef = 478814041839E7120085224D /* mockhead.png */; };
 		478814091839E8400085224D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 478814081839E8400085224D /* libsqlite3.dylib */; };
-		4788140B1839ED7F0085224D /* itel.png in Resources */ = {isa = PBXBuildFile; fileRef = 4788140A1839ED7F0085224D /* itel.png */; };
 		47952D9418582DBA0044CF64 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9318582DBA0044CF64 /* MBProgressHUD.m */; };
 		47952D9718583D170044CF64 /* NSCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9618583D170044CF64 /* NSCAlertView.m */; };
 		47952D9D18585F600044CF64 /* RegNextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 47952D9C18585F600044CF64 /* RegNextButton.m */; };
@@ -93,6 +87,7 @@
 		4797E8CF18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8CE18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m */; };
 		4797E8D4188567DA0075BD9B /* HostSecondAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797E8D3188567DA0075BD9B /* HostSecondAddressViewController.m */; };
 		47987DD618AC6132008CC5F5 /* Button115.m in Sources */ = {isa = PBXBuildFile; fileRef = 47987DD518AC6132008CC5F5 /* Button115.m */; };
+		4798873C18F1AE7600A948B2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AA52879A89A4338A0611E15 /* libPods.a */; };
 		4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */ = {isa = PBXBuildFile; fileRef = 4798A26D183DD45300060DDB /* HostItelUser+set.m */; };
 		4798DEDE18C70C2F0068BFF1 /* ItelUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4798DEDD18C70C2F0068BFF1 /* ItelUpdateManager.m */; };
 		479AD2EB18862AB2009B3278 /* Area+toString.m in Sources */ = {isa = PBXBuildFile; fileRef = 479AD2EA18862AB2009B3278 /* Area+toString.m */; };
@@ -103,12 +98,10 @@
 		479C7BAB185DA7A30046B1D7 /* MoreOtherViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BAA185DA7A30046B1D7 /* MoreOtherViewCell.m */; };
 		479C7BAE185DDB480046B1D7 /* RegTipLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BAD185DDB480046B1D7 /* RegTipLabel.m */; };
 		479C9C221834F02800DE40D8 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C9C201834F02800DE40D8 /* ContentViewController.m */; };
-		479C9C291835019D00DE40D8 /* 头像.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 479C9C281835019D00DE40D8 /* 头像.jpg */; };
 		479DB4B418648F8300421C10 /* CommonSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4B318648F8300421C10 /* CommonSettingViewController.m */; };
 		479DB4B718648F9900421C10 /* BlackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4B618648F9900421C10 /* BlackListViewController.m */; };
 		479DB4BB186494A000421C10 /* blackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4BA186494A000421C10 /* blackCell.m */; };
 		479DC49B183A4D3F00C3F3F2 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DC49A183A4D3F00C3F3F2 /* PeopleViewController.m */; };
-		479DC49D183A544200C3F3F2 /* 广告.png in Resources */ = {isa = PBXBuildFile; fileRef = 479DC49C183A544200C3F3F2 /* 广告.png */; };
 		479E0CDA1856A817005BAE20 /* RegManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E0CD91856A817005BAE20 /* RegManager.m */; };
 		479E2BC81835B8B6002D8172 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E2BC71835B8B6002D8172 /* AddViewController.m */; };
 		479E5BF6186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E5BF5186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.m */; };
@@ -116,8 +109,6 @@
 		479E934F185AB7D4001AF6ED /* NXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E934E185AB7D4001AF6ED /* NXLoginViewController.m */; };
 		479E9351185AB7F8001AF6ED /* NSCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E9350185AB7F8001AF6ED /* NSCAppDelegate.m */; };
 		479E9353185AB842001AF6ED /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E9352185AB842001AF6ED /* RootViewController.m */; };
-		479ED42C186C65C40084EED1 /* itelLOGO.png in Resources */ = {isa = PBXBuildFile; fileRef = 479ED42B186C65C40084EED1 /* itelLOGO.png */; };
-		479ED42E186C66290084EED1 /* AboutLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 479ED42D186C66290084EED1 /* AboutLogo.png */; };
 		479EF04E1859D47C0012EE29 /* IMAnsweringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF00F1859D47C0012EE29 /* IMAnsweringViewController.m */; };
 		479EF04F1859D47C0012EE29 /* IMCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF0111859D47C0012EE29 /* IMCallingViewController.m */; };
 		479EF0501859D47C0012EE29 /* IMDailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF0131859D47C0012EE29 /* IMDailViewController.m */; };
@@ -177,7 +168,6 @@
 		47A5577E186320640062EFFF /* HostEditSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A5577D186320640062EFFF /* HostEditSignViewController.m */; };
 		47A557811863280A0062EFFF /* HostEditNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A557801863280A0062EFFF /* HostEditNicknameViewController.m */; };
 		47A5F8B6186D480900B8CEC8 /* PassManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A5F8B5186D480900B8CEC8 /* PassManager.m */; };
-		47A5F8B8186D650A00B8CEC8 /* Itel ICON-IOS.png in Resources */ = {isa = PBXBuildFile; fileRef = 47A5F8B7186D650A00B8CEC8 /* Itel ICON-IOS.png */; };
 		47B66DD7186AC3FA00AAD771 /* SecurityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B66DD6186AC3FA00AAD771 /* SecurityViewController.m */; };
 		47B89DD51834D40000022FE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD41834D40000022FE5 /* Foundation.framework */; };
 		47B89DD71834D40000022FE5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD61834D40000022FE5 /* CoreGraphics.framework */; };
@@ -190,6 +180,8 @@
 		47B89DF61834D40000022FE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B89DD81834D40000022FE5 /* UIKit.framework */; };
 		47B89DFE1834D40000022FE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47B89DFC1834D40000022FE5 /* InfoPlist.strings */; };
 		47B89E001834D40000022FE5 /* iCloudPhoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B89DFF1834D40000022FE5 /* iCloudPhoneTests.m */; };
+		47B9F79C18F19899004211C8 /* Itel_RAC_User_Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B9F79B18F19899004211C8 /* Itel_RAC_User_Service.m */; };
+		47B9F79F18F19990004211C8 /* RAC_NetRequest_Signal.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B9F79E18F19990004211C8 /* RAC_NetRequest_Signal.m */; };
 		47BE0A3C18C58FAF007F5423 /* MoreAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BE0A3B18C58FAF007F5423 /* MoreAboutViewController.m */; };
 		47CDFE90184ED0F700673C2B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CDFE8F184ED0F700673C2B /* AVFoundation.framework */; };
 		47CDFE92184ED10500673C2B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CDFE91184ED10500673C2B /* CoreImage.framework */; };
@@ -211,14 +203,9 @@
 		47DD064718A8A47200BD0E47 /* ItelProcessIntent.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DD064618A8A47200BD0E47 /* ItelProcessIntent.m */; };
 		47E05DC018517418009FDCED /* searchuser.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E05DBE18517418009FDCED /* searchuser.png */; };
 		47E05DC118517418009FDCED /* checkAddress.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E05DBF18517418009FDCED /* checkAddress.png */; };
-		47E05DC318519C9C009FDCED /* 头像.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E05DC218519C9C009FDCED /* 头像.png */; };
-		47E05DC51851A2CE009FDCED /* 详细按钮.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E05DC41851A2CE009FDCED /* 详细按钮.png */; };
 		47E2DB8C18595A5A00D455EF /* SearchNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E2DB8B18595A5A00D455EF /* SearchNavController.m */; };
-		47E2DB8E185985C800D455EF /* 本机联系人.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E2DB8D185985C800D455EF /* 本机联系人.png */; };
 		47E2DB931859875A00D455EF /* InviteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E2DB921859875A00D455EF /* InviteButton.m */; };
-		47E2DB9518598B0500D455EF /* 邀请.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E2DB9418598B0500D455EF /* 邀请.png */; };
 		47E2DB9A185991BD00D455EF /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E2DB99185991BD00D455EF /* MoreViewController.m */; };
-		47E2DB9C185997F000D455EF /* 登录logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E2DB9B185997F000D455EF /* 登录logo.png */; };
 		BA06AFAA1877C5F20099C3F7 /* Recent.m in Sources */ = {isa = PBXBuildFile; fileRef = BA06AFA91877C5F20099C3F7 /* Recent.m */; };
 		BA06AFAD18783A8E0099C3F7 /* Recent+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BA06AFAC18783A8E0099C3F7 /* Recent+CRUD.m */; };
 		BA06AFAE187873910099C3F7 /* iCloudPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA06AFB0187873910099C3F7 /* iCloudPhone.storyboard */; };
@@ -403,10 +390,6 @@
 		475165561875683500628C8A /* MoreSIgnOutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSIgnOutCell.m; sourceTree = "<group>"; };
 		4757D04D1855BC69001A9639 /* NetRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetRequester.h; sourceTree = "<group>"; };
 		4757D04E1855BC69001A9639 /* NetRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetRequester.m; sourceTree = "<group>"; };
-		4757D0501855C078001A9639 /* 企业注册.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "企业注册.png"; sourceTree = "<group>"; };
-		4757D0521855C083001A9639 /* 个人注册.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人注册.png"; sourceTree = "<group>"; };
-		4757D0541855C5F0001A9639 /* itel输入提示.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "itel输入提示.png"; sourceTree = "<group>"; };
-		4757D0581855CAD6001A9639 /* 短信提示.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "短信提示.png"; sourceTree = "<group>"; };
 		47592C3C1872923A003FB827 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		47592C3D1872923A003FB827 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		4769EC6118AB2F4300F76DB5 /* 115.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = 115.storyboard; sourceTree = "<group>"; };
@@ -493,9 +476,7 @@
 		478813FE1839E66C0085224D /* NXInputCheckerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXInputCheckerTest.m; sourceTree = "<group>"; };
 		478813FF1839E66C0085224D /* NXLoginViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXLoginViewControllerTest.m; sourceTree = "<group>"; };
 		478814001839E66C0085224D /* NXRegViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXRegViewControllerTest.m; sourceTree = "<group>"; };
-		478814041839E7120085224D /* mockhead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mockhead.png; sourceTree = "<group>"; };
 		478814081839E8400085224D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		4788140A1839ED7F0085224D /* itel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itel.png; sourceTree = "<group>"; };
 		47952D9218582DBA0044CF64 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		47952D9318582DBA0044CF64 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		47952D9518583D170044CF64 /* NSCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCAlertView.h; sourceTree = "<group>"; };
@@ -536,7 +517,6 @@
 		479C7BAD185DDB480046B1D7 /* RegTipLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegTipLabel.m; sourceTree = "<group>"; };
 		479C9C1F1834F02800DE40D8 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		479C9C201834F02800DE40D8 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
-		479C9C281835019D00DE40D8 /* 头像.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "头像.jpg"; sourceTree = "<group>"; };
 		479DB4B218648F8300421C10 /* CommonSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSettingViewController.h; sourceTree = "<group>"; };
 		479DB4B318648F8300421C10 /* CommonSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonSettingViewController.m; sourceTree = "<group>"; };
 		479DB4B518648F9900421C10 /* BlackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackListViewController.h; sourceTree = "<group>"; };
@@ -546,7 +526,6 @@
 		479DC496183A4CC100C3F3F2 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		479DC499183A4D3F00C3F3F2 /* PeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeopleViewController.h; path = ../PeopleViewController.h; sourceTree = "<group>"; };
 		479DC49A183A4D3F00C3F3F2 /* PeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeopleViewController.m; path = ../PeopleViewController.m; sourceTree = "<group>"; };
-		479DC49C183A544200C3F3F2 /* 广告.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "广告.png"; sourceTree = "<group>"; };
 		479E0CD81856A817005BAE20 /* RegManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegManager.h; sourceTree = "<group>"; };
 		479E0CD91856A817005BAE20 /* RegManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegManager.m; sourceTree = "<group>"; };
 		479E2BC61835B8B6002D8172 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
@@ -558,8 +537,6 @@
 		479E934E185AB7D4001AF6ED /* NXLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXLoginViewController.m; sourceTree = "<group>"; };
 		479E9350185AB7F8001AF6ED /* NSCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSCAppDelegate.m; sourceTree = "<group>"; };
 		479E9352185AB842001AF6ED /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		479ED42B186C65C40084EED1 /* itelLOGO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itelLOGO.png; sourceTree = "<group>"; };
-		479ED42D186C66290084EED1 /* AboutLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AboutLogo.png; sourceTree = "<group>"; };
 		479EF00E1859D47C0012EE29 /* IMAnsweringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAnsweringViewController.h; sourceTree = "<group>"; };
 		479EF00F1859D47C0012EE29 /* IMAnsweringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAnsweringViewController.m; sourceTree = "<group>"; };
 		479EF0101859D47C0012EE29 /* IMCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMCallingViewController.h; sourceTree = "<group>"; };
@@ -669,7 +646,6 @@
 		47A557801863280A0062EFFF /* HostEditNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEditNicknameViewController.m; sourceTree = "<group>"; };
 		47A5F8B4186D480900B8CEC8 /* PassManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassManager.h; sourceTree = "<group>"; };
 		47A5F8B5186D480900B8CEC8 /* PassManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassManager.m; sourceTree = "<group>"; };
-		47A5F8B7186D650A00B8CEC8 /* Itel ICON-IOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Itel ICON-IOS.png"; sourceTree = "<group>"; };
 		47B66DD5186AC3FA00AAD771 /* SecurityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityViewController.h; sourceTree = "<group>"; };
 		47B66DD6186AC3FA00AAD771 /* SecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityViewController.m; sourceTree = "<group>"; };
 		47B89DD11834D40000022FE5 /* iTelPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTelPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -687,6 +663,13 @@
 		47B89DFB1834D40000022FE5 /* iCloudPhoneTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iCloudPhoneTests-Info.plist"; sourceTree = "<group>"; };
 		47B89DFD1834D40000022FE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		47B89DFF1834D40000022FE5 /* iCloudPhoneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iCloudPhoneTests.m; sourceTree = "<group>"; };
+		47B9F79A18F19899004211C8 /* Itel_RAC_User_Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Itel_RAC_User_Service.h; sourceTree = "<group>"; };
+		47B9F79B18F19899004211C8 /* Itel_RAC_User_Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Itel_RAC_User_Service.m; sourceTree = "<group>"; };
+		47B9F79D18F19990004211C8 /* RAC_NetRequest_Signal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAC_NetRequest_Signal.h; sourceTree = "<group>"; };
+		47B9F79E18F19990004211C8 /* RAC_NetRequest_Signal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAC_NetRequest_Signal.m; sourceTree = "<group>"; };
+		47B9F7A018F1A30B004211C8 /* iTelPhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iTelPhone.entitlements; sourceTree = "<group>"; };
+		47B9F7A118F1A59A004211C8 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		47B9F7A318F1A5BE004211C8 /* libPods-AFNetworking-ReactiveCocoa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking-ReactiveCocoa.a"; path = "Pods/build/Release-iphoneos/libPods-AFNetworking-ReactiveCocoa.a"; sourceTree = "<group>"; };
 		47BE0A3A18C58FAF007F5423 /* MoreAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreAboutViewController.h; sourceTree = "<group>"; };
 		47BE0A3B18C58FAF007F5423 /* MoreAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreAboutViewController.m; sourceTree = "<group>"; };
 		47CDFE8F184ED0F700673C2B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -718,17 +701,14 @@
 		47DD064618A8A47200BD0E47 /* ItelProcessIntent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelProcessIntent.m; sourceTree = "<group>"; };
 		47E05DBE18517418009FDCED /* searchuser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchuser.png; sourceTree = "<group>"; };
 		47E05DBF18517418009FDCED /* checkAddress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkAddress.png; sourceTree = "<group>"; };
-		47E05DC218519C9C009FDCED /* 头像.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "头像.png"; sourceTree = "<group>"; };
-		47E05DC41851A2CE009FDCED /* 详细按钮.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "详细按钮.png"; sourceTree = "<group>"; };
 		47E2DB8A18595A5A00D455EF /* SearchNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNavController.h; sourceTree = "<group>"; };
 		47E2DB8B18595A5A00D455EF /* SearchNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNavController.m; sourceTree = "<group>"; };
-		47E2DB8D185985C800D455EF /* 本机联系人.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "本机联系人.png"; sourceTree = "<group>"; };
 		47E2DB911859875A00D455EF /* InviteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteButton.h; sourceTree = "<group>"; };
 		47E2DB921859875A00D455EF /* InviteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteButton.m; sourceTree = "<group>"; };
-		47E2DB9418598B0500D455EF /* 邀请.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请.png"; sourceTree = "<group>"; };
 		47E2DB98185991BD00D455EF /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		47E2DB99185991BD00D455EF /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
-		47E2DB9B185997F000D455EF /* 登录logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登录logo.png"; sourceTree = "<group>"; };
+		4AA52879A89A4338A0611E15 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		87FCD330768448B688169FF6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		BA06AFA81877C5F20099C3F7 /* Recent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recent.h; sourceTree = "<group>"; };
 		BA06AFA91877C5F20099C3F7 /* Recent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recent.m; sourceTree = "<group>"; };
 		BA06AFAB18783A8E0099C3F7 /* Recent+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Recent+CRUD.h"; sourceTree = "<group>"; };
@@ -856,6 +836,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4798873C18F1AE7600A948B2 /* libPods.a in Frameworks */,
 				BACCBF0518D79BCA00215FA7 /* OpenAL.framework in Frameworks */,
 				BA5485C018C8C77B003B2716 /* libTSMessages.a in Frameworks */,
 				BADDFD6A1876915200D10DDC /* CoreData.framework in Frameworks */,
@@ -1564,6 +1545,7 @@
 		47B89DC81834D40000022FE5 = {
 			isa = PBXGroup;
 			children = (
+				47B9F79918F1981B004211C8 /* RAC_Models */,
 				4769EC5118AB295700F76DB5 /* 115 */,
 				BAFEE13818744FDA00DB1AC6 /* db */,
 				479EF00C1859D47C0012EE29 /* im */,
@@ -1579,6 +1561,7 @@
 				BA54858C18C8C431003B2716 /* TSMessagesTests */,
 				47B89DD31834D40000022FE5 /* Frameworks */,
 				47B89DD21834D40000022FE5 /* Products */,
+				87FCD330768448B688169FF6 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1598,6 +1581,8 @@
 		47B89DD31834D40000022FE5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				47B9F7A318F1A5BE004211C8 /* libPods-AFNetworking-ReactiveCocoa.a */,
+				47B9F7A118F1A59A004211C8 /* libPods.a */,
 				BACCBF0418D79BCA00215FA7 /* OpenAL.framework */,
 				BADDFD691876915200D10DDC /* CoreData.framework */,
 				47CDFEA3184ED17800673C2B /* Security.framework */,
@@ -1618,6 +1603,7 @@
 				47B89DD61834D40000022FE5 /* CoreGraphics.framework */,
 				47B89DD81834D40000022FE5 /* UIKit.framework */,
 				47B89DF31834D40000022FE5 /* XCTest.framework */,
+				4AA52879A89A4338A0611E15 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1625,6 +1611,7 @@
 		47B89DDA1834D40000022FE5 /* iCloudPhone */ = {
 			isa = PBXGroup;
 			children = (
+				47B9F7A018F1A30B004211C8 /* iTelPhone.entitlements */,
 				BAE9C90A187C31C700E41A9E /* interface */,
 				4751655318750D8B00628C8A /* settings */,
 				47A269AF1871195F00084A80 /* message */,
@@ -1651,22 +1638,6 @@
 				BA06AFB0187873910099C3F7 /* iCloudPhone.storyboard */,
 				479E934B185AB7A3001AF6ED /* Login_iPhone.storyboard */,
 				47B89DDD1834D40000022FE5 /* (zh-Hans)InfoPlist.strings */,
-				479ED42B186C65C40084EED1 /* itelLOGO.png */,
-				47A5F8B7186D650A00B8CEC8 /* Itel ICON-IOS.png */,
-				479ED42D186C66290084EED1 /* AboutLogo.png */,
-				4757D0541855C5F0001A9639 /* itel输入提示.png */,
-				47E2DB9B185997F000D455EF /* 登录logo.png */,
-				4757D0581855CAD6001A9639 /* 短信提示.png */,
-				47E2DB8D185985C800D455EF /* 本机联系人.png */,
-				479DC49C183A544200C3F3F2 /* 广告.png */,
-				47E2DB9418598B0500D455EF /* 邀请.png */,
-				4757D0521855C083001A9639 /* 个人注册.png */,
-				47E05DC41851A2CE009FDCED /* 详细按钮.png */,
-				47E05DC218519C9C009FDCED /* 头像.png */,
-				4757D0501855C078001A9639 /* 企业注册.png */,
-				479C9C281835019D00DE40D8 /* 头像.jpg */,
-				4788140A1839ED7F0085224D /* itel.png */,
-				478814041839E7120085224D /* mockhead.png */,
 				47B89DE01834D40000022FE5 /* main.m */,
 				47B89DE21834D40000022FE5 /* iCloudPhone-Prefix.pch */,
 				BA06AFB11878757B0099C3F7 /* zh-cn.strings */,
@@ -1692,6 +1663,17 @@
 				47B89DFC1834D40000022FE5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		47B9F79918F1981B004211C8 /* RAC_Models */ = {
+			isa = PBXGroup;
+			children = (
+				47B9F79A18F19899004211C8 /* Itel_RAC_User_Service.h */,
+				47B9F79B18F19899004211C8 /* Itel_RAC_User_Service.m */,
+				47B9F79D18F19990004211C8 /* RAC_NetRequest_Signal.h */,
+				47B9F79E18F19990004211C8 /* RAC_NetRequest_Signal.m */,
+			);
+			name = RAC_Models;
 			sourceTree = "<group>";
 		};
 		47DD062D18A7217400BD0E47 /* base */ = {
@@ -2020,9 +2002,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47B89E031834D40000022FE5 /* Build configuration list for PBXNativeTarget "iCloudPhone" */;
 			buildPhases = (
+				401B1F9E5FF24C77BF4CF501 /* Check Pods Manifest.lock */,
 				47B89DCD1834D40000022FE5 /* Sources */,
 				47B89DCE1834D40000022FE5 /* Frameworks */,
 				47B89DCF1834D40000022FE5 /* Resources */,
+				9DD06AA4C6EE43D1B3DD32C2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 				479A8BEA18E139C800F73BA8 /* PBXBuildRule */,
@@ -2126,9 +2110,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				47B89DD01834D40000022FE5 /* iCloudPhone */,
 				47B89DF11834D40000022FE5 /* iCloudPhoneTests */,
 				479EF09B1859D9A40012EE29 /* GCDSocket */,
-				47B89DD01834D40000022FE5 /* iCloudPhone */,
 				479EF0A81859D9A50012EE29 /* GCDSocketTests */,
 				BA54857718C8C430003B2716 /* TSMessages */,
 				BA54858418C8C431003B2716 /* TSMessagesTests */,
@@ -2149,39 +2133,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4757D0551855C5F0001A9639 /* itel输入提示.png in Resources */,
 				BACD8282188C36DB0066F143 /* area.sqlite in Resources */,
 				BA06AFB21878757B0099C3F7 /* zh-cn.strings in Resources */,
 				BACCBF0C18D7B04D00215FA7 /* inComingSound.m4a in Resources */,
-				479DC49D183A544200C3F3F2 /* 广告.png in Resources */,
 				478594C0185026FF00AFF6BF /* tab_bar.png in Resources */,
-				47A5F8B8186D650A00B8CEC8 /* Itel ICON-IOS.png in Resources */,
 				BA5485E118C8D1C4003B2716 /* NotificationButtonBackground.png in Resources */,
 				BA5485DB18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon.png in Resources */,
 				479E934C185AB7A3001AF6ED /* Login_iPhone.storyboard in Resources */,
 				BA5485D518C8D1C4003B2716 /* NotificationBackgroundErrorIcon.png in Resources */,
 				BA5485E018C8D1C4003B2716 /* NotificationBackgroundWarningIcon@2x.png in Resources */,
-				479C9C291835019D00DE40D8 /* 头像.jpg in Resources */,
 				BA5485DA18C8D1C4003B2716 /* NotificationBackgroundSuccess@2x.png in Resources */,
-				47E05DC51851A2CE009FDCED /* 详细按钮.png in Resources */,
-				4788140B1839ED7F0085224D /* itel.png in Resources */,
 				BA5485D818C8D1C4003B2716 /* NotificationBackgroundMessage@2x.png in Resources */,
 				BA5485DE18C8D1C4003B2716 /* NotificationBackgroundWarning@2x.png in Resources */,
-				4757D0531855C083001A9639 /* 个人注册.png in Resources */,
 				BACCBF0D18D7B04D00215FA7 /* callingSound.m4a in Resources */,
 				BA5485D318C8D1C4003B2716 /* NotificationBackgroundError.png in Resources */,
 				BA5485E218C8D1C4003B2716 /* NotificationButtonBackground@2x.png in Resources */,
 				BA8242FC18758EA2001903CE /* jgb.m4a in Resources */,
 				BA5485DD18C8D1C4003B2716 /* NotificationBackgroundWarning.png in Resources */,
-				479ED42C186C65C40084EED1 /* itelLOGO.png in Resources */,
-				47E2DB8E185985C800D455EF /* 本机联系人.png in Resources */,
-				47E2DB9518598B0500D455EF /* 邀请.png in Resources */,
 				BA5485D418C8D1C4003B2716 /* NotificationBackgroundError@2x.png in Resources */,
-				479ED42E186C66290084EED1 /* AboutLogo.png in Resources */,
 				BA06AFAE187873910099C3F7 /* iCloudPhone.storyboard in Resources */,
-				47E05DC318519C9C009FDCED /* 头像.png in Resources */,
-				47E2DB9C185997F000D455EF /* 登录logo.png in Resources */,
-				4757D0591855CAD6001A9639 /* 短信提示.png in Resources */,
 				4769EC6218AB2F4300F76DB5 /* 115.storyboard in Resources */,
 				47E05DC018517418009FDCED /* searchuser.png in Resources */,
 				BA5485C118C8CAA7003B2716 /* TSMessagesDefaultDesign.json in Resources */,
@@ -2190,8 +2160,6 @@
 				47B89DED1834D40000022FE5 /* Images.xcassets in Resources */,
 				47B89DDF1834D40000022FE5 /* (zh-Hans)InfoPlist.strings in Resources */,
 				BA5485D618C8D1C4003B2716 /* NotificationBackgroundErrorIcon@2x.png in Resources */,
-				478814051839E7120085224D /* mockhead.png in Resources */,
-				4757D0511855C078001A9639 /* 企业注册.png in Resources */,
 				BA5485D718C8D1C4003B2716 /* NotificationBackgroundMessage.png in Resources */,
 				BA5485DC18C8D1C4003B2716 /* NotificationBackgroundSuccessIcon@2x.png in Resources */,
 				BA5485D918C8D1C4003B2716 /* NotificationBackgroundSuccess.png in Resources */,
@@ -2215,6 +2183,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		401B1F9E5FF24C77BF4CF501 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9DD06AA4C6EE43D1B3DD32C2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		479EF0981859D9A40012EE29 /* Sources */ = {
@@ -2349,6 +2350,7 @@
 				479EF05D1859D47C0012EE29 /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				4769EC6B18AB432100F76DB5 /* NX115Cell.m in Sources */,
 				47DD063518A744B000BD0E47 /* ItelIntentImp.m in Sources */,
+				47B9F79F18F19990004211C8 /* RAC_NetRequest_Signal.m in Sources */,
 				4769EC6E18AB460600F76DB5 /* Manager115.m in Sources */,
 				478813C81839C35E0085224D /* AFHTTPSessionManager.m in Sources */,
 				47E2DB9A185991BD00D455EF /* MoreViewController.m in Sources */,
@@ -2406,6 +2408,7 @@
 				479EF0521859D47C0012EE29 /* IMInSessionViewController.m in Sources */,
 				473F62DC18387CA4006CAE31 /* PersonInAddressBook.m in Sources */,
 				BA06AFAA1877C5F20099C3F7 /* Recent.m in Sources */,
+				47B9F79C18F19899004211C8 /* Itel_RAC_User_Service.m in Sources */,
 				479C7BAB185DA7A30046B1D7 /* MoreOtherViewCell.m in Sources */,
 				47592C3E1872923A003FB827 /* MessageCell.m in Sources */,
 				479F139518617904006DF67B /* HostNickNameCell.m in Sources */,
@@ -2681,9 +2684,11 @@
 		};
 		47B89E041834D40000022FE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87FCD330768448B688169FF6 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = iCloudPhone/iTelPhone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: YongPeng Wang (SPJ738AAND)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YongPeng Wang (SPJ738AAND)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2694,6 +2699,8 @@
 					"$(inherited)",
 					./iCloudPhone/im/sdk,
 					"$(PROJECT_DIR)/iCloudPhone/im/sdk",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Pods/build/Release-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
@@ -2707,9 +2714,11 @@
 		};
 		47B89E051834D40000022FE5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87FCD330768448B688169FF6 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = iCloudPhone/iTelPhone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: YongPeng Wang (SPJ738AAND)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YongPeng Wang (SPJ738AAND)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2720,7 +2729,10 @@
 					"$(inherited)",
 					./iCloudPhone/im/sdk,
 					"$(PROJECT_DIR)/iCloudPhone/im/sdk",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Pods/build/Release-iphoneos",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = iTelPhone;
 				PROVISIONING_PROFILE = "9A81C241-DB8B-44A0-AFC0-1EAB1A53B7C0";
