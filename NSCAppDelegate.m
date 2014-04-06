@@ -44,19 +44,25 @@
 
 - (void) reconnect:(NSNotification*) notify{
 
+//    if ([[ItelAction action] getHost] && self.manager && ![[self.manager myAccount] isEqualToString: BLANK_STRING]) {
+//#if usertip
+//////        [TSMessage showNotificationWithTitle:nil
+////                                    subtitle:NSLocalizedString(@"连接中...", nil)
+////                                        type:TSMessageNotificationTypeWarning];
+//        
+//        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"连接中...", nil) subtitle:nil type:TSMessageNotificationTypeWarning duration:0.5 canBeDismissedByUser:NO];
+//#endif
+//        [self.manager connectToSignalServer];
+//    }
+    [self performSelector:@selector(connectAfterDelay) withObject:nil afterDelay:0.5];
+//    [self connectAfterDelay];
+}
+- (void) connectAfterDelay{
     if ([[ItelAction action] getHost] && self.manager && ![[self.manager myAccount] isEqualToString: BLANK_STRING]) {
-#if usertip
-////        [TSMessage showNotificationWithTitle:nil
-//                                    subtitle:NSLocalizedString(@"连接中...", nil)
-//                                        type:TSMessageNotificationTypeWarning];
-        
-        [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"连接中...", nil) subtitle:nil type:TSMessageNotificationTypeWarning duration:0.5 canBeDismissedByUser:NO];
-#endif
+
         [self.manager connectToSignalServer];
     }
-
 }
-
 -(void)setupManagers{
 
 }

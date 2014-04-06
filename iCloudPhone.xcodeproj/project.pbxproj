@@ -258,6 +258,7 @@
 		BA5485E018C8D1C4003B2716 /* NotificationBackgroundWarningIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485D018C8D1C4003B2716 /* NotificationBackgroundWarningIcon@2x.png */; };
 		BA5485E118C8D1C4003B2716 /* NotificationButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485D118C8D1C4003B2716 /* NotificationButtonBackground.png */; };
 		BA5485E218C8D1C4003B2716 /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5485D218C8D1C4003B2716 /* NotificationButtonBackground@2x.png */; };
+		BA689A5E18EE9E1800AF85E1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BA689A5D18EE9E1800AF85E1 /* Reachability.m */; };
 		BA772EDA1875F02400CD8982 /* IMDBManagerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA772ED91875F02400CD8982 /* IMDBManagerImp.m */; };
 		BA8242FC18758EA2001903CE /* jgb.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BA8242FB18758EA2001903CE /* jgb.m4a */; };
 		BA959A9418605639009B8A4C /* MSWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA959A9318605639009B8A4C /* MSWeakTimer.m */; };
@@ -778,6 +779,8 @@
 		BA5485D018C8D1C4003B2716 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
 		BA5485D118C8D1C4003B2716 /* NotificationButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationButtonBackground.png; sourceTree = "<group>"; };
 		BA5485D218C8D1C4003B2716 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
+		BA689A5C18EE9E1800AF85E1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		BA689A5D18EE9E1800AF85E1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BA772ED81875F02400CD8982 /* IMDBManagerImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDBManagerImp.h; sourceTree = "<group>"; };
 		BA772ED91875F02400CD8982 /* IMDBManagerImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDBManagerImp.m; sourceTree = "<group>"; };
 		BA8242FB18758EA2001903CE /* jgb.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jgb.m4a; sourceTree = "<group>"; };
@@ -1289,6 +1292,7 @@
 		479EF00C1859D47C0012EE29 /* im */ = {
 			isa = PBXGroup;
 			children = (
+				BA689A5B18EE9E1800AF85E1 /* reachablity */,
 				BA54859A18C8C459003B2716 /* TSMessages */,
 				BA1A74D4187A77F40071E83F /* utils */,
 				BA8242FA18758E8A001903CE /* resources */,
@@ -1891,6 +1895,15 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		BA689A5B18EE9E1800AF85E1 /* reachablity */ = {
+			isa = PBXGroup;
+			children = (
+				BA689A5C18EE9E1800AF85E1 /* Reachability.h */,
+				BA689A5D18EE9E1800AF85E1 /* Reachability.m */,
+			);
+			path = reachablity;
+			sourceTree = "<group>";
+		};
 		BA8242FA18758E8A001903CE /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -2312,6 +2325,7 @@
 				BA9D481518A8BCE4001A78C8 /* Store.m in Sources */,
 				47A10DAD18659D3E00FB9FED /* PassSecuretyQuestiongViewController.m in Sources */,
 				479EF05F1859D47C0012EE29 /* IMTCPCommunicator.m in Sources */,
+				BA689A5E18EE9E1800AF85E1 /* Reachability.m in Sources */,
 				BAE9C908187C31B800E41A9E /* ItelNetInterfaceImp.m in Sources */,
 				479E2BC81835B8B6002D8172 /* AddViewController.m in Sources */,
 				479EF0571859D47C0012EE29 /* IMEngineImp.m in Sources */,
