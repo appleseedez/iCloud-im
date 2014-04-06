@@ -1256,12 +1256,22 @@ static int endTime = 0;
                                            selector:@selector(markServerHeart:)
                                                name:SERVER_HEART
                                              object:nil];
+  [[NSNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(sendHeartToServer:)
+             name:SEND_HEART_TO_SERVER
+           object:nil];
 }
-
+- (void)sendHeartToServer:(NSNotification *)notify {
+  [self sendHeartBeat];
+}
 - (void)markServerHeart:(NSNotification *)notify {
   self.latestServerHeart = [NSDate timeIntervalSinceReferenceDate];
   NSLog(@"服务器心跳");
   [TSMessage dismissActiveNotification];
+  [[NSNotificationCenter defaultCenter]
+      postNotificationName:SEND_HEART_TO_SERVER
+                    object:nil];
 }
 
 - (void)checkConnectionToServer {
