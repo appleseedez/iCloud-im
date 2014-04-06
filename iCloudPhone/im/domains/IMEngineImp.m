@@ -11,7 +11,7 @@
 #import "NatTypeImpl.h"
 #import "ConstantHeader.h"
 #import "video_render_ios_view.h"
-
+#import "NSCAppDelegate.h"
 UIView *_pview_local;
 @interface IMEngineImp ()
 @property(atomic) CAVInterfaceAPI *pInterfaceApi;
@@ -147,7 +147,7 @@ static int localNetPortSuffix = 0;
       [Reachability reachabilityWithHostname:@"www.baidu.com"];
   //  Reachability *wifiReach = [Reachability
   // reachabilityForInternetConnection];
-//  Reachability *localWIFIReach = [Reachability reachabilityForLocalWiFi];
+  //  Reachability *localWIFIReach = [Reachability reachabilityForLocalWiFi];
   [[NSNotificationCenter defaultCenter]
       addObserver:self
          selector:@selector(reachabilityChanged:)
@@ -155,7 +155,7 @@ static int localNetPortSuffix = 0;
            object:nil];
   [reach startNotifier];
   //  [wifiReach startNotifier];
-//  [localWIFIReach startNotifier];
+  //  [localWIFIReach startNotifier];
   //  //接下来，本地根据网络情况，会重新评估一次是否支持视频
   //  AFNetworkReachabilityManager *reachabilityManager =
   //      [AFNetworkReachabilityManager sharedManager];
@@ -211,26 +211,15 @@ static int localNetPortSuffix = 0;
   NSLog(@"当前的状态:是否可达:%d", [reach isReachable]);
   NSLog(@"当前的状态:是否是通过 wifi 可达:%d", [reach isReachableViaWiFi]);
   if ([reach isReachable]) {
-    //
+    ((NSCAppDelegate *)[UIApplication sharedApplication].delegate)
+        .connectionFlag = @(ConnectionFlagConnected);
     [[NSNotificationCenter defaultCenter]
         postNotificationName:CHANGE_CONNECTION_NOTIFICATION
                       object:nil];
   } else {
     NSLog(@"网络中断");
-    [TSMessage
-        showNotificationInViewController:[UIApplication sharedApplication]
-                                             .keyWindow.rootViewController
-                                   title:NSLocalizedString(@"网络异常.", nil)
-                                subtitle:nil
-                                   image:nil
-                                    type:TSMessageNotificationTypeError
-                                duration:36000
-                                callback:
-                                    ^{ [TSMessage dismissActiveNotification]; }
-                             buttonTitle:nil
-                          buttonCallback:nil
-                              atPosition:TSMessageNotificationPositionBottom
-                    canBeDismissedByUser:YES];
+    ((NSCAppDelegate *)[UIApplication sharedApplication].delegate)
+        .connectionFlag = @(ConnectionFlagNoConnection);
   }
 }
 - (NSString *)mediaTypeString:(InitType)mediaType {

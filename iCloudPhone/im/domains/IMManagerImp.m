@@ -40,6 +40,9 @@
 @property(nonatomic) dispatch_queue_t connectionTimerQueue;
 @property(nonatomic) NSTimeInterval latestServerHeart;
 @property(nonatomic) MSWeakTimer *frontConnectionTimer;
+@property(nonatomic) MSWeakTimer *authTimer;
+
+@property(nonatomic) dispatch_queue_t authTimerQueue;
 @end
 enum BasicStates {
   basicStateIdle = 0,  //空闲
@@ -562,11 +565,18 @@ static int endTime = 0;
 }
 // 收到服务器认证的返回值
 - (void)authHasResult:(NSNotification *)result {
+  NSLog(@"登录信令服务器成功. 移除通知");
+  [TSMessage dismissActiveNotification];
+  NSLog(@"停止信令登录验证定时器");
+  [self.authTimer invalidate];
+  // 标记当前和信令服务器连接成功
+  ((NSCAppDelegate *)[UIApplication sharedApplication].delegate)
+      .connetionToSignalServer = @(YES);
   //每次认证成功都算是一次心跳
   self.latestServerHeart = [NSDate timeIntervalSinceReferenceDate];
   self.disconnectTime = [NSDate timeIntervalSinceReferenceDate];
-  [TSMessage dismissActiveNotification];
-  NSLog(@"开启定时器");
+
+  NSLog(@"开启1分钟连接检测定时器");
   [self.frontConnectionTimer invalidate];
   self.frontConnectionTimer = [MSWeakTimer
       scheduledTimerWithTimeInterval:60
@@ -588,7 +598,8 @@ static int endTime = 0;
 #if OTHER_MESSAGE
   NSLog(@"我被踢下线了!!!!!!!");
 #endif
-  //当前用户被其他用此账号登陆的客户端踢下线了. 断开连接.提示当前用户,然后登出.
+  //当前用户被其他用此账号登陆的客户端踢下线了.
+  //断开连接.提示当前用户,然后登出.
 
   // TODO: 被踢下线和是否在拨打状态有关系吗?!
   if (![[self.state valueForKey:kPeerAccount] isEqualToString:IDLE]) {
@@ -1022,24 +1033,16 @@ static int endTime = 0;
 }
 
 - (void)connectToSignalServer {
+  if (ConnectionFlagNoConnection ==
+      ((NSCAppDelegate *)[UIApplication sharedApplication].delegate)
+          .connectionFlag.integerValue) {
+    return;
+  }
+
   if ([self.TCPcommunicator isConnected]) {
     return;
   }
-#if usertip
-  ////        [TSMessage showNotificationWithTitle:nil
-  //                                    subtitle:NSLocalizedString(@"连接中...",
-  // nil)
-  //                                        type:TSMessageNotificationTypeWarning];
 
-  [TSMessage
-      showNotificationInViewController:[UIApplication sharedApplication]
-                                           .keyWindow.rootViewController
-                                 title:NSLocalizedString(@"连接中...", nil)
-                              subtitle:nil
-                                  type:TSMessageNotificationTypeWarning
-                              duration:36000
-                  canBeDismissedByUser:NO];
-#endif
   if (self.signalServerAddress) {
     [[NSNotificationCenter defaultCenter]
         postNotificationName:UDP_LOOKUP_COMPLETE_NOTIFICATION
@@ -1049,7 +1052,7 @@ static int endTime = 0;
   }
 
 #if MANAGER_DEBUG
-  NSLog(@"开始连接信令服务器");
+  NSLog(@"开始连接信令服务器的过程");
 #endif
   //注册事件
   [self registerNotifications];
@@ -1261,7 +1264,34 @@ static int endTime = 0;
          selector:@selector(sendHeartToServer:)
              name:SEND_HEART_TO_SERVER
            object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(sendAuthToServer:)
+                                               name:SEND_AUTH_TO_SIGNAL_SERVER
+                                             object:nil];
 }
+@synthesize authTimerQueue = _authTimerQueue;
+- (dispatch_queue_t)authTimerQueue {
+  if (_authTimerQueue == nil) {
+    _authTimerQueue = dispatch_queue_create("com.itelland.authtimerQ", NULL);
+  }
+  return _authTimerQueue;
+}
+
+- (void)sendAuthToServer:(NSNotification *)notify {
+  NSDictionary *authInfo = notify.userInfo;
+  [self.TCPcommunicator send:authInfo];
+  // 开启超时定时器. 一秒内没有收到成功回复则认为本次登录失败
+  [self.authTimer invalidate];
+  self.authTimer = nil;
+  self.authTimer =
+      [MSWeakTimer scheduledTimerWithTimeInterval:1.5
+                                           target:self
+                                         selector:@selector(disconnect)
+                                         userInfo:nil
+                                          repeats:NO
+                                    dispatchQueue:self.authTimerQueue];
+}
+
 - (void)sendHeartToServer:(NSNotification *)notify {
   [self sendHeartBeat];
 }

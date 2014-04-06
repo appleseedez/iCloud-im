@@ -14,6 +14,7 @@
 @property(nonatomic) MSWeakTimer *heartBeat;     // 心跳定时器
 @property(nonatomic) NSDictionary *heartBeatPKG; // 心跳包
 @property(nonatomic) NSDictionary *authInfo;     //登录信息
+
 @end
 
 @implementation IMTCPCommunicator
@@ -98,28 +99,31 @@
     didConnectToHost:(NSString *)host
                 port:(uint16_t)port {
 #if usertip
-  ////    [TSMessage showNotificationWithTitle:NSLocalizedString(@"连接完成",
-  /// nil)
-  //                                subtitle:nil
-  //                                    type:TSMessageNotificationTypeSuccess];
-  [TSMessage
-      showNotificationInViewController:[UIApplication sharedApplication]
-                                           .keyWindow.rootViewController
-                                 title:NSLocalizedString(@"连接完成", nil)
-                              subtitle:nil
-                                  type:TSMessageNotificationTypeSuccess
-                              duration:0.5
-                  canBeDismissedByUser:NO];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [TSMessage
+        showNotificationInViewController:[UIApplication sharedApplication]
+                                             .keyWindow.rootViewController
+                                   title:NSLocalizedString(@"连接完成", nil)
+                                subtitle:nil
+                                    type:TSMessageNotificationTypeSuccess
+                                duration:0.5
+                    canBeDismissedByUser:NO];
+  });
 #endif
   [sock performBlock:^{ [sock enableBackgroundingOnSocket]; }];
   [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
-  NSLog(@"验证信息:%@", self.authInfo);
-  [self send:self.authInfo];
+  NSLog(@"tcp 连接建立完成.准备发送认证信息到信令服务器");
+  [[NSNotificationCenter defaultCenter]
+      postNotificationName:SEND_AUTH_TO_SIGNAL_SERVER
+                    object:nil
+                  userInfo:self.authInfo];
+  //  [self send:self.authInfo];
 }
 static int reconnectTryCount = 0;
 // 断开了服务器链接
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-
+  ((NSCAppDelegate *)[UIApplication sharedApplication].delegate)
+      .connetionToSignalServer = @(NO);
   if (reconnectTryCount < 3) {
     reconnectTryCount++;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -137,13 +141,25 @@ static int reconnectTryCount = 0;
     [TSMessage
         showNotificationInViewController:[UIApplication sharedApplication]
                                              .keyWindow.rootViewController
-                                   title:NSLocalizedString(@"网络异常.", nil)
-                                subtitle:nil
+                                   title:NSLocalizedString(@"服务器异常.", nil)
+                                subtitle:NSLocalizedString(@"请点击重试连接.",
+                                                           nil)
                                    image:nil
                                     type:TSMessageNotificationTypeError
                                 duration:36000
                                 callback:
-                                    ^{ [TSMessage dismissActiveNotification]; }
+                                    ^{
+                                      [TSMessage dismissActiveNotification];
+                                      dispatch_async(dispatch_get_main_queue(),
+                                                     ^{
+                                        NSLog(@"重连");
+                                        [[NSNotificationCenter defaultCenter]
+                                            postNotificationName:
+                                                RECONNECT_TO_SIGNAL_SERVER_NOTIFICATION
+                                                          object:nil
+                                                        userInfo:nil];
+                                      });
+                                    }
                              buttonTitle:nil
                           buttonCallback:nil
                               atPosition:TSMessageNotificationPositionBottom
@@ -213,6 +229,19 @@ static int reconnectTryCount = 0;
 
 // IMCommunicator接口
 - (void)connect:(NSString *)account withAuthInfo:(NSDictionary *)authInfo {
+  NSLog(@"开始连接信令服务器");
+#if usertip
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [TSMessage
+        showNotificationInViewController:[UIApplication sharedApplication]
+                                             .keyWindow.rootViewController
+                                   title:NSLocalizedString(@"连接中...", nil)
+                                subtitle:nil
+                                    type:TSMessageNotificationTypeWarning
+                                duration:36000
+                    canBeDismissedByUser:NO];
+  });
+#endif
   NSError *error;
   self.account = account;
   if ([self.sock isConnected]) {
@@ -231,6 +260,7 @@ static int reconnectTryCount = 0;
 - (void)disconnect {
   // 终止心跳
   [self.heartBeat invalidate];
+    ((NSCAppDelegate*) [UIApplication sharedApplication].delegate).connetionToSignalServer = @(NO);
     [self.sock disconnect];
 }
 
