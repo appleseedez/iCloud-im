@@ -119,7 +119,7 @@
                                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@",APPID]  parameters:nil success:success failure:failure];
+    [manager GET:[NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@",APPID]  parameters:nil success:success failure:failure];
 }
 
 @end
