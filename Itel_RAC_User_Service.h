@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface Itel_RAC_User_Service : NSObject
-
+@property (nonatomic,strong) RACSubject *netSubject;
+@property (nonatomic,strong) RACSubject *DBSubjec;
+@property (nonatomic,strong) RACSubject *responseSubject;
+@property (nonatomic,strong) RACSubject *serviceSubject;
 @end

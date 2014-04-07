@@ -194,7 +194,7 @@ static int loginCount=0;
          
          NSLog(@"%@",error);
 
-         NSLog(@"%@",error);
+        
      }];
     [loginSignal subscribeNext:^(NSDictionary *responseDic ) {
         if (responseDic!=nil) {

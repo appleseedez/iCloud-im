@@ -13,4 +13,6 @@
 +(RACSignal*)signalWithUrl:(NSString*)url
                 parameters:(NSDictionary*)parameters
                       type:(NSInteger)type;
++(NSURLRequest*)JSONPostOperation:(NSString*)url parameters:(NSDictionary*)parameters;
++(NSURLRequest*)JSONGetOperation:(NSString*)url parameters:(NSDictionary*)parameters;
 @end

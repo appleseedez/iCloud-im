@@ -8,7 +8,7 @@
 
 #import "RAC_NetRequest_Signal.h"
 #import "ItelAction.h"
-#import "ReactiveCocoa.h"
+
 #import "AFNetworking.h"
 @implementation RAC_NetRequest_Signal
 +(RACSignal*)signalWithUrl:(NSString*)url
@@ -32,8 +32,7 @@
             if (error) {
                 [subscriber sendError:error];
             }else {
-                NSString *str=[[NSString alloc]initWithData:responseObject encoding:4];
-                NSLog(@"%@",str);
+               
                 
                 NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 [subscriber sendNext:dic];
@@ -81,7 +80,7 @@
     
     NSURL *uurl=[NSURL URLWithString:[NSString stringWithFormat:@"%@?%@",url,paraURL]];
     NSURLRequest *request=[NSURLRequest requestWithURL:uurl];
-    AFHTTPRequestOperation *operation=[[AFHTTPRequestOperation alloc]initWithRequest:request];
+   
     return request;
 }
 @end
