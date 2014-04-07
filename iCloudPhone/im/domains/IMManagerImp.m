@@ -1291,7 +1291,9 @@ static int endTime = 0;
                                           repeats:NO
                                     dispatchQueue:self.authTimerQueue];
 }
-
+- (void)disconnect {
+  [self.TCPcommunicator disconnect];
+}
 - (void)sendHeartToServer:(NSNotification *)notify {
   [self sendHeartBeat];
 }
