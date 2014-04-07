@@ -25,6 +25,7 @@ UIView *_pview_local;
 @property(atomic) BOOL p2pFinished;
 @property(nonatomic) int selfNATType;
 @property(nonatomic, copy) NSString *stunServer;
+@property(nonatomic) Reachability *reach;
 @end
 static BOOL firstOpenCam = YES;
 @implementation IMEngineImp
@@ -134,6 +135,15 @@ static int localNetPortSuffix = 0;
   } else {
   }
 }
+
+@synthesize reach = _reach;
+- (Reachability *)reach {
+  if (_reach == nil) {
+
+    _reach = [Reachability reachabilityWithHostname:@"www.baidu.com"];
+  }
+  return _reach;
+}
 /**
  *  初始化本机的媒体库。 根据网络状况确定是否支持视频
  */
@@ -143,8 +153,6 @@ static int localNetPortSuffix = 0;
   self.pInterfaceApi->MediaInit();
   //初始化媒体时获取一次本机的nat
   [self setCurrentNATType:[self natType]];
-  Reachability *reach =
-      [Reachability reachabilityWithHostname:@"www.baidu.com"];
   //  Reachability *wifiReach = [Reachability
   // reachabilityForInternetConnection];
   //  Reachability *localWIFIReach = [Reachability reachabilityForLocalWiFi];
@@ -153,7 +161,7 @@ static int localNetPortSuffix = 0;
          selector:@selector(reachabilityChanged:)
              name:kReachabilityChangedNotification
            object:nil];
-  [reach startNotifier];
+  [self.reach startNotifier];
   //  [wifiReach startNotifier];
   //  [localWIFIReach startNotifier];
   //  //接下来，本地根据网络情况，会重新评估一次是否支持视频
@@ -620,6 +628,8 @@ static int localNetPortSuffix = 0;
     
 }
 - (void)tearDown{
+    [self.reach stopNotifier];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     bool ret  = self.pInterfaceApi->Terminate(); NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<关闭引擎>>>>>>>>>>>>>>:%d",ret);
     delete _pInterfaceApi;
     _pInterfaceApi = nil;
