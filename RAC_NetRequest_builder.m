@@ -6,47 +6,11 @@
 //  Copyright (c) 2014年 NX. All rights reserved.
 //
 
-#import "RAC_NetRequest_Signal.h"
+#import "RAC_NetRequest_builder.h"
 #import "ItelAction.h"
 
 #import "AFNetworking.h"
-@implementation RAC_NetRequest_Signal
-+(RACSignal*)signalWithUrl:(NSString*)url
-                            parameters:(NSDictionary*)parameters
-                                  type:(NSInteger)type
-{
-    NSURLRequest *request;
-    if(type==0){
-        request= [self JSONGetOperation:url parameters:parameters];
-    }else{
-        request=[self JSONPostOperation:url parameters:parameters];
-    }
-    
-   RACSignal *signal=[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-       
-        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSError *error;
-            NSData *responseObject;
-            NSURLResponse *response;
-          responseObject=  [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            if (error) {
-                [subscriber sendError:error];
-            }else {
-               
-                
-                NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                [subscriber sendNext:dic];
-            
-            }
-        });
-       
-       
-       return nil;
-   }];
-
-    
-    return signal;
-}
+@implementation RAC_NetRequest_builder
 +(NSURLRequest*)JSONPostOperation:(NSString*)url parameters:(NSDictionary*)parameters{
     NSString *token=[[ItelAction action] getHost].token;
     

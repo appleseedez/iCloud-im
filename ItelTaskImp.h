@@ -7,15 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ItelTask.h"
-@interface ItelTaskImp : NSObject <ItelTask>
 
+
+typedef NS_ENUM (NSInteger, ItelTaskType){
+    ItelTaskTypeNet,
+    ItelTaskTypeDB,
+    ItelTaskTypeResponse,
+    ItelTaskTypeError,
+    ItelTaskTypeEnd
+};
+@interface ItelTaskImp : NSObject
 
 @property (nonatomic) ItelTaskType taskType;
 @property (nonatomic) NSDictionary *parameters;
-
-+(id<ItelTask>)taskWithType:(ItelTaskType)type;
-
--(id<ItelTask>)nextTask;
-+(id<ItelTask>)endTask;
+@property (nonatomic) id forResult;
+@property (nonatomic,strong) id (^parameterMap)(id forResult);
+@property (nonatomic) NSArray *settingParam;
+@property (nonatomic) ItelTaskImp *nextTask;
++(ItelTaskImp*)taskWithType:(ItelTaskType)type;
+-(void)setObjectWithParam:(id)param managedObject:(NSManagedObject*)managedObject andContext:(NSManagedObjectContext*)context;
++(ItelTaskImp*)endTask;
 @end

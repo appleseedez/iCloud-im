@@ -8,7 +8,7 @@
 
 #import "HostSettingViewController.h"
 #import "HostCell.h"
-
+#import "ItelViewModelManager.h"
 #import "UIImage+Compress.h"
 #import "HostItelUser.h"
 #import <QuartzCore/QuartzCore.h>
@@ -45,7 +45,7 @@ UITableViewCell <HostCell> *getCellWithIndexPath(NSIndexPath *indexPath,UITableV
 @implementation HostSettingViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"modifyHost" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"modifyHost" object:nil];
     [self refresh];
 }
 -(void)refresh{
@@ -53,14 +53,22 @@ UITableViewCell <HostCell> *getCellWithIndexPath(NSIndexPath *indexPath,UITableV
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+   // [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
  
     self.tableView.frame=CGRectMake(0, 0, 320, 450);
-    
+    RACSignal *dataSourceSignal=[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        RACSubject *datas=[ItelViewModelManager defaultManager].hostModel.outSubject;
+        [subscriber sendNext:datas];
+        return nil;
+    }]flatten];
+        [dataSourceSignal subscribeNext:^(id x) {
+            NSLog(@"%@",x);
+            [self.tableView reloadData];
+        }];
     
 
 	// Do any additional setup after loading the view.

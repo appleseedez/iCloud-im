@@ -8,6 +8,7 @@
 
 #import "HostItelUser+set.h"
 #import "IMCoreDataManager.h"
+#import "NSManagedObject+RAC.h"
 @implementation HostItelUser (set)
 +(HostItelUser*)userWithDictionary:(NSDictionary*)dic{
     NSManagedObjectContext* currentContext = [IMCoreDataManager defaulManager].managedObjectContext;
@@ -41,6 +42,15 @@
 
 
     return host;
+}
+-(void)setWithDic:(NSDictionary *)dic andContext:(NSManagedObjectContext *)context{
+    [self setPersonal:dic];
+    NSError *error;
+    [context save:&error];
+    if (error) {
+        NSLog(@"%@",error);
+    }
+    
 }
 -(void)setPersonal:(NSDictionary*)data{
     for(NSString *s in [data allKeys]){

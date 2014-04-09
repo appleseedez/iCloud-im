@@ -17,7 +17,7 @@
 #import "NXImageView.h"
 #import "ItelAction.h"
 #import "NetRequester.h"
-#import "RAC_NetRequest_Signal.h"
+#import "RAC_NetRequest_builder.h"
 #import "ReactiveCocoa.h"
 #define mockServer [AFHTTPSessionManager manager]
 
@@ -85,7 +85,7 @@ static int loginCount=0;
     }
     else{
         self.btnLogin.enabled=NO;
-        [self requestToLogin1];
+        [self requestToLogin];
     }
 }
 -(void)requestToLogin{
@@ -162,82 +162,7 @@ static int loginCount=0;
     };
     [NetRequester jsonPostRequestWithUrl:url andParameters:parameters success:success failure:failure];
 }
--(void)requestToLogin1{
-    //这是退出键盘的 不用理它
-    [self.view endEditing:YES];
-    self.txtInuptCheckMessage.text=@"登录中...";
-    [self.actWaitingToLogin startAnimating];
-    NSString *url=[NSString stringWithFormat:@"%@/login.json",SIGNAL_SERVER];
-    
-    loginCount ++;
-    NSLog(@"登录了%d次",loginCount);
-    NSString *uuid=((NSCAppDelegate*)[UIApplication sharedApplication].delegate).UUID;
-    //ecommerce-android
-    
-    NSString *password=self.txtUserPassword.text;
-#if USING_PASSWORD_ENCODE
-    
-    password=[NXInputChecker encodePassWord:password];
-#endif
-    NSDictionary *parameters=  @{@"itel": self.txtUserCloudNumber.text,@"password":password,@"type":@"phone-ios",@"onlymark":uuid,@"phonecode":@""};
-    
 
-    
-    
-    
-  
-    RACSignal *loginSignal=[RAC_NetRequest_Signal signalWithUrl:url parameters:parameters type:1];
-     [loginSignal subscribeError:^(NSError *error) {
-         [self.actWaitingToLogin stopAnimating];
-         self.txtInuptCheckMessage.text = @"网络不通";
-         self.btnLogin.enabled = YES;
-         
-         NSLog(@"%@",error);
-
-        
-     }];
-    [loginSignal subscribeNext:^(NSDictionary *responseDic ) {
-        if (responseDic!=nil) {
-            NSDictionary *dic=[responseDic objectForKey:@"message"];
-            if ([dic objectForKey:@"ret"] == nil) {
-                [self.actWaitingToLogin stopAnimating];
-                self.txtInuptCheckMessage.text=[dic objectForKey:@"msg"];
-                self.btnLogin.enabled=YES;
-                NSLog(@"登录失败:%@",[dic objectForKey:@"msg"]);
-                return ;
-            }
-            int ret=[[dic objectForKey:@"ret"] intValue];
-            if (ret==0) {
-                HostItelUser *host=[HostItelUser userWithDictionary:[[dic objectForKey:@"data"] mutableCopy]];
-                
-                
-                
-                
-                [[ItelAction action] setHostItelUser:host];
-                [self.actWaitingToLogin stopAnimating];
-                self.txtInuptCheckMessage.text = @"";
-                
-                [[ItelAction action] resetContact];
-                
-                
-                NSCAppDelegate *delegate =   (NSCAppDelegate*) [UIApplication sharedApplication].delegate;
-                [delegate changeRootViewController:RootViewControllerMain userInfo:[[responseDic valueForKey:@"message"] valueForKey:@"data"]];
-                
-                [[ItelAction action] checkAddressBookMatchingItel];
-                [[ItelAction action] getItelBlackList:0];
-                [[ItelAction action] getItelFriendList:0];
-                [[ItelAction action] checkNewVersion:nil];
-                self.btnLogin.enabled=YES;
-            }
-            else {
-                [self.actWaitingToLogin stopAnimating];
-                self.txtInuptCheckMessage.text=[dic objectForKey:@"msg"];
-                self.btnLogin.enabled=YES;
-            }
-
-        }
-    }];
-}
 #pragma mark - 检测用户输入
 
 -(BOOL)checkUserInput{

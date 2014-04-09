@@ -8,6 +8,7 @@
 
 #import "HostEditSignViewController.h"
 #import "ItelAction.h"
+#import "ItelViewModelManager.h"
 @interface HostEditSignViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *signEditView;
@@ -25,7 +26,10 @@
 }
 -(void)finishButtonClicked{
 //     NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)(self.signEditView.text), NULL, NULL,  kCFStringEncodingUTF8 ));
-    [[ItelAction action] modifyPersonal:@"recommend" forValue:self.signEditView.text];
+   // [[ItelAction action] modifyPersonal:@"recommend" forValue:self.signEditView.text];
+    
+    RACSubject *subject=[ItelViewModelManager defaultManager].hostModel.inModifySubject;
+    [ subject sendNext:@{@"key": @"recommend",@"value":self.signEditView.text}];
     [self.navigationController popViewControllerAnimated:YES];
     
 }

@@ -7,11 +7,13 @@
 //
 
 #import "Itel_RAC_User_Service.h"
-#import "Itel_User_Intent.h"
-#import "RAC_NetRequest_Signal.h"
+
+#import "RAC_NetRequest_builder.h"
 #import "ReactiveCocoa.h"
 #import "ItelTaskImp.h"
-#import "RAC_NetRequest_Signal.h"
+#import "NSManagedObject+RAC.h"
+#import "IMCoreDataManager+FMDB_TO_COREDATA.h"
+#import "ItelResponseTask.h"
 @implementation Itel_RAC_User_Service
 static Itel_RAC_User_Service *defaultService;
 +(Itel_RAC_User_Service*)defaultService{
@@ -22,14 +24,14 @@ static Itel_RAC_User_Service *defaultService;
         defaultService.DBSubjec=[RACSubject subject];
         defaultService.responseSubject=[RACSubject subject];
         defaultService.serviceSubject=[RACSubject subject];
-        RACSignal *serviceSignal=[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        RACSignal *serviceSignal=[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             [subscriber sendNext:defaultService.serviceSubject];
                        return nil;
-        }];
+        }]flatten];
         [serviceSignal subscribeError:^(NSError *error) {
             NSLog(@"%@",error);
         }];
-        [serviceSignal subscribeNext:^(id <ItelTask> task) {
+        [serviceSignal subscribeNext:^(ItelTaskImp *task) {
             //任务分发
             switch (task.taskType) {
                 case ItelTaskTypeNet:
@@ -47,11 +49,11 @@ static Itel_RAC_User_Service *defaultService;
             }
         }];
            //网络请求signal
-        RACSignal *netSignal=[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        RACSignal *netSignal=[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             [subscriber sendNext:defaultService.netSubject];
             return nil;
-        }];
-        [netSignal subscribeNext:^(id <ItelTask> task) {
+        }]flatten];
+        [netSignal subscribeNext:^(ItelTaskImp *task) {
             NSString *strUrl=[task.parameters objectForKey:@"url"];
             NSDictionary *parameters=[task.parameters objectForKey:@"parameters" ];
             NSInteger type=[[task.parameters objectForKey:@"type"] integerValue];
@@ -61,22 +63,23 @@ static Itel_RAC_User_Service *defaultService;
                 NSURLResponse *response;
                 NSURLRequest *request;
                 if (type==0) {
-                    request=[RAC_NetRequest_Signal JSONGetOperation:strUrl parameters:parameters];
+                    request=[RAC_NetRequest_builder JSONGetOperation:strUrl parameters:parameters];
                 }else if(type==1){
-                    request=[RAC_NetRequest_Signal JSONPostOperation:strUrl parameters:parameters];
+                    request=[RAC_NetRequest_builder JSONPostOperation:strUrl parameters:parameters];
                 }
             responseData=  [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
                 if (error) {
-                    id <ItelTask> errorTask=[ItelTaskImp taskWithType:ItelTaskTypeError];
+                    ItelTaskImp *errorTask=[ItelTaskImp taskWithType:ItelTaskTypeError];
                     [defaultService.serviceSubject sendNext:errorTask];
                 }else {
                     
                     
                     NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
-                     id <ItelTask> nextTask= [task nextTask];
+                     ItelTaskImp *nextTask= [task nextTask];
                      //如果还有任务 执行下个task
                     if (nextTask) {
-                        nextTask.parameters=nextTask.parameterMap(dic);
+                        nextTask.forResult=dic;
+                        nextTask.settingParam=nextTask.parameterMap(dic);
                         [defaultService.serviceSubject sendNext:nextTask];
                     }else{
                         //否则执行endTask
@@ -87,6 +90,54 @@ static Itel_RAC_User_Service *defaultService;
         }];
         
         // coreData存取
+        RACSignal *DBSignal=[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            [subscriber sendNext:defaultService.DBSubjec];
+            return nil;
+        }]flatten];
+        [DBSignal subscribeNext:^(ItelTaskImp *task) {
+            NSString *selectName=[task.parameters objectForKey:@"selectName"];
+            NSString *predicateName=[task.parameters objectForKey:@"predicate"];
+            NSManagedObjectContext *context=[IMCoreDataManager defaulManager].managedObjectContext;
+            for (id object in task.settingParam) {
+                NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:selectName];
+                NSError *error;
+                NSString *selectParam=[NSString stringWithFormat:@"%@ = %@",predicateName,[object valueForKey:[task.parameters valueForKey:@"selectParam"] ]];
+                
+                request.predicate = [NSPredicate predicateWithFormat:selectParam];
+                NSLog(@"%@ = %@",predicateName,[object valueForKey:[task.parameters valueForKey:@"selectParam"] ]);
+             
+                NSArray* matched = [context executeFetchRequest:request error:&error];
+                if (error) {
+                    NSLog(@"%@",error);
+                }
+                if ([matched count]) {
+                   NSManagedObject *managedObject = matched[0];
+                    [managedObject setWithDic:object andContext:context];
+                }else{
+                     id managedObject= [NSEntityDescription insertNewObjectForEntityForName:selectName inManagedObjectContext:context];
+                    [managedObject setWithDic:object andContext:context];
+                }
+
+            }
+            ItelTaskImp *nextTask= [task nextTask];
+            nextTask.forResult=task.forResult;
+            if (nextTask) {
+                [defaultService.serviceSubject sendNext:nextTask];
+            }
+            
+        }];
+        
+        RACSignal *responseSignal=[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            [subscriber sendNext:defaultService.responseSubject];
+            return nil;
+        }]flatten];
+        
+            [responseSignal subscribeNext:^(ItelResponseTask *task) {
+                [task.responseSubject sendNext:task.forResult];
+                
+            }];
+        
+        
         
     }
     return defaultService;

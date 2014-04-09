@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 @class RACSignal;
-@interface RAC_NetRequest_Signal :NSObject
+@interface RAC_NetRequest_builder :NSObject
 
-+(RACSignal*)signalWithUrl:(NSString*)url
-                parameters:(NSDictionary*)parameters
-                      type:(NSInteger)type;
+
 +(NSURLRequest*)JSONPostOperation:(NSString*)url parameters:(NSDictionary*)parameters;
 +(NSURLRequest*)JSONGetOperation:(NSString*)url parameters:(NSDictionary*)parameters;
 @end
