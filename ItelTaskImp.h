@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
+
 typedef NS_ENUM (NSInteger, ItelTaskType){
     ItelTaskTypeNet,
     ItelTaskTypeDB,
@@ -24,6 +25,7 @@ typedef NS_ENUM (NSInteger, ItelTaskType){
 @property (nonatomic,strong) id (^parameterMap)(id forResult);
 @property (nonatomic) NSArray *settingParam;
 @property (nonatomic) ItelTaskImp *nextTask;
+@property (nonatomic) RACSubject *returnSuject;
 +(ItelTaskImp*)taskWithType:(ItelTaskType)type;
 -(void)setObjectWithParam:(id)param managedObject:(NSManagedObject*)managedObject andContext:(NSManagedObjectContext*)context;
 +(ItelTaskImp*)endTask;

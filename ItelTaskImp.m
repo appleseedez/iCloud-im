@@ -19,16 +19,19 @@
         case ItelTaskTypeNet:{
             task=[[ItelNetTask alloc]init];
             task.taskType=ItelTaskTypeNet;
+        
         }
             break;
         case ItelTaskTypeDB:{
             task=[[ItelDBTask alloc]init];
             task.taskType=ItelTaskTypeDB;
+      
         }
             break;
         case ItelTaskTypeResponse:{
             task=[[ItelResponseTask alloc]init];
             task.taskType=ItelTaskTypeResponse;
+         
         }
             break;
             

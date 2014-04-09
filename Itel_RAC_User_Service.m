@@ -14,6 +14,8 @@
 #import "NSManagedObject+RAC.h"
 #import "IMCoreDataManager+FMDB_TO_COREDATA.h"
 #import "ItelResponseTask.h"
+#import "ItelNetTask.h"
+#import "ItelDBTask.h"
 @implementation Itel_RAC_User_Service
 static Itel_RAC_User_Service *defaultService;
 +(Itel_RAC_User_Service*)defaultService{
@@ -53,38 +55,40 @@ static Itel_RAC_User_Service *defaultService;
             [subscriber sendNext:defaultService.netSubject];
             return nil;
         }]flatten];
-        [netSignal subscribeNext:^(ItelTaskImp *task) {
-            NSString *strUrl=[task.parameters objectForKey:@"url"];
-            NSDictionary *parameters=[task.parameters objectForKey:@"parameters" ];
-            NSInteger type=[[task.parameters objectForKey:@"type"] integerValue];
+        [netSignal subscribeNext:^(ItelNetTask *task) {
+            NSString *strUrl=task.url;
+            NSDictionary *parameters=task.parameters;
+            NSInteger type=task.requestType;
             dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSError *error;
                 NSData *responseData;
                 NSURLResponse *response;
                 NSURLRequest *request;
-                if (type==0) {
+                if (type==ItelNetTaskRequestTypeGet) {
                     request=[RAC_NetRequest_builder JSONGetOperation:strUrl parameters:parameters];
-                }else if(type==1){
+                }else if(type==ItelNetTaskRequestTypeJsonPost){
                     request=[RAC_NetRequest_builder JSONPostOperation:strUrl parameters:parameters];
                 }
             responseData=  [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
                 if (error) {
-                    ItelTaskImp *errorTask=[ItelTaskImp taskWithType:ItelTaskTypeError];
-                    [defaultService.serviceSubject sendNext:errorTask];
+                    [task.returnSuject sendError:error];
                 }else {
-                    
-                    
                     NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
-                     ItelTaskImp *nextTask= [task nextTask];
-                     //如果还有任务 执行下个task
-                    if (nextTask) {
-                        nextTask.forResult=dic;
-                        nextTask.settingParam=nextTask.parameterMap(dic);
-                        [defaultService.serviceSubject sendNext:nextTask];
-                    }else{
-                        //否则执行endTask
-                        [defaultService.serviceSubject sendNext:[ItelTaskImp endTask]];
+                    NSString *keypath=task.codeKeyPath;
+                    if (keypath==nil) {
+                         keypath=@"code";
                     }
+                    int code=[[dic valueForKeyPath:keypath]intValue];
+                    if (code==200) {
+                        [task.returnSuject sendNext:dic];
+                        
+                    }else{
+                        [task.failuerSubject sendNext:dic];
+                    }
+                    
+                    
+                    
+                    
                 }
             });
         }];
@@ -94,38 +98,30 @@ static Itel_RAC_User_Service *defaultService;
             [subscriber sendNext:defaultService.DBSubjec];
             return nil;
         }]flatten];
-        [DBSignal subscribeNext:^(ItelTaskImp *task) {
-            NSString *selectName=[task.parameters objectForKey:@"selectName"];
-            NSString *predicateName=[task.parameters objectForKey:@"predicate"];
+        [DBSignal subscribeNext:^(ItelDBTask *task) {
+            NSString *selectName=task.selectName;
+           // NSString *predicateName=[task.parameters objectForKey:@"predicate"];
             NSManagedObjectContext *context=[IMCoreDataManager defaulManager].managedObjectContext;
-            for (id object in task.settingParam) {
-                NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:selectName];
+                            NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:selectName];
                 NSError *error;
-                NSString *selectParam=[NSString stringWithFormat:@"%@ = %@",predicateName,[object valueForKey:[task.parameters valueForKey:@"selectParam"] ]];
-                
+            NSString *selectParam=[NSString stringWithFormat:@"%@ = %@",task.predicateName ,task.predicateValue ];
+            
                 request.predicate = [NSPredicate predicateWithFormat:selectParam];
-                NSLog(@"%@ = %@",predicateName,[object valueForKey:[task.parameters valueForKey:@"selectParam"] ]);
+            
              
                 NSArray* matched = [context executeFetchRequest:request error:&error];
                 if (error) {
-                    NSLog(@"%@",error);
+                    [task.returnSuject sendError:error];
                 }
                 if ([matched count]) {
                    NSManagedObject *managedObject = matched[0];
-                    [managedObject setWithDic:object andContext:context];
+                    [task.returnSuject sendNext:managedObject];
                 }else{
-                     id managedObject= [NSEntityDescription insertNewObjectForEntityForName:selectName inManagedObjectContext:context];
-                    [managedObject setWithDic:object andContext:context];
+                    [task.returnSuject sendNext:@(0)];
                 }
 
-            }
-            ItelTaskImp *nextTask= [task nextTask];
-            nextTask.forResult=task.forResult;
-            if (nextTask) {
-                [defaultService.serviceSubject sendNext:nextTask];
-            }
             
-        }];
+            }];
         
         RACSignal *responseSignal=[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             [subscriber sendNext:defaultService.responseSubject];

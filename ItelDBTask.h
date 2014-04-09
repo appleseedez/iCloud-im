@@ -9,5 +9,8 @@
 #import "ItelTaskImp.h"
 
 @interface ItelDBTask : ItelTaskImp
-
+-(ItelDBTask*)buildGetHostTask;
+@property (nonatomic) NSString *selectName;
+@property (nonatomic) NSString *predicateName;
+@property (nonatomic) NSString *predicateValue;
 @end

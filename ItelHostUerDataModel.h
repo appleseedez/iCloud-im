@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class HostItelUser;
 @interface ItelHostUerDataModel : NSObject
 @property (nonatomic) RACSubject *inModifySubject;
 @property (nonatomic) RACSubject *inSetSubject;
 @property (nonatomic) RACSubject *outSubject;
+@property (nonatomic) HostItelUser *hostUser;
 @end
