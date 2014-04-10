@@ -26,6 +26,7 @@
         RACSubject *netFailureSubject=[RACSubject subject];
         RACSubject *netResponseSubject=[RACSubject subject ];
         RACSubject *getHostSubject=[RACSubject subject];
+        RACSubject *requestError=[RACSubject subject];
         //网络请求信号
            RACSignal *modifySignal=[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                [subscriber sendNext:self.inModifySubject];
@@ -36,21 +37,24 @@
                [netTask buildWithInterFace:ItelNetTaskInterfaceUpdateUser userInfo:param];
                netTask.returnSuject=netResponseSubject;
                netTask.failuerSubject=netFailureSubject;
+               netTask.requestError=requestError;
                [[Itel_RAC_User_Service defaultService].serviceSubject sendNext:netTask];
                //获得hostUser
+               
                ItelDBTask *hostTask=[(ItelDBTask*)[ItelTaskImp taskWithType:ItelTaskTypeDB] buildGetHostTask];
                hostTask.returnSuject=getHostSubject;
-               [[Itel_RAC_User_Service defaultService].serviceSubject sendNext: hostTask];
-
-               
-            }];
-        
-        
-        [modifySignal subscribeError:^(NSError *error) {
-              
-        }];
+               [[Itel_RAC_User_Service defaultService].serviceSubject sendNext: hostTask];}];
+        //[modifySignal subscribeError:^(NSError *error) {}];
         //网络请求回调
         //失败
+      [[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            [subscriber sendNext:requestError];
+            return nil;
+        }]flatten] subscribeNext:^(id x) {
+            NSLog(@"%@",x);
+        }];
+        
+        
          RACSignal *requestFail=[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
              [subscriber sendNext:netFailureSubject];
              return nil;
@@ -58,10 +62,7 @@
                 [requestFail subscribeNext:^(NSDictionary *dic) {
                     // 这里写失败的回调
                 }];
-        
-        
         //成功
-        
         RACSignal *netResponseSignal=[RACSignal combineLatest:@[netResponseSubject,getHostSubject]];
         
         [netResponseSignal subscribeNext:^(RACTuple *tuple) {

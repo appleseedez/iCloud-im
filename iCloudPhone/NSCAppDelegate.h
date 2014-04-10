@@ -11,6 +11,7 @@
 #import "AddressBook.h"
 @class NXLoginViewController;
 @class RootViewController;
+@class ItelPhoneModule;
 typedef NS_ENUM(NSInteger,
                 setRootViewController) { RootViewControllerLogin = 1,
                                          RootViewControllerMain = 1 << 1, };
@@ -32,7 +33,7 @@ typedef NS_ENUM(NSInteger, ConnectionFlag) { ConnectionFlagNoConnection = 0,
 @property(nonatomic) AddressBook *phoneBook; //电话联系人列表
 @property(nonatomic) NSDictionary *startExtra;
 @property(nonatomic) BOOL ignoreOnce; // 当前是否是后台状态
-
+@property (nonatomic) ItelPhoneModule *phoneModule;
 @property(nonatomic) NSNumber *connectionFlag; //标识当前网络状况
 @property(nonatomic)
     NSNumber *connetionToSignalServer; // 标记当前是否和信令服务器有连接.

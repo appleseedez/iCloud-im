@@ -8,6 +8,7 @@
 
 #import "HostEditNicknameViewController.h"
 #import "ItelAction.h"
+#import "itelViewModelManager.h"
 @interface HostEditNicknameViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtNIckName;
 
@@ -25,6 +26,7 @@
 }
 -(void)finishButtonClicked{
     [[ItelAction action] modifyPersonal:@"nick_name" forValue:self.txtNIckName.text];
+    [[ItelViewModelManager defaultManager].hostModel.inModifySubject sendNext:@{@"key":@"nick_name",@"value":self.txtNIckName.text}];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

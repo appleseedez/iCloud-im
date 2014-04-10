@@ -89,6 +89,9 @@
 		479B90791837660B005D8CCB /* SearchNewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B90781837660B005D8CCB /* SearchNewFriendViewController.m */; };
 		479B907E18376DA1005D8CCB /* ItelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B907D18376DA1005D8CCB /* ItelAction.m */; };
 		479B908418376DE3005D8CCB /* ItelBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 479B908318376DE3005D8CCB /* ItelBook.m */; };
+		479C00AA18F6556100EED1DC /* ItelSocketConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C00A918F6556100EED1DC /* ItelSocketConnector.m */; };
+		479C00AD18F675A400EED1DC /* ItelPhoneModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C00AC18F675A400EED1DC /* ItelPhoneModule.m */; };
+		479C00B018F6907400EED1DC /* ItelIncomeDataProcesser.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C00AF18F6907400EED1DC /* ItelIncomeDataProcesser.m */; };
 		479C7BA8185DA78E0046B1D7 /* MoreHostViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BA7185DA78E0046B1D7 /* MoreHostViewCell.m */; };
 		479C7BAB185DA7A30046B1D7 /* MoreOtherViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BAA185DA7A30046B1D7 /* MoreOtherViewCell.m */; };
 		479C7BAE185DDB480046B1D7 /* RegTipLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7BAD185DDB480046B1D7 /* RegTipLabel.m */; };
@@ -460,6 +463,12 @@
 		479B907D18376DA1005D8CCB /* ItelAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelAction.m; sourceTree = "<group>"; };
 		479B908218376DE3005D8CCB /* ItelBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelBook.h; sourceTree = "<group>"; };
 		479B908318376DE3005D8CCB /* ItelBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelBook.m; sourceTree = "<group>"; };
+		479C00A818F6556100EED1DC /* ItelSocketConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelSocketConnector.h; sourceTree = "<group>"; };
+		479C00A918F6556100EED1DC /* ItelSocketConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelSocketConnector.m; sourceTree = "<group>"; };
+		479C00AB18F675A400EED1DC /* ItelPhoneModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelPhoneModule.h; sourceTree = "<group>"; };
+		479C00AC18F675A400EED1DC /* ItelPhoneModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelPhoneModule.m; sourceTree = "<group>"; };
+		479C00AE18F6907400EED1DC /* ItelIncomeDataProcesser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelIncomeDataProcesser.h; sourceTree = "<group>"; };
+		479C00AF18F6907400EED1DC /* ItelIncomeDataProcesser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelIncomeDataProcesser.m; sourceTree = "<group>"; };
 		479C7BA6185DA78E0046B1D7 /* MoreHostViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreHostViewCell.h; sourceTree = "<group>"; };
 		479C7BA7185DA78E0046B1D7 /* MoreHostViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreHostViewCell.m; sourceTree = "<group>"; };
 		479C7BA9185DA7A30046B1D7 /* MoreOtherViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreOtherViewCell.h; sourceTree = "<group>"; };
@@ -1123,6 +1132,19 @@
 			name = datamodels;
 			sourceTree = "<group>";
 		};
+		479C00A718F6551E00EED1DC /* RAC_IM */ = {
+			isa = PBXGroup;
+			children = (
+				479C00A818F6556100EED1DC /* ItelSocketConnector.h */,
+				479C00A918F6556100EED1DC /* ItelSocketConnector.m */,
+				479C00AE18F6907400EED1DC /* ItelIncomeDataProcesser.h */,
+				479C00AF18F6907400EED1DC /* ItelIncomeDataProcesser.m */,
+				479C00AB18F675A400EED1DC /* ItelPhoneModule.h */,
+				479C00AC18F675A400EED1DC /* ItelPhoneModule.m */,
+			);
+			name = RAC_IM;
+			sourceTree = "<group>";
+		};
 		479C7BA5185DA7170046B1D7 /* moreViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -1455,6 +1477,7 @@
 		47B89DC81834D40000022FE5 = {
 			isa = PBXGroup;
 			children = (
+				479C00A718F6551E00EED1DC /* RAC_IM */,
 				479CB1EC18F3C703007F9B41 /* RAC */,
 				4769EC5118AB295700F76DB5 /* 115 */,
 				BAFEE13818744FDA00DB1AC6 /* db */,
@@ -2060,11 +2083,13 @@
 				478813C61839C35E0085224D /* AFHTTPRequestOperation.m in Sources */,
 				47952D9718583D170044CF64 /* NSCAlertView.m in Sources */,
 				BA959A9418605639009B8A4C /* MSWeakTimer.m in Sources */,
+				479C00B018F6907400EED1DC /* ItelIncomeDataProcesser.m in Sources */,
 				471F00D81868321D00D3DAFD /* HostEditTelViewController.m in Sources */,
 				47B66DD7186AC3FA00AAD771 /* SecurityViewController.m in Sources */,
 				478813D41839C35E0085224D /* FMDatabaseQueue.m in Sources */,
 				478813D91839C35E0085224D /* UIButton+AFNetworking.m in Sources */,
 				BAE9C915187C415800E41A9E /* ItelUser+CRUD.m in Sources */,
+				479C00AA18F6556100EED1DC /* ItelSocketConnector.m in Sources */,
 				47E2DB8C18595A5A00D455EF /* SearchNavController.m in Sources */,
 				4798A26E183DD45300060DDB /* HostItelUser+set.m in Sources */,
 				BADDFD681876901500D10DDC /* IMCoreDataManager.m in Sources */,
@@ -2099,6 +2124,7 @@
 				47A10DAD18659D3E00FB9FED /* PassSecuretyQuestiongViewController.m in Sources */,
 				479EF05F1859D47C0012EE29 /* IMTCPCommunicator.m in Sources */,
 				BA689A5E18EE9E1800AF85E1 /* Reachability.m in Sources */,
+				479C00AD18F675A400EED1DC /* ItelPhoneModule.m in Sources */,
 				BAE9C908187C31B800E41A9E /* ItelNetInterfaceImp.m in Sources */,
 				479E2BC81835B8B6002D8172 /* AddViewController.m in Sources */,
 				479EF0571859D47C0012EE29 /* IMEngineImp.m in Sources */,

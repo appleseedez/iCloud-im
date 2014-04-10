@@ -15,12 +15,13 @@
 #import "ItelAction.h"
 #import "IMCoreDataManager+FMDB_TO_COREDATA.h"
 #import "NXInputChecker.h"
-
+#import "ItelSocketConnector.h"
 #import "IMDailViewController.h"
 #import "IMCallingViewController.h"
 #import "IMAnsweringViewController.h"
 #import "ItelUpdateManager.h"
 #import "NetRequester.h"
+#import "ItelPhoneModule.h"
 #define winFrame [UIApplication sharedApplication].delegate.window.bounds
 
 @interface ItelMessageInterfaceImp ()
@@ -296,8 +297,11 @@ void *ConnectionFlagKVOContext = &ConnectionFlagKVOContext;
     [[ItelAction action] checkAddressBookMatchingItel];
     [self setupIMManager:params];
     if ([[ItelAction action] getHost]) {
-      [self.manager setup];
-      [self.manager connectToSignalServer];
+      //[self.manager setup];
+      //[self.manager connectToSignalServer];
+        self.phoneModule =[[ItelPhoneModule alloc]init];
+        [self.phoneModule buildModule];
+        [self.phoneModule.inConnect sendNext:@(1)];
     }
   }
 }

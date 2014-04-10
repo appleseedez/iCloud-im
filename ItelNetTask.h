@@ -25,4 +25,5 @@ typedef NS_ENUM (NSInteger, ItelNetTaskRequestType){
 @property (nonatomic) NSDictionary *parameters;
 @property (nonatomic) RACSubject *failuerSubject;
 @property (nonatomic) NSString *codeKeyPath;
+@property (nonatomic) RACSubject *requestError;
 @end

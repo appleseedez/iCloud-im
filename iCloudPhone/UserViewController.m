@@ -16,11 +16,12 @@
 #import "NSCAppDelegate.h"
 #import "UIImageView+AFNetworking.h"
 #import "Area+toString.h"
+#import "ItelPhoneModule.h"
 @interface UserViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbShowName;
 @property (weak, nonatomic) IBOutlet NXImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (weak,nonatomic) RACSubject *callSubject;
 @property (weak, nonatomic) IBOutlet UILabel *lbItel;
 
 
@@ -134,7 +135,8 @@
     [appDelegate.manager setIsVideoCall:isVidio];
    
     
-    [appDelegate.manager dial:self.user.itelNum];
+    //[appDelegate.manager dial:self.user.itelNum];
+    [self.callSubject sendNext:self.user.itelNum];
     
 }
 
@@ -192,6 +194,7 @@
     //self.navigationController.navigationBarHidden=YES;
     [self refreshMessage];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(callActionSheet) ];
+    self.callSubject= [ItelPhoneModule getPhoneModule].outCall;
 
     
    	// Do any additional setup after loading the view.

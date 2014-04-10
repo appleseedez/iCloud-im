@@ -50,6 +50,8 @@ static Itel_RAC_User_Service *defaultService;
                     break;
             }
         }];
+        
+        
            //网络请求signal
         RACSignal *netSignal=[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             [subscriber sendNext:defaultService.netSubject];
@@ -71,7 +73,7 @@ static Itel_RAC_User_Service *defaultService;
                 }
             responseData=  [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
                 if (error) {
-                    [task.returnSuject sendError:error];
+                    [task.requestError sendNext:error];
                 }else {
                     NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
                     NSString *keypath=task.codeKeyPath;
