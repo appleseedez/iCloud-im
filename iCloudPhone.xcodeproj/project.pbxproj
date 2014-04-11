@@ -106,6 +106,8 @@
 		479DB4B718648F9900421C10 /* BlackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4B618648F9900421C10 /* BlackListViewController.m */; };
 		479DB4BB186494A000421C10 /* blackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DB4BA186494A000421C10 /* blackCell.m */; };
 		479DC49B183A4D3F00C3F3F2 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DC49A183A4D3F00C3F3F2 /* PeopleViewController.m */; };
+		479DD3BE18F789E200CC615F /* ItelEngineModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DD3BD18F789E200CC615F /* ItelEngineModule.m */; };
+		479DD3C118F7BE5300CC615F /* ItelQueryIPModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 479DD3C018F7BE5300CC615F /* ItelQueryIPModule.m */; };
 		479E0CDA1856A817005BAE20 /* RegManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E0CD91856A817005BAE20 /* RegManager.m */; };
 		479E2BC81835B8B6002D8172 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E2BC71835B8B6002D8172 /* AddViewController.m */; };
 		479E5BF6186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E5BF5186BFCE100FD29FA /* SecuretyAnswerQuestionViewController.m */; };
@@ -498,6 +500,10 @@
 		479DC496183A4CC100C3F3F2 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		479DC499183A4D3F00C3F3F2 /* PeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeopleViewController.h; path = ../PeopleViewController.h; sourceTree = "<group>"; };
 		479DC49A183A4D3F00C3F3F2 /* PeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeopleViewController.m; path = ../PeopleViewController.m; sourceTree = "<group>"; };
+		479DD3BC18F789E200CC615F /* ItelEngineModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelEngineModule.h; sourceTree = "<group>"; };
+		479DD3BD18F789E200CC615F /* ItelEngineModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelEngineModule.m; sourceTree = "<group>"; };
+		479DD3BF18F7BE5300CC615F /* ItelQueryIPModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelQueryIPModule.h; sourceTree = "<group>"; };
+		479DD3C018F7BE5300CC615F /* ItelQueryIPModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelQueryIPModule.m; sourceTree = "<group>"; };
 		479E0CD81856A817005BAE20 /* RegManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegManager.h; sourceTree = "<group>"; };
 		479E0CD91856A817005BAE20 /* RegManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegManager.m; sourceTree = "<group>"; };
 		479E2BC61835B8B6002D8172 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
@@ -1139,6 +1145,10 @@
 				479C00A918F6556100EED1DC /* ItelSocketConnector.m */,
 				479C00AE18F6907400EED1DC /* ItelIncomeDataProcesser.h */,
 				479C00AF18F6907400EED1DC /* ItelIncomeDataProcesser.m */,
+				479DD3BC18F789E200CC615F /* ItelEngineModule.h */,
+				479DD3BD18F789E200CC615F /* ItelEngineModule.m */,
+				479DD3BF18F7BE5300CC615F /* ItelQueryIPModule.h */,
+				479DD3C018F7BE5300CC615F /* ItelQueryIPModule.m */,
 				479C00AB18F675A400EED1DC /* ItelPhoneModule.h */,
 				479C00AC18F675A400EED1DC /* ItelPhoneModule.m */,
 			);
@@ -2075,6 +2085,7 @@
 				479EF0611859D47C0012EE29 /* NSString+MD5.m in Sources */,
 				478813C71839C35E0085224D /* AFHTTPRequestOperationManager.m in Sources */,
 				BA772EDA1875F02400CD8982 /* IMDBManagerImp.m in Sources */,
+				479DD3BE18F789E200CC615F /* ItelEngineModule.m in Sources */,
 				479EF0511859D47C0012EE29 /* IMHomeViewController.m in Sources */,
 				479EF05A1859D47C0012EE29 /* IMSeqenceGen.m in Sources */,
 				479EF0501859D47C0012EE29 /* IMDailViewController.m in Sources */,
@@ -2130,6 +2141,7 @@
 				479EF0571859D47C0012EE29 /* IMEngineImp.m in Sources */,
 				4797E8CF18854A2D0075BD9B /* IMCoreDataManager+FMDB_TO_COREDATA.m in Sources */,
 				479AD2EB18862AB2009B3278 /* Area+toString.m in Sources */,
+				479DD3C118F7BE5300CC615F /* ItelQueryIPModule.m in Sources */,
 				479F138F186178C7006DF67B /* HostHeadImageCell.m in Sources */,
 				473748CF1863E5A500F112AF /* HostEditQQViewController.m in Sources */,
 				479EF0651859D47C0012EE29 /* IMSuggestResultCell.m in Sources */,

@@ -9,11 +9,18 @@
 #import <Foundation/Foundation.h>
 @class ItelSocketConnector;
 @class ItelIncomeDataProcesser;
+@class ItelEngineModule;
+@class ItelQueryIPModule;
 @interface ItelPhoneModule : NSObject
 @property (nonatomic) ItelSocketConnector *socketConnector;
 @property (nonatomic) ItelIncomeDataProcesser *incomeDataProcesser;
+@property (nonatomic) ItelEngineModule *EnginModule;
+
 @property  (nonatomic) RACSubject *inConnect;
 @property  (nonatomic) RACSubject *outCall;
+@property (nonatomic) RACSubject *isVideo;
+@property (nonatomic) RACSubject *queryIP;
+@property (nonatomic) ItelQueryIPModule *queryIPModule;
 +(ItelPhoneModule*)getPhoneModule;
 -(void)buildModule;
 @end
