@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment version="1552" defaultVersion="1536" identifier="iOS"/>
+        <deployment version="1552" defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
@@ -129,7 +129,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVQ-77-BQr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-625" y="-415"/>
+            <point key="canvasLocation" x="-645" y="-415"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HUP-Ry-Xe1">
@@ -388,7 +388,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xhr-Ko-tta" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226" y="-415"/>
+            <point key="canvasLocation" x="-260" y="-415"/>
         </scene>
         <!--Reg Detail View Controller - 账号注册-->
         <scene sceneID="h6R-u8-haK">
@@ -491,7 +491,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Sc-lA-chR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130" y="-428"/>
+            <point key="canvasLocation" x="112" y="-420"/>
         </scene>
         <!--Reg Mes Check View Controller - 验证手机-->
         <scene sceneID="Orx-Ap-zRh">
@@ -566,7 +566,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YjG-zc-LKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="502" y="-428"/>
+            <point key="canvasLocation" x="488" y="-420"/>
         </scene>
         <!--Pass Reset View Controller - 重新设置密码-->
         <scene sceneID="2ls-Km-AjH">

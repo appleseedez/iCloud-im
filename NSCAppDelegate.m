@@ -226,7 +226,7 @@ void *ConnectionFlagKVOContext = &ConnectionFlagKVOContext;
   RootViewController *rootVC =
       (RootViewController *)self.window.rootViewController;
   //实例化manager
-  self.manager = [[IMManagerImp alloc] init];
+ // self.manager = [[IMManagerImp alloc] init];
   //[self.manager setup];
   [self registerNotifications];
   [[ItelMessageInterfaceImp defaultMessageInterface] setup];
@@ -295,7 +295,7 @@ void *ConnectionFlagKVOContext = &ConnectionFlagKVOContext;
       kHostItelNumber : currUser.itelNum
     };
     [[ItelAction action] checkAddressBookMatchingItel];
-    [self setupIMManager:params];
+    //[self setupIMManager:params];
     if ([[ItelAction action] getHost]) {
       //[self.manager setup];
       //[self.manager connectToSignalServer];
@@ -361,15 +361,15 @@ void *ConnectionFlagKVOContext = &ConnectionFlagKVOContext;
     NSString *hostItel = [[ItelAction action] getHost].itelNum;
     [[NSUserDefaults standardUserDefaults] setObject:hostItel
                                               forKey:@"currUser"];
-    [self.manager setup];
+    //[self.manager setup];
     NSDictionary *params = @{
       kDomain : [info valueForKey:kDomain],
       kPort : [info valueForKey:kPort],
       kHostItelNumber : hostItel
     };
-    [self setupIMManager:params];
+    //[self setupIMManager:params];
     //        [self.manager setup];
-    [self.manager connectToSignalServer];
+    //[self.manager connectToSignalServer];
     trans.subtype = @"fromBottom";
   }
   [self.window.layer addAnimation:trans forKey:nil];

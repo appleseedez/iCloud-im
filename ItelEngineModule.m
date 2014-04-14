@@ -31,9 +31,11 @@
     self.iniMedia=[RACSubject subject];
     self.iniNet=[RACSubject subject];
     self.iniNetFinish=[RACSubject subject];
+    self.inOpenCamera=[RACSubject subject];
+    self.outCameraOpend=[RACSubject subject];
     [self buildIniMedia];
     [self buildIniNet];
-    
+    [self BuildOpenCamera];
     self.cameraIndex = 1;
     self.isCameraOpened = NO;
     self.netWorkPort = LOCAL_PORT;
@@ -62,7 +64,7 @@
      [P2PSignal subscribeNext:^(RACTuple *tuple) {
          BOOL isVideo=[[tuple objectAtIndex:1]boolValue];
          NSDictionary *params=[tuple objectAtIndex:0];
-         [self openCamera];
+        
          bool __block ret = true;
          TP2PPeerArgc __block argc;
          
@@ -300,7 +302,11 @@
     return addr;
 }
 static bool firstOpenCam=YES;
-- (BOOL)openCamera {
+- (void)BuildOpenCamera {
+    
+    [self.inOpenCamera subscribeNext:^(id x) {
+        
+    
     dispatch_sync(self.q, ^{
         int r = 0;
         //先把摄像头关了
@@ -332,8 +338,9 @@ static bool firstOpenCam=YES;
              userInfo:nil];
             self.isCameraOpened = NO;
         }
+        [self.outCameraOpend sendNext:@(self.isCameraOpened)];
     });
-    return self.isCameraOpened;
+    }];
 }
 - (NSInteger)getCameraOrientation:(NSInteger)cameraOrientation {
     UIInterfaceOrientation displatyRotation =

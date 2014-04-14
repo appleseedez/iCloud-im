@@ -16,6 +16,8 @@
 @property (nonatomic) RACSubject *iniNet;
 @property (nonatomic) RACSubject *iniMedia;
 @property (nonatomic) RACSubject *iniNetFinish;
+@property (nonatomic) RACSubject *inOpenCamera;
+@property (nonatomic) RACSubject *outCameraOpend;
 -(void)buildModule;
 
 - (NSDictionary *)endPointAddressWithProbeServer:(NSString *)probeServerIP

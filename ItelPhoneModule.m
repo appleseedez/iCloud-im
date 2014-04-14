@@ -68,6 +68,7 @@
 -(void)buildCall{
     self.outCall=[RACSubject subject];
      [self.outCall subscribeNext:^(NSString *destAccount) {
+         [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil];
          NSDictionary *data=[[[IMSessionInitMessageBuilder alloc]init]buildWithParams:@{kDestAccount : destAccount }];
          [self.EnginModule.isVideo sendNext:@(1)];
         [self.socketConnector.outData sendNext:data];
@@ -75,26 +76,35 @@
 
 }
 -(void)buildInitSession{
+    // 查询回调
      [self.incomeDataProcesser.outSessionInit subscribeNext:^(NSDictionary *data) {
-        [self.EnginModule.iniNet sendNext:@(1)];
+         [[NSNotificationCenter defaultCenter] postNotificationName:PEER_FOUND_NOTIFICATION object:nil];
+          //开启网络
          [self.EnginModule.iniNet sendNext:data];
+             //查询外网IP
               [self.queryIP sendNext:data];
          
         
      }];
     [self.EnginModule.iniNetFinish subscribeNext:^(id x) {
+         //查询完外网ip 回调开启媒体
         [[self.EnginModule iniMedia] sendNext:@(1)];
     }];
     
 }
 -(void)buildReceiveAnswer{
+    //主叫收到对方响应
     [self.incomeDataProcesser.receiveAnswering subscribeNext:^(NSDictionary *dic) {
+        //是否视频
         [self.EnginModule.isVideo sendNext:@([[dic valueForKey:kUseVideo] boolValue])];
-        
+        //开始p2p
         [self.EnginModule.inP2P sendNext:dic];
-       
+        //开启摄像头
+        [self.EnginModule.inOpenCamera sendNext:@(1)];
     }];
-    
+     [self.EnginModule.outCameraOpend subscribeNext:^(id x) {
+          [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_CAMERA_SUCCESS_NOTIFICATION object:nil];
+     }];
 }
 
 -(void)buildQueryIp{
@@ -125,10 +135,7 @@
                  forKey:kForwardPort];
         // 外网第一次ip探测时的bakport
         [state setValue:[userInfo valueForKey:kBakPort] forKey:kBakPort];
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:PEER_FOUND_NOTIFICATION
-         object:nil
-         userInfo:nil];
+       
         
         NSDictionary *communicationAddress = [self.EnginModule
                                               endPointAddressWithProbeServer:[state valueForKey:kForwardIP]
