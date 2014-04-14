@@ -28,6 +28,11 @@
 -(void)buildModule{
     
     self.keepAlive = [RACSubject subject];
+    self.iniMedia=[RACSubject subject];
+    self.iniNet=[RACSubject subject];
+    self.iniNetFinish=[RACSubject subject];
+    [self buildIniMedia];
+    [self buildIniNet];
     
     self.cameraIndex = 1;
     self.isCameraOpened = NO;
@@ -51,12 +56,13 @@
     self.inP2P=[RACSubject subject];
     self.isVideo=[RACSubject subject];
     self.pInterfaceApi = new CAVInterfaceAPI();
+   
     RACSignal *P2PSignal=[RACSignal combineLatest:@[self.inP2P,self.isVideo]];
-    
+   
      [P2PSignal subscribeNext:^(RACTuple *tuple) {
          BOOL isVideo=[[tuple objectAtIndex:1]boolValue];
          NSDictionary *params=[tuple objectAtIndex:0];
-         
+         [self openCamera];
          bool __block ret = true;
          TP2PPeerArgc __block argc;
          
@@ -221,7 +227,7 @@
         u_int8_t tick = 0xFF;
         self.pInterfaceApi->SendUserData(&tick, sizeof(u_int8_t), [probeServerIP UTF8String], port);
     }];
-}
+    }
 
 - (NSDictionary *)endPointAddressWithProbeServer:(NSString *)probeServerIP
                                             port:(NSInteger)probeServerPort
@@ -293,9 +299,93 @@
     
     return addr;
 }
+static bool firstOpenCam=YES;
+- (BOOL)openCamera {
+    dispatch_sync(self.q, ^{
+        int r = 0;
+        //先把摄像头关了
+        if ((r = self.pInterfaceApi->StartCamera(self.cameraIndex)) >= 0) {
+            if (firstOpenCam) {
+                firstOpenCam = NO;
+            } else {
+                self.pInterfaceApi->ConnectCaptureDevice();
+            }
+            
+            self.isCameraOpened = YES;
+            // 摆正摄像头位置
+            self.pInterfaceApi->VieSetRotation([self
+                                                getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(
+                                                                                                                 self.cameraIndex)]);
+            NSLog(@"本地摄像头开启成功");
+            //当摄像头开启成功, 把_pview_local作为通知内容发出去
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:OPEN_CAMERA_SUCCESS_NOTIFICATION
+                 object:Nil
+                 userInfo:@{ @"preview" : _pview_local }];
+            });
+        } else {
+            NSLog(@"摄像头开启失败:%d", r);
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:OPEN_CAMERA_FAILED_NOTIFICATION
+             object:nil
+             userInfo:nil];
+            self.isCameraOpened = NO;
+        }
+    });
+    return self.isCameraOpened;
+}
+- (NSInteger)getCameraOrientation:(NSInteger)cameraOrientation {
+    UIInterfaceOrientation displatyRotation =
+    [[UIApplication sharedApplication] statusBarOrientation];
+    NSInteger degrees = 0;
+    switch (displatyRotation) {
+        case UIInterfaceOrientationPortrait:
+            degrees = 180;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            degrees = 270;
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            degrees = 0;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            degrees = 90;
+            break;
+    }
+    
+    NSInteger result = 0;
+    if (cameraOrientation > 180) {
+        result = (cameraOrientation + degrees) % 360;
+    } else {
+        result = (cameraOrientation - degrees + 360) % 360;
+    }
+    
+    return result;
+}
 +(int)getNatType{
     NatTypeImpl nat;
     
     return nat.GetNatType([[[ItelAction action]getHost].stunServer UTF8String]);
+}
+static int localNetPortSuffix = 0;
+-(void)buildIniNet{
+      [self.iniNet subscribeNext:^(id x) {
+         int netWorkPort = LOCAL_PORT + (++localNetPortSuffix) % 9;
+          BOOL finish=self.pInterfaceApi->OpenNetWork(netWorkPort);
+          if (false == finish) {
+              NSLog(@"初始化网络失败");
+          } else {
+              NSLog(@"初始化网络成功");
+          }
+          [self.iniNetFinish sendNext:@(finish) ];
+      }];
+       
+}
+-(void)buildIniMedia{
+    [self.iniMedia subscribeNext:^(id x) {
+        self.pInterfaceApi->MediaInit();
+
+    }];
 }
 @end

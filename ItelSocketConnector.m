@@ -85,7 +85,7 @@
     if (_socket==nil) {
         
         
-    dispatch_queue_t socketQ=dispatch_queue_create("socketQueue", NULL);
+    dispatch_queue_t socketQ=dispatch_queue_create("com.itelland.socketQ", NULL);
         
         
         _socket = [[GCDAsyncSocket alloc] initWithDelegate:self

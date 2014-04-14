@@ -13,6 +13,9 @@
 @property (nonatomic) RACSubject *inP2P;
 @property (nonatomic) RACSubject *isVideo;
 @property (nonatomic) RACSubject *keepAlive;
+@property (nonatomic) RACSubject *iniNet;
+@property (nonatomic) RACSubject *iniMedia;
+@property (nonatomic) RACSubject *iniNetFinish;
 -(void)buildModule;
 
 - (NSDictionary *)endPointAddressWithProbeServer:(NSString *)probeServerIP

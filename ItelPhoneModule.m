@@ -37,7 +37,8 @@
                                          },
                                  kBody:params
                                  
-                                 };;
+                                 };
+        
         [self.socketConnector.inConnect sendNext:authInfo];
     }];
 }
@@ -75,14 +76,23 @@
 }
 -(void)buildInitSession{
      [self.incomeDataProcesser.outSessionInit subscribeNext:^(NSDictionary *data) {
+        [self.EnginModule.iniNet sendNext:@(1)];
+         [self.EnginModule.iniNet sendNext:data];
+              [self.queryIP sendNext:data];
+         
         
-         [self.queryIP sendNext:data];
      }];
+    [self.EnginModule.iniNetFinish subscribeNext:^(id x) {
+        [[self.EnginModule iniMedia] sendNext:@(1)];
+    }];
+    
 }
 -(void)buildReceiveAnswer{
     [self.incomeDataProcesser.receiveAnswering subscribeNext:^(NSDictionary *dic) {
         [self.EnginModule.isVideo sendNext:@([[dic valueForKey:kUseVideo] boolValue])];
+        
         [self.EnginModule.inP2P sendNext:dic];
+       
     }];
     
 }
@@ -92,8 +102,9 @@
     
     
     [self.queryIP subscribeNext:^(NSDictionary *userInfo) {
+        [self.EnginModule.iniNet sendNext:@(1)];
         NSMutableDictionary *state=[[NSMutableDictionary alloc]init];
-        [state setObject:@(1) forKey:kUseVideo];
+        [state setObject:@(YES) forKey:kUseVideo];
         [state setValue:[userInfo valueForKey:kDestAccount]
                  forKey:kPeerAccount];
         // myAccount
