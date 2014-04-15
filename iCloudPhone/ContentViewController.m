@@ -24,16 +24,18 @@ static int currPage=0;
 {
     [super viewDidLoad];
     
-    //[self addSubButtons];
+    [self addSubButtons];
     self.rootDelegate=((NSCAppDelegate*)[UIApplication sharedApplication].delegate).RootVC;
     self.view.backgroundColor=[UIColor whiteColor];
 	// Do any additional setup after loading the view.
 }
+
+static CGFloat width115=99;
 -(void)addSubButtons{
     float deltaHeight=0.0;
     
     UIButton *btn115=[[UIButton alloc]init];
-    btn115.frame=CGRectMake(7, 481,76 , 76);
+    btn115.frame=CGRectMake(7, 481,width115 , width115);
     [btn115 setImage:[UIImage imageNamed:@"115icon"] forState:UIControlStateNormal];
     [btn115 setBackgroundColor:[UIColor colorWithRed:153.0/255 green:51.0/255 blue:51.0/255 alpha:1]];
     deltaHeight=deltaHeight+btn115.frame.size.height+2*10;
@@ -41,7 +43,24 @@ static int currPage=0;
    // btn115.backgroundColor=[UIColor orangeColor];
     [self.contentScrollView addSubview:btn115];
     
+    UIButton *btnCamera=[[UIButton alloc]init];
+    btnCamera.frame=CGRectMake(7+width115+7, 481,width115 , width115);
+    [btnCamera setImage:[UIImage imageNamed:@"cameraicon"] forState:UIControlStateNormal];
+    [btnCamera setBackgroundColor:[UIColor colorWithRed:0/255 green:153.0/255 blue:153.0/255 alpha:1]];
+    deltaHeight=deltaHeight+btn115.frame.size.height+2*10;
+    [btnCamera addTarget:self action:@selector(goCamera) forControlEvents:UIControlEventTouchUpInside];
+    // btn115.backgroundColor=[UIColor orangeColor];
+    [self.contentScrollView addSubview:btnCamera];
     self.contentScrollView.contentSize=CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height+deltaHeight);
+}
+-(void)goCamera{
+    NSString *itel=[[ItelAction action] getHost].itelNum;
+    NSString *token=[[ItelAction action] getHost].token;
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"surveillance://com.iTel.surveillance?itel=%@&sessiontoken=%@",itel,token]];
+    NSLog(@"调用摄像头的URL是：%@",url);
+    if ([[UIApplication sharedApplication]canOpenURL:url]) {
+        [[UIApplication sharedApplication]openURL:url];
+    }
 }
 - (IBAction)goFish:(id)sender {
     [[ItelAction action ] loginOtherApp:nil];
