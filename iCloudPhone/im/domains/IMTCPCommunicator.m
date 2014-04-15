@@ -98,6 +98,13 @@
 - (void)socket:(GCDAsyncSocket *)sock
     didConnectToHost:(NSString *)host
                 port:(uint16_t)port {
+    [sock performBlock:^{ [sock enableBackgroundingOnSocket]; }];
+    [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
+    NSLog(@"tcp 连接建立完成.准备发送认证信息到信令服务器");
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:SEND_AUTH_TO_SIGNAL_SERVER
+     object:nil
+     userInfo:self.authInfo];
 #if usertip
   dispatch_async(dispatch_get_main_queue(), ^{
     [TSMessage
@@ -108,15 +115,10 @@
                                     type:TSMessageNotificationTypeSuccess
                                 duration:0.5
                     canBeDismissedByUser:NO];
+      NSLog(@"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk连接完成kkkkkkkkkkkk");
   });
 #endif
-  [sock performBlock:^{ [sock enableBackgroundingOnSocket]; }];
-  [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
-  NSLog(@"tcp 连接建立完成.准备发送认证信息到信令服务器");
-  [[NSNotificationCenter defaultCenter]
-      postNotificationName:SEND_AUTH_TO_SIGNAL_SERVER
-                    object:nil
-                  userInfo:self.authInfo];
+  
   //  [self send:self.authInfo];
 }
 static int reconnectTryCount = 0;
@@ -238,8 +240,9 @@ static int reconnectTryCount = 0;
                                    title:NSLocalizedString(@"连接中...", nil)
                                 subtitle:nil
                                     type:TSMessageNotificationTypeWarning
-                                duration:36000
+                                duration:1.6
                     canBeDismissedByUser:NO];
+      NSLog(@"ppppppppppppppppppppppppppppppppppppppp连接中pppppppppppppppppppppppp");
   });
 #endif
   NSError *error;
