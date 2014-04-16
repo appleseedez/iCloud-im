@@ -31,6 +31,7 @@
 
 @implementation NSCAppDelegate
 - (void)signOut {
+    
   [[ItelAction action] logout];
   [self.manager dismissDialRelatedPanel];
   [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"currUser"];
