@@ -248,7 +248,7 @@
 - (IBAction)deleteAllRecents:(UIBarButtonItem*)sender{
     if ([[self.fetchedResultsController sections] count]) {
         UIActionSheet* confirmSheet = [[UIActionSheet alloc] initWithTitle:@"将要删除全部通话记录" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"全部删除" otherButtonTitles:nil, nil];
-        [confirmSheet showFromTabBar:self.tabBarController.tabBar];
+        [confirmSheet showInView:self.view];
         
     }
     

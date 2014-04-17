@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pj0-BP-Pa6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pj0-BP-Pa6">
     <dependencies>
         <deployment version="1552" defaultVersion="1792" identifier="iOS"/>
         <development version="5000" identifier="xcode"/>
@@ -2292,9 +2292,6 @@
                                                 <state key="selected" title="显示小窗口" image="close_self_window_disable_btn">
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="togglePreviewCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="xQb-Ry-Gbc"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="hBp-5c-I2e" userLabel="toggle cam">
                                                 <rect key="frame" x="160" y="61" width="159" height="60"/>
@@ -2309,9 +2306,6 @@
                                                 <state key="selected" title="开启摄像头" image="closeCamera_disable_btn">
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="toggleCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="hvW-Os-wln"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="vyO-gB-Cvk" userLabel="toggle mute">
                                                 <rect key="frame" x="1" y="0.0" width="158" height="60"/>
@@ -2328,9 +2322,6 @@
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <state key="highlighted" image="mute_disable_btn"/>
-                                                <connections>
-                                                    <action selector="toggleMute:" destination="kEe-Cf-lem" eventType="touchUpInside" id="SlJ-Dh-BQK"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="7Fr-G6-IxL" userLabel="toggle speaker">
                                                 <rect key="frame" x="160" y="0.0" width="159" height="60"/>
@@ -2427,7 +2418,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1930" y="1419"/>
+            <point key="canvasLocation" x="1876" y="1359"/>
         </scene>
         <!--Dail View Controller-->
         <scene sceneID="Z6h-56-3Sa">
@@ -2976,7 +2967,6 @@
                                         </state>
                                         <connections>
                                             <action selector="endSession:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="BV6-aL-YKp"/>
-                                            <action selector="endSession:" destination="kEe-Cf-lem" eventType="touchUpInside" id="sAJ-Pp-iMA"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="sVC-VY-72j" userLabel="hide small window">
@@ -2994,7 +2984,6 @@
                                         </state>
                                         <connections>
                                             <action selector="togglePreviewCam:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="02g-yH-iLw"/>
-                                            <action selector="togglePreviewCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="N2s-IT-QOV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="cUY-7K-785" userLabel="toggle cam">
@@ -3011,7 +3000,6 @@
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="toggleCam:" destination="kEe-Cf-lem" eventType="touchUpInside" id="75N-kR-PeM"/>
                                             <action selector="toggleCam:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="XIi-4E-kp1"/>
                                         </connections>
                                     </button>
@@ -3032,7 +3020,6 @@
                                         <state key="highlighted" image="mute_disable_btn"/>
                                         <connections>
                                             <action selector="toggleMute:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="QfB-tt-GDD"/>
-                                            <action selector="toggleMute:" destination="kEe-Cf-lem" eventType="touchUpInside" id="Z2z-C1-H8T"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="XOd-Fm-bfE" userLabel="toggle speaker">
@@ -3049,7 +3036,6 @@
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="toggleSpeeker:" destination="kEe-Cf-lem" eventType="touchUpInside" id="2xp-gU-BlO"/>
                                             <action selector="toggleSpeeker:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="aXn-cP-8eh"/>
                                         </connections>
                                     </button>
@@ -3156,7 +3142,6 @@
                                 </state>
                                 <connections>
                                     <action selector="switchCamera:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="alm-k7-rbm"/>
-                                    <action selector="switchCamera:" destination="kEe-Cf-lem" eventType="touchUpInside" id="uhm-yW-PVl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -3237,7 +3222,6 @@
                                         <connections>
                                             <action selector="endSession:" destination="qS2-tk-E1c" eventType="touchUpInside" id="3UM-E8-bLp"/>
                                             <action selector="endSession:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="3zq-3W-qV2"/>
-                                            <action selector="endSession:" destination="kEe-Cf-lem" eventType="touchUpInside" id="hhN-9c-lZF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="gO5-Rs-xo5" userLabel="hide small window">
@@ -3315,7 +3299,6 @@
                                         <connections>
                                             <action selector="toggleSpeeker:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="6ZD-K4-w7k"/>
                                             <action selector="toggleSpeeker:" destination="qS2-tk-E1c" eventType="touchUpInside" id="RPj-xb-ooM"/>
-                                            <action selector="toggleSpeeker:" destination="kEe-Cf-lem" eventType="touchUpInside" id="e8g-Wb-0ay"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3477,7 +3460,6 @@
                                 <connections>
                                     <action selector="switchCamera:" destination="qS2-tk-E1c" eventType="touchUpInside" id="SV6-GJ-oCV"/>
                                     <action selector="switchCamera:" destination="RXn-9S-Bdt" eventType="touchUpInside" id="lve-bM-oSS"/>
-                                    <action selector="switchCamera:" destination="kEe-Cf-lem" eventType="touchUpInside" id="vov-eh-irG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -3505,7 +3487,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1397" y="2094"/>
+            <point key="canvasLocation" x="1273" y="2138"/>
         </scene>
         <!--Recent Contact List View Controller - 通话记录-->
         <scene sceneID="FUF-TP-Mgc">

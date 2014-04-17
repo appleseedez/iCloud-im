@@ -267,7 +267,7 @@ static NSString* kOperationReason = @"reason";
         [moreActionSheet setDestructiveButtonIndex:2];
     }
 
-    [moreActionSheet showFromTabBar:self.tabBarController.tabBar];
+    [moreActionSheet showInView:self.view];
 }
 
 - (void)videoDial:(UIButton *)sender{
