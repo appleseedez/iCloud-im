@@ -378,7 +378,17 @@ static int localNetPortSuffix = 0;
       //#if DEBUG
       //            [[IMTipImp defaultTip] showTip:@"准备startmedia"];
       //#endif
-
+        VoEControlParameters voiceSettings;
+        voiceSettings.ostype = OsT_IOS;
+        voiceSettings.enable = true;
+        voiceSettings.optype = OpT_AGC;
+        
+        self.pInterfaceApi->SetVoEControlParameters(voiceSettings);
+        voiceSettings.ostype = OsT_IOS;
+        voiceSettings.enable = true;
+        voiceSettings.optype = OpT_NS;
+        
+        self.pInterfaceApi->SetVoEControlParameters(voiceSettings);
       TVideoConfigInfo vieConfig;
       //            if (iPhone5) {
       //                vieConfig.height = 192;
