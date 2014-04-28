@@ -501,6 +501,18 @@
     [self NotifyForNormalResponse:@"exactlyUser" parameters:data];
     
 }
+#pragma mark - 启动摄像头
+
+-(void)startCamera:(NSString*)targetItel{
+    HostItelUser *host= [self getHost];
+    
+    NSDictionary *parameters=@{@"sessiontoken":host.token,@"type":@"surveillance-ios",@"phonecode":@""};
+    [self.itelNetRequestActionDelegate startCamera:parameters];
+}
+-(void)startCameraResponse:(NSDictionary*)dic{
+    [self NotifyForNormalResponse:@"startCamera" parameters:[dic objectForKey:@"data"]];
+    
+}
 //查找好友列表
 -(ItelUser*)userInFriendBook:(NSString*)itel{
     return [self.itelBookActionDelegate userInFriendBook:itel];

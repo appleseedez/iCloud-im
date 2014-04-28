@@ -23,6 +23,7 @@
 @property(nonatomic) NSMutableArray* currentSuggestDataSource; //用于接收近似的itel号码
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) UILongPressGestureRecognizer *backRecognizer;
+@property (nonatomic) NSString *cameraPeerItel;
 @end
 
 @implementation IMDailViewController
@@ -165,8 +166,23 @@
 - (IBAction)voiceDialing:(UIButton *)sender {
 
     [self.manager setIsVideoCall:NO];//告诉manager是音频通话
+    
+    
     NSString* peerAccount = self.peerAccount.text;
+    NSRange range;
+    range.location=0;
+    range.length=2;
+    
+    NSString *head;
+    if (peerAccount.length>2) {
+        head= [peerAccount substringWithRange:range];
+    }
+    
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
+        return;
+    }else if([head isEqual:@"09"]){
+        [[ItelAction action ] startCamera:peerAccount];
+        self.cameraPeerItel=peerAccount;
         return;
     }
 //#if DEBUG
@@ -194,8 +210,23 @@
 }
 - (void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authOK:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didStartCamera:) name:@"startCamera" object:nil];
 
-
+}
+-(void)didStartCamera:(NSNotification*)notification{
+    NSString *isNormal=[notification.userInfo objectForKey:@"isNormal"];
+    if ([isNormal boolValue]) {
+        NSDictionary *dic=notification.object;
+        NSURL *cameraUrl=[NSURL URLWithString:[NSString stringWithFormat:@"surveillance://com.iTel.surveillance?itel=%@&sessiontoken=%@&peeritel=%@",[dic valueForKeyPath:@"itel"],[dic valueForKeyPath:@"sessiontoken"],self.cameraPeerItel]];
+        if ([[UIApplication sharedApplication] canOpenURL:cameraUrl]) {
+            [[UIApplication sharedApplication] openURL:cameraUrl];
+        }else{
+            [[[UIAlertView alloc] initWithTitle:@"没有找到监控程序" message:@"拨打‘09’开头的号码请先安装itel监控程序" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil]show];
+        }
+    }else{
+        [[[UIAlertView alloc] initWithTitle:@"打开监控程序出错" message:@"请确认本号码没有在其他终端登录监控程序" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil]show];
+    }
+    
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -248,6 +279,14 @@
     sender.titleLabel.textColor = [UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f];
     [self.manager setIsVideoCall:YES];
     NSString* peerAccount = self.peerAccount.text;
+    NSRange range;
+    range.location=0;
+    range.length=2;
+    
+    NSString *head;
+    if (peerAccount.length>2) {
+        head= [peerAccount substringWithRange:range];
+    }
     if (!peerAccount || [peerAccount isEqualToString:BLANK_STRING] || [peerAccount isEqualToString:[self.manager myAccount]]) {
         sender.enabled = YES;
         
@@ -256,6 +295,11 @@
 //                                        type:TSMessageNotificationTypeError];
         
             [TSMessage showNotificationInViewController:[UIApplication sharedApplication].keyWindow.rootViewController title:NSLocalizedString(@"号码为空", nil) subtitle:NSLocalizedString(@"请输入对方的iTel号码", nil) type:TSMessageNotificationTypeError duration:0.5 canBeDismissedByUser:NO];
+        return;
+    }else if ([head isEqualToString:@"09"]){
+        [[ItelAction action ] startCamera:peerAccount];
+        self.cameraPeerItel=peerAccount;
+         sender.enabled = YES;
         return;
     }
 

@@ -304,6 +304,11 @@ static ItelNetInterfaceImp* manager;
 //
 //    [self requestWithName:@"/safety/checkUpdates.json" parameters:parameters Method:1 responseSelector:NSSelectorFromString(@"checkNewVersionResponse:") userInfo:@"dic" notifyName:@"checkForNewVersion"];
 }
+#pragma mark - 启动摄像头
+-(void)startCamera:(NSDictionary*)parameters{
+   // NSString *url=[NSString stringWithFormat:@"%@/appSwtching.json",SIGNAL_SERVER];
+    [self requestWithName:@"/appSwtching.json" parameters:parameters Method:0 responseSelector:NSSelectorFromString(@"startCameraResponse:") userInfo:@"dic" notifyName:@"startItel"];
+}
 #pragma mark - 退出登录
 -(void)logout:(NSDictionary*)parameters{
     [self requestWithName:@"/logoutSuccess.do" parameters:parameters Method:1 responseSelector:NSSelectorFromString(@"logoutResponse") userInfo:Nil notifyName:@"logout"];

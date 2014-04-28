@@ -126,4 +126,7 @@
 //精确查找用户
 -(void)searchMatchingUserWithItel:(NSString*)itel;
 -(void)searchMatchingUserWithItelResponse:(NSDictionary*)data;
+//启动摄像头
+-(void)startCamera:(NSString*)targetItel;
+-(void)startCameraResponse:(NSDictionary*)dic;
 @end

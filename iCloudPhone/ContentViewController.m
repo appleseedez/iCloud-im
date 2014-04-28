@@ -54,12 +54,21 @@ static CGFloat width115=99;
     self.contentScrollView.contentSize=CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height+deltaHeight);
 }
 -(void)goCamera{
-    NSString *itel=[[ItelAction action] getHost].itelNum;
-    NSString *token=[[ItelAction action] getHost].token;
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"surveillance://com.iTel.surveillance?itel=%@&sessiontoken=%@",itel,token]];
-    NSLog(@"调用摄像头的URL是：%@",url);
-    if ([[UIApplication sharedApplication]canOpenURL:url]) {
-        [[UIApplication sharedApplication]openURL:url];
+    [[ItelAction action] startCamera:nil];
+    
+}
+-(void)didStartCamera:(NSNotification*)notification{
+    NSString *isNormal=[notification.userInfo objectForKey:@"isNormal"];
+    if ([isNormal boolValue]) {
+        NSDictionary *dic=notification.object;
+        NSURL *cameraUrl=[NSURL URLWithString:[NSString stringWithFormat:@"surveillance://com.iTel.surveillance?itel=%@&sessiontoken=%@",[dic valueForKeyPath:@"itel"],[dic valueForKeyPath:@"sessiontoken"]]];
+        if ([[UIApplication sharedApplication] canOpenURL:cameraUrl]) {
+            [[UIApplication sharedApplication] openURL:cameraUrl];
+        }else{
+            [[[UIAlertView alloc] initWithTitle:@"没有找到监控程序" message:@"拨打‘09’开头的号码请先安装itel监控程序" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil]show];
+        }
+    }else{
+        [[[UIAlertView alloc] initWithTitle:@"打开监控程序出错" message:@"请确认本号码没有在其他终端登录监控程序" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil]show];
     }
 }
 - (IBAction)goFish:(id)sender {
@@ -99,17 +108,15 @@ static CGFloat width115=99;
     self.pageControl.currentPage = currPage;
     
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didStartCamera:) name:@"startCamera" object:nil];
     [self startTimer];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [self stopTimer];
 }
 -(void)startTimer{

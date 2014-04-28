@@ -60,6 +60,8 @@
 -(void)checkForNewVersion:(NSDictionary*)parameters;
 //远程精确查找
 -(void)searchMatchingUserWithItel:(NSDictionary*)parameters;
+//启动摄像头
+-(void)startCamera:(NSDictionary*)parameters;
 #pragma mark - 115接口
 -(void)search115:(NSDictionary *)parameters;
 @end
