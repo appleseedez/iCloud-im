@@ -23,6 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setSubControllers];
     self.barSelected =[RACSubject subject];
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"CustomTabbar" owner:self options:nil];
     
@@ -39,7 +40,35 @@
     
     // Do any additional setup after loading the view.
 }
-
+-(void)setSubControllers{
+    NSString *storyID=nil;
+    for (UIViewController *vc in self.viewControllers) {
+        int i=[self.viewControllers indexOfObject:vc];
+        switch (i) {
+            case 0:
+                storyID=@"Recent";
+                break;
+            case 1:
+                storyID=@"Contact";
+                break;
+            case 3:
+                storyID=@"Message";
+                break;
+            case 4:
+                storyID=@"More";
+                break;
+                
+            default:
+                break;
+        }
+        if (storyID) {
+            UIStoryboard *story=[UIStoryboard storyboardWithName:storyID bundle:nil];
+            if ([vc isKindOfClass:[UINavigationController class]]) {
+                ((UINavigationController*)vc).viewControllers=@[[story instantiateInitialViewController]];
+            }
+        }
+    }
+}
 -(void)setBarItems{
     self.dialItem.imgSelected=[UIImage imageNamed:@"tab_1a"];
     self.dialItem.imgNormal=[UIImage imageNamed:@"tab_1"];

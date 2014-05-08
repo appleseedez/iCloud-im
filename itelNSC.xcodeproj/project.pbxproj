@@ -55,6 +55,15 @@
 		47838BFE191B5FF500EE08AF /* DialTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BFB191B5FF500EE08AF /* DialTableViewModel.m */; };
 		47838C00191B600400EE08AF /* dial.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47838BFF191B600400EE08AF /* dial.xcassets */; };
 		47838C03191B639B00EE08AF /* AppService.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838C02191B639B00EE08AF /* AppService.m */; };
+		47838C07191B789600EE08AF /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838C06191B789600EE08AF /* MainPageViewController.m */; };
+		47838C0D191B798D00EE08AF /* Recent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47838C0C191B798D00EE08AF /* Recent.storyboard */; };
+		47838C0F191B79B200EE08AF /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47838C0E191B79B200EE08AF /* Contact.storyboard */; };
+		47838C11191B79C100EE08AF /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47838C10191B79C100EE08AF /* Message.storyboard */; };
+		47838C13191B79D100EE08AF /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47838C12191B79D100EE08AF /* More.storyboard */; };
+		47838C15191B7A3000EE08AF /* more.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47838C14191B7A3000EE08AF /* more.xcassets */; };
+		47838C17191B7AF800EE08AF /* message.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47838C16191B7AF800EE08AF /* message.xcassets */; };
+		47838C19191B7B0700EE08AF /* contact.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47838C18191B7B0700EE08AF /* contact.xcassets */; };
+		47838C1B191B7B1600EE08AF /* recent.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47838C1A191B7B1600EE08AF /* recent.xcassets */; };
 		47929B69191B164F0054292D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B68191B164F0054292D /* Foundation.framework */; };
 		47929B6B191B164F0054292D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B6A191B164F0054292D /* CoreGraphics.framework */; };
 		47929B6D191B164F0054292D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B6C191B164F0054292D /* UIKit.framework */; };
@@ -170,6 +179,16 @@
 		47838BFF191B600400EE08AF /* dial.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = dial.xcassets; sourceTree = "<group>"; };
 		47838C01191B639B00EE08AF /* AppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppService.h; sourceTree = "<group>"; };
 		47838C02191B639B00EE08AF /* AppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppService.m; sourceTree = "<group>"; };
+		47838C05191B789600EE08AF /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
+		47838C06191B789600EE08AF /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
+		47838C0C191B798D00EE08AF /* Recent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Recent.storyboard; sourceTree = "<group>"; };
+		47838C0E191B79B200EE08AF /* Contact.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Contact.storyboard; sourceTree = "<group>"; };
+		47838C10191B79C100EE08AF /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
+		47838C12191B79D100EE08AF /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
+		47838C14191B7A3000EE08AF /* more.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = more.xcassets; sourceTree = "<group>"; };
+		47838C16191B7AF800EE08AF /* message.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = message.xcassets; sourceTree = "<group>"; };
+		47838C18191B7B0700EE08AF /* contact.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = contact.xcassets; sourceTree = "<group>"; };
+		47838C1A191B7B1600EE08AF /* recent.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = recent.xcassets; sourceTree = "<group>"; };
 		47929B65191B164F0054292D /* itelNSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = itelNSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47929B68191B164F0054292D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		47929B6A191B164F0054292D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -302,20 +321,19 @@
 			name = viewControllers;
 			sourceTree = "<group>";
 		};
-		473354C6191B23AB00B800CB /* mainView */ = {
+		473354C6191B23AB00B800CB /* MainView */ = {
 			isa = PBXGroup;
 			children = (
 				473354C7191B240400B800CB /* main.storyboard */,
 				473354C9191B256A00B800CB /* MainTabbarViewController.h */,
 				473354CA191B256A00B800CB /* MainTabbarViewController.m */,
-				473354CE191B2ED200B800CB /* CustomTabbar.h */,
-				473354CF191B2ED200B800CB /* CustomTabbar.m */,
-				473354D5191B3E7800B800CB /* CustomBarItem.h */,
-				473354D6191B3E7800B800CB /* CustomBarItem.m */,
+				47838C05191B789600EE08AF /* MainPageViewController.h */,
+				47838C06191B789600EE08AF /* MainPageViewController.m */,
+				47838C04191B785E00EE08AF /* views */,
 				473354D1191B2EF300B800CB /* CustomTabbar.xib */,
 				473354D3191B308500B800CB /* main.xcassets */,
 			);
-			name = mainView;
+			name = MainView;
 			sourceTree = "<group>";
 		};
 		47838BD3191B5DB700EE08AF /* DialViewSence */ = {
@@ -367,18 +385,69 @@
 			name = DialingViewModel;
 			sourceTree = "<group>";
 		};
+		47838C04191B785E00EE08AF /* views */ = {
+			isa = PBXGroup;
+			children = (
+				473354CE191B2ED200B800CB /* CustomTabbar.h */,
+				473354CF191B2ED200B800CB /* CustomTabbar.m */,
+				473354D5191B3E7800B800CB /* CustomBarItem.h */,
+				473354D6191B3E7800B800CB /* CustomBarItem.m */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		47838C08191B793200EE08AF /* RecentView */ = {
+			isa = PBXGroup;
+			children = (
+				47838C0C191B798D00EE08AF /* Recent.storyboard */,
+				47838C1A191B7B1600EE08AF /* recent.xcassets */,
+			);
+			name = RecentView;
+			sourceTree = "<group>";
+		};
+		47838C09191B793E00EE08AF /* ContactView */ = {
+			isa = PBXGroup;
+			children = (
+				47838C0E191B79B200EE08AF /* Contact.storyboard */,
+				47838C18191B7B0700EE08AF /* contact.xcassets */,
+			);
+			name = ContactView;
+			sourceTree = "<group>";
+		};
+		47838C0A191B795000EE08AF /* MessageView */ = {
+			isa = PBXGroup;
+			children = (
+				47838C10191B79C100EE08AF /* Message.storyboard */,
+				47838C16191B7AF800EE08AF /* message.xcassets */,
+			);
+			name = MessageView;
+			sourceTree = "<group>";
+		};
+		47838C0B191B796300EE08AF /* MoreView */ = {
+			isa = PBXGroup;
+			children = (
+				47838C12191B79D100EE08AF /* More.storyboard */,
+				47838C14191B7A3000EE08AF /* more.xcassets */,
+			);
+			name = MoreView;
+			sourceTree = "<group>";
+		};
 		47929B5C191B164F0054292D = {
 			isa = PBXGroup;
 			children = (
+				47838C0B191B796300EE08AF /* MoreView */,
+				47838C0A191B795000EE08AF /* MessageView */,
+				47838C09191B793E00EE08AF /* ContactView */,
+				47838C08191B793200EE08AF /* RecentView */,
 				47838BD3191B5DB700EE08AF /* DialViewSence */,
-				473354C6191B23AB00B800CB /* mainView */,
+				473354C6191B23AB00B800CB /* MainView */,
 				47335478191B1B2300B800CB /* RegisterAndLogin */,
 				47929B6E191B164F0054292D /* itelNSC */,
-				47929B8D191B164F0054292D /* itelNSCTests */,
 				47929B67191B164F0054292D /* Frameworks */,
 				47929B66191B164F0054292D /* Products */,
 				28E822647253439B999D3369 /* Pods.xcconfig */,
 				815C2441F4894284BD56C245 /* Pods-itelNSCTests.xcconfig */,
+				47929B8D191B164F0054292D /* itelNSCTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -534,14 +603,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				473354D2191B2EF300B800CB /* CustomTabbar.xib in Resources */,
+				47838C17191B7AF800EE08AF /* message.xcassets in Resources */,
+				47838C0F191B79B200EE08AF /* Contact.storyboard in Resources */,
+				47838C15191B7A3000EE08AF /* more.xcassets in Resources */,
 				47929B81191B164F0054292D /* Images.xcassets in Resources */,
+				47838C0D191B798D00EE08AF /* Recent.storyboard in Resources */,
 				473354C8191B240400B800CB /* main.storyboard in Resources */,
 				47838C00191B600400EE08AF /* dial.xcassets in Resources */,
 				47838BD7191B5E3A00EE08AF /* DialView.storyboard in Resources */,
 				473354BF191B1CC900B800CB /* login.xcassets in Resources */,
+				47838C1B191B7B1600EE08AF /* recent.xcassets in Resources */,
 				47929B73191B164F0054292D /* InfoPlist.strings in Resources */,
+				47838C19191B7B0700EE08AF /* contact.xcassets in Resources */,
+				47838C13191B79D100EE08AF /* More.storyboard in Resources */,
 				47929B7C191B164F0054292D /* Root.storyboard in Resources */,
 				473354D4191B308500B800CB /* main.xcassets in Resources */,
+				47838C11191B79C100EE08AF /* Message.storyboard in Resources */,
 				473354BD191B1C3C00B800CB /* login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -656,6 +733,7 @@
 				47838BD8191B5E3A00EE08AF /* DialViewModel.m in Sources */,
 				473354B5191B1C1800B800CB /* RegChooseNumberViewController.m in Sources */,
 				47838BF3191B5FD700EE08AF /* AudioSessionViewController.m in Sources */,
+				47838C07191B789600EE08AF /* MainPageViewController.m in Sources */,
 				47929B75191B164F0054292D /* main.m in Sources */,
 				47335494191B1BF300B800CB /* LoginViewModel.m in Sources */,
 				473354B8191B1C1800B800CB /* PassMesViewController.m in Sources */,
