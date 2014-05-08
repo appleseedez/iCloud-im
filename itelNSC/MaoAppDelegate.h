@@ -11,5 +11,7 @@
 @interface MaoAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (nonatomic)  NSString *UUID;
+@property (nonatomic)  NSDictionary *loginInfo;
+@property (nonatomic) NSArray *backUsers;
 @end

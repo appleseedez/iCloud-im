@@ -12,7 +12,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                   ^{
+                       self.UUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+                       
+                   });
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"loginSuccess" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        self.loginInfo=note.userInfo;
+        NSLog(@"收到登陆成功通知啦:%@",note.userInfo);
+    }];
+
     return YES;
 }
 							

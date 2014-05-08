@@ -13,4 +13,8 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import<ReactiveCocoa.h>
+    #import<MBProgressHUD.h>
+    #import<AFNetworking.h>
 #endif
+#define ACCOUNT_SERVER @"http://211.149.144.15:8080/CloudCommunity"
