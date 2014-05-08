@@ -17,4 +17,5 @@
     #import<MBProgressHUD.h>
     #import<AFNetworking.h>
 #endif
-#define ACCOUNT_SERVER @"http://211.149.144.15:8080/CloudCommunity"
+//#define ACCOUNT_SERVER @"http://211.149.144.15:8080/CloudCommunity"
+#define ACCOUNT_SERVER @"http://42.96.149.86/CloudCommunity"

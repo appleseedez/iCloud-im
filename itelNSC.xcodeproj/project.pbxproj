@@ -31,14 +31,37 @@
 		473354BB191B1C1800B800CB /* PassResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473354AF191B1C1800B800CB /* PassResetViewController.m */; };
 		473354BD191B1C3C00B800CB /* login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 473354BC191B1C3C00B800CB /* login.storyboard */; };
 		473354BF191B1CC900B800CB /* login.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473354BE191B1CC900B800CB /* login.xcassets */; };
+		473354C2191B1E6900B800CB /* RoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473354C1191B1E6900B800CB /* RoolViewController.m */; };
+		473354C5191B20B000B800CB /* RootViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 473354C4191B20B000B800CB /* RootViewModel.m */; };
+		473354C8191B240400B800CB /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 473354C7191B240400B800CB /* main.storyboard */; };
+		473354CB191B256A00B800CB /* MainTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473354CA191B256A00B800CB /* MainTabbarViewController.m */; };
+		473354CD191B2AE200B800CB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 473354CC191B2AE200B800CB /* CFNetwork.framework */; };
+		473354D0191B2ED200B800CB /* CustomTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 473354CF191B2ED200B800CB /* CustomTabbar.m */; };
+		473354D2191B2EF300B800CB /* CustomTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 473354D1191B2EF300B800CB /* CustomTabbar.xib */; };
+		473354D4191B308500B800CB /* main.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473354D3191B308500B800CB /* main.xcassets */; };
+		473354D7191B3E7800B800CB /* CustomBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 473354D6191B3E7800B800CB /* CustomBarItem.m */; };
+		47838BD7191B5E3A00EE08AF /* DialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47838BD4191B5E3A00EE08AF /* DialView.storyboard */; };
+		47838BD8191B5E3A00EE08AF /* DialViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BD6191B5E3A00EE08AF /* DialViewModel.m */; };
+		47838BDB191B5F8500EE08AF /* RootTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BDA191B5F8500EE08AF /* RootTabbarController.m */; };
+		47838BEE191B5FD700EE08AF /* VideoCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BE1191B5FD700EE08AF /* VideoCallingViewController.m */; };
+		47838BEF191B5FD700EE08AF /* VideoAnsweringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BE3191B5FD700EE08AF /* VideoAnsweringViewController.m */; };
+		47838BF0191B5FD700EE08AF /* VideoSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BE5191B5FD700EE08AF /* VideoSessionViewController.m */; };
+		47838BF1191B5FD700EE08AF /* AudioCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BE7191B5FD700EE08AF /* AudioCallingViewController.m */; };
+		47838BF2191B5FD700EE08AF /* AudioAnsweringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BE9191B5FD700EE08AF /* AudioAnsweringViewController.m */; };
+		47838BF3191B5FD700EE08AF /* AudioSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BEB191B5FD700EE08AF /* AudioSessionViewController.m */; };
+		47838BF4191B5FD700EE08AF /* DialingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BED191B5FD700EE08AF /* DialingViewController.m */; };
+		47838BFC191B5FF500EE08AF /* DialNumberButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BF7191B5FF500EE08AF /* DialNumberButton.m */; };
+		47838BFD191B5FF500EE08AF /* DialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BF9191B5FF500EE08AF /* DialTableViewCell.m */; };
+		47838BFE191B5FF500EE08AF /* DialTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BFB191B5FF500EE08AF /* DialTableViewModel.m */; };
+		47838C00191B600400EE08AF /* dial.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47838BFF191B600400EE08AF /* dial.xcassets */; };
+		47838C03191B639B00EE08AF /* AppService.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838C02191B639B00EE08AF /* AppService.m */; };
 		47929B69191B164F0054292D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B68191B164F0054292D /* Foundation.framework */; };
 		47929B6B191B164F0054292D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B6A191B164F0054292D /* CoreGraphics.framework */; };
 		47929B6D191B164F0054292D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B6C191B164F0054292D /* UIKit.framework */; };
 		47929B73191B164F0054292D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47929B71191B164F0054292D /* InfoPlist.strings */; };
 		47929B75191B164F0054292D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47929B74191B164F0054292D /* main.m */; };
 		47929B79191B164F0054292D /* MaoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47929B78191B164F0054292D /* MaoAppDelegate.m */; };
-		47929B7C191B164F0054292D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47929B7A191B164F0054292D /* Main.storyboard */; };
-		47929B7F191B164F0054292D /* MaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47929B7E191B164F0054292D /* MaoViewController.m */; };
+		47929B7C191B164F0054292D /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47929B7A191B164F0054292D /* Root.storyboard */; };
 		47929B81191B164F0054292D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47929B80191B164F0054292D /* Images.xcassets */; };
 		47929B88191B164F0054292D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B87191B164F0054292D /* XCTest.framework */; };
 		47929B89191B164F0054292D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B68191B164F0054292D /* Foundation.framework */; };
@@ -105,6 +128,48 @@
 		473354AF191B1C1800B800CB /* PassResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassResetViewController.m; sourceTree = "<group>"; };
 		473354BC191B1C3C00B800CB /* login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = login.storyboard; sourceTree = "<group>"; };
 		473354BE191B1CC900B800CB /* login.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = login.xcassets; sourceTree = "<group>"; };
+		473354C0191B1E6900B800CB /* RoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoolViewController.h; sourceTree = "<group>"; };
+		473354C1191B1E6900B800CB /* RoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoolViewController.m; sourceTree = "<group>"; };
+		473354C3191B20B000B800CB /* RootViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewModel.h; sourceTree = "<group>"; };
+		473354C4191B20B000B800CB /* RootViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewModel.m; sourceTree = "<group>"; };
+		473354C7191B240400B800CB /* main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = main.storyboard; sourceTree = "<group>"; };
+		473354C9191B256A00B800CB /* MainTabbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabbarViewController.h; sourceTree = "<group>"; };
+		473354CA191B256A00B800CB /* MainTabbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabbarViewController.m; sourceTree = "<group>"; };
+		473354CC191B2AE200B800CB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		473354CE191B2ED200B800CB /* CustomTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabbar.h; sourceTree = "<group>"; };
+		473354CF191B2ED200B800CB /* CustomTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabbar.m; sourceTree = "<group>"; };
+		473354D1191B2EF300B800CB /* CustomTabbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTabbar.xib; sourceTree = "<group>"; };
+		473354D3191B308500B800CB /* main.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = main.xcassets; sourceTree = "<group>"; };
+		473354D5191B3E7800B800CB /* CustomBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBarItem.h; sourceTree = "<group>"; };
+		473354D6191B3E7800B800CB /* CustomBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBarItem.m; sourceTree = "<group>"; };
+		47838BD4191B5E3A00EE08AF /* DialView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DialView.storyboard; sourceTree = "<group>"; };
+		47838BD5191B5E3A00EE08AF /* DialViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialViewModel.h; sourceTree = "<group>"; };
+		47838BD6191B5E3A00EE08AF /* DialViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialViewModel.m; sourceTree = "<group>"; };
+		47838BD9191B5F8500EE08AF /* RootTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabbarController.h; sourceTree = "<group>"; };
+		47838BDA191B5F8500EE08AF /* RootTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabbarController.m; sourceTree = "<group>"; };
+		47838BE0191B5FD700EE08AF /* VideoCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCallingViewController.h; sourceTree = "<group>"; };
+		47838BE1191B5FD700EE08AF /* VideoCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCallingViewController.m; sourceTree = "<group>"; };
+		47838BE2191B5FD700EE08AF /* VideoAnsweringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoAnsweringViewController.h; sourceTree = "<group>"; };
+		47838BE3191B5FD700EE08AF /* VideoAnsweringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoAnsweringViewController.m; sourceTree = "<group>"; };
+		47838BE4191B5FD700EE08AF /* VideoSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSessionViewController.h; sourceTree = "<group>"; };
+		47838BE5191B5FD700EE08AF /* VideoSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoSessionViewController.m; sourceTree = "<group>"; };
+		47838BE6191B5FD700EE08AF /* AudioCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCallingViewController.h; sourceTree = "<group>"; };
+		47838BE7191B5FD700EE08AF /* AudioCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioCallingViewController.m; sourceTree = "<group>"; };
+		47838BE8191B5FD700EE08AF /* AudioAnsweringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioAnsweringViewController.h; sourceTree = "<group>"; };
+		47838BE9191B5FD700EE08AF /* AudioAnsweringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioAnsweringViewController.m; sourceTree = "<group>"; };
+		47838BEA191B5FD700EE08AF /* AudioSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSessionViewController.h; sourceTree = "<group>"; };
+		47838BEB191B5FD700EE08AF /* AudioSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioSessionViewController.m; sourceTree = "<group>"; };
+		47838BEC191B5FD700EE08AF /* DialingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialingViewController.h; sourceTree = "<group>"; };
+		47838BED191B5FD700EE08AF /* DialingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialingViewController.m; sourceTree = "<group>"; };
+		47838BF6191B5FF500EE08AF /* DialNumberButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialNumberButton.h; sourceTree = "<group>"; };
+		47838BF7191B5FF500EE08AF /* DialNumberButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialNumberButton.m; sourceTree = "<group>"; };
+		47838BF8191B5FF500EE08AF /* DialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialTableViewCell.h; sourceTree = "<group>"; };
+		47838BF9191B5FF500EE08AF /* DialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialTableViewCell.m; sourceTree = "<group>"; };
+		47838BFA191B5FF500EE08AF /* DialTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialTableViewModel.h; sourceTree = "<group>"; };
+		47838BFB191B5FF500EE08AF /* DialTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialTableViewModel.m; sourceTree = "<group>"; };
+		47838BFF191B600400EE08AF /* dial.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = dial.xcassets; sourceTree = "<group>"; };
+		47838C01191B639B00EE08AF /* AppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppService.h; sourceTree = "<group>"; };
+		47838C02191B639B00EE08AF /* AppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppService.m; sourceTree = "<group>"; };
 		47929B65191B164F0054292D /* itelNSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = itelNSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47929B68191B164F0054292D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		47929B6A191B164F0054292D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,9 +180,7 @@
 		47929B76191B164F0054292D /* itelNSC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "itelNSC-Prefix.pch"; sourceTree = "<group>"; };
 		47929B77191B164F0054292D /* MaoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaoAppDelegate.h; sourceTree = "<group>"; };
 		47929B78191B164F0054292D /* MaoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MaoAppDelegate.m; sourceTree = "<group>"; };
-		47929B7B191B164F0054292D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		47929B7D191B164F0054292D /* MaoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaoViewController.h; sourceTree = "<group>"; };
-		47929B7E191B164F0054292D /* MaoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MaoViewController.m; sourceTree = "<group>"; };
+		47929B7B191B164F0054292D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Root.storyboard; sourceTree = "<group>"; };
 		47929B80191B164F0054292D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		47929B86191B164F0054292D /* itelNSCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = itelNSCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47929B87191B164F0054292D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -133,6 +196,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				473354CD191B2AE200B800CB /* CFNetwork.framework in Frameworks */,
 				47929B6B191B164F0054292D /* CoreGraphics.framework in Frameworks */,
 				47929B6D191B164F0054292D /* UIKit.framework in Frameworks */,
 				47929B69191B164F0054292D /* Foundation.framework in Frameworks */,
@@ -161,8 +225,6 @@
 				473354BC191B1C3C00B800CB /* login.storyboard */,
 				47335497191B1BFC00B800CB /* viewControllers */,
 				4733548D191B1BD900B800CB /* viewModels */,
-				4733547D191B1BB900B800CB /* models */,
-				47335479191B1B9600B800CB /* services */,
 			);
 			name = RegisterAndLogin;
 			path = itelNSC;
@@ -173,6 +235,8 @@
 			children = (
 				4733547A191B1BAE00B800CB /* HTTPService.h */,
 				4733547B191B1BAE00B800CB /* HTTPService.m */,
+				47838C01191B639B00EE08AF /* AppService.h */,
+				47838C02191B639B00EE08AF /* AppService.m */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -238,9 +302,76 @@
 			name = viewControllers;
 			sourceTree = "<group>";
 		};
+		473354C6191B23AB00B800CB /* mainView */ = {
+			isa = PBXGroup;
+			children = (
+				473354C7191B240400B800CB /* main.storyboard */,
+				473354C9191B256A00B800CB /* MainTabbarViewController.h */,
+				473354CA191B256A00B800CB /* MainTabbarViewController.m */,
+				473354CE191B2ED200B800CB /* CustomTabbar.h */,
+				473354CF191B2ED200B800CB /* CustomTabbar.m */,
+				473354D5191B3E7800B800CB /* CustomBarItem.h */,
+				473354D6191B3E7800B800CB /* CustomBarItem.m */,
+				473354D1191B2EF300B800CB /* CustomTabbar.xib */,
+				473354D3191B308500B800CB /* main.xcassets */,
+			);
+			name = mainView;
+			sourceTree = "<group>";
+		};
+		47838BD3191B5DB700EE08AF /* DialViewSence */ = {
+			isa = PBXGroup;
+			children = (
+				47838BFF191B600400EE08AF /* dial.xcassets */,
+				47838BD4191B5E3A00EE08AF /* DialView.storyboard */,
+				47838BD5191B5E3A00EE08AF /* DialViewModel.h */,
+				47838BD6191B5E3A00EE08AF /* DialViewModel.m */,
+				47838BD9191B5F8500EE08AF /* RootTabbarController.h */,
+				47838BDA191B5F8500EE08AF /* RootTabbarController.m */,
+				47838BDF191B5FC600EE08AF /* SubVCs */,
+			);
+			name = DialViewSence;
+			sourceTree = "<group>";
+		};
+		47838BDF191B5FC600EE08AF /* SubVCs */ = {
+			isa = PBXGroup;
+			children = (
+				47838BE0191B5FD700EE08AF /* VideoCallingViewController.h */,
+				47838BE1191B5FD700EE08AF /* VideoCallingViewController.m */,
+				47838BE2191B5FD700EE08AF /* VideoAnsweringViewController.h */,
+				47838BE3191B5FD700EE08AF /* VideoAnsweringViewController.m */,
+				47838BE4191B5FD700EE08AF /* VideoSessionViewController.h */,
+				47838BE5191B5FD700EE08AF /* VideoSessionViewController.m */,
+				47838BE6191B5FD700EE08AF /* AudioCallingViewController.h */,
+				47838BE7191B5FD700EE08AF /* AudioCallingViewController.m */,
+				47838BE8191B5FD700EE08AF /* AudioAnsweringViewController.h */,
+				47838BE9191B5FD700EE08AF /* AudioAnsweringViewController.m */,
+				47838BEA191B5FD700EE08AF /* AudioSessionViewController.h */,
+				47838BEB191B5FD700EE08AF /* AudioSessionViewController.m */,
+				47838BEC191B5FD700EE08AF /* DialingViewController.h */,
+				47838BED191B5FD700EE08AF /* DialingViewController.m */,
+				47838BF5191B5FE100EE08AF /* DialingViewModel */,
+			);
+			name = SubVCs;
+			sourceTree = "<group>";
+		};
+		47838BF5191B5FE100EE08AF /* DialingViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				47838BF6191B5FF500EE08AF /* DialNumberButton.h */,
+				47838BF7191B5FF500EE08AF /* DialNumberButton.m */,
+				47838BF8191B5FF500EE08AF /* DialTableViewCell.h */,
+				47838BF9191B5FF500EE08AF /* DialTableViewCell.m */,
+				47838BFA191B5FF500EE08AF /* DialTableViewModel.h */,
+				47838BFB191B5FF500EE08AF /* DialTableViewModel.m */,
+			);
+			name = DialingViewModel;
+			sourceTree = "<group>";
+		};
 		47929B5C191B164F0054292D = {
 			isa = PBXGroup;
 			children = (
+				47838BD3191B5DB700EE08AF /* DialViewSence */,
+				473354C6191B23AB00B800CB /* mainView */,
 				47335478191B1B2300B800CB /* RegisterAndLogin */,
 				47929B6E191B164F0054292D /* itelNSC */,
 				47929B8D191B164F0054292D /* itelNSCTests */,
@@ -263,6 +394,7 @@
 		47929B67191B164F0054292D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				473354CC191B2AE200B800CB /* CFNetwork.framework */,
 				47929B68191B164F0054292D /* Foundation.framework */,
 				47929B6A191B164F0054292D /* CoreGraphics.framework */,
 				47929B6C191B164F0054292D /* UIKit.framework */,
@@ -276,11 +408,15 @@
 		47929B6E191B164F0054292D /* itelNSC */ = {
 			isa = PBXGroup;
 			children = (
+				4733547D191B1BB900B800CB /* models */,
+				47335479191B1B9600B800CB /* services */,
 				47929B77191B164F0054292D /* MaoAppDelegate.h */,
 				47929B78191B164F0054292D /* MaoAppDelegate.m */,
-				47929B7A191B164F0054292D /* Main.storyboard */,
-				47929B7D191B164F0054292D /* MaoViewController.h */,
-				47929B7E191B164F0054292D /* MaoViewController.m */,
+				47929B7A191B164F0054292D /* Root.storyboard */,
+				473354C0191B1E6900B800CB /* RoolViewController.h */,
+				473354C1191B1E6900B800CB /* RoolViewController.m */,
+				473354C3191B20B000B800CB /* RootViewModel.h */,
+				473354C4191B20B000B800CB /* RootViewModel.m */,
 				47929B80191B164F0054292D /* Images.xcassets */,
 				47929B6F191B164F0054292D /* Supporting Files */,
 			);
@@ -397,10 +533,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				473354D2191B2EF300B800CB /* CustomTabbar.xib in Resources */,
 				47929B81191B164F0054292D /* Images.xcassets in Resources */,
+				473354C8191B240400B800CB /* main.storyboard in Resources */,
+				47838C00191B600400EE08AF /* dial.xcassets in Resources */,
+				47838BD7191B5E3A00EE08AF /* DialView.storyboard in Resources */,
 				473354BF191B1CC900B800CB /* login.xcassets in Resources */,
 				47929B73191B164F0054292D /* InfoPlist.strings in Resources */,
-				47929B7C191B164F0054292D /* Main.storyboard in Resources */,
+				47929B7C191B164F0054292D /* Root.storyboard in Resources */,
+				473354D4191B308500B800CB /* main.xcassets in Resources */,
 				473354BD191B1C3C00B800CB /* login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,13 +624,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47838BF2191B5FD700EE08AF /* AudioAnsweringViewController.m in Sources */,
 				47929B79191B164F0054292D /* MaoAppDelegate.m in Sources */,
 				47335496191B1BF300B800CB /* PassViewModel.m in Sources */,
+				47838BFD191B5FF500EE08AF /* DialTableViewCell.m in Sources */,
+				47838C03191B639B00EE08AF /* AppService.m in Sources */,
+				473354C2191B1E6900B800CB /* RoolViewController.m in Sources */,
 				473354B2191B1C1800B800CB /* RegTypeViewController.m in Sources */,
+				47838BFC191B5FF500EE08AF /* DialNumberButton.m in Sources */,
 				473354BA191B1C1800B800CB /* PassEmailViewController.m in Sources */,
+				47838BDB191B5F8500EE08AF /* RootTabbarController.m in Sources */,
+				473354D7191B3E7800B800CB /* CustomBarItem.m in Sources */,
+				47838BEE191B5FD700EE08AF /* VideoCallingViewController.m in Sources */,
 				473354B0191B1C1800B800CB /* LoginViewController.m in Sources */,
 				473354B3191B1C1800B800CB /* RegDetailViewController.m in Sources */,
+				47838BFE191B5FF500EE08AF /* DialTableViewModel.m in Sources */,
 				47335495191B1BF300B800CB /* RegisterViewModel.m in Sources */,
+				47838BEF191B5FD700EE08AF /* VideoAnsweringViewController.m in Sources */,
+				47838BF0191B5FD700EE08AF /* VideoSessionViewController.m in Sources */,
+				47838BF1191B5FD700EE08AF /* AudioCallingViewController.m in Sources */,
 				4733547C191B1BAE00B800CB /* HTTPService.m in Sources */,
 				4733548A191B1BCA00B800CB /* HTTPRequestBuilder.m in Sources */,
 				47335489191B1BCA00B800CB /* NXInputChecker.m in Sources */,
@@ -497,15 +650,20 @@
 				473354B6191B1C1800B800CB /* PassViewController.m in Sources */,
 				4733548C191B1BCA00B800CB /* BaseViewModel.m in Sources */,
 				4733548B191B1BCA00B800CB /* HTTPRequestBuilder+LoginAndRegister.m in Sources */,
+				473354D0191B2ED200B800CB /* CustomTabbar.m in Sources */,
 				473354B7191B1C1800B800CB /* PassWayViewController.m in Sources */,
 				47335488191B1BCA00B800CB /* NSString+MD5.m in Sources */,
+				47838BD8191B5E3A00EE08AF /* DialViewModel.m in Sources */,
 				473354B5191B1C1800B800CB /* RegChooseNumberViewController.m in Sources */,
+				47838BF3191B5FD700EE08AF /* AudioSessionViewController.m in Sources */,
 				47929B75191B164F0054292D /* main.m in Sources */,
 				47335494191B1BF300B800CB /* LoginViewModel.m in Sources */,
 				473354B8191B1C1800B800CB /* PassMesViewController.m in Sources */,
+				473354CB191B256A00B800CB /* MainTabbarViewController.m in Sources */,
 				473354B4191B1C1800B800CB /* RegMesViewController.m in Sources */,
+				473354C5191B20B000B800CB /* RootViewModel.m in Sources */,
+				47838BF4191B5FD700EE08AF /* DialingViewController.m in Sources */,
 				473354BB191B1C1800B800CB /* PassResetViewController.m in Sources */,
-				47929B7F191B164F0054292D /* MaoViewController.m in Sources */,
 				473354B9191B1C1800B800CB /* PassAnswerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,12 +695,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		47929B7A191B164F0054292D /* Main.storyboard */ = {
+		47929B7A191B164F0054292D /* Root.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				47929B7B191B164F0054292D /* Base */,
 			);
-			name = Main.storyboard;
+			name = Root.storyboard;
 			sourceTree = "<group>";
 		};
 		47929B90191B164F0054292D /* InfoPlist.strings */ = {
@@ -635,7 +793,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "itelNSC/itelNSC-Prefix.pch";
 				INFOPLIST_FILE = "itelNSC/itelNSC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -649,7 +810,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "itelNSC/itelNSC-Prefix.pch";
 				INFOPLIST_FILE = "itelNSC/itelNSC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
