@@ -94,7 +94,15 @@
     return YES;
   }
   NSDictionary *dic = [[loginDic objectForKey:@"message"] objectForKey:@"data"];
-  self.startExtra = @{ @"itelNumber" : [pass objectForKey:@"targetItel"] };
+    
+    NSString *itel=[pass objectForKey:@"targetItel"];
+    if (itel.length) {
+         self.startExtra = @{ @"itelNumber" : [pass objectForKey:@"targetItel"] };
+    }else{
+        self.startExtra=nil;
+    }
+    
+ 
   if (dic) {
 
     HostItelUser *host = [[ItelAction action] getHost];
