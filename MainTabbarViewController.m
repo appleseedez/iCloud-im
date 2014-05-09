@@ -28,22 +28,19 @@
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"CustomTabbar" owner:self options:nil];
     
     self.customTabbar = [nib objectAtIndex:0];
-   
-    
     self.customTabbar.center=CGPointMake(160, self.view.bounds.size.height-self.customTabbar.bounds.size.height/2.0);
+    [self.customTabbar bringSubviewToFront:self.mainItem];
     [self.view addSubview:self.customTabbar];
     [self setBarItems];
    
     [self.view addSubview:self.customTabbar];
     [self.tabBar removeFromSuperview];
     [self.barSelected sendNext:self.mainItem];
-    
-    // Do any additional setup after loading the view.
 }
 -(void)setSubControllers{
     NSString *storyID=nil;
     for (UIViewController *vc in self.viewControllers) {
-        int i=[self.viewControllers indexOfObject:vc];
+        NSUInteger i=[self.viewControllers indexOfObject:vc];
         switch (i) {
             case 0:
                 storyID=@"Recent";
@@ -117,6 +114,21 @@
         
     }];
     
+}
+-(void)chooseSelectedView:(NSInteger)index{
+    CustomBarItem *item=nil;
+    if (index==[self.dialItem.selIndex integerValue]) {
+        item=self.dialItem;
+    }else if(index==[self.moreItem.selIndex integerValue]) {
+        item=self.moreItem;
+    }else if(index==[self.contactItem.selIndex integerValue]) {
+        item=self.contactItem;
+    }else if(index==[self.mainItem.selIndex integerValue]) {
+        item=self.mainItem;
+    }else if(index==[self.messageItem.selIndex integerValue]) {
+        item=self.messageItem;
+    }
+    [self.barSelected sendNext:item];
 }
 -(void)presentDialPan{
     self.viewModel.dialViewModel.showingView=@(ViewTypeDialing);

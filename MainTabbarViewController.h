@@ -17,4 +17,6 @@
 @property (weak, nonatomic) IBOutlet CustomBarItem *messageItem;
 @property (weak,nonatomic)  RootViewModel *viewModel;
 @property (nonatomic)  NSNumber *selectIndex;
+-(void)chooseSelectedView:(NSInteger)index;
+-(void)presentDialPan;
 @end

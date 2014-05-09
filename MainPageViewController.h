@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MainPageViewController : UIViewController
-
+@class MainPageViewModel;
+@interface MainPageViewController : UIViewController <UIScrollViewDelegate>
+@property  (nonatomic,strong) MainPageViewModel *viewModel;
 @end

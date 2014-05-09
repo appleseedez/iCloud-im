@@ -40,6 +40,9 @@
 		473354D2191B2EF300B800CB /* CustomTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 473354D1191B2EF300B800CB /* CustomTabbar.xib */; };
 		473354D4191B308500B800CB /* main.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473354D3191B308500B800CB /* main.xcassets */; };
 		473354D7191B3E7800B800CB /* CustomBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 473354D6191B3E7800B800CB /* CustomBarItem.m */; };
+		4757BB6A191C68DB009A8938 /* MainPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB69191C68DB009A8938 /* MainPageViewModel.m */; };
+		4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6C191C81B3009A8938 /* MainPageButton.m */; };
+		4757BB70191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */; };
 		47838BD7191B5E3A00EE08AF /* DialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47838BD4191B5E3A00EE08AF /* DialView.storyboard */; };
 		47838BD8191B5E3A00EE08AF /* DialViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BD6191B5E3A00EE08AF /* DialViewModel.m */; };
 		47838BDB191B5F8500EE08AF /* RootTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BDA191B5F8500EE08AF /* RootTabbarController.m */; };
@@ -151,6 +154,12 @@
 		473354D3191B308500B800CB /* main.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = main.xcassets; sourceTree = "<group>"; };
 		473354D5191B3E7800B800CB /* CustomBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBarItem.h; sourceTree = "<group>"; };
 		473354D6191B3E7800B800CB /* CustomBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBarItem.m; sourceTree = "<group>"; };
+		4757BB68191C68DB009A8938 /* MainPageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewModel.h; sourceTree = "<group>"; };
+		4757BB69191C68DB009A8938 /* MainPageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewModel.m; sourceTree = "<group>"; };
+		4757BB6B191C81B3009A8938 /* MainPageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageButton.h; sourceTree = "<group>"; };
+		4757BB6C191C81B3009A8938 /* MainPageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageButton.m; sourceTree = "<group>"; };
+		4757BB6E191CAB81009A8938 /* HTTPRequestBuilder+mainPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPRequestBuilder+mainPage.h"; sourceTree = "<group>"; };
+		4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPRequestBuilder+mainPage.m"; sourceTree = "<group>"; };
 		47838BD4191B5E3A00EE08AF /* DialView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DialView.storyboard; sourceTree = "<group>"; };
 		47838BD5191B5E3A00EE08AF /* DialViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialViewModel.h; sourceTree = "<group>"; };
 		47838BD6191B5E3A00EE08AF /* DialViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialViewModel.m; sourceTree = "<group>"; };
@@ -329,11 +338,25 @@
 				473354CA191B256A00B800CB /* MainTabbarViewController.m */,
 				47838C05191B789600EE08AF /* MainPageViewController.h */,
 				47838C06191B789600EE08AF /* MainPageViewController.m */,
+				4757BB6B191C81B3009A8938 /* MainPageButton.h */,
+				4757BB6C191C81B3009A8938 /* MainPageButton.m */,
+				4757BB67191C68B9009A8938 /* viewModel */,
 				47838C04191B785E00EE08AF /* views */,
 				473354D1191B2EF300B800CB /* CustomTabbar.xib */,
 				473354D3191B308500B800CB /* main.xcassets */,
 			);
 			name = MainView;
+			sourceTree = "<group>";
+		};
+		4757BB67191C68B9009A8938 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4757BB68191C68DB009A8938 /* MainPageViewModel.h */,
+				4757BB69191C68DB009A8938 /* MainPageViewModel.m */,
+				4757BB6E191CAB81009A8938 /* HTTPRequestBuilder+mainPage.h */,
+				4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */,
+			);
+			name = viewModel;
 			sourceTree = "<group>";
 		};
 		47838BD3191B5DB700EE08AF /* DialViewSence */ = {
@@ -718,10 +741,12 @@
 				47838BFE191B5FF500EE08AF /* DialTableViewModel.m in Sources */,
 				47335495191B1BF300B800CB /* RegisterViewModel.m in Sources */,
 				47838BEF191B5FD700EE08AF /* VideoAnsweringViewController.m in Sources */,
+				4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */,
 				47838BF0191B5FD700EE08AF /* VideoSessionViewController.m in Sources */,
 				47838BF1191B5FD700EE08AF /* AudioCallingViewController.m in Sources */,
 				4733547C191B1BAE00B800CB /* HTTPService.m in Sources */,
 				4733548A191B1BCA00B800CB /* HTTPRequestBuilder.m in Sources */,
+				4757BB70191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m in Sources */,
 				47335489191B1BCA00B800CB /* NXInputChecker.m in Sources */,
 				473354B1191B1C1800B800CB /* LoginTableViewCell.m in Sources */,
 				473354B6191B1C1800B800CB /* PassViewController.m in Sources */,
@@ -737,6 +762,7 @@
 				47929B75191B164F0054292D /* main.m in Sources */,
 				47335494191B1BF300B800CB /* LoginViewModel.m in Sources */,
 				473354B8191B1C1800B800CB /* PassMesViewController.m in Sources */,
+				4757BB6A191C68DB009A8938 /* MainPageViewModel.m in Sources */,
 				473354CB191B256A00B800CB /* MainTabbarViewController.m in Sources */,
 				473354B4191B1C1800B800CB /* RegMesViewController.m in Sources */,
 				473354C5191B20B000B800CB /* RootViewModel.m in Sources */,
