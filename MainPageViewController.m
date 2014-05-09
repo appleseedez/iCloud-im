@@ -98,7 +98,12 @@
     }];
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if ([self.viewModel.adArray count]) {
+        [self startTimer];
+    }
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self stopTimer];
