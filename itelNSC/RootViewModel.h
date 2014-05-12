@@ -12,4 +12,5 @@
 @property (nonatomic) NSNumber *showSessinView;
 @property (nonatomic) NSNumber *dialViewType;
 @property (nonatomic) DialViewModel *dialViewModel;
+@property (nonatomic) NSNumber *showTabbar; //bool 显示隐藏tabbar；
 @end

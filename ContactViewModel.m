@@ -13,7 +13,7 @@
 @implementation ContactViewModel
 -(void)addNewFriend:(NSString*)itel{
     self.busy=@(YES);
-     NSDictionary *parameters = @{@"userId":[self hostUserID] ,@"hostItel":[self hostItel],@"targetItel":itel};
+    NSDictionary *parameters = @{@"userId":[self hostUserID] ,@"hostItel":[self hostItel],@"targetItel":itel};
     [[self.requestBuilder addNewFriend:parameters] subscribeNext:^(id x) {
         
     }error:^(NSError *error) {

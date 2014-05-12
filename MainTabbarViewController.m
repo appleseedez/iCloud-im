@@ -113,7 +113,29 @@
         [self setSelectedIndex:[x.selIndex intValue]];
         
     }];
-    
+    //监听 显示隐藏tabbar
+    [RACObserve(self, viewModel.showTabbar) subscribeNext:^(NSNumber *x) {
+        BOOL show=[x boolValue];
+        NSString *type=@"push";
+        NSString *subtype=nil;
+        
+        if (show) {
+            subtype=@"fromTop";
+        }else{
+            subtype=@"fromBottom";
+        }
+        if (self.customTabbar.hidden==show) {
+            CATransition *anim=[CATransition animation];
+            anim.type=type;
+            anim.subtype=subtype;
+            anim.duration=0.3;
+            [self.customTabbar setHidden:!show];
+            [self.customTabbar.layer addAnimation:anim forKey:@"4"];
+            
+        }
+        
+        
+    }];
 }
 -(void)chooseSelectedView:(NSInteger)index{
     CustomBarItem *item=nil;

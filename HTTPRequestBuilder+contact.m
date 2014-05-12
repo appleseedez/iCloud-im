@@ -21,4 +21,22 @@
     
     return [[HTTPService defaultService] signalWithRequest:request];
 }
+-(RACSignal*)editUserAlias:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/contact/updateItelFriend.json",ACCOUNT_SERVER];
+    NSURLRequest *request= [self jsonPostRequestWithUrl:url andParameters:parameters];
+    
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
+-(RACSignal*)delFriend:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/contact/removeItelFriend.json",ACCOUNT_SERVER];
+    NSURLRequest *request= [self jsonPostRequestWithUrl:url andParameters:parameters];
+    
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
+-(RACSignal*)addToBlack:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/blacklist/addItelBlack.json",ACCOUNT_SERVER];
+    NSURLRequest *request= [self jsonPostRequestWithUrl:url andParameters:parameters];
+    
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
 @end

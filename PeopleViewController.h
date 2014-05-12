@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
 @class ContactViewModel;
-@interface PeopleViewController : CoreDataTableViewController <UISearchBarDelegate,UIScrollViewDelegate,UINavigationControllerDelegate>
+@interface PeopleViewController : CoreDataTableViewController <UISearchBarDelegate,UIScrollViewDelegate,UINavigationControllerDelegate,UITableViewDelegate>
 
 @property (nonatomic) ContactViewModel *contactViewModel;
 @end

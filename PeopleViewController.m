@@ -49,12 +49,18 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setupFetchViewController];
-
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showTabbar" object:nil];
+    [self.navigationController setToolbarHidden:NO animated:NO];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setToolbarHidden:YES animated:NO];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tableView.frame=CGRectMake(0, 0, self.tableView.frame.size.width, self.tableView.frame.size.height-44);
     self.loginInfo=((MaoAppDelegate*)[UIApplication sharedApplication].delegate).loginInfo;
     self.contactViewModel=[[ContactViewModel alloc]init];
     self.navigationController.delegate=self;

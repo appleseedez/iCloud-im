@@ -8,8 +8,8 @@
 //
 
 #import "UserViewController.h"
-
-
+#import "EditAliasViewController.h"
+#import "ContactUserViewModel.h"
 
 
 #import "MaoAppDelegate.h"
@@ -141,7 +141,7 @@
             
             break;
         case 1:
-            //这里删除好友
+            [self.userViewModel delUser];
             break;
             
         default:
@@ -156,17 +156,20 @@
 - (void)editAlias:(UIButton *)sender {
 
     ItelUser *user=self.user;
-    UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
+    UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Contact" bundle:nil];
    UINavigationController *aliasVC=[storyBoard instantiateViewControllerWithIdentifier:@"editAliasView"];
-   
+    EditAliasViewController *editVC=aliasVC.childViewControllers[0];
+    editVC.userViewModel=self.userViewModel;
+    editVC.user=user;
+    [self presentViewController:aliasVC animated:YES completion:^{
+        
+    }];
 }
 - (void)addToBlack:(UIButton *)sender {
    //这里添加黑名单
+    [self.userViewModel addBlackList];
 }
--(void)reloadData:(id)userInfo{
-    [self refreshMessage];
-    [self.tableView reloadData];
-}
+
 -(void)refreshMessage{
     if([self.user.remarkName length]>0){
         self.lbShowName.text=[NSString stringWithFormat:@"%@(%@)",self.user.remarkName,self.user.nickName];
@@ -180,10 +183,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.navigationController.navigationBarHidden=YES;
-    [self refreshMessage];
+    self.userViewModel=[[ContactUserViewModel alloc]init];
+    self.userViewModel.user=self.user;
+    //监听 修改用户
+     [RACObserve(self, userViewModel.user) subscribeNext:^(ItelUser *x) {
+         self.user=x;
+         [self refreshMessage];
+     }];
+    
+    //监听hud
+    [RACObserve(self, userViewModel.busy) subscribeNext:^(NSNumber *x) {
+        BOOL busy= [x boolValue];
+        if (busy) {
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.labelText=@"请稍后";
+        }else{
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+    //监听 退出页面
+     [RACObserve(self, userViewModel.finish) subscribeNext:^(NSNumber *x) {
+         if ([x boolValue]) {
+             [self.navigationController popViewControllerAnimated:YES];
+         }
+     }];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(callActionSheet) ];
-
+    
     [self.imageView setClipsToBounds:YES];
     [self.imageView.layer setCornerRadius:12];
     [self.imageView.layer setBorderColor:[UIColor whiteColor].CGColor];
@@ -196,15 +221,12 @@
     
     [self.imageView setImageWithURL:[NSURL URLWithString:self.user.imageurl]placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     
-    //这里设置UI
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideTabbar" object:nil];
     
     
 }
--(NSArray*)notifications{
-    
-    return @[@"resetAlias",@"addBlack",@"delItelUser"];
-}
+
 
 
 -(void)callActionSheet{
@@ -249,12 +271,5 @@
     else return 40;
 }
 
--(void)userAliasChanged:(NSNotification*)notification{
-    ItelUser *user=(ItelUser*)notification.object ;
-    self.user=user ;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self refreshMessage];
-    });
-    
-}
+
 @end

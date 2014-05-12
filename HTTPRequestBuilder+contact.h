@@ -11,4 +11,7 @@
 @interface HTTPRequestBuilder (contact)
 -(RACSignal*)addNewFriend:(NSDictionary*)parameters;
 -(RACSignal*)getFriendList:(NSDictionary*)parameters;
+-(RACSignal*)editUserAlias:(NSDictionary*)parameters;
+-(RACSignal*)delFriend:(NSDictionary*)parameters;
+-(RACSignal*)addToBlack:(NSDictionary*)parameters;
 @end

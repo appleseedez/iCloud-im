@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ItelUser.h"
-
+@class ContactUserViewModel;
 @interface UserViewController : UIViewController <UIAlertViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) ItelUser *user;
+@property (nonatomic,strong) ContactUserViewModel *userViewModel;
 @end

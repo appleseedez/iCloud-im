@@ -25,7 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.viewModel.showTabbar=@(YES);
     [self setSubViewModels];
     
     
@@ -53,8 +53,7 @@
         }
         [self.sessionView.layer addAnimation:transition forKey:@"3"];
     }];
-    
-  
+     
 }
 
 -(void)setSubViewModels{

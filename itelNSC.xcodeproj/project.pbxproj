@@ -91,6 +91,8 @@
 		47929B8A191B164F0054292D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B6C191B164F0054292D /* UIKit.framework */; };
 		47929B92191B164F0054292D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47929B90191B164F0054292D /* InfoPlist.strings */; };
 		47929B94191B164F0054292D /* itelNSCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47929B93191B164F0054292D /* itelNSCTests.m */; };
+		47A1884C19209A07006E8013 /* EditAliasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1884B19209A07006E8013 /* EditAliasViewController.m */; };
+		47A1885519209E48006E8013 /* ContactUserViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1885419209E48006E8013 /* ContactUserViewModel.m */; };
 		CB1F6AFEA3184BDB81C53864 /* libPods-itelNSCTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D9AB139A734F2896A91E3D /* libPods-itelNSCTests.a */; };
 /* End PBXBuildFile section */
 
@@ -246,6 +248,10 @@
 		47929B8F191B164F0054292D /* itelNSCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "itelNSCTests-Info.plist"; sourceTree = "<group>"; };
 		47929B91191B164F0054292D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		47929B93191B164F0054292D /* itelNSCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itelNSCTests.m; sourceTree = "<group>"; };
+		47A1884A19209A07006E8013 /* EditAliasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAliasViewController.h; sourceTree = "<group>"; };
+		47A1884B19209A07006E8013 /* EditAliasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAliasViewController.m; sourceTree = "<group>"; };
+		47A1885319209E48006E8013 /* ContactUserViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUserViewModel.h; sourceTree = "<group>"; };
+		47A1885419209E48006E8013 /* ContactUserViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUserViewModel.m; sourceTree = "<group>"; };
 		815C2441F4894284BD56C245 /* Pods-itelNSCTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itelNSCTests.xcconfig"; path = "Pods/Pods-itelNSCTests.xcconfig"; sourceTree = "<group>"; };
 		F2DCCDFA5B5A4BBCAB7CA810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -405,6 +411,8 @@
 			children = (
 				476D3A04191DD8C300742EE5 /* ContactViewModel.h */,
 				476D3A05191DD8C300742EE5 /* ContactViewModel.m */,
+				47A1885319209E48006E8013 /* ContactUserViewModel.h */,
+				47A1885419209E48006E8013 /* ContactUserViewModel.m */,
 				476D3A07191DD96B00742EE5 /* HTTPRequestBuilder+contact.h */,
 				476D3A08191DD96B00742EE5 /* HTTPRequestBuilder+contact.m */,
 			);
@@ -488,6 +496,8 @@
 				476D39EF191DD1EB00742EE5 /* PeopleViewController.m */,
 				476D3A00191DD5B900742EE5 /* UserViewController.h */,
 				476D3A01191DD5B900742EE5 /* UserViewController.m */,
+				47A1884A19209A07006E8013 /* EditAliasViewController.h */,
+				47A1884B19209A07006E8013 /* EditAliasViewController.m */,
 				476D39FD191DD46200742EE5 /* ContactCell.h */,
 				476D39FE191DD46200742EE5 /* ContactCell.m */,
 				47838C0E191B79B200EE08AF /* Contact.storyboard */,
@@ -787,6 +797,7 @@
 				47838BF2191B5FD700EE08AF /* AudioAnsweringViewController.m in Sources */,
 				476D3A06191DD8C300742EE5 /* ContactViewModel.m in Sources */,
 				47929B79191B164F0054292D /* MaoAppDelegate.m in Sources */,
+				47A1885519209E48006E8013 /* ContactUserViewModel.m in Sources */,
 				47335496191B1BF300B800CB /* PassViewModel.m in Sources */,
 				476D39F9191DD35300742EE5 /* ItelUser+CRUD.m in Sources */,
 				47838BFD191B5FF500EE08AF /* DialTableViewCell.m in Sources */,
@@ -835,6 +846,7 @@
 				473354CB191B256A00B800CB /* MainTabbarViewController.m in Sources */,
 				473354B4191B1C1800B800CB /* RegMesViewController.m in Sources */,
 				473354C5191B20B000B800CB /* RootViewModel.m in Sources */,
+				47A1884C19209A07006E8013 /* EditAliasViewController.m in Sources */,
 				47838BF4191B5FD700EE08AF /* DialingViewController.m in Sources */,
 				473354BB191B1C1800B800CB /* PassResetViewController.m in Sources */,
 				473354B9191B1C1800B800CB /* PassAnswerViewController.m in Sources */,

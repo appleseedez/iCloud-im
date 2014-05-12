@@ -61,6 +61,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="LKd-0G-5tM"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchBar" destination="y0d-dw-70b" id="sG5-zC-Nh4"/>
                     </connections>
@@ -200,6 +201,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bcn-8Q-LEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1011" y="-370"/>
+        </scene>
+        <!--Edit Alias View Controller - 输入新备注-->
+        <scene sceneID="9kK-NP-t7x">
+            <objects>
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="8mu-k6-vTN" customClass="EditAliasViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QxO-Hx-kf7"/>
+                        <viewControllerLayoutGuide type="bottom" id="OFy-Q0-74z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gac-OV-8Jq">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sty-wX-QGp">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="192"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <action selector="didEnd:" destination="8mu-k6-vTN" eventType="editingDidEndOnExit" id="gQb-T2-pjJ"/>
+                                    <outlet property="delegate" destination="8mu-k6-vTN" id="aSI-Zo-6SY"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="输入新备注" id="UuQ-QX-5Kt"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="txtEditAlias" destination="sty-wX-QGp" id="2t8-ja-VFo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iM4-iT-ckb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-678" y="-422"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UJw-It-e4j">
+            <objects>
+                <navigationController storyboardIdentifier="editAliasView" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wai-w4-6sO" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Qi-9l-afG">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8mu-k6-vTN" kind="relationship" relationship="rootViewController" id="8Ts-jt-P5I"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3jv-DC-axh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-352" y="-416"/>
         </scene>
     </scenes>
     <resources>
