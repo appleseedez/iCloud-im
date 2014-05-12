@@ -26,6 +26,8 @@ static HTTPRequestBuilder *instance;
         initialized=YES;
     }
 }
+
+
 -(NSURLRequest*)jsonPostRequestWithUrl:(NSString*)url
                 andParameters:(NSDictionary*)parameters
                       {
@@ -49,18 +51,19 @@ static HTTPRequestBuilder *instance;
 }
 
 -(NSURLRequest*)getRequestWithUrl:(NSString*)url andParameters:(NSDictionary*)parameters{
-    NSString *paraStr=nil;
-    for (NSString *key in [parameters allKeys]) {
-        NSInteger i=[[parameters allKeys] indexOfObject:key];
-        if (i==0) {
-            paraStr=[NSString stringWithFormat:@"%@=%@",key, [parameters objectForKey:key]];
-        }else{
-            paraStr=[NSString stringWithFormat:@"%@&%@=%@",paraStr,key,[parameters objectForKey:key]];
-        }
-    }
-    NSString *getUrl=[NSString stringWithFormat:@"%@?%@",url,paraStr];
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:getUrl]];
     
-    return request;
+    NSMutableDictionary *tokenParameters=[parameters mutableCopy];
+   
+    NSString *token=[self.delegate.loginInfo objectForKey:@"sessiontoken"];
+    
+    if (token) {
+        [tokenParameters setValue:token forKey:@"sessiontoken"];
+    }
+    
+    
+    
+    
+   return  [[AFJSONRequestSerializer serializer] requestWithMethod:@"get" URLString:url parameters:tokenParameters];
+  
 }
 @end

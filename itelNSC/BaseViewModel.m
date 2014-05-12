@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewModel.h"
-
+#import "MaoAppDelegate.h"
 @implementation BaseViewModel
 - (instancetype)init
 {
@@ -26,5 +26,23 @@
 }
 -(void)serverError{
     [[[UIAlertView alloc]initWithTitle:@"服务器异常" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil]show];
+}
+-(NSString*)hostUserID{
+    return [self.hostInfo objectForKey:@"userId"];
+}
+-(NSString*)hostItel{
+    return [self.hostInfo objectForKey:@"itel"];
+}
+-(void)responseError:(id)info{
+    if ([info isKindOfClass:[NSData class]]) {
+        NSString *string=[[NSString alloc]initWithData:info encoding:NSUTF8StringEncoding];
+        [[[UIAlertView alloc] initWithTitle:@"服务器异常" message:string delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil]show];
+    }
+}
+
+
+-(NSDictionary*)hostInfo{
+    MaoAppDelegate *delegate=(MaoAppDelegate*)[UIApplication sharedApplication].delegate;
+    return delegate.loginInfo;
 }
 @end

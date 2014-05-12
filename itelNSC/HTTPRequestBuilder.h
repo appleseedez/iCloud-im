@@ -16,4 +16,5 @@
 -(NSURLRequest*)jsonPostRequestWithUrl:(NSString*)url
                          andParameters:(NSDictionary*)parameters;
 -(NSURLRequest*)getRequestWithUrl:(NSString*)url andParameters:(NSDictionary*)parameters;
+
 @end

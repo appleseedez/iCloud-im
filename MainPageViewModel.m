@@ -15,6 +15,10 @@
     RACSignal *signal= [self.requestBuilder loadADImages];
     
       [signal subscribeNext:^(NSDictionary *x) {
+          if (![x isKindOfClass:[NSDictionary class]]) {
+              [self responseError:x];
+              return ;
+          }
           int code=[[x objectForKey:@"code"]intValue];
           if (code==200) {
               self.adArray=[x objectForKey:@"data"];

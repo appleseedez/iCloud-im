@@ -43,6 +43,17 @@
 		4757BB6A191C68DB009A8938 /* MainPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB69191C68DB009A8938 /* MainPageViewModel.m */; };
 		4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6C191C81B3009A8938 /* MainPageButton.m */; };
 		4757BB70191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */; };
+		476D39A4191DC57200742EE5 /* DBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39A3191DC57200742EE5 /* DBService.m */; };
+		476D39EB191DC6DC00742EE5 /* itelDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 476D39E9191DC6DC00742EE5 /* itelDB.xcdatamodeld */; };
+		476D39ED191DC9B400742EE5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 476D39EC191DC9B400742EE5 /* CoreData.framework */; };
+		476D39F0191DD1EB00742EE5 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39EF191DD1EB00742EE5 /* PeopleViewController.m */; };
+		476D39F3191DD22400742EE5 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39F2191DD22400742EE5 /* CoreDataTableViewController.m */; };
+		476D39F9191DD35300742EE5 /* ItelUser+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39F8191DD35300742EE5 /* ItelUser+CRUD.m */; };
+		476D39FC191DD3BE00742EE5 /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39FB191DD3BE00742EE5 /* ItelUser.m */; };
+		476D39FF191DD46200742EE5 /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39FE191DD46200742EE5 /* ContactCell.m */; };
+		476D3A02191DD5B900742EE5 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A01191DD5B900742EE5 /* UserViewController.m */; };
+		476D3A06191DD8C300742EE5 /* ContactViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A05191DD8C300742EE5 /* ContactViewModel.m */; };
+		476D3A09191DD96B00742EE5 /* HTTPRequestBuilder+contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A08191DD96B00742EE5 /* HTTPRequestBuilder+contact.m */; };
 		47838BD7191B5E3A00EE08AF /* DialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47838BD4191B5E3A00EE08AF /* DialView.storyboard */; };
 		47838BD8191B5E3A00EE08AF /* DialViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BD6191B5E3A00EE08AF /* DialViewModel.m */; };
 		47838BDB191B5F8500EE08AF /* RootTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BDA191B5F8500EE08AF /* RootTabbarController.m */; };
@@ -160,6 +171,26 @@
 		4757BB6C191C81B3009A8938 /* MainPageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageButton.m; sourceTree = "<group>"; };
 		4757BB6E191CAB81009A8938 /* HTTPRequestBuilder+mainPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPRequestBuilder+mainPage.h"; sourceTree = "<group>"; };
 		4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPRequestBuilder+mainPage.m"; sourceTree = "<group>"; };
+		476D39A2191DC57200742EE5 /* DBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBService.h; sourceTree = "<group>"; };
+		476D39A3191DC57200742EE5 /* DBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBService.m; sourceTree = "<group>"; };
+		476D39EA191DC6DC00742EE5 /* itelDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = itelDB.xcdatamodel; sourceTree = "<group>"; };
+		476D39EC191DC9B400742EE5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		476D39EE191DD1EB00742EE5 /* PeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleViewController.h; sourceTree = "<group>"; };
+		476D39EF191DD1EB00742EE5 /* PeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleViewController.m; sourceTree = "<group>"; };
+		476D39F1191DD22400742EE5 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
+		476D39F2191DD22400742EE5 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
+		476D39F7191DD35300742EE5 /* ItelUser+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ItelUser+CRUD.h"; sourceTree = "<group>"; };
+		476D39F8191DD35300742EE5 /* ItelUser+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ItelUser+CRUD.m"; sourceTree = "<group>"; };
+		476D39FA191DD3BE00742EE5 /* ItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUser.h; sourceTree = "<group>"; };
+		476D39FB191DD3BE00742EE5 /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
+		476D39FD191DD46200742EE5 /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
+		476D39FE191DD46200742EE5 /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
+		476D3A00191DD5B900742EE5 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		476D3A01191DD5B900742EE5 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		476D3A04191DD8C300742EE5 /* ContactViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewModel.h; sourceTree = "<group>"; };
+		476D3A05191DD8C300742EE5 /* ContactViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewModel.m; sourceTree = "<group>"; };
+		476D3A07191DD96B00742EE5 /* HTTPRequestBuilder+contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPRequestBuilder+contact.h"; sourceTree = "<group>"; };
+		476D3A08191DD96B00742EE5 /* HTTPRequestBuilder+contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPRequestBuilder+contact.m"; sourceTree = "<group>"; };
 		47838BD4191B5E3A00EE08AF /* DialView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DialView.storyboard; sourceTree = "<group>"; };
 		47838BD5191B5E3A00EE08AF /* DialViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialViewModel.h; sourceTree = "<group>"; };
 		47838BD6191B5E3A00EE08AF /* DialViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialViewModel.m; sourceTree = "<group>"; };
@@ -224,6 +255,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				476D39ED191DC9B400742EE5 /* CoreData.framework in Frameworks */,
 				473354CD191B2AE200B800CB /* CFNetwork.framework in Frameworks */,
 				47929B6B191B164F0054292D /* CoreGraphics.framework in Frameworks */,
 				47929B6D191B164F0054292D /* UIKit.framework in Frameworks */,
@@ -265,6 +297,13 @@
 				4733547B191B1BAE00B800CB /* HTTPService.m */,
 				47838C01191B639B00EE08AF /* AppService.h */,
 				47838C02191B639B00EE08AF /* AppService.m */,
+				476D39A2191DC57200742EE5 /* DBService.h */,
+				476D39A3191DC57200742EE5 /* DBService.m */,
+				476D39FA191DD3BE00742EE5 /* ItelUser.h */,
+				476D39FB191DD3BE00742EE5 /* ItelUser.m */,
+				476D39E9191DC6DC00742EE5 /* itelDB.xcdatamodeld */,
+				476D39F7191DD35300742EE5 /* ItelUser+CRUD.h */,
+				476D39F8191DD35300742EE5 /* ItelUser+CRUD.m */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -272,6 +311,8 @@
 		4733547D191B1BB900B800CB /* models */ = {
 			isa = PBXGroup;
 			children = (
+				476D39F1191DD22400742EE5 /* CoreDataTableViewController.h */,
+				476D39F2191DD22400742EE5 /* CoreDataTableViewController.m */,
 				4733547E191B1BCA00B800CB /* NSString+MD5.h */,
 				4733547F191B1BCA00B800CB /* NSString+MD5.m */,
 				47335480191B1BCA00B800CB /* NXInputChecker.h */,
@@ -359,6 +400,17 @@
 			name = viewModel;
 			sourceTree = "<group>";
 		};
+		476D3A03191DD8A200742EE5 /* viewModels */ = {
+			isa = PBXGroup;
+			children = (
+				476D3A04191DD8C300742EE5 /* ContactViewModel.h */,
+				476D3A05191DD8C300742EE5 /* ContactViewModel.m */,
+				476D3A07191DD96B00742EE5 /* HTTPRequestBuilder+contact.h */,
+				476D3A08191DD96B00742EE5 /* HTTPRequestBuilder+contact.m */,
+			);
+			name = viewModels;
+			sourceTree = "<group>";
+		};
 		47838BD3191B5DB700EE08AF /* DialViewSence */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +483,13 @@
 		47838C09191B793E00EE08AF /* ContactView */ = {
 			isa = PBXGroup;
 			children = (
+				476D3A03191DD8A200742EE5 /* viewModels */,
+				476D39EE191DD1EB00742EE5 /* PeopleViewController.h */,
+				476D39EF191DD1EB00742EE5 /* PeopleViewController.m */,
+				476D3A00191DD5B900742EE5 /* UserViewController.h */,
+				476D3A01191DD5B900742EE5 /* UserViewController.m */,
+				476D39FD191DD46200742EE5 /* ContactCell.h */,
+				476D39FE191DD46200742EE5 /* ContactCell.m */,
 				47838C0E191B79B200EE08AF /* Contact.storyboard */,
 				47838C18191B7B0700EE08AF /* contact.xcassets */,
 			);
@@ -486,6 +545,7 @@
 		47929B67191B164F0054292D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				476D39EC191DC9B400742EE5 /* CoreData.framework */,
 				473354CC191B2AE200B800CB /* CFNetwork.framework */,
 				47929B68191B164F0054292D /* Foundation.framework */,
 				47929B6A191B164F0054292D /* CoreGraphics.framework */,
@@ -725,8 +785,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				47838BF2191B5FD700EE08AF /* AudioAnsweringViewController.m in Sources */,
+				476D3A06191DD8C300742EE5 /* ContactViewModel.m in Sources */,
 				47929B79191B164F0054292D /* MaoAppDelegate.m in Sources */,
 				47335496191B1BF300B800CB /* PassViewModel.m in Sources */,
+				476D39F9191DD35300742EE5 /* ItelUser+CRUD.m in Sources */,
 				47838BFD191B5FF500EE08AF /* DialTableViewCell.m in Sources */,
 				47838C03191B639B00EE08AF /* AppService.m in Sources */,
 				473354C2191B1E6900B800CB /* RoolViewController.m in Sources */,
@@ -740,16 +802,23 @@
 				473354B3191B1C1800B800CB /* RegDetailViewController.m in Sources */,
 				47838BFE191B5FF500EE08AF /* DialTableViewModel.m in Sources */,
 				47335495191B1BF300B800CB /* RegisterViewModel.m in Sources */,
+				476D39F3191DD22400742EE5 /* CoreDataTableViewController.m in Sources */,
 				47838BEF191B5FD700EE08AF /* VideoAnsweringViewController.m in Sources */,
 				4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */,
 				47838BF0191B5FD700EE08AF /* VideoSessionViewController.m in Sources */,
+				476D39A4191DC57200742EE5 /* DBService.m in Sources */,
 				47838BF1191B5FD700EE08AF /* AudioCallingViewController.m in Sources */,
+				476D39F0191DD1EB00742EE5 /* PeopleViewController.m in Sources */,
+				476D39EB191DC6DC00742EE5 /* itelDB.xcdatamodeld in Sources */,
 				4733547C191B1BAE00B800CB /* HTTPService.m in Sources */,
+				476D3A02191DD5B900742EE5 /* UserViewController.m in Sources */,
 				4733548A191B1BCA00B800CB /* HTTPRequestBuilder.m in Sources */,
 				4757BB70191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m in Sources */,
 				47335489191B1BCA00B800CB /* NXInputChecker.m in Sources */,
 				473354B1191B1C1800B800CB /* LoginTableViewCell.m in Sources */,
+				476D39FC191DD3BE00742EE5 /* ItelUser.m in Sources */,
 				473354B6191B1C1800B800CB /* PassViewController.m in Sources */,
+				476D39FF191DD46200742EE5 /* ContactCell.m in Sources */,
 				4733548C191B1BCA00B800CB /* BaseViewModel.m in Sources */,
 				4733548B191B1BCA00B800CB /* HTTPRequestBuilder+LoginAndRegister.m in Sources */,
 				473354D0191B2ED200B800CB /* CustomTabbar.m in Sources */,
@@ -769,6 +838,7 @@
 				47838BF4191B5FD700EE08AF /* DialingViewController.m in Sources */,
 				473354BB191B1C1800B800CB /* PassResetViewController.m in Sources */,
 				473354B9191B1C1800B800CB /* PassAnswerViewController.m in Sources */,
+				476D3A09191DD96B00742EE5 /* HTTPRequestBuilder+contact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -995,6 +1065,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		476D39E9191DC6DC00742EE5 /* itelDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				476D39EA191DC6DC00742EE5 /* itelDB.xcdatamodel */,
+			);
+			currentVersion = 476D39EA191DC6DC00742EE5 /* itelDB.xcdatamodel */;
+			path = itelDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 47929B5D191B164F0054292D /* Project object */;
 }

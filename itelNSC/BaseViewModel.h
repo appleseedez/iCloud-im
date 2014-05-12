@@ -16,4 +16,7 @@
 -(void)netRequestError:(NSError*)error;
 -(void)netRequestFail:(NSDictionary*)data;
 -(void)serverError;
+-(NSString*)hostUserID;
+-(NSString*)hostItel;
+-(void)responseError:(id)info;
 @end
