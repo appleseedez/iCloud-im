@@ -10,6 +10,7 @@
 #import "MaoAppDelegate.h"
 #import "RoolViewController.h"
 #import "LoginViewController.h"
+#import "HTTPRequestBuilder+app.h"
 @interface AppService ()
 
 @property (nonatomic,weak) MaoAppDelegate *delegate;
@@ -28,6 +29,27 @@ static AppService *instance;
             initialized=YES;
         }
     }
+}
+-(void)logout{
+    self.busy=@(YES);
+        NSDictionary *parameters=@{@"itel":[self hostItel],@"onlymark":self.delegate.UUID};
+         [[self.requestBuilder logout:parameters] subscribeNext:^(NSDictionary *x) {
+             int code=[x[@"code"]intValue];
+             if (code==200) {
+                 
+                 NSLog(@"正常登出");
+                 self.delegate.loginInfo=nil;
+                 self.rootViewType=@(rootViewTypeLogin);
+             }else{
+                 NSLog(@"异常登出");
+                 self.delegate.loginInfo=nil;
+                 self.rootViewType=@(rootViewTypeLogin);
+             }
+         }error:^(NSError *error) {
+             NSLog(@"异常登出");
+         }completed:^{
+             self.busy=@(NO);
+         }];
 }
 - (instancetype)init
 {

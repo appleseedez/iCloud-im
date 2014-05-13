@@ -8,6 +8,7 @@
 
 #import "MaoAppDelegate.h"
 #import "AppService.h"
+#import "AddressService.h"
 @implementation MaoAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -20,8 +21,22 @@
                        
                    });
     [[NSNotificationCenter defaultCenter] addObserverForName:@"loginSuccess" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        self.loginInfo=note.userInfo;
+        
+        NSMutableDictionary *info=[note.userInfo mutableCopy];
+        for (NSString *k in [info allKeys] ) {
+            id x= [info objectForKey:k];
+            if ([x isEqual:[NSNull null]]) {
+                
+                [info setObject:@"" forKey:k];
+            }
+        }
+        self.loginInfo=[info copy];
+        
         [AppService defaultService].rootViewType=@(rootViewTypeMain);
+         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+             [[AddressService defaultService] loadAddressBook];
+         });
+        
     }];
 
     return YES;

@@ -39,4 +39,10 @@
     
     return [[HTTPService defaultService] signalWithRequest:request];
 }
+-(RACSignal*)searchStranger:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/contact/searchUser.json",ACCOUNT_SERVER];
+    NSURLRequest *request= [self getRequestWithUrl:url andParameters:parameters];
+    
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
 @end

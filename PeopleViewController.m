@@ -55,6 +55,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:NO];
+    [self.view endEditing:YES];
 }
 - (void)viewDidLoad
 {

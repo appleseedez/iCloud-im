@@ -91,8 +91,23 @@
 		47929B8A191B164F0054292D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B6C191B164F0054292D /* UIKit.framework */; };
 		47929B92191B164F0054292D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47929B90191B164F0054292D /* InfoPlist.strings */; };
 		47929B94191B164F0054292D /* itelNSCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47929B93191B164F0054292D /* itelNSCTests.m */; };
+		479E17601921AD6B005D3A82 /* AddressBookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E175F1921AD6B005D3A82 /* AddressBookTableViewController.m */; };
+		479E17631921B1E6005D3A82 /* AddressService.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E17621921B1E6005D3A82 /* AddressService.m */; };
+		479E17661921B76D005D3A82 /* AddressUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E17651921B76D005D3A82 /* AddressUser.m */; };
+		479E17691921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E17681921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.m */; };
+		479E176C1921C3C4005D3A82 /* AddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E176B1921C3C4005D3A82 /* AddressCell.m */; };
+		479E176F1921F16F005D3A82 /* MoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E176E1921F16F005D3A82 /* MoreTableViewController.m */; };
+		479E17741921F748005D3A82 /* MoreViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E17731921F748005D3A82 /* MoreViewModel.m */; };
+		479E17771922009D005D3A82 /* HTTPRequestBuilder+app.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E17761922009D005D3A82 /* HTTPRequestBuilder+app.m */; };
+		479E177A192207C1005D3A82 /* MaoHostSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E1779192207C1005D3A82 /* MaoHostSettingViewController.m */; };
 		47A1884C19209A07006E8013 /* EditAliasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1884B19209A07006E8013 /* EditAliasViewController.m */; };
 		47A1885519209E48006E8013 /* ContactUserViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1885419209E48006E8013 /* ContactUserViewModel.m */; };
+		47A188581920B62B006E8013 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188571920B62B006E8013 /* AddViewController.m */; };
+		47A1885B1920B794006E8013 /* SearchNewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1885A1920B794006E8013 /* SearchNewFriendViewController.m */; };
+		47A1885E1920B7A1006E8013 /* NewFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1885D1920B7A1006E8013 /* NewFriendListViewController.m */; };
+		47A188631920B8A0006E8013 /* StrangerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188621920B8A0006E8013 /* StrangerCell.m */; };
+		47A188661920B8C9006E8013 /* StrangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188651920B8C9006E8013 /* StrangerViewController.m */; };
+		47A188691920BD12006E8013 /* SearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188681920BD12006E8013 /* SearchViewModel.m */; };
 		CB1F6AFEA3184BDB81C53864 /* libPods-itelNSCTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D9AB139A734F2896A91E3D /* libPods-itelNSCTests.a */; };
 /* End PBXBuildFile section */
 
@@ -248,10 +263,40 @@
 		47929B8F191B164F0054292D /* itelNSCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "itelNSCTests-Info.plist"; sourceTree = "<group>"; };
 		47929B91191B164F0054292D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		47929B93191B164F0054292D /* itelNSCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itelNSCTests.m; sourceTree = "<group>"; };
+		479E175E1921AD6B005D3A82 /* AddressBookTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookTableViewController.h; sourceTree = "<group>"; };
+		479E175F1921AD6B005D3A82 /* AddressBookTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookTableViewController.m; sourceTree = "<group>"; };
+		479E17611921B1E6005D3A82 /* AddressService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressService.h; sourceTree = "<group>"; };
+		479E17621921B1E6005D3A82 /* AddressService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressService.m; sourceTree = "<group>"; };
+		479E17641921B76D005D3A82 /* AddressUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressUser.h; sourceTree = "<group>"; };
+		479E17651921B76D005D3A82 /* AddressUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressUser.m; sourceTree = "<group>"; };
+		479E17671921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPRequestBuilder+AddressBook.h"; sourceTree = "<group>"; };
+		479E17681921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPRequestBuilder+AddressBook.m"; sourceTree = "<group>"; };
+		479E176A1921C3C4005D3A82 /* AddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressCell.h; sourceTree = "<group>"; };
+		479E176B1921C3C4005D3A82 /* AddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressCell.m; sourceTree = "<group>"; };
+		479E176D1921F16F005D3A82 /* MoreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreTableViewController.h; sourceTree = "<group>"; };
+		479E176E1921F16F005D3A82 /* MoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewController.m; sourceTree = "<group>"; };
+		479E17721921F748005D3A82 /* MoreViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewModel.h; sourceTree = "<group>"; };
+		479E17731921F748005D3A82 /* MoreViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewModel.m; sourceTree = "<group>"; };
+		479E17751922009D005D3A82 /* HTTPRequestBuilder+app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPRequestBuilder+app.h"; sourceTree = "<group>"; };
+		479E17761922009D005D3A82 /* HTTPRequestBuilder+app.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPRequestBuilder+app.m"; sourceTree = "<group>"; };
+		479E1778192207C1005D3A82 /* MaoHostSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaoHostSettingViewController.h; sourceTree = "<group>"; };
+		479E1779192207C1005D3A82 /* MaoHostSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaoHostSettingViewController.m; sourceTree = "<group>"; };
 		47A1884A19209A07006E8013 /* EditAliasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAliasViewController.h; sourceTree = "<group>"; };
 		47A1884B19209A07006E8013 /* EditAliasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAliasViewController.m; sourceTree = "<group>"; };
 		47A1885319209E48006E8013 /* ContactUserViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUserViewModel.h; sourceTree = "<group>"; };
 		47A1885419209E48006E8013 /* ContactUserViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUserViewModel.m; sourceTree = "<group>"; };
+		47A188561920B62B006E8013 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		47A188571920B62B006E8013 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		47A188591920B794006E8013 /* SearchNewFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNewFriendViewController.h; sourceTree = "<group>"; };
+		47A1885A1920B794006E8013 /* SearchNewFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNewFriendViewController.m; sourceTree = "<group>"; };
+		47A1885C1920B7A1006E8013 /* NewFriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFriendListViewController.h; sourceTree = "<group>"; };
+		47A1885D1920B7A1006E8013 /* NewFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFriendListViewController.m; sourceTree = "<group>"; };
+		47A188611920B8A0006E8013 /* StrangerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrangerCell.h; sourceTree = "<group>"; };
+		47A188621920B8A0006E8013 /* StrangerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrangerCell.m; sourceTree = "<group>"; };
+		47A188641920B8C9006E8013 /* StrangerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrangerViewController.h; sourceTree = "<group>"; };
+		47A188651920B8C9006E8013 /* StrangerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrangerViewController.m; sourceTree = "<group>"; };
+		47A188671920BD12006E8013 /* SearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewModel.h; sourceTree = "<group>"; };
+		47A188681920BD12006E8013 /* SearchViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewModel.m; sourceTree = "<group>"; };
 		815C2441F4894284BD56C245 /* Pods-itelNSCTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itelNSCTests.xcconfig"; path = "Pods/Pods-itelNSCTests.xcconfig"; sourceTree = "<group>"; };
 		F2DCCDFA5B5A4BBCAB7CA810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -299,6 +344,8 @@
 		47335479191B1B9600B800CB /* services */ = {
 			isa = PBXGroup;
 			children = (
+				479E17611921B1E6005D3A82 /* AddressService.h */,
+				479E17621921B1E6005D3A82 /* AddressService.m */,
 				4733547A191B1BAE00B800CB /* HTTPService.h */,
 				4733547B191B1BAE00B800CB /* HTTPService.m */,
 				47838C01191B639B00EE08AF /* AppService.h */,
@@ -327,8 +374,14 @@
 				47335483191B1BCA00B800CB /* HTTPRequestBuilder.m */,
 				47335484191B1BCA00B800CB /* HTTPRequestBuilder+LoginAndRegister.h */,
 				47335485191B1BCA00B800CB /* HTTPRequestBuilder+LoginAndRegister.m */,
+				479E17751922009D005D3A82 /* HTTPRequestBuilder+app.h */,
+				479E17761922009D005D3A82 /* HTTPRequestBuilder+app.m */,
 				47335486191B1BCA00B800CB /* BaseViewModel.h */,
 				47335487191B1BCA00B800CB /* BaseViewModel.m */,
+				479E17641921B76D005D3A82 /* AddressUser.h */,
+				479E17651921B76D005D3A82 /* AddressUser.m */,
+				479E17671921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.h */,
+				479E17681921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -413,6 +466,8 @@
 				476D3A05191DD8C300742EE5 /* ContactViewModel.m */,
 				47A1885319209E48006E8013 /* ContactUserViewModel.h */,
 				47A1885419209E48006E8013 /* ContactUserViewModel.m */,
+				47A188671920BD12006E8013 /* SearchViewModel.h */,
+				47A188681920BD12006E8013 /* SearchViewModel.m */,
 				476D3A07191DD96B00742EE5 /* HTTPRequestBuilder+contact.h */,
 				476D3A08191DD96B00742EE5 /* HTTPRequestBuilder+contact.m */,
 			);
@@ -492,14 +547,8 @@
 			isa = PBXGroup;
 			children = (
 				476D3A03191DD8A200742EE5 /* viewModels */,
-				476D39EE191DD1EB00742EE5 /* PeopleViewController.h */,
-				476D39EF191DD1EB00742EE5 /* PeopleViewController.m */,
-				476D3A00191DD5B900742EE5 /* UserViewController.h */,
-				476D3A01191DD5B900742EE5 /* UserViewController.m */,
-				47A1884A19209A07006E8013 /* EditAliasViewController.h */,
-				47A1884B19209A07006E8013 /* EditAliasViewController.m */,
-				476D39FD191DD46200742EE5 /* ContactCell.h */,
-				476D39FE191DD46200742EE5 /* ContactCell.m */,
+				47A1885F1920B7BB006E8013 /* viewControllers */,
+				47A188601920B7E1006E8013 /* cells */,
 				47838C0E191B79B200EE08AF /* Contact.storyboard */,
 				47838C18191B7B0700EE08AF /* contact.xcassets */,
 			);
@@ -519,6 +568,8 @@
 			isa = PBXGroup;
 			children = (
 				47838C12191B79D100EE08AF /* More.storyboard */,
+				479E17711921F728005D3A82 /* viewModels */,
+				479E17701921F718005D3A82 /* viewControllers */,
 				47838C14191B7A3000EE08AF /* more.xcassets */,
 			);
 			name = MoreView;
@@ -612,6 +663,62 @@
 				47929B90191B164F0054292D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		479E17701921F718005D3A82 /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				479E176D1921F16F005D3A82 /* MoreTableViewController.h */,
+				479E176E1921F16F005D3A82 /* MoreTableViewController.m */,
+				479E1778192207C1005D3A82 /* MaoHostSettingViewController.h */,
+				479E1779192207C1005D3A82 /* MaoHostSettingViewController.m */,
+			);
+			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		479E17711921F728005D3A82 /* viewModels */ = {
+			isa = PBXGroup;
+			children = (
+				479E17721921F748005D3A82 /* MoreViewModel.h */,
+				479E17731921F748005D3A82 /* MoreViewModel.m */,
+			);
+			name = viewModels;
+			sourceTree = "<group>";
+		};
+		47A1885F1920B7BB006E8013 /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				476D39EE191DD1EB00742EE5 /* PeopleViewController.h */,
+				476D39EF191DD1EB00742EE5 /* PeopleViewController.m */,
+				476D3A00191DD5B900742EE5 /* UserViewController.h */,
+				476D3A01191DD5B900742EE5 /* UserViewController.m */,
+				47A1884A19209A07006E8013 /* EditAliasViewController.h */,
+				47A1884B19209A07006E8013 /* EditAliasViewController.m */,
+				47A188561920B62B006E8013 /* AddViewController.h */,
+				47A188571920B62B006E8013 /* AddViewController.m */,
+				47A188591920B794006E8013 /* SearchNewFriendViewController.h */,
+				47A1885A1920B794006E8013 /* SearchNewFriendViewController.m */,
+				47A1885C1920B7A1006E8013 /* NewFriendListViewController.h */,
+				47A1885D1920B7A1006E8013 /* NewFriendListViewController.m */,
+				47A188641920B8C9006E8013 /* StrangerViewController.h */,
+				47A188651920B8C9006E8013 /* StrangerViewController.m */,
+				479E175E1921AD6B005D3A82 /* AddressBookTableViewController.h */,
+				479E175F1921AD6B005D3A82 /* AddressBookTableViewController.m */,
+			);
+			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		47A188601920B7E1006E8013 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				47A188611920B8A0006E8013 /* StrangerCell.h */,
+				47A188621920B8A0006E8013 /* StrangerCell.m */,
+				476D39FD191DD46200742EE5 /* ContactCell.h */,
+				476D39FE191DD46200742EE5 /* ContactCell.m */,
+				479E176A1921C3C4005D3A82 /* AddressCell.h */,
+				479E176B1921C3C4005D3A82 /* AddressCell.m */,
+			);
+			name = cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -803,21 +910,28 @@
 				47838BFD191B5FF500EE08AF /* DialTableViewCell.m in Sources */,
 				47838C03191B639B00EE08AF /* AppService.m in Sources */,
 				473354C2191B1E6900B800CB /* RoolViewController.m in Sources */,
+				479E177A192207C1005D3A82 /* MaoHostSettingViewController.m in Sources */,
+				479E17771922009D005D3A82 /* HTTPRequestBuilder+app.m in Sources */,
 				473354B2191B1C1800B800CB /* RegTypeViewController.m in Sources */,
 				47838BFC191B5FF500EE08AF /* DialNumberButton.m in Sources */,
 				473354BA191B1C1800B800CB /* PassEmailViewController.m in Sources */,
 				47838BDB191B5F8500EE08AF /* RootTabbarController.m in Sources */,
 				473354D7191B3E7800B800CB /* CustomBarItem.m in Sources */,
+				47A1885B1920B794006E8013 /* SearchNewFriendViewController.m in Sources */,
+				47A188581920B62B006E8013 /* AddViewController.m in Sources */,
 				47838BEE191B5FD700EE08AF /* VideoCallingViewController.m in Sources */,
 				473354B0191B1C1800B800CB /* LoginViewController.m in Sources */,
 				473354B3191B1C1800B800CB /* RegDetailViewController.m in Sources */,
+				47A188691920BD12006E8013 /* SearchViewModel.m in Sources */,
 				47838BFE191B5FF500EE08AF /* DialTableViewModel.m in Sources */,
 				47335495191B1BF300B800CB /* RegisterViewModel.m in Sources */,
+				479E176C1921C3C4005D3A82 /* AddressCell.m in Sources */,
 				476D39F3191DD22400742EE5 /* CoreDataTableViewController.m in Sources */,
 				47838BEF191B5FD700EE08AF /* VideoAnsweringViewController.m in Sources */,
 				4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */,
 				47838BF0191B5FD700EE08AF /* VideoSessionViewController.m in Sources */,
 				476D39A4191DC57200742EE5 /* DBService.m in Sources */,
+				479E17661921B76D005D3A82 /* AddressUser.m in Sources */,
 				47838BF1191B5FD700EE08AF /* AudioCallingViewController.m in Sources */,
 				476D39F0191DD1EB00742EE5 /* PeopleViewController.m in Sources */,
 				476D39EB191DC6DC00742EE5 /* itelDB.xcdatamodeld in Sources */,
@@ -829,8 +943,10 @@
 				473354B1191B1C1800B800CB /* LoginTableViewCell.m in Sources */,
 				476D39FC191DD3BE00742EE5 /* ItelUser.m in Sources */,
 				473354B6191B1C1800B800CB /* PassViewController.m in Sources */,
+				479E17601921AD6B005D3A82 /* AddressBookTableViewController.m in Sources */,
 				476D39FF191DD46200742EE5 /* ContactCell.m in Sources */,
 				4733548C191B1BCA00B800CB /* BaseViewModel.m in Sources */,
+				479E176F1921F16F005D3A82 /* MoreTableViewController.m in Sources */,
 				4733548B191B1BCA00B800CB /* HTTPRequestBuilder+LoginAndRegister.m in Sources */,
 				473354D0191B2ED200B800CB /* CustomTabbar.m in Sources */,
 				473354B7191B1C1800B800CB /* PassWayViewController.m in Sources */,
@@ -840,12 +956,18 @@
 				47838BF3191B5FD700EE08AF /* AudioSessionViewController.m in Sources */,
 				47838C07191B789600EE08AF /* MainPageViewController.m in Sources */,
 				47929B75191B164F0054292D /* main.m in Sources */,
+				479E17741921F748005D3A82 /* MoreViewModel.m in Sources */,
 				47335494191B1BF300B800CB /* LoginViewModel.m in Sources */,
 				473354B8191B1C1800B800CB /* PassMesViewController.m in Sources */,
 				4757BB6A191C68DB009A8938 /* MainPageViewModel.m in Sources */,
 				473354CB191B256A00B800CB /* MainTabbarViewController.m in Sources */,
 				473354B4191B1C1800B800CB /* RegMesViewController.m in Sources */,
+				479E17631921B1E6005D3A82 /* AddressService.m in Sources */,
+				47A188631920B8A0006E8013 /* StrangerCell.m in Sources */,
+				47A1885E1920B7A1006E8013 /* NewFriendListViewController.m in Sources */,
 				473354C5191B20B000B800CB /* RootViewModel.m in Sources */,
+				47A188661920B8C9006E8013 /* StrangerViewController.m in Sources */,
+				479E17691921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.m in Sources */,
 				47A1884C19209A07006E8013 /* EditAliasViewController.m in Sources */,
 				47838BF4191B5FD700EE08AF /* DialingViewController.m in Sources */,
 				473354BB191B1C1800B800CB /* PassResetViewController.m in Sources */,

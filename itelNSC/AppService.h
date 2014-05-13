@@ -6,14 +6,17 @@
 //  Copyright (c) 2014年 reactiveCocoa. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BaseViewModel.h"
 
 NS_ENUM(NSInteger, rootViewType){
      rootViewTypeLogin,
      rootViewTypeMain
 };
 
-@interface AppService : NSObject
+@interface AppService : BaseViewModel
 +(instancetype)defaultService;
+
+
 @property (nonatomic) NSNumber *rootViewType;
+-(void)logout;
 @end

@@ -7,8 +7,8 @@
 //
 
 #import "BaseViewModel.h"
-
+@class ItelUser;
 @interface ContactViewModel : BaseViewModel
--(void)addNewFriend:(NSString*)itel;
+-(void)addNewFriend:(ItelUser*)user;
 -(void)refreshFriendList;
 @end

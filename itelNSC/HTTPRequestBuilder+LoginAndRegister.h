@@ -23,4 +23,5 @@
 -(RACSignal*)passAnswerQuestion:(NSDictionary*)parameters;
 -(RACSignal*)passSendEmail:(NSDictionary*)parameters;
 -(RACSignal*)passCheckEmailCode:(NSDictionary*)parameters;
+
 @end
