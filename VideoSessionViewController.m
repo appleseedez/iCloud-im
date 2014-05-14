@@ -50,109 +50,124 @@ static float BottomHide;
     [self.view addGestureRecognizer:HideControleRecognizer];
     UITapGestureRecognizer *changeSessionViewRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changePeerViewToLocal)];
     [self.secondarySessionView addGestureRecognizer:changeSessionViewRecognizer];
+    
+    __weak id weakSelf=self;
+    
     //监听 隐藏 控制面板
     [RACObserve(self, showControlView) subscribeNext:^(NSNumber *showControleView) {
+        __strong VideoSessionViewController *strongSelf=weakSelf;
         [UIView animateWithDuration:0.3 animations:^{
             if ([showControleView boolValue]) {
-                self.topControlView.center=CGPointMake(160, TopShow);
-                self.bottomControlView.center=CGPointMake(160, BottomShow);
+                strongSelf.topControlView.center=CGPointMake(160, TopShow);
+                strongSelf.bottomControlView.center=CGPointMake(160, BottomShow);
             }else{
-                self.topControlView.center=CGPointMake(160, TopHide);
-                self.bottomControlView.center=CGPointMake(160, BottomHide);
+                strongSelf.topControlView.center=CGPointMake(160, TopHide);
+                strongSelf.bottomControlView.center=CGPointMake(160, BottomHide);
             }
         }];
         
     }];
     //监听 交换窗口
     [RACObserve(self.viewModel, isPeerLarge) subscribeNext:^(NSNumber *x) {
+         __strong VideoSessionViewController *strongSelf=weakSelf;
         BOOL isPeerLarge=[x boolValue];
         [UIView beginAnimations:@"" context:nil];
         if (isPeerLarge) {
             
-            self.viewModel.peerSessionView.frame=self.mainSessionView.bounds;
-            [self.mainSessionView addSubview:self.viewModel.peerSessionView];
-            self.viewModel.localSessionView.frame=self.secondarySessionView.bounds;
-            [self.secondarySessionView addSubview:self.viewModel.localSessionView];
+            strongSelf.viewModel.peerSessionView.frame=self.mainSessionView.bounds;
+            [strongSelf.mainSessionView addSubview:self.viewModel.peerSessionView];
+            strongSelf.viewModel.localSessionView.frame=self.secondarySessionView.bounds;
+            [strongSelf.secondarySessionView addSubview:self.viewModel.localSessionView];
         }else{
-            self.viewModel.peerSessionView.frame=self.secondarySessionView.bounds;
-            [self.secondarySessionView addSubview:self.viewModel.peerSessionView];
-            self.viewModel.localSessionView.frame=self.mainSessionView.bounds;
-            [self.mainSessionView addSubview:self.viewModel.localSessionView];
+            strongSelf.viewModel.peerSessionView.frame=self.secondarySessionView.bounds;
+            [strongSelf.secondarySessionView addSubview:self.viewModel.peerSessionView];
+            strongSelf.viewModel.localSessionView.frame=self.mainSessionView.bounds;
+            [strongSelf.mainSessionView addSubview:self.viewModel.localSessionView];
         }
         [UIView commitAnimations];
     }];
     // 监听 麦克风
     
       [RACObserve(self, viewModel.isMicOn) subscribeNext:^(NSNumber *x) {
+           __strong VideoSessionViewController *strongSelf=weakSelf;
           BOOL micOn=[x boolValue];
           if (micOn) {
-              [self.btnMic setBackgroundImage:[UIImage imageNamed:@"btn_mic_on"] forState:UIControlStateNormal];
+              [strongSelf.btnMic setBackgroundImage:[UIImage imageNamed:@"btn_mic_on"] forState:UIControlStateNormal];
           }else{
-              [self.btnMic setBackgroundImage:[UIImage imageNamed:@"btn_mic_off"] forState:UIControlStateNormal];
+              [strongSelf.btnMic setBackgroundImage:[UIImage imageNamed:@"btn_mic_off"] forState:UIControlStateNormal];
           }
       }];
     //mic点击事件
     [[self.btnMic rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(id x) {
-        [self.viewModel micSetted];
+         __strong VideoSessionViewController *strongSelf=weakSelf;
+        [strongSelf.viewModel micSetted];
     }];
     //监听 扬声器
     
       [RACObserve(self, viewModel.isSoundOn) subscribeNext:^(NSNumber *x) {
+           __strong VideoSessionViewController *strongSelf=weakSelf;
           BOOL soundOn=[x boolValue];
           if (soundOn) {
-              [self.btnSound setBackgroundImage:[UIImage imageNamed:@"btn_outSound_on"] forState:UIControlStateNormal];
+              [strongSelf.btnSound setBackgroundImage:[UIImage imageNamed:@"btn_outSound_on"] forState:UIControlStateNormal];
           }else{
-              [self.btnSound setBackgroundImage:[UIImage imageNamed:@"btn_outSound_off"] forState:UIControlStateNormal];
+              [strongSelf.btnSound setBackgroundImage:[UIImage imageNamed:@"btn_outSound_off"] forState:UIControlStateNormal];
           }
 
       }];
     //扬声器点击事件
     [[self.btnSound rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(id x) {
-        [self.viewModel soundSetted];
+         __strong VideoSessionViewController *strongSelf=weakSelf;
+        [strongSelf.viewModel soundSetted];
     }];
     
     //监听 本地摄像头开关
      [RACObserve(self, viewModel.isLocalCameraOn) subscribeNext:^(NSNumber *x) {
+          __strong VideoSessionViewController *strongSelf=weakSelf;
          BOOL cameraOn=[x boolValue];
          if (cameraOn) {
-             [self.btnCamera setBackgroundImage:[UIImage imageNamed:@"btn_localCamera_on"] forState:UIControlStateNormal];
+             [strongSelf.btnCamera setBackgroundImage:[UIImage imageNamed:@"btn_localCamera_on"] forState:UIControlStateNormal];
          }else{
-             [self.btnCamera setBackgroundImage:[UIImage imageNamed:@"btn_localCamera_off"] forState:UIControlStateNormal];
+             [strongSelf.btnCamera setBackgroundImage:[UIImage imageNamed:@"btn_localCamera_off"] forState:UIControlStateNormal];
          }
 
      }];
     //本地摄像头 设置事件
     [[self.btnCamera rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(id x) {
-        [self.viewModel localCameraOnSetted];
+         __strong VideoSessionViewController *strongSelf=weakSelf;
+        [strongSelf.viewModel localCameraOnSetted];
     }];
     
     //监听 隐藏小窗口
     [RACObserve(self, viewModel.smallSessionView) subscribeNext:^(NSNumber *x) {
+         __strong VideoSessionViewController *strongSelf=weakSelf;
         BOOL hideSmall=[x boolValue];
     
         if (hideSmall) {
-            [self.btnSmallSessionView setBackgroundImage:[UIImage imageNamed:@"btn_peerCamera_on"] forState:UIControlStateNormal];
-            self.secondarySessionView.alpha=1;
+            [strongSelf.btnSmallSessionView setBackgroundImage:[UIImage imageNamed:@"btn_peerCamera_on"] forState:UIControlStateNormal];
+            strongSelf.secondarySessionView.alpha=1;
         }else{
-            [self.btnSmallSessionView setBackgroundImage:[UIImage imageNamed:@"btn_peerCamera_off"] forState:UIControlStateNormal];
-            self.secondarySessionView.alpha=0;
+            [strongSelf.btnSmallSessionView setBackgroundImage:[UIImage imageNamed:@"btn_peerCamera_off"] forState:UIControlStateNormal];
+            strongSelf.secondarySessionView.alpha=0;
         }
         
     }];
     // 隐藏小窗口设置事件
     [[self.btnSmallSessionView rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(id x) {
-        [self.viewModel smallSessionShowSetted];
+         __strong VideoSessionViewController *strongSelf=weakSelf;
+        [strongSelf.viewModel smallSessionShowSetted];
     }];
     //挂断
     [[self.btnEndSession rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+         __strong VideoSessionViewController *strongSelf=weakSelf;
         
-        [self.viewModel sessionComplete];
+        [strongSelf.viewModel sessionComplete];
     }];
     
     // 系统时间显示
      [RACObserve(self, viewModel.systemTime) subscribeNext:^(NSString *x) {
+          __strong VideoSessionViewController *strongSelf=weakSelf;
          dispatch_async(dispatch_get_main_queue(), ^{
-         self.lbTime.text=x;
+         strongSelf.lbTime.text=x;
          });
      }];
 }
@@ -186,6 +201,9 @@ static float BottomHide;
         }
         
     }
+}
+-(void)dealloc{
+    NSLog(@"%@被销毁",self);
 }
 /*
 #pragma mark - Navigation

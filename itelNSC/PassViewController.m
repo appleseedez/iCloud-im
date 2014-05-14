@@ -31,65 +31,73 @@
     self.codeImage.image=[UIImage imageNamed:@"code_placeholder"];
     self.getImage=[RACSubject subject];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
+    __weak id weakSelf=self;
       //监听 token
        [RACObserve( self, passViewModel.imgToken) subscribeNext:^(NSString *x) {
+          __strong PassViewController *strongSelf=weakSelf;
            if (x) {
-               [self.getImage sendNext:@""];
+               [strongSelf.getImage sendNext:@""];
            }else{
-               [self.passViewModel getToken];
+               [strongSelf.passViewModel getToken];
            }
        }];
     
     [self.getImage subscribeNext:^(id x) {
-        [self.passViewModel getCodedImage];
+        __strong PassViewController *strongSelf=weakSelf;
+        [strongSelf.passViewModel getCodedImage];
     }];
     
     //监听 image
     [RACObserve(self, passViewModel.codeImage) subscribeNext:^(UIImage *x) {
+        __strong PassViewController *strongSelf=weakSelf;
         if (x) {
-            self.codeImage.image=x;
+            strongSelf.codeImage.image=x;
         }else{
-            self.codeImage.image=[UIImage imageNamed:@"code_placeholder"];
+            strongSelf.codeImage.image=[UIImage imageNamed:@"code_placeholder"];
         }
         
     }];
     //监听hud
     [RACObserve(self, passViewModel.busy) subscribeNext:^(NSNumber *x) {
+        __strong PassViewController *strongSelf=weakSelf;
         BOOL busy= [x boolValue];
         if (busy) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
             hud.labelText=@"请稍后";
         }else{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
         }
     }];
      //事件 点击换图片
     [[self.btnGetImage rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
-        [self.passViewModel getToken];
+        __strong PassViewController *strongSelf=weakSelf;
+        [strongSelf.passViewModel getToken];
     }];
     //事件 检查密保
     [[self.nextButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        __strong PassViewController *strongSelf=weakSelf;
         NSString *msg=nil;
-        if (self.txtItel.text.length==0) {
+        if (strongSelf.txtItel.text.length==0) {
               msg=@"iTel号码不能为空";
-        }else if(self.txtVerifyCode.text.length==0){
+        }else if(strongSelf.txtVerifyCode.text.length==0){
                msg=@"验证码不能为空";
         }
         if (msg) {
             [[[UIAlertView alloc] initWithTitle:msg message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
             return ;
         }
-        self.passViewModel.itel=self.txtItel.text;
-        self.passViewModel.code=self.txtVerifyCode.text;
-        [self.passViewModel checkSecurity];
+        strongSelf.passViewModel.itel=strongSelf.txtItel.text;
+        strongSelf.passViewModel.code=strongSelf.txtVerifyCode.text;
+        [strongSelf.passViewModel checkSecurity];
     }];
      //监听 密保信息
     [RACObserve(self, passViewModel.securityData) subscribeNext:^(NSDictionary *x) {
+        __strong PassViewController *strongSelf=weakSelf;
         if (x) {
-            if ([self.navigationController.childViewControllers lastObject]==self) {
-                PassWayViewController *vc=[self.storyboard instantiateViewControllerWithIdentifier:@"passWayView"];
-                vc.passViewModel=self.passViewModel;
-                [self.navigationController pushViewController:vc animated:YES];
+            if ([strongSelf.navigationController.childViewControllers lastObject]==strongSelf) {
+                PassWayViewController *vc=[strongSelf.storyboard instantiateViewControllerWithIdentifier:@"passWayView"];
+                vc.passViewModel=strongSelf.passViewModel;
+                [strongSelf.navigationController pushViewController:vc animated:YES];
             }
         }
     }];
@@ -132,5 +140,8 @@
         
     }];
 }
-
+- (void)dealloc
+{
+    NSLog(@"passVC 被销毁");
+}
 @end

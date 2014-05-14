@@ -90,4 +90,8 @@
     }];
 
 }
+- (void)dealloc
+{
+    NSLog(@"contactUserViewModel被成功销毁");
+}
 @end

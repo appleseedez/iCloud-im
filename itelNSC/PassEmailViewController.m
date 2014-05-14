@@ -32,19 +32,22 @@
     [self setButtonUI];
     [self setTipUI];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
+    __weak id weakSelf=self;
     //监听hud
     [RACObserve(self, passViewModel.busy) subscribeNext:^(NSNumber *x) {
+      __strong  PassEmailViewController *strongSelf=weakSelf;
         BOOL busy= [x boolValue];
         if (busy) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
             hud.labelText=@"请稍后";
         }else{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
         }
     }];
     
     //监听 邮箱
     [RACObserve(self, passViewModel.securityData) subscribeNext:^(NSDictionary *x) {
+         __strong  PassEmailViewController *strongSelf=weakSelf;
         NSString *email=[x objectForKey:@"mail"];
         NSArray *array = [email componentsSeparatedByString:@"@"];
         NSLog(@"%@",array);
@@ -60,29 +63,32 @@
             frant=@"****";
         }
         
-        self.lbTipTitle.text=[NSString stringWithFormat:@"请输入邮箱%@@%@收到的校验码",frant,back];
+        strongSelf.lbTipTitle.text=[NSString stringWithFormat:@"请输入邮箱%@@%@收到的校验码",frant,back];
     }];
     //事件 重新发送
     [[self.btnResend rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [self.passViewModel sendEmail];
+         __strong  PassEmailViewController *strongSelf=weakSelf;
+        [strongSelf.passViewModel sendEmail];
     }];
     //监听 弹出修改密码页面
     [RACObserve(self, passViewModel.showModifyPassView) subscribeNext:^(NSNumber *x) {
+         __strong  PassEmailViewController *strongSelf=weakSelf;
         if ([x boolValue]) {
-            PassResetViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PassReset"];
-            vc.passViewModel=self.passViewModel;
-            [self.navigationController pushViewController:vc animated:YES];
+            PassResetViewController *vc = [strongSelf.storyboard instantiateViewControllerWithIdentifier:@"PassReset"];
+            vc.passViewModel=strongSelf.passViewModel;
+            [strongSelf.navigationController pushViewController:vc animated:YES];
         }
         
     }];
     
     //事件 下一步
     [[self.btnNext rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
-        if (![NXInputChecker checkEmpty:self.txtCode.text]) {
+         __strong  PassEmailViewController *strongSelf=weakSelf;
+        if (![NXInputChecker checkEmpty:strongSelf.txtCode.text]) {
             [[[UIAlertView alloc]initWithTitle:@"请输入校验码" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil]show];
             return ;
         }else{
-            [self.passViewModel emailCodeCheck:self.txtCode.text];
+            [strongSelf.passViewModel emailCodeCheck:strongSelf.txtCode.text];
         }
     }];
 }
@@ -116,6 +122,9 @@
     }
     return YES;
 }
-
+- (void)dealloc
+{
+    NSLog(@"passEmail被销毁");
+}
 
 @end

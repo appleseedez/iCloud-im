@@ -25,10 +25,10 @@
     self.lbPhone.text=user.phone;
     [self.btnInvite addTarget:self action:@selector(action) forControlEvents:UIControlEventTouchUpInside];
     if (user.user) {
-        [self.btnInvite setImage:[UIImage imageNamed:@"inviteButton"] forState:UIControlStateNormal];
+        [self.btnInvite setImage:[UIImage imageNamed:@"addButton"] forState:UIControlStateNormal];
         [self.imgHead setImageWithURL:[NSURL URLWithString:user.user.telNum] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
     }else{
-        [self.btnInvite setImage:[UIImage imageNamed:@"addButton"] forState:UIControlStateNormal];
+        [self.btnInvite setImage:[UIImage imageNamed:@"inviteButton"] forState:UIControlStateNormal];
         [self.imgHead setImage:[UIImage imageNamed:@"standedHeader"]];
     }
 }

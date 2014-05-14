@@ -50,12 +50,15 @@
 -(void)checkItel{
     self.busy=@(YES);
     if (self.timerObserver==nil) {
+        __weak id weakSelf=self;
         self.timerObserver= RACObserve(self, startTimer);
+        
         [self.timerObserver  subscribeNext:^(NSNumber *x) {
+          __strong  RegisterViewModel *strongSelf=weakSelf;
             if ([x boolValue]) {
-                [self beginTimer];
+                [strongSelf beginTimer];
             }else{
-                [self.timer invalidate];
+                [strongSelf.timer invalidate];
                 
             }
         }];
@@ -86,6 +89,7 @@
           [self netRequestError:error];
           self.busy=@(NO);
       }];
+        
       [sendMessage subscribeCompleted:^{
           UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"手机短信验证" message:@"系统将发送一条短信验证您的手机 点击取消将不发送" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"发送", nil];
           [alert show];
@@ -204,5 +208,8 @@ static int last =60;
                  self.busy=@(NO);
              }];
     
+}
+-(void)dealloc{
+    NSLog(@"registerViewModel 被销毁");
 }
 @end

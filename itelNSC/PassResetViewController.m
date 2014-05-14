@@ -23,37 +23,44 @@
     [super viewDidLoad];
     [self setButtonUI];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
+    __weak id weakSelf=self;
+    
     //监听hud
     [RACObserve(self, passViewModel.busy) subscribeNext:^(NSNumber *x) {
+        
+      __strong  PassResetViewController *strongSelf=weakSelf;
         BOOL busy= [x boolValue];
         if (busy) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
             hud.labelText=@"请稍后";
         }else{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
         }
     }];
     
     //监听 输入检测
     [RACObserve(self, passViewModel.passwordCheckPassed) subscribeNext:^(NSNumber *x) {
+        __strong  PassResetViewController *strongSelf=weakSelf;
         if ([x boolValue]) {
-            [self.passViewModel sendNewPassword];
+            [strongSelf.passViewModel sendNewPassword];
         }
     }];
     
     //事件 开始输入检测
     [[self.btnFinish rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
-        self.passViewModel.theNewPassword=self.txtPassword.text;
-        self.passViewModel.theNewRePassword=self.txtRePassword.text;
-        [self.passViewModel checkPassword];
+        __strong  PassResetViewController *strongSelf=weakSelf;
+        strongSelf.passViewModel.theNewPassword=strongSelf.txtPassword.text;
+        strongSelf.passViewModel.theNewRePassword=strongSelf.txtRePassword.text;
+        [strongSelf.passViewModel checkPassword];
     }];
      //监听 修改密码成功
     [RACObserve(self, passViewModel.taskSuccess) subscribeNext:^(NSNumber *x) {
+        __strong  PassResetViewController *strongSelf=weakSelf;
         if ([x boolValue]) {
-           UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"修改密码成功" message:@"请牢记您的密码" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+           UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"修改密码成功" message:@"请牢记您的密码" delegate:strongSelf cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
             [[alert rac_buttonClickedSignal] subscribeNext:^(id x) {
-                   [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                   [strongSelf.navigationController dismissViewControllerAnimated:YES completion:^{
                        
                    }];
             }];
@@ -73,5 +80,9 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+- (void)dealloc
+{
+    NSLog(@"PassResetVC被销毁");
 }
 @end

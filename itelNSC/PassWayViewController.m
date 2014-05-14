@@ -25,21 +25,23 @@
     [super viewDidLoad];
     
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
-    
+    __weak id weakSelf=self;
     [RACObserve(self, passViewModel.securityData) subscribeNext:^(NSDictionary *x) {
+        __strong PassWayViewController *strongSelf=weakSelf;
+        
         NSDictionary *questions= x;
         NSString *question1=[questions objectForKey:@"question1"];
         NSString *question2=[questions objectForKey:@"question2"];
         NSString *question3=[questions objectForKey:@"question3"];
-        if ([self questiongExist:question1]&&[self questiongExist:question2]&&[self questiongExist:question3]) {
-            [self showCell:self.questionCell show:YES];
+        if ([strongSelf questiongExist:question1]&&[strongSelf questiongExist:question2]&&[strongSelf questiongExist:question3]) {
+            [strongSelf showCell:strongSelf.questionCell show:YES];
         }
-        else {[self showCell:self.questionCell show:NO];}
+        else {[strongSelf showCell:strongSelf.questionCell show:NO];}
         NSString *email= [x objectForKey:@"mail"];
-        if ([self questiongExist:email]) {
-            [self showCell:self.emaiCell show:YES];
+        if ([strongSelf questiongExist:email]) {
+            [strongSelf showCell:strongSelf.emaiCell show:YES];
         }else{
-            [self showCell:self.emaiCell show:NO];
+            [strongSelf showCell:strongSelf.emaiCell show:NO];
         }
         
     }];
@@ -75,5 +77,9 @@
         ((PassEmailViewController*)vc).passViewModel=self.passViewModel;
         [self.passViewModel sendEmail];
     }
+}
+- (void)dealloc
+{
+    NSLog(@"passWayVC 被销毁");
 }
 @end

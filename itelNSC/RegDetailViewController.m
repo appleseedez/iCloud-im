@@ -53,47 +53,53 @@ static long currEditingTextTag=0;
     
     [self.nextButton setClipsToBounds:YES];
     [self.nextButton.layer setCornerRadius:5];
-    
+    __weak id weakSelf=self;
     //监听 格式错误信息
     [RACObserve(self, regViewModel.regError) subscribeNext:^(NSString *x) {
+      
+        
         if (x) {
             [[[UIAlertView alloc]initWithTitle:x message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
         }
     }];
     //监听hud
     [RACObserve(self, regViewModel.busy) subscribeNext:^(NSNumber *x) {
+        __strong  RegDetailViewController *strongSelf=weakSelf;
         BOOL busy= [x boolValue];
         if (busy) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
                hud.labelText=@"请稍后";
         }else{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
         }
     }];
     //监听 用户选择的号码
      [RACObserve(self, regViewModel.selectedItel) subscribeNext:^(NSString *x) {
+         __strong  RegDetailViewController *strongSelf=weakSelf;
          if ([x length]) {
-             self.txtItel.text=x;
+             strongSelf.txtItel.text=x;
          }
      }];
     
     
     //事件 下一步按钮
     [[self.nextButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        self.regViewModel.itel=self.txtItel.text;
-        self.regViewModel.password=self.txtPassword.text ;
-        self.regViewModel.repassword=self.txtRePassword.text;
-        self.regViewModel.phone=self.txtPhoneNumber.text;
-        if (![self.regViewModel checkInput]) {
+        __strong  RegDetailViewController *strongSelf=weakSelf;
+        strongSelf.regViewModel.itel=strongSelf.txtItel.text;
+        strongSelf.regViewModel.password=strongSelf.txtPassword.text ;
+        strongSelf.regViewModel.repassword=strongSelf.txtRePassword.text;
+        strongSelf.regViewModel.phone=strongSelf.txtPhoneNumber.text;
+        if (![strongSelf.regViewModel checkInput]) {
             return ;
         }else{
-            [self.regViewModel checkItel];
+            [strongSelf.regViewModel checkItel];
         }
     }];
      //监听 push短信页面
     [RACObserve(self, regViewModel.startTimer) subscribeNext:^(NSNumber *x) {
+        __strong  RegDetailViewController *strongSelf=weakSelf;
         if ([x boolValue]) {
-            [self pushMes];
+            [strongSelf pushMes];
         }
     }];
     
@@ -288,6 +294,8 @@ static long currEditingTextTag=0;
         ((RegChooseNumberViewController*)segue.destinationViewController).regViewModel=self.regViewModel;
     }
 }
-
+-(void)dealloc{
+    NSLog(@"regDetailVC被销毁");
+}
 
 @end

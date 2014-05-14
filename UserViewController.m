@@ -185,26 +185,30 @@
     [super viewDidLoad];
     self.userViewModel=[[ContactUserViewModel alloc]init];
     self.userViewModel.user=self.user;
+    __weak id weekSelf=self;
     //监听 修改用户
      [RACObserve(self, userViewModel.user) subscribeNext:^(ItelUser *x) {
-         self.user=x;
-         [self refreshMessage];
+         __strong UserViewController *strongSelf=weekSelf;
+         strongSelf.user=x;
+         [strongSelf refreshMessage];
      }];
     
     //监听hud
     [RACObserve(self, userViewModel.busy) subscribeNext:^(NSNumber *x) {
+         __strong UserViewController *strongSelf=weekSelf;
         BOOL busy= [x boolValue];
         if (busy) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
             hud.labelText=@"请稍后";
         }else{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
         }
     }];
     //监听 退出页面
      [RACObserve(self, userViewModel.finish) subscribeNext:^(NSNumber *x) {
+          __strong UserViewController *strongSelf=weekSelf;
          if ([x boolValue]) {
-             [self.navigationController popViewControllerAnimated:YES];
+             [strongSelf.navigationController popViewControllerAnimated:YES];
          }
      }];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(callActionSheet) ];
@@ -270,6 +274,9 @@
     }
     else return 40;
 }
-
+- (void)dealloc
+{
+    NSLog(@"UserVC被成功销毁");
+}
 
 @end

@@ -93,9 +93,11 @@
         
         self.showTableView=@(NO);
         [self readBackUsers];
+        __weak id weakSelf=self;
         [RACObserve(self, backUsers)subscribeNext:^(NSArray *x) {
+            __strong LoginViewModel *strongSelf=weakSelf;
             if (x) {
-                [ self saveBackUsers];
+                [strongSelf saveBackUsers];
             }
             
         }];
@@ -127,5 +129,7 @@
     NSData *data=[NSJSONSerialization dataWithJSONObject:self.backUsers options:NSJSONWritingPrettyPrinted error:&error];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"backUsers"];
 }
-
+-(void)dealloc{
+    NSLog(@"loginViewMode 被销毁");
+}
 @end

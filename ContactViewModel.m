@@ -15,7 +15,7 @@
 -(void)addNewFriend:(ItelUser*)user{
     self.busy=@(YES);
     NSDictionary *parameters = @{@"userId":[self hostUserID] ,@"hostItel":[self hostItel],@"targetItel":user.itelNum};
-    __block ItelUser *blockUser=user;
+    __weak ItelUser *blockUser=user;
     
     [[self.requestBuilder addNewFriend:parameters] subscribeNext:^(NSDictionary *x) {
         if (![x isKindOfClass:[NSDictionary class]]) {
@@ -51,7 +51,7 @@
         if (code==200) {
             NSArray *arr=[x[@"data"] objectForKey:@"list"];
             NSManagedObjectContext *contex=[DBService defaultService].managedObjectContext;
-            for (NSDictionary *dic in arr ) {
+            for (NSDictionary *dic in arr) {
               ItelUser *user= [ItelUser userWithDictionary:dic inContext:contex];
                 user.isFriend=@(YES);
                 user.host=[self hostItel];
@@ -71,5 +71,9 @@
     }completed:^{
         self.busy=@(NO);
     }];
+}
+- (void)dealloc
+{
+    NSLog(@"contactViewModel被成功销毁");
 }
 @end

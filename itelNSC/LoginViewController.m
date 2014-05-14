@@ -42,26 +42,27 @@ static float tableViewHeight=135.0;
     [self.btnLogin.layer setCornerRadius:5];
     //监听 显示隐藏用户列表
     self.viewModel=[[LoginViewModel alloc]init];
-    
+    __weak id weekSelf=self;
     [RACObserve(self, viewModel.showTableView) subscribeNext:^(NSNumber *x) {
+        __strong LoginViewController *strongSelf=weekSelf;
         BOOL showTableView=[x boolValue];
        
         if (showTableView) {
             [UIView animateWithDuration:0.3 animations:^{
-                self.tableView.frame=CGRectMake(0, 0, self.tableView.frame.size.width, tableViewHeight);
-                [self.btnShowList setImage:[UIImage imageNamed:@"btn_login_showList_up"] forState:UIControlStateNormal];
+                strongSelf.tableView.frame=CGRectMake(0, 0, strongSelf.tableView.frame.size.width, tableViewHeight);
+                [strongSelf.btnShowList setImage:[UIImage imageNamed:@"btn_login_showList_up"] forState:UIControlStateNormal];
 
             } completion:^(BOOL finished) {
-                self.contentView.userInteractionEnabled=YES;
-                NSLog(@"%f",self.tableView.frame.size.height);
+                strongSelf.contentView.userInteractionEnabled=YES;
+                NSLog(@"%f",strongSelf.tableView.frame.size.height);
             }];
             
         }else{
            [UIView animateWithDuration:0.3 animations:^{
-               self.tableView.frame=CGRectMake(0, -self.tableView.frame.size.height, self.tableView.frame.size.width, tableViewHeight);
-               [self.btnShowList setImage:[UIImage imageNamed:@"btn_login_showList_down"] forState:UIControlStateNormal];
+               strongSelf.tableView.frame=CGRectMake(0, -strongSelf.tableView.frame.size.height, strongSelf.tableView.frame.size.width, tableViewHeight);
+               [strongSelf.btnShowList setImage:[UIImage imageNamed:@"btn_login_showList_down"] forState:UIControlStateNormal];
            } completion:^(BOOL finished) {
-               self.contentView.userInteractionEnabled=NO;
+               strongSelf.contentView.userInteractionEnabled=NO;
            }];
             
            
@@ -71,41 +72,47 @@ static float tableViewHeight=135.0;
     
     //事件 显示隐藏用户列表
     [[self.btnShowList rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(id x) {
-        BOOL showTableView=[self.viewModel.showTableView boolValue];
-        self.viewModel.showTableView=@(!showTableView);
+        __strong LoginViewController *strongSelf=weekSelf;
+        BOOL showTableView=[strongSelf.viewModel.showTableView boolValue];
+        strongSelf.viewModel.showTableView=@(!showTableView);
     }];
     
     //监听 用户名 itel
     [RACObserve(self, viewModel.itel) subscribeNext:^(NSString *x) {
-        self.txtUserCloudNumber.text=x;
+        __strong LoginViewController *strongSelf=weekSelf;
+        strongSelf.txtUserCloudNumber.text=x;
     }];
     [RACObserve(self, viewModel.password) subscribeNext:^(NSString *x) {
-        self.txtUserPassword.text=x;
+        __strong LoginViewController *strongSelf=weekSelf;
+        strongSelf.txtUserPassword.text=x;
     }];
     //监听 hud
     [RACObserve(self, viewModel.busy) subscribeNext:^(NSNumber *x) {
+        __strong LoginViewController *strongSelf=weekSelf;
         BOOL showHud=[x boolValue];
         if (showHud) {
-           MBProgressHUD *hud =[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+           MBProgressHUD *hud =[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
             hud.labelText=@"登录中...";
         }else{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];        }
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];        }
     }];
     
     //事件 点击登陆
     [[self.btnLogin rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
-        self.viewModel.itel=self.txtUserCloudNumber.text;
-        self.viewModel.password=self.txtUserPassword.text;
-        [self.viewModel login];
+        __strong LoginViewController *strongSelf=weekSelf;
+        strongSelf.viewModel.itel=strongSelf.txtUserCloudNumber.text;
+        strongSelf.viewModel.password=strongSelf.txtUserPassword.text;
+        [strongSelf.viewModel login];
     }];
     //监听 tableView
      [RACObserve(self, viewModel.backUsers) subscribeNext:^(NSArray *x) {
-         self.btnShowList.enabled=(BOOL)[x count];
+         __strong LoginViewController *strongSelf=weekSelf;
+         strongSelf.btnShowList.enabled=(BOOL)[x count];
          if ([x count]<=3) {
              tableViewHeight=[x count]*45.0;
-             NSLog(@"%f",self.tableView.frame.size.height);
+             NSLog(@"%f",strongSelf.tableView.frame.size.height);
          }
-               [self.tableView reloadData];
+               [strongSelf.tableView reloadData];
          
      }];
 }
@@ -154,9 +161,10 @@ static float tableViewHeight=135.0;
     CGRect beginRect=[[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect endRect=[[info objectForKey:UIKeyboardFrameEndUserInfoKey]CGRectValue];
     keyBoardHeightDelta=beginRect.origin.y-endRect.origin.y;
-    
+    __weak id weekSelf=self;
     [UIView animateWithDuration:0.30 delay:0.2 options:UIViewAnimationOptionLayoutSubviews animations:^{
-        self.view.center=CGPointMake(self.view.center.x, self.view.center.y-keyBoardHeightDelta/2);
+        __strong LoginViewController *strongSelf=weekSelf;
+        strongSelf.view.center=CGPointMake(self.view.center.x, self.view.center.y-keyBoardHeightDelta/2);
     } completion:^(BOOL finished) {
         
     }];
@@ -209,5 +217,9 @@ static float tableViewHeight=135.0;
     }
    
     
+}
+- (void)dealloc
+{
+    NSLog(@"loginVC被销毁");
 }
 @end

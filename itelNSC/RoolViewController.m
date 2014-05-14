@@ -31,7 +31,9 @@
     
     
      //监听 弹出拨号盘
+    __weak id weakSelf=self;
     [RACObserve(self, viewModel.showSessinView) subscribeNext:^(NSNumber *x) {
+        __strong RoolViewController *strongSelf=weakSelf;
         CATransition *transition=[CATransition animation];
         transition.type=@"push";
         if ([x boolValue]) {
@@ -39,19 +41,19 @@
             transition.subtype=@"fromTop";
 
             
-            self.mainView.userInteractionEnabled=NO;
-            [self.view bringSubviewToFront:self.sessionView];
-            self.sessionView.hidden=NO;
+            strongSelf.mainView.userInteractionEnabled=NO;
+            [strongSelf.view bringSubviewToFront:strongSelf.sessionView];
+            strongSelf.sessionView.hidden=NO;
             
             
         }else{
             
             transition.subtype=@"fromBottom";
-            self.sessionView.hidden=YES;
-            self.mainView.userInteractionEnabled=YES;
+            strongSelf.sessionView.hidden=YES;
+            strongSelf.mainView.userInteractionEnabled=YES;
              
         }
-        [self.sessionView.layer addAnimation:transition forKey:@"3"];
+        [strongSelf.sessionView.layer addAnimation:transition forKey:@"3"];
     }];
      
 }
@@ -70,6 +72,9 @@
     dialModel.modelService=self.viewModel;
     self.viewModel.dialViewModel=dialModel;
     [self.sessionView addSubview:self.dialVC.view];
+}
+-(void)dealloc{
+    NSLog(@"rootVC被成功销毁");
 }
 /*
 #pragma mark - Navigation

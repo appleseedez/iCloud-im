@@ -28,21 +28,24 @@
 {
     [super viewDidLoad];
     self.searchViewModel=[[SearchViewModel alloc]init];
+    __weak id weekSelf=self;
     //监听hud
     [RACObserve(self, searchViewModel.busy) subscribeNext:^(NSNumber *x) {
+        __strong SearchNewFriendViewController *strongSelf=weekSelf;
         BOOL busy= [x boolValue];
         if (busy) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
             hud.labelText=@"请稍后";
         }else{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
         }
     }];
     
     //监听 搜索结果
     [RACObserve(self, searchViewModel.searchResult) subscribeNext:^(NSArray *x) {
+        __strong SearchNewFriendViewController *strongSelf=weekSelf;
         if ([x count]) {
-            [self pushNewFriendList:nil];
+            [strongSelf pushNewFriendList:nil];
         }
         
     }];
@@ -67,5 +70,8 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.searchBar becomeFirstResponder];
+}
+-(void)dealloc{
+    NSLog(@"searchNewFriendVC被销毁");
 }
 @end

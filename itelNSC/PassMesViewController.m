@@ -42,8 +42,10 @@
     [self setButtonUI];
     [self setTipUI];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
+    __weak id weakSelf=self;
     //监听 手机号码
     [RACObserve(self, passViewModel.securityData) subscribeNext:^(NSDictionary *x) {
+        __strong PassMesViewController *strongSelf=weakSelf;
         NSString *phone=[x objectForKey:@"phone"];
         NSRange fore;
         fore.length=3;
@@ -53,61 +55,67 @@
         back.length=4;
         back.location=7;
         NSString *backString=[phone substringWithRange:back];
-        self.lbTipTitle.text=[NSString stringWithFormat:@"请输入手机%@****%@收到的短信校验码",foreString,backString];
+        strongSelf.lbTipTitle.text=[NSString stringWithFormat:@"请输入手机%@****%@收到的短信校验码",foreString,backString];
     }];
     //监听hud
     [RACObserve(self, passViewModel.busy) subscribeNext:^(NSNumber *x) {
+         __strong PassMesViewController *strongSelf=weakSelf;
         BOOL busy= [x boolValue];
         if (busy) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
             hud.labelText=@"请稍后";
         }else{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
         }
     }];
 
     //监听 定时器 是否启动
     [RACObserve(self, passViewModel.startTimer) subscribeNext:^(NSNumber *x) {
+         __strong PassMesViewController *strongSelf=weakSelf;
         if ([x boolValue]) {
-            self.btnResend.enabled=NO;
+            strongSelf.btnResend.enabled=NO;
             
         }else{
-            self.btnResend.enabled=YES;
+            strongSelf.btnResend.enabled=YES;
         }
     }];
     //监听 剩余时间
     [RACObserve(self, passViewModel.lastTime) subscribeNext:^(NSString *x) {
+         __strong PassMesViewController *strongSelf=weakSelf;
         NSString *time;
         
         time=[NSString stringWithFormat:@"在%@秒后点击重新发送",x];
         
         
-        [self.btnResend setTitle:@"点击重新发送短信" forState:UIControlStateNormal];
-        [self.btnResend setTitle:time forState:UIControlStateDisabled];
+        [strongSelf.btnResend setTitle:@"点击重新发送短信" forState:UIControlStateNormal];
+        [strongSelf.btnResend setTitle:time forState:UIControlStateDisabled];
     }];
     //事件 重发短信
     [[self.btnResend rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+         __strong PassMesViewController *strongSelf=weakSelf;
         if (x) {
-            [self.passViewModel sendMessage];
+            [strongSelf.passViewModel sendMessage];
         }
         
     }];
     
     //事件 提交短信吗
     [[self.btnNext rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        if (self.txtCode.text.length==0) {
+         __strong PassMesViewController *strongSelf=weakSelf;
+        if (strongSelf.txtCode.text.length==0) {
             [[[UIAlertView alloc]initWithTitle:@"验证码不能为空" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
             return ;
         }else{
-            [self.passViewModel checkMesCode:self.txtCode.text];
+            [strongSelf.passViewModel checkMesCode:strongSelf.txtCode.text];
         }
     }];
     //监听 弹出修改密码页面
     [RACObserve(self, passViewModel.showModifyPassView) subscribeNext:^(NSNumber *x) {
+         __strong PassMesViewController *strongSelf=weakSelf;
         if ([x boolValue]) {
-          PassResetViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PassReset"];
-            vc.passViewModel=self.passViewModel;
-            [self.navigationController pushViewController:vc animated:YES];
+          PassResetViewController *vc = [strongSelf.storyboard instantiateViewControllerWithIdentifier:@"PassReset"];
+            vc.passViewModel=strongSelf.passViewModel;
+            [strongSelf.navigationController pushViewController:vc animated:YES];
         }
         
     }];
@@ -149,7 +157,10 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-
+- (void)dealloc
+{
+    NSLog(@"passMesVC被销毁");
+}
 
 
 @end

@@ -19,6 +19,7 @@
                               
                                @"hostUserId":[self hostUserID]
                                };
+    __weak SearchViewModel *weakSelf=self;
     [[self.requestBuilder searchStranger:Parameters] subscribeNext:^(NSDictionary *x) {
         int code=[x[@"code"] intValue];
         if (![x isKindOfClass:[NSDictionary class]]) {
@@ -26,17 +27,17 @@
             return ;
         }
         if (code==200) {
-            NSArray *arr=x[@"data"][@"list"];
+           __weak NSArray *arr=x[@"data"][@"list"];
             NSMutableArray *marr=[NSMutableArray new];
             NSManagedObjectContext *contex=[DBService defaultService].managedObjectContext;
             for (NSDictionary *dic in arr) {
                 ItelUser *user=[ItelUser userWithDictionary:dic inContext:contex];
-                if (![user.isFriend boolValue]&&![user.itelNum isEqualToString:[self hostItel]]) {
+                if (![user.isFriend boolValue]&&![user.itelNum isEqualToString:[weakSelf hostItel]]) {
                     [marr addObject:dic];
                 }
             }
-            self.searchResult=[marr copy];
-            if (![self.searchResult count]) {
+            weakSelf.searchResult=marr;
+            if (![weakSelf.searchResult count]) {
                 [[[UIAlertView alloc]initWithTitle:@"没有搜索结果" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
             }
         }else{
@@ -109,5 +110,9 @@
     }completed:^{
         self.busy=@(NO);
     }];
+}
+- (void)dealloc
+{
+    NSLog(@"searchViewModel被成功销毁");
 }
 @end

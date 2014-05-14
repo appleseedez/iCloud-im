@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, ViewType){
     ViewTypeDialing
 };
 @interface DialViewModel : NSObject
-@property  (nonatomic,strong) RootViewModel  *modelService;
+@property  (nonatomic,weak) RootViewModel  *modelService;
 @property  (nonatomic,strong) NSNumber *showingView;   //当前显示窗口 见ViewType
 @property  (nonatomic,strong) UIView *peerSessionView;  //对方的影像
 @property  (nonatomic,strong) UIView *localSessionView;  //自己的影像

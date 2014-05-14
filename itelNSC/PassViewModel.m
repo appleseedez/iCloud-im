@@ -66,12 +66,14 @@
 -(void)sendMessage{
     self.busy=@(YES);
     if (self.timerObserver==nil) {
+        __weak id weakSelf=self;
         self.timerObserver= RACObserve(self, startTimer);
         [self.timerObserver  subscribeNext:^(NSNumber *x) {
+         __strong   PassViewModel *strongSelf=weakSelf;
             if ([x boolValue]) {
-                [self beginTimer];
+                [strongSelf beginTimer];
             }else{
-                [self.timer invalidate];
+                [strongSelf.timer invalidate];
                 
             }
         }];
@@ -274,7 +276,9 @@ static int last =60;
 }
 
 
-
+-(void)dealloc{
+    NSLog(@"passViewModel 被销毁");
+}
 
 
 

@@ -31,41 +31,49 @@
         self.view.frame=CGRectMake(0, 0, 320, self.view.frame.size.height);
     }
     [self setHeaderImage];
+    __weak id weakSelf=self;
     //监听名字
     [RACObserve(self, viewModel.peerName) subscribeNext:^(NSString *x) {
+         __strong AudioAnsweringViewController *strongSelf=weakSelf;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.lbPeerName.text=x;
+            strongSelf.lbPeerName.text=x;
         });
     }];
     //监听号码
     [RACObserve(self, viewModel.peerNum) subscribeNext:^(NSString *x) {
+         __strong AudioAnsweringViewController *strongSelf=weakSelf;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.lbPeerNumber.text=x;
+            strongSelf.lbPeerNumber.text=x;
         });
     }];
     //监听地址
     [RACObserve(self, viewModel.peerArea) subscribeNext:^(NSString *x) {
+         __strong AudioAnsweringViewController *strongSelf=weakSelf;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.lbPeerArea.text=x;
+            strongSelf.lbPeerArea.text=x;
         });
     }];
     //语音接听
     [[self.btnAudioAnswer rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        self.viewModel.localCanVideo=@(NO);
-        [self.viewModel answer];
+         __strong AudioAnsweringViewController *strongSelf=weakSelf;
+        strongSelf.viewModel.localCanVideo=@(NO);
+        [strongSelf.viewModel answer];
     }];
     //挂断
     [[self.btnHungUp rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+         __strong AudioAnsweringViewController *strongSelf=weakSelf;
         
-        [self.viewModel sessionComplete];
+        [strongSelf.viewModel sessionComplete];
     }];
     //监听状态
     [RACObserve(self, viewModel.connectionState) subscribeNext:^(NSString *x) {
-        self.lbSessionState.text=x;
+         __strong AudioAnsweringViewController *strongSelf=weakSelf;
+        strongSelf.lbSessionState.text=x;
     }];
     //监听头像
     [RACObserve(self, viewModel.peerHeader) subscribeNext:^(UIImage *x) {
-        self.headImageView.image=x;
+         __strong AudioAnsweringViewController *strongSelf=weakSelf;
+        strongSelf.headImageView.image=x;
     }];
 
 }
@@ -76,5 +84,8 @@
     [self.headImageView.layer setCornerRadius:12];
     [self.headImageView setClipsToBounds:YES];
     
+}
+-(void)dealloc{
+    NSLog(@"%@被销毁",self);
 }
 @end

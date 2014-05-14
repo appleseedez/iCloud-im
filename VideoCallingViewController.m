@@ -30,22 +30,27 @@
     }else{
         self.view.frame=CGRectMake(0, 0, 320, self.view.frame.size.height);
     }
+    __weak id weakSelf=self;
    //监听 对方名字
     [RACObserve(self, viewModel.peerName) subscribeNext:^(NSString *x) {
-        self.lbPeerName.text=x;
+        __strong VideoCallingViewController *strongSelf=weakSelf;
+        strongSelf.lbPeerName.text=x;
     }];
     //监听 对方号码
     [RACObserve(self, viewModel.peerNum) subscribeNext:^(NSString *x) {
-        self.lbPeerNumber.text=x;
+        __strong VideoCallingViewController *strongSelf=weakSelf;
+        strongSelf.lbPeerNumber.text=x;
     }];
     //监听 连接状态
     [RACObserve(self, viewModel.connectionState) subscribeNext:^(NSString *x) {
-        self.lbSessionState.text=x;
+        __strong VideoCallingViewController *strongSelf=weakSelf;
+        strongSelf.lbSessionState.text=x;
     }];
     
     //挂断按钮
      [[self.btnHungUp rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
-         [self.viewModel sessionComplete];
+         __strong VideoCallingViewController *strongSelf=weakSelf;
+         [strongSelf.viewModel sessionComplete];
      }];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -53,5 +58,7 @@
     self.viewModel.localSessionView.frame=self.localSessionView.bounds;
     [self.localSessionView addSubview:self.viewModel.localSessionView];
 }
-
+-(void)dealloc{
+    NSLog(@"%@被销毁",self);
+}
 @end

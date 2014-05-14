@@ -29,6 +29,7 @@ static AddressService *instance;
     }
 }
 -(void)loadItels{
+    self.busy=@(YES);
     NSArray *phones=[self.addressList valueForKeyPath:@"phone"];
     NSString *strPhones=[NXInputChecker changeArrayToString:phones];
     NSDictionary *parameters=@{@"hostUserId":[self hostUserID], @"numbers":strPhones};
@@ -37,9 +38,10 @@ static AddressService *instance;
        int code=[x[@"code"]intValue];
        if (code==200) {
            
-           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+           
                NSArray *arr=x[@"data"];
                NSManagedObjectContext *contex=[DBService defaultService].managedObjectContext;
+          
                for (NSDictionary *dic in arr) {
                    
                    ItelUser *user=[ItelUser userWithDictionary:dic inContext:contex];
@@ -50,18 +52,15 @@ static AddressService *instance;
                    }
                    
                }
-               NSError *error=nil;
-               [contex save:&error];
-               if (error) {
-                   NSLog(@"通讯录出错鸟 %@",error);
-               }
-           });
+           
+
+           
           
        }
    }error:^(NSError *error) {
-       
+       self.busy=@(NO);
    }completed:^{
-       
+       self.busy=@(NO);
    }];
     
 }
@@ -150,11 +149,10 @@ static AddressService *instance;
         
     }
      self.addressList=[arr copy];
+    [self loadItels];
     self.isLoading=@(NO);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self loadItels];
-    });
+  
     
     
 }

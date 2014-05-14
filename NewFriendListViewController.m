@@ -26,10 +26,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    __weak id weakSelf=self;
     [RACObserve(self, searchViewModel.searchResult) subscribeNext:^(NSArray *x) {
+      __strong  NewFriendListViewController *strongSelf=weakSelf;
         if ([x count]) {
-            self.searchResult=x;
-            [self.tableView reloadData];
+            strongSelf.searchResult=x;
+            [strongSelf.tableView reloadData];
             
         }
     }];
@@ -85,6 +87,9 @@
     strangerVC.user=user;
     strangerVC.searchViewModel=self.searchViewModel;
     [self.navigationController pushViewController:strangerVC animated:YES];
+}
+-(void)dealloc{
+    NSLog(@"NewFriendListVC被销毁");
 }
 
 

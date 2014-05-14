@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 @class PassViewModel;
 @interface PassWayViewController : UITableViewController
-@property (nonatomic) PassViewModel *passViewModel;
+@property (nonatomic,weak) PassViewModel *passViewModel;
 @end

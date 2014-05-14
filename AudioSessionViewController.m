@@ -45,16 +45,17 @@ static float BottomHide;
     TopHide=TopShow-70;
     UITapGestureRecognizer *HideControleRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(animation:)];
     [self.view addGestureRecognizer:HideControleRecognizer];
-   
+   __weak id weakSelf=self;
     //监听 隐藏 控制面板
     [RACObserve(self, showControlView) subscribeNext:^(NSNumber *showControleView) {
+         __strong AudioSessionViewController *strongSelf=weakSelf;
         [UIView animateWithDuration:0.3 animations:^{
             if ([showControleView boolValue]) {
-                self.topControlView.center=CGPointMake(160, TopShow);
-                self.bottomControlView.center=CGPointMake(160, BottomShow);
+                strongSelf.topControlView.center=CGPointMake(160, TopShow);
+                strongSelf.bottomControlView.center=CGPointMake(160, BottomShow);
             }else{
-                self.topControlView.center=CGPointMake(160, TopHide);
-                self.bottomControlView.center=CGPointMake(160, BottomHide);
+                strongSelf.topControlView.center=CGPointMake(160, TopHide);
+                strongSelf.bottomControlView.center=CGPointMake(160, BottomHide);
             }
         }];
         
@@ -62,51 +63,58 @@ static float BottomHide;
     // 监听 麦克风
     
     [RACObserve(self, viewModel.isMicOn) subscribeNext:^(NSNumber *x) {
+        __strong AudioSessionViewController *strongSelf=weakSelf;
         BOOL micOn=[x boolValue];
         if (micOn) {
-            [self.btnMic setImage:[UIImage imageNamed:@"btn_mic_on"] forState:UIControlStateNormal];
+            [strongSelf.btnMic setImage:[UIImage imageNamed:@"btn_mic_on"] forState:UIControlStateNormal];
         }else{
-            [self.btnMic setImage:[UIImage imageNamed:@"btn_mic_off"] forState:UIControlStateNormal];
+            [strongSelf.btnMic setImage:[UIImage imageNamed:@"btn_mic_off"] forState:UIControlStateNormal];
         }
     }];
     //mic点击事件
     [[self.btnMic rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(id x) {
-        [self.viewModel micSetted];
+        __strong AudioSessionViewController *strongSelf=weakSelf;
+        [strongSelf.viewModel micSetted];
     }];
     //监听 扬声器
     
     [RACObserve(self, viewModel.isSoundOn) subscribeNext:^(NSNumber *x) {
+        __strong AudioSessionViewController *strongSelf=weakSelf;
         BOOL soundOn=[x boolValue];
         if (soundOn) {
-            [self.btnSound setImage:[UIImage imageNamed:@"btn_outSound_on"] forState:UIControlStateNormal];
+            [strongSelf.btnSound setImage:[UIImage imageNamed:@"btn_outSound_on"] forState:UIControlStateNormal];
         }else{
-            [self.btnSound setImage:[UIImage imageNamed:@"btn_outSound_off"] forState:UIControlStateNormal];
+            [strongSelf.btnSound setImage:[UIImage imageNamed:@"btn_outSound_off"] forState:UIControlStateNormal];
         }
         
     }];
     //扬声器点击事件
     [[self.btnSound rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(id x) {
-        [self.viewModel soundSetted];
+        __strong AudioSessionViewController *strongSelf=weakSelf;
+        [strongSelf.viewModel soundSetted];
     }];
     //挂断
     [[self.btnEndSession rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        
-        [self.viewModel sessionComplete];
+        __strong AudioSessionViewController *strongSelf=weakSelf;
+        [strongSelf.viewModel sessionComplete];
     }];
     
     // 系统时间显示
     [RACObserve(self, viewModel.systemTime) subscribeNext:^(NSString *x) {
+        __strong AudioSessionViewController *strongSelf=weakSelf;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.lbTime.text=x;
+            strongSelf.lbTime.text=x;
         });
     }];
     //监听 对方昵称
     [RACObserve(self, viewModel.peerName) subscribeNext:^(NSString *x) {
-        self.lbPeerName.text=x;
+        __strong AudioSessionViewController *strongSelf=weakSelf;
+        strongSelf.lbPeerName.text=x;
     }];
     //监听 对方号码
     [RACObserve(self, viewModel.peerNum) subscribeNext:^(NSString *x) {
-        self.lbPeerItel.text=x;
+        __strong AudioSessionViewController *strongSelf=weakSelf;
+        strongSelf.lbPeerItel.text=x;
     }];
 
 }
@@ -120,6 +128,9 @@ static float BottomHide;
     [self.headImageView.layer setCornerRadius:12];
     [self.headImageView setClipsToBounds:YES];
     
+}
+-(void)dealloc{
+    NSLog(@"%@被销毁",self);
 }
 
 @end

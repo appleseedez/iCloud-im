@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 @class PassViewModel;
 @interface PassAnswerViewController : UIViewController
-@property (nonatomic) PassViewModel *passViewModel;
+@property (nonatomic,weak) PassViewModel *passViewModel;
 @end

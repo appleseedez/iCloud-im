@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h8e-om-TY7">
     <dependencies>
-        <deployment version="1552" defaultVersion="1536" identifier="iOS"/>
+        <deployment version="1552" defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
@@ -1287,7 +1287,7 @@
         <image name="logo_video_answer" width="30" height="30"/>
         <image name="mao_header" width="259" height="258"/>
         <image name="peerAvatar" width="30" height="32"/>
-        <image name="standedHeader" width="30" height="32"/>
+        <image name="standedHeader" width="75" height="75"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

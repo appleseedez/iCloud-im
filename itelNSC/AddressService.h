@@ -17,4 +17,5 @@
 @property (nonatomic) NSNumber *isLoading;
 +(AddressService*)defaultService;
 -(void)loadAddressBook;
+-(void)loadItels;
 @end

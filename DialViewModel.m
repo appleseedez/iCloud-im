@@ -85,4 +85,7 @@
 -(void)dial:(NSString*)itel useVideo:(BOOL)useVideo{
     NSLog(@"开始拨打:%@  是否视频:%d",itel,useVideo);
 }
+-(void)dealloc{
+    NSLog(@"%@被销毁",self);
+}
 @end

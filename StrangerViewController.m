@@ -193,4 +193,7 @@
    
     [self.navigationController setNavigationBarHidden:NO];
 }
+-(void)dealloc{
+    NSLog(@"strangerVC被销毁了");
+}
 @end

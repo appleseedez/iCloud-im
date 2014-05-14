@@ -86,35 +86,39 @@
     self.moreItem.imgSelected=[UIImage imageNamed:@"tab_5a"];
     self.moreItem.imgNormal=[UIImage imageNamed:@"tab_5"];
     self.moreItem.selIndex=@(4);
-    
+      __weak id weekSelf=self;
     for (CustomBarItem *item in self.customTabbar.subviews) {
         if ([item isKindOfClass:[CustomBarItem class]]) {
               item.selectedColor=[UIColor colorWithRed:0.1216 green:0.3961 blue:1.00 alpha:1];
                item.normalColor=[UIColor colorWithRed:0.4745 green:0.4745 blue:0.4745 alpha:1];
-            
+           __weak id weekSelf=self;
             [[item rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(CustomBarItem *x) {
-                self.selectIndex=x.selIndex;
-                [self.barSelected sendNext:x];
-                if (self.dialItem==x) {
-                    [self  presentDialPan];
+              __strong  MainTabbarViewController *strongSelf=weekSelf;
+                strongSelf.selectIndex=x.selIndex;
+                [strongSelf.barSelected sendNext:x];
+                if (strongSelf.dialItem==x) {
+                    [strongSelf  presentDialPan];
                 }
                             }];
         }
     }
+   
     [self.barSelected subscribeNext:^(CustomBarItem *x) {
-        
-        for (CustomBarItem *item in self.customTabbar.subviews) {
+        __strong  MainTabbarViewController *strongSelf=weekSelf;
+        for (CustomBarItem *item in strongSelf.customTabbar.subviews) {
             if (item!=x) {
                 item.beSelected=@(NO);
             }else{
                 item.beSelected=@(YES);
             }
         }
-        [self setSelectedIndex:[x.selIndex intValue]];
+        [strongSelf setSelectedIndex:[x.selIndex intValue]];
         
     }];
     //监听 显示隐藏tabbar
+   
     [RACObserve(self, viewModel.showTabbar) subscribeNext:^(NSNumber *x) {
+        __strong MainTabbarViewController *strongSelf=weekSelf;
         BOOL show=[x boolValue];
         NSString *type=@"push";
         NSString *subtype=nil;
@@ -124,13 +128,13 @@
         }else{
             subtype=@"fromBottom";
         }
-        if (self.customTabbar.hidden==show) {
+        if (strongSelf.customTabbar.hidden==show) {
             CATransition *anim=[CATransition animation];
             anim.type=type;
             anim.subtype=subtype;
             anim.duration=0.3;
-            [self.customTabbar setHidden:!show];
-            [self.customTabbar.layer addAnimation:anim forKey:@"4"];
+            [strongSelf.customTabbar setHidden:!show];
+            [strongSelf.customTabbar.layer addAnimation:anim forKey:@"4"];
             
         }
         
@@ -155,5 +159,9 @@
 -(void)presentDialPan{
     self.viewModel.dialViewModel.showingView=@(ViewTypeDialing);
     self.viewModel.showSessinView=@(YES);
+}
+- (void)dealloc
+{
+    NSLog(@"mainTabbarVC被销毁");
 }
 @end

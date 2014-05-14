@@ -27,12 +27,14 @@
     [self.btnPrice setClipsToBounds:YES];
     [self.btnPerson.layer setCornerRadius:5];
     [self.btnPrice.layer setCornerRadius:5];
-    
+    __weak id weakSelf=self;
     [[self.btnPrice rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        self.viewModel.regType=@(1);
+        __strong RegTypeViewController *strongSelf=weakSelf;
+        strongSelf.viewModel.regType=@(1);
     }];
     [[self.btnPerson rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        self.viewModel.regType=@(0);
+        __strong RegTypeViewController *strongSelf=weakSelf;
+        strongSelf.viewModel.regType=@(0);
     }];
     
     // Do any additional setup after loading the view.
@@ -57,6 +59,9 @@
 
     ((RegDetailViewController*)segue.destinationViewController).viewModel=self.viewModel;
 }
-
+- (void)dealloc
+{
+    NSLog(@"regTypeVC被成功销毁");
+}
 
 @end

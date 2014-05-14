@@ -49,4 +49,8 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"hideTabbar" object:nil];
 }
+- (void)dealloc
+{
+    NSLog(@"AddVC被成功销毁");
+}
 @end

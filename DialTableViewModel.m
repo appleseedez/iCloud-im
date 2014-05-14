@@ -44,4 +44,7 @@
     NSLog(@"添加好友：%@",itel);
     self.addFail=@(YES);
 }
+-(void)dealloc{
+    NSLog(@"%@被销毁",self);
+}
 @end

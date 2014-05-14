@@ -30,17 +30,23 @@
     PeopleViewController *pVC=self.navigationController.childViewControllers[0];
     self.contactViewModel=pVC.contactViewModel;
     self.service=[AddressService defaultService];
+    __weak id weakSelf=self;
       [RACObserve(self, service.addressList) subscribeNext:^(id x) {
-          [self.tableView reloadData];
+          __strong AddressBookTableViewController *strongSelf=weakSelf;
+          dispatch_async(dispatch_get_main_queue(), ^{
+               [strongSelf.tableView reloadData];
+          });
+         
       }];
     //监听hud
     [RACObserve(self, contactViewModel.busy) subscribeNext:^(NSNumber *x) {
+        __strong AddressBookTableViewController *strongSelf=weakSelf;
         BOOL busy= [x boolValue];
         if (busy) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.labelText=@"请稍后";
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
+            hud.labelText=@"加载中";
         }else{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
         }
     }];
 }
@@ -172,5 +178,7 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+-(void)dealloc{
+    NSLog(@"addessBookVC被销毁了");
+}
 @end

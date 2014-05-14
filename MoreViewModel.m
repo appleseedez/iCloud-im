@@ -14,22 +14,27 @@
     self = [super init];
     if (self) {
         self.appDelegate=(MaoAppDelegate*)[UIApplication sharedApplication].delegate;
-        
+        __weak id weekSelf=self;
         [RACObserve(self, appDelegate.loginInfo) subscribeNext:^(NSDictionary *x) {
+            __strong MoreViewModel *strongSelf=weekSelf;
             if (x) {
                 
             
-            self.itel=x[@"itel"];
-            self.qq=x[@"qq_num"];
-            self.area=x[@"area_code"];
-            self.email=x[@"mail"];
-            self.nickname=x[@"nick_name"];
-            self.birthday=x[@"birthday"];
-            self.phone=x[@"phone"];
-            self.imgUrl=x[@"photo_file_name"];
+            strongSelf.itel=x[@"itel"];
+            strongSelf.qq=x[@"qq_num"];
+            strongSelf.area=x[@"area_code"];
+            strongSelf.email=x[@"mail"];
+            strongSelf.nickname=x[@"nick_name"];
+            strongSelf.birthday=x[@"birthday"];
+            strongSelf.phone=x[@"phone"];
+            strongSelf.imgUrl=x[@"photo_file_name"];
             }
         }];
     }
     return self;
+}
+- (void)dealloc
+{
+    NSLog(@"moreViewModel成功被销毁");
 }
 @end

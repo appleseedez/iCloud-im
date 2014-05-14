@@ -45,47 +45,58 @@
     self.tableModel.selectedSuggestNumber=@"";
     self.suggestViewType=@(suggestViewTypeEmpty);
     [self.view bringSubviewToFront:self.tableView];
+    
+    __weak id weakSelf=self;
     //监听 隐藏 显示tableView
     [RACObserve(self, tableModel.tableViewhidden) subscribeNext:^(NSNumber *  x) {
+        __strong DialingViewController *strongSelf=weakSelf;
         BOOL hidden=[x boolValue];
-        self.tableView.alpha=!hidden;
+        strongSelf.tableView.alpha=!hidden;
     }];
     //自动更新tableView
     [RACObserve(self, tableModel.datasource) subscribeNext:^(id x) {
-        [self.tableView reloadData];
+        __strong DialingViewController *strongSelf=weakSelf;
+
+        [strongSelf.tableView reloadData];
     }];
     
     
     //显示 隐藏数字label
     RACSignal *dialNumberOb=RACObserve(self, dialNumber);
     [dialNumberOb subscribeNext:^(NSString *x) {
-       self.lbNumPan.text=x;
+        __strong DialingViewController *strongSelf=weakSelf;
+
+       strongSelf.lbNumPan.text=x;
        if (x.length==0) {
-           self.numPanView.alpha=0;
-           self.suggestViewType=@(suggestViewTypeEmpty);
+           strongSelf.numPanView.alpha=0;
+           strongSelf.suggestViewType=@(suggestViewTypeEmpty);
            
        }else {
-           self.numPanView.alpha=1;
-           [self.tableModel searchSuggest:x];
+           strongSelf.numPanView.alpha=1;
+           [strongSelf.tableModel searchSuggest:x];
            
         }
-       self.btnExit.alpha=!self.numPanView.alpha;
+       strongSelf.btnExit.alpha=!strongSelf.numPanView.alpha;
         
    }];
     //数字键被按了
     [self.padButtonPressed subscribeNext:^(NSString *x) {
-        if (self.dialNumber.length<13) {
-            self.dialNumber =[NSString stringWithFormat:@"%@%@",self.dialNumber,x];
+        __strong DialingViewController *strongSelf=weakSelf;
+
+        if (strongSelf.dialNumber.length<13) {
+            strongSelf.dialNumber =[NSString stringWithFormat:@"%@%@",strongSelf.dialNumber,x];
         }
         
     }];
     //backspace被按了
     [[self.btnBackSpace rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        __strong DialingViewController *strongSelf=weakSelf;
+
         NSRange range;
         range.location=0;
-        range.length=self.dialNumber.length-1;
-        NSString *last=[self.dialNumber substringWithRange:range];
-        self.dialNumber=last;
+        range.length=strongSelf.dialNumber.length-1;
+        NSString *last=[strongSelf.dialNumber substringWithRange:range];
+        strongSelf.dialNumber=last;
     }];
     //添加长按手势
     UILongPressGestureRecognizer *longPressrd=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressed:)];
@@ -93,33 +104,35 @@
     
     //绑定suggestView
     [RACObserve(self, suggestViewType) subscribeNext:^(NSNumber *x) {
+        __strong DialingViewController *strongSelf=weakSelf;
+
         suggestViewType type=[x integerValue];
         switch (type) {
             case suggestViewTypeEmpty:{
-                self.sugestResultView.alpha=0;
-                self.suggestAddView.alpha=0;
-                self.suggestNoneView.alpha=0;
+                strongSelf.sugestResultView.alpha=0;
+                strongSelf.suggestAddView.alpha=0;
+                strongSelf.suggestNoneView.alpha=0;
             }
                 
                 break;
             case suggestViewTypeNone:{
-                self.sugestResultView.alpha=0;
-                self.suggestAddView.alpha=0;
-                self.suggestNoneView.alpha=1;
+                strongSelf.sugestResultView.alpha=0;
+                strongSelf.suggestAddView.alpha=0;
+                strongSelf.suggestNoneView.alpha=1;
             }
                 
                 break;
             case suggestViewTypeAdd:{
-                self.sugestResultView.alpha=0;
-                self.suggestAddView.alpha=1;
-                self.suggestNoneView.alpha=0;
+                strongSelf.sugestResultView.alpha=0;
+                strongSelf.suggestAddView.alpha=1;
+                strongSelf.suggestNoneView.alpha=0;
             }
                 
                 break;
             case suggestViewTypeResult:{
-                self.sugestResultView.alpha=1;
-                self.suggestAddView.alpha=0;
-                self.suggestNoneView.alpha=0;
+                strongSelf.sugestResultView.alpha=1;
+                strongSelf.suggestAddView.alpha=0;
+                strongSelf.suggestNoneView.alpha=0;
             }
                 
                 break;
@@ -130,6 +143,8 @@
     }];
     //设定suggestView
      [[RACSignal combineLatest:@[dialNumberOb ,RACObserve(self, tableModel.datasource)]] subscribeNext:^(RACTuple *x) {
+         __strong DialingViewController *strongSelf=weakSelf;
+
          NSString *dialNumber=[x objectAtIndex:0];
          NSArray *suggestResult=[x objectAtIndex:1];
          BOOL result=NO;
@@ -140,22 +155,23 @@
              result=YES;
          }
          if (result) {
-            self.suggestViewType=@(suggestViewTypeResult);
+             
+            strongSelf.suggestViewType=@(suggestViewTypeResult);
              id user=suggestResult[0];
              NSInteger count=[suggestResult count];
             //这里需要设置resultView
-             [self.btnSuggestMore setTitle:[NSString stringWithFormat:@"%ld",(long)count] forState:UIControlStateNormal];
-             self.suggestResultImage.image=[user objectForKey:@"image"];
-             self.lbSuggestResultNickname.text=[user objectForKey:@"nickname"];
-             self.lbSuggestResultItel.text=[user objectForKey:@"itel"];
+             [strongSelf.btnSuggestMore setTitle:[NSString stringWithFormat:@"%ld",(long)count] forState:UIControlStateNormal];
+             strongSelf.suggestResultImage.image=[user objectForKey:@"image"];
+             strongSelf.lbSuggestResultNickname.text=[user objectForKey:@"nickname"];
+             strongSelf.lbSuggestResultItel.text=[user objectForKey:@"itel"];
              
              
          }else{
-             self.tableModel.tableViewhidden=@(YES);
+             strongSelf.tableModel.tableViewhidden=@(YES);
              if (dialNumber.length>=3) {
-                 self.suggestViewType=@(suggestViewTypeAdd);
+                 strongSelf.suggestViewType=@(suggestViewTypeAdd);
              }else if(dialNumber.length<3&&dialNumber.length>0){
-                 self.suggestViewType=@(suggestViewTypeEmpty);
+                 strongSelf.suggestViewType=@(suggestViewTypeEmpty);
              }
          }
          
@@ -163,27 +179,35 @@
     
     //判断suggest添加失败还是成功
          [RACObserve(self, tableModel.addFail) subscribeNext:^(NSNumber *x) {
+             __strong DialingViewController *strongSelf=weakSelf;
+
              BOOL isAddFail= [x boolValue];
              if (isAddFail) {
-                 self.suggestViewType=@(suggestViewTypeNone);
+                 strongSelf.suggestViewType=@(suggestViewTypeNone);
              }
          }];
     
     //显示tableView
       [[self.btnSuggestMore rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-          self.tableModel.tableViewhidden=@(NO);
+          __strong DialingViewController *strongSelf=weakSelf;
+
+          strongSelf.tableModel.tableViewhidden=@(NO);
       }];
     //绑定选中建议号码
       [RACObserve(self, tableModel.selectedSuggestNumber) subscribeNext:^(NSString *x) {
+          __strong DialingViewController *strongSelf=weakSelf;
+
           if (x.length>0) {
-              self.dialNumber=x;
+              strongSelf.dialNumber=x;
           }
       }];
     //建议View
     
     [[self.btnSuggest1 rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
-        if (![self.dialNumber isEqualToString: self.lbSuggestResultItel.text]) {
-            self.dialNumber=self.lbSuggestResultItel.text ;
+        __strong DialingViewController *strongSelf=weakSelf;
+
+        if (![strongSelf.dialNumber isEqualToString: strongSelf.lbSuggestResultItel.text]) {
+            strongSelf.dialNumber=strongSelf.lbSuggestResultItel.text ;
         }
     }];
 }
@@ -210,5 +234,8 @@
 // 视频拨打
 - (IBAction)videoDial:(id)sender {
     [self.viewModel dial:self.dialNumber useVideo:YES];
+}
+-(void)dealloc{
+    NSLog(@"%@被销毁",self);
 }
 @end

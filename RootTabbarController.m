@@ -34,43 +34,45 @@
     [super viewDidLoad];
     
         //self.viewModel=[DialViewModel new];
+    __weak id weakSelf=self;
     [RACObserve(self, viewModel.showingView) subscribeNext:^(id x) {
+        __strong RootTabbarController *strongSelf=weakSelf;
         if (x !=nil) {
          
             ViewType type=[(NSNumber*)x integerValue];
             UIViewController *vc;
             switch (type) {
                 case ViewTypeVAnsering:
-                    vc=self.vAnsweringVC;
+                    vc=strongSelf.vAnsweringVC;
                     break;
                 case ViewTypeVCalling:
-                    vc=self.vCallingVC;
+                    vc=strongSelf.vCallingVC;
                     break;
                 case ViewTypeVsession:
-                    vc=self.vSessionVC;
+                    vc=strongSelf.vSessionVC;
                     break;
                 case ViewTypeAAnsering:
-                    vc=self.aAnsweringVC;
+                    vc=strongSelf.aAnsweringVC;
                     break;
                 case ViewTypeACalling:
-                    vc=self.aCallingVC;
+                    vc=strongSelf.aCallingVC;
                     break;
                 case ViewTypeAsession:
-                    vc=self.aSessionVC;
+                    vc=strongSelf.aSessionVC;
                     break;
                 case ViewTypeDialing:
-                    vc=self.dialingVC;
+                    vc=strongSelf.dialingVC;
                     break;
                 
                     
                 default:
                     break;
             }
-            [self setViewController:vc];
+            [strongSelf setViewController:vc];
         }
     }];
     
-    NSLog(@"%f",self.view.frame.origin.y);
+   
     float version=[[UIDevice currentDevice].systemVersion floatValue];
     if (version>=7.0) {
         
@@ -78,8 +80,7 @@
         self.view.frame=CGRectMake(0, 0, 320, self.view.frame.size.height);
     }
   
-    NSLog(@"%f",self.view.frame.origin.y);
-    //[self setViewController:self.dialingVC];
+    
     
     
     
@@ -153,6 +154,8 @@
     return _aSessionVC;
 }
 
-
+-(void)dealloc{
+    NSLog(@"%@被销毁",self);
+}
 
 @end

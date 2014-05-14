@@ -57,27 +57,30 @@ static AppService *instance;
     if (self) {
         self.delegate=(MaoAppDelegate*)[UIApplication sharedApplication].delegate;
         self.rootViewType=@(rootViewTypeMain);
-        
+        __weak id weekSelf=self;
         [RACObserve(self, rootViewType) subscribeNext:^(NSNumber *x) {
+          __strong  AppService *strongSelf=weekSelf;
+            
             if ([x integerValue]==rootViewTypeLogin) {
-                if (![self.delegate.window.rootViewController isKindOfClass:[LoginViewController class]]) {
+                if (![strongSelf.delegate.window.rootViewController isKindOfClass:[LoginViewController class]]) {
                     CATransition *transition=[CATransition animation];
                     transition.type=@"push";
                     transition.subtype=@"fromLeft";
                     transition.duration=0.5;
-                 
-                [self.delegate.window setRootViewController:[self getLoginViewController]];
-                    [self.delegate.window.layer addAnimation:transition forKey:@"1"];
+                    strongSelf.delegate.window.rootViewController=nil;
+                [strongSelf.delegate.window setRootViewController:[strongSelf getLoginViewController]];
+                    [strongSelf.delegate.window.layer addAnimation:transition forKey:@"1"];
                     
                 }
             }else {
-                if (![self.delegate.window.rootViewController isKindOfClass:[RoolViewController class]]) {
+                if (![strongSelf.delegate.window.rootViewController isKindOfClass:[RoolViewController class]]) {
                     CATransition *transition=[CATransition animation];
                     transition.type=@"push";
                     transition.subtype=@"fromRight";
                     transition.duration=0.5;
-                [self.delegate.window setRootViewController:[self getMainViewController]];
-                    [self.delegate.window.layer addAnimation:transition forKey:@"2"];
+                     strongSelf.delegate.window.rootViewController=nil;
+                [strongSelf.delegate.window setRootViewController:[strongSelf getMainViewController]];
+                    [strongSelf.delegate.window.layer addAnimation:transition forKey:@"2"];
                 }
             }
         }];

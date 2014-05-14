@@ -33,19 +33,22 @@
     [super viewDidLoad];
     self.moreViewModel=[[MoreViewModel alloc]init];
     [self setButtonUI];
-    
+   __weak id weekSelf=self;
     //监听 nickname
     [RACObserve(self, moreViewModel.nickname) subscribeNext:^(NSString *x) {
-        self.lbNickname.text=x;
+        __strong MoreTableViewController *strongSelf=weekSelf;
+        strongSelf.lbNickname.text=x;
     }];
     //监听 itel
     [RACObserve(self, moreViewModel.itel) subscribeNext:^(NSString *x) {
-        self.lbItel.text=x;
+        __strong MoreTableViewController *strongSelf=weekSelf;
+        strongSelf.lbItel.text=x;
     }];
     //监听 头像
     [RACObserve(self, moreViewModel.imgUrl) subscribeNext:^(NSString *x) {
+        __strong MoreTableViewController *strongSelf=weekSelf;
         if (x) {
-            [self.imgHead setImageWithURL:[NSURL URLWithString:x] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
+            [strongSelf.imgHead setImageWithURL:[NSURL URLWithString:x] placeholderImage:[UIImage imageNamed:@"standedHeader"]];
         }
     }];
     //事件 退出登录
@@ -62,5 +65,9 @@
 {
     ((MaoHostSettingViewController*)segue.destinationViewController).moreViewModel=self.moreViewModel;
     
+}
+- (void)dealloc
+{
+    NSLog(@"moreTableVC 被成功销毁");
 }
 @end

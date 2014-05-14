@@ -112,7 +112,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2B0007AD-4CA6-48CE-9837-B739182D6E02" id="gLk-48-x7N">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="9725F37A-B208-48A3-9233-CF29B3DF15E3" id="gLk-48-x7N">
                                                             <rect key="frame" x="28" y="5" width="35" height="35"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         </imageView>
@@ -579,11 +579,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pass_phone_icon" id="R8P-NQ-IXh">
-                                                    <rect key="frame" x="26" y="7" width="20" height="30"/>
+                                                    <rect key="frame" x="25" y="5" width="20" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通过绑定手机找回" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CKI-sf-Jug">
-                                                    <rect key="frame" x="72" y="14" width="150" height="21"/>
+                                                    <rect key="frame" x="68" y="11" width="150" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -606,7 +606,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通过密保问题找回" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wx9-zu-Zgh">
-                                                    <rect key="frame" x="73" y="14" width="150" height="21"/>
+                                                    <rect key="frame" x="68" y="11" width="150" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -624,12 +624,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pass_security_icon" id="55g-HU-5Ul">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pass_email_icon" id="55g-HU-5Ul">
                                                     <rect key="frame" x="20" y="7" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通过绑定邮箱找回" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rff-yC-fhT">
-                                                    <rect key="frame" x="73" y="14" width="150" height="21"/>
+                                                    <rect key="frame" x="68" y="11" width="150" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -849,7 +849,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="2B0007AD-4CA6-48CE-9837-B739182D6E02" width="102" height="102">
+        <image name="9725F37A-B208-48A3-9233-CF29B3DF15E3" width="102" height="102">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -1593,8 +1593,9 @@ twC5ALsAvQC/AMQA2wDdAN+r4avmq/Gr+qwNrBGsJKwvrDisPaxFrEisTaxcrGCsZ6xvrHysgayDrIWs
 iqySrJWsmqyirKWst6y6rL8AAAAAAAACAQAAAAAAAABCAAAAAAAAAAAAAAAAAACswQ
 </mutableData>
         </image>
-        <image name="Pass_phone_icon" width="80" height="90"/>
-        <image name="Pass_security_icon" width="80" height="90"/>
+        <image name="Pass_email_icon" width="24" height="24"/>
+        <image name="Pass_phone_icon" width="16" height="24"/>
+        <image name="Pass_security_icon" width="22" height="24"/>
         <image name="btn_login_black_high" width="25" height="25"/>
         <image name="btn_login_black_normal" width="25" height="25"/>
         <image name="btn_login_blue_high" width="25" height="25"/>

@@ -47,21 +47,23 @@ static float side=5.0;
     }
     
     [self.regViewModel getRandomNumbers];
-    
+    __weak id weakSelf=self;
     //监听 busy
     [RACObserve(self, regViewModel.busy) subscribeNext:^(NSNumber *x) {
+       __strong RegChooseNumberViewController *strongSelf=weakSelf;
         if ([x boolValue]) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
             hud.labelText=@"请稍后...";
         }else {
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
         }
     }];
     
     //监听 datasource
     [RACObserve(self, regViewModel.randomNumbersDataSource)subscribeNext:^(NSArray *x) {
-        for (UIButton *btn in self.subButtons) {
-            NSInteger i= [self.subButtons indexOfObject:btn];
+         __strong RegChooseNumberViewController *strongSelf=weakSelf;
+        for (UIButton *btn in strongSelf.subButtons) {
+            NSInteger i= [strongSelf.subButtons indexOfObject:btn];
             NSString *number=[x objectAtIndex:i];
             [btn setTitle:number forState:UIControlStateNormal];
             btn.titleLabel.text=number;
@@ -81,5 +83,8 @@ static float side=5.0;
 -(void)change{
     [self.regViewModel getRandomNumbers];
 }
-
+- (void)dealloc
+{
+    NSLog(@"regChooseVC被销毁");
+}
 @end

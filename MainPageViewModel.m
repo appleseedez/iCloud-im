@@ -29,4 +29,8 @@
           self.loadingAD=@(NO);
       }];
 }
+-(void)dealloc{
+    NSLog(@"mainPageViewModel被销毁");
+}
+
 @end

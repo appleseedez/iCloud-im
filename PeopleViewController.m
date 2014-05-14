@@ -196,6 +196,9 @@
 -(void)callUser:(ItelUser*)user{
 }
 
-
+- (void)dealloc
+{
+    NSLog(@"peopleVC被成功销毁");
+}
 
 @end
