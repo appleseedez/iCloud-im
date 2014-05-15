@@ -7,7 +7,7 @@
 //
 
 #import "HTTPService.h"
-
+#import "MaoAppDelegate.h"
 @implementation HTTPService
 static HTTPService *instance=nil;
 +(HTTPService*)defaultService{
@@ -53,5 +53,26 @@ static HTTPService *instance=nil;
           }];
     
     return signal;
+}
+-(void)uploadImagePostRequestWithUrl:(NSString*)url
+                           imageData:(NSData*)imageData
+                       andParameters:(NSDictionary*)parameters
+                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
+    
+    NSDictionary *loginInfo=((MaoAppDelegate*)[UIApplication sharedApplication].delegate).loginInfo;
+    NSString *token=[loginInfo objectForKey:@"sessiontoken"];;
+    
+    if (token) {
+        url=[NSString stringWithFormat:@"%@?sessiontoken=%@",url,token];
+    }
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    
+    [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData    name:@"image" fileName:@"header.png" mimeType:@"image/png"];
+    } success:success failure:failure];
+    //NSLog(@"%@",url);
+    
 }
 @end

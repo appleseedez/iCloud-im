@@ -54,6 +54,9 @@
 		476D3A02191DD5B900742EE5 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A01191DD5B900742EE5 /* UserViewController.m */; };
 		476D3A06191DD8C300742EE5 /* ContactViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A05191DD8C300742EE5 /* ContactViewModel.m */; };
 		476D3A09191DD96B00742EE5 /* HTTPRequestBuilder+contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A08191DD96B00742EE5 /* HTTPRequestBuilder+contact.m */; };
+		47714D8D19244EB70018ED26 /* UIImage+Compress.m in Sources */ = {isa = PBXBuildFile; fileRef = 47714D8C19244EB70018ED26 /* UIImage+Compress.m */; };
+		47714D901924700D0018ED26 /* HTTPRequestBuilder+More.m in Sources */ = {isa = PBXBuildFile; fileRef = 47714D8F1924700D0018ED26 /* HTTPRequestBuilder+More.m */; };
+		47714D93192475FE0018ED26 /* MoreHostEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47714D92192475FE0018ED26 /* MoreHostEditViewController.m */; };
 		47838BD7191B5E3A00EE08AF /* DialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47838BD4191B5E3A00EE08AF /* DialView.storyboard */; };
 		47838BD8191B5E3A00EE08AF /* DialViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BD6191B5E3A00EE08AF /* DialViewModel.m */; };
 		47838BDB191B5F8500EE08AF /* RootTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47838BDA191B5F8500EE08AF /* RootTabbarController.m */; };
@@ -208,6 +211,12 @@
 		476D3A05191DD8C300742EE5 /* ContactViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewModel.m; sourceTree = "<group>"; };
 		476D3A07191DD96B00742EE5 /* HTTPRequestBuilder+contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPRequestBuilder+contact.h"; sourceTree = "<group>"; };
 		476D3A08191DD96B00742EE5 /* HTTPRequestBuilder+contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPRequestBuilder+contact.m"; sourceTree = "<group>"; };
+		47714D8B19244EB70018ED26 /* UIImage+Compress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Compress.h"; sourceTree = "<group>"; };
+		47714D8C19244EB70018ED26 /* UIImage+Compress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Compress.m"; sourceTree = "<group>"; };
+		47714D8E1924700D0018ED26 /* HTTPRequestBuilder+More.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPRequestBuilder+More.h"; sourceTree = "<group>"; };
+		47714D8F1924700D0018ED26 /* HTTPRequestBuilder+More.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPRequestBuilder+More.m"; sourceTree = "<group>"; };
+		47714D91192475FE0018ED26 /* MoreHostEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreHostEditViewController.h; sourceTree = "<group>"; };
+		47714D92192475FE0018ED26 /* MoreHostEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreHostEditViewController.m; sourceTree = "<group>"; };
 		47838BD4191B5E3A00EE08AF /* DialView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DialView.storyboard; sourceTree = "<group>"; };
 		47838BD5191B5E3A00EE08AF /* DialViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialViewModel.h; sourceTree = "<group>"; };
 		47838BD6191B5E3A00EE08AF /* DialViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialViewModel.m; sourceTree = "<group>"; };
@@ -474,6 +483,15 @@
 			name = viewModels;
 			sourceTree = "<group>";
 		};
+		47714D8A19244EA10018ED26 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				47714D8B19244EB70018ED26 /* UIImage+Compress.h */,
+				47714D8C19244EB70018ED26 /* UIImage+Compress.m */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
 		47838BD3191B5DB700EE08AF /* DialViewSence */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,6 +639,7 @@
 		47929B6E191B164F0054292D /* itelNSC */ = {
 			isa = PBXGroup;
 			children = (
+				47714D8A19244EA10018ED26 /* views */,
 				4733547D191B1BB900B800CB /* models */,
 				47335479191B1B9600B800CB /* services */,
 				47929B77191B164F0054292D /* MaoAppDelegate.h */,
@@ -672,6 +691,8 @@
 				479E176E1921F16F005D3A82 /* MoreTableViewController.m */,
 				479E1778192207C1005D3A82 /* MaoHostSettingViewController.h */,
 				479E1779192207C1005D3A82 /* MaoHostSettingViewController.m */,
+				47714D91192475FE0018ED26 /* MoreHostEditViewController.h */,
+				47714D92192475FE0018ED26 /* MoreHostEditViewController.m */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -681,6 +702,8 @@
 			children = (
 				479E17721921F748005D3A82 /* MoreViewModel.h */,
 				479E17731921F748005D3A82 /* MoreViewModel.m */,
+				47714D8E1924700D0018ED26 /* HTTPRequestBuilder+More.h */,
+				47714D8F1924700D0018ED26 /* HTTPRequestBuilder+More.m */,
 			);
 			name = viewModels;
 			sourceTree = "<group>";
@@ -911,6 +934,7 @@
 				47838C03191B639B00EE08AF /* AppService.m in Sources */,
 				473354C2191B1E6900B800CB /* RoolViewController.m in Sources */,
 				479E177A192207C1005D3A82 /* MaoHostSettingViewController.m in Sources */,
+				47714D901924700D0018ED26 /* HTTPRequestBuilder+More.m in Sources */,
 				479E17771922009D005D3A82 /* HTTPRequestBuilder+app.m in Sources */,
 				473354B2191B1C1800B800CB /* RegTypeViewController.m in Sources */,
 				47838BFC191B5FF500EE08AF /* DialNumberButton.m in Sources */,
@@ -931,9 +955,11 @@
 				4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */,
 				47838BF0191B5FD700EE08AF /* VideoSessionViewController.m in Sources */,
 				476D39A4191DC57200742EE5 /* DBService.m in Sources */,
+				47714D93192475FE0018ED26 /* MoreHostEditViewController.m in Sources */,
 				479E17661921B76D005D3A82 /* AddressUser.m in Sources */,
 				47838BF1191B5FD700EE08AF /* AudioCallingViewController.m in Sources */,
 				476D39F0191DD1EB00742EE5 /* PeopleViewController.m in Sources */,
+				47714D8D19244EB70018ED26 /* UIImage+Compress.m in Sources */,
 				476D39EB191DC6DC00742EE5 /* itelDB.xcdatamodeld in Sources */,
 				4733547C191B1BAE00B800CB /* HTTPService.m in Sources */,
 				476D3A02191DD5B900742EE5 /* UserViewController.m in Sources */,

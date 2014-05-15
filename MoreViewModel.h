@@ -20,4 +20,6 @@
 @property (nonatomic) NSString *sex;
 @property (nonatomic) NSString *birthday;
 @property (nonatomic,weak) MaoAppDelegate *appDelegate;
+-(void)uploadImage:(NSData*)image;
+-(void)modifyHoseSetting:(NSString*)key value:(NSString*)value;
 @end

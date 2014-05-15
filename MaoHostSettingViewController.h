@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 @class  MoreViewModel;
-@interface MaoHostSettingViewController : UITableViewController <UIActionSheetDelegate>
+@interface MaoHostSettingViewController : UITableViewController <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic) MoreViewModel *moreViewModel;
 @end

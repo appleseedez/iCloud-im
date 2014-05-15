@@ -95,4 +95,9 @@ static AppService *instance;
     UIStoryboard *story=[UIStoryboard storyboardWithName:@"login" bundle:nil];
     return [story instantiateInitialViewController];
 }
+-(void)setHostWithKey:(NSString*)key value:(NSString*)value{
+    NSMutableDictionary *dic=[self.delegate.loginInfo mutableCopy];
+    [dic setObject:value forKey:key];
+    self.delegate.loginInfo=[dic copy];
+}
 @end

@@ -19,4 +19,5 @@ NS_ENUM(NSInteger, rootViewType){
 
 @property (nonatomic) NSNumber *rootViewType;
 -(void)logout;
+-(void)setHostWithKey:(NSString*)key value:(NSString*)value;
 @end

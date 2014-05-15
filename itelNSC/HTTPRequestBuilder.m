@@ -63,7 +63,8 @@ static HTTPRequestBuilder *instance;
     
     
     
-   return  [[AFJSONRequestSerializer serializer] requestWithMethod:@"get" URLString:url parameters:tokenParameters];
+   return  [[AFJSONRequestSerializer serializer] requestWithMethod:@"get" URLString:url parameters:tokenParameters error:nil]  ;
   
 }
+
 @end
