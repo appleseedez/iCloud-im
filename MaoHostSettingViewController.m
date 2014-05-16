@@ -30,6 +30,7 @@
 #import <UIImageView+AFNetworking.h>
 #import "UIImage+Compress.h"
 #import "MoreHostEditViewController.h"
+#import "MoreHostSexView.h"
 @interface MaoHostSettingViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgHead;
 @property (weak, nonatomic) IBOutlet UILabel *lbSign;
@@ -40,7 +41,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbPhone;
 @property (weak, nonatomic) IBOutlet UILabel *lbEmail;
 @property (weak, nonatomic) IBOutlet UILabel *lbQQ;
-
+@property (strong, nonatomic) IBOutlet MoreHostSexView *sexSettingView;
+@property (weak, nonatomic) IBOutlet UIDatePicker *birthdayPicker;
+@property (nonatomic,weak)  UIWindow *sexSettingWindow;
 @end
 
 @implementation MaoHostSettingViewController
@@ -48,7 +51,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    UIView *birthdayView=[[[NSBundle mainBundle] loadNibNamed:@"MoreHostBirthdatView" owner:self options:nil] objectAtIndex:0];
+    self.lbBirthday.inputView=birthdayView;
     [self setUI];
     
   __weak  id weakSelf=self;
@@ -73,9 +77,9 @@
     [RACObserve(self, moreViewModel.sex) subscribeNext:^(NSString *x) {
         __strong MaoHostSettingViewController *strongSelf=weakSelf;
         if ([x boolValue]) {
-            [strongSelf.imgSex setImage:[UIImage imageNamed:@"female"]];
-        }else{
             [strongSelf.imgSex setImage:[UIImage imageNamed:@"male"]];
+        }else{
+            [strongSelf.imgSex setImage:[UIImage imageNamed:@"female"]];
         }
     }];
     //监听 生日
@@ -114,6 +118,29 @@
             [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
         }
     }];
+}
+- (IBAction)birthdayFinish:(id)sender {
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    NSString *birthday=[formatter stringForObjectValue:self.birthdayPicker.date];
+    [self.moreViewModel modifyHoseSetting:@"birthday" value:birthday];
+ 
+    [self.lbBirthday resignFirstResponder];
+}
+- (IBAction)birthdayCancel:(id)sender {
+    [self.lbBirthday resignFirstResponder];
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField==self.lbBirthday) {
+        NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *date= [formatter dateFromString:textField.text];
+        if (date) {
+            self.birthdayPicker.date=date;
+        }
+    }
 }
 -(void)getCamera{
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -230,10 +257,37 @@
         editVC.keyboardType=UIKeyboardTypeNumberPad;
         [self.navigationController pushViewController:editVC animated:YES];
     }else if (indexPath.section==2&&indexPath.row==1){
+        if (self.sexSettingView==nil) {
+            self.sexSettingView=[[[NSBundle mainBundle] loadNibNamed:@"MoreHostSexView" owner:self options:nil] objectAtIndex:0];
+            
+            [self.sexSettingView.layer setCornerRadius:8.0];
+            
+            
+            
+
+        }
+       
+            [self.navigationController.view addSubview:self.sexSettingView];
+       
+       
+       
         
-          
+        
         
     }
+}
+- (IBAction)sexChooseMale:(id)sender {
+   
+    [self.moreViewModel modifyHoseSetting:@"sex" value:@"1"];
+    [self.sexSettingView removeFromSuperview];
+    
+   
+   }
+- (IBAction)sexChooseFemal:(id)sender {
+   
+    [UIView setAnimationDuration:0.5];    [self.moreViewModel modifyHoseSetting:@"sex" value:@"0"];
+    [self.sexSettingView removeFromSuperview];
+  
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -262,6 +316,9 @@
     [picker dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
 }
 
 - (void)dealloc

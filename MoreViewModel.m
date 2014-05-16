@@ -31,6 +31,7 @@
             strongSelf.phone=x[@"phone"];
             strongSelf.imgUrl=x[@"photo_file_name"];
             strongSelf.sign=x[@"recommend"];
+                strongSelf.sex=x[@"sex"];
             }
         }];
     }

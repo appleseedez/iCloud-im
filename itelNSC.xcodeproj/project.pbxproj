@@ -54,6 +54,9 @@
 		476D3A02191DD5B900742EE5 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A01191DD5B900742EE5 /* UserViewController.m */; };
 		476D3A06191DD8C300742EE5 /* ContactViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A05191DD8C300742EE5 /* ContactViewModel.m */; };
 		476D3A09191DD96B00742EE5 /* HTTPRequestBuilder+contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A08191DD96B00742EE5 /* HTTPRequestBuilder+contact.m */; };
+		476D3EA21925C1DA00A9D116 /* MoreHostSexView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476D3EA11925C1DA00A9D116 /* MoreHostSexView.xib */; };
+		476D3EA51925C7AA00A9D116 /* MoreHostSexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3EA41925C7AA00A9D116 /* MoreHostSexView.m */; };
+		476D3EA71925CADA00A9D116 /* MoreHostBirthdatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476D3EA61925CADA00A9D116 /* MoreHostBirthdatView.xib */; };
 		47714D8D19244EB70018ED26 /* UIImage+Compress.m in Sources */ = {isa = PBXBuildFile; fileRef = 47714D8C19244EB70018ED26 /* UIImage+Compress.m */; };
 		47714D901924700D0018ED26 /* HTTPRequestBuilder+More.m in Sources */ = {isa = PBXBuildFile; fileRef = 47714D8F1924700D0018ED26 /* HTTPRequestBuilder+More.m */; };
 		47714D93192475FE0018ED26 /* MoreHostEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47714D92192475FE0018ED26 /* MoreHostEditViewController.m */; };
@@ -211,6 +214,10 @@
 		476D3A05191DD8C300742EE5 /* ContactViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewModel.m; sourceTree = "<group>"; };
 		476D3A07191DD96B00742EE5 /* HTTPRequestBuilder+contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPRequestBuilder+contact.h"; sourceTree = "<group>"; };
 		476D3A08191DD96B00742EE5 /* HTTPRequestBuilder+contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPRequestBuilder+contact.m"; sourceTree = "<group>"; };
+		476D3EA11925C1DA00A9D116 /* MoreHostSexView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreHostSexView.xib; sourceTree = "<group>"; };
+		476D3EA31925C7AA00A9D116 /* MoreHostSexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreHostSexView.h; sourceTree = "<group>"; };
+		476D3EA41925C7AA00A9D116 /* MoreHostSexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreHostSexView.m; sourceTree = "<group>"; };
+		476D3EA61925CADA00A9D116 /* MoreHostBirthdatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreHostBirthdatView.xib; sourceTree = "<group>"; };
 		47714D8B19244EB70018ED26 /* UIImage+Compress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Compress.h"; sourceTree = "<group>"; };
 		47714D8C19244EB70018ED26 /* UIImage+Compress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Compress.m"; sourceTree = "<group>"; };
 		47714D8E1924700D0018ED26 /* HTTPRequestBuilder+More.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPRequestBuilder+More.h"; sourceTree = "<group>"; };
@@ -693,6 +700,10 @@
 				479E1779192207C1005D3A82 /* MaoHostSettingViewController.m */,
 				47714D91192475FE0018ED26 /* MoreHostEditViewController.h */,
 				47714D92192475FE0018ED26 /* MoreHostEditViewController.m */,
+				476D3EA31925C7AA00A9D116 /* MoreHostSexView.h */,
+				476D3EA41925C7AA00A9D116 /* MoreHostSexView.m */,
+				476D3EA11925C1DA00A9D116 /* MoreHostSexView.xib */,
+				476D3EA61925CADA00A9D116 /* MoreHostBirthdatView.xib */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -832,11 +843,13 @@
 				47929B81191B164F0054292D /* Images.xcassets in Resources */,
 				47838C0D191B798D00EE08AF /* Recent.storyboard in Resources */,
 				473354C8191B240400B800CB /* main.storyboard in Resources */,
+				476D3EA71925CADA00A9D116 /* MoreHostBirthdatView.xib in Resources */,
 				47838C00191B600400EE08AF /* dial.xcassets in Resources */,
 				47838BD7191B5E3A00EE08AF /* DialView.storyboard in Resources */,
 				473354BF191B1CC900B800CB /* login.xcassets in Resources */,
 				47838C1B191B7B1600EE08AF /* recent.xcassets in Resources */,
 				47929B73191B164F0054292D /* InfoPlist.strings in Resources */,
+				476D3EA21925C1DA00A9D116 /* MoreHostSexView.xib in Resources */,
 				47838C19191B7B0700EE08AF /* contact.xcassets in Resources */,
 				47838C13191B79D100EE08AF /* More.storyboard in Resources */,
 				47929B7C191B164F0054292D /* Root.storyboard in Resources */,
@@ -976,6 +989,7 @@
 				4733548B191B1BCA00B800CB /* HTTPRequestBuilder+LoginAndRegister.m in Sources */,
 				473354D0191B2ED200B800CB /* CustomTabbar.m in Sources */,
 				473354B7191B1C1800B800CB /* PassWayViewController.m in Sources */,
+				476D3EA51925C7AA00A9D116 /* MoreHostSexView.m in Sources */,
 				47335488191B1BCA00B800CB /* NSString+MD5.m in Sources */,
 				47838BD8191B5E3A00EE08AF /* DialViewModel.m in Sources */,
 				473354B5191B1C1800B800CB /* RegChooseNumberViewController.m in Sources */,

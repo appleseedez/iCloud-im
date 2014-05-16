@@ -20,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.txtEdit.delegate=self;
     [self.txtEdit setPlaceholder:self.placeHolder];
     [self setTitle:self.titleText];
