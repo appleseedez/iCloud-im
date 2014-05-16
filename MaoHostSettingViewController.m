@@ -229,6 +229,10 @@
         editVC.titleText=@"修改QQ";
         editVC.keyboardType=UIKeyboardTypeNumberPad;
         [self.navigationController pushViewController:editVC animated:YES];
+    }else if (indexPath.section==2&&indexPath.row==1){
+        
+          
+        
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
