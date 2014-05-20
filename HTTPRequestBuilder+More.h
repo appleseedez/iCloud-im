@@ -10,4 +10,7 @@
 
 @interface HTTPRequestBuilder (More)
 -(RACSignal*)modifyHost:(NSDictionary*)parameters;
+-(RACSignal*)checkPhoneNumber:(NSDictionary*)parameters;
+-(RACSignal*)moreSendMessager:(NSDictionary*)parameters;
+-(RACSignal*)checkCodeNumber:(NSDictionary*)parameters;
 @end

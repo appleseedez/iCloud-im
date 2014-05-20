@@ -106,6 +106,9 @@
 		479E17741921F748005D3A82 /* MoreViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E17731921F748005D3A82 /* MoreViewModel.m */; };
 		479E17771922009D005D3A82 /* HTTPRequestBuilder+app.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E17761922009D005D3A82 /* HTTPRequestBuilder+app.m */; };
 		479E177A192207C1005D3A82 /* MaoHostSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E1779192207C1005D3A82 /* MaoHostSettingViewController.m */; };
+		479F53D9192B0472004435FA /* MoreHoseEditPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F53D8192B0472004435FA /* MoreHoseEditPhoneController.m */; };
+		479F53DC192B2041004435FA /* MorePhoneViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F53DB192B2041004435FA /* MorePhoneViewModel.m */; };
+		479F53DF192B2D83004435FA /* MoreMesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F53DE192B2D83004435FA /* MoreMesViewController.m */; };
 		47A1884C19209A07006E8013 /* EditAliasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1884B19209A07006E8013 /* EditAliasViewController.m */; };
 		47A1885519209E48006E8013 /* ContactUserViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1885419209E48006E8013 /* ContactUserViewModel.m */; };
 		47A188581920B62B006E8013 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188571920B62B006E8013 /* AddViewController.m */; };
@@ -297,6 +300,12 @@
 		479E17761922009D005D3A82 /* HTTPRequestBuilder+app.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPRequestBuilder+app.m"; sourceTree = "<group>"; };
 		479E1778192207C1005D3A82 /* MaoHostSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaoHostSettingViewController.h; sourceTree = "<group>"; };
 		479E1779192207C1005D3A82 /* MaoHostSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaoHostSettingViewController.m; sourceTree = "<group>"; };
+		479F53D7192B0472004435FA /* MoreHoseEditPhoneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreHoseEditPhoneController.h; sourceTree = "<group>"; };
+		479F53D8192B0472004435FA /* MoreHoseEditPhoneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreHoseEditPhoneController.m; sourceTree = "<group>"; };
+		479F53DA192B2041004435FA /* MorePhoneViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MorePhoneViewModel.h; sourceTree = "<group>"; };
+		479F53DB192B2041004435FA /* MorePhoneViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorePhoneViewModel.m; sourceTree = "<group>"; };
+		479F53DD192B2D83004435FA /* MoreMesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreMesViewController.h; sourceTree = "<group>"; };
+		479F53DE192B2D83004435FA /* MoreMesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreMesViewController.m; sourceTree = "<group>"; };
 		47A1884A19209A07006E8013 /* EditAliasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAliasViewController.h; sourceTree = "<group>"; };
 		47A1884B19209A07006E8013 /* EditAliasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAliasViewController.m; sourceTree = "<group>"; };
 		47A1885319209E48006E8013 /* ContactUserViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUserViewModel.h; sourceTree = "<group>"; };
@@ -700,6 +709,10 @@
 				479E1779192207C1005D3A82 /* MaoHostSettingViewController.m */,
 				47714D91192475FE0018ED26 /* MoreHostEditViewController.h */,
 				47714D92192475FE0018ED26 /* MoreHostEditViewController.m */,
+				479F53D7192B0472004435FA /* MoreHoseEditPhoneController.h */,
+				479F53D8192B0472004435FA /* MoreHoseEditPhoneController.m */,
+				479F53DD192B2D83004435FA /* MoreMesViewController.h */,
+				479F53DE192B2D83004435FA /* MoreMesViewController.m */,
 				476D3EA31925C7AA00A9D116 /* MoreHostSexView.h */,
 				476D3EA41925C7AA00A9D116 /* MoreHostSexView.m */,
 				476D3EA11925C1DA00A9D116 /* MoreHostSexView.xib */,
@@ -713,6 +726,8 @@
 			children = (
 				479E17721921F748005D3A82 /* MoreViewModel.h */,
 				479E17731921F748005D3A82 /* MoreViewModel.m */,
+				479F53DA192B2041004435FA /* MorePhoneViewModel.h */,
+				479F53DB192B2041004435FA /* MorePhoneViewModel.m */,
 				47714D8E1924700D0018ED26 /* HTTPRequestBuilder+More.h */,
 				47714D8F1924700D0018ED26 /* HTTPRequestBuilder+More.m */,
 			);
@@ -973,6 +988,7 @@
 				47838BF1191B5FD700EE08AF /* AudioCallingViewController.m in Sources */,
 				476D39F0191DD1EB00742EE5 /* PeopleViewController.m in Sources */,
 				47714D8D19244EB70018ED26 /* UIImage+Compress.m in Sources */,
+				479F53DC192B2041004435FA /* MorePhoneViewModel.m in Sources */,
 				476D39EB191DC6DC00742EE5 /* itelDB.xcdatamodeld in Sources */,
 				4733547C191B1BAE00B800CB /* HTTPService.m in Sources */,
 				476D3A02191DD5B900742EE5 /* UserViewController.m in Sources */,
@@ -983,6 +999,7 @@
 				476D39FC191DD3BE00742EE5 /* ItelUser.m in Sources */,
 				473354B6191B1C1800B800CB /* PassViewController.m in Sources */,
 				479E17601921AD6B005D3A82 /* AddressBookTableViewController.m in Sources */,
+				479F53D9192B0472004435FA /* MoreHoseEditPhoneController.m in Sources */,
 				476D39FF191DD46200742EE5 /* ContactCell.m in Sources */,
 				4733548C191B1BCA00B800CB /* BaseViewModel.m in Sources */,
 				479E176F1921F16F005D3A82 /* MoreTableViewController.m in Sources */,
@@ -1007,6 +1024,7 @@
 				47A1885E1920B7A1006E8013 /* NewFriendListViewController.m in Sources */,
 				473354C5191B20B000B800CB /* RootViewModel.m in Sources */,
 				47A188661920B8C9006E8013 /* StrangerViewController.m in Sources */,
+				479F53DF192B2D83004435FA /* MoreMesViewController.m in Sources */,
 				479E17691921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.m in Sources */,
 				47A1884C19209A07006E8013 /* EditAliasViewController.m in Sources */,
 				47838BF4191B5FD700EE08AF /* DialingViewController.m in Sources */,

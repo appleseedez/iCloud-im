@@ -34,6 +34,7 @@
                 strongSelf.sex=x[@"sex"];
             }
         }];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changePhone:) name:@"phoneNumberChanged" object:nil];
     }
     return self;
 }
@@ -53,6 +54,9 @@
              [self netRequestError:error];
              self.busy=@(NO);
          }];
+}
+-(void)changePhone:(NSNotification*)notification{
+    [[AppService defaultService] setHostWithKey:@"phone" value:notification.object];
 }
 /*
  "area_code" = "-24181";

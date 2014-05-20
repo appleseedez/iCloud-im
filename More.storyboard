@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="HmU-LA-rrz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="HmU-LA-rrz">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -16,7 +16,7 @@
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="sectionIndexTrackingBackgroundColor" patternImage="8554CFE1-B25A-49AF-9218-1DCC85E2055A" colorSpace="pattern"/>
+                        <color key="sectionIndexTrackingBackgroundColor" patternImage="B147EF10-DA70-4447-91B0-57C0B239338E" colorSpace="pattern"/>
                         <sections>
                             <tableViewSection headerTitle="      " id="gAU-Py-0nC">
                                 <cells>
@@ -395,6 +395,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="S8Q-N5-z8x" kind="modal" id="6vI-8q-bMo"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="email" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="email" rowHeight="40" id="JQW-Fp-38h">
                                         <rect key="frame" x="0.0" y="414" width="320" height="40"/>
@@ -468,7 +471,22 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydE-Vl-oHo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1927" y="1802"/>
+            <point key="canvasLocation" x="-1968" y="1807"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LWB-BS-TPe">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="S8Q-N5-z8x" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S29-BM-RfY">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PaL-xV-6wC" kind="relationship" relationship="rootViewController" id="4Ht-db-mPx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t7w-RH-Lx5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1872" y="1891"/>
         </scene>
         <!--More Host Edit View Controller - 编辑-->
         <scene sceneID="Eoo-0U-peT">
@@ -495,11 +513,124 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IWp-b2-0E1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1579" y="1807"/>
+            <point key="canvasLocation" x="-1099" y="1740"/>
+        </scene>
+        <!--More Hose Edit Phone Controller - 修改手机-->
+        <scene sceneID="ne8-3A-NR1">
+            <objects>
+                <viewController id="PaL-xV-6wC" customClass="MoreHoseEditPhoneController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IkX-gK-vUu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="center" minimumFontSize="17" id="k9s-VH-hpN">
+                                <rect key="frame" x="0.0" y="136" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="PaL-xV-6wC" id="OXe-Dc-FmR"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="A6v-by-BNO">
+                                <rect key="frame" x="5" y="240" width="310" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="下一步" backgroundImage="btn_login_blue_normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="btn_login_blue_high"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="修改手机" id="fK9-V3-dna"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="nextButton" destination="A6v-by-BNO" id="qNL-HV-xQn"/>
+                        <outlet property="txtPhone" destination="k9s-VH-hpN" id="CgP-SF-zxm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YFg-dc-w7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1570" y="1901"/>
+        </scene>
+        <!--More Mes View Controller - 验证手机-->
+        <scene sceneID="Ob3-2b-kxL">
+            <objects>
+                <viewController storyboardIdentifier="moreMesView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VJc-Dc-ak7" customClass="MoreMesViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wi2-3M-A1p">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="输入短信效验码" textAlignment="center" minimumFontSize="17" id="lhH-rf-GLv">
+                                <rect key="frame" x="0.0" y="83" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="VJc-Dc-ak7" id="zaW-ro-Dvc"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oxk-n9-J4w">
+                                <rect key="frame" x="5" y="209" width="310" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="下一步" backgroundImage="btn_login_blue_normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="btn_login_blue_high"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fxM-bA-Bny">
+                                <rect key="frame" x="5" y="285" width="310" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="在秒后重新点击发送" backgroundImage="btn_login_black_normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" backgroundImage="btn_login_black_high"/>
+                            </button>
+                            <view contentMode="scaleToFill" id="OXf-Qe-pqz" customClass="UILabel">
+                                <rect key="frame" x="0.0" y="144" width="320" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入手机130***1234收到的短信校验码" lineBreakMode="characterWrap" numberOfLines="0" adjustsFontSizeToFit="NO" id="TmS-X5-P16">
+                                        <rect key="frame" x="20" y="0.0" width="285" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reg_tip" id="buS-Cx-15c">
+                                <rect key="frame" x="39" y="138" width="9" height="7"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="验证手机" id="Rik-n0-r7C"/>
+                    <connections>
+                        <outlet property="btnNext" destination="oxk-n9-J4w" id="c65-Ms-C3o"/>
+                        <outlet property="btnResend" destination="fxM-bA-Bny" id="WC0-76-IxT"/>
+                        <outlet property="lbTip" destination="OXf-Qe-pqz" id="AnW-gw-yfi"/>
+                        <outlet property="lbTipTitle" destination="TmS-X5-P16" id="Hop-7W-TBl"/>
+                        <outlet property="txtCode" destination="lhH-rf-GLv" id="jMn-0V-7Cc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NDp-pn-Qr9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1703" y="1225"/>
         </scene>
     </scenes>
     <resources>
-        <image name="8554CFE1-B25A-49AF-9218-1DCC85E2055A" width="256" height="256">
+        <image name="B147EF10-DA70-4447-91B0-57C0B239338E" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -4942,6 +5073,10 @@ AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
         <image name="aboutItel" width="24" height="24"/>
+        <image name="btn_login_black_high" width="25" height="25"/>
+        <image name="btn_login_black_normal" width="25" height="25"/>
+        <image name="btn_login_blue_high" width="25" height="25"/>
+        <image name="btn_login_blue_normal" width="25" height="25"/>
         <image name="btn_logout_high" width="25" height="25"/>
         <image name="btn_logout_normal" width="25" height="25"/>
         <image name="commonSetting" width="24" height="24"/>
@@ -4949,6 +5084,7 @@ AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
         <image name="mao_header" width="259" height="258"/>
         <image name="personalSetting" width="24" height="24"/>
         <image name="pushNotification" width="24" height="24"/>
+        <image name="reg_tip" width="8" height="6"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
