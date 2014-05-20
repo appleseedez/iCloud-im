@@ -378,57 +378,68 @@ static int localNetPortSuffix = 0;
       //#if DEBUG
       //            [[IMTipImp defaultTip] showTip:@"准备startmedia"];
       //#endif
-        VoEControlParameters voiceSettings;
-        voiceSettings.ostype = OsT_IOS;
-        voiceSettings.enable = true;
-        voiceSettings.optype = OpT_AGC;
-        
-        self.pInterfaceApi->SetVoEControlParameters(voiceSettings);
-        voiceSettings.ostype = OsT_IOS;
-        voiceSettings.enable = true;
-        voiceSettings.optype = OpT_NS;
-        
-        self.pInterfaceApi->SetVoEControlParameters(voiceSettings);
+      VoEControlParameters voiceSettings;
+      voiceSettings.ostype = OsT_IOS;
+      voiceSettings.enable = true;
+      voiceSettings.optype = OpT_AGC;
+
+      self.pInterfaceApi->SetVoEControlParameters(voiceSettings);
+      voiceSettings.ostype = OsT_IOS;
+      voiceSettings.enable = true;
+      voiceSettings.optype = OpT_NS;
+
+      self.pInterfaceApi->SetVoEControlParameters(voiceSettings);
+      //      TVideoConfigInfo vieConfig;
+      //      //            if (iPhone5) {
+      //      //                vieConfig.height = 192;
+      //      //            }else{
+      //      //                vieConfig.height = 176;
+      //      //            }
+      //      vieConfig.height = 176;
+      //      vieConfig.width = 144;
+      //      vieConfig.maxFramerate = 15;
+      //      vieConfig.startBitrate = 80;
+      //      vieConfig.maxBitrate = 600;
+
       TVideoConfigInfo vieConfig;
-      //            if (iPhone5) {
-      //                vieConfig.height = 192;
-      //            }else{
-      //                vieConfig.height = 176;
-      //            }
-      vieConfig.height = 176;
+      vieConfig.height = 192;
       vieConfig.width = 144;
       vieConfig.maxFramerate = 15;
       vieConfig.startBitrate = 80;
-      vieConfig.maxBitrate = 600;
+      vieConfig.maxBitrate = 320;
+
+      TVoeConfigInfo voeConfig;
+      voeConfig.pltype = EISAC; // EILBC;
+      voeConfig.pacsize = 480; // 240;
       if (argc.islocal) {
         NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
         if (self.canVideoCalling) {
-          ret = self.pInterfaceApi->StartVieMedia(argc.otherLocalIP,
-                                                  argc.otherLocalPort,
-                                                  vieConfig); // 要判断返回值
+          ret = self.pInterfaceApi->StartVieMedia(
+              argc.otherLocalIP, argc.otherLocalPort, vieConfig,
+              voeConfig); // 要判断返回值
         } else {
-          ret = self.pInterfaceApi->StartVoeMedia(argc.otherLocalIP,
-                                                  argc.otherLocalPort);
+          ret = self.pInterfaceApi->StartVoeMedia(
+              argc.otherLocalIP, argc.otherLocalPort, voeConfig);
         }
       } else if (argc.isInter) {
         NSLog(@"外网可用[%s:%d]", argc.otherInterIP, argc.otherInterPort);
         if (self.canVideoCalling) {
-          ret = self.pInterfaceApi->StartVieMedia(argc.otherInterIP,
-                                                  argc.otherInterPort,
-                                                  vieConfig); // 要判断返回值
+          ret = self.pInterfaceApi->StartVieMedia(
+              argc.otherInterIP, argc.otherInterPort, vieConfig,
+              voeConfig); // 要判断返回值
         } else {
-          ret = self.pInterfaceApi->StartVoeMedia(argc.otherInterIP,
-                                                  argc.otherInterPort);
+          ret = self.pInterfaceApi->StartVoeMedia(
+              argc.otherInterIP, argc.otherInterPort, voeConfig);
         }
       } else {
         NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
         if (self.canVideoCalling) {
-          ret = self.pInterfaceApi->StartVieMedia(argc.otherForwardIP,
-                                                  argc.otherForwardPort,
-                                                  vieConfig); // 要判断返回值
+          ret = self.pInterfaceApi->StartVieMedia(
+              argc.otherForwardIP, argc.otherForwardPort, vieConfig,
+              voeConfig); // 要判断返回值
         } else {
-          ret = self.pInterfaceApi->StartVoeMedia(argc.otherForwardIP,
-                                                  argc.otherForwardPort);
+          ret = self.pInterfaceApi->StartVoeMedia(
+              argc.otherForwardIP, argc.otherForwardPort, voeConfig);
         }
         //                [[NSNotificationCenter defaultCenter]
         // postNotificationName:CLOSE_REMOTE_VIEW_FOR_RELAY_TRANSPORT

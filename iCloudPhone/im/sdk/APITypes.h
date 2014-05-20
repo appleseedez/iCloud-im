@@ -156,4 +156,22 @@ typedef struct stVideoConfigInfo
     }
 }TVideoConfigInfo;
 
+enum Epltype
+{
+    EILBC = 0,
+    EISAC
+};
+
+typedef struct stVoeconfigInfo
+{
+    Epltype pltype;
+    int pacsize;
+    
+    stVoeconfigInfo()
+    {
+        pltype = EILBC;
+        pacsize = 240;
+    }
+}TVoeConfigInfo;
+
 #endif

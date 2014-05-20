@@ -1,4 +1,11 @@
 #pragma once
+//
+//  AVInterface.h
+//  AVInterface
+//
+//  Created by chenjianjun on 13-9-9.
+//  Copyright (c) 2013年 zc. All rights reserved.
+//
 
 #include <iostream>
 
@@ -200,28 +207,6 @@ public:
     //////////////////////////////////////////////////////////////////////////
     unsigned int GetTopMediaDataSize();
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /*********************************媒体api接口********************************/
     //////////////////////////////////////////////////////////////////////////
     ///@brief 媒体引擎初期化
@@ -242,7 +227,7 @@ public:
     ///
     ///@return true false
     //////////////////////////////////////////////////////////////////////////
-    bool StartVoeMedia(const char* dest_address, uint16_t dest_port);
+    bool StartVoeMedia(const char* dest_address, uint16_t dest_port, const TVoeConfigInfo& voeConfig);
     
     //////////////////////////////////////////////////////////////////////////
     ///@brief 关闭音频媒体
@@ -260,7 +245,7 @@ public:
     ///
     ///@return true false
     //////////////////////////////////////////////////////////////////////////
-    bool StartVieMedia(const char* dest_address, uint16_t dest_port, const TVideoConfigInfo& vieConfig);
+    bool StartVieMedia(const char* dest_address, uint16_t dest_port, const TVideoConfigInfo& vieConfig, const TVoeConfigInfo& voeConfig);
     
     //////////////////////////////////////////////////////////////////////////
     ///@brief 关闭视频媒体
@@ -367,4 +352,5 @@ private:
     volatile bool peer_flg;// 探测标志
     
     TVideoConfigInfo m_vieConfig;// 视频参数配置信息
+    TVoeConfigInfo m_voeConfig;// 音频参数配置信息
 };
