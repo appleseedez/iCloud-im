@@ -13,4 +13,7 @@
 -(RACSignal*)checkPhoneNumber:(NSDictionary*)parameters;
 -(RACSignal*)moreSendMessager:(NSDictionary*)parameters;
 -(RACSignal*)checkCodeNumber:(NSDictionary*)parameters;
+-(RACSignal*)loadBlackList:(NSDictionary*)parameters;
+-(RACSignal*)removeFromBlackList:(NSDictionary*)parameters;
+-(RACSignal*)changePassword:(NSDictionary*)parameters;
 @end

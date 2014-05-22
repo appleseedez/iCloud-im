@@ -109,6 +109,15 @@
 		479F53D9192B0472004435FA /* MoreHoseEditPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F53D8192B0472004435FA /* MoreHoseEditPhoneController.m */; };
 		479F53DC192B2041004435FA /* MorePhoneViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F53DB192B2041004435FA /* MorePhoneViewModel.m */; };
 		479F53DF192B2D83004435FA /* MoreMesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F53DE192B2D83004435FA /* MoreMesViewController.m */; };
+		479F53E2192B4EA8004435FA /* MoreCommonSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F53E1192B4EA8004435FA /* MoreCommonSettingViewController.m */; };
+		479F6B70192C3B0700FFA979 /* MoreBlackListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B6F192C3B0700FFA979 /* MoreBlackListTableViewController.m */; };
+		479F6B73192C3FB900FFA979 /* MoreBlackListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B72192C3FB900FFA979 /* MoreBlackListCell.m */; };
+		479F6B76192C429D00FFA979 /* MoreBlackLisetViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B75192C429D00FFA979 /* MoreBlackLisetViewModel.m */; };
+		479F6B7F192C8E6900FFA979 /* SecurityChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B78192C8E6900FFA979 /* SecurityChangePasswordViewController.m */; };
+		479F6B80192C8E6900FFA979 /* SecurityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B7A192C8E6900FFA979 /* SecurityViewController.m */; };
+		479F6B81192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B7C192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.m */; };
+		479F6B82192C8E6900FFA979 /* SecuretyQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B7E192C8E6900FFA979 /* SecuretyQuestionViewController.m */; };
+		479F6B85192C96FB00FFA979 /* MoreChangePasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B84192C96FB00FFA979 /* MoreChangePasswordViewModel.m */; };
 		47A1884C19209A07006E8013 /* EditAliasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1884B19209A07006E8013 /* EditAliasViewController.m */; };
 		47A1885519209E48006E8013 /* ContactUserViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1885419209E48006E8013 /* ContactUserViewModel.m */; };
 		47A188581920B62B006E8013 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188571920B62B006E8013 /* AddViewController.m */; };
@@ -306,6 +315,24 @@
 		479F53DB192B2041004435FA /* MorePhoneViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorePhoneViewModel.m; sourceTree = "<group>"; };
 		479F53DD192B2D83004435FA /* MoreMesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreMesViewController.h; sourceTree = "<group>"; };
 		479F53DE192B2D83004435FA /* MoreMesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreMesViewController.m; sourceTree = "<group>"; };
+		479F53E0192B4EA8004435FA /* MoreCommonSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreCommonSettingViewController.h; sourceTree = "<group>"; };
+		479F53E1192B4EA8004435FA /* MoreCommonSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreCommonSettingViewController.m; sourceTree = "<group>"; };
+		479F6B6E192C3B0700FFA979 /* MoreBlackListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreBlackListTableViewController.h; sourceTree = "<group>"; };
+		479F6B6F192C3B0700FFA979 /* MoreBlackListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreBlackListTableViewController.m; sourceTree = "<group>"; };
+		479F6B71192C3FB900FFA979 /* MoreBlackListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreBlackListCell.h; sourceTree = "<group>"; };
+		479F6B72192C3FB900FFA979 /* MoreBlackListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreBlackListCell.m; sourceTree = "<group>"; };
+		479F6B74192C429D00FFA979 /* MoreBlackLisetViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreBlackLisetViewModel.h; sourceTree = "<group>"; };
+		479F6B75192C429D00FFA979 /* MoreBlackLisetViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreBlackLisetViewModel.m; sourceTree = "<group>"; };
+		479F6B77192C8E6900FFA979 /* SecurityChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityChangePasswordViewController.h; sourceTree = "<group>"; };
+		479F6B78192C8E6900FFA979 /* SecurityChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityChangePasswordViewController.m; sourceTree = "<group>"; };
+		479F6B79192C8E6900FFA979 /* SecurityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityViewController.h; sourceTree = "<group>"; };
+		479F6B7A192C8E6900FFA979 /* SecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityViewController.m; sourceTree = "<group>"; };
+		479F6B7B192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecuretyAnswerQuestionViewController.h; sourceTree = "<group>"; };
+		479F6B7C192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecuretyAnswerQuestionViewController.m; sourceTree = "<group>"; };
+		479F6B7D192C8E6900FFA979 /* SecuretyQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecuretyQuestionViewController.h; sourceTree = "<group>"; };
+		479F6B7E192C8E6900FFA979 /* SecuretyQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecuretyQuestionViewController.m; sourceTree = "<group>"; };
+		479F6B83192C96FB00FFA979 /* MoreChangePasswordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreChangePasswordViewModel.h; sourceTree = "<group>"; };
+		479F6B84192C96FB00FFA979 /* MoreChangePasswordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreChangePasswordViewModel.m; sourceTree = "<group>"; };
 		47A1884A19209A07006E8013 /* EditAliasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAliasViewController.h; sourceTree = "<group>"; };
 		47A1884B19209A07006E8013 /* EditAliasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAliasViewController.m; sourceTree = "<group>"; };
 		47A1885319209E48006E8013 /* ContactUserViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUserViewModel.h; sourceTree = "<group>"; };
@@ -713,10 +740,19 @@
 				479F53D8192B0472004435FA /* MoreHoseEditPhoneController.m */,
 				479F53DD192B2D83004435FA /* MoreMesViewController.h */,
 				479F53DE192B2D83004435FA /* MoreMesViewController.m */,
-				476D3EA31925C7AA00A9D116 /* MoreHostSexView.h */,
-				476D3EA41925C7AA00A9D116 /* MoreHostSexView.m */,
-				476D3EA11925C1DA00A9D116 /* MoreHostSexView.xib */,
-				476D3EA61925CADA00A9D116 /* MoreHostBirthdatView.xib */,
+				479F53E0192B4EA8004435FA /* MoreCommonSettingViewController.h */,
+				479F53E1192B4EA8004435FA /* MoreCommonSettingViewController.m */,
+				479F6B6E192C3B0700FFA979 /* MoreBlackListTableViewController.h */,
+				479F6B6F192C3B0700FFA979 /* MoreBlackListTableViewController.m */,
+				479F6B77192C8E6900FFA979 /* SecurityChangePasswordViewController.h */,
+				479F6B78192C8E6900FFA979 /* SecurityChangePasswordViewController.m */,
+				479F6B79192C8E6900FFA979 /* SecurityViewController.h */,
+				479F6B7A192C8E6900FFA979 /* SecurityViewController.m */,
+				479F6B7B192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.h */,
+				479F6B7C192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.m */,
+				479F6B7D192C8E6900FFA979 /* SecuretyQuestionViewController.h */,
+				479F6B7E192C8E6900FFA979 /* SecuretyQuestionViewController.m */,
+				479F6B6D192C390100FFA979 /* views */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -728,10 +764,27 @@
 				479E17731921F748005D3A82 /* MoreViewModel.m */,
 				479F53DA192B2041004435FA /* MorePhoneViewModel.h */,
 				479F53DB192B2041004435FA /* MorePhoneViewModel.m */,
+				479F6B74192C429D00FFA979 /* MoreBlackLisetViewModel.h */,
+				479F6B75192C429D00FFA979 /* MoreBlackLisetViewModel.m */,
+				479F6B83192C96FB00FFA979 /* MoreChangePasswordViewModel.h */,
+				479F6B84192C96FB00FFA979 /* MoreChangePasswordViewModel.m */,
 				47714D8E1924700D0018ED26 /* HTTPRequestBuilder+More.h */,
 				47714D8F1924700D0018ED26 /* HTTPRequestBuilder+More.m */,
 			);
 			name = viewModels;
+			sourceTree = "<group>";
+		};
+		479F6B6D192C390100FFA979 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				476D3EA31925C7AA00A9D116 /* MoreHostSexView.h */,
+				476D3EA41925C7AA00A9D116 /* MoreHostSexView.m */,
+				476D3EA11925C1DA00A9D116 /* MoreHostSexView.xib */,
+				476D3EA61925CADA00A9D116 /* MoreHostBirthdatView.xib */,
+				479F6B71192C3FB900FFA979 /* MoreBlackListCell.h */,
+				479F6B72192C3FB900FFA979 /* MoreBlackListCell.m */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 		47A1885F1920B7BB006E8013 /* viewControllers */ = {
@@ -952,6 +1005,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				479F6B85192C96FB00FFA979 /* MoreChangePasswordViewModel.m in Sources */,
 				47838BF2191B5FD700EE08AF /* AudioAnsweringViewController.m in Sources */,
 				476D3A06191DD8C300742EE5 /* ContactViewModel.m in Sources */,
 				47929B79191B164F0054292D /* MaoAppDelegate.m in Sources */,
@@ -965,6 +1019,7 @@
 				47714D901924700D0018ED26 /* HTTPRequestBuilder+More.m in Sources */,
 				479E17771922009D005D3A82 /* HTTPRequestBuilder+app.m in Sources */,
 				473354B2191B1C1800B800CB /* RegTypeViewController.m in Sources */,
+				479F6B7F192C8E6900FFA979 /* SecurityChangePasswordViewController.m in Sources */,
 				47838BFC191B5FF500EE08AF /* DialNumberButton.m in Sources */,
 				473354BA191B1C1800B800CB /* PassEmailViewController.m in Sources */,
 				47838BDB191B5F8500EE08AF /* RootTabbarController.m in Sources */,
@@ -977,6 +1032,7 @@
 				47A188691920BD12006E8013 /* SearchViewModel.m in Sources */,
 				47838BFE191B5FF500EE08AF /* DialTableViewModel.m in Sources */,
 				47335495191B1BF300B800CB /* RegisterViewModel.m in Sources */,
+				479F6B70192C3B0700FFA979 /* MoreBlackListTableViewController.m in Sources */,
 				479E176C1921C3C4005D3A82 /* AddressCell.m in Sources */,
 				476D39F3191DD22400742EE5 /* CoreDataTableViewController.m in Sources */,
 				47838BEF191B5FD700EE08AF /* VideoAnsweringViewController.m in Sources */,
@@ -997,11 +1053,14 @@
 				47335489191B1BCA00B800CB /* NXInputChecker.m in Sources */,
 				473354B1191B1C1800B800CB /* LoginTableViewCell.m in Sources */,
 				476D39FC191DD3BE00742EE5 /* ItelUser.m in Sources */,
+				479F6B73192C3FB900FFA979 /* MoreBlackListCell.m in Sources */,
 				473354B6191B1C1800B800CB /* PassViewController.m in Sources */,
 				479E17601921AD6B005D3A82 /* AddressBookTableViewController.m in Sources */,
 				479F53D9192B0472004435FA /* MoreHoseEditPhoneController.m in Sources */,
 				476D39FF191DD46200742EE5 /* ContactCell.m in Sources */,
+				479F6B81192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.m in Sources */,
 				4733548C191B1BCA00B800CB /* BaseViewModel.m in Sources */,
+				479F6B80192C8E6900FFA979 /* SecurityViewController.m in Sources */,
 				479E176F1921F16F005D3A82 /* MoreTableViewController.m in Sources */,
 				4733548B191B1BCA00B800CB /* HTTPRequestBuilder+LoginAndRegister.m in Sources */,
 				473354D0191B2ED200B800CB /* CustomTabbar.m in Sources */,
@@ -1015,6 +1074,7 @@
 				47929B75191B164F0054292D /* main.m in Sources */,
 				479E17741921F748005D3A82 /* MoreViewModel.m in Sources */,
 				47335494191B1BF300B800CB /* LoginViewModel.m in Sources */,
+				479F53E2192B4EA8004435FA /* MoreCommonSettingViewController.m in Sources */,
 				473354B8191B1C1800B800CB /* PassMesViewController.m in Sources */,
 				4757BB6A191C68DB009A8938 /* MainPageViewModel.m in Sources */,
 				473354CB191B256A00B800CB /* MainTabbarViewController.m in Sources */,
@@ -1023,11 +1083,13 @@
 				47A188631920B8A0006E8013 /* StrangerCell.m in Sources */,
 				47A1885E1920B7A1006E8013 /* NewFriendListViewController.m in Sources */,
 				473354C5191B20B000B800CB /* RootViewModel.m in Sources */,
+				479F6B82192C8E6900FFA979 /* SecuretyQuestionViewController.m in Sources */,
 				47A188661920B8C9006E8013 /* StrangerViewController.m in Sources */,
 				479F53DF192B2D83004435FA /* MoreMesViewController.m in Sources */,
 				479E17691921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.m in Sources */,
 				47A1884C19209A07006E8013 /* EditAliasViewController.m in Sources */,
 				47838BF4191B5FD700EE08AF /* DialingViewController.m in Sources */,
+				479F6B76192C429D00FFA979 /* MoreBlackLisetViewModel.m in Sources */,
 				473354BB191B1C1800B800CB /* PassResetViewController.m in Sources */,
 				473354B9191B1C1800B800CB /* PassAnswerViewController.m in Sources */,
 				476D3A09191DD96B00742EE5 /* HTTPRequestBuilder+contact.m in Sources */,

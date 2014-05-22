@@ -11,6 +11,7 @@
 #import <UIImageView+AFNetworking.h>
 #import "AppService.h"
 #import "MaoHostSettingViewController.h"
+#import "MoreCommonSettingViewController.h"
 @interface MoreTableViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *btnLogout;
 @property (weak, nonatomic) IBOutlet UIImageView *imgHead;
@@ -63,8 +64,12 @@
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    ((MaoHostSettingViewController*)segue.destinationViewController).moreViewModel=self.moreViewModel;
     
+    if([segue.destinationViewController isKindOfClass:[MaoHostSettingViewController class]]){
+    ((MaoHostSettingViewController*)segue.destinationViewController).moreViewModel=self.moreViewModel;
+    }else if ([segue.destinationViewController isKindOfClass:[MoreCommonSettingViewController class]]){
+    ((MoreCommonSettingViewController*)segue.destinationViewController).moreViewModel=self.moreViewModel;
+    }
 }
 - (void)dealloc
 {

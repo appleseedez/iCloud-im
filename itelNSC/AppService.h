@@ -18,6 +18,7 @@ NS_ENUM(NSInteger, rootViewType){
 
 
 @property (nonatomic) NSNumber *rootViewType;
+@property (nonatomic) NSNumber *blackLoaded; //是否加载过黑名单
 -(void)logout;
 -(void)setHostWithKey:(NSString*)key value:(NSString*)value;
 @end

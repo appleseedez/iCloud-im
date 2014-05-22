@@ -112,7 +112,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="77590EDA-4D6A-4A8F-90D0-DFE02DAF777E" id="gLk-48-x7N">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="64B4D5CF-CF4B-4189-BEFD-EFFF5E0A7FE8" id="gLk-48-x7N">
                                                             <rect key="frame" x="28" y="5" width="35" height="35"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         </imageView>
@@ -849,7 +849,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="77590EDA-4D6A-4A8F-90D0-DFE02DAF777E" width="102" height="102">
+        <image name="64B4D5CF-CF4B-4189-BEFD-EFFF5E0A7FE8" width="102" height="102">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

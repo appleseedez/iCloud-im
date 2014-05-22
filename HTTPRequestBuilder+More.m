@@ -29,4 +29,19 @@
     NSURLRequest *request=[self jsonPostRequestWithUrl:url andParameters:parameters];
     return [[HTTPService defaultService] signalWithRequest:request];
 }
+-(RACSignal*)loadBlackList:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/blacklist/loadItelBlackLists.json",ACCOUNT_SERVER];
+    NSURLRequest *request=[self getRequestWithUrl:url andParameters:parameters];
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
+-(RACSignal*)removeFromBlackList:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/blacklist/removeItelBlack.json",ACCOUNT_SERVER];
+    NSURLRequest *request=[self jsonPostRequestWithUrl:url andParameters:parameters];
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
+-(RACSignal*)changePassword:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/safety/updatePassword.json",ACCOUNT_SERVER];
+    NSURLRequest *request=[self jsonPostRequestWithUrl:url andParameters:parameters];
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
 @end
