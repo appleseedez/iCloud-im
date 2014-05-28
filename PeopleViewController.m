@@ -102,9 +102,10 @@
         self.searchPredicate= [NSCompoundPredicate orPredicateWithSubpredicates:@[
                                                                                   [NSPredicate predicateWithFormat:@"remarkName contains[cd] %@",searchText],
                                                                                   [NSPredicate predicateWithFormat:@"nickName contains[cd] %@",searchText],
-                                                                                  [NSPredicate predicateWithFormat:@"itelNum contains %@",searchText]
-                                                                                  
-                                                                                  ]];
+                                                                                  [NSPredicate predicateWithFormat:@"itelNum contains %@",searchText],
+                                                                                  [NSPredicate predicateWithFormat:@"pyNickname contains [cd] %@",searchText],
+                                                                                  [NSPredicate predicateWithFormat:@"pyRemarkName contains [cd] %@",searchText]
+                                                                                ]];
         [self.fetchedResultsController.fetchRequest setPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:@[self.searchPredicate,self.normalPredicate]]];
     }
 
@@ -123,15 +124,15 @@
     
 }
 -(void)search:(NSString*)text{
-    
+    [self.view endEditing:YES];
 }
 
 - (void) setupFetchViewController{
     if ([DBService defaultService].managedObjectContext) {
-        // 获取最近通话记录列表
+        
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
         [request setFetchBatchSize:20];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"nickName" ascending:NO selector:nil]];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"section" ascending:YES selector:nil]];
         
         self.normalPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[
                                                                                     [NSPredicate predicateWithFormat:@"host = %@",[self.loginInfo objectForKey:@"itel"]]                                                                                    ,
@@ -140,7 +141,7 @@
         request.predicate = self.normalPredicate;
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                             managedObjectContext:[DBService defaultService].managedObjectContext
-                                                                              sectionNameKeyPath:nil
+                                                                              sectionNameKeyPath:@"section"
                                                                                        cacheName:nil];
     } else {
         self.fetchedResultsController = nil;

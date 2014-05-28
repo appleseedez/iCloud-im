@@ -8,8 +8,8 @@
 
 #import "ItelUser+CRUD.h"
 #import "DBService.h"
-
-
+#import "pinyin.h"
+#import "NXInputChecker.h"
 @implementation ItelUser (CRUD)
 +(ItelUser*)userWithDictionary:(NSDictionary*)dic inContext:(NSManagedObjectContext*) context{
     for (NSString *key in [dic allKeys]) {
@@ -41,7 +41,84 @@
     }
     user.remarkName=[dic objectForKey:@"alias"] ;
     user.telNum=[dic objectForKey:@"phone"];
+    
     [user setPersonal:dic];
+    NSString *pynick=@"";
+    if ([NXInputChecker checkEmpty:user.nickName]) {
+        for (int i=0; i<user.nickName.length; i++) {
+            char letter= pinyinFirstLetter([user.nickName characterAtIndex:i]);
+            if (letter!='#') {
+            pynick=[NSString stringWithFormat:@"%@%c",pynick,letter];
+            }else{
+                NSString *s=nil;
+                NSRange range;
+                range.length=1;
+                range.location=i;
+                s=[user.nickName substringWithRange:range];
+                pynick=[NSString stringWithFormat:@"%@%@",pynick,s];
+
+            }
+        }
+    }
+    user.pyNickname=pynick;
+    NSString *remark=@"";
+    if ([user.remarkName length]) {
+        for (int i=0; i<user.remarkName.length; i++) {
+            char letter= pinyinFirstLetter([user.remarkName characterAtIndex:i]);
+            if (letter!='#') {
+                remark=[NSString stringWithFormat:@"%@%c",remark,letter];
+            }else{
+                NSString *s=nil;
+                NSRange range;
+                range.length=1;
+                range.location=i;
+                s=[user.remarkName substringWithRange:range];
+                remark=[NSString stringWithFormat:@"%@%@",remark,s];
+            }
+            
+        }
+    }
+    user.pyRemarkName=remark;
+    NSString *resource=nil;
+    if (user.pyRemarkName.length) {
+        resource=user.pyRemarkName;
+    }else{
+        resource=user.pyNickname;
+    }
+    if (resource.length) {
+        NSRange range;
+        range.length=1;
+        range.location=0;
+        NSString *first=[[resource substringWithRange:range] lowercaseString];
+        
+        NSString *regex = @"[a-z]";
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", first];
+        
+        if ([predicate evaluateWithObject:first] == YES) {
+            user.section=first;
+        }else{
+               regex=@"[0-9]";
+            NSPredicate *predicate0 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", first];
+            if ([predicate0 evaluateWithObject:first]) {//如果是数字
+                  user.section=@"0";
+            }else{
+                user.section=@"#";
+            }
+        }
+    }
+    if (!user.nickName.length && !user.remarkName.length) {
+        user.section=@"0";
+    }
+    //全拼
+    NSString *quanpin=nil;
+    if ([NXInputChecker checkEmpty:user.remarkName]) {
+        quanpin=user.remarkName;
+    }else{
+        quanpin=user.nickName;
+    }
+    
+    NSLog(@" name:%@ section:%@   nickname:%@   remarkname:%@",resource,user.section,user.nickName,user.remarkName);
     
     return user;
 }

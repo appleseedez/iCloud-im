@@ -59,10 +59,11 @@
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    
+    NSLog(@"tttt::%@",deviceToken);
     [BPush registerDeviceToken:deviceToken]; // 必须
     
     [BPush bindChannel]; // 必须。可以在其它时机调用，只有在该方法返回（通过onMethod:response:回调）绑定成功时，app才能接收到Push消息。一个app绑定成功至少一次即可（如果access token变更请重新绑定）。
+    
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
 {
@@ -87,11 +88,15 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [BPush handleNotification:userInfo]; // 可选
-    
-    NSLog(@"接到啦 接到啦:%@",userInfo);
+    NSDictionary *aps=[userInfo objectForKey:@"aps"];
+    NSLog(@"你妹的 接到了\n");
+    for (NSString *s in aps.allKeys) {
+        
+        NSLog(@"%@:%@",s,[aps objectForKey:s]);
+    }
 }
 - (void)applicationWillResignActive:(UIApplication *)application
-{
+{   //[BPush unbindChannel];
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }

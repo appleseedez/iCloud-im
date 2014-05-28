@@ -17,6 +17,9 @@
                             <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="J3v-iB-W3P" id="sQ2-H3-8kP"/>
+                            </connections>
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="contactCell" rowHeight="60" id="NC6-ir-FtF" customClass="ContactCell">
@@ -72,7 +75,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F85-5E-8tr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1337" y="-375"/>
+            <point key="canvasLocation" x="-1738" y="-422"/>
         </scene>
         <!--User View Controller - 联系人详情-->
         <scene sceneID="oDR-K6-UG9">

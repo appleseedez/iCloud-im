@@ -63,7 +63,6 @@
 		476D39F0191DD1EB00742EE5 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39EF191DD1EB00742EE5 /* PeopleViewController.m */; };
 		476D39F3191DD22400742EE5 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39F2191DD22400742EE5 /* CoreDataTableViewController.m */; };
 		476D39F9191DD35300742EE5 /* ItelUser+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39F8191DD35300742EE5 /* ItelUser+CRUD.m */; };
-		476D39FC191DD3BE00742EE5 /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39FB191DD3BE00742EE5 /* ItelUser.m */; };
 		476D39FF191DD46200742EE5 /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39FE191DD46200742EE5 /* ContactCell.m */; };
 		476D3A02191DD5B900742EE5 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A01191DD5B900742EE5 /* UserViewController.m */; };
 		476D3A06191DD8C300742EE5 /* ContactViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D3A05191DD8C300742EE5 /* ContactViewModel.m */; };
@@ -138,6 +137,8 @@
 		47A188631920B8A0006E8013 /* StrangerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188621920B8A0006E8013 /* StrangerCell.m */; };
 		47A188661920B8C9006E8013 /* StrangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188651920B8C9006E8013 /* StrangerViewController.m */; };
 		47A188691920BD12006E8013 /* SearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188681920BD12006E8013 /* SearchViewModel.m */; };
+		47A354041935846C00329B5A /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 47A354021935846C00329B5A /* pinyin.c */; };
+		47A354141935DD4100329B5A /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A354131935DD4100329B5A /* ItelUser.m */; };
 		47A9D111192F24D90026335C /* MoreAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A9D110192F24D90026335C /* MoreAboutViewController.m */; };
 		47D6D707193426B40062C864 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D6D706193426B40062C864 /* CoreTelephony.framework */; };
 		47D6D709193426C80062C864 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D6D708193426C80062C864 /* SystemConfiguration.framework */; };
@@ -247,8 +248,6 @@
 		476D39F2191DD22400742EE5 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		476D39F7191DD35300742EE5 /* ItelUser+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ItelUser+CRUD.h"; sourceTree = "<group>"; };
 		476D39F8191DD35300742EE5 /* ItelUser+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ItelUser+CRUD.m"; sourceTree = "<group>"; };
-		476D39FA191DD3BE00742EE5 /* ItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUser.h; sourceTree = "<group>"; };
-		476D39FB191DD3BE00742EE5 /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
 		476D39FD191DD46200742EE5 /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
 		476D39FE191DD46200742EE5 /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
 		476D3A00191DD5B900742EE5 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
@@ -385,6 +384,10 @@
 		47A188651920B8C9006E8013 /* StrangerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrangerViewController.m; sourceTree = "<group>"; };
 		47A188671920BD12006E8013 /* SearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewModel.h; sourceTree = "<group>"; };
 		47A188681920BD12006E8013 /* SearchViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewModel.m; sourceTree = "<group>"; };
+		47A354021935846C00329B5A /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
+		47A354031935846C00329B5A /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		47A354121935DD4100329B5A /* ItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUser.h; sourceTree = "<group>"; };
+		47A354131935DD4100329B5A /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
 		47A9D10F192F24D90026335C /* MoreAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreAboutViewController.h; sourceTree = "<group>"; };
 		47A9D110192F24D90026335C /* MoreAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreAboutViewController.m; sourceTree = "<group>"; };
 		47D6D706193426B40062C864 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -445,9 +448,9 @@
 				47838C02191B639B00EE08AF /* AppService.m */,
 				476D39A2191DC57200742EE5 /* DBService.h */,
 				476D39A3191DC57200742EE5 /* DBService.m */,
-				476D39FA191DD3BE00742EE5 /* ItelUser.h */,
-				476D39FB191DD3BE00742EE5 /* ItelUser.m */,
 				476D39E9191DC6DC00742EE5 /* itelDB.xcdatamodeld */,
+				47A354121935DD4100329B5A /* ItelUser.h */,
+				47A354131935DD4100329B5A /* ItelUser.m */,
 				476D39F7191DD35300742EE5 /* ItelUser+CRUD.h */,
 				476D39F8191DD35300742EE5 /* ItelUser+CRUD.m */,
 			);
@@ -475,6 +478,8 @@
 				479E17651921B76D005D3A82 /* AddressUser.m */,
 				479E17671921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.h */,
 				479E17681921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.m */,
+				47A354021935846C00329B5A /* pinyin.c */,
+				47A354031935846C00329B5A /* pinyin.h */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -1109,6 +1114,7 @@
 				473354BA191B1C1800B800CB /* PassEmailViewController.m in Sources */,
 				47838BDB191B5F8500EE08AF /* RootTabbarController.m in Sources */,
 				473354D7191B3E7800B800CB /* CustomBarItem.m in Sources */,
+				47A354041935846C00329B5A /* pinyin.c in Sources */,
 				47A1885B1920B794006E8013 /* SearchNewFriendViewController.m in Sources */,
 				47A188581920B62B006E8013 /* AddViewController.m in Sources */,
 				47838BEE191B5FD700EE08AF /* VideoCallingViewController.m in Sources */,
@@ -1118,6 +1124,7 @@
 				47838BFE191B5FF500EE08AF /* DialTableViewModel.m in Sources */,
 				47335495191B1BF300B800CB /* RegisterViewModel.m in Sources */,
 				479F6B70192C3B0700FFA979 /* MoreBlackListTableViewController.m in Sources */,
+				47A354141935DD4100329B5A /* ItelUser.m in Sources */,
 				479E176C1921C3C4005D3A82 /* AddressCell.m in Sources */,
 				476D39F3191DD22400742EE5 /* CoreDataTableViewController.m in Sources */,
 				47838BEF191B5FD700EE08AF /* VideoAnsweringViewController.m in Sources */,
@@ -1140,7 +1147,6 @@
 				4757BB70191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m in Sources */,
 				47335489191B1BCA00B800CB /* NXInputChecker.m in Sources */,
 				473354B1191B1C1800B800CB /* LoginTableViewCell.m in Sources */,
-				476D39FC191DD3BE00742EE5 /* ItelUser.m in Sources */,
 				479F6B73192C3FB900FFA979 /* MoreBlackListCell.m in Sources */,
 				473354B6191B1C1800B800CB /* PassViewController.m in Sources */,
 				479E17601921AD6B005D3A82 /* AddressBookTableViewController.m in Sources */,
@@ -1320,7 +1326,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C915A584-8BEE-49B3-ABB9-FA6A8E7A9121";
+				PROVISIONING_PROFILE = "D361E66C-40EA-4BFF-997F-AE423B55D400";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -1349,7 +1355,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C915A584-8BEE-49B3-ABB9-FA6A8E7A9121";
+				PROVISIONING_PROFILE = "D361E66C-40EA-4BFF-997F-AE423B55D400";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
