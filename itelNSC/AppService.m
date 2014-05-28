@@ -11,6 +11,7 @@
 #import "RoolViewController.h"
 #import "LoginViewController.h"
 #import "HTTPRequestBuilder+app.h"
+#import <QuartzCore/QuartzCore.h>
 @interface AppService ()
 
 @property (nonatomic,weak) MaoAppDelegate *delegate;

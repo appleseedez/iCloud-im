@@ -44,4 +44,19 @@
     NSURLRequest *request=[self jsonPostRequestWithUrl:url andParameters:parameters];
     return [[HTTPService defaultService] signalWithRequest:request];
 }
+-(RACSignal*)getUserSecurity:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/safety/getPasswordProtection.json",ACCOUNT_SERVER];
+    NSURLRequest *request=[self getRequestWithUrl:url andParameters:parameters];
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
+-(RACSignal*)checkUserAnswer:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/safety/checkPasswordProtection.json",ACCOUNT_SERVER];
+    NSURLRequest *request=[self jsonPostRequestWithUrl:url andParameters:parameters];
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
+-(RACSignal*)modifyProtection:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/safety/saveOrUpdatePasswordProtection.json",ACCOUNT_SERVER];
+    NSURLRequest *request=[self jsonPostRequestWithUrl:url andParameters:parameters];
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
 @end

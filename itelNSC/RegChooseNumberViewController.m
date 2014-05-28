@@ -36,7 +36,7 @@ static float side=5.0;
             btnX=rightX;
         }
         float btnY=i/2 *(height+side)+topY;
-        UIButton *btn=[UIButton buttonWithType:UIButtonTypeSystem];
+        UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame=CGRectMake(btnX, btnY, width, height);
         btn.backgroundColor=[UIColor whiteColor];
         btn.titleLabel.text=@"";

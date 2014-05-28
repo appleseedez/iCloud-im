@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BPush.h"
 
-@interface MaoAppDelegate : UIResponder <UIApplicationDelegate>
+@interface MaoAppDelegate : UIResponder <UIApplicationDelegate,BPushDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic)  NSString *UUID;

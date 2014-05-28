@@ -7,7 +7,7 @@
 //
 
 #import "SecuretyQuestionViewController.h"
-
+#import "SecurityViewModel.h"
 #import "NXInputChecker.h"
 #define TXT_Q1 870021
 #define TXT_A1 870022
@@ -29,7 +29,7 @@
 
 @implementation SecuretyQuestionViewController
 static long currEditingTextTag=0;
-static float animatedDuration=1.0;
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     currEditingTextTag=textField.tag;
     
@@ -44,6 +44,8 @@ static float animatedDuration=1.0;
         foreward.backgroundColor=[UIColor whiteColor];
         [foreward addTarget:self action:@selector(chanegeToNextText) forControlEvents:UIControlEventTouchUpInside];
         [foreward setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [foreward setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_normal"] forState:UIControlStateNormal];
+        [foreward setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_high"] forState:UIControlStateHighlighted];
         [_inputAccessoryView addSubview:foreward];
         
         UIButton *backward=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 44)];
@@ -51,12 +53,16 @@ static float animatedDuration=1.0;
         backward.backgroundColor=[UIColor whiteColor];
         [backward addTarget:self action:@selector(changeToLast) forControlEvents:UIControlEventTouchUpInside];
         [_inputAccessoryView addSubview:backward];
+        [backward setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_normal"] forState:UIControlStateNormal];
+        [backward setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_high"] forState:UIControlStateHighlighted];
         [backward setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         UIButton *end=[[UIButton alloc]initWithFrame:CGRectMake(216, 0, 106, 44)];
         [end setTitle:@"结束" forState:UIControlStateNormal];
         end.backgroundColor=[UIColor whiteColor];
         [end addTarget:self action:@selector(returnKeyBoard) forControlEvents:UIControlEventTouchUpInside];
         [_inputAccessoryView addSubview:end];
+        [end setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_normal"] forState:UIControlStateNormal];
+        [end setBackgroundImage:[UIImage imageNamed:@"Register_input_accessory_high"] forState:UIControlStateHighlighted];
         [end setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     return _inputAccessoryView;
@@ -95,6 +101,7 @@ static float animatedDuration=1.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+     
     self.question1.inputAccessoryView=self.inputAccessoryView;
     self.question2.inputAccessoryView=self.inputAccessoryView;
     self.question3.inputAccessoryView=self.inputAccessoryView;
@@ -102,6 +109,18 @@ static float animatedDuration=1.0;
     self.answer2.inputAccessoryView=self.inputAccessoryView;
     self.answer3.inputAccessoryView=self.inputAccessoryView;
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishClicked)];
+    
+    [[RACObserve(self, securityViewModel.modifySuccess) map:^id(id value) {
+        if ([value boolValue]) {
+             [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        
+       
+        return value;
+    }] subscribeNext:^(id x) {
+        
+    }];
+    
 }
 -(void)finishClicked{
     NSString *check=[self checkInput];
@@ -114,28 +133,14 @@ static float animatedDuration=1.0;
                                    @"answer3":self.answer3.text,
                                    };
         
+        //这里提交密保
+        [self.securityViewModel modifyProtection:parameters];
     }
     else{
-        [self errorAlert:check];
+        [[[UIAlertView alloc]initWithTitle:check message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
     }
 }
--(void)receive:(NSNotification*)notification{
-    BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"]boolValue];
-    if (isNormal) {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"恭喜设置成功" message:@"请牢记您的密保问题和答案" delegate:self cancelButtonTitle:@"返回" otherButtonTitles: nil];
-        [alert show];
-    }
-    else {
-        [self errorAlert:@"设置失败 请稍后重试"];
-    }
-}
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
--(void)errorAlert:(NSString*)errorString{
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"输入错误" message:errorString delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
-    [alert show];
-}
+
 
 -(NSString*)checkInput{
     if ( self.question1.text.length>20||self.question2.text.length>20||self.question3.text.length>20||self.answer1.text.length>20||self.answer2.text.length>20||self.answer3.text.length>20) {
@@ -172,7 +177,7 @@ static float animatedDuration=1.0;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:@"modifySecurety" object:nil];
+    
    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(conformKeyBoard:) name:UIKeyboardWillChangeFrameNotification object:Nil];
 }
 -(void) viewWillDisappear:(BOOL)animated{

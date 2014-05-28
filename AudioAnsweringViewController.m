@@ -8,6 +8,7 @@
 
 #import "AudioAnsweringViewController.h"
 #import "DialViewModel.h"
+#import <QuartzCore/QuartzCore.h>
 @interface AudioAnsweringViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbPeerName;
 @property (weak, nonatomic) IBOutlet UILabel *lbPeerNumber;

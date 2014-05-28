@@ -106,7 +106,7 @@
     [RACObserve(self, suggestViewType) subscribeNext:^(NSNumber *x) {
         __strong DialingViewController *strongSelf=weakSelf;
 
-        suggestViewType type=[x integerValue];
+        NSInteger type=[x integerValue];
         switch (type) {
             case suggestViewTypeEmpty:{
                 strongSelf.sugestResultView.alpha=0;

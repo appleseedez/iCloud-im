@@ -4,6 +4,4 @@ pod 'ReactiveCocoa'
 pod 'MBProgressHUD'
 pod 'AFNetworking'
 
-target :itelNSCTests, :exclusive => true do
-    pod 'Kiwi/XCTest'
-end
+

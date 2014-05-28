@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class SecurityViewModel;
 @interface SecurityViewController : UITableViewController
-
+@property  (nonatomic) SecurityViewModel *securtiViewModel;
 @end

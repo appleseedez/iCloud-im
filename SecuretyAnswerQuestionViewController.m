@@ -8,7 +8,7 @@
 
 #import "SecuretyAnswerQuestionViewController.h"
 
-
+#import "SecurityViewModel.h"
 
 #import "SecuretyQuestionViewController.h"
 @interface SecuretyAnswerQuestionViewController ()
@@ -48,36 +48,28 @@
     }
     self.question.text=[NSString stringWithFormat:@"问题：%@",self.strQuestion];
     
+    [[RACObserve(self, securityViewModel.answerPassed) map:^id(NSNumber *value) {
+        if ([value boolValue]) {
+            [self pushNext];
+            
+        }
+        return value;
+    }]subscribeNext:^(id x) {
+        
+    }];
 	// Do any additional setup after loading the view.
 }
 - (IBAction)nextButtonPushed:(UIButton *)sender {
-    
+    [self.securityViewModel checkAnswer:self.strQuestion answer:self.txtAnswer.text];
     
 }
--(void)receive:(NSNotification*)notification{
-    BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"] boolValue];
-    if (isNormal) {
-        [self pushNext];
-    }
-    else{
-        [self errorAlert:@"密保问题回答错误"];
-    }
-}
+
 -(void)pushNext{
-    UIStoryboard *story=[UIStoryboard storyboardWithName:@"iCloudPhone" bundle:nil];
+    UIStoryboard *story=self.storyboard;
     SecuretyQuestionViewController *securetyQusetionVC= [story instantiateViewControllerWithIdentifier:@"SecuretyQuetionView"];
+    securetyQusetionVC.securityViewModel=self.securityViewModel;
     [self.navigationController pushViewController:securetyQusetionVC animated:YES];
 }
--(void)errorAlert:(NSString*)errorString{
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"回答错误" message:errorString delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
-    [alert show];
-}
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:@"answerQuestion" object:nil];
-}
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+
+
 @end

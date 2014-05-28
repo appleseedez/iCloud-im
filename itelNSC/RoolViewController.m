@@ -11,6 +11,7 @@
 #import "MainTabbarViewController.h"
 #import "RootTabbarController.h"
 #import "DialViewModel.h"
+#import <QuartzCore/QuartzCore.h>
 @interface RoolViewController ()
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UIView *sessionView;

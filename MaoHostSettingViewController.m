@@ -31,6 +31,7 @@
 #import "UIImage+Compress.h"
 #import "MoreHostEditViewController.h"
 #import "MoreHostSexView.h"
+#import <QuartzCore/QuartzCore.h>
 @interface MaoHostSettingViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgHead;
 @property (weak, nonatomic) IBOutlet UILabel *lbSign;

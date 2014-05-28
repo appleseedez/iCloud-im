@@ -7,36 +7,59 @@
 //
 
 #import "SecurityViewController.h"
-
+#import "SecurityViewModel.h"
 #import "SecuretyQuestionViewController.h"
 #import "SecuretyAnswerQuestionViewController.h"
+#import "SecurityViewModel.h"
 @interface SecurityViewController ()
 
 @end
 
 @implementation SecurityViewController
 
-static bool isConnecting=0;
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.securtiViewModel=[[SecurityViewModel alloc]init];
+    //监听hud
+  __weak  id weakSelf=self;
+    [RACObserve(self, securtiViewModel.busy) subscribeNext:^(NSNumber *x) {
+        __strong SecurityViewController *strongSelf=weakSelf;
+        BOOL busy= [x boolValue];
+        if (busy) {
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:strongSelf.view animated:YES];
+            hud.labelText=@"请稍后";
+        }else{
+            [MBProgressHUD hideAllHUDsForView:strongSelf.view animated:YES];
+        }
+    }];
+    [RACObserve(self, securtiViewModel.questionData) subscribeNext:^(NSDictionary *x) {
+        __strong SecurityViewController *strongSelf=weakSelf;
+        if ([x isKindOfClass:[NSDictionary class]] ) {
+            if ([x isEqual:@{}]) {
+                [strongSelf pushToSettingView];
+            }else{
+                [strongSelf pushToReSettingView:x];
+            }
+        }
+    }];
 }
 
--(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==1) {
         
         switch (indexPath.row) {
-            case 0:
-                if (isConnecting==0) {
+            case 0:{
+              
                     [self checkSecurity];
-                    isConnecting=1;
+                
                 }
                 
                 break;
             case 1:
-                [self pushToChangePasswordView];
+                
                 break;
             default:
                 break;
@@ -44,41 +67,24 @@ static bool isConnecting=0;
         
         }}
 }
--(void)pushToChangePasswordView{
-    
-}
+
 -(void)checkSecurity{
    //此处拽密保
+    
+    [self.securtiViewModel getSecurity];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    isConnecting=0;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receive:) name:@"passwordProtection" object:nil];
+   
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideTabbar" object:nil];
     
 }
--(void)receive:(NSNotification*)notification{
-    BOOL isNormal=[[notification.userInfo objectForKey:@"isNormal"]boolValue];
-    isConnecting=0;
-    if (isNormal) {
-        if ([[notification.object objectForKey:@"code"]intValue]==222) {
-            [self pushToSettingView];
-        }
-        else{
-            [self pushToReSettingView:notification.object];
-        }
-    }
-    else{
-        [self errorAlert:[notification.userInfo objectForKey:@"reason"]];
-    }
-}
--(void)errorAlert:(NSString*)errorString{
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"错误" message:errorString delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
-    [alert show];
-}
+
+
 -(void)pushToSettingView{
     UIStoryboard *story=self.storyboard;
    SecuretyQuestionViewController *securetyQusetionVC= [story instantiateViewControllerWithIdentifier:@"SecuretyQuetionView"];
-    
+    securetyQusetionVC.securityViewModel=self.securtiViewModel;
     
     [self.navigationController pushViewController:securetyQusetionVC animated:YES];
     
@@ -87,6 +93,7 @@ static bool isConnecting=0;
     UIStoryboard *story=self.storyboard;
     SecuretyAnswerQuestionViewController *securetyQusetionVC= [story instantiateViewControllerWithIdentifier:@"SecuretyAnswerView"];
     securetyQusetionVC.data=data;
+    securetyQusetionVC.securityViewModel=self.securtiViewModel;
     [self.navigationController pushViewController:securetyQusetionVC animated:YES];
 }
 

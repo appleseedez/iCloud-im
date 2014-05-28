@@ -39,7 +39,7 @@
         __strong RootTabbarController *strongSelf=weakSelf;
         if (x !=nil) {
          
-            ViewType type=[(NSNumber*)x integerValue];
+            NSInteger type=(NSInteger)[(NSNumber*)x integerValue];
             UIViewController *vc;
             switch (type) {
                 case ViewTypeVAnsering:

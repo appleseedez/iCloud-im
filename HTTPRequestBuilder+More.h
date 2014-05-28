@@ -16,4 +16,7 @@
 -(RACSignal*)loadBlackList:(NSDictionary*)parameters;
 -(RACSignal*)removeFromBlackList:(NSDictionary*)parameters;
 -(RACSignal*)changePassword:(NSDictionary*)parameters;
+-(RACSignal*)getUserSecurity:(NSDictionary*)parameters;
+-(RACSignal*)checkUserAnswer:(NSDictionary*)parameters;
+-(RACSignal*)modifyProtection:(NSDictionary*)parameters;
 @end

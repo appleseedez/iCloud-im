@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class SecurityViewModel;
 @interface SecuretyAnswerQuestionViewController : UIViewController
 @property (nonatomic,strong) NSDictionary *data;
+@property (nonatomic,weak)   SecurityViewModel *securityViewModel;
 @end

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class SecurityViewModel;
 @interface SecuretyQuestionViewController : UIViewController <UIScrollViewDelegate,UITextFieldDelegate,UIAlertViewDelegate>
+
+@property (nonatomic) SecurityViewModel *securityViewModel;
 
 @end
