@@ -88,7 +88,7 @@
     return YES;
   }
 
-  id ret = [loginDic objectForKey:@"ret"];
+  id ret = [[loginDic objectForKey:@"message"]objectForKey:@"ret"];
   if (ret == nil || [ret intValue] != 0) {
     [self returnAppCall:backURL];
     return YES;
