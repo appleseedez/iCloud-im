@@ -26,9 +26,11 @@ NS_ENUM(NSInteger, IMsessionType){
 -(void)vcall:(NSString*)itel;
 -(UIView*)getCametaViewLocal;
 -(int)openScreen:(UIView*)view;
+-(void)haltSession:(NSString*)haltType;
 @property (nonatomic) NSNumber *useVideo;
 @property (nonatomic) sdk *avSdk;
 @property (nonatomic) long  SSID;
 @property (nonatomic) NSNumber *sessionType;
 @property (nonatomic) NSString *sessionState;
+@property (nonatomic) NSString *peerAccount;
 @end

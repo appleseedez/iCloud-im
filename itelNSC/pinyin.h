@@ -19,5 +19,8 @@
  * }
  *
  */
+#import <Foundation/Foundation.h>
 
-char pinyinFirstLetter(unsigned short hanzi);
+@interface Pinyin : NSObject
++(char)getFirstLetter:(NSString*)string;
+@end

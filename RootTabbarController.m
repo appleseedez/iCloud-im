@@ -90,6 +90,7 @@
 -(void)setViewController:(UIViewController*)controller{
     [UIView animateWithDuration:0.3 animations:^{
          [self.view addSubview:controller.view];
+         // [controller viewWillAppear:NO];
     }];
    
 }

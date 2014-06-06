@@ -52,11 +52,22 @@
          __strong VideoCallingViewController *strongSelf=weakSelf;
          [strongSelf.viewModel sessionComplete];
      }];
+    [[RACObserve(self, viewModel.localSessionView) map:^id(id value) {
+        
+        
+        
+        return value;
+    }]subscribeNext:^(id x) {}];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.viewModel.localSessionView.frame=self.localSessionView.bounds;
     [self.localSessionView addSubview:self.viewModel.localSessionView];
+    ((CALayer*)self.viewModel.localSessionView.layer.sublayers[0]).frame=self.viewModel.localSessionView.bounds;
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.viewModel.localSessionView removeFromSuperview];
 }
 -(void)dealloc{
     NSLog(@"%@被销毁",self);

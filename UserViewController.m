@@ -11,9 +11,9 @@
 #import "EditAliasViewController.h"
 #import "ContactUserViewModel.h"
 
-
+#import "IMService.h"
 #import "MaoAppDelegate.h"
-
+#import "RootViewModel.h"
 #import "UIImageView+AFNetworking.h"
 
 @interface UserViewController ()
@@ -129,7 +129,9 @@
     [self callUserisVidio:NO];
 }
 - (void)callUserisVidio:(BOOL)isVidio {
+    if (isVidio) {
    
+    }
     
 }
 

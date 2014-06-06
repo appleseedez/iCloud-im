@@ -182,9 +182,7 @@ static float BottomHide;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    BOOL isPeerLarge=[self.viewModel.isPeerLarge boolValue];
-    
-    self.viewModel.isPeerLarge =@(isPeerLarge);
+    self.viewModel.isPeerLarge=@(YES);
 }
 -(void)animation:(UITapGestureRecognizer*)gesture{
     bool show=[self.showControlView boolValue];

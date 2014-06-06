@@ -124,6 +124,7 @@
 		47929B81191B164F0054292D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47929B80191B164F0054292D /* Images.xcassets */; };
 		479C567B1932E8D20086380C /* SocketConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C567A1932E8D20086380C /* SocketConnector.m */; };
 		479C567E193316A60086380C /* IMService.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C567D193316A60086380C /* IMService.m */; };
+		479E04141941835500501CAE /* libPinyin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A471938506E00811695 /* libPinyin.a */; };
 		479E17601921AD6B005D3A82 /* AddressBookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E175F1921AD6B005D3A82 /* AddressBookTableViewController.m */; };
 		479E17631921B1E6005D3A82 /* AddressService.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E17621921B1E6005D3A82 /* AddressService.m */; };
 		479E17661921B76D005D3A82 /* AddressUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E17651921B76D005D3A82 /* AddressUser.m */; };
@@ -172,22 +173,11 @@
 		47D27A4D1938506E00811695 /* Pinyin.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47D27A4C1938506E00811695 /* Pinyin.h */; };
 		47D27A4F1938506E00811695 /* Pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D27A4E1938506E00811695 /* Pinyin.m */; };
 		47D27A6A193850B000811695 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 47D27A69193850B000811695 /* pinyin.c */; };
-		47D27A70193854C400811695 /* libPinyin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A471938506E00811695 /* libPinyin.a */; };
 		47D6D707193426B40062C864 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D6D706193426B40062C864 /* CoreTelephony.framework */; };
 		47D6D709193426C80062C864 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D6D708193426C80062C864 /* SystemConfiguration.framework */; };
 		47D6D70B193426D80062C864 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D6D70A193426D80062C864 /* libz.dylib */; };
 		47D6D70D19343AA70062C864 /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47D6D70C19343AA70062C864 /* BPushConfig.plist */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		47D27A6C1938545600811695 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 47929B5D191B164F0054292D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 47D27A461938506E00811695;
-			remoteInfo = Pinyin;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		476B364D19385D1100D855E6 /* CopyFiles */ = {
@@ -515,13 +505,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				479E04141941835500501CAE /* libPinyin.a in Frameworks */,
 				476AAE68193D7D9D0008510C /* libstdc++.6.0.9.dylib in Frameworks */,
 				476B367D19385E3600D855E6 /* libsdk.a in Frameworks */,
 				4737764A193446EC00B0C8B1 /* CoreMedia.framework in Frameworks */,
 				47377646193446BD00B0C8B1 /* QuartzCore.framework in Frameworks */,
 				47377648193446D300B0C8B1 /* CoreImage.framework in Frameworks */,
 				47D27A2E1938363A00811695 /* CoreVideo.framework in Frameworks */,
-				47D27A70193854C400811695 /* libPinyin.a in Frameworks */,
 				47377642193444F100B0C8B1 /* OpenAL.framework in Frameworks */,
 				47D27A321938366200811695 /* Security.framework in Frameworks */,
 				47D27A301938364900811695 /* AudioToolbox.framework in Frameworks */,
@@ -1161,7 +1151,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				47D27A6D1938545600811695 /* PBXTargetDependency */,
 			);
 			name = itelNSC;
 			productName = itelNSC;
@@ -1438,14 +1427,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		47D27A6D1938545600811695 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 47D27A461938506E00811695 /* Pinyin */;
-			targetProxy = 47D27A6C1938545600811695 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		47929B71191B164F0054292D /* InfoPlist.strings */ = {

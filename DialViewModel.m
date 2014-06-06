@@ -37,6 +37,8 @@
            
             return value;
         }]subscribeNext:^(id x) {}];
+        
+       
         [[RACObserve(self, imService.sessionState) map:^id(id value) {
             self.connectionState=value;
             return value;
@@ -107,7 +109,13 @@
 //挂断
 -(void)sessionComplete{
     NSLog(@"用户挂断了.......");
-    
+    NSString *haltType=nil;
+    if ([self.showingView integerValue]==ViewTypeAsession||[self.showingView integerValue]==ViewTypeVsession) {
+            haltType=@"endsession";
+    }else{
+        haltType=@"refusesession";
+    }
+    [self.imService haltSession:haltType];
 }
 //接听
 -(void)answer{
@@ -117,6 +125,7 @@
 //隐藏拨号盘（包括通话所有界面）
 -(void)hideDialingSessionView{
     self.modelService.showSessinView=@(NO);
+    
 }
 -(void)dial:(NSString*)itel useVideo:(BOOL)useVideo{
     NSLog(@"开始拨打:%@  是否视频:%d",itel,useVideo);

@@ -72,7 +72,7 @@ static IMService *instance;
                     [[NSNotificationCenter defaultCenter]
                      postNotificationName:SIGNAL_ERROR_NOTIFICATION
                      object:nil
-                     userInfo:@{ kType : @(type) }];
+                     userInfo:data];
                     return;
                 }
                 bodySection = [data valueForKey:kBody];
@@ -99,6 +99,7 @@ static IMService *instance;
                     break;
                 case SESSION_PERIOD_HALT_TYPE:
                     NSLog(@"SESSION_PERIOD_HALT_TYPE");
+                    [self endSession];
                     break;
                 case CMID_APP_DROPPED_SSS_REQ_TYPE:
                     NSLog(@"CMID_APP_DROPPED_SSS_REQ_TYPE");
@@ -130,7 +131,9 @@ static IMService *instance;
 }
 #pragma mark - 查询
 -(void)checkPeer:(NSString*)peerItel{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(checkFail:) name:SIGNAL_ERROR_NOTIFICATION object:nil];
     //构造通话信令
+    self.peerAccount=peerItel;
     self.sessionType=@(IMsessionTypeCalling);
     self.sessionState=@"正在查询对方信息...";
     
@@ -146,6 +149,12 @@ static IMService *instance;
                       };
     [self.socketConnector sendRequest:data type:[@(SESSION_INIT_REQ_TYPE) integerValue]];
     
+}
+-(void)checkFail:(NSNotification*)notification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIGNAL_ERROR_NOTIFICATION object:nil];
+    NSString *info=[notification.userInfo valueForKeyPath:@"body.description"];
+    self.sessionState=[NSString stringWithFormat:@"%@",info];
+    [self performSelector:@selector(endSession) withObject:nil afterDelay:2];
 }
 #pragma mark - 查询成功后 主叫信令流程
 -(void)callingMessage:(NSDictionary*)data{
@@ -225,7 +234,7 @@ static IMService *instance;
               "主叫方收到非成对的ssid通话应答");
         }
 }
-// 被叫接听回掉
+
 - (void)startTransportAndNotify:(NSNotification *)notify {
     
  
@@ -246,7 +255,42 @@ static IMService *instance;
     
     
 }
-
+#pragma mark - 挂断
+-(void)haltSession:(NSString*)haltType{
+    NSDictionary *params = @{
+                             kType : [NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                             kSrcAccount : self.peerAccount,
+                             kDestAccount : [[self hostInfo] objectForKey:@"itel"],
+                             kHaltType : haltType
+                             };
+    NSDictionary* result = @{
+                             kHead:@{
+                                     kType: [NSNumber numberWithInt:SESSION_PERIOD_REQ_TYPE],
+                                     kStatus:[NSNumber numberWithInt:NORMAL_STATUS],
+                                     kSeq:[NSNumber numberWithInteger:[self.socketConnector seq]]
+                                     },
+                             kBody:@{
+                                     kDestAccount:[params valueForKey:kSrcAccount],
+                                     kData:[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:params options:0 error:nil]  encoding:NSUTF8StringEncoding],
+                                     kDataType:[NSNumber numberWithInt:EDT_SIGNEL]
+                                     }
+                             
+                             };
+    
+    [self.socketConnector sendRequest:result type:SESSION_PERIOD_REQ_TYPE];
+    [self endSession];
+}
+-(void)endSession{
+ 
+        [self.avSdk stopTransport];
+    
+    if (![self.avSdk isP2PFinished]) {
+        [self.avSdk stopDetectP2P];
+    }
+    self.sessionType=@(IMsessionTypeEdle);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"endSession" object:nil userInfo:nil];
+    //[self.avSdk tearDown];
+}
 -(NSDictionary*)hostInfo{
     MaoAppDelegate *delegate=[UIApplication sharedApplication].delegate;
     return delegate.loginInfo;

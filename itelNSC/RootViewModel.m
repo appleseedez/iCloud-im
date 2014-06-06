@@ -20,6 +20,12 @@
         [[NSNotificationCenter defaultCenter]addObserverForName:@"hideTabbar" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
             self.showTabbar=@(NO);
         }];
+        [[NSNotificationCenter defaultCenter]addObserverForName:@"endSession" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+            self.showSessinView=@(NO);
+        }];
+        [[NSNotificationCenter defaultCenter]addObserverForName:@"SessionStart" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+            self.showSessinView=@(YES);
+        }];
         self.showTabbar=@(YES);
     }
     return self;
