@@ -7,8 +7,44 @@
 //
 
 #import "DialViewModel.h"
-
+#import "IMService.h"
+#import "ItelUser+CRUD.h"
+#import "video_render_ios_view.h"
 @implementation DialViewModel
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.imService=[IMService defaultService];
+        
+       [[RACObserve(self, imService.sessionType) map:^id(NSNumber *value) {
+           if ([value integerValue]==IMsessionTypeCalling) {
+               if ([self.imService.useVideo boolValue]) {
+                   self.showingView=@(ViewTypeVCalling);
+               }else{
+                   self.showingView=@(ViewTypeACalling);
+               }
+           }else if ([value integerValue]==IMsessionTypeInSession){
+               if ([self.imService.useVideo boolValue]) {
+                   [self openScreen  ];
+                   self.showingView=@(ViewTypeVsession);
+                   
+               }else{
+                   self.showingView=@(ViewTypeAsession);
+               }
+               
+           }
+           
+            return value;
+        }]subscribeNext:^(id x) {}];
+        [[RACObserve(self, imService.sessionState) map:^id(id value) {
+            self.connectionState=value;
+            return value;
+        }]subscribeNext:^(id x) {}];
+        
+    }
+    return self;
+}
 -(void)changeCamera{
     BOOL useFrontCamera=[self.useFrontCamera boolValue];
     NSString *state;
@@ -84,6 +120,42 @@
 }
 -(void)dial:(NSString*)itel useVideo:(BOOL)useVideo{
     NSLog(@"开始拨打:%@  是否视频:%d",itel,useVideo);
+    [self setUser:itel];
+    
+    if (useVideo) {
+        
+        self.localSessionView=[self.imService getCametaViewLocal];
+        [[self.localSessionView.layer sublayers][0] setFrame:[UIScreen mainScreen].bounds];
+        self.isPeerLarge=@(YES);
+        [self.imService vcall:itel];
+    }
+}
+-(void)setUser:(NSString*)itel{
+    ItelUser *user = [ItelUser userWithItel:itel];
+    if (user) {
+        self.peerNum=user.itelNum;
+        self.peerName=user.nickName;
+        self.peerArea=user.address;
+        
+    }else{
+        self.peerNum=itel;
+        self.peerName=@"陌生人";
+        self.peerArea=@"";
+    }
+}
+-(void)openScreen{
+    if (!self.peerSessionView) {
+       
+        VideoRenderIosView *v=[[VideoRenderIosView alloc]init];
+        self.peerSessionView=v;
+        
+    }
+    
+  
+   // self.peerSessionView.layer.frame=[UIScreen mainScreen].bounds ;
+    self.peerSessionView.backgroundColor=[UIColor grayColor];
+    
+    [self.imService performSelector:@selector(openScreen:) withObject:self.peerSessionView afterDelay:0.2];
 }
 -(void)dealloc{
     NSLog(@"%@被销毁",self);

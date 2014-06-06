@@ -10,5 +10,6 @@
 
 @interface ItelUser (CRUD)
 +(ItelUser*)userWithDictionary:(NSDictionary*)dic inContext:(NSManagedObjectContext*)context;
++(ItelUser*)userWithItel:(NSString*)itel;
 - (void) delete;
 @end

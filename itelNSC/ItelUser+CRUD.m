@@ -11,6 +11,20 @@
 #import "pinyin.h"
 #import "NXInputChecker.h"
 @implementation ItelUser (CRUD)
+
++(ItelUser*)userWithItel:(NSString*)itel{
+    NSError* error;
+    ItelUser *user;
+    NSManagedObjectContext *context=[DBService defaultService].managedObjectContext;
+    NSFetchRequest* getOneUser = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
+    getOneUser.predicate = [NSPredicate predicateWithFormat:@"itelNum = %@",itel];
+    
+    NSArray* match = [context executeFetchRequest:getOneUser error:&error];
+    if ([match count]) {
+        user =(ItelUser*)match[0];
+    }
+    return user;
+}
 +(ItelUser*)userWithDictionary:(NSDictionary*)dic inContext:(NSManagedObjectContext*) context{
     for (NSString *key in [dic allKeys]) {
         id object = [dic objectForKey:key];
@@ -46,7 +60,7 @@
     NSString *pynick=@"";
     if ([NXInputChecker checkEmpty:user.nickName]) {
         for (int i=0; i<user.nickName.length; i++) {
-            char letter= pinyinFirstLetter([user.nickName characterAtIndex:i]);
+            char letter= [Pinyin getFirstLetter:user.nickName];
             if (letter!='#') {
             pynick=[NSString stringWithFormat:@"%@%c",pynick,letter];
             }else{
@@ -64,7 +78,7 @@
     NSString *remark=@"";
     if ([user.remarkName length]) {
         for (int i=0; i<user.remarkName.length; i++) {
-            char letter= pinyinFirstLetter([user.remarkName characterAtIndex:i]);
+             char letter= [Pinyin getFirstLetter:user.remarkName];
             if (letter!='#') {
                 remark=[NSString stringWithFormat:@"%@%c",remark,letter];
             }else{
@@ -118,7 +132,7 @@
         quanpin=user.nickName;
     }
     
-    NSLog(@" name:%@ section:%@   nickname:%@   remarkname:%@",resource,user.section,user.nickName,user.remarkName);
+   // NSLog(@" name:%@ section:%@   nickname:%@   remarkname:%@",resource,user.section,user.nickName,user.remarkName);
     
     return user;
 }

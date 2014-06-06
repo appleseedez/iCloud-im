@@ -9,6 +9,7 @@
 #import "SocketConnector.h"
 #import "MaoAppDelegate.h"
 #import <objc/runtime.h>
+#import "NSData+Byte.h"
 //客户端状态值
 enum AccountStatusTypes {
     AST_INVALID = -1,
@@ -70,8 +71,6 @@ enum emDataType {
         
         self.socketQueue=dispatch_queue_create("socketQ", NULL);
         self.tcpSocket=[[GCDAsyncSocket alloc]initWithSocketQueue:self.socketQueue];
-     
-        
         [self.tcpSocket setDelegate:self delegateQueue:dispatch_get_main_queue()];
     }
     return self;
@@ -115,6 +114,9 @@ static NSUInteger seq;
     [self udpSend:data];
     
 }
+-(NSUInteger)seq{
+    return ++seq;
+}
 -(void)udpSend:(NSDictionary *)data{
     NSError* error = nil;
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
@@ -152,13 +154,13 @@ static NSUInteger seq;
                      }];
     }else if (udpTag == ROUTE_UDP_SEQENCE_END_TAG){
 
-        [self.udpSocket close];
+       
         self.signalServerPort=[[response valueForKeyPath:@"body.port"] unsignedShortValue];
         self.signalServerIP=[response valueForKeyPath:@"body.ip"];
        
         
-        NSLog(@"信令服务器获取成功  ip:%@  port:%d",self.ip,self.port);
-        
+        NSLog(@"信令服务器获取成功  ip:%@  port:%d",self.signalServerIP,self.signalServerPort);
+        [self.udpSocket close];
     }
     
     
@@ -169,17 +171,19 @@ static NSUInteger seq;
     if ([self.conected boolValue]) {
         return;
     }
-    self.socketSignal=[RACSubject subject];
+    
     NSError *error=nil;
     if (![self.tcpSocket connectToHost:self.signalServerIP onPort:self.signalServerPort error:&error]) {
         self.conected=@(NO);
         NSLog(@"连接 tcp 信令服务器没有成功");
-        [self.socketSignal sendError:error];
+        //[self.socketSignal sendError:error];
         
     }
 }
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
     NSLog(@"连接成功");
+    [sock performBlock:^{ [sock enableBackgroundingOnSocket]; }];
+     [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
     NSString *token = @""; // 推送用到的token
    NSDictionary *info=
     @{
@@ -197,7 +201,15 @@ static NSUInteger seq;
       };
     NSInteger type = [[[info valueForKey:kHead] valueForKey:kType] integerValue];
     [self sendRequest:info type:type];
+    self.socketSignal=[RACSubject subject];
+    [self.service connectSuccess:self.socketSignal];
     self.conected=@(YES);
+}
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
+    NSLog(@"发送成功:");
+}
+- (void)socketDidCloseReadStream:(GCDAsyncSocket *)sock{
+    NSLog(@"readStream关闭");
 }
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
     NSError *error;
@@ -284,8 +296,7 @@ static NSUInteger seq;
     [requestData
      appendData:[NSData dataWithBytes:&pkgLength length:sizeof(uint16_t)]];
     [requestData appendData:jsonData];
-     const char value='\0';
-    [requestData appendBytes:&value length:sizeof(value)];    // 5data\0
+    [requestData appendByte:'\0'];    // 5data\0
     /* send data to server.*/
     [self.tcpSocket writeData:[requestData copy] withTimeout:-1 tag:type];
 }

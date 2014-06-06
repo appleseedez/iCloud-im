@@ -22,7 +22,7 @@ static HTTPRequestBuilder *instance;
     static BOOL initialized=NO;
     if (initialized==NO) {
         instance=[[HTTPRequestBuilder alloc]init];
-        instance.delegate=[UIApplication sharedApplication].delegate;
+        instance.delegate=(MaoAppDelegate*)[UIApplication sharedApplication].delegate;
         initialized=YES;
     }
 }

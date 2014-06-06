@@ -8,8 +8,27 @@
 
 #import <Foundation/Foundation.h>
 @class SocketConnector;
+@class sdk;
+
+NS_ENUM(NSInteger, IMsessionType){
+    IMsessionTypeEdle,
+    IMsessionTypeCalling,
+    IMsessionTypeAnsering,
+    IMsessionTypeInSession
+};
+
+
 @interface IMService : NSObject
 +(instancetype)defaultService;
 @property (nonatomic)  SocketConnector *socketConnector;
 -(void)connectToSignalServer;
+-(void)connectSuccess:(RACSignal*)signal;
+-(void)vcall:(NSString*)itel;
+-(UIView*)getCametaViewLocal;
+-(int)openScreen:(UIView*)view;
+@property (nonatomic) NSNumber *useVideo;
+@property (nonatomic) sdk *avSdk;
+@property (nonatomic) long  SSID;
+@property (nonatomic) NSNumber *sessionType;
+@property (nonatomic) NSString *sessionState;
 @end

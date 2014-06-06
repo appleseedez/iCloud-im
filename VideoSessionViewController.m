@@ -82,8 +82,11 @@ static float BottomHide;
             strongSelf.viewModel.peerSessionView.frame=self.secondarySessionView.bounds;
             [strongSelf.secondarySessionView addSubview:self.viewModel.peerSessionView];
             strongSelf.viewModel.localSessionView.frame=self.mainSessionView.bounds;
+            
             [strongSelf.mainSessionView addSubview:self.viewModel.localSessionView];
+            
         }
+        ((CALayer*)strongSelf.viewModel.localSessionView.layer.sublayers[0]).frame=strongSelf.viewModel.localSessionView.bounds;
         [UIView commitAnimations];
     }];
     // 监听 麦克风
@@ -170,6 +173,7 @@ static float BottomHide;
          strongSelf.lbTime.text=x;
          });
      }];
+    ((CALayer*)self.viewModel.localSessionView.layer.sublayers[0]).frame=self.viewModel.localSessionView.bounds;
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];

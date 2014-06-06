@@ -41,29 +41,30 @@
         [[IMService defaultService] connectToSignalServer];
         
     }];
-    [BPush setupChannel:launchOptions]; // 必须
-    
-    [BPush setDelegate:self]; // 必须。参数对象必须实现onMethod: response:方法，本示例中为self
-    
-    // [BPush setAccessToken:@"3.ad0c16fa2c6aa378f450f54adb08039.2592000.1367133742.282335-602025"];  // 可选。api key绑定时不需要，也可在其它时机调用
-    
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeAlert
-     | UIRemoteNotificationTypeBadge
-     | UIRemoteNotificationTypeSound];
-    NSLog(@"appID:%@",[BPush getAppId]);
-    NSLog(@"channelID:%@",[BPush getChannelId]);
-    NSLog(@"userID:%@",[BPush getUserId]);
+     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert];
+//    [BPush setupChannel:launchOptions]; // 必须
+//    
+//    [BPush setDelegate:self]; // 必须。参数对象必须实现onMethod: response:方法，本示例中为self
+//    
+//    // [BPush setAccessToken:@"3.ad0c16fa2c6aa378f450f54adb08039.2592000.1367133742.282335-602025"];  // 可选。api key绑定时不需要，也可在其它时机调用
+//    
+//    [application registerForRemoteNotificationTypes:
+//     UIRemoteNotificationTypeAlert
+//     | UIRemoteNotificationTypeBadge
+//     | UIRemoteNotificationTypeSound];
+//    NSLog(@"appID:%@",[BPush getAppId]);
+//    NSLog(@"channelID:%@",[BPush getChannelId]);
+//    NSLog(@"userID:%@",[BPush getUserId]);
     return YES;
 }
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSLog(@"tttt::%@",deviceToken);
-    [BPush registerDeviceToken:deviceToken]; // 必须
-    
-    [BPush bindChannel]; // 必须。可以在其它时机调用，只有在该方法返回（通过onMethod:response:回调）绑定成功时，app才能接收到Push消息。一个app绑定成功至少一次即可（如果access token变更请重新绑定）。
-    
+//    NSLog(@"tttt::%@",deviceToken);
+//    [BPush registerDeviceToken:deviceToken]; // 必须
+//    
+//    [BPush bindChannel]; // 必须。可以在其它时机调用，只有在该方法返回（通过onMethod:response:回调）绑定成功时，app才能接收到Push消息。一个app绑定成功至少一次即可（如果access token变更请重新绑定）。
+    NSLog(@"token:%@",deviceToken);
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
 {
@@ -73,27 +74,36 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 }
 - (void) onMethod:(NSString*)method response:(NSDictionary*)data
 {
-    if ([BPushRequestMethod_Bind isEqualToString:method])
-    {
-        NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
-        
-        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
-        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
-        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
-        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
-    }
+//    if ([BPushRequestMethod_Bind isEqualToString:method])
+//    {
+////        NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
+//        
+////        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
+////        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
+////        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
+////        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+////        NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
+//    }
 }
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    [BPush handleNotification:userInfo]; // 可选
-    NSDictionary *aps=[userInfo objectForKey:@"aps"];
-    NSLog(@"你妹的 接到了\n");
-    for (NSString *s in aps.allKeys) {
-        
-        NSLog(@"%@:%@",s,[aps objectForKey:s]);
+{     NSLog(@"收到啦 收到啦 \n");
+    for (NSString * s  in [userInfo allKeys]) {
+        NSLog(@"%@:%@\n",s ,[userInfo objectForKey:s]);
     }
+//    [BPush handleNotification:userInfo]; // 可选
+//    NSString *string=@"";
+//    NSDictionary *aps=[userInfo objectForKey:@"aps"];
+//    NSLog(@"你妹的 接到了\n");
+//    for (NSString *s in aps.allKeys) {
+//        
+//        NSLog(@"%@:%@",s,[aps objectForKey:s]);
+//        string=[NSString stringWithFormat:@"%@:%@\n",s,[aps objectForKey:s]];
+//    }
+//    
+//    
+//    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"你妹的 接到了" message:[userInfo description] delegate:nil cancelButtonTitle:@"好吧" otherButtonTitles: nil ];
+//    [alert show];
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {   //[BPush unbindChannel];

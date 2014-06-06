@@ -46,17 +46,34 @@
 		47377646193446BD00B0C8B1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377645193446BD00B0C8B1 /* QuartzCore.framework */; };
 		47377648193446D300B0C8B1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377647193446D200B0C8B1 /* CoreImage.framework */; };
 		4737764A193446EC00B0C8B1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377649193446EC00B0C8B1 /* CoreMedia.framework */; };
-		4737769A193465EA00B0C8B1 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4737769119344D2D00B0C8B1 /* GCDAsyncSocket.m */; };
-		4737769B193465EC00B0C8B1 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4737769319344D2D00B0C8B1 /* GCDAsyncUdpSocket.m */; };
-		473776CD19346D1A00B0C8B1 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 473776AF1934696200B0C8B1 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		473776CE19346D1E00B0C8B1 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 473776B11934696200B0C8B1 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		473776CF19346D2200B0C8B1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 473776B31934696200B0C8B1 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		473776D019346D2900B0C8B1 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 473776AD1934696200B0C8B1 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		473776D119346D2C00B0C8B1 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 473776AA1934696200B0C8B1 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		473776D219346D3000B0C8B1 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 473776A71934696200B0C8B1 /* libBPush.a */; };
 		4757BB6A191C68DB009A8938 /* MainPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB69191C68DB009A8938 /* MainPageViewModel.m */; };
 		4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6C191C81B3009A8938 /* MainPageButton.m */; };
 		4757BB70191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */; };
+		476AAE54193D5C810008510C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A311938366200811695 /* Security.framework */; };
+		476AAE55193D5C900008510C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D6D708193426C80062C864 /* SystemConfiguration.framework */; };
+		476AAE56193D5C990008510C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377643193446A300B0C8B1 /* OpenGLES.framework */; };
+		476AAE57193D5CA20008510C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A2F1938364900811695 /* AudioToolbox.framework */; };
+		476AAE58193D5CAC0008510C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A2D1938363A00811695 /* CoreVideo.framework */; };
+		476AAE59193D5CB50008510C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377649193446EC00B0C8B1 /* CoreMedia.framework */; };
+		476AAE5B193D5CD90008510C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377645193446BD00B0C8B1 /* QuartzCore.framework */; };
+		476AAE5C193D5CE30008510C /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377647193446D200B0C8B1 /* CoreImage.framework */; };
+		476AAE5D193D5CF40008510C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A2B1938360600811695 /* MessageUI.framework */; };
+		476AAE5E193D5D000008510C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B6A191B164F0054292D /* CoreGraphics.framework */; };
+		476AAE60193D5F210008510C /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 476AAE5F193D5F210008510C /* libAVInterface.a */; };
+		476AAE61193D5F9D0008510C /* sigslot.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367819385DCA00D855E6 /* sigslot.h */; };
+		476AAE62193D5FD30008510C /* APITypes.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367419385DCA00D855E6 /* APITypes.h */; };
+		476AAE63193D60110008510C /* AVInterface.hh in Sources */ = {isa = PBXBuildFile; fileRef = 476B367519385DCA00D855E6 /* AVInterface.hh */; };
+		476AAE64193D60110008510C /* thread.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367619385DCA00D855E6 /* thread.h */; };
+		476AAE65193D60110008510C /* common.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367719385DCA00D855E6 /* common.h */; };
+		476AAE66193D60110008510C /* NatTypeImpl.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367919385DCA00D855E6 /* NatTypeImpl.h */; };
+		476AAE67193D60110008510C /* video_render_ios_view.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367B19385DCA00D855E6 /* video_render_ios_view.h */; };
+		476AAE68193D7D9D0008510C /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 479F00B219372E3A0006E0B4 /* libstdc++.6.0.9.dylib */; };
+		476B365019385D1100D855E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B68191B164F0054292D /* Foundation.framework */; };
+		476B365519385D1100D855E6 /* sdk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 476B365419385D1100D855E6 /* sdk.h */; };
+		476B365719385D1100D855E6 /* sdk.mm in Sources */ = {isa = PBXBuildFile; fileRef = 476B365619385D1100D855E6 /* sdk.mm */; };
+		476B367D19385E3600D855E6 /* libsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 476B364F19385D1100D855E6 /* libsdk.a */; };
+		476B367E19387CFA00D855E6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 473354CC191B2AE200B800CB /* CFNetwork.framework */; };
+		476B367F1938825300D855E6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4737763F1934447E00B0C8B1 /* AVFoundation.framework */; };
 		476D39A4191DC57200742EE5 /* DBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 476D39A3191DC57200742EE5 /* DBService.m */; };
 		476D39EB191DC6DC00742EE5 /* itelDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 476D39E9191DC6DC00742EE5 /* itelDB.xcdatamodeld */; };
 		476D39ED191DC9B400742EE5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 476D39EC191DC9B400742EE5 /* CoreData.framework */; };
@@ -117,6 +134,7 @@
 		479E17771922009D005D3A82 /* HTTPRequestBuilder+app.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E17761922009D005D3A82 /* HTTPRequestBuilder+app.m */; };
 		479E177A192207C1005D3A82 /* MaoHostSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E1779192207C1005D3A82 /* MaoHostSettingViewController.m */; };
 		479E2D93192DDA0B009C3B61 /* SecurityViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479E2D92192DDA0B009C3B61 /* SecurityViewModel.m */; };
+		479F0025193716890006E0B4 /* NSData+Byte.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F0024193716890006E0B4 /* NSData+Byte.m */; };
 		479F53D9192B0472004435FA /* MoreHoseEditPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F53D8192B0472004435FA /* MoreHoseEditPhoneController.m */; };
 		479F53DC192B2041004435FA /* MorePhoneViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F53DB192B2041004435FA /* MorePhoneViewModel.m */; };
 		479F53DF192B2D83004435FA /* MoreMesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F53DE192B2D83004435FA /* MoreMesViewController.m */; };
@@ -137,14 +155,72 @@
 		47A188631920B8A0006E8013 /* StrangerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188621920B8A0006E8013 /* StrangerCell.m */; };
 		47A188661920B8C9006E8013 /* StrangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188651920B8C9006E8013 /* StrangerViewController.m */; };
 		47A188691920BD12006E8013 /* SearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188681920BD12006E8013 /* SearchViewModel.m */; };
-		47A354041935846C00329B5A /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 47A354021935846C00329B5A /* pinyin.c */; };
 		47A354141935DD4100329B5A /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A354131935DD4100329B5A /* ItelUser.m */; };
 		47A9D111192F24D90026335C /* MoreAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A9D110192F24D90026335C /* MoreAboutViewController.m */; };
+		47D279CA19382A3B00811695 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D279C919382A3B00811695 /* AddressBook.framework */; };
+		47D279D419382D1700811695 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B68191B164F0054292D /* Foundation.framework */; };
+		47D279D919382D1700811695 /* GCDASocket.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47D279D819382D1700811695 /* GCDASocket.h */; };
+		47D279DB19382D1700811695 /* GCDASocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D279DA19382D1700811695 /* GCDASocket.m */; };
+		47D279F919382D9100811695 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D279F619382D9100811695 /* GCDAsyncSocket.m */; };
+		47D279FA19382D9100811695 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D279F819382D9100811695 /* GCDAsyncUdpSocket.m */; };
+		47D279FD1938305700811695 /* libGCDASocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D279D319382D1600811695 /* libGCDASocket.a */; };
+		47D27A2C1938360600811695 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A2B1938360600811695 /* MessageUI.framework */; };
+		47D27A2E1938363A00811695 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A2D1938363A00811695 /* CoreVideo.framework */; };
+		47D27A301938364900811695 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A2F1938364900811695 /* AudioToolbox.framework */; };
+		47D27A321938366200811695 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A311938366200811695 /* Security.framework */; };
+		47D27A481938506E00811695 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B68191B164F0054292D /* Foundation.framework */; };
+		47D27A4D1938506E00811695 /* Pinyin.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47D27A4C1938506E00811695 /* Pinyin.h */; };
+		47D27A4F1938506E00811695 /* Pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D27A4E1938506E00811695 /* Pinyin.m */; };
+		47D27A6A193850B000811695 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 47D27A69193850B000811695 /* pinyin.c */; };
+		47D27A70193854C400811695 /* libPinyin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D27A471938506E00811695 /* libPinyin.a */; };
 		47D6D707193426B40062C864 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D6D706193426B40062C864 /* CoreTelephony.framework */; };
 		47D6D709193426C80062C864 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D6D708193426C80062C864 /* SystemConfiguration.framework */; };
 		47D6D70B193426D80062C864 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D6D70A193426D80062C864 /* libz.dylib */; };
 		47D6D70D19343AA70062C864 /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47D6D70C19343AA70062C864 /* BPushConfig.plist */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		47D27A6C1938545600811695 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47929B5D191B164F0054292D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47D27A461938506E00811695;
+			remoteInfo = Pinyin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		476B364D19385D1100D855E6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				476B365519385D1100D855E6 /* sdk.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47D279D119382D1600811695 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				47D279D919382D1700811695 /* GCDASocket.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47D27A451938506E00811695 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				47D27A4D1938506E00811695 /* Pinyin.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		28E822647253439B999D3369 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -213,31 +289,24 @@
 		47377645193446BD00B0C8B1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		47377647193446D200B0C8B1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		47377649193446EC00B0C8B1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		4737767419344BE300B0C8B1 /* ContentInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContentInfo.plist; sourceTree = "<group>"; };
-		4737769019344D2D00B0C8B1 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
-		4737769119344D2D00B0C8B1 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
-		4737769219344D2D00B0C8B1 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
-		4737769319344D2D00B0C8B1 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
-		473776A61934696200B0C8B1 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
-		473776A71934696200B0C8B1 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
-		473776A91934696200B0C8B1 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
-		473776AA1934696200B0C8B1 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
-		473776AB1934696200B0C8B1 /* Base64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Defines.h; sourceTree = "<group>"; };
-		473776AC1934696200B0C8B1 /* GzipCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzipCompressor.h; sourceTree = "<group>"; };
-		473776AD1934696200B0C8B1 /* GzipCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipCompressor.m; sourceTree = "<group>"; };
-		473776AE1934696200B0C8B1 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		473776AF1934696200B0C8B1 /* JSONKit.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = JSONKit.m; sourceTree = "<group>"; };
-		473776B01934696200B0C8B1 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
-		473776B11934696200B0C8B1 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
-		473776B21934696200B0C8B1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		473776B31934696200B0C8B1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		473776C819346C8E00B0C8B1 /* ContentInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContentInfo.plist; sourceTree = "<group>"; };
 		4757BB68191C68DB009A8938 /* MainPageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewModel.h; sourceTree = "<group>"; };
 		4757BB69191C68DB009A8938 /* MainPageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewModel.m; sourceTree = "<group>"; };
 		4757BB6B191C81B3009A8938 /* MainPageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageButton.h; sourceTree = "<group>"; };
 		4757BB6C191C81B3009A8938 /* MainPageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageButton.m; sourceTree = "<group>"; };
 		4757BB6E191CAB81009A8938 /* HTTPRequestBuilder+mainPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPRequestBuilder+mainPage.h"; sourceTree = "<group>"; };
 		4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPRequestBuilder+mainPage.m"; sourceTree = "<group>"; };
+		476AAE5F193D5F210008510C /* libAVInterface.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAVInterface.a; sourceTree = "<group>"; };
+		476B364F19385D1100D855E6 /* libsdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		476B365319385D1100D855E6 /* sdk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sdk-Prefix.pch"; sourceTree = "<group>"; };
+		476B365419385D1100D855E6 /* sdk.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = sdk.h; sourceTree = "<group>"; };
+		476B365619385D1100D855E6 /* sdk.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = sdk.mm; sourceTree = "<group>"; };
+		476B367419385DCA00D855E6 /* APITypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = APITypes.h; sourceTree = "<group>"; };
+		476B367519385DCA00D855E6 /* AVInterface.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = AVInterface.hh; sourceTree = "<group>"; };
+		476B367619385DCA00D855E6 /* thread.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = thread.h; sourceTree = "<group>"; };
+		476B367719385DCA00D855E6 /* common.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = common.h; sourceTree = "<group>"; };
+		476B367819385DCA00D855E6 /* sigslot.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = sigslot.h; sourceTree = "<group>"; };
+		476B367919385DCA00D855E6 /* NatTypeImpl.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = NatTypeImpl.h; sourceTree = "<group>"; };
+		476B367B19385DCA00D855E6 /* video_render_ios_view.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = video_render_ios_view.h; sourceTree = "<group>"; };
 		476D39A2191DC57200742EE5 /* DBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBService.h; sourceTree = "<group>"; };
 		476D39A3191DC57200742EE5 /* DBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBService.m; sourceTree = "<group>"; };
 		476D39EA191DC6DC00742EE5 /* itelDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = itelDB.xcdatamodel; sourceTree = "<group>"; };
@@ -344,6 +413,11 @@
 		479E1779192207C1005D3A82 /* MaoHostSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaoHostSettingViewController.m; sourceTree = "<group>"; };
 		479E2D91192DDA0B009C3B61 /* SecurityViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityViewModel.h; sourceTree = "<group>"; };
 		479E2D92192DDA0B009C3B61 /* SecurityViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityViewModel.m; sourceTree = "<group>"; };
+		479F00221936D5940006E0B4 /* ConstantHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantHeader.h; sourceTree = "<group>"; };
+		479F0023193716890006E0B4 /* NSData+Byte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Byte.h"; sourceTree = "<group>"; };
+		479F0024193716890006E0B4 /* NSData+Byte.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Byte.m"; sourceTree = "<group>"; };
+		479F00B019372E080006E0B4 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		479F00B219372E3A0006E0B4 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		479F53D7192B0472004435FA /* MoreHoseEditPhoneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreHoseEditPhoneController.h; sourceTree = "<group>"; };
 		479F53D8192B0472004435FA /* MoreHoseEditPhoneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreHoseEditPhoneController.m; sourceTree = "<group>"; };
 		479F53DA192B2041004435FA /* MorePhoneViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MorePhoneViewModel.h; sourceTree = "<group>"; };
@@ -384,12 +458,29 @@
 		47A188651920B8C9006E8013 /* StrangerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrangerViewController.m; sourceTree = "<group>"; };
 		47A188671920BD12006E8013 /* SearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewModel.h; sourceTree = "<group>"; };
 		47A188681920BD12006E8013 /* SearchViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewModel.m; sourceTree = "<group>"; };
-		47A354021935846C00329B5A /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
-		47A354031935846C00329B5A /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		47A354121935DD4100329B5A /* ItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUser.h; sourceTree = "<group>"; };
 		47A354131935DD4100329B5A /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
 		47A9D10F192F24D90026335C /* MoreAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreAboutViewController.h; sourceTree = "<group>"; };
 		47A9D110192F24D90026335C /* MoreAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreAboutViewController.m; sourceTree = "<group>"; };
+		47D279C919382A3B00811695 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		47D279D319382D1600811695 /* libGCDASocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGCDASocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		47D279D719382D1700811695 /* GCDASocket-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GCDASocket-Prefix.pch"; sourceTree = "<group>"; };
+		47D279D819382D1700811695 /* GCDASocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDASocket.h; sourceTree = "<group>"; };
+		47D279DA19382D1700811695 /* GCDASocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDASocket.m; sourceTree = "<group>"; };
+		47D279F519382D9100811695 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		47D279F619382D9100811695 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		47D279F719382D9100811695 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		47D279F819382D9100811695 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		47D27A28193835BB00811695 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		47D27A2B1938360600811695 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		47D27A2D1938363A00811695 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		47D27A2F1938364900811695 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		47D27A311938366200811695 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		47D27A471938506E00811695 /* libPinyin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPinyin.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		47D27A4B1938506E00811695 /* Pinyin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pinyin-Prefix.pch"; sourceTree = "<group>"; };
+		47D27A4C1938506E00811695 /* Pinyin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pinyin.h; sourceTree = "<group>"; };
+		47D27A4E1938506E00811695 /* Pinyin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pinyin.m; sourceTree = "<group>"; };
+		47D27A69193850B000811695 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		47D6D706193426B40062C864 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		47D6D708193426C80062C864 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		47D6D70A193426D80062C864 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -399,17 +490,46 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		476B364C19385D1100D855E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				476AAE5E193D5D000008510C /* CoreGraphics.framework in Frameworks */,
+				476AAE5D193D5CF40008510C /* MessageUI.framework in Frameworks */,
+				476B367F1938825300D855E6 /* AVFoundation.framework in Frameworks */,
+				476AAE5C193D5CE30008510C /* CoreImage.framework in Frameworks */,
+				476AAE60193D5F210008510C /* libAVInterface.a in Frameworks */,
+				476AAE5B193D5CD90008510C /* QuartzCore.framework in Frameworks */,
+				476AAE59193D5CB50008510C /* CoreMedia.framework in Frameworks */,
+				476AAE58193D5CAC0008510C /* CoreVideo.framework in Frameworks */,
+				476AAE57193D5CA20008510C /* AudioToolbox.framework in Frameworks */,
+				476AAE56193D5C990008510C /* OpenGLES.framework in Frameworks */,
+				476AAE55193D5C900008510C /* SystemConfiguration.framework in Frameworks */,
+				476AAE54193D5C810008510C /* Security.framework in Frameworks */,
+				476B367E19387CFA00D855E6 /* CFNetwork.framework in Frameworks */,
+				476B365019385D1100D855E6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47929B62191B164F0054292D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				476AAE68193D7D9D0008510C /* libstdc++.6.0.9.dylib in Frameworks */,
+				476B367D19385E3600D855E6 /* libsdk.a in Frameworks */,
 				4737764A193446EC00B0C8B1 /* CoreMedia.framework in Frameworks */,
-				47377648193446D300B0C8B1 /* CoreImage.framework in Frameworks */,
-				473776D219346D3000B0C8B1 /* libBPush.a in Frameworks */,
 				47377646193446BD00B0C8B1 /* QuartzCore.framework in Frameworks */,
-				47377644193446A300B0C8B1 /* OpenGLES.framework in Frameworks */,
+				47377648193446D300B0C8B1 /* CoreImage.framework in Frameworks */,
+				47D27A2E1938363A00811695 /* CoreVideo.framework in Frameworks */,
+				47D27A70193854C400811695 /* libPinyin.a in Frameworks */,
 				47377642193444F100B0C8B1 /* OpenAL.framework in Frameworks */,
+				47D27A321938366200811695 /* Security.framework in Frameworks */,
+				47D27A301938364900811695 /* AudioToolbox.framework in Frameworks */,
 				473776401934447E00B0C8B1 /* AVFoundation.framework in Frameworks */,
+				47D27A2C1938360600811695 /* MessageUI.framework in Frameworks */,
+				47D279FD1938305700811695 /* libGCDASocket.a in Frameworks */,
+				47D279CA19382A3B00811695 /* AddressBook.framework in Frameworks */,
+				47377644193446A300B0C8B1 /* OpenGLES.framework in Frameworks */,
 				47D6D70B193426D80062C864 /* libz.dylib in Frameworks */,
 				47D6D709193426C80062C864 /* SystemConfiguration.framework in Frameworks */,
 				47D6D707193426B40062C864 /* CoreTelephony.framework in Frameworks */,
@@ -419,6 +539,22 @@
 				47929B6D191B164F0054292D /* UIKit.framework in Frameworks */,
 				47929B69191B164F0054292D /* Foundation.framework in Frameworks */,
 				019AE0312DD5461BB0545B9B /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47D279D019382D1600811695 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47D279D419382D1700811695 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47D27A441938506E00811695 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47D27A481938506E00811695 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,8 +614,6 @@
 				479E17651921B76D005D3A82 /* AddressUser.m */,
 				479E17671921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.h */,
 				479E17681921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.m */,
-				47A354021935846C00329B5A /* pinyin.c */,
-				47A354031935846C00329B5A /* pinyin.h */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -546,68 +680,6 @@
 			name = MainView;
 			sourceTree = "<group>";
 		};
-		4737767219344BE300B0C8B1 /* gcdSocket */ = {
-			isa = PBXGroup;
-			children = (
-				479C56711932E7EA0086380C /* socket */,
-				4737767319344BE300B0C8B1 /* Supporting Files */,
-			);
-			path = gcdSocket;
-			sourceTree = "<group>";
-		};
-		4737767319344BE300B0C8B1 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				4737767419344BE300B0C8B1 /* ContentInfo.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		473776A51934696200B0C8B1 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				473776A81934696200B0C8B1 /* opensource */,
-				473776A61934696200B0C8B1 /* BPush.h */,
-				473776A71934696200B0C8B1 /* libBPush.a */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		473776A81934696200B0C8B1 /* opensource */ = {
-			isa = PBXGroup;
-			children = (
-				473776A91934696200B0C8B1 /* Base64.h */,
-				473776AA1934696200B0C8B1 /* Base64.m */,
-				473776AB1934696200B0C8B1 /* Base64Defines.h */,
-				473776AC1934696200B0C8B1 /* GzipCompressor.h */,
-				473776AD1934696200B0C8B1 /* GzipCompressor.m */,
-				473776AE1934696200B0C8B1 /* JSONKit.h */,
-				473776AF1934696200B0C8B1 /* JSONKit.m */,
-				473776B01934696200B0C8B1 /* OpenUDID.h */,
-				473776B11934696200B0C8B1 /* OpenUDID.m */,
-				473776B21934696200B0C8B1 /* Reachability.h */,
-				473776B31934696200B0C8B1 /* Reachability.m */,
-			);
-			path = opensource;
-			sourceTree = "<group>";
-		};
-		473776C619346C8E00B0C8B1 /* baidu */ = {
-			isa = PBXGroup;
-			children = (
-				473776A51934696200B0C8B1 /* lib */,
-				473776C719346C8E00B0C8B1 /* Supporting Files */,
-			);
-			path = baidu;
-			sourceTree = "<group>";
-		};
-		473776C719346C8E00B0C8B1 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				473776C819346C8E00B0C8B1 /* ContentInfo.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		4757BB67191C68B9009A8938 /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -617,6 +689,32 @@
 				4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */,
 			);
 			name = viewModel;
+			sourceTree = "<group>";
+		};
+		476B365119385D1100D855E6 /* sdk */ = {
+			isa = PBXGroup;
+			children = (
+				476AAE5F193D5F210008510C /* libAVInterface.a */,
+				476B367419385DCA00D855E6 /* APITypes.h */,
+				476B367519385DCA00D855E6 /* AVInterface.hh */,
+				476B367619385DCA00D855E6 /* thread.h */,
+				476B367719385DCA00D855E6 /* common.h */,
+				476B367819385DCA00D855E6 /* sigslot.h */,
+				476B367919385DCA00D855E6 /* NatTypeImpl.h */,
+				476B367B19385DCA00D855E6 /* video_render_ios_view.h */,
+				476B365419385D1100D855E6 /* sdk.h */,
+				476B365619385D1100D855E6 /* sdk.mm */,
+				476B365219385D1100D855E6 /* Supporting Files */,
+			);
+			path = sdk;
+			sourceTree = "<group>";
+		};
+		476B365219385D1100D855E6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				476B365319385D1100D855E6 /* sdk-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		476D3A03191DD8A200742EE5 /* viewModels */ = {
@@ -756,8 +854,9 @@
 				473354C6191B23AB00B800CB /* MainView */,
 				47335478191B1B2300B800CB /* RegisterAndLogin */,
 				47929B6E191B164F0054292D /* itelNSC */,
-				4737767219344BE300B0C8B1 /* gcdSocket */,
-				473776C619346C8E00B0C8B1 /* baidu */,
+				47D279D519382D1700811695 /* GCDASocket */,
+				47D27A491938506E00811695 /* Pinyin */,
+				476B365119385D1100D855E6 /* sdk */,
 				47929B67191B164F0054292D /* Frameworks */,
 				47929B66191B164F0054292D /* Products */,
 				28E822647253439B999D3369 /* Pods.xcconfig */,
@@ -770,6 +869,9 @@
 			isa = PBXGroup;
 			children = (
 				47929B65191B164F0054292D /* itelNSC.app */,
+				47D279D319382D1600811695 /* libGCDASocket.a */,
+				47D27A471938506E00811695 /* libPinyin.a */,
+				476B364F19385D1100D855E6 /* libsdk.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -777,6 +879,14 @@
 		47929B67191B164F0054292D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				47D27A311938366200811695 /* Security.framework */,
+				47D27A2F1938364900811695 /* AudioToolbox.framework */,
+				47D27A2D1938363A00811695 /* CoreVideo.framework */,
+				47D27A2B1938360600811695 /* MessageUI.framework */,
+				47D27A28193835BB00811695 /* AddressBookUI.framework */,
+				47D279C919382A3B00811695 /* AddressBook.framework */,
+				479F00B219372E3A0006E0B4 /* libstdc++.6.0.9.dylib */,
+				479F00B019372E080006E0B4 /* libstdc++.dylib */,
 				47377649193446EC00B0C8B1 /* CoreMedia.framework */,
 				47377647193446D200B0C8B1 /* CoreImage.framework */,
 				47377645193446BD00B0C8B1 /* QuartzCore.framework */,
@@ -850,24 +960,17 @@
 		479C56661932E6C70086380C /* IMServices */ = {
 			isa = PBXGroup;
 			children = (
+				479F6BA01938156D00E15DD1 /* socket */,
+				479F015F193733D00006E0B4 /* sdk */,
+				479F0023193716890006E0B4 /* NSData+Byte.h */,
+				479F0024193716890006E0B4 /* NSData+Byte.m */,
+				479F00221936D5940006E0B4 /* ConstantHeader.h */,
 				479C567C193316A60086380C /* IMService.h */,
 				479C567D193316A60086380C /* IMService.m */,
 				479C56791932E8D20086380C /* SocketConnector.h */,
 				479C567A1932E8D20086380C /* SocketConnector.m */,
 			);
 			name = IMServices;
-			sourceTree = "<group>";
-		};
-		479C56711932E7EA0086380C /* socket */ = {
-			isa = PBXGroup;
-			children = (
-				4737769019344D2D00B0C8B1 /* GCDAsyncSocket.h */,
-				4737769119344D2D00B0C8B1 /* GCDAsyncSocket.m */,
-				4737769219344D2D00B0C8B1 /* GCDAsyncUdpSocket.h */,
-				4737769319344D2D00B0C8B1 /* GCDAsyncUdpSocket.m */,
-			);
-			name = socket;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		479E17701921F718005D3A82 /* viewControllers */ = {
@@ -921,6 +1024,13 @@
 			name = viewModels;
 			sourceTree = "<group>";
 		};
+		479F015F193733D00006E0B4 /* sdk */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = sdk;
+			sourceTree = "<group>";
+		};
 		479F6B6D192C390100FFA979 /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -932,6 +1042,13 @@
 				479F6B72192C3FB900FFA979 /* MoreBlackListCell.m */,
 			);
 			name = views;
+			sourceTree = "<group>";
+		};
+		479F6BA01938156D00E15DD1 /* socket */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = socket;
 			sourceTree = "<group>";
 		};
 		47A1885F1920B7BB006E8013 /* viewControllers */ = {
@@ -970,9 +1087,67 @@
 			name = cells;
 			sourceTree = "<group>";
 		};
+		47D279D519382D1700811695 /* GCDASocket */ = {
+			isa = PBXGroup;
+			children = (
+				47D279F519382D9100811695 /* GCDAsyncSocket.h */,
+				47D279F619382D9100811695 /* GCDAsyncSocket.m */,
+				47D279F719382D9100811695 /* GCDAsyncUdpSocket.h */,
+				47D279F819382D9100811695 /* GCDAsyncUdpSocket.m */,
+				47D279D819382D1700811695 /* GCDASocket.h */,
+				47D279DA19382D1700811695 /* GCDASocket.m */,
+				47D279D619382D1700811695 /* Supporting Files */,
+			);
+			path = GCDASocket;
+			sourceTree = "<group>";
+		};
+		47D279D619382D1700811695 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				47D279D719382D1700811695 /* GCDASocket-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		47D27A491938506E00811695 /* Pinyin */ = {
+			isa = PBXGroup;
+			children = (
+				47D27A4C1938506E00811695 /* Pinyin.h */,
+				47D27A4E1938506E00811695 /* Pinyin.m */,
+				47D27A4A1938506E00811695 /* Supporting Files */,
+			);
+			path = Pinyin;
+			sourceTree = "<group>";
+		};
+		47D27A4A1938506E00811695 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				47D27A69193850B000811695 /* pinyin.c */,
+				47D27A4B1938506E00811695 /* Pinyin-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		476B364E19385D1100D855E6 /* sdk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 476B366B19385D1200D855E6 /* Build configuration list for PBXNativeTarget "sdk" */;
+			buildPhases = (
+				476B364B19385D1100D855E6 /* Sources */,
+				476B364C19385D1100D855E6 /* Frameworks */,
+				476B364D19385D1100D855E6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sdk;
+			productName = sdk;
+			productReference = 476B364F19385D1100D855E6 /* libsdk.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		47929B64191B164F0054292D /* itelNSC */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47929B97191B164F0054292D /* Build configuration list for PBXNativeTarget "itelNSC" */;
@@ -986,11 +1161,46 @@
 			buildRules = (
 			);
 			dependencies = (
+				47D27A6D1938545600811695 /* PBXTargetDependency */,
 			);
 			name = itelNSC;
 			productName = itelNSC;
 			productReference = 47929B65191B164F0054292D /* itelNSC.app */;
 			productType = "com.apple.product-type.application";
+		};
+		47D279D219382D1600811695 /* GCDASocket */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47D279EF19382D1700811695 /* Build configuration list for PBXNativeTarget "GCDASocket" */;
+			buildPhases = (
+				47D279CF19382D1600811695 /* Sources */,
+				47D279D019382D1600811695 /* Frameworks */,
+				47D279D119382D1600811695 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GCDASocket;
+			productName = GCDASocket;
+			productReference = 47D279D319382D1600811695 /* libGCDASocket.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		47D27A461938506E00811695 /* Pinyin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47D27A631938506E00811695 /* Build configuration list for PBXNativeTarget "Pinyin" */;
+			buildPhases = (
+				47D27A431938506E00811695 /* Sources */,
+				47D27A441938506E00811695 /* Frameworks */,
+				47D27A451938506E00811695 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pinyin;
+			productName = Pinyin;
+			productReference = 47D27A471938506E00811695 /* libPinyin.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -1021,6 +1231,9 @@
 			projectRoot = "";
 			targets = (
 				47929B64191B164F0054292D /* itelNSC */,
+				47D279D219382D1600811695 /* GCDASocket */,
+				47D27A461938506E00811695 /* Pinyin */,
+				476B364E19385D1100D855E6 /* sdk */,
 			);
 		};
 /* End PBXProject section */
@@ -1090,6 +1303,21 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		476B364B19385D1100D855E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				476AAE63193D60110008510C /* AVInterface.hh in Sources */,
+				476AAE64193D60110008510C /* thread.h in Sources */,
+				476AAE65193D60110008510C /* common.h in Sources */,
+				476AAE66193D60110008510C /* NatTypeImpl.h in Sources */,
+				476AAE67193D60110008510C /* video_render_ios_view.h in Sources */,
+				476AAE62193D5FD30008510C /* APITypes.h in Sources */,
+				476AAE61193D5F9D0008510C /* sigslot.h in Sources */,
+				476B365719385D1100D855E6 /* sdk.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47929B61191B164F0054292D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1098,6 +1326,7 @@
 				47838BF2191B5FD700EE08AF /* AudioAnsweringViewController.m in Sources */,
 				476D3A06191DD8C300742EE5 /* ContactViewModel.m in Sources */,
 				47929B79191B164F0054292D /* MaoAppDelegate.m in Sources */,
+				479F0025193716890006E0B4 /* NSData+Byte.m in Sources */,
 				47A1885519209E48006E8013 /* ContactUserViewModel.m in Sources */,
 				47335496191B1BF300B800CB /* PassViewModel.m in Sources */,
 				476D39F9191DD35300742EE5 /* ItelUser+CRUD.m in Sources */,
@@ -1114,7 +1343,6 @@
 				473354BA191B1C1800B800CB /* PassEmailViewController.m in Sources */,
 				47838BDB191B5F8500EE08AF /* RootTabbarController.m in Sources */,
 				473354D7191B3E7800B800CB /* CustomBarItem.m in Sources */,
-				47A354041935846C00329B5A /* pinyin.c in Sources */,
 				47A1885B1920B794006E8013 /* SearchNewFriendViewController.m in Sources */,
 				47A188581920B62B006E8013 /* AddViewController.m in Sources */,
 				47838BEE191B5FD700EE08AF /* VideoCallingViewController.m in Sources */,
@@ -1128,7 +1356,6 @@
 				479E176C1921C3C4005D3A82 /* AddressCell.m in Sources */,
 				476D39F3191DD22400742EE5 /* CoreDataTableViewController.m in Sources */,
 				47838BEF191B5FD700EE08AF /* VideoAnsweringViewController.m in Sources */,
-				4737769B193465EC00B0C8B1 /* GCDAsyncUdpSocket.m in Sources */,
 				4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */,
 				47838BF0191B5FD700EE08AF /* VideoSessionViewController.m in Sources */,
 				476D39A4191DC57200742EE5 /* DBService.m in Sources */,
@@ -1139,8 +1366,6 @@
 				47714D8D19244EB70018ED26 /* UIImage+Compress.m in Sources */,
 				479F53DC192B2041004435FA /* MorePhoneViewModel.m in Sources */,
 				476D39EB191DC6DC00742EE5 /* itelDB.xcdatamodeld in Sources */,
-				473776D119346D2C00B0C8B1 /* Base64.m in Sources */,
-				4737769A193465EA00B0C8B1 /* GCDAsyncSocket.m in Sources */,
 				4733547C191B1BAE00B800CB /* HTTPService.m in Sources */,
 				476D3A02191DD5B900742EE5 /* UserViewController.m in Sources */,
 				4733548A191B1BCA00B800CB /* HTTPRequestBuilder.m in Sources */,
@@ -1150,12 +1375,10 @@
 				479F6B73192C3FB900FFA979 /* MoreBlackListCell.m in Sources */,
 				473354B6191B1C1800B800CB /* PassViewController.m in Sources */,
 				479E17601921AD6B005D3A82 /* AddressBookTableViewController.m in Sources */,
-				473776CD19346D1A00B0C8B1 /* JSONKit.m in Sources */,
 				479F53D9192B0472004435FA /* MoreHoseEditPhoneController.m in Sources */,
 				476D39FF191DD46200742EE5 /* ContactCell.m in Sources */,
 				479F6B81192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.m in Sources */,
 				4733548C191B1BCA00B800CB /* BaseViewModel.m in Sources */,
-				473776CF19346D2200B0C8B1 /* Reachability.m in Sources */,
 				479F6B80192C8E6900FFA979 /* SecurityViewController.m in Sources */,
 				479C567E193316A60086380C /* IMService.m in Sources */,
 				479E176F1921F16F005D3A82 /* MoreTableViewController.m in Sources */,
@@ -1190,14 +1413,39 @@
 				47838BF4191B5FD700EE08AF /* DialingViewController.m in Sources */,
 				479F6B76192C429D00FFA979 /* MoreBlackLisetViewModel.m in Sources */,
 				473354BB191B1C1800B800CB /* PassResetViewController.m in Sources */,
-				473776CE19346D1E00B0C8B1 /* OpenUDID.m in Sources */,
 				473354B9191B1C1800B800CB /* PassAnswerViewController.m in Sources */,
-				473776D019346D2900B0C8B1 /* GzipCompressor.m in Sources */,
 				476D3A09191DD96B00742EE5 /* HTTPRequestBuilder+contact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		47D279CF19382D1600811695 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47D279F919382D9100811695 /* GCDAsyncSocket.m in Sources */,
+				47D279FA19382D9100811695 /* GCDAsyncUdpSocket.m in Sources */,
+				47D279DB19382D1700811695 /* GCDASocket.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47D27A431938506E00811695 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47D27A6A193850B000811695 /* pinyin.c in Sources */,
+				47D27A4F1938506E00811695 /* Pinyin.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		47D27A6D1938545600811695 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47D27A461938506E00811695 /* Pinyin */;
+			targetProxy = 47D27A6C1938545600811695 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		47929B71191B164F0054292D /* InfoPlist.strings */ = {
@@ -1227,13 +1475,62 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		476B366C19385D1200D855E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				DSTROOT = /tmp/sdk.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sdk/sdk-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sdk",
+				);
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = armv7;
+			};
+			name = Debug;
+		};
+		476B366D19385D1200D855E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				DSTROOT = /tmp/sdk.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sdk/sdk-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sdk",
+				);
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = armv7;
+			};
+			name = Release;
+		};
 		47929B95191B164F0054292D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1249,22 +1546,30 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PROFILING_CODE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "2CDC928A-D9FF-4BD7-BBCB-B6009CBBAC8B";
-				SDKROOT = iphoneos7.1;
+				MACH_O_TYPE = mh_execute;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-all_load";
+				PROVISIONING_PROFILE = "D361E66C-40EA-4BFF-997F-AE423B55D400";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
+				SDKROOT = iphoneos;
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -1273,8 +1578,9 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1290,17 +1596,25 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PROFILING_CODE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				MACH_O_TYPE = mh_execute;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "2CDC928A-D9FF-4BD7-BBCB-B6009CBBAC8B";
-				SDKROOT = iphoneos7.1;
+				OTHER_LDFLAGS = "-all_load";
+				PROVISIONING_PROFILE = "D361E66C-40EA-4BFF-997F-AE423B55D400";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
@@ -1314,7 +1628,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_INPUT_FILETYPE = automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "itelNSC/itelNSC-Prefix.pch";
 				INFOPLIST_FILE = "itelNSC/itelNSC-Info.plist";
@@ -1324,11 +1639,17 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/baidu/lib",
 				);
+				MACH_O_TYPE = mh_execute;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lc++",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "D361E66C-40EA-4BFF-997F-AE423B55D400";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1343,7 +1664,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_INPUT_FILETYPE = automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "itelNSC/itelNSC-Prefix.pch";
 				INFOPLIST_FILE = "itelNSC/itelNSC-Info.plist";
@@ -1353,18 +1675,108 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/baidu/lib",
 				);
+				MACH_O_TYPE = mh_execute;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lc++",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "D361E66C-40EA-4BFF-997F-AE423B55D400";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		47D279F019382D1700811695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/GCDASocket.dst;
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GCDASocket/GCDASocket-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = armv7;
+			};
+			name = Debug;
+		};
+		47D279F119382D1700811695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/GCDASocket.dst;
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GCDASocket/GCDASocket-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = armv7;
+			};
+			name = Release;
+		};
+		47D27A641938506E00811695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Pinyin.dst;
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pinyin/Pinyin-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		47D27A651938506E00811695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Pinyin.dst;
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pinyin/Pinyin-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		476B366B19385D1200D855E6 /* Build configuration list for PBXNativeTarget "sdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				476B366C19385D1200D855E6 /* Debug */,
+				476B366D19385D1200D855E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		47929B60191B164F0054292D /* Build configuration list for PBXProject "itelNSC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1379,6 +1791,24 @@
 			buildConfigurations = (
 				47929B98191B164F0054292D /* Debug */,
 				47929B99191B164F0054292D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47D279EF19382D1700811695 /* Build configuration list for PBXNativeTarget "GCDASocket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47D279F019382D1700811695 /* Debug */,
+				47D279F119382D1700811695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47D27A631938506E00811695 /* Build configuration list for PBXNativeTarget "Pinyin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47D27A641938506E00811695 /* Debug */,
+				47D27A651938506E00811695 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

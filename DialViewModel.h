@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "rootViewModel.h"
+
+@class  IMService;
 typedef NS_ENUM(NSInteger, ViewType){
     ViewTypeVCalling,
     ViewTypeVAnsering,
@@ -18,6 +21,7 @@ typedef NS_ENUM(NSInteger, ViewType){
     ViewTypeDialing
 };
 @interface DialViewModel : NSObject
+@property (nonatomic,weak) IMService *imService;
 @property  (nonatomic,weak) RootViewModel  *modelService;
 @property  (nonatomic,strong) NSNumber *showingView;   //当前显示窗口 见ViewType
 @property  (nonatomic,strong) UIView *peerSessionView;  //对方的影像
