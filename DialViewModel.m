@@ -18,6 +18,10 @@
         self.imService=[IMService defaultService];
         
        [[RACObserve(self, imService.sessionType) map:^id(NSNumber *value) {
+           if ([value integerValue]!=IMsessionTypeEdle) {
+               self.modelService.showSessinView=@(YES);
+           }
+           
            if ([value integerValue]==IMsessionTypeCalling) {
                if ([self.imService.useVideo boolValue]) {
                    self.showingView=@(ViewTypeVCalling);
@@ -33,6 +37,12 @@
                    self.showingView=@(ViewTypeAsession);
                }
                
+           }else if ([value integerValue]==IMsessionTypeAnsering){
+               if ([self.imService.useVideo boolValue]) {
+                   self.showingView=@(ViewTypeVAnsering);
+               }else{
+                   self.showingView=@(ViewTypeAAnsering);
+               }
            }
            
             return value;
@@ -43,9 +53,21 @@
             self.connectionState=value;
             return value;
         }]subscribeNext:^(id x) {}];
-        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sessionCome:) name:@"sessionCome" object:nil];
     }
     return self;
+}
+-(void)sessionCome:(NSNotification*)notification{
+    NSString *type=[notification.userInfo objectForKey:@"type"];
+    if ([type isEqualToString:@"call"]) {
+        BOOL useVideo=[[notification.userInfo objectForKey:@"useVideo"]boolValue];
+        NSString *itel=[notification.userInfo objectForKey:@"itel"];
+        [self dial:itel useVideo:useVideo];
+    }
+   
+//    NSDictionary *userInfo=@{@"type":@"call",@"useVideo":@(1),@"itel":};
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"sessionCome" object:nil userInfo:userInfo];
+
 }
 -(void)changeCamera{
     BOOL useFrontCamera=[self.useFrontCamera boolValue];
@@ -120,7 +142,10 @@
 //接听
 -(void)answer{
     NSLog(@"用户接听了   视频：%@",self.localCanVideo);
-   
+    self.localSessionView=[self.imService getCametaViewLocal];
+    [[self.localSessionView.layer sublayers][0] setFrame:[UIScreen mainScreen].bounds];
+    self.isPeerLarge=@(YES);
+    [self.imService answer:[self.localCanVideo boolValue]];
 }
 //隐藏拨号盘（包括通话所有界面）
 -(void)hideDialingSessionView{
@@ -153,18 +178,18 @@
     }
 }
 -(void)openScreen{
-    if (!self.peerSessionView) {
-       
+   
+    NSLog(@"之前的PeerView:%@",self.peerSessionView);
         VideoRenderIosView *v=[[VideoRenderIosView alloc]init];
         self.peerSessionView=v;
-        
-    }
+    
     
   
-   // self.peerSessionView.layer.frame=[UIScreen mainScreen].bounds ;
+   //self.peerSessionView.layer.frame=[UIScreen mainScreen].bounds ;
     self.peerSessionView.backgroundColor=[UIColor grayColor];
     
-    [self.imService performSelector:@selector(openScreen:) withObject:self.peerSessionView afterDelay:0.2];
+    [self.imService performSelector:@selector(openScreen:) withObject:self.peerSessionView afterDelay:2];
+    NSLog(@"之后的PeerView:%@",self.peerSessionView);
 }
 -(void)dealloc{
     NSLog(@"%@被销毁",self);

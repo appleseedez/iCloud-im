@@ -134,11 +134,15 @@ static BOOL firstOpenCam = YES;
 #pragma mark - INTERFACE
 static int localNetPortSuffix = 0;
 // IMEngine接口 见接口定义
+static int initnetTimes=0;
 - (void)initNetwork {
+    initnetTimes++;
+    NSLog(@"初始化网络%d次",initnetTimes);
     self.netWorkPort = LOCAL_PORT + (++localNetPortSuffix) % 9;
     if (false == self.pInterFaceApi->OpenNetWork(self.netWorkPort)) {
-        
+        NSLog(@"==========================网络初始化失败");
     } else {
+         NSLog(@"==========================网络初始化成功");
     }
 }
 
@@ -193,7 +197,7 @@ static int localNetPortSuffix = 0;
     //获取本机外网ip和端口
     // 1st time
     NSLog(@"use backport:%d for the 1st get", bakPort);
-    self.pInterFaceApi->GetSelfInterAddr([probeServerIP UTF8String], bakPort,
+    int ret1= self.pInterFaceApi->GetSelfInterAddr([probeServerIP UTF8String], bakPort,
                                          self_inter_ip, self_inter_port);
     // 2nd time
     NSLog(@"use probeport:%d for the 2nd get", probeServerPort);

@@ -177,8 +177,8 @@ static float BottomHide;
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self clearSessionView:self.mainSessionView except:nil];
-    [self clearSessionView:self.secondarySessionView except:nil];
+   // [self clearSessionView:self.mainSessionView except:nil];
+    //[self clearSessionView:self.secondarySessionView except:nil];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

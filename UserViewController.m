@@ -129,9 +129,8 @@
     [self callUserisVidio:NO];
 }
 - (void)callUserisVidio:(BOOL)isVidio {
-    if (isVidio) {
-   
-    }
+    NSDictionary *userInfo=@{@"type":@"call",@"useVideo":@(isVidio),@"itel":self.user.itelNum};
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"sessionCome" object:nil userInfo:userInfo];
     
 }
 

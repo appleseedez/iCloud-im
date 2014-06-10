@@ -86,10 +86,12 @@
     
    
 }
-
+static UIView *currentView;
 -(void)setViewController:(UIViewController*)controller{
     [UIView animateWithDuration:0.3 animations:^{
+        [currentView removeFromSuperview];
          [self.view addSubview:controller.view];
+        currentView=controller.view;
          // [controller viewWillAppear:NO];
     }];
    

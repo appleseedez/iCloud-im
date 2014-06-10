@@ -48,4 +48,5 @@ typedef NS_ENUM(NSInteger, ViewType){
 -(void)answer;           //接听来电
 -(void)hideDialingSessionView; //隐藏拨号盘
 -(void)dial:(NSString*)itel useVideo:(BOOL)useVideo;
+
 @end

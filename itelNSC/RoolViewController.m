@@ -56,8 +56,8 @@
             transition.subtype=@"fromBottom";
             strongSelf.sessionView.hidden=YES;
             strongSelf.mainView.userInteractionEnabled=YES;
-            [self tearDownDialView];
-              [self setupDialView];
+            //[self tearDownDialView];
+              
         }
         [strongSelf.sessionView.layer addAnimation:transition forKey:@"3"];
        
