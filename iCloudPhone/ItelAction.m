@@ -423,12 +423,12 @@
 }
 -(void)loginOtherAppResponse:(NSDictionary*)data{
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString: @"itelKuaiYu://itelland.com"]]) {
-        NSMutableDictionary *login=[data mutableCopy];
        
-        NSData *json=[NSJSONSerialization dataWithJSONObject:login options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *strParameters=[[[NSString alloc ] initWithData:json encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
+       
+       
+      
         
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"itelKuaiYu://itelland.com/?%@",strParameters]];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"itelKuaiYu://?&%@&%@", [data objectForKey:@"itel"], [data objectForKey:@"sessiontoken"]]];
         if ([[UIApplication sharedApplication]canOpenURL:url]) {
              [[UIApplication sharedApplication] openURL:url];
         }else{
