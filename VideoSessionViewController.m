@@ -74,19 +74,21 @@ static float BottomHide;
         [UIView beginAnimations:@"" context:nil];
         if (isPeerLarge) {
             
-            strongSelf.viewModel.peerSessionView.frame=self.mainSessionView.bounds;
-            [strongSelf.mainSessionView addSubview:self.viewModel.peerSessionView];
-            strongSelf.viewModel.localSessionView.frame=self.secondarySessionView.bounds;
-            [strongSelf.secondarySessionView addSubview:self.viewModel.localSessionView];
+            strongSelf.viewModel.peerSessionView.frame=strongSelf.mainSessionView.bounds;
+            [strongSelf.mainSessionView addSubview:strongSelf.viewModel.peerSessionView];
+            strongSelf.viewModel.localSessionView.frame=strongSelf.secondarySessionView.bounds;
+            [strongSelf.secondarySessionView addSubview:strongSelf.viewModel.localSessionView];
         }else{
-            strongSelf.viewModel.peerSessionView.frame=self.secondarySessionView.bounds;
-            [strongSelf.secondarySessionView addSubview:self.viewModel.peerSessionView];
-            strongSelf.viewModel.localSessionView.frame=self.mainSessionView.bounds;
+            strongSelf.viewModel.peerSessionView.frame=strongSelf.secondarySessionView.bounds;
+            [strongSelf.secondarySessionView addSubview:strongSelf.viewModel.peerSessionView];
+            strongSelf.viewModel.localSessionView.frame=strongSelf.mainSessionView.bounds;
             
-            [strongSelf.mainSessionView addSubview:self.viewModel.localSessionView];
+            [strongSelf.mainSessionView addSubview:strongSelf.viewModel.localSessionView];
             
         }
         ((CALayer*)strongSelf.viewModel.localSessionView.layer.sublayers[0]).frame=strongSelf.viewModel.localSessionView.bounds;
+       // strongSelf.viewModel.peerSessionView.backgroundColor=[UIColor redColor];
+      //  NSLog(@"peerSessionView的subviews:%@",strongSelf.viewModel.peerSessionView.subviews);
         [UIView commitAnimations];
     }];
     // 监听 麦克风

@@ -46,6 +46,8 @@
 		47377646193446BD00B0C8B1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377645193446BD00B0C8B1 /* QuartzCore.framework */; };
 		47377648193446D300B0C8B1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377647193446D200B0C8B1 /* CoreImage.framework */; };
 		4737764A193446EC00B0C8B1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377649193446EC00B0C8B1 /* CoreMedia.framework */; };
+		474091241959620500EAA437 /* SoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 474091231959620500EAA437 /* SoundManager.m */; };
+		47409128195966E400EAA437 /* comingCall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 47409127195966E400EAA437 /* comingCall.wav */; };
 		4757BB6A191C68DB009A8938 /* MainPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB69191C68DB009A8938 /* MainPageViewModel.m */; };
 		4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6C191C81B3009A8938 /* MainPageButton.m */; };
 		4757BB70191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */; };
@@ -279,6 +281,9 @@
 		47377645193446BD00B0C8B1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		47377647193446D200B0C8B1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		47377649193446EC00B0C8B1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		474091221959620500EAA437 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
+		474091231959620500EAA437 /* SoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundManager.m; sourceTree = "<group>"; };
+		47409127195966E400EAA437 /* comingCall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = comingCall.wav; sourceTree = "<group>"; };
 		4757BB68191C68DB009A8938 /* MainPageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewModel.h; sourceTree = "<group>"; };
 		4757BB69191C68DB009A8938 /* MainPageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewModel.m; sourceTree = "<group>"; };
 		4757BB6B191C81B3009A8938 /* MainPageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageButton.h; sourceTree = "<group>"; };
@@ -922,6 +927,7 @@
 			children = (
 				47929B70191B164F0054292D /* itelNSC-Info.plist */,
 				47929B71191B164F0054292D /* InfoPlist.strings */,
+				47409127195966E400EAA437 /* comingCall.wav */,
 				47929B74191B164F0054292D /* main.m */,
 				47929B76191B164F0054292D /* itelNSC-Prefix.pch */,
 				47D6D70C19343AA70062C864 /* BPushConfig.plist */,
@@ -951,12 +957,13 @@
 			isa = PBXGroup;
 			children = (
 				479F6BA01938156D00E15DD1 /* socket */,
-				479F015F193733D00006E0B4 /* sdk */,
 				479F0023193716890006E0B4 /* NSData+Byte.h */,
 				479F0024193716890006E0B4 /* NSData+Byte.m */,
 				479F00221936D5940006E0B4 /* ConstantHeader.h */,
 				479C567C193316A60086380C /* IMService.h */,
 				479C567D193316A60086380C /* IMService.m */,
+				474091221959620500EAA437 /* SoundManager.h */,
+				474091231959620500EAA437 /* SoundManager.m */,
 				479C56791932E8D20086380C /* SocketConnector.h */,
 				479C567A1932E8D20086380C /* SocketConnector.m */,
 			);
@@ -1012,13 +1019,6 @@
 				47714D8F1924700D0018ED26 /* HTTPRequestBuilder+More.m */,
 			);
 			name = viewModels;
-			sourceTree = "<group>";
-		};
-		479F015F193733D00006E0B4 /* sdk */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = sdk;
 			sourceTree = "<group>";
 		};
 		479F6B6D192C390100FFA979 /* views */ = {
@@ -1237,6 +1237,7 @@
 				47838C0F191B79B200EE08AF /* Contact.storyboard in Resources */,
 				47838C15191B7A3000EE08AF /* more.xcassets in Resources */,
 				47929B81191B164F0054292D /* Images.xcassets in Resources */,
+				47409128195966E400EAA437 /* comingCall.wav in Resources */,
 				47838C0D191B798D00EE08AF /* Recent.storyboard in Resources */,
 				473354C8191B240400B800CB /* main.storyboard in Resources */,
 				476D3EA71925CADA00A9D116 /* MoreHostBirthdatView.xib in Resources */,
@@ -1336,6 +1337,7 @@
 				47A188581920B62B006E8013 /* AddViewController.m in Sources */,
 				47838BEE191B5FD700EE08AF /* VideoCallingViewController.m in Sources */,
 				473354B0191B1C1800B800CB /* LoginViewController.m in Sources */,
+				474091241959620500EAA437 /* SoundManager.m in Sources */,
 				473354B3191B1C1800B800CB /* RegDetailViewController.m in Sources */,
 				47A188691920BD12006E8013 /* SearchViewModel.m in Sources */,
 				47838BFE191B5FF500EE08AF /* DialTableViewModel.m in Sources */,

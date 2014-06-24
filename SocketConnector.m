@@ -204,6 +204,9 @@ static NSUInteger seq;
     self.socketSignal=[RACSubject subject];
     [self.service connectSuccess:self.socketSignal];
     self.conected=@(YES);
+    [sock performBlock:^{
+        [sock enableBackgroundingOnSocket];
+    }];
 }
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
     NSLog(@"发送成功:");
@@ -262,6 +265,10 @@ static NSUInteger seq;
             break;
     }
 
+}
+-(void)disconnect{
+    [self.tcpSocket disconnect];
+    self.conected=@(NO);
 }
 -(RACSignal*)socketDataSignal{
     return self.socketSignal;

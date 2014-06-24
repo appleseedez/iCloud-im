@@ -26,7 +26,7 @@ UIView *_pview_local;
 @property (nonatomic) InitType m_type;
 @property (nonatomic) NSString *currentInterIP;
 @property (nonatomic) int  cameraIndex;
-@property(nonatomic) BOOL isCameraOpened;
+
 @property(nonatomic) int netWorkPort;
 @property(nonatomic) dispatch_queue_t q;
 @property(nonatomic) dispatch_queue_t m;
@@ -154,7 +154,7 @@ static int initnetTimes=0;
     // 另外如果没有获取到这些权限应该怎么办?
     self.pInterFaceApi->MediaInit();
     //初始化媒体时获取一次本机的nat
-    //[self setCurrentNATType:[self natType]];
+    [self setCurrentNATType:[self natType]];
     
     
 }
@@ -197,11 +197,11 @@ static int initnetTimes=0;
     //获取本机外网ip和端口
     // 1st time
     NSLog(@"use backport:%d for the 1st get", bakPort);
-    int ret1= self.pInterFaceApi->GetSelfInterAddr([probeServerIP UTF8String], bakPort,
+    int ret= self.pInterFaceApi->GetSelfInterAddr([probeServerIP UTF8String], bakPort,
                                          self_inter_ip, self_inter_port);
     // 2nd time
     NSLog(@"use probeport:%d for the 2nd get", probeServerPort);
-    int ret = self.pInterFaceApi->GetSelfInterAddr([probeServerIP UTF8String],
+     ret = self.pInterFaceApi->GetSelfInterAddr([probeServerIP UTF8String],
                                                    probeServerPort, self_inter_ip,
                                                    self_inter_port);
     if (ret != 0) {
@@ -483,7 +483,7 @@ static int initnetTimes=0;
 }
 - (int)openScreen:(VideoRenderIosView *)remoteRenderView {
     if (!remoteRenderView) {
-        return 0;
+        return -1;
     }
     int ret = 0;
     if (self.isCameraOpened) {

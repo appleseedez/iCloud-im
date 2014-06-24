@@ -30,8 +30,9 @@
                }
            }else if ([value integerValue]==IMsessionTypeInSession){
                if ([self.imService.useVideo boolValue]) {
-                   [self openScreen  ];
+                    [self openScreen  ];
                    self.showingView=@(ViewTypeVsession);
+                  
                    
                }else{
                    self.showingView=@(ViewTypeAsession);
@@ -188,7 +189,7 @@
    //self.peerSessionView.layer.frame=[UIScreen mainScreen].bounds ;
     self.peerSessionView.backgroundColor=[UIColor grayColor];
     
-    [self.imService performSelector:@selector(openScreen:) withObject:self.peerSessionView afterDelay:2];
+    [self.imService performSelector:@selector(openScreen:) withObject:self.peerSessionView afterDelay:0.2];
     NSLog(@"之后的PeerView:%@",self.peerSessionView);
 }
 -(void)dealloc{

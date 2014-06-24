@@ -21,6 +21,8 @@ NS_ENUM(NSInteger, IMsessionType){
 @interface IMService : NSObject
 +(instancetype)defaultService;
 @property (nonatomic)  SocketConnector *socketConnector;
+-(void)setup;
+-(void)tearDown;
 -(void)connectToSignalServer;
 -(void)connectSuccess:(RACSignal*)signal;
 -(void)vcall:(NSString*)itel;
@@ -28,6 +30,7 @@ NS_ENUM(NSInteger, IMsessionType){
 -(int)openScreen:(UIView*)view;
 -(void)haltSession:(NSString*)haltType;
 -(void)answer:(BOOL)useVideo;
+@property (nonatomic) NSNumber *inBackground;
 @property (nonatomic) NSNumber *useVideo;
 @property (nonatomic) sdk *avSdk;
 @property (nonatomic) long  SSID;

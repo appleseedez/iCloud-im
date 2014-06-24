@@ -12,6 +12,7 @@
 #import "LoginViewController.h"
 #import "HTTPRequestBuilder+app.h"
 #import <QuartzCore/QuartzCore.h>
+#import "IMService.h"
 @interface AppService ()
 
 @property (nonatomic,weak) MaoAppDelegate *delegate;
@@ -71,7 +72,8 @@ static AppService *instance;
                     strongSelf.delegate.window.rootViewController=nil;
                 [strongSelf.delegate.window setRootViewController:[strongSelf getLoginViewController]];
                     [strongSelf.delegate.window.layer addAnimation:transition forKey:@"1"];
-                    
+                    [[IMService defaultService] tearDown];
+
                 }
             }else {
                 if (![strongSelf.delegate.window.rootViewController isKindOfClass:[RoolViewController class]]) {
@@ -82,6 +84,8 @@ static AppService *instance;
                      strongSelf.delegate.window.rootViewController=nil;
                 [strongSelf.delegate.window setRootViewController:[strongSelf getMainViewController]];
                     [strongSelf.delegate.window.layer addAnimation:transition forKey:@"2"];
+                    [[IMService defaultService] setup];
+                    [[IMService defaultService] connectToSignalServer];
                 }
             }
         }];

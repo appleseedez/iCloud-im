@@ -10,6 +10,7 @@
 @class UIView;
 @interface sdk : NSObject
 @property(nonatomic) BOOL canVideoCalling;
+@property(nonatomic) BOOL isCameraOpened;
 -(UIView*)pViewLocal;
 //初始化网络
 - (void) initNetwork;

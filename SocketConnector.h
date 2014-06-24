@@ -19,8 +19,9 @@
 @property (nonatomic) uint16_t signalServerPort;
 @property (nonatomic) NSNumber *conected; //bool 是否连接
 
-@property (nonatomic) IMService *service;
+@property (nonatomic,weak) IMService *service;
 -(void)connect;
+-(void)disconnect;
 -(RACSignal*)socketDataSignal;
 -(void)getSignalIP;
 -(NSUInteger)seq;

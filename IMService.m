@@ -11,6 +11,7 @@
 #import "ConstantHeader.h"
 #import "sdk.h"
 #import "MaoAppDelegate.h"
+#import "SoundManager.h"
 @implementation IMService
 static IMService *instance;
 +(instancetype)defaultService{
@@ -30,14 +31,27 @@ static IMService *instance;
 {
     self = [super init];
     if (self) {
-        self.socketConnector=[[SocketConnector alloc]init];
-        self.socketConnector.service=self;
-        self.avSdk=[[sdk alloc]init];
-        [self.avSdk initMedia];
-        self.sessionType=@(IMsessionTypeEdle);
+        
         
     }
     return self;
+}
+-(void)setup{
+    self.socketConnector=[[SocketConnector alloc]init];
+    self.socketConnector.service=self;
+    self.avSdk=[[sdk alloc]init];
+    
+    NSDictionary *logininfo=((MaoAppDelegate*)[UIApplication sharedApplication].delegate).loginInfo;
+    [self.avSdk setSTUNSrv:[logininfo objectForKey:@"stun_server"]];
+    [self.avSdk initMedia];
+    self.sessionType=@(IMsessionTypeEdle);
+}
+-(void)tearDown{
+    [self.socketConnector disconnect];
+    self.socketConnector=nil;
+    self.avSdk=nil;
+    
+    
 }
 -(void)connectToSignalServer{
     [self.socketConnector getSignalIP];
@@ -117,8 +131,11 @@ static IMService *instance;
 #pragma mark - 获得摄像头View
 -(UIView*)getCametaViewLocal{
     UIView *view=nil;
-    if ([self.avSdk openCamera]) {
+    if (self.avSdk.isCameraOpened) {
         view= [self.avSdk pViewLocal];
+    }else{
+        [self.avSdk openCamera];
+        view=[self.avSdk pViewLocal];
     }
    
     return view;
@@ -266,10 +283,18 @@ static IMService *instance;
     self.peerCallingData=data;
     self.useVideo=[data objectForKey:@"useVideo"];
     self.sessionType=@(IMsessionTypeAnsering);
-   
+    [SoundManager playSound:@"comingCall"];
+    if ([self.inBackground boolValue]) {
+        UILocalNotification *not=[[UILocalNotification alloc]init];
+        not.alertBody=[NSString stringWithFormat:@"%@打电话来啦",self.peerAccount];
+        [[UIApplication sharedApplication] scheduleLocalNotification:not];
+
+    }
 }
 static bool answering=NO;
 -(void)answer:(BOOL)useVideo{
+    [SoundManager stopPlaying];
+    NSLog(@"开始接听");
     if (answering==YES) {
         NSLog(@"answer 方法被多次调用");
         return;
@@ -278,9 +303,9 @@ static bool answering=NO;
     answering=YES;
     self.useVideo=@(useVideo);
     [self.avSdk initNetwork];
-    if ([self.useVideo boolValue]) {
-        [self.avSdk openCamera];
-    }
+//    if ([self.useVideo boolValue]) {
+//        [self.avSdk openCamera];
+//    }
     NSDictionary *data=self.peerCallingData;
     //  获取本机的链路列表. 中继服务器目前充当外网地址探测
     NSDictionary *address=(NSDictionary*)[self.avSdk endPointAddressWithProbeServer:data[@"relayip"] port:[data[@"relayport"]integerValue] bakPort:[data[@"bakport"] integerValue]];
@@ -300,8 +325,8 @@ static bool answering=NO;
        kType : @(SESSION_PERIOD_ANSWERING_TYPE),
        kRelayIP : [self.peerCallingData valueForKey:kRelayIP],
        kRelayPort : [self.peerCallingData valueForKey:kRelayPort],
-       kDestSSID :  @([[self.peerCallingData valueForKey:kSrcSSID]intValue]+1),
-       kSrcSSID : [self.peerCallingData valueForKey:kSrcSSID],
+       kDestSSID :  [self.peerCallingData valueForKey:kSrcSSID],
+       kSrcSSID : [self.peerCallingData valueForKey:kDestSSID],
        kDestAccount : [[self hostInfo] objectForKey:@"itel"],
        kSrcAccount : [self.peerCallingData valueForKey:kDestAccount],
        kPeerNATType :@([self.avSdk currentNATType]),
@@ -323,14 +348,7 @@ static bool answering=NO;
                              
                              };
     [self.socketConnector sendRequest:result type:SESSION_PERIOD_REQ_TYPE];
-    NSDictionary *info=[mergeData mutableCopy];
-    [info setValue:[self.peerCallingData objectForKey:kPeerInterIP] forKey:kPeerInterIP];
-    [info setValue:[self.peerCallingData objectForKey:kPeerLocalIP] forKey:kPeerLocalIP];
-    [info setValue:[self.peerCallingData objectForKey:@"peerInterPort"] forKey:@"peerInterPort"];
-    [info setValue:[self.peerCallingData objectForKey:kPeerLocalPort] forKey:kPeerLocalPort];
-    [info setValue:@([[self.peerCallingData objectForKey:kSrcSSID]intValue]+1) forKey:kSrcSSID];
-    [info setValue:[self.peerCallingData objectForKey:kSrcSSID] forKey:kDestSSID];
-    [info setValue:[self.peerCallingData objectForKey:kPeerNATType] forKey:kPeerNATType];
+   
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -344,16 +362,18 @@ static bool answering=NO;
      object:nil];
     
     if (![self.avSdk isP2PFinished]) {
+        answering=NO;
         return;
     }
     
     
     
-    [self.avSdk tunnelWith:info];
+    [self.avSdk tunnelWith:self.peerCallingData];
     answering=NO;
 }
 #pragma mark - 挂断
 -(void)haltSession:(NSString*)haltType{
+    NSLog(@"被挂断了");
     NSDictionary *params = @{
                              kType : [NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
                              kSrcAccount : self.peerAccount,
@@ -379,7 +399,7 @@ static bool answering=NO;
     [self endSession];
 }
 -(void)endSession{
- 
+    [SoundManager stopPlaying];
         [self.avSdk stopTransport];
     
     if (![self.avSdk isP2PFinished]) {
