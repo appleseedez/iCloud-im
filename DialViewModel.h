@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ItelUser+CRUD.h"
 #import "rootViewModel.h"
-
+#import "BaseViewModel.h"
 @class  IMService;
 typedef NS_ENUM(NSInteger, ViewType){
     ViewTypeVCalling,
@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, ViewType){
     ViewTypeAsession,
     ViewTypeDialing
 };
-@interface DialViewModel : NSObject
+@interface DialViewModel : BaseViewModel;
 @property (nonatomic,weak) IMService *imService;
 @property  (nonatomic,weak) RootViewModel  *modelService;
 @property  (nonatomic,strong) NSNumber *showingView;   //当前显示窗口 见ViewType
@@ -38,14 +38,15 @@ typedef NS_ENUM(NSInteger, ViewType){
 @property  (nonatomic,strong) NSString *connectionState;// 连接状态 如：正在建立连接
 @property  (nonatomic,strong) NSNumber *localCanVideo; //本地是否视频接听
 @property  (nonatomic,strong) NSString *peerArea;  //对方地址 如 重庆 南岸区
-@property  (nonatomic,strong) UIImage  *peerHeader; //对方头像
+@property  (nonatomic,strong) NSString  *peerHeader; //对方头像
+@property  (nonatomic,strong) ItelUser *peerUser;
 -(void)changeCamera;   //交换摄像头
 -(void)micSetted;      // 设置mic
 -(void)soundSetted;     // 设置扬声器
 -(void)localCameraOnSetted; // 设置本地摄像头开启
 -(void)smallSessionShowSetted; // 隐藏小窗口
 -(void)sessionComplete; // 结束通话信号
--(void)answer;           //接听来电
+-(void)answer:(NSNumber*)localCanVideo;           //接听来电
 -(void)hideDialingSessionView; //隐藏拨号盘
 -(void)dial:(NSString*)itel useVideo:(BOOL)useVideo;
 

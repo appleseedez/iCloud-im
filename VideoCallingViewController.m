@@ -64,6 +64,8 @@
     self.viewModel.localSessionView.frame=self.localSessionView.bounds;
     [self.localSessionView addSubview:self.viewModel.localSessionView];
     ((CALayer*)self.viewModel.localSessionView.layer.sublayers[0]).frame=self.viewModel.localSessionView.bounds;
+    self.view.userInteractionEnabled=NO;
+    [self.view performSelector:@selector(setUserInteractionEnabled:) withObject:@(YES) afterDelay:0.5];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];

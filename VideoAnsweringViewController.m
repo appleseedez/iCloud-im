@@ -8,6 +8,8 @@
 
 #import "VideoAnsweringViewController.h"
 #import "DialViewModel.h"
+#import <UIImageView+AFNetworking.h>
+#import "IMService.h"
 @interface VideoAnsweringViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *headImagerView;
 @property (weak, nonatomic) IBOutlet UILabel *lbPeerName;
@@ -53,6 +55,7 @@
     //监听地址
     [RACObserve(self, viewModel.peerArea) subscribeNext:^(NSString *x) {
          __strong VideoAnsweringViewController *strongSelf=weakSelf;
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             strongSelf.lbPeerArea.text=x;
         });
@@ -60,14 +63,18 @@
     //语音接听
      [[self.btnAudioAnswer rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
           __strong VideoAnsweringViewController *strongSelf=weakSelf;
-         strongSelf.viewModel.localCanVideo=@(NO);
-         [strongSelf.viewModel answer];
+         if ([strongSelf.viewModel.imService  isAnsewering]) {
+             return ;
+         }
+         [strongSelf.viewModel answer:@(NO)];
      }];
     //视频接听
     [[self.btnVideoAnswer rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
          __strong VideoAnsweringViewController *strongSelf=weakSelf;
-        strongSelf.viewModel.localCanVideo=@(YES);
-        [strongSelf.viewModel answer];
+        if ([strongSelf.viewModel.imService  isAnsewering]) {
+            return ;
+        }
+        [strongSelf.viewModel answer:@(YES)];
     }];
     //挂断
     [[self.btnHungUp rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
@@ -81,17 +88,21 @@
         strongSelf.lbSessionState.text=x;
     }];
     //监听头像
-    [RACObserve(self, viewModel.peerHeader) subscribeNext:^(UIImage *x) {
-         __strong VideoAnsweringViewController *strongSelf=weakSelf;
-        strongSelf.headImagerView.image=x;
-    }];
+    [RACObserve(self, viewModel.peerHeader) subscribeNext:^(NSString *x) {
+        if ([x length]) {
+            __strong VideoAnsweringViewController *strongSelf=weakSelf;
+            [strongSelf.headImagerView setImageWithURL:[NSURL URLWithString:x]];
+
+        }
+            }];
 }
 -(void)setHeaderImage{
     [self.headImagerView.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.headImagerView.layer setBorderWidth:3];
     [self.headImagerView.layer setCornerRadius:12];
     [self.headImagerView setClipsToBounds:YES];
-
+    self.view.userInteractionEnabled=NO;
+    [self.view performSelector:@selector(setUserInteractionEnabled:) withObject:@(YES) afterDelay:0.5];
 }
 -(void)dealloc{
     NSLog(@"%@被销毁",self);

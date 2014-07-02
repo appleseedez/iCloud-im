@@ -85,7 +85,7 @@
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="sectionIndexTrackingBackgroundColor" patternImage="9172939B-955D-4A14-B394-C99B67272BF2" colorSpace="pattern"/>
+                        <color key="sectionIndexTrackingBackgroundColor" patternImage="55601A11-A175-414A-82CA-A19574CD6085" colorSpace="pattern"/>
                         <sections>
                             <tableViewSection headerTitle="      " id="gAU-Py-0nC">
                                 <cells>
@@ -445,6 +445,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="N1T-zJ-PQM" kind="modal" id="TnG-sX-FSA"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -551,6 +554,97 @@
             </objects>
             <point key="canvasLocation" x="-2286" y="1153"/>
         </scene>
+        <!--Host Address View Controller - Root View Controller-->
+        <scene sceneID="CeL-kL-4fB">
+            <objects>
+                <tableViewController id="whD-CK-Tkz" customClass="HostAddressViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zPS-Zn-lJM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HostSettingAddressCell" textLabel="eq5-5H-XbR" style="IBUITableViewCellStyleDefault" id="VxQ-AR-KXH">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VxQ-AR-KXH" id="rfT-dj-oFO">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eq5-5H-XbR">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="whD-CK-Tkz" id="AWe-F6-zvi"/>
+                            <outlet property="delegate" destination="whD-CK-Tkz" id="WxZ-WC-CD3"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="hWU-sP-iiG"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zbk-71-Lzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2123" y="461"/>
+        </scene>
+        <!--Host Second Address View Controller-->
+        <scene sceneID="1Ba-jl-FG6">
+            <objects>
+                <tableViewController storyboardIdentifier="hostSecondAddressView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LDa-2Z-hUy" customClass="HostSecondAddressViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="I8U-d5-2kd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="secondAddressCell" textLabel="vml-P5-Pti" style="IBUITableViewCellStyleDefault" id="vPU-xs-RB0">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vPU-xs-RB0" id="QZf-Lo-6p8">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vml-P5-Pti">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LDa-2Z-hUy" id="bii-ck-hX2"/>
+                            <outlet property="delegate" destination="LDa-2Z-hUy" id="znP-TO-wGy"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="thb-ee-gfj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1799" y="397"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="g52-18-gjO">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H8g-RT-YUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="N1T-zJ-PQM" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="VbB-kI-WZ6"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FbS-Af-SnA">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="whD-CK-Tkz" kind="relationship" relationship="rootViewController" id="yj9-F8-wKP"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-2496" y="470"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="LWB-BS-TPe">
             <objects>
@@ -564,7 +658,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7w-RH-Lx5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1948" y="945"/>
+            <point key="canvasLocation" x="-1792" y="1053"/>
         </scene>
         <!--More Host Edit View Controller - 编辑-->
         <scene sceneID="Eoo-0U-peT">
@@ -886,7 +980,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bi9-Bw-YcB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1649" y="1961"/>
+            <point key="canvasLocation" x="-1531" y="1812"/>
         </scene>
         <!--Security Change Password View Controller - 修改登录密码-->
         <scene sceneID="gk1-15-pZx">
@@ -963,7 +1057,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PKJ-MJ-K3J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2102" y="1477"/>
+            <point key="canvasLocation" x="-1978" y="1711"/>
         </scene>
         <!--Securety Answer Question View Controller-->
         <scene sceneID="Rdn-kq-Kwg">
@@ -1012,7 +1106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="phY-56-QaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1637" y="1716"/>
+            <point key="canvasLocation" x="-1349" y="1684"/>
         </scene>
         <!--Securety Question View Controller - 设置密保-->
         <scene sceneID="zBD-9k-MlF">
@@ -1226,7 +1320,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="9172939B-955D-4A14-B394-C99B67272BF2" width="256" height="256">
+        <image name="55601A11-A175-414A-82CA-A19574CD6085" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

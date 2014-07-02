@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnEndSession;
 @property (weak, nonatomic) IBOutlet UILabel *lbTime;
+@property (weak, nonatomic) IBOutlet UILabel *lbPeerAddress;
 
 @end
 
@@ -116,6 +117,12 @@ static float BottomHide;
         __strong AudioSessionViewController *strongSelf=weakSelf;
         strongSelf.lbPeerItel.text=x;
     }];
+    //监听 对方地址
+    [RACObserve(self, viewModel.peerArea) subscribeNext:^(NSString *x) {
+        __strong AudioSessionViewController *strongSelf=weakSelf;
+     
+        strongSelf.lbPeerAddress.text=x;
+             }];
 
 }
 -(void)animation:(UITapGestureRecognizer*)gesture{
@@ -128,6 +135,11 @@ static float BottomHide;
     [self.headImageView.layer setCornerRadius:12];
     [self.headImageView setClipsToBounds:YES];
     
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.view.userInteractionEnabled=NO;
+    [self.view performSelector:@selector(setUserInteractionEnabled:) withObject:@(YES) afterDelay:0.5];
 }
 -(void)dealloc{
     NSLog(@"%@被销毁",self);

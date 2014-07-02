@@ -10,39 +10,44 @@
 #import "IMService.h"
 #import "ItelUser+CRUD.h"
 #import "video_render_ios_view.h"
+#import "HTTPRequestBuilder+contact.h"
+#import "DBService.h"
+#import <UIImageView+AFNetworking.h>
+#import "sdk.h"
 @implementation DialViewModel
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         self.imService=[IMService defaultService];
-        
+        __weak id weakSelf=self;
        [[RACObserve(self, imService.sessionType) map:^id(NSNumber *value) {
+           __strong DialViewModel *strongSelf=weakSelf;
            if ([value integerValue]!=IMsessionTypeEdle) {
-               self.modelService.showSessinView=@(YES);
+               strongSelf.modelService.showSessinView=@(YES);
            }
            
            if ([value integerValue]==IMsessionTypeCalling) {
-               if ([self.imService.useVideo boolValue]) {
-                   self.showingView=@(ViewTypeVCalling);
+               if ([strongSelf.imService.useVideo boolValue]) {
+                   strongSelf.showingView=@(ViewTypeVCalling);
                }else{
-                   self.showingView=@(ViewTypeACalling);
+                   strongSelf.showingView=@(ViewTypeACalling);
                }
            }else if ([value integerValue]==IMsessionTypeInSession){
-               if ([self.imService.useVideo boolValue]) {
-                    [self openScreen  ];
-                   self.showingView=@(ViewTypeVsession);
+               if ([strongSelf.imService.useVideo boolValue]) {
+                    [strongSelf openScreen  ];
+                   strongSelf.showingView=@(ViewTypeVsession);
                   
                    
                }else{
-                   self.showingView=@(ViewTypeAsession);
+                   strongSelf.showingView=@(ViewTypeAsession);
                }
                
            }else if ([value integerValue]==IMsessionTypeAnsering){
-               if ([self.imService.useVideo boolValue]) {
-                   self.showingView=@(ViewTypeVAnsering);
+               if ([strongSelf.imService.useVideo boolValue]) {
+                   strongSelf.showingView=@(ViewTypeVAnsering);
                }else{
-                   self.showingView=@(ViewTypeAAnsering);
+                   strongSelf.showingView=@(ViewTypeAAnsering);
                }
            }
            
@@ -51,12 +56,69 @@
         
        
         [[RACObserve(self, imService.sessionState) map:^id(id value) {
-            self.connectionState=value;
+            __strong DialViewModel *strongSelf=weakSelf;
+            strongSelf.connectionState=value;
             return value;
         }]subscribeNext:^(id x) {}];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sessionCome:) name:@"sessionCome" object:nil];
+        
+        [RACObserve(self, imService.peerAccount) subscribeNext:^(NSString *x) {
+            __strong DialViewModel *strongSelf=weakSelf;
+            if (x.length) {
+                [strongSelf loadPeerUser:x];
+            }
+          
+        }];
+        [RACObserve(self, peerUser) subscribeNext:^(ItelUser *x) {
+            __strong DialViewModel *strongSelf=weakSelf;
+            if (x) {
+                strongSelf.peerName=x.nickName;
+                strongSelf.peerHeader=x.imageurl;
+                strongSelf.peerArea=x.address;
+                strongSelf.peerNum=x.itelNum;
+                if (x.address.length==0) {
+                     strongSelf.peerArea=@"对方未设置地址";
+                }
+                
+            }
+            
+        }];
     }
     return self;
+}
+-(void)loadPeerUser:(NSString*)peerItel{
+    ItelUser *user=[ItelUser userWithItel:peerItel];
+    if (!user) {
+        [self searchUserInNet:peerItel];
+    }else{
+        self.peerUser=user;
+    }
+}
+-(void)searchUserInNet:(NSString*)itel{
+    [[self.requestBuilder searchOneUser:@{@"username":itel}]subscribeNext:^(NSDictionary *x) {
+        if (![x isKindOfClass:[NSDictionary class]]) {
+            [self responseError:x];
+            return ;
+        }
+        int code=[x[@"code"]intValue];
+        if (code==200) {
+            NSManagedObjectContext *context=[DBService defaultService].managedObjectContext;
+            ItelUser *user=[ItelUser userWithDictionary:x[@"data"] inContext:context];
+            user.isFriend=@(NO);
+            self.peerUser=user;
+            [context save:nil];
+        }else{
+            [self netRequestFail:x];
+        }
+    }error:^(NSError *error) {
+        
+        self.busy=@(NO);
+        [self netRequestError:error];
+    }completed:^{
+        self.busy=@(NO);
+  
+
+    }];
 }
 -(void)sessionCome:(NSNotification*)notification{
     NSString *type=[notification.userInfo objectForKey:@"type"];
@@ -79,41 +141,58 @@
         state=@"后置摄像头";
     }
     self.useFrontCamera=@(!useFrontCamera);
+    [self.imService.avSdk switchCamera];
     NSLog(@"本地使用%@",state);
 }
 
 -(void)micSetted{
+    
     BOOL isMicOn=[self.isMicOn boolValue];
+     self.isMicOn=@(!isMicOn);
     NSString *state;
     if (isMicOn) {
         state=@"开启";
+         [self.imService.avSdk unmute];
     }else{
         state=@"关闭";
-    }
-    self.isMicOn=@(!isMicOn);
+        [self.imService.avSdk mute];
+           }
+   
     NSLog(@"本地麦克风%@",state);
 }
 -(void)soundSetted{
     BOOL isSoundOn=[self.isSoundOn boolValue];
     NSString *state;
-    if (isSoundOn) {
+       self.isSoundOn=@(!isSoundOn);
+    if (!isSoundOn) {
+        [self.imService.avSdk enableSpeaker];
+        
         state=@"开启";
     }else{
+        
+        [self.imService.avSdk disableSpeaker];
+
         state=@"关闭";
     }
-    self.isSoundOn=@(!isSoundOn);
+ 
+   
+    
+    
     NSLog(@"本地扬声器%@",state);
 }
 //本地摄像头
 -(void)localCameraOnSetted{
     BOOL cameraOn=[self.isLocalCameraOn boolValue];
     NSString *state;
-    if (cameraOn) {
+    self.isLocalCameraOn=@(!cameraOn);
+    if (!cameraOn) {
          state=@"开启";
+        [self.imService.avSdk showCam];
     }else{
         state=@"关闭";
+        [self.imService.avSdk hideCam];
     }
-    self.isLocalCameraOn=@(!cameraOn);
+    
     NSLog(@"本地摄像头%@",state);
 }
 //隐藏小窗口
@@ -141,8 +220,12 @@
     [self.imService haltSession:haltType];
 }
 //接听
--(void)answer{
+-(void)answer:(NSNumber*)localCanVideo{
+    if ([self.imService isAnsewering]) {
+        return;
+    }
     NSLog(@"用户接听了   视频：%@",self.localCanVideo);
+    self.localCanVideo=localCanVideo;
     self.localSessionView=[self.imService getCametaViewLocal];
     [[self.localSessionView.layer sublayers][0] setFrame:[UIScreen mainScreen].bounds];
     self.isPeerLarge=@(YES);
@@ -154,8 +237,13 @@
     
 }
 -(void)dial:(NSString*)itel useVideo:(BOOL)useVideo{
+    if ([self.imService.sessionType integerValue]!=IMsessionTypeEdle) {
+        NSLog(@"用户忙 放弃拨打");
+        return;
+    }
     NSLog(@"开始拨打:%@  是否视频:%d",itel,useVideo);
     [self setUser:itel];
+  
     
     if (useVideo) {
         
@@ -163,6 +251,9 @@
         [[self.localSessionView.layer sublayers][0] setFrame:[UIScreen mainScreen].bounds];
         self.isPeerLarge=@(YES);
         [self.imService vcall:itel];
+    }else{
+        self.localSessionView=[self.imService getCametaViewLocal];
+                [self.imService acall:itel];
     }
 }
 -(void)setUser:(NSString*)itel{

@@ -15,4 +15,5 @@
 -(RACSignal*)delFriend:(NSDictionary*)parameters;
 -(RACSignal*)addToBlack:(NSDictionary*)parameters;
 -(RACSignal*)searchStranger:(NSDictionary*)parameters;
+-(RACSignal*)searchOneUser:(NSDictionary*)parameters;
 @end

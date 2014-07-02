@@ -32,6 +32,8 @@
 #import "MoreHostEditViewController.h"
 #import "MoreHostSexView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "HostAddressViewController.h"
+#import "Area+toString.h"
 @interface MaoHostSettingViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgHead;
 @property (weak, nonatomic) IBOutlet UILabel *lbSign;
@@ -90,8 +92,11 @@
     }];
     //监听 所在地
     [RACObserve(self, moreViewModel.area) subscribeNext:^(NSString *x) {
-        __strong MaoHostSettingViewController *strongSelf=weakSelf;
-        strongSelf.lbArea.text=x;
+        if (x.length) {
+            __strong MaoHostSettingViewController *strongSelf=weakSelf;
+            strongSelf.lbArea.text=[[Area idForArea:x] toString];
+        }
+        
     }];
     //监听 手机
     [RACObserve(self, moreViewModel.phone) subscribeNext:^(NSString *x) {
@@ -320,6 +325,14 @@
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if([segue.destinationViewController isKindOfClass:[UINavigationController class]]){
+        UINavigationController *nav=segue.destinationViewController;
+        if ([nav.childViewControllers[0] isKindOfClass:[HostAddressViewController class]]) {
+            HostAddressViewController *addressVC=nav.childViewControllers[0];
+            addressVC.moreViewModel=self.moreViewModel;
+        }
+    
+    }
     
 }
 

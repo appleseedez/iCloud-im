@@ -18,7 +18,13 @@ PODS:
   - AFNetworking/UIKit (2.2.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - FMDB (2.3):
+    - FMDB/standard
+  - FMDB/common (2.3)
+  - FMDB/standard (2.3):
+    - FMDB/common
   - MBProgressHUD (0.8)
+  - Reachability (3.1.1)
   - ReactiveCocoa (2.3):
     - ReactiveCocoa/UI
   - ReactiveCocoa/Core (2.3):
@@ -29,12 +35,16 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - FMDB
   - MBProgressHUD
+  - Reachability
   - ReactiveCocoa
 
 SPEC CHECKSUMS:
   AFNetworking: 47947303319594706f48a55185ea95a95159ab94
+  FMDB: 31ec26773c7f7b7890a6038235a1f2bbd933a7cb
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
+  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   ReactiveCocoa: 2066583826c17dde8e90c41e489f682048cc57c9
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1

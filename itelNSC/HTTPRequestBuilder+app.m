@@ -15,4 +15,10 @@
     [request setTimeoutInterval:3];
     return [[HTTPService defaultService] signalWithRequest:request];
 }
+-(RACSignal*)subPushToken:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/push/relationItel.josn",ACCOUNT_SERVER];
+    NSMutableURLRequest *request=[[self jsonPostRequestWithUrl:url andParameters:parameters] mutableCopy];
+    [request setTimeoutInterval:3];
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
 @end

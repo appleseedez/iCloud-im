@@ -147,7 +147,6 @@
         self.fetchedResultsController = nil;
     }
 }
-
 - (ContactCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSString *CellIdentifier = @"contactCell";

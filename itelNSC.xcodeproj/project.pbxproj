@@ -48,6 +48,14 @@
 		4737764A193446EC00B0C8B1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47377649193446EC00B0C8B1 /* CoreMedia.framework */; };
 		474091241959620500EAA437 /* SoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 474091231959620500EAA437 /* SoundManager.m */; };
 		47409128195966E400EAA437 /* comingCall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 47409127195966E400EAA437 /* comingCall.wav */; };
+		4740F4C9196109C80096BBAD /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4C8196109C80096BBAD /* MessageController.m */; };
+		4740F4CC19610C8F0096BBAD /* SystemMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4CB19610C8F0096BBAD /* SystemMessageController.m */; };
+		4740F4CF19610CAC0096BBAD /* KuaiYuMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4CE19610CAC0096BBAD /* KuaiYuMessageViewController.m */; };
+		4740F4D219610CC00096BBAD /* FriendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4D119610CC00096BBAD /* FriendMessageViewController.m */; };
+		4740F4D9196111CE0096BBAD /* MessageSystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4D8196111CE0096BBAD /* MessageSystemCell.m */; };
+		4740F4DC196111E10096BBAD /* MessageKuaiyuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4DB196111E10096BBAD /* MessageKuaiyuCell.m */; };
+		4740F4DF196111FB0096BBAD /* MessageFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4DE196111FB0096BBAD /* MessageFriendCell.m */; };
+		4740F4F719614A600096BBAD /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4F619614A600096BBAD /* Message.m */; };
 		4757BB6A191C68DB009A8938 /* MainPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB69191C68DB009A8938 /* MainPageViewModel.m */; };
 		4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6C191C81B3009A8938 /* MainPageButton.m */; };
 		4757BB70191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */; };
@@ -64,7 +72,7 @@
 		476AAE60193D5F210008510C /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 476AAE5F193D5F210008510C /* libAVInterface.a */; };
 		476AAE61193D5F9D0008510C /* sigslot.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367819385DCA00D855E6 /* sigslot.h */; };
 		476AAE62193D5FD30008510C /* APITypes.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367419385DCA00D855E6 /* APITypes.h */; };
-		476AAE63193D60110008510C /* AVInterface.hh in Sources */ = {isa = PBXBuildFile; fileRef = 476B367519385DCA00D855E6 /* AVInterface.hh */; };
+		476AAE63193D60110008510C /* AVInterface.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367519385DCA00D855E6 /* AVInterface.h */; };
 		476AAE64193D60110008510C /* thread.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367619385DCA00D855E6 /* thread.h */; };
 		476AAE65193D60110008510C /* common.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367719385DCA00D855E6 /* common.h */; };
 		476AAE66193D60110008510C /* NatTypeImpl.h in Sources */ = {isa = PBXBuildFile; fileRef = 476B367919385DCA00D855E6 /* NatTypeImpl.h */; };
@@ -116,6 +124,7 @@
 		47838C17191B7AF800EE08AF /* message.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47838C16191B7AF800EE08AF /* message.xcassets */; };
 		47838C19191B7B0700EE08AF /* contact.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47838C18191B7B0700EE08AF /* contact.xcassets */; };
 		47838C1B191B7B1600EE08AF /* recent.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47838C1A191B7B1600EE08AF /* recent.xcassets */; };
+		479165CA196256B600457DDA /* MessageImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 479165C9196256B600457DDA /* MessageImageView.m */; };
 		47929B69191B164F0054292D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B68191B164F0054292D /* Foundation.framework */; };
 		47929B6B191B164F0054292D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B6A191B164F0054292D /* CoreGraphics.framework */; };
 		47929B6D191B164F0054292D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B6C191B164F0054292D /* UIKit.framework */; };
@@ -150,6 +159,13 @@
 		479F6B81192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B7C192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.m */; };
 		479F6B82192C8E6900FFA979 /* SecuretyQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B7E192C8E6900FFA979 /* SecuretyQuestionViewController.m */; };
 		479F6B85192C96FB00FFA979 /* MoreChangePasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479F6B84192C96FB00FFA979 /* MoreChangePasswordViewModel.m */; };
+		479FC179195D0EE500B28647 /* Area.m in Sources */ = {isa = PBXBuildFile; fileRef = 479FC178195D0EE500B28647 /* Area.m */; };
+		479FC17C195D0F2B00B28647 /* Area+toString.m in Sources */ = {isa = PBXBuildFile; fileRef = 479FC17B195D0F2B00B28647 /* Area+toString.m */; };
+		479FC17E195D112400B28647 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 479FC17D195D112400B28647 /* libsqlite3.dylib */; };
+		479FC183195D132600B28647 /* HostAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479FC180195D132600B28647 /* HostAddressViewController.m */; };
+		479FC184195D132600B28647 /* HostSecondAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479FC182195D132600B28647 /* HostSecondAddressViewController.m */; };
+		479FC186195D174300B28647 /* area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 479FC185195D174300B28647 /* area.sqlite */; };
+		479FC189195D4C2A00B28647 /* MessageWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 479FC188195D4C2A00B28647 /* MessageWindow.m */; };
 		47A1884C19209A07006E8013 /* EditAliasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1884B19209A07006E8013 /* EditAliasViewController.m */; };
 		47A1885519209E48006E8013 /* ContactUserViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A1885419209E48006E8013 /* ContactUserViewModel.m */; };
 		47A188581920B62B006E8013 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188571920B62B006E8013 /* AddViewController.m */; };
@@ -160,6 +176,7 @@
 		47A188691920BD12006E8013 /* SearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188681920BD12006E8013 /* SearchViewModel.m */; };
 		47A354141935DD4100329B5A /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A354131935DD4100329B5A /* ItelUser.m */; };
 		47A9D111192F24D90026335C /* MoreAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A9D110192F24D90026335C /* MoreAboutViewController.m */; };
+		47CC0219195A66CA00DA79EF /* ReacabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CC0218195A66CA00DA79EF /* ReacabilityManager.m */; };
 		47D279CA19382A3B00811695 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D279C919382A3B00811695 /* AddressBook.framework */; };
 		47D279D419382D1700811695 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47929B68191B164F0054292D /* Foundation.framework */; };
 		47D279D919382D1700811695 /* GCDASocket.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47D279D819382D1700811695 /* GCDASocket.h */; };
@@ -284,6 +301,22 @@
 		474091221959620500EAA437 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
 		474091231959620500EAA437 /* SoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundManager.m; sourceTree = "<group>"; };
 		47409127195966E400EAA437 /* comingCall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = comingCall.wav; sourceTree = "<group>"; };
+		4740F4C7196109C80096BBAD /* MessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageController.h; sourceTree = "<group>"; };
+		4740F4C8196109C80096BBAD /* MessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageController.m; sourceTree = "<group>"; };
+		4740F4CA19610C8F0096BBAD /* SystemMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMessageController.h; sourceTree = "<group>"; };
+		4740F4CB19610C8F0096BBAD /* SystemMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMessageController.m; sourceTree = "<group>"; };
+		4740F4CD19610CAC0096BBAD /* KuaiYuMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KuaiYuMessageViewController.h; sourceTree = "<group>"; };
+		4740F4CE19610CAC0096BBAD /* KuaiYuMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KuaiYuMessageViewController.m; sourceTree = "<group>"; };
+		4740F4D019610CC00096BBAD /* FriendMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendMessageViewController.h; sourceTree = "<group>"; };
+		4740F4D119610CC00096BBAD /* FriendMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendMessageViewController.m; sourceTree = "<group>"; };
+		4740F4D7196111CE0096BBAD /* MessageSystemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSystemCell.h; sourceTree = "<group>"; };
+		4740F4D8196111CE0096BBAD /* MessageSystemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSystemCell.m; sourceTree = "<group>"; };
+		4740F4DA196111E10096BBAD /* MessageKuaiyuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageKuaiyuCell.h; sourceTree = "<group>"; };
+		4740F4DB196111E10096BBAD /* MessageKuaiyuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageKuaiyuCell.m; sourceTree = "<group>"; };
+		4740F4DD196111FB0096BBAD /* MessageFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageFriendCell.h; sourceTree = "<group>"; };
+		4740F4DE196111FB0096BBAD /* MessageFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageFriendCell.m; sourceTree = "<group>"; };
+		4740F4F519614A600096BBAD /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		4740F4F619614A600096BBAD /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		4757BB68191C68DB009A8938 /* MainPageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewModel.h; sourceTree = "<group>"; };
 		4757BB69191C68DB009A8938 /* MainPageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewModel.m; sourceTree = "<group>"; };
 		4757BB6B191C81B3009A8938 /* MainPageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageButton.h; sourceTree = "<group>"; };
@@ -296,7 +329,7 @@
 		476B365419385D1100D855E6 /* sdk.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = sdk.h; sourceTree = "<group>"; };
 		476B365619385D1100D855E6 /* sdk.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = sdk.mm; sourceTree = "<group>"; };
 		476B367419385DCA00D855E6 /* APITypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = APITypes.h; sourceTree = "<group>"; };
-		476B367519385DCA00D855E6 /* AVInterface.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = AVInterface.hh; sourceTree = "<group>"; };
+		476B367519385DCA00D855E6 /* AVInterface.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = AVInterface.h; sourceTree = "<group>"; };
 		476B367619385DCA00D855E6 /* thread.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = thread.h; sourceTree = "<group>"; };
 		476B367719385DCA00D855E6 /* common.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = common.h; sourceTree = "<group>"; };
 		476B367819385DCA00D855E6 /* sigslot.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = sigslot.h; sourceTree = "<group>"; };
@@ -368,7 +401,9 @@
 		47838C16191B7AF800EE08AF /* message.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = message.xcassets; sourceTree = "<group>"; };
 		47838C18191B7B0700EE08AF /* contact.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = contact.xcassets; sourceTree = "<group>"; };
 		47838C1A191B7B1600EE08AF /* recent.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = recent.xcassets; sourceTree = "<group>"; };
-		47929B65191B164F0054292D /* itelNSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = itelNSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		479165C8196256B600457DDA /* MessageImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageImageView.h; sourceTree = "<group>"; };
+		479165C9196256B600457DDA /* MessageImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageImageView.m; sourceTree = "<group>"; };
+		47929B65191B164F0054292D /* iCloudPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCloudPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47929B68191B164F0054292D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		47929B6A191B164F0054292D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		47929B6C191B164F0054292D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -381,9 +416,6 @@
 		47929B7B191B164F0054292D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Root.storyboard; sourceTree = "<group>"; };
 		47929B80191B164F0054292D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		47929B87191B164F0054292D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		47929B8F191B164F0054292D /* itelNSCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "itelNSCTests-Info.plist"; sourceTree = "<group>"; };
-		47929B91191B164F0054292D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		47929B93191B164F0054292D /* itelNSCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itelNSCTests.m; sourceTree = "<group>"; };
 		479C56791932E8D20086380C /* SocketConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketConnector.h; sourceTree = "<group>"; };
 		479C567A1932E8D20086380C /* SocketConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketConnector.m; sourceTree = "<group>"; };
 		479C567C193316A60086380C /* IMService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMService.h; sourceTree = "<group>"; };
@@ -437,6 +469,18 @@
 		479F6B7E192C8E6900FFA979 /* SecuretyQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecuretyQuestionViewController.m; sourceTree = "<group>"; };
 		479F6B83192C96FB00FFA979 /* MoreChangePasswordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreChangePasswordViewModel.h; sourceTree = "<group>"; };
 		479F6B84192C96FB00FFA979 /* MoreChangePasswordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreChangePasswordViewModel.m; sourceTree = "<group>"; };
+		479FC177195D0EE500B28647 /* Area.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Area.h; sourceTree = "<group>"; };
+		479FC178195D0EE500B28647 /* Area.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Area.m; sourceTree = "<group>"; };
+		479FC17A195D0F2B00B28647 /* Area+toString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Area+toString.h"; sourceTree = "<group>"; };
+		479FC17B195D0F2B00B28647 /* Area+toString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Area+toString.m"; sourceTree = "<group>"; };
+		479FC17D195D112400B28647 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		479FC17F195D132600B28647 /* HostAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostAddressViewController.h; sourceTree = "<group>"; };
+		479FC180195D132600B28647 /* HostAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostAddressViewController.m; sourceTree = "<group>"; };
+		479FC181195D132600B28647 /* HostSecondAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostSecondAddressViewController.h; sourceTree = "<group>"; };
+		479FC182195D132600B28647 /* HostSecondAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostSecondAddressViewController.m; sourceTree = "<group>"; };
+		479FC185195D174300B28647 /* area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = area.sqlite; sourceTree = "<group>"; };
+		479FC187195D4C2A00B28647 /* MessageWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageWindow.h; sourceTree = "<group>"; };
+		479FC188195D4C2A00B28647 /* MessageWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageWindow.m; sourceTree = "<group>"; };
 		47A1884A19209A07006E8013 /* EditAliasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAliasViewController.h; sourceTree = "<group>"; };
 		47A1884B19209A07006E8013 /* EditAliasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAliasViewController.m; sourceTree = "<group>"; };
 		47A1885319209E48006E8013 /* ContactUserViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUserViewModel.h; sourceTree = "<group>"; };
@@ -457,6 +501,8 @@
 		47A354131935DD4100329B5A /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
 		47A9D10F192F24D90026335C /* MoreAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreAboutViewController.h; sourceTree = "<group>"; };
 		47A9D110192F24D90026335C /* MoreAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreAboutViewController.m; sourceTree = "<group>"; };
+		47CC0217195A66CA00DA79EF /* ReacabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReacabilityManager.h; sourceTree = "<group>"; };
+		47CC0218195A66CA00DA79EF /* ReacabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReacabilityManager.m; sourceTree = "<group>"; };
 		47D279C919382A3B00811695 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		47D279D319382D1600811695 /* libGCDASocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGCDASocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		47D279D719382D1700811695 /* GCDASocket-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GCDASocket-Prefix.pch"; sourceTree = "<group>"; };
@@ -510,6 +556,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				479FC17E195D112400B28647 /* libsqlite3.dylib in Frameworks */,
 				479E04141941835500501CAE /* libPinyin.a in Frameworks */,
 				476AAE68193D7D9D0008510C /* libstdc++.6.0.9.dylib in Frameworks */,
 				476B367D19385E3600D855E6 /* libsdk.a in Frameworks */,
@@ -571,6 +618,8 @@
 		47335479191B1B9600B800CB /* services */ = {
 			isa = PBXGroup;
 			children = (
+				4740F4F519614A600096BBAD /* Message.h */,
+				4740F4F619614A600096BBAD /* Message.m */,
 				479E17611921B1E6005D3A82 /* AddressService.h */,
 				479E17621921B1E6005D3A82 /* AddressService.m */,
 				4733547A191B1BAE00B800CB /* HTTPService.h */,
@@ -580,10 +629,16 @@
 				476D39A2191DC57200742EE5 /* DBService.h */,
 				476D39A3191DC57200742EE5 /* DBService.m */,
 				476D39E9191DC6DC00742EE5 /* itelDB.xcdatamodeld */,
+				479FC17A195D0F2B00B28647 /* Area+toString.h */,
+				479FC17B195D0F2B00B28647 /* Area+toString.m */,
+				479FC177195D0EE500B28647 /* Area.h */,
+				479FC178195D0EE500B28647 /* Area.m */,
 				47A354121935DD4100329B5A /* ItelUser.h */,
 				47A354131935DD4100329B5A /* ItelUser.m */,
 				476D39F7191DD35300742EE5 /* ItelUser+CRUD.h */,
 				476D39F8191DD35300742EE5 /* ItelUser+CRUD.m */,
+				479FC187195D4C2A00B28647 /* MessageWindow.h */,
+				479FC188195D4C2A00B28647 /* MessageWindow.m */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -675,6 +730,19 @@
 			name = MainView;
 			sourceTree = "<group>";
 		};
+		4740F4D6196111AE0096BBAD /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				4740F4D7196111CE0096BBAD /* MessageSystemCell.h */,
+				4740F4D8196111CE0096BBAD /* MessageSystemCell.m */,
+				4740F4DA196111E10096BBAD /* MessageKuaiyuCell.h */,
+				4740F4DB196111E10096BBAD /* MessageKuaiyuCell.m */,
+				4740F4DD196111FB0096BBAD /* MessageFriendCell.h */,
+				4740F4DE196111FB0096BBAD /* MessageFriendCell.m */,
+			);
+			name = cells;
+			sourceTree = "<group>";
+		};
 		4757BB67191C68B9009A8938 /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -691,7 +759,7 @@
 			children = (
 				476AAE5F193D5F210008510C /* libAVInterface.a */,
 				476B367419385DCA00D855E6 /* APITypes.h */,
-				476B367519385DCA00D855E6 /* AVInterface.hh */,
+				476B367519385DCA00D855E6 /* AVInterface.h */,
 				476B367619385DCA00D855E6 /* thread.h */,
 				476B367719385DCA00D855E6 /* common.h */,
 				476B367819385DCA00D855E6 /* sigslot.h */,
@@ -820,7 +888,17 @@
 		47838C0A191B795000EE08AF /* MessageView */ = {
 			isa = PBXGroup;
 			children = (
+				479165C71962567A00457DDA /* views */,
 				47838C10191B79C100EE08AF /* Message.storyboard */,
+				4740F4C7196109C80096BBAD /* MessageController.h */,
+				4740F4C8196109C80096BBAD /* MessageController.m */,
+				4740F4CA19610C8F0096BBAD /* SystemMessageController.h */,
+				4740F4CB19610C8F0096BBAD /* SystemMessageController.m */,
+				4740F4CD19610CAC0096BBAD /* KuaiYuMessageViewController.h */,
+				4740F4CE19610CAC0096BBAD /* KuaiYuMessageViewController.m */,
+				4740F4D019610CC00096BBAD /* FriendMessageViewController.h */,
+				4740F4D119610CC00096BBAD /* FriendMessageViewController.m */,
+				4740F4D6196111AE0096BBAD /* cells */,
 				47838C16191B7AF800EE08AF /* message.xcassets */,
 			);
 			name = MessageView;
@@ -835,6 +913,15 @@
 				47838C14191B7A3000EE08AF /* more.xcassets */,
 			);
 			name = MoreView;
+			sourceTree = "<group>";
+		};
+		479165C71962567A00457DDA /* views */ = {
+			isa = PBXGroup;
+			children = (
+				479165C8196256B600457DDA /* MessageImageView.h */,
+				479165C9196256B600457DDA /* MessageImageView.m */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 		47929B5C191B164F0054292D = {
@@ -856,14 +943,13 @@
 				47929B66191B164F0054292D /* Products */,
 				28E822647253439B999D3369 /* Pods.xcconfig */,
 				815C2441F4894284BD56C245 /* Pods-itelNSCTests.xcconfig */,
-				47929B8D191B164F0054292D /* itelNSCTests */,
 			);
 			sourceTree = "<group>";
 		};
 		47929B66191B164F0054292D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				47929B65191B164F0054292D /* itelNSC.app */,
+				47929B65191B164F0054292D /* iCloudPhone.app */,
 				47D279D319382D1600811695 /* libGCDASocket.a */,
 				47D27A471938506E00811695 /* libPinyin.a */,
 				476B364F19385D1100D855E6 /* libsdk.a */,
@@ -874,6 +960,7 @@
 		47929B67191B164F0054292D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				479FC17D195D112400B28647 /* libsqlite3.dylib */,
 				47D27A311938366200811695 /* Security.framework */,
 				47D27A2F1938364900811695 /* AudioToolbox.framework */,
 				47D27A2D1938363A00811695 /* CoreVideo.framework */,
@@ -925,30 +1012,13 @@
 		47929B6F191B164F0054292D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				479FC185195D174300B28647 /* area.sqlite */,
 				47929B70191B164F0054292D /* itelNSC-Info.plist */,
 				47929B71191B164F0054292D /* InfoPlist.strings */,
 				47409127195966E400EAA437 /* comingCall.wav */,
 				47929B74191B164F0054292D /* main.m */,
 				47929B76191B164F0054292D /* itelNSC-Prefix.pch */,
 				47D6D70C19343AA70062C864 /* BPushConfig.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		47929B8D191B164F0054292D /* itelNSCTests */ = {
-			isa = PBXGroup;
-			children = (
-				47929B93191B164F0054292D /* itelNSCTests.m */,
-				47929B8E191B164F0054292D /* Supporting Files */,
-			);
-			path = itelNSCTests;
-			sourceTree = "<group>";
-		};
-		47929B8E191B164F0054292D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				47929B8F191B164F0054292D /* itelNSCTests-Info.plist */,
-				47929B90191B164F0054292D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -964,6 +1034,8 @@
 				479C567D193316A60086380C /* IMService.m */,
 				474091221959620500EAA437 /* SoundManager.h */,
 				474091231959620500EAA437 /* SoundManager.m */,
+				47CC0217195A66CA00DA79EF /* ReacabilityManager.h */,
+				47CC0218195A66CA00DA79EF /* ReacabilityManager.m */,
 				479C56791932E8D20086380C /* SocketConnector.h */,
 				479C567A1932E8D20086380C /* SocketConnector.m */,
 			);
@@ -981,6 +1053,10 @@
 				47714D92192475FE0018ED26 /* MoreHostEditViewController.m */,
 				479F53D7192B0472004435FA /* MoreHoseEditPhoneController.h */,
 				479F53D8192B0472004435FA /* MoreHoseEditPhoneController.m */,
+				479FC17F195D132600B28647 /* HostAddressViewController.h */,
+				479FC180195D132600B28647 /* HostAddressViewController.m */,
+				479FC181195D132600B28647 /* HostSecondAddressViewController.h */,
+				479FC182195D132600B28647 /* HostSecondAddressViewController.m */,
 				479F53DD192B2D83004435FA /* MoreMesViewController.h */,
 				479F53DE192B2D83004435FA /* MoreMesViewController.m */,
 				479F53E0192B4EA8004435FA /* MoreCommonSettingViewController.h */,
@@ -1154,7 +1230,7 @@
 			);
 			name = itelNSC;
 			productName = itelNSC;
-			productReference = 47929B65191B164F0054292D /* itelNSC.app */;
+			productReference = 47929B65191B164F0054292D /* iCloudPhone.app */;
 			productType = "com.apple.product-type.application";
 		};
 		47D279D219382D1600811695 /* GCDASocket */ = {
@@ -1241,6 +1317,7 @@
 				47838C0D191B798D00EE08AF /* Recent.storyboard in Resources */,
 				473354C8191B240400B800CB /* main.storyboard in Resources */,
 				476D3EA71925CADA00A9D116 /* MoreHostBirthdatView.xib in Resources */,
+				479FC186195D174300B28647 /* area.sqlite in Resources */,
 				47D6D70D19343AA70062C864 /* BPushConfig.plist in Resources */,
 				47838C00191B600400EE08AF /* dial.xcassets in Resources */,
 				47838BD7191B5E3A00EE08AF /* DialView.storyboard in Resources */,
@@ -1297,7 +1374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				476AAE63193D60110008510C /* AVInterface.hh in Sources */,
+				476AAE63193D60110008510C /* AVInterface.h in Sources */,
 				476AAE64193D60110008510C /* thread.h in Sources */,
 				476AAE65193D60110008510C /* common.h in Sources */,
 				476AAE66193D60110008510C /* NatTypeImpl.h in Sources */,
@@ -1326,6 +1403,7 @@
 				473354C2191B1E6900B800CB /* RoolViewController.m in Sources */,
 				479E177A192207C1005D3A82 /* MaoHostSettingViewController.m in Sources */,
 				47714D901924700D0018ED26 /* HTTPRequestBuilder+More.m in Sources */,
+				4740F4DC196111E10096BBAD /* MessageKuaiyuCell.m in Sources */,
 				479E17771922009D005D3A82 /* HTTPRequestBuilder+app.m in Sources */,
 				473354B2191B1C1800B800CB /* RegTypeViewController.m in Sources */,
 				479F6B7F192C8E6900FFA979 /* SecurityChangePasswordViewController.m in Sources */,
@@ -1341,6 +1419,7 @@
 				473354B3191B1C1800B800CB /* RegDetailViewController.m in Sources */,
 				47A188691920BD12006E8013 /* SearchViewModel.m in Sources */,
 				47838BFE191B5FF500EE08AF /* DialTableViewModel.m in Sources */,
+				4740F4C9196109C80096BBAD /* MessageController.m in Sources */,
 				47335495191B1BF300B800CB /* RegisterViewModel.m in Sources */,
 				479F6B70192C3B0700FFA979 /* MoreBlackListTableViewController.m in Sources */,
 				47A354141935DD4100329B5A /* ItelUser.m in Sources */,
@@ -1353,6 +1432,7 @@
 				47714D93192475FE0018ED26 /* MoreHostEditViewController.m in Sources */,
 				479E17661921B76D005D3A82 /* AddressUser.m in Sources */,
 				47838BF1191B5FD700EE08AF /* AudioCallingViewController.m in Sources */,
+				4740F4CF19610CAC0096BBAD /* KuaiYuMessageViewController.m in Sources */,
 				476D39F0191DD1EB00742EE5 /* PeopleViewController.m in Sources */,
 				47714D8D19244EB70018ED26 /* UIImage+Compress.m in Sources */,
 				479F53DC192B2041004435FA /* MorePhoneViewModel.m in Sources */,
@@ -1362,6 +1442,7 @@
 				4733548A191B1BCA00B800CB /* HTTPRequestBuilder.m in Sources */,
 				4757BB70191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m in Sources */,
 				47335489191B1BCA00B800CB /* NXInputChecker.m in Sources */,
+				4740F4D219610CC00096BBAD /* FriendMessageViewController.m in Sources */,
 				473354B1191B1C1800B800CB /* LoginTableViewCell.m in Sources */,
 				479F6B73192C3FB900FFA979 /* MoreBlackListCell.m in Sources */,
 				473354B6191B1C1800B800CB /* PassViewController.m in Sources */,
@@ -1369,12 +1450,15 @@
 				479F53D9192B0472004435FA /* MoreHoseEditPhoneController.m in Sources */,
 				476D39FF191DD46200742EE5 /* ContactCell.m in Sources */,
 				479F6B81192C8E6900FFA979 /* SecuretyAnswerQuestionViewController.m in Sources */,
+				47CC0219195A66CA00DA79EF /* ReacabilityManager.m in Sources */,
 				4733548C191B1BCA00B800CB /* BaseViewModel.m in Sources */,
 				479F6B80192C8E6900FFA979 /* SecurityViewController.m in Sources */,
 				479C567E193316A60086380C /* IMService.m in Sources */,
 				479E176F1921F16F005D3A82 /* MoreTableViewController.m in Sources */,
+				4740F4DF196111FB0096BBAD /* MessageFriendCell.m in Sources */,
 				4733548B191B1BCA00B800CB /* HTTPRequestBuilder+LoginAndRegister.m in Sources */,
 				473354D0191B2ED200B800CB /* CustomTabbar.m in Sources */,
+				4740F4D9196111CE0096BBAD /* MessageSystemCell.m in Sources */,
 				473354B7191B1C1800B800CB /* PassWayViewController.m in Sources */,
 				479C567B1932E8D20086380C /* SocketConnector.m in Sources */,
 				476D3EA51925C7AA00A9D116 /* MoreHostSexView.m in Sources */,
@@ -1385,22 +1469,30 @@
 				47838BF3191B5FD700EE08AF /* AudioSessionViewController.m in Sources */,
 				47838C07191B789600EE08AF /* MainPageViewController.m in Sources */,
 				47929B75191B164F0054292D /* main.m in Sources */,
+				479165CA196256B600457DDA /* MessageImageView.m in Sources */,
 				479E17741921F748005D3A82 /* MoreViewModel.m in Sources */,
 				47335494191B1BF300B800CB /* LoginViewModel.m in Sources */,
 				479F53E2192B4EA8004435FA /* MoreCommonSettingViewController.m in Sources */,
 				473354B8191B1C1800B800CB /* PassMesViewController.m in Sources */,
 				4757BB6A191C68DB009A8938 /* MainPageViewModel.m in Sources */,
+				4740F4CC19610C8F0096BBAD /* SystemMessageController.m in Sources */,
+				479FC184195D132600B28647 /* HostSecondAddressViewController.m in Sources */,
+				479FC17C195D0F2B00B28647 /* Area+toString.m in Sources */,
 				473354CB191B256A00B800CB /* MainTabbarViewController.m in Sources */,
+				479FC183195D132600B28647 /* HostAddressViewController.m in Sources */,
 				473354B4191B1C1800B800CB /* RegMesViewController.m in Sources */,
 				479E17631921B1E6005D3A82 /* AddressService.m in Sources */,
 				47A188631920B8A0006E8013 /* StrangerCell.m in Sources */,
 				47A1885E1920B7A1006E8013 /* NewFriendListViewController.m in Sources */,
+				479FC189195D4C2A00B28647 /* MessageWindow.m in Sources */,
 				473354C5191B20B000B800CB /* RootViewModel.m in Sources */,
 				479F6B82192C8E6900FFA979 /* SecuretyQuestionViewController.m in Sources */,
+				4740F4F719614A600096BBAD /* Message.m in Sources */,
 				47A188661920B8C9006E8013 /* StrangerViewController.m in Sources */,
 				479F53DF192B2D83004435FA /* MoreMesViewController.m in Sources */,
 				479E17691921BAB6005D3A82 /* HTTPRequestBuilder+AddressBook.m in Sources */,
 				47A1884C19209A07006E8013 /* EditAliasViewController.m in Sources */,
+				479FC179195D0EE500B28647 /* Area.m in Sources */,
 				47838BF4191B5FD700EE08AF /* DialingViewController.m in Sources */,
 				479F6B76192C429D00FFA979 /* MoreBlackLisetViewModel.m in Sources */,
 				473354BB191B1C1800B800CB /* PassResetViewController.m in Sources */,
@@ -1445,14 +1537,6 @@
 				47929B7B191B164F0054292D /* Base */,
 			);
 			name = Root.storyboard;
-			sourceTree = "<group>";
-		};
-		47929B90191B164F0054292D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				47929B91191B164F0054292D /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1628,8 +1712,8 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D361E66C-40EA-4BFF-997F-AE423B55D400";
+				PRODUCT_NAME = iCloudPhone;
+				PROVISIONING_PROFILE = "21DC65F0-1803-4C34-9C18-86CC636DDC68";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
@@ -1664,8 +1748,8 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D361E66C-40EA-4BFF-997F-AE423B55D400";
+				PRODUCT_NAME = iCloudPhone;
+				PROVISIONING_PROFILE = "21DC65F0-1803-4C34-9C18-86CC636DDC68";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;

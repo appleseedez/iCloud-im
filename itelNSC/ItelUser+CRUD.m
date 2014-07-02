@@ -14,7 +14,7 @@
 
 +(ItelUser*)userWithItel:(NSString*)itel{
     NSError* error;
-    ItelUser *user;
+    ItelUser *user=nil;
     NSManagedObjectContext *context=[DBService defaultService].managedObjectContext;
     NSFetchRequest* getOneUser = [NSFetchRequest fetchRequestWithEntityName:@"ItelUser"];
     getOneUser.predicate = [NSPredicate predicateWithFormat:@"itelNum = %@",itel];

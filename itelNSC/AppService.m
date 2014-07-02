@@ -53,6 +53,10 @@ static AppService *instance;
              self.busy=@(NO);
          }];
 }
+-(void)dropped:(NSNotification*)notify{
+    self.rootViewType=@(rootViewTypeLogin);
+    [[[UIAlertView alloc]initWithTitle:@"被踢下线" message:@"您的账号在另一台手机登陆，如非本人操作请检查账号安全" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil]show];
+}
 - (instancetype)init
 {
     self = [super init];
@@ -70,7 +74,7 @@ static AppService *instance;
                     transition.subtype=@"fromLeft";
                     transition.duration=0.5;
                     strongSelf.delegate.window.rootViewController=nil;
-                [strongSelf.delegate.window setRootViewController:[strongSelf getLoginViewController]];
+                    [strongSelf.delegate.window setRootViewController:[strongSelf getLoginViewController]];
                     [strongSelf.delegate.window.layer addAnimation:transition forKey:@"1"];
                     [[IMService defaultService] tearDown];
 
@@ -84,11 +88,14 @@ static AppService *instance;
                      strongSelf.delegate.window.rootViewController=nil;
                 [strongSelf.delegate.window setRootViewController:[strongSelf getMainViewController]];
                     [strongSelf.delegate.window.layer addAnimation:transition forKey:@"2"];
+                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     [[IMService defaultService] setup];
                     [[IMService defaultService] connectToSignalServer];
+                     });
                 }
             }
         }];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dropped:) name:@"dropped" object:nil];
     }
     return self;
 }
@@ -104,5 +111,11 @@ static AppService *instance;
     NSMutableDictionary *dic=[self.delegate.loginInfo mutableCopy];
     [dic setObject:value forKey:key];
     self.delegate.loginInfo=[dic copy];
+}
+-(void)subDeviceToken:(NSString*)deviceToken{
+    NSDictionary *parameters=@{@"itel":[self.delegate.loginInfo objectForKey:@"itel"],@"ios_token":deviceToken,@"type":@"phone-ios"};
+    [[self.requestBuilder subPushToken:parameters]subscribeNext:^(id x) {
+        
+    }];
 }
 @end

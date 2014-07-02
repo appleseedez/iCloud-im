@@ -10,4 +10,5 @@
 
 @interface HTTPRequestBuilder (app)
 -(RACSignal*)logout:(NSDictionary*)parameters;
+-(RACSignal*)subPushToken:(NSDictionary*)parameters;
 @end

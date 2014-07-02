@@ -10,7 +10,8 @@
 #import "HTTPService.h"
 @implementation HTTPRequestBuilder (contact)
 -(RACSignal*)addNewFriend:(NSDictionary*)parameters{
-    NSString *url=[NSString stringWithFormat:@"%@/contact/applyItelFriend.json",ACCOUNT_SERVER];
+    //NSString *url=[NSString stringWithFormat:@"%@/contact/applyItelFriend.json",ACCOUNT_SERVER];
+    NSString *url=[NSString stringWithFormat:@"%@/contact/addContact.json",ACCOUNT_SERVER];
     NSURLRequest *request= [self jsonPostRequestWithUrl:url andParameters:parameters];
     
     return [[HTTPService defaultService] signalWithRequest:request];
@@ -41,6 +42,12 @@
 }
 -(RACSignal*)searchStranger:(NSDictionary*)parameters{
     NSString *url=[NSString stringWithFormat:@"%@/contact/searchUser.json",ACCOUNT_SERVER];
+    NSURLRequest *request= [self getRequestWithUrl:url andParameters:parameters];
+    
+    return [[HTTPService defaultService] signalWithRequest:request];
+}
+-(RACSignal*)searchOneUser:(NSDictionary*)parameters{
+    NSString *url=[NSString stringWithFormat:@"%@/user/queryUser.json",ACCOUNT_SERVER];
     NSURLRequest *request= [self getRequestWithUrl:url andParameters:parameters];
     
     return [[HTTPService defaultService] signalWithRequest:request];

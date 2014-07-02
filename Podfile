@@ -3,5 +3,5 @@ pod 'ReactiveCocoa'
 
 pod 'MBProgressHUD'
 pod 'AFNetworking'
-
-
+pod 'FMDB'
+pod 'Reachability'

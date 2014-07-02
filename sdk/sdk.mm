@@ -7,7 +7,7 @@
 //
 
 #import "sdk.h"
-#import "AVInterface.hh"
+#import "AVInterface.h"
 #import "NatTypeImpl.h"
 #import "ConstantHeader.h"
 #import <UIKit/UIKit.h>

@@ -11,6 +11,7 @@
 #import "ItelUser+CRUD.h"
 #import "DBService.h"
 #import "ItelUser+CRUD.h"
+#import "MaoAppdelegate.h"
 @implementation ContactViewModel
 -(void)addNewFriend:(ItelUser*)user{
     self.busy=@(YES);
@@ -24,8 +25,8 @@
         }
         int code=[x[@"code"]intValue];
         if (code==200) {
-            
-            
+            MaoAppDelegate *delegate=(MaoAppDelegate*)[UIApplication sharedApplication].delegate;
+            blockUser.host=[delegate.loginInfo objectForKey:@"itel"];
             blockUser.isFriend=@(YES);
             [[DBService defaultService].managedObjectContext save:nil];
             

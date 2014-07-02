@@ -12,6 +12,7 @@
 #import "sdk.h"
 #import "MaoAppDelegate.h"
 #import "SoundManager.h"
+#import "MessageWindow.h"
 @implementation IMService
 static IMService *instance;
 +(instancetype)defaultService{
@@ -31,10 +32,42 @@ static IMService *instance;
 {
     self = [super init];
     if (self) {
-        
+        self.reachaBilityManager=[ReacabilityManager defarutManager];
+        __weak id weakSelf=self;
+        [RACObserve(self, reachaBilityManager.currNetStatus) subscribeNext:^(NSNumber *x) {
+            __strong IMService *strongSelf=weakSelf;
+            if ([strongSelf.sessionType integerValue]!=IMsessionTypeEdle) {
+                [strongSelf haltSession:@"endsession"];
+                [MessageWindow showWithMessage:@"网络断开正在重连"];
+            }
+            
+            if ([strongSelf.didSetup boolValue]) {
+                if ([x integerValue]==netStatusNonet ) {
+                    [MessageWindow showWithMessage:@"当前没有任何网络可用"];
+                }else{
+                    [strongSelf reconnect];
+                    if ([x integerValue]==netStatus3G) {
+                        [MessageWindow showWithMessage:@"当前正在使用蜂窝网络，通话会占用一定的流量"];
+                    }else{
+                         [MessageWindow showWithMessage:@"已经连接到wifi网络"];
+                    }
+                    
+                }
+                
+                
+            }
+            
+        }];
         
     }
     return self;
+}
+-(void)reconnect{
+    [self.socketConnector disconnect];
+    [self.socketConnector connect];
+    
+    
+    
 }
 -(void)setup{
     self.socketConnector=[[SocketConnector alloc]init];
@@ -45,8 +78,10 @@ static IMService *instance;
     [self.avSdk setSTUNSrv:[logininfo objectForKey:@"stun_server"]];
     [self.avSdk initMedia];
     self.sessionType=@(IMsessionTypeEdle);
+    self.didSetup=@(YES);
 }
 -(void)tearDown{
+    self.didSetup=@(NO);
     [self.socketConnector disconnect];
     self.socketConnector=nil;
     self.avSdk=nil;
@@ -118,6 +153,7 @@ static IMService *instance;
                     break;
                 case CMID_APP_DROPPED_SSS_REQ_TYPE:
                     NSLog(@"CMID_APP_DROPPED_SSS_REQ_TYPE");
+                    [self dropped];
                     break;
                 case HEART_BEAT_REQ_TYPE:
                     NSLog(@"HEART_BEAT_REQ_TYPE");
@@ -127,6 +163,10 @@ static IMService *instance;
             }
 
         }];
+}
+#pragma mark - 被顶掉了
+-(void)dropped{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dropped" object:nil];
 }
 #pragma mark - 获得摄像头View
 -(UIView*)getCametaViewLocal{
@@ -142,16 +182,32 @@ static IMService *instance;
 }
 #pragma mark - 拨打
 -(void)vcall:(NSString*)itel{
-    
+    if ([self.sessionType integerValue]!=IMsessionTypeEdle) {
+        NSLog(@"用户忙 放弃拨打");
+        return;
+    }
+     self.sessionType=@(IMsessionTypeCalling);
     self.useVideo=@(YES);
     [self checkPeer:itel];
+    self.peerAccount=itel;
+   
+}
+-(void)acall:(NSString*)itel{
+    if ([self.sessionType integerValue]!=IMsessionTypeEdle) {
+        NSLog(@"用户忙 放弃拨打");
+        return;
+    }
     self.sessionType=@(IMsessionTypeCalling);
+    self.useVideo=@(NO);
+    [self checkPeer:itel];
+    self.peerAccount=itel;
+    
 }
 #pragma mark - 查询
 -(void)checkPeer:(NSString*)peerItel{
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(checkFail:) name:SIGNAL_ERROR_NOTIFICATION object:nil];
     //构造通话信令
-    self.peerAccount=peerItel;
+    
     self.sessionType=@(IMsessionTypeCalling);
     self.sessionState=@"正在查询对方信息...";
     
@@ -216,8 +272,11 @@ static IMService *instance;
 }
 #pragma mark - 主叫方收到被叫回复
 -(void)callingResponse:(NSDictionary*)data{
-    
+    if ([self.sessionType integerValue]!=IMsessionTypeCalling) {
+        [self haltSession:@"endsession"];
+    }
     self.sessionState=@"对方已经接听,正在初始化通信通道...";
+    self.useVideo=[data objectForKey:@"useVideo"];
     NSLog(@"收到被叫方回复：%@",data);
     long receivedSSID =
     [[data valueForKey:@"srcssid"] longValue];
@@ -299,9 +358,14 @@ static bool answering=NO;
         NSLog(@"answer 方法被多次调用");
         return;
     }
-    
+    if ([self.sessionType integerValue]!=IMsessionTypeAnsering) {
+        return;
+    }
     answering=YES;
     self.useVideo=@(useVideo);
+    if (self.avSdk.isCameraOpened&&!useVideo) {
+        [self.avSdk closeScreen];
+    }
     [self.avSdk initNetwork];
 //    if ([self.useVideo boolValue]) {
 //        [self.avSdk openCamera];
@@ -330,7 +394,7 @@ static bool answering=NO;
        kDestAccount : [[self hostInfo] objectForKey:@"itel"],
        kSrcAccount : [self.peerCallingData valueForKey:kDestAccount],
        kPeerNATType :@([self.avSdk currentNATType]),
-       kUseVideo : [NSNumber numberWithBool:YES],
+       kUseVideo : self.useVideo,
        kBakPort : [self.peerCallingData valueForKey:kBakPort]
        }];
     NSDictionary* result = @{
@@ -360,7 +424,7 @@ static bool answering=NO;
      selector:@selector(transportFailed:)
      name:P2PTUNNEL_FAILED
      object:nil];
-    
+    self.sessionType=@(IMsessionTypeP2P);
     if (![self.avSdk isP2PFinished]) {
         answering=NO;
         return;
@@ -370,6 +434,9 @@ static bool answering=NO;
     
     [self.avSdk tunnelWith:self.peerCallingData];
     answering=NO;
+}
+-(BOOL)isAnsewering{
+    return  answering;
 }
 #pragma mark - 挂断
 -(void)haltSession:(NSString*)haltType{

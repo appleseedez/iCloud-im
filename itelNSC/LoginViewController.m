@@ -182,8 +182,12 @@ static float tableViewHeight=135.0;
     
     cell.lbItel.text=[dic objectForKey:@"itel"];
    
-    NSURL *imageUrl=[NSURL URLWithString:[dic objectForKey:@"image"]];
-    [cell.imgHeader setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"logo_login_header"]];
+    NSString *imageUrl=[dic objectForKey:@"image"];
+    if ([imageUrl isEqual:[NSNull null]]) {
+        cell.imgHeader.image=[UIImage imageNamed:@"logo_login_header"];
+    }else{
+        [cell.imgHeader setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"logo_login_header"]];
+    }
     cell.btnDel.tag=delButtonBase+indexPath.row;
     [cell.btnDel addTarget:self action:@selector(delUser:) forControlEvents:UIControlEventTouchUpInside];
     return cell;

@@ -722,6 +722,7 @@
                         <outlet property="btnMic" destination="EQG-Aa-5V1" id="eIu-SB-JSa"/>
                         <outlet property="btnSound" destination="hPm-Hy-8g4" id="0ml-Ha-bIj"/>
                         <outlet property="headImageView" destination="dg1-uX-O4n" id="VQX-Nu-9kL"/>
+                        <outlet property="lbPeerAddress" destination="61b-qo-RYR" id="HtU-tn-kI4"/>
                         <outlet property="lbPeerItel" destination="NXL-AX-Ym1" id="AX6-TY-rdq"/>
                         <outlet property="lbPeerName" destination="HnW-Ry-nhF" id="Omy-4r-8bj"/>
                         <outlet property="lbTime" destination="DSb-gp-aBT" id="2tG-KK-lVw"/>

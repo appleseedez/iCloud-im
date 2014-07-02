@@ -185,6 +185,8 @@ static float BottomHide;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.viewModel.isPeerLarge=@(YES);
+    self.view.userInteractionEnabled=NO;
+    [self.view performSelector:@selector(setUserInteractionEnabled:) withObject:@(YES) afterDelay:0.5];
 }
 -(void)animation:(UITapGestureRecognizer*)gesture{
     bool show=[self.showControlView boolValue];

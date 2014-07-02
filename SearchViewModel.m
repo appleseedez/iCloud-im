@@ -10,6 +10,7 @@
 #import "HTTPRequestBuilder+contact.h"
 #import "ItelUser+CRUD.h"
 #import "DBService.h"
+#import "MaoAppDelegate.h"
 @implementation SearchViewModel
 -(void)startSearch:(NSString*)search{
     self.busy=@(YES);
@@ -29,11 +30,22 @@
         if (code==200) {
            __weak NSArray *arr=x[@"data"][@"list"];
             NSMutableArray *marr=[NSMutableArray new];
+            MaoAppDelegate *delegate=[UIApplication sharedApplication].delegate;
             NSManagedObjectContext *contex=[DBService defaultService].managedObjectContext;
             for (NSDictionary *dic in arr) {
                 ItelUser *user=[ItelUser userWithDictionary:dic inContext:contex];
-                if (![user.isFriend boolValue]&&![user.itelNum isEqualToString:[weakSelf hostItel]]) {
-                    [marr addObject:dic];
+                if (![user.itelNum isEqualToString:[weakSelf hostItel]]) {
+                    
+                    if ([user.isFriend boolValue]) {
+                        if (![user.host isEqualToString:[weakSelf hostItel]]) {
+                             [marr addObject:dic];
+                        }
+                    }else{
+                         [marr addObject:dic];
+                    }
+                   
+                }else if([user.isFriend boolValue]&&[user.host isEqualToString:[delegate.loginInfo objectForKey:@"itel"]]){
+                    
                 }
             }
             weakSelf.searchResult=marr;
@@ -92,8 +104,8 @@
         }
         int code=[x[@"code"]intValue];
         if (code==200) {
-            
-            
+            MaoAppDelegate *delegate=(MaoAppDelegate*)[UIApplication sharedApplication].delegate;
+            blockUser.host=[delegate.loginInfo objectForKey:@"itel"];
             blockUser.isFriend=@(YES);
             [[DBService defaultService].managedObjectContext save:nil];
             

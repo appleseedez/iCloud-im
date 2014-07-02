@@ -15,4 +15,5 @@
 @property (nonatomic)  NSString *UUID;
 @property (nonatomic)  NSDictionary *loginInfo;
 @property (nonatomic) NSArray *backUsers;
+@property (nonatomic) NSString *deviceToken;
 @end

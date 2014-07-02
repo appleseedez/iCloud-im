@@ -66,7 +66,11 @@
     }];
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.view.userInteractionEnabled=NO;
+    [self.view performSelector:@selector(setUserInteractionEnabled:) withObject:@(YES) afterDelay:0.5];
+}
 -(void)setHeaderImage{
     [self.headImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.headImageView.layer setBorderWidth:3];

@@ -16,5 +16,6 @@
 - (void)saveContext:(NSManagedObjectContext*) context;
 - (void)deletObject:(NSManagedObject*) obj inContext:(NSManagedObjectContext*) context;
 - (NSURL *)applicationDocumentsDirectory;
+-(void)isAreaInCoreData;
 +(instancetype)defaultService;
 @end

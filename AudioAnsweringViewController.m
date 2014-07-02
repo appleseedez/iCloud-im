@@ -9,6 +9,8 @@
 #import "AudioAnsweringViewController.h"
 #import "DialViewModel.h"
 #import <QuartzCore/QuartzCore.h>
+#import <UIImageView+AFNetworking.h>
+#import "IMService.h"
 @interface AudioAnsweringViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbPeerName;
 @property (weak, nonatomic) IBOutlet UILabel *lbPeerNumber;
@@ -57,8 +59,10 @@
     //语音接听
     [[self.btnAudioAnswer rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
          __strong AudioAnsweringViewController *strongSelf=weakSelf;
-        strongSelf.viewModel.localCanVideo=@(NO);
-        [strongSelf.viewModel answer];
+        if ([strongSelf.viewModel.imService  isAnsewering]) {
+            return ;
+        }
+        [strongSelf.viewModel answer:@(NO)];
     }];
     //挂断
     [[self.btnHungUp rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
@@ -72,9 +76,12 @@
         strongSelf.lbSessionState.text=x;
     }];
     //监听头像
-    [RACObserve(self, viewModel.peerHeader) subscribeNext:^(UIImage *x) {
-         __strong AudioAnsweringViewController *strongSelf=weakSelf;
-        strongSelf.headImageView.image=x;
+    [RACObserve(self, viewModel.peerHeader) subscribeNext:^(NSString *x) {
+        if (x.length) {
+            __strong AudioAnsweringViewController *strongSelf=weakSelf;
+            [strongSelf.headImageView setImageWithURL:[NSURL URLWithString:x]];
+        }
+        
     }];
 
 }
@@ -85,6 +92,11 @@
     [self.headImageView.layer setCornerRadius:12];
     [self.headImageView setClipsToBounds:YES];
     
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.view.userInteractionEnabled=NO;
+    [self.view performSelector:@selector(setUserInteractionEnabled:) withObject:@(YES) afterDelay:0.5];
 }
 -(void)dealloc{
     NSLog(@"%@被销毁",self);

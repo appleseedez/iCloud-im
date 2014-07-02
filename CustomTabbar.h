@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomBarItem.h"
 @interface CustomTabbar : UIView
+@property (weak, nonatomic) IBOutlet UIImageView *imgNewMessage;
 
 
 

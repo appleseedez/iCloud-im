@@ -11,9 +11,14 @@
 #import "CustomBarItem.h"
 #import "RootViewModel.h"
 #import "DialViewModel.h"
+#import "Message.h"
+#import <CoreData/CoreData.h>
+#import "DBService.h"
+#import "MaoAppDelegate.h"
 @interface MainTabbarViewController ()
 @property (nonatomic)   CustomTabbar *customTabbar;
 @property (nonatomic,strong) RACSubject *barSelected;
+@property (nonatomic) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation MainTabbarViewController
@@ -36,6 +41,45 @@
     [self.view addSubview:self.customTabbar];
     [self.tabBar removeFromSuperview];
     [self.barSelected sendNext:self.mainItem];
+    [self setupFetchController];
+}
+-(void)setupFetchController{
+    MaoAppDelegate *delegate=[UIApplication sharedApplication].delegate;
+    //是否有新的系统消息
+    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"ItelMessage"];
+    request.sortDescriptors=@[];
+    request.predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[
+                                                                             [NSPredicate predicateWithFormat:@"hostItel = %@",[delegate.loginInfo objectForKey:@"itel"]],[NSPredicate predicateWithFormat:@"isNew = %@",@(YES)]                                                                                  ]];
+    NSManagedObjectContext *context=[DBService defaultService].managedObjectContext;
+//    NSArray *systemResult=  [context executeFetchRequest:request error:nil];
+//    if ([systemResult count]) {
+//        self.customTabbar.imgNewMessage.alpha=1;
+//    }else{
+//        self.customTabbar.imgNewMessage.alpha=0;
+//    }
+    self.fetchedResultsController=[[NSFetchedResultsController alloc]initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+    self.fetchedResultsController.delegate=self;
+    [self.fetchedResultsController performFetch:nil];
+    if ([[self.fetchedResultsController fetchedObjects] count]) {
+        self.customTabbar.imgNewMessage.alpha=1;
+    }else{
+        self.customTabbar.imgNewMessage.alpha=0;
+    }
+}
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath{
+    if ([[controller fetchedObjects] count]) {
+        self.customTabbar.imgNewMessage.alpha=1;
+    }else{
+        self.customTabbar.imgNewMessage.alpha=0;
+    }
+    NSLog(@"剩余未读%d",[[controller fetchedObjects] count]);
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+   
+    
+    
+    
 }
 -(void)setSubControllers{
     NSString *storyID=nil;
@@ -105,13 +149,19 @@
    
     [self.barSelected subscribeNext:^(CustomBarItem *x) {
         __strong  MainTabbarViewController *strongSelf=weekSelf;
-        for (CustomBarItem *item in strongSelf.customTabbar.subviews) {
-            if (item!=x) {
-                item.beSelected=@(NO);
-            }else{
-                item.beSelected=@(YES);
+        if ([x isKindOfClass:[CustomBarItem class]]) {
+            for (CustomBarItem *item in strongSelf.customTabbar.subviews) {
+                if ([item isKindOfClass:[CustomBarItem class]]) {
+                    if (item!=x) {
+                        item.beSelected=@(NO);
+                    }else{
+                        item.beSelected=@(YES);
+                    }
+                }
+               
             }
         }
+       
         [strongSelf setSelectedIndex:[x.selIndex intValue]];
         
     }];

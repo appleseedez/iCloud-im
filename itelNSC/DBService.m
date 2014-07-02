@@ -7,7 +7,8 @@
 //
 
 #import "DBService.h"
-
+#import <FMDB/FMDB.h>
+#import "Area+toString.h"
 @implementation DBService
 static DBService *instance;
 @synthesize managedObjectContext = _managedObjectContext;
@@ -26,6 +27,47 @@ static DBService *instance;
         }
     }
 }
+-(void)isAreaInCoreData{
+    
+    NSFetchRequest* areaRequest = [NSFetchRequest fetchRequestWithEntityName:@"Area"];
+    areaRequest.predicate = [NSPredicate predicateWithFormat:@"areaId = %@",[NSNumber numberWithInt:1]];
+    NSError *error=nil;
+    NSArray* match = [[DBService defaultService].managedObjectContext executeFetchRequest:areaRequest error:&error];
+    if (![match count]) {
+        [self insertAreaToCoreData];
+    }
+    
+}
+
+-(void)insertAreaToCoreData
+{
+    NSString *createSQL=@"SeLeCt * from area";
+    NSString *dbPath=[[NSBundle mainBundle]pathForResource:@"area" ofType:@"sqlite"];
+    
+    FMDatabase *db=[FMDatabase databaseWithPath:dbPath];
+    
+    [db open];
+    FMResultSet *result=[db executeQuery:createSQL];
+    
+    NSManagedObjectContext* currentContext = self.managedObjectContext;
+    
+    while (result.next) {
+        Area *area=[NSEntityDescription insertNewObjectForEntityForName:@"Area" inManagedObjectContext:currentContext];
+        area.areaId=[NSNumber numberWithInt: [result intForColumn:@"id"]];
+        area.name=[result stringForColumn:@"name"];
+        area.parentId=[NSNumber numberWithInt: [result intForColumn:@"parent_id"]];
+        area.sequence=[result stringForColumn:@"sequence"];
+        area.code=[result stringForColumn:@"code"];
+        area.capital=[NSNumber numberWithInt: [result intForColumn:@"capital"]];
+    }
+    [self saveContext:currentContext];
+    [db close];
+    
+    
+    
+}
+
+
 - (void)saveContext:(NSManagedObjectContext*)context
 {
     NSError *error = nil;

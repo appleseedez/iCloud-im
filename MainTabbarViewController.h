@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class CustomBarItem;
 @class RootViewModel;
-@interface MainTabbarViewController : UITabBarController
+@interface MainTabbarViewController : UITabBarController <NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet CustomBarItem *dialItem;
 @property (weak, nonatomic) IBOutlet CustomBarItem *contactItem;
 @property (weak, nonatomic) IBOutlet CustomBarItem *mainItem;
