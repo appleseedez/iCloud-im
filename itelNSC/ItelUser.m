@@ -2,11 +2,12 @@
 //  ItelUser.m
 //  itelNSC
 //
-//  Created by nsc on 14-5-28.
+//  Created by nsc on 14-7-3.
 //  Copyright (c) 2014年 reactiveCocoa. All rights reserved.
 //
 
 #import "ItelUser.h"
+#import "Recent.h"
 
 
 @implementation ItelUser
@@ -26,11 +27,12 @@
 @dynamic pyNickname;
 @dynamic pyRemarkName;
 @dynamic qq;
+@dynamic quanpin;
 @dynamic remarkName;
+@dynamic section;
 @dynamic sex;
 @dynamic telNum;
 @dynamic userId;
-@dynamic section;
-@dynamic quanpin;
+@dynamic recents;
 
 @end

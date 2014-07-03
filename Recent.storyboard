@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="53b-bo-I7Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="VSz-jb-kq8">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller - 通话记录-->
+        <!--Navigation Controller-->
+        <scene sceneID="e92-m7-ubs">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="VSz-jb-kq8" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OZY-gK-wVv">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="53b-bo-I7Q" kind="relationship" relationship="rootViewController" id="FXV-GR-eSL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gsu-vd-44v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3260" y="-282"/>
+        </scene>
+        <!--Recent View Controller - 通话记录-->
         <scene sceneID="9H1-SI-vZ5">
             <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="53b-bo-I7Q" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="53b-bo-I7Q" customClass="RecentViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kz0-KW-XKA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Recent Call Cell" id="Cjd-Eg-w0g">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecentCell" id="Cjd-Eg-w0g" customClass="RecentCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cjd-Eg-w0g" id="3QQ-3X-qnY">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -45,6 +60,12 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imgHeader" destination="hbg-67-lrf" id="QdS-b3-x58"/>
+                                    <outlet property="imgType" destination="F2Z-uf-Z28" id="S6Q-s5-ULD"/>
+                                    <outlet property="nickName" destination="Jp7-u3-DRK" id="uEF-GN-X2B"/>
+                                    <outlet property="peerItel" destination="34h-19-UzG" id="51n-Lq-fOI"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
@@ -55,7 +76,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fbh-Ud-hz1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2572" y="-120"/>
+            <point key="canvasLocation" x="-2883" y="-282"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

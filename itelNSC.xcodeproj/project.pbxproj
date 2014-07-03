@@ -56,6 +56,10 @@
 		4740F4DC196111E10096BBAD /* MessageKuaiyuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4DB196111E10096BBAD /* MessageKuaiyuCell.m */; };
 		4740F4DF196111FB0096BBAD /* MessageFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4DE196111FB0096BBAD /* MessageFriendCell.m */; };
 		4740F4F719614A600096BBAD /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F4F619614A600096BBAD /* Message.m */; };
+		47484AF319651921004AF0E8 /* RecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47484AF219651921004AF0E8 /* RecentViewController.m */; };
+		47484AFC19653399004AF0E8 /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 47484AFB19653399004AF0E8 /* ItelUser.m */; };
+		47484AFF19653399004AF0E8 /* Recent.m in Sources */ = {isa = PBXBuildFile; fileRef = 47484AFE19653399004AF0E8 /* Recent.m */; };
+		47484B0219653784004AF0E8 /* RecentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47484B0119653784004AF0E8 /* RecentCell.m */; };
 		4757BB6A191C68DB009A8938 /* MainPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB69191C68DB009A8938 /* MainPageViewModel.m */; };
 		4757BB6D191C81B3009A8938 /* MainPageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6C191C81B3009A8938 /* MainPageButton.m */; };
 		4757BB70191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757BB6F191CAB81009A8938 /* HTTPRequestBuilder+mainPage.m */; };
@@ -174,7 +178,6 @@
 		47A188631920B8A0006E8013 /* StrangerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188621920B8A0006E8013 /* StrangerCell.m */; };
 		47A188661920B8C9006E8013 /* StrangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188651920B8C9006E8013 /* StrangerViewController.m */; };
 		47A188691920BD12006E8013 /* SearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A188681920BD12006E8013 /* SearchViewModel.m */; };
-		47A354141935DD4100329B5A /* ItelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A354131935DD4100329B5A /* ItelUser.m */; };
 		47A9D111192F24D90026335C /* MoreAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A9D110192F24D90026335C /* MoreAboutViewController.m */; };
 		47CC0219195A66CA00DA79EF /* ReacabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CC0218195A66CA00DA79EF /* ReacabilityManager.m */; };
 		47D279CA19382A3B00811695 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D279C919382A3B00811695 /* AddressBook.framework */; };
@@ -317,6 +320,14 @@
 		4740F4DE196111FB0096BBAD /* MessageFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageFriendCell.m; sourceTree = "<group>"; };
 		4740F4F519614A600096BBAD /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		4740F4F619614A600096BBAD /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		47484AF119651921004AF0E8 /* RecentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentViewController.h; sourceTree = "<group>"; };
+		47484AF219651921004AF0E8 /* RecentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentViewController.m; sourceTree = "<group>"; };
+		47484AFA19653399004AF0E8 /* ItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUser.h; sourceTree = "<group>"; };
+		47484AFB19653399004AF0E8 /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
+		47484AFD19653399004AF0E8 /* Recent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recent.h; sourceTree = "<group>"; };
+		47484AFE19653399004AF0E8 /* Recent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recent.m; sourceTree = "<group>"; };
+		47484B0019653784004AF0E8 /* RecentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCell.h; sourceTree = "<group>"; };
+		47484B0119653784004AF0E8 /* RecentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCell.m; sourceTree = "<group>"; };
 		4757BB68191C68DB009A8938 /* MainPageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewModel.h; sourceTree = "<group>"; };
 		4757BB69191C68DB009A8938 /* MainPageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewModel.m; sourceTree = "<group>"; };
 		4757BB6B191C81B3009A8938 /* MainPageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageButton.h; sourceTree = "<group>"; };
@@ -403,7 +414,7 @@
 		47838C1A191B7B1600EE08AF /* recent.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = recent.xcassets; sourceTree = "<group>"; };
 		479165C8196256B600457DDA /* MessageImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageImageView.h; sourceTree = "<group>"; };
 		479165C9196256B600457DDA /* MessageImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageImageView.m; sourceTree = "<group>"; };
-		47929B65191B164F0054292D /* iCloudPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCloudPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		47929B65191B164F0054292D /* 云电话2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "云电话2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47929B68191B164F0054292D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		47929B6A191B164F0054292D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		47929B6C191B164F0054292D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -497,8 +508,6 @@
 		47A188651920B8C9006E8013 /* StrangerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrangerViewController.m; sourceTree = "<group>"; };
 		47A188671920BD12006E8013 /* SearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewModel.h; sourceTree = "<group>"; };
 		47A188681920BD12006E8013 /* SearchViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewModel.m; sourceTree = "<group>"; };
-		47A354121935DD4100329B5A /* ItelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItelUser.h; sourceTree = "<group>"; };
-		47A354131935DD4100329B5A /* ItelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItelUser.m; sourceTree = "<group>"; };
 		47A9D10F192F24D90026335C /* MoreAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreAboutViewController.h; sourceTree = "<group>"; };
 		47A9D110192F24D90026335C /* MoreAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreAboutViewController.m; sourceTree = "<group>"; };
 		47CC0217195A66CA00DA79EF /* ReacabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReacabilityManager.h; sourceTree = "<group>"; };
@@ -629,12 +638,14 @@
 				476D39A2191DC57200742EE5 /* DBService.h */,
 				476D39A3191DC57200742EE5 /* DBService.m */,
 				476D39E9191DC6DC00742EE5 /* itelDB.xcdatamodeld */,
+				47484AFD19653399004AF0E8 /* Recent.h */,
+				47484AFE19653399004AF0E8 /* Recent.m */,
+				47484AFA19653399004AF0E8 /* ItelUser.h */,
+				47484AFB19653399004AF0E8 /* ItelUser.m */,
 				479FC17A195D0F2B00B28647 /* Area+toString.h */,
 				479FC17B195D0F2B00B28647 /* Area+toString.m */,
 				479FC177195D0EE500B28647 /* Area.h */,
 				479FC178195D0EE500B28647 /* Area.m */,
-				47A354121935DD4100329B5A /* ItelUser.h */,
-				47A354131935DD4100329B5A /* ItelUser.m */,
 				476D39F7191DD35300742EE5 /* ItelUser+CRUD.h */,
 				476D39F8191DD35300742EE5 /* ItelUser+CRUD.m */,
 				479FC187195D4C2A00B28647 /* MessageWindow.h */,
@@ -868,6 +879,10 @@
 			isa = PBXGroup;
 			children = (
 				47838C0C191B798D00EE08AF /* Recent.storyboard */,
+				47484AF119651921004AF0E8 /* RecentViewController.h */,
+				47484AF219651921004AF0E8 /* RecentViewController.m */,
+				47484B0019653784004AF0E8 /* RecentCell.h */,
+				47484B0119653784004AF0E8 /* RecentCell.m */,
 				47838C1A191B7B1600EE08AF /* recent.xcassets */,
 			);
 			name = RecentView;
@@ -949,7 +964,7 @@
 		47929B66191B164F0054292D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				47929B65191B164F0054292D /* iCloudPhone.app */,
+				47929B65191B164F0054292D /* 云电话2.app */,
 				47D279D319382D1600811695 /* libGCDASocket.a */,
 				47D27A471938506E00811695 /* libPinyin.a */,
 				476B364F19385D1100D855E6 /* libsdk.a */,
@@ -1230,7 +1245,7 @@
 			);
 			name = itelNSC;
 			productName = itelNSC;
-			productReference = 47929B65191B164F0054292D /* iCloudPhone.app */;
+			productReference = 47929B65191B164F0054292D /* 云电话2.app */;
 			productType = "com.apple.product-type.application";
 		};
 		47D279D219382D1600811695 /* GCDASocket */ = {
@@ -1392,6 +1407,7 @@
 				479F6B85192C96FB00FFA979 /* MoreChangePasswordViewModel.m in Sources */,
 				47838BF2191B5FD700EE08AF /* AudioAnsweringViewController.m in Sources */,
 				476D3A06191DD8C300742EE5 /* ContactViewModel.m in Sources */,
+				47484AF319651921004AF0E8 /* RecentViewController.m in Sources */,
 				47929B79191B164F0054292D /* MaoAppDelegate.m in Sources */,
 				479F0025193716890006E0B4 /* NSData+Byte.m in Sources */,
 				47A1885519209E48006E8013 /* ContactUserViewModel.m in Sources */,
@@ -1422,7 +1438,6 @@
 				4740F4C9196109C80096BBAD /* MessageController.m in Sources */,
 				47335495191B1BF300B800CB /* RegisterViewModel.m in Sources */,
 				479F6B70192C3B0700FFA979 /* MoreBlackListTableViewController.m in Sources */,
-				47A354141935DD4100329B5A /* ItelUser.m in Sources */,
 				479E176C1921C3C4005D3A82 /* AddressCell.m in Sources */,
 				476D39F3191DD22400742EE5 /* CoreDataTableViewController.m in Sources */,
 				47838BEF191B5FD700EE08AF /* VideoAnsweringViewController.m in Sources */,
@@ -1445,6 +1460,7 @@
 				4740F4D219610CC00096BBAD /* FriendMessageViewController.m in Sources */,
 				473354B1191B1C1800B800CB /* LoginTableViewCell.m in Sources */,
 				479F6B73192C3FB900FFA979 /* MoreBlackListCell.m in Sources */,
+				47484B0219653784004AF0E8 /* RecentCell.m in Sources */,
 				473354B6191B1C1800B800CB /* PassViewController.m in Sources */,
 				479E17601921AD6B005D3A82 /* AddressBookTableViewController.m in Sources */,
 				479F53D9192B0472004435FA /* MoreHoseEditPhoneController.m in Sources */,
@@ -1463,12 +1479,14 @@
 				479C567B1932E8D20086380C /* SocketConnector.m in Sources */,
 				476D3EA51925C7AA00A9D116 /* MoreHostSexView.m in Sources */,
 				47335488191B1BCA00B800CB /* NSString+MD5.m in Sources */,
+				47484AFF19653399004AF0E8 /* Recent.m in Sources */,
 				47838BD8191B5E3A00EE08AF /* DialViewModel.m in Sources */,
 				473354B5191B1C1800B800CB /* RegChooseNumberViewController.m in Sources */,
 				479E2D93192DDA0B009C3B61 /* SecurityViewModel.m in Sources */,
 				47838BF3191B5FD700EE08AF /* AudioSessionViewController.m in Sources */,
 				47838C07191B789600EE08AF /* MainPageViewController.m in Sources */,
 				47929B75191B164F0054292D /* main.m in Sources */,
+				47484AFC19653399004AF0E8 /* ItelUser.m in Sources */,
 				479165CA196256B600457DDA /* MessageImageView.m in Sources */,
 				479E17741921F748005D3A82 /* MoreViewModel.m in Sources */,
 				47335494191B1BF300B800CB /* LoginViewModel.m in Sources */,
@@ -1712,7 +1730,7 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_NAME = iCloudPhone;
+				PRODUCT_NAME = "云电话2";
 				PROVISIONING_PROFILE = "21DC65F0-1803-4C34-9C18-86CC636DDC68";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1748,7 +1766,7 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_NAME = iCloudPhone;
+				PRODUCT_NAME = "云电话2";
 				PROVISIONING_PROFILE = "21DC65F0-1803-4C34-9C18-86CC636DDC68";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
